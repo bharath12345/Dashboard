@@ -1,0 +1,244 @@
+{
+    "matrix": [
+        {
+            "timestamp":"10:05",
+            "data": [
+                {
+                    "type":"WAS",
+                    "kpi":[
+                        {"name": "violated", "value":"0.5"},
+                        {"name": "okay", "value":"0.5"}
+                    ]
+                },
+                {
+                    "type":"Oracle",
+                    "kpi":[
+                        {"name": "violated", "value":"0.2"},
+                        {"name": "okay", "value":"0.8"}
+                    ]
+                },
+                {
+                    "type":"Linux",
+                    "kpi":[
+                        {"name": "violated", "value":"0.3"},
+                        {"name": "okay", "value":"0.7"}
+                    ]
+                },
+                {
+                    "type":"Windows",
+                    "kpi":[
+                        {"name": "violated", "value":"0.4"},
+                        {"name": "okay", "value":"0.6"}
+                    ]
+                },
+                {
+                    "type":"Rest-Standalone",
+                    "kpi":[
+                        {"name": "violated", "value":"0.25"},
+                        {"name": "okay", "value":"0.75"}
+                    ]
+                }
+            ]
+        },
+        {
+            "timestamp":"10:10",
+            "data": [
+                {
+                    "type":"WAS",
+                    "kpi":[
+                        {"name": "violated", "value":"0.1"},
+                        {"name": "okay", "value":"0.9"}
+                    ]
+                },
+                {
+                    "type":"Oracle",
+                    "kpi":[
+                        {"name": "violated", "value":"0.2"},
+                        {"name": "okay", "value":"0.8"}
+                    ]
+                },
+                {
+                    "type":"Linux",
+                    "kpi":[
+                        {"name": "violated", "value":"0.3"},
+                        {"name": "okay", "value":"0.7"}
+                    ]
+                },
+                {
+                    "type":"Windows",
+                    "kpi":[
+                        {"name": "violated", "value":"0.4"},
+                        {"name": "okay", "value":"0.6"}
+                    ]
+                },
+                {
+                    "type":"Rest-Standalone",
+                    "kpi":[
+                        {"name": "violated", "value":"0.25"},
+                        {"name": "okay", "value":"0.75"}
+                    ]
+                }
+            ]
+        },
+        {
+            "timestamp":"10:15",
+            "data": [
+                {
+                    "type":"WAS",
+                    "kpi":[
+                        {"name": "violated", "value":"0.1"},
+                        {"name": "okay", "value":"0.9"}
+                    ]
+                },
+                {
+                    "type":"Oracle",
+                    "kpi":[
+                        {"name": "violated", "value":"0.2"},
+                        {"name": "okay", "value":"0.8"}
+                    ]
+                },
+                {
+                    "type":"Linux",
+                    "kpi":[
+                        {"name": "violated", "value":"0.3"},
+                        {"name": "okay", "value":"0.7"}
+                    ]
+                },
+                {
+                    "type":"Windows",
+                    "kpi":[
+                        {"name": "violated", "value":"0.4"},
+                        {"name": "okay", "value":"0.6"}
+                    ]
+                },
+                {
+                    "type":"Rest-Standalone",
+                    "kpi":[
+                        {"name": "violated", "value":"0.25"},
+                        {"name": "okay", "value":"0.75"}
+                    ]
+                }
+            ]
+        },
+        {
+            "timestamp":"10:20",
+            "data": [
+                {
+                    "type":"WAS",
+                    "kpi":[
+                        {"name": "violated", "value":"0.1"},
+                        {"name": "okay", "value":"0.9"}
+                    ]
+                },
+                {
+                    "type":"Oracle",
+                    "kpi":[
+                        {"name": "violated", "value":"0.2"},
+                        {"name": "okay", "value":"0.8"}
+                    ]
+                },
+                {
+                    "type":"Linux",
+                    "kpi":[
+                        {"name": "violated", "value":"0.3"},
+                        {"name": "okay", "value":"0.7"}
+                    ]
+                },
+                {
+                    "type":"Windows",
+                    "kpi":[
+                        {"name": "violated", "value":"0.4"},
+                        {"name": "okay", "value":"0.6"}
+                    ]
+                },
+                {
+                    "type":"Rest-Standalone",
+                    "kpi":[
+                        {"name": "violated", "value":"0.25"},
+                        {"name": "okay", "value":"0.75"}
+                    ]
+                }
+            ]
+        },
+        {
+            "timestamp":"10:25",
+            "data": [
+                {
+                    "type":"WAS",
+                    "kpi":[
+                        {"name": "violated", "value":"0.1"},
+                        {"name": "okay", "value":"0.9"}
+                    ]
+                },
+                {
+                    "type":"Oracle",
+                    "kpi":[
+                        {"name": "violated", "value":"0.2"},
+                        {"name": "okay", "value":"0.8"}
+                    ]
+                },
+                {
+                    "type":"Linux",
+                    "kpi":[
+                        {"name": "violated", "value":"0.3"},
+                        {"name": "okay", "value":"0.7"}
+                    ]
+                },
+                {
+                    "type":"Windows",
+                    "kpi":[
+                        {"name": "violated", "value":"0.4"},
+                        {"name": "okay", "value":"0.6"}
+                    ]
+                },
+                {
+                    "type":"Rest-Standalone",
+                    "kpi":[
+                        {"name": "violated", "value":"0.25"},
+                        {"name": "okay", "value":"0.75"}
+                    ]
+                }
+            ]
+        },
+        {
+            "timestamp":"10:30",
+            "data": [
+                {
+                    "type":"WAS",
+                    "kpi":[
+                        {"name": "violated", "value":"0.1"},
+                        {"name": "okay", "value":"0.9"}
+                    ]
+                },
+                {
+                    "type":"Oracle",
+                    "kpi":[
+                        {"name": "violated", "value":"0.2"},
+                        {"name": "okay", "value":"0.8"}
+                    ]
+                },
+                {
+                    "type":"Linux",
+                    "kpi":[
+                        {"name": "violated", "value":"0.3"},
+                        {"name": "okay", "value":"0.7"}
+                    ]
+                },
+                {
+                    "type":"Windows",
+                    "kpi":[
+                        {"name": "violated", "value":"0.4"},
+                        {"name": "okay", "value":"0.6"}
+                    ]
+                },
+                {
+                    "type":"Rest-Standalone",
+                    "kpi":[
+                        {"name": "violated", "value":"0.25"},
+                        {"name": "okay", "value":"0.75"}
+                    ]
+                }
+            ]
+        }
+    ]
+}

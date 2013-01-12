@@ -1,0 +1,57 @@
+{
+    "instance-name": "Oracle",
+    "times":[ 
+    	{
+    		"time": "10:00",
+    		"cluster":[
+        		{
+            		"name" : "Oracle-Cluster1",
+            		"value":"0"
+        		},
+        		{
+            		"name" : "Oracle-Cluster2",
+            		"value":"1"
+        		}
+    		]
+    	},
+        {
+            "time": "10:05",
+            "cluster":[
+                {
+                    "name" : "Oracle-Cluster1",
+                    "value":"0"
+                },
+                {
+                    "name" : "Oracle-Cluster2",
+                    "value":"1"
+                }
+            ]
+        },
+        {
+            "time": "10:10",
+            "cluster":[
+                {
+                    "name" : "Oracle-Cluster1",
+                    "value":"0"
+                },
+                {
+                    "name" : "Oracle-Cluster2",
+                    "value":"1"
+                }
+            ]
+        },
+        {
+            "time": "10:15",
+            "cluster":[
+                {
+                    "name" : "Oracle-Cluster1",
+                    "value":"0"
+                },
+                {
+                    "name" : "Oracle-Cluster2",
+                    "value":"1"
+                }
+            ]
+        }
+    ]
+}

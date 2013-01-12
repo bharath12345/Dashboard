@@ -1,0 +1,57 @@
+{
+    "instance-name": "WAS",
+    "times":[
+        {
+            "time": "10:00",
+            "cluster":[
+                {
+                    "name" : "WAS-Cluster1",
+                    "value":"0"
+                },
+                {
+                    "name" : "WAS-Cluster2",
+                    "value":"1"
+                }
+            ]
+        },
+        {
+            "time": "10:05",
+            "cluster":[
+                {
+                    "name" : "WAS-Cluster1",
+                    "value":"0"
+                },
+                {
+                    "name" : "WAS-Cluster2",
+                    "value":"1"
+                }
+            ]
+        },
+        {
+            "time": "10:10",
+            "cluster":[
+                {
+                    "name" : "WAS-Cluster1",
+                    "value":"0"
+                },
+                {
+                    "name" : "WAS-Cluster2",
+                    "value":"1"
+                }
+            ]
+        },
+        {
+            "time": "10:15",
+            "cluster":[
+                {
+                    "name" : "WAS-Cluster1",
+                    "value":"0"
+                },
+                {
+                    "name" : "WAS-Cluster2",
+                    "value":"1"
+                }
+            ]
+        }
+    ]
+}

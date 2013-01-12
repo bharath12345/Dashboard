@@ -1,0 +1,23 @@
+{
+    "name":"noc",
+    "description":"AppsOne NOC Screens",
+    "version":"9.30",
+    "keywords":["JavaScript", "Dojo", "Toolkit", "DojoX", "NOC", "Screens"],
+    "maintainers":[
+        {
+            "name":"Bharadwaj Narasimha"
+        }
+    ],
+    "contributors":[
+        {
+            "name":"Bharadwaj Narasimha"
+        }
+    ],
+    "dependencies":{
+        "dojo":"~1.8.0",
+        "dijit":"~1.8.0",
+        "dojox":"~1.8.0"
+    },
+    "main":"NocMain",
+    "dojoBuild":"noc.profile.js"
+}

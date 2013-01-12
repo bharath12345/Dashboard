@@ -1,0 +1,83 @@
+{
+    "matrix":[
+        {
+            "component":"WAS",
+            "clusters": [
+                {
+                    "clusterName": "WAS-Cluster1",
+                    "clusterMembers" : [
+                        {
+                            "name": "WAS-host1",
+                            "kpiCount" : 3
+                        },
+                        {
+                            "name": "WAS-host2",
+                            "kpiCount" : 5
+                        },
+                        {
+                            "name": "WAS-host3",
+                            "kpiCount" : 4
+                        }
+                    ]
+                },
+                {
+                    "clusterName": "WAS-Cluster2",
+                    "clusterMembers" : [
+                        {
+                            "name": "WAS-host4",
+                            "kpiCount" : 2
+                        },
+                        {
+                            "name": "WAS-host5",
+                            "kpiCount" : 5
+                        },
+                        {
+                            "name": "WAS-host6",
+                            "kpiCount" : 2
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "component":"Oracle",
+            "clusters": [
+                {
+                    "clusterName": "Oracle-Cluster1",
+                    "clusterMembers" : [
+                        {
+                            "name": "Oracle-host1",
+                            "kpiCount" : 4
+                        },
+                        {
+                            "name": "Oracle-host2",
+                            "kpiCount" : 5
+                        },
+                        {
+                            "name": "Oracle-host3",
+                            "kpiCount" : 3
+                        }
+                    ]
+                },
+                {
+                    "clusterName": "Oracle-Cluster2",
+                    "clusterMembers" : [
+                        {
+                            "name": "Oracle-host4",
+                            "kpiCount" : 5
+                        },
+                        {
+                            "name": "Oracle-host5",
+                            "kpiCount" : 5
+                        },
+                        {
+                            "name": "Oracle-host6",
+                            "kpiCount" : 3
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+

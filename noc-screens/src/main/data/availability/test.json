@@ -1,0 +1,36 @@
+[
+    {
+        "id":0,
+        "row0col3":"WAS",
+        "row1col3":"<div id=\"WAS\"></div>",
+        "row0col2":"WAS-Cluster1",
+        "row0col1":"WAS-host1",
+        "row2col1":"WAS-host2",
+        "row4col1":"WAS-host3",
+        "row2col2":"WAS-Cluster2",
+        "row6col1":"WAS-host4",
+        "row8col1":"WAS-host5",
+        "row10col1":"WAS-host6"
+    },
+    {
+        "id":1,
+        "row0col3":"Oracle",
+        "row1col3":"<div id=\"Oracle\"></div>",
+        "row0col2":"Oracle-Cluster1",
+        "row0col1":"Oracle-host1",
+        "row2col1":"Oracle-host2",
+        "row4col1":"Oracle-host3",
+        "row2col2":"Oracle-Cluster2",
+        "row6col1":"Oracle-host4",
+        "row8col1":"Oracle-host5",
+        "row10col1":"Oracle-host6"
+    },
+    {
+        "id":2,
+        "row0col3":"Standalone/Custom",
+        "row1col3":"<div id=\"Standalone/Custom\"></div>",
+        "row0col2":"Standalone/Custom",
+        "row0col1":"Oracle-standalone",
+        "row2col1":"Custom-standalone"
+    }
+]

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app
+    xmlns="http://java.sun.com/xml/ns/j2ee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+        http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+    version="2.4">
+  <display-name>AppsOne NOC Screens</display-name>
+
+  <context-param>
+    <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
+    <param-value>AppsOneResources</param-value>
+  </context-param>
+
+  <filter>
+     <filter-name>http-context-filter</filter-name>
+     <filter-class>com.appnomic.noc.HttpContextFilter</filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>http-context-filter</filter-name>
+    <url-pattern>/*</url-pattern>
+    <!--  By default, JBoss only adds the REQUEST dispatcher type.
+          We added FORWARD to also catch forwards to the login page.
+    -->
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+    <!--  <dispatcher>INCLUDE</dispatcher>  -->
+    <!--  <dispatcher>ERROR</dispatcher> -->
+  </filter-mapping>
+
+    <servlet>
+        <servlet-name>NOC Screen Browser</servlet-name>
+        <servlet-class>org.apache.catalina.servlets.DefaultServlet</servlet-class>
+        <init-param>
+            <param-name>listings</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <!-- [INSERT FRAGMENT HERE] -->
+
+    <servlet-mapping>
+        <servlet-name>NOC Screen Browser</servlet-name>
+        <url-pattern>*.html</url-pattern>
+    </servlet-mapping>
+    
+  </web-app>

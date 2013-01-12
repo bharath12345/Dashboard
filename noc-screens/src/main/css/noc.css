@@ -1,0 +1,25 @@
+.rowtext {
+    font-size: 10px;
+    font-family:Helvetica Neue;
+}
+
+.onlineTxRowOdd {
+    background-color:#F2F7E8
+}
+
+.dgrid {
+    height: auto;
+}
+.dgrid .dgrid-scroller {
+    position: relative;
+    overflow: visible;
+}
+.dgrid-row-table {
+    height: 300px !important;
+}
+.dgrid-cell {
+    height: auto !important;
+    line-height: 4px;
+    vertical-align: middle !important;
+}
+
