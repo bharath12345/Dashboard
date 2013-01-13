@@ -1,10 +1,10 @@
 define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/layout/BorderContainer", "dojo/window",
     "dojo/i18n!noc/nls/noc", "noc/pages/AvailabilityPage", "noc/pages/TxTreemapPage",
-    "noc/pages/ComponentPage", "noc/pages/TxTimeSeriesPage", "noc/pages/AlertPage", "noc/pages/TxServiceLevelPage"],
+    "noc/pages/ComponentPage", "noc/pages/TxTimeSeriesPage","noc/pages/TxServiceLevelPage"],
 
     function (require, declare, i18n, ContentPane, BorderContainer, win,
               i18nString, AvailabilityPage, TxTimeSeriesPage, ComponentPage,
-              TxTreemapPage, AlertPage, TxServiceLevelPage) {
+              TxTreemapPage, TxServiceLevelPage) {
 
         var PageLoader = declare("noc.PageLoader", null, {
 
@@ -25,7 +25,6 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
                 new TxTimeSeriesPage().loadPage();
                 new ComponentPage().loadPage();
                 new TxTreemapPage().loadPage();
-                new AlertPage().loadPage();
                 new TxServiceLevelPage().loadPage();
 
                 //PageLoader.pageScroll(viewPort);

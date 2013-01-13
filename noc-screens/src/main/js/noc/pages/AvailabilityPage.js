@@ -1,7 +1,7 @@
 define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/GridContainer",
     "dojo/i18n!noc/nls/noc", "noc/Utility", "noc/Constants"],
 
-    function (require, declare, i18n, TitlePane, GridContainer, lang, Grid, i18nString, Utility, Constants) {
+    function (require, declare, i18n, TitlePane, GridContainer, i18nString, Utility, CONSTANTS) {
 
         var AvailabilityPage = declare("noc.pages.AvailabilityPage", null, {
 
@@ -40,7 +40,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                 };
 
                 var queryUrl = Utility.serialiseObject(gridViewMeta);
-                var baseUrl = "component/AvailabilityGrid.jsp";
+                var baseUrl = "component/AvailabilityGrid.jsp?";
                 Utility.xhrPostCentral(baseUrl + queryUrl, gridViewMeta);
 
             }

@@ -1,11 +1,20 @@
 .idea/
 .svn/
+.metadata/
 
 noc-screens/build.log
 dashboard/build.log
 
 noc-screens/target/
 dashboard/target/
+
+noc-screens/.settings
+noc-screens/.classpath
+noc-screens/.project
+
+dashboard/.settings
+dashboard/.classpath
+dashboard/.project
 
 noc-screens/src/main/js/dojo/
 noc-screens/src/main/js/dijit/
