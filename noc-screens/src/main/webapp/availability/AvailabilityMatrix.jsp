@@ -6,7 +6,7 @@
 
 <%
 	String id = new String(request.getParameter(NocScreenConstants.ID));
-	String type = new Integer(request.getParameter(NocScreenConstants.TYPE));
+	int type = new Integer(request.getParameter(NocScreenConstants.TYPE));
 
 	int width = new Integer(request.getParameter(NocScreenConstants.WIDTH));
 	int height = new Integer(request.getParameter(NocScreenConstants.HEIGHT));

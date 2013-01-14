@@ -1,49 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app
-    xmlns="http://java.sun.com/xml/ns/j2ee"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
         http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
-    version="2.4">
-  <display-name>AppsOne NOC Screens</display-name>
+	version="2.4">
+	<display-name>AppsOne NOC Screens</display-name>
 
-  <context-param>
-    <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
-    <param-value>AppsOneResources</param-value>
-  </context-param>
+	<context-param>
+		<param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
+		<param-value>AppsOneResources</param-value>
+	</context-param>
 
-  <filter>
-     <filter-name>http-context-filter</filter-name>
-     <filter-class>com.appnomic.noc.HttpContextFilter</filter-class>
-  </filter>
+	<filter>
+		<filter-name>http-context-filter</filter-name>
+		<filter-class>com.appnomic.noc.HttpContextFilter</filter-class>
+	</filter>
 
-  <filter-mapping>
-    <filter-name>http-context-filter</filter-name>
-    <url-pattern>/*</url-pattern>
-    <!--  By default, JBoss only adds the REQUEST dispatcher type.
-          We added FORWARD to also catch forwards to the login page.
-    -->
-    <dispatcher>REQUEST</dispatcher>
-    <dispatcher>FORWARD</dispatcher>
-    <!--  <dispatcher>INCLUDE</dispatcher>  -->
-    <!--  <dispatcher>ERROR</dispatcher> -->
-  </filter-mapping>
+	<!-- The Struts 2 filter should be mapped to ALL requests coming into the 
+		web application. As a filter, it can let the non-struts requests pass through 
+		and they will arrive at which ever servlets to which they may be mapped. 
+		When the filter recognizes a Struts 2 request, typically by the .action extension, 
+		the normal filter chaining of a web application is aborted and the request 
+		is completely handled by the Struts 2 system. -->
+	<filter>
+		<filter-name>struts2</filter-name>
+		<filter-class>org.apache.struts2.dispatcher.FilterDispatcher</filter-class>
+	</filter>
 
-    <servlet>
-        <servlet-name>NOC Screen Browser</servlet-name>
-        <servlet-class>org.apache.catalina.servlets.DefaultServlet</servlet-class>
-        <init-param>
-            <param-name>listings</param-name>
-            <param-value>true</param-value>
-        </init-param>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
+	<filter-mapping>
+		<filter-name>http-context-filter</filter-name>
+		<url-pattern>/*</url-pattern>
+		<!-- By default, JBoss only adds the REQUEST dispatcher type. We added 
+			FORWARD to also catch forwards to the login page. -->
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<!-- <dispatcher>INCLUDE</dispatcher> -->
+		<!-- <dispatcher>ERROR</dispatcher> -->
+	</filter-mapping>
 
-    <!-- [INSERT FRAGMENT HERE] -->
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 
-    <servlet-mapping>
-        <servlet-name>NOC Screen Browser</servlet-name>
-        <url-pattern>*.html</url-pattern>
-    </servlet-mapping>
-    
-  </web-app>
+	<servlet>
+		<servlet-name>NOC Screen Browser</servlet-name>
+		<servlet-class>org.apache.catalina.servlets.DefaultServlet</servlet-class>
+		<init-param>
+			<param-name>listings</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<!-- [INSERT FRAGMENT HERE] -->
+
+	<servlet-mapping>
+		<servlet-name>NOC Screen Browser</servlet-name>
+		<url-pattern>*.html</url-pattern>
+	</servlet-mapping>
+
+</web-app>
