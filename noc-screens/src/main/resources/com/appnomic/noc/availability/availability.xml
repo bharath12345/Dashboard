@@ -10,4 +10,19 @@
 			<result type="json"></result>
 		</action>
 	</package>
+	<package name="availability" namespace="/availability" extends="json-default">
+		<action name="AvailabilityDataComponent" class="com.appnomic.noc.availability.AvailabilityDataComponentAction">
+			<result type="json"></result>
+		</action>
+	</package>
+	<package name="availability" namespace="/availability" extends="json-default">
+		<action name="AvailabilityDataCluster" class="com.appnomic.noc.availability.AvailabilityDataClusterAction">
+			<result type="json"></result>
+		</action>
+	</package>
+	<package name="availability" namespace="/availability" extends="json-default">
+		<action name="AvailabilityDataHost" class="com.appnomic.noc.availability.AvailabilityDataHostAction">
+			<result type="json"></result>
+		</action>
+	</package>
 </struts>
