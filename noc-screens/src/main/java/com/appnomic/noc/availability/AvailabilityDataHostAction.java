@@ -51,7 +51,7 @@ public class AvailabilityDataHostAction implements ParameterAware {
 	}
 	
 	public void setDummyData() {
-		HostData hostData = new HostData();
+		hostData = new HostData();
 		hostData.setInstanceName("HostX");
 		
 		int kpiCount = 3;

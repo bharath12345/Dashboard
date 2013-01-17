@@ -67,9 +67,9 @@ public class AvailabilityDataClusterAction implements ParameterAware {
 			hostTimes[i].setHost(hostDataPoint);
 			
 			for(int j=0;j<hostDataPoints;j++) {
-				hostDataPoint[i] = new HostDataPoint();
-				hostDataPoint[i].setName("HostX");
-				hostDataPoint[i].setValue(j); // in this dummy sample, j is just 0/1
+				hostDataPoint[j] = new HostDataPoint();
+				hostDataPoint[j].setName("HostX");
+				hostDataPoint[j].setValue(j); // in this dummy sample, j is just 0/1
 			}
 		}
 	}

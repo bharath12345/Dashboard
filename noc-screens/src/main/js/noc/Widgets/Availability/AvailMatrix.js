@@ -5,6 +5,28 @@ define(['require', "dojo/_base/declare", "dojo/i18n",
 
         var AvailMatrix = declare("noc.Components.Availability.AvailMatrix", null, {
 
+            create: function(data) {
+                var gridItemWidth = parseInt(data.custom[0]);
+                var gridType = parseInt(data.custom[1]);
+                var url;
+                switch(gridType) {
+                    case 0:
+                        url = "availabilityDataComponent/AvailabilityDataComponent.action";
+                        break;
+                    case 1:
+                        url = "availabilityDataCluster/AvailabilityDataCluster.action";
+                        break;
+                    case 2:
+                        url = "availabilityDataHost/AvailabilityDataHost.action";
+                        break;
+                }
+
+                // ToDo: you SHOULD use data.id in the below fetch URL to get the data for the exact point
+                this.fetchData(url, data.id,
+                    data.dimensions.width, data.dimensions.height,
+                    data.position.xpos, data.position.ypos, gridItemWidth, gridType);
+            },
+
             fetchData: function(jsonStore, id,
                                 gridWidth, gridHeight,
                                 topLeftX, topLeftY,
@@ -16,21 +38,39 @@ define(['require', "dojo/_base/declare", "dojo/i18n",
                     var xpos = topLeftX;
                     var gridItemHeight = gridItemWidth; // for square boxes
 
-                    for(var i=0; i<m.times.length; i++) {
+                    var length, sub;
+                    switch(gridType) {
+                        case 0:
+                            length = m.componentData.times.length;
+                            sub = m.componentData.times;
+                            break;
+
+                        case 1:
+                            length = m.clusterData.times.length;
+                            sub = m.clusterData.times;
+                            break;
+
+                        case 2:
+                            length = m.hostData.times.length;
+                            sub = m.hostData.times;
+                            break;
+                    }
+
+                    for(var i=0; i<length; i++) {
                         xpos += gridItemWidth;
                         data[i] = new Array();
                         var columnSet;
                         switch(gridType) {
                             case 0:
-                                columnSet = m.times[i].cluster;
+                                columnSet = sub[i].cluster;
                                 break;
 
                             case 1:
-                                columnSet = m.times[i].host;
+                                columnSet = sub[i].host;
                                 break;
 
                             case 2:
-                                columnSet = m.times[i].kpi;
+                                columnSet = sub[i].kpi;
                                 break;
                         }
 
