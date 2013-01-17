@@ -420,7 +420,7 @@
 									<tasks>
 										<parallel>
 											<java classname="org.mozilla.javascript.tools.shell.Main"
-												fork="true" maxmemory="256m" failonerror="true"
+												fork="true" maxmemory="512m" failonerror="false"
 												classpath="${shrinksafe-dir}/js.jar${path.separator}${closure-dir}/compiler.jar${path.separator}${shrinksafe-dir}/shrinksafe.jar">
 												<arg value="${js-dir}/dojo/dojo.js" />
 												<arg value="baseUrl=${js-dir}/dojo" />
@@ -429,7 +429,7 @@
 												<arg value="--release" />
 											</java>
 											<java classname="org.mozilla.javascript.tools.shell.Main"
-												fork="true" maxmemory="256m" failonerror="true"
+												fork="true" maxmemory="512m" failonerror="false"
 												classpath="${shrinksafe-dir}/js.jar${path.separator}${closure-dir}/compiler.jar${path.separator}${shrinksafe-dir}/shrinksafe.jar">
 												<arg value="${js-dir}/${uncompressed}/dojo/dojo.js" />
 												<arg value="baseUrl=${js-dir}/${uncompressed}/dojo" />
@@ -535,116 +535,6 @@
 							</execution>
 						</executions>
 					</plugin>
-
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-compiler-plugin</artifactId>
-						<configuration>
-							<source>1.5</source>
-							<target>1.5</target>
-							<compilerVersion>1.5</compilerVersion>
-						</configuration>
-						<executions>
-							<execution>
-								<id>jsp-build</id>
-								<phase>package</phase>
-							</execution>
-						</executions>
-					</plugin>
-
-					<plugin>
-						<groupId>org.apache.sling</groupId>
-						<artifactId>maven-jspc-plugin</artifactId>
-						<version>2.0.4-incubator</version>
-						<configuration>
-							<compilerSourceVM>1.5</compilerSourceVM>
-							<compilerTargetVM>1.5</compilerTargetVM>
-						</configuration>
-						<executions>
-							<execution>
-								<id>compile-jsp</id>
-								<phase>package</phase>
-								<goals>
-									<goal>jspc</goal>
-								</goals>
-							</execution>
-						</executions>
-
-						<dependencies>
-							<dependency>
-								<groupId>org.codehaus.mojo.jspc</groupId>
-								<artifactId>jspc-compiler-tomcat6</artifactId>
-								<version>2.0-alpha-3</version>
-							</dependency>
-							<dependency>
-								<groupId>jboss.web</groupId>
-								<artifactId>jbossweb</artifactId>
-								<version>2.1.4.GA</version>
-							</dependency>
-							<dependency>
-								<groupId>org.jboss.logging</groupId>
-								<artifactId>jboss-logging-spi</artifactId>
-								<version>2.1.0.GA</version>
-							</dependency>
-							<dependency>
-								<groupId>javax.servlet</groupId>
-								<artifactId>servlet-api</artifactId>
-								<version>2.4</version>
-							</dependency>
-							<dependency>
-								<groupId>javax.servlet.jsp</groupId>
-								<artifactId>jsp-api</artifactId>
-								<version>2.1</version>
-							</dependency>
-							<dependency>
-								<groupId>sun.jdk</groupId>
-								<artifactId>tools</artifactId>
-								<scope>system</scope>
-								<version>1.5</version>
-								<systemPath>${java.home}/../lib/tools.jar</systemPath>
-							</dependency>
-							<dependency>
-								<groupId>tomcat</groupId>
-								<artifactId>jasper-compiler</artifactId>
-								<version>5.5.23</version>
-							</dependency>
-							<dependency>
-								<groupId>tomcat</groupId>
-								<artifactId>jasper-runtime</artifactId>
-								<version>5.5.23</version>
-							</dependency>
-							<dependency>
-								<groupId>javax.servlet</groupId>
-								<artifactId>jstl</artifactId>
-								<version>1.1.2</version>
-							</dependency>
-							<dependency>
-								<groupId>taglibs</groupId>
-								<artifactId>standard</artifactId>
-								<version>1.1.2</version>
-							</dependency>
-							<dependency>
-								<groupId>javax</groupId>
-								<artifactId>javaee-api</artifactId>
-								<version>6.0</version>
-							</dependency>
-							<dependency>
-								<groupId>org.apache.struts</groupId>
-								<artifactId>struts2-core</artifactId>
-								<version>2.1.8</version>
-							</dependency>
-							<dependency>
-								<groupId>org.apache.struts</groupId>
-								<artifactId>struts2-convention-plugin</artifactId>
-								<version>2.1.8</version>
-							</dependency>
-							<dependency>
-								<groupId>org.apache.struts</groupId>
-								<artifactId>struts2-json-plugin</artifactId>
-								<version>2.1.8</version>
-							</dependency>
-						</dependencies>
-					</plugin>
 				</plugins>
 			</build>
 		</profile>
@@ -726,93 +616,9 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>commons-beanutils</groupId>
-			<artifactId>commons-beanutils</artifactId>
-			<version>1.8.0</version>
-			<type>jar</type>
-		</dependency>
-		<dependency>
-			<groupId>commons-lang</groupId>
-			<artifactId>commons-lang</artifactId>
-			<version>2.4</version>
-			<type>jar</type>
-		</dependency>
-		<dependency>
-			<groupId>net.sf.ezmorph</groupId>
-			<artifactId>ezmorph</artifactId>
-			<version>1.0.6</version>
-			<type>jar</type>
-		</dependency>
-		<dependency>
-			<groupId>net.sf.json-lib</groupId>
-			<artifactId>json-lib</artifactId>
-			<version>2.2.3</version>
-			<type>jar</type>
-		</dependency>
-		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-			<version>11.0.2</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.codehaus.mojo.jspc</groupId>
-			<artifactId>jspc-compiler-tomcat6</artifactId>
-			<version>2.0-alpha-3</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>jboss.web</groupId>
-			<artifactId>jbossweb</artifactId>
-			<version>2.1.4.GA</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jboss.logging</groupId>
-			<artifactId>jboss-logging-spi</artifactId>
-			<version>2.1.0.GA</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 			<version>2.4</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet.jsp</groupId>
-			<artifactId>jsp-api</artifactId>
-			<version>2.1</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>tomcat</groupId>
-			<artifactId>jasper-compiler</artifactId>
-			<version>5.5.23</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>tomcat</groupId>
-			<artifactId>jasper-runtime</artifactId>
-			<version>5.5.23</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.1.2</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>taglibs</groupId>
-			<artifactId>standard</artifactId>
-			<version>1.1.2</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>javax</groupId>
-			<artifactId>javaee-api</artifactId>
-			<version>6.0</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
