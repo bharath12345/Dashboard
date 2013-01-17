@@ -1,15 +1,15 @@
 package com.appnomic.noc.availability;
 
-public class ClusterMember {
+public class Host {
 
-	private String name;
+	private String hostname;
 	private int kpiCount;
 	
-	public String getName() {
-		return name;
+	public String getHostname() {
+		return hostname;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setHostname(String hostname) {
+		this.hostname = hostname;
 	}
 	public int getKpiCount() {
 		return kpiCount;

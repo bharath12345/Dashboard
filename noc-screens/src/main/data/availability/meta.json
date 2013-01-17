@@ -5,7 +5,7 @@
             "clusters": [
                 {
                     "clusterName": "WAS-Cluster1",
-                    "clusterMembers" : [
+                    "hosts" : [
                         {
                             "name": "WAS-host1",
                             "kpiCount" : 3
@@ -22,7 +22,7 @@
                 },
                 {
                     "clusterName": "WAS-Cluster2",
-                    "clusterMembers" : [
+                    "hosts" : [
                         {
                             "name": "WAS-host4",
                             "kpiCount" : 2
@@ -44,7 +44,7 @@
             "clusters": [
                 {
                     "clusterName": "Oracle-Cluster1",
-                    "clusterMembers" : [
+                    "hosts" : [
                         {
                             "name": "Oracle-host1",
                             "kpiCount" : 4
@@ -61,7 +61,7 @@
                 },
                 {
                     "clusterName": "Oracle-Cluster2",
-                    "clusterMembers" : [
+                    "hosts" : [
                         {
                             "name": "Oracle-host4",
                             "kpiCount" : 5

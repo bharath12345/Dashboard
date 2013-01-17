@@ -5,8 +5,10 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "dojo/reques
         var Utility = declare("noc.Utility", null, {});
 
         Utility.xhrPostCentral = function (url, options) {
-            xhr(url, options, {
-                handleAs: "json"
+            xhr(url, {
+                handleAs: "json",
+                method: "POST",
+                query: options
             }).then(function(data){
                     // Do something with the handled data
                     noc.ViewManager.manageView(data);
@@ -18,21 +20,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "dojo/reques
                     // browser supports XHR2
                     console.log("hit event = " + evt);
                 });
-        };
-
-        Utility.serialiseObject = function (obj) {
-            var pairs = [];
-            for (var prop in obj) {
-                if (!obj.hasOwnProperty(prop)) {
-                    continue;
-                }
-                if (Object.prototype.toString.call(obj[prop]) == '[object Object]') {
-                    pairs.push(ViewManager.serialiseObject(obj[prop]));
-                    continue;
-                }
-                pairs.push(prop + '=' + obj[prop]);
-            }
-            return pairs.join('&');
         };
 
         return Utility;

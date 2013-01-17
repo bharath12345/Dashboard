@@ -547,7 +547,8 @@
 		<!-- dojo from files from /src/main/resources either. This is so to aid -->
 		<!-- faster development cycles (extracting and copying Dojo is slow). Be -->
 		<!-- COGNIZANT of this when you use this option -->
-		<!-- USAGE: mvn clean install -DskipFullBuild -Dbuild=compressed -->
+		<!-- USAGE:
+		 -->
 		<!-- ***************************************************************************** -->
 		<profile>
 			<id>build-compressed</id>

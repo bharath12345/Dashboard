@@ -6,7 +6,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid',
         var AvailabilityGrid = declare("noc.Components.Availability.AvailabilityGrid", null, {
 
             create:function () {
-                d3.json("./data/availability/meta.json", dojo.hitch(this, function (m) {
+                d3.json("availability/AvailabilityMeta.action", dojo.hitch(this, function (m) {
                     this.renderGrid(m);
                 }));
             },
@@ -16,20 +16,20 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid',
                 // How to build the table - METHODOLOGY
                 // 1. The number of Broad columns is fixed at 3
                 // 2. Parse the JSON to find the number of items in Column 3 - this should NOT be more than 5
-                var maxCol3 = gridMeta.matrix.length;
+                var maxCol3 = gridMeta.components.length;
 
                 // 3. Parse the JSON to find the MAX number of columns among the '5' of step 2 for column 2 (children). Lets say it is 4
                 // 4. Parse the JSON to find the MAX number of columns among the '4' of step 3 for column 1 (children). Lets say it is 3
 
                 var maxCol2 = 0, maxCol1 = 0;
                 for (var i = 0; i < maxCol3; i++) {
-                    var clusters = gridMeta.matrix[i].clusters;
+                    var clusters = gridMeta.components[i].clusters;
                     if (clusters.length > maxCol2) {
                         maxCol2 = clusters.length;
                     }
                     for (var j = 0; j < clusters.length; j++) {
-                        if (clusters[j].clusterMembers.length > maxCol1) {
-                            maxCol1 = clusters[j].clusterMembers.length;
+                        if (clusters[j].host.length > maxCol1) {
+                            maxCol1 = clusters[j].host.length;
                         }
                     }
                 }
@@ -90,19 +90,19 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid',
                 var gridData = [];
                 for (var i = 0; i < maxCol3; i++) {
                     var dataPoint = new Object();
-                    dataPoint.row0col3 = gridMeta.matrix[i].component;
+                    dataPoint.row0col3 = gridMeta.components[i];
 
                     var lastpoint = 0;
-                    var clusters = gridMeta.matrix[i].clusters;
+                    var clusters = gridMeta.components[i];
                     for (var j = 0; j < clusters.length; j++) {
                         var point2 = "row" + (2 * j) + "col2";
                         dataPoint[point2] = clusters[j].clusterName;
 
-                        for (var z = 0; z < clusters[j].clusterMembers.length; z++) {
+                        for (var z = 0; z < clusters[j].host.length; z++) {
                             var point1 = "row" + (lastpoint + (2 * z)) + "col1";
                             //console.log("point 1 = " + point1);
-                            dataPoint[point1] = clusters[j].clusterMembers[z].name;
-                            if (z == (clusters[j].clusterMembers.length - 1)) {
+                            dataPoint[point1] = clusters[j].host[z].name;
+                            if (z == (clusters[j].host.length - 1)) {
                                 lastpoint = (2 * z) + 2;
                             }
                         }
@@ -125,7 +125,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid',
 
                 var i = 0;
                 dojo.query("td.field-row1col3").forEach(function (node) {
-                    node.id = gridMeta.matrix[i].component;
+                    node.id = gridMeta.components[i];
                     console.log("i = " + i + " this is the div in cell = " + node);
                     i++;
                 });
@@ -136,8 +136,8 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid',
 
                 console.log("max col 3 = " + maxCol3);
                 for (var i = 0; i < maxCol3; i++) {
-                    var cluster = gridMeta.matrix[i].clusters;
-                    console.log("working on cluster = " + gridMeta.matrix[i].component);
+                    var cluster = gridMeta.components[i];
+                    console.log("working on cluster = " + gridMeta.components[i]);
                     var hostsOfCluster = [];
                     this.cacheClusterHosts(cluster, hostsOfCluster);
 
@@ -154,14 +154,14 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid',
                 // By this point all 'td' are ready with the correct id's
                 // Traverse the meta and fire queries for the correct host, cluster, component
                 // Render them
-                for (var i = 0; i < gridMeta.matrix.length; i++) {
-                    this.renderSVG(gridMeta.matrix[i].component, 30, 0);
-                    var clusters = gridMeta.matrix[i].clusters;
+                for (var i = 0; i < gridMeta.components.length; i++) {
+                    this.renderSVG(gridMeta.components[i], 30, 0);
+                    var clusters = gridMeta.components[i].clusters;
                     for (var j = 0; j < clusters.length; j++) {
                         this.renderSVG(clusters[j].clusterName, 20, 1);
-                        var clusterMembers = clusters[j].clusterMembers;
-                        for (var z = 0; z < clusterMembers.length; z++) {
-                            this.renderSVG(clusterMembers[z].name, 10, 2);
+                        var host = clusters[j].host;
+                        for (var z = 0; z < host.length; z++) {
+                            this.renderSVG(host[z].name, 10, 2);
                         }
                     }
                 }
@@ -187,10 +187,10 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid',
 
             cacheClusterHosts:function (cluster, hostsOfCluster) {
                 for (var j = 0; j < cluster.length; j++) {
-                    var clusterMembers = cluster[j].clusterMembers;
-                    for (var z = 0; z < clusterMembers.length; z++) {
-                        hostsOfCluster.push(clusterMembers[z].name);
-                        console.log("pushed host = " + clusterMembers[z].name);
+                    var host = cluster[j].host;
+                    for (var z = 0; z < host.length; z++) {
+                        hostsOfCluster.push(host[z].name);
+                        console.log("pushed host = " + host[z].name);
                     }
                 }
             },
@@ -198,7 +198,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid',
             markCol2Ids:function (rowNum, maxCol3, gridMeta) {
                 var clusterOfType = [];
                 for (var i = 0; i < maxCol3; i++) {
-                    var clusters = gridMeta.matrix[i].clusters;
+                    var clusters = gridMeta.components[i].clusters;
                     if (clusters[rowNum] != null && clusters[rowNum] != undefined) {
                         clusterOfType.push(clusters[rowNum].clusterName);
                         console.log("pushed cluster = " + clusters[rowNum].clusterName);

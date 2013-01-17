@@ -27,10 +27,10 @@ public class AvailabilityMetaAction /*implements Action*/ {
 	private Component [] components = null;
 	
 	public AvailabilityMetaAction() {
-		setDummyAvailabilityData();
+		setDummyData();
 	}
 	
-	public void setDummyAvailabilityData() {
+	public void setDummyData() {
 		int compCount = 6;
 		components = new Component[compCount];
 		for(int i=0; i<compCount; i++) {
@@ -41,14 +41,14 @@ public class AvailabilityMetaAction /*implements Action*/ {
 			components[i].setClusters(cluster);
 			for(int j=0;j<clusterCount;j++) {
 				int clusterMembers = 2;
-				ClusterMember[] clusterMember = new ClusterMember[clusterMembers];
+				Host[] host = new Host[clusterMembers];
 				cluster[j] = new Cluster();
 				cluster[j].setClusterName("cluster"+j);
-				cluster[j].setClusterMember(clusterMember);
+				cluster[j].setHost(host);
 				for(int z=0;z<clusterMembers;z++) {
-					clusterMember[z] = new ClusterMember();
-					clusterMember[z].setKpiCount(z);
-					clusterMember[z].setName("kpi"+z);
+					host[z] = new Host();
+					host[z].setKpiCount(3);
+					host[z].setHostname("kpi"+z);
 				}
 			}
 			

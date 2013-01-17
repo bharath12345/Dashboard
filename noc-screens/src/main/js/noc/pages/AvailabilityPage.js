@@ -39,9 +39,8 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                     ypos:0
                 };
 
-                var queryUrl = Utility.serialiseObject(gridViewMeta);
-                var baseUrl = "component/AvailabilityGrid.jsp?";
-                Utility.xhrPostCentral(baseUrl + queryUrl, gridViewMeta);
+                var baseUrl = "availability/AvailabilityRequestHandler.action";
+                Utility.xhrPostCentral(baseUrl, gridViewMeta);
 
             }
         });

@@ -3,7 +3,7 @@ package com.appnomic.noc.availability;
 public class Cluster {
 
 	private String clusterName;
-	private ClusterMember [] clusterMember;
+	private Host [] host;
 	
 	public String getClusterName() {
 		return clusterName;
@@ -11,10 +11,10 @@ public class Cluster {
 	public void setClusterName(String clusterName) {
 		this.clusterName = clusterName;
 	}
-	public ClusterMember[] getClusterMember() {
-		return clusterMember;
+	public Host[] getHost() {
+		return host;
 	}
-	public void setClusterMember(ClusterMember[] clusterMember) {
-		this.clusterMember = clusterMember;
+	public void setHost(Host[] host) {
+		this.host = host;
 	}
 }

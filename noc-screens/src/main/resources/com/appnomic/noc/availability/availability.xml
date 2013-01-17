@@ -13,6 +13,10 @@
 			<result type="json"></result>
 		</action>
 
+		<action name="AvailabilityRequestHandler" class="com.appnomic.noc.availability.AvailabilityRequestHandlerAction">
+			<result type="json"></result>
+		</action>
+
 	</package>
 
 </struts>
