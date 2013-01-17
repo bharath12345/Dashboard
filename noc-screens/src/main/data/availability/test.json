@@ -2,56 +2,56 @@
     {
         "clusters":[
             {
-                "clusterMember":[
+                "clusterName":"cluster0",
+                "host":[
                     {
-                        "kpiCount":0,
-                        "name":"kpi0"
+                        "hostname":"kpi0",
+                        "kpiCount":3
                     },
                     {
-                        "kpiCount":1,
-                        "name":"kpi1"
+                        "hostname":"kpi1",
+                        "kpiCount":3
                     }
-                ],
-                "clusterName":"cluster0"
+                ]
             },
             {
-                "clusterMember":[
+                "clusterName":"cluster1",
+                "host":[
                     {
-                        "kpiCount":0,
-                        "name":"kpi0"
+                        "hostname":"kpi0",
+                        "kpiCount":3
                     },
                     {
-                        "kpiCount":1,
-                        "name":"kpi1"
+                        "hostname":"kpi1",
+                        "kpiCount":3
                     }
-                ],
-                "clusterName":"cluster1"
+                ]
             },
             {
-                "clusterMember":[
+                "clusterName":"cluster2",
+                "host":[
                     {
-                        "kpiCount":0,
-                        "name":"kpi0"
+                        "hostname":"kpi0",
+                        "kpiCount":3
                     },
                     {
-                        "kpiCount":1,
-                        "name":"kpi1"
+                        "hostname":"kpi1",
+                        "kpiCount":3
                     }
-                ],
-                "clusterName":"cluster2"
+                ]
             },
             {
-                "clusterMember":[
+                "clusterName":"cluster3",
+                "host":[
                     {
-                        "kpiCount":0,
-                        "name":"kpi0"
+                        "hostname":"kpi0",
+                        "kpiCount":3
                     },
                     {
-                        "kpiCount":1,
-                        "name":"kpi1"
+                        "hostname":"kpi1",
+                        "kpiCount":3
                     }
-                ],
-                "clusterName":"cluster3"
+                ]
             }
         ],
         "componentName":"component-0"
@@ -59,56 +59,56 @@
     {
         "clusters":[
             {
-                "clusterMember":[
+                "clusterName":"cluster0",
+                "host":[
                     {
-                        "kpiCount":0,
-                        "name":"kpi0"
+                        "hostname":"kpi0",
+                        "kpiCount":3
                     },
                     {
-                        "kpiCount":1,
-                        "name":"kpi1"
+                        "hostname":"kpi1",
+                        "kpiCount":3
                     }
-                ],
-                "clusterName":"cluster0"
+                ]
             },
             {
-                "clusterMember":[
+                "clusterName":"cluster1",
+                "host":[
                     {
-                        "kpiCount":0,
-                        "name":"kpi0"
+                        "hostname":"kpi0",
+                        "kpiCount":3
                     },
                     {
-                        "kpiCount":1,
-                        "name":"kpi1"
+                        "hostname":"kpi1",
+                        "kpiCount":3
                     }
-                ],
-                "clusterName":"cluster1"
+                ]
             },
             {
-                "clusterMember":[
+                "clusterName":"cluster2",
+                "host":[
                     {
-                        "kpiCount":0,
-                        "name":"kpi0"
+                        "hostname":"kpi0",
+                        "kpiCount":3
                     },
                     {
-                        "kpiCount":1,
-                        "name":"kpi1"
+                        "hostname":"kpi1",
+                        "kpiCount":3
                     }
-                ],
-                "clusterName":"cluster2"
+                ]
             },
             {
-                "clusterMember":[
+                "clusterName":"cluster3",
+                "host":[
                     {
-                        "kpiCount":0,
-                        "name":"kpi0"
+                        "hostname":"kpi0",
+                        "kpiCount":3
                     },
                     {
-                        "kpiCount":1,
-                        "name":"kpi1"
+                        "hostname":"kpi1",
+                        "kpiCount":3
                     }
-                ],
-                "clusterName":"cluster3"
+                ]
             }
         ],
         "componentName":"component-1"
@@ -116,56 +116,56 @@
     {
         "clusters":[
             {
-                "clusterMember":[
+                "clusterName":"cluster0",
+                "host":[
                     {
-                        "kpiCount":0,
-                        "name":"kpi0"
+                        "hostname":"kpi0",
+                        "kpiCount":3
                     },
                     {
-                        "kpiCount":1,
-                        "name":"kpi1"
+                        "hostname":"kpi1",
+                        "kpiCount":3
                     }
-                ],
-                "clusterName":"cluster0"
+                ]
             },
             {
-                "clusterMember":[
+                "clusterName":"cluster1",
+                "host":[
                     {
-                        "kpiCount":0,
-                        "name":"kpi0"
+                        "hostname":"kpi0",
+                        "kpiCount":3
                     },
                     {
-                        "kpiCount":1,
-                        "name":"kpi1"
+                        "hostname":"kpi1",
+                        "kpiCount":3
                     }
-                ],
-                "clusterName":"cluster1"
+                ]
             },
             {
-                "clusterMember":[
+                "clusterName":"cluster2",
+                "host":[
                     {
-                        "kpiCount":0,
-                        "name":"kpi0"
+                        "hostname":"kpi0",
+                        "kpiCount":3
                     },
                     {
-                        "kpiCount":1,
-                        "name":"kpi1"
+                        "hostname":"kpi1",
+                        "kpiCount":3
                     }
-                ],
-                "clusterName":"cluster2"
+                ]
             },
             {
-                "clusterMember":[
+                "clusterName":"cluster3",
+                "host":[
                     {
-                        "kpiCount":0,
-                        "name":"kpi0"
+                        "hostname":"kpi0",
+                        "kpiCount":3
                     },
                     {
-                        "kpiCount":1,
-                        "name":"kpi1"
+                        "hostname":"kpi1",
+                        "kpiCount":3
                     }
-                ],
-                "clusterName":"cluster3"
+                ]
             }
         ],
         "componentName":"component-2"
@@ -173,56 +173,56 @@
     {
         "clusters":[
             {
-                "clusterMember":[
+                "clusterName":"cluster0",
+                "host":[
                     {
-                        "kpiCount":0,
-                        "name":"kpi0"
+                        "hostname":"kpi0",
+                        "kpiCount":3
                     },
                     {
-                        "kpiCount":1,
-                        "name":"kpi1"
+                        "hostname":"kpi1",
+                        "kpiCount":3
                     }
-                ],
-                "clusterName":"cluster0"
+                ]
             },
             {
-                "clusterMember":[
+                "clusterName":"cluster1",
+                "host":[
                     {
-                        "kpiCount":0,
-                        "name":"kpi0"
+                        "hostname":"kpi0",
+                        "kpiCount":3
                     },
                     {
-                        "kpiCount":1,
-                        "name":"kpi1"
+                        "hostname":"kpi1",
+                        "kpiCount":3
                     }
-                ],
-                "clusterName":"cluster1"
+                ]
             },
             {
-                "clusterMember":[
+                "clusterName":"cluster2",
+                "host":[
                     {
-                        "kpiCount":0,
-                        "name":"kpi0"
+                        "hostname":"kpi0",
+                        "kpiCount":3
                     },
                     {
-                        "kpiCount":1,
-                        "name":"kpi1"
+                        "hostname":"kpi1",
+                        "kpiCount":3
                     }
-                ],
-                "clusterName":"cluster2"
+                ]
             },
             {
-                "clusterMember":[
+                "clusterName":"cluster3",
+                "host":[
                     {
-                        "kpiCount":0,
-                        "name":"kpi0"
+                        "hostname":"kpi0",
+                        "kpiCount":3
                     },
                     {
-                        "kpiCount":1,
-                        "name":"kpi1"
+                        "hostname":"kpi1",
+                        "kpiCount":3
                     }
-                ],
-                "clusterName":"cluster3"
+                ]
             }
         ],
         "componentName":"component-3"
@@ -230,56 +230,56 @@
     {
         "clusters":[
             {
-                "clusterMember":[
+                "clusterName":"cluster0",
+                "host":[
                     {
-                        "kpiCount":0,
-                        "name":"kpi0"
+                        "hostname":"kpi0",
+                        "kpiCount":3
                     },
                     {
-                        "kpiCount":1,
-                        "name":"kpi1"
+                        "hostname":"kpi1",
+                        "kpiCount":3
                     }
-                ],
-                "clusterName":"cluster0"
+                ]
             },
             {
-                "clusterMember":[
+                "clusterName":"cluster1",
+                "host":[
                     {
-                        "kpiCount":0,
-                        "name":"kpi0"
+                        "hostname":"kpi0",
+                        "kpiCount":3
                     },
                     {
-                        "kpiCount":1,
-                        "name":"kpi1"
+                        "hostname":"kpi1",
+                        "kpiCount":3
                     }
-                ],
-                "clusterName":"cluster1"
+                ]
             },
             {
-                "clusterMember":[
+                "clusterName":"cluster2",
+                "host":[
                     {
-                        "kpiCount":0,
-                        "name":"kpi0"
+                        "hostname":"kpi0",
+                        "kpiCount":3
                     },
                     {
-                        "kpiCount":1,
-                        "name":"kpi1"
+                        "hostname":"kpi1",
+                        "kpiCount":3
                     }
-                ],
-                "clusterName":"cluster2"
+                ]
             },
             {
-                "clusterMember":[
+                "clusterName":"cluster3",
+                "host":[
                     {
-                        "kpiCount":0,
-                        "name":"kpi0"
+                        "hostname":"kpi0",
+                        "kpiCount":3
                     },
                     {
-                        "kpiCount":1,
-                        "name":"kpi1"
+                        "hostname":"kpi1",
+                        "kpiCount":3
                     }
-                ],
-                "clusterName":"cluster3"
+                ]
             }
         ],
         "componentName":"component-4"
@@ -287,56 +287,56 @@
     {
         "clusters":[
             {
-                "clusterMember":[
+                "clusterName":"cluster0",
+                "host":[
                     {
-                        "kpiCount":0,
-                        "name":"kpi0"
+                        "hostname":"kpi0",
+                        "kpiCount":3
                     },
                     {
-                        "kpiCount":1,
-                        "name":"kpi1"
+                        "hostname":"kpi1",
+                        "kpiCount":3
                     }
-                ],
-                "clusterName":"cluster0"
+                ]
             },
             {
-                "clusterMember":[
+                "clusterName":"cluster1",
+                "host":[
                     {
-                        "kpiCount":0,
-                        "name":"kpi0"
+                        "hostname":"kpi0",
+                        "kpiCount":3
                     },
                     {
-                        "kpiCount":1,
-                        "name":"kpi1"
+                        "hostname":"kpi1",
+                        "kpiCount":3
                     }
-                ],
-                "clusterName":"cluster1"
+                ]
             },
             {
-                "clusterMember":[
+                "clusterName":"cluster2",
+                "host":[
                     {
-                        "kpiCount":0,
-                        "name":"kpi0"
+                        "hostname":"kpi0",
+                        "kpiCount":3
                     },
                     {
-                        "kpiCount":1,
-                        "name":"kpi1"
+                        "hostname":"kpi1",
+                        "kpiCount":3
                     }
-                ],
-                "clusterName":"cluster2"
+                ]
             },
             {
-                "clusterMember":[
+                "clusterName":"cluster3",
+                "host":[
                     {
-                        "kpiCount":0,
-                        "name":"kpi0"
+                        "hostname":"kpi0",
+                        "kpiCount":3
                     },
                     {
-                        "kpiCount":1,
-                        "name":"kpi1"
+                        "hostname":"kpi1",
+                        "kpiCount":3
                     }
-                ],
-                "clusterName":"cluster3"
+                ]
             }
         ],
         "componentName":"component-5"

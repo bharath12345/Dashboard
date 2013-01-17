@@ -1,4 +1,4 @@
-package com.appnomic.noc.availability;
+package com.appnomic.noc;
 
 import java.util.Map;
 
@@ -6,11 +6,11 @@ import org.apache.struts2.interceptor.ParameterAware;
 
 import com.opensymphony.xwork2.Action;
 
-public class AvailabilityRequestHandlerAction implements ParameterAware {
+public class RequestHandlerAction implements ParameterAware {
 	
 	private Map<String, String[]> parameters;
 	
-	public AvailabilityRequestHandlerAction() {
+	public RequestHandlerAction() {
 	}
 	
 	public String execute() {

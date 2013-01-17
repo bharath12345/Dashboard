@@ -30,17 +30,18 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                 gridContainer.startup();
                 gridContainer.resize();
 
-                var gridViewMeta = {
+                var xpos=0, ypos=0;
+
+                var viewMeta = {
                     id:"availGrid",
                     type: CONSTANTS.AVAILABILITY,
-                    width:AvailabilityPage.CP.offsetWidth,
-                    height:AvailabilityPage.CP.offsetHeight,
-                    xpos:0,
-                    ypos:0
+                    dimensions:[AvailabilityPage.CP.w, AvailabilityPage.CP.h],
+                    position:[xpos,ypos],
+                    custom: []
                 };
 
-                var baseUrl = "availability/AvailabilityRequestHandler.action";
-                Utility.xhrPostCentral(baseUrl, gridViewMeta);
+                var baseUrl = "noc/RequestHandler.action";
+                Utility.xhrPostCentral(baseUrl, viewMeta);
 
             }
         });

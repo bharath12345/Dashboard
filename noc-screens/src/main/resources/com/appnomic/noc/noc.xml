@@ -5,8 +5,8 @@
 <struts>
 	<!-- The package element provides a mechanism by which to group related 
 		Struts 2 components, such as actions and results, into logical units. -->
-	<package name="availability" namespace="/availability" extends="json-default">
-		<action name="AvailabilityMeta" class="com.appnomic.noc.availability.AvailabilityMetaAction">
+	<package name="noc" namespace="/noc" extends="json-default">
+		<action name="RequestHandler" class="com.appnomic.noc.RequestHandlerAction">
 			<result type="json"></result>
 		</action>
 	</package>

@@ -1,11 +1,12 @@
 define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid',
-    "dojo/i18n!noc/nls/noc"],
+    "dojo/i18n!noc/nls/noc", "noc/Utility", "noc/Constants"],
 
-    function (require, declare, i18n, Grid, i18nString) {
+    function (require, declare, i18n, Grid, i18nString, Utility, CONSTANTS) {
 
         var AvailabilityGrid = declare("noc.Components.Availability.AvailabilityGrid", null, {
 
-            create:function () {
+            create:function (data) {
+                this.data = data;
                 d3.json("availability/AvailabilityMeta.action", dojo.hitch(this, function (m) {
                     this.renderGrid(m);
                 }));
@@ -90,10 +91,10 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid',
                 var gridData = [];
                 for (var i = 0; i < maxCol3; i++) {
                     var dataPoint = new Object();
-                    dataPoint.row0col3 = gridMeta.components[i];
+                    dataPoint.row0col3 = gridMeta.components[i].componentName;
 
                     var lastpoint = 0;
-                    var clusters = gridMeta.components[i];
+                    var clusters = gridMeta.components[i].clusters;
                     for (var j = 0; j < clusters.length; j++) {
                         var point2 = "row" + (2 * j) + "col2";
                         dataPoint[point2] = clusters[j].clusterName;
@@ -101,7 +102,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid',
                         for (var z = 0; z < clusters[j].host.length; z++) {
                             var point1 = "row" + (lastpoint + (2 * z)) + "col1";
                             //console.log("point 1 = " + point1);
-                            dataPoint[point1] = clusters[j].host[z].name;
+                            dataPoint[point1] = clusters[j].host[z].hostname;
                             if (z == (clusters[j].host.length - 1)) {
                                 lastpoint = (2 * z) + 2;
                             }
@@ -112,8 +113,8 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid',
                 console.log("table data json" + dojo.toJson(gridData));
 
                 var grid = new Grid({subRows:subSubRows, showHeader:false,
-                    style:"width:" + AvailabilityGrid.CP.offsetWidth +
-                        "height:" + AvailabilityGrid.CP.offsetHeight}, "availGrid");
+                    style:"width:" + this.data.dimensions.width +
+                        "height:" + this.data.dimensions.height}, "availGrid");
                 grid.renderArray(gridData);
                 dojo.byId("dijit_TitlePane_0_pane").style.padding = "0px";
 
@@ -125,7 +126,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid',
 
                 var i = 0;
                 dojo.query("td.field-row1col3").forEach(function (node) {
-                    node.id = gridMeta.components[i];
+                    node.id = gridMeta.components[i].componentName;
                     console.log("i = " + i + " this is the div in cell = " + node);
                     i++;
                 });
@@ -136,8 +137,8 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid',
 
                 console.log("max col 3 = " + maxCol3);
                 for (var i = 0; i < maxCol3; i++) {
-                    var cluster = gridMeta.components[i];
-                    console.log("working on cluster = " + gridMeta.components[i]);
+                    var cluster = gridMeta.components[i].clusters;
+                    //console.log("working on clusters in = " + gridMeta.components[i].componentName);
                     var hostsOfCluster = [];
                     this.cacheClusterHosts(cluster, hostsOfCluster);
 
@@ -155,13 +156,13 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid',
                 // Traverse the meta and fire queries for the correct host, cluster, component
                 // Render them
                 for (var i = 0; i < gridMeta.components.length; i++) {
-                    this.renderSVG(gridMeta.components[i], 30, 0);
+                    this.renderSVG(gridMeta.components[i].componentName, 30, 0);
                     var clusters = gridMeta.components[i].clusters;
                     for (var j = 0; j < clusters.length; j++) {
                         this.renderSVG(clusters[j].clusterName, 20, 1);
                         var host = clusters[j].host;
                         for (var z = 0; z < host.length; z++) {
-                            this.renderSVG(host[z].name, 10, 2);
+                            this.renderSVG(host[z].hostname, 10, 2);
                         }
                     }
                 }
@@ -169,28 +170,24 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid',
 
             renderSVG:function (objectName, objectSize, gridType) {
                 var domNode = dojo.byId(objectName);
-                var gridViewMeta = {
+                var xpos= 0, ypos=0;
+                var viewMeta = {
                     id:objectName,
                     type: CONSTANTS.AVAILABILITY_DATA,
-                    width:domNode.offsetWidth,
-                    height:domNode.offsetHeight,
-                    xpos:0,
-                    ypos:0,
-                    objectSize: objectSize,
-                    gridType: gridType
+                    dimensions:[domNode.offsetWidth,domNode.offsetHeight],
+                    position: [xpos,ypos],
+                    custom: [objectSize,gridType]
                 };
-
-                var queryUrl = Utility.serialiseObject(gridViewMeta);
-                var baseUrl = "component/AvailabilityMatrix.jsp";
-                Utility.xhrPostCentral(baseUrl + queryUrl, gridViewMeta);
+                var baseUrl = "noc/RequestHandler.action";
+                Utility.xhrPostCentral(baseUrl, viewMeta);
             },
 
             cacheClusterHosts:function (cluster, hostsOfCluster) {
                 for (var j = 0; j < cluster.length; j++) {
                     var host = cluster[j].host;
                     for (var z = 0; z < host.length; z++) {
-                        hostsOfCluster.push(host[z].name);
-                        console.log("pushed host = " + host[z].name);
+                        hostsOfCluster.push(host[z].hostname);
+                        //console.log("pushed host = " + host[z].hostname);
                     }
                 }
             },
@@ -201,14 +198,14 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid',
                     var clusters = gridMeta.components[i].clusters;
                     if (clusters[rowNum] != null && clusters[rowNum] != undefined) {
                         clusterOfType.push(clusters[rowNum].clusterName);
-                        console.log("pushed cluster = " + clusters[rowNum].clusterName);
+                        //console.log("pushed cluster = " + clusters[rowNum].clusterName);
                     }
                 }
                 var i = 0;
                 dojo.query("td.field-row" + ((rowNum * 2) + 1) + "col2").forEach(function (node) {
                     if (clusterOfType[i] != null && clusterOfType[i] != undefined) {
                         node.id = clusterOfType[i];
-                        console.log("i = " + clusterOfType[i] + " div in cell = " + node.className);
+                        //console.log("i = " + clusterOfType[i] + " div in cell = " + node.className);
                     }
                     i++;
                 });
