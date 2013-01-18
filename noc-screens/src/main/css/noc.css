@@ -23,3 +23,69 @@
     vertical-align: middle !important;
 }
 
+BODY {
+    background-color: #fff;
+}
+
+#loginHeader {
+    border-collapse: collapse;
+    width: 100%;
+    border: none;
+}
+
+#loginHeader TBODY TR TD {
+    padding: 0px;
+}
+
+.loginHeaderIcon IMG {
+    margin-left: 20px;
+}
+
+.loginHeaderTitle {
+    vertical-align: middle;
+}
+
+.loginHeaderTitle DIV {
+    margin-bottom: 20px !important;
+    margin-right: 20px;
+}
+
+.loginHeaderPhoto DIV {
+    background: #fff;
+    border: 0px;
+    border-left: 7px solid #fff;
+    float: right;
+    width: 307px;
+    height: 39px;
+}
+
+DIV.Title {
+    border:               0px;
+    background-image:     url(../images/box-header.png);
+    background-repeat:    repeat;
+    padding-left:         4px;
+    padding-top:          2px;
+    padding-bottom:       4px;
+    padding-right:        2px;
+    color:                black;
+    overflow:             hidden;
+    text-overflow:        ellipsis; /*IE Only*/
+    width:                auto;
+}
+
+DIV.Title {
+    margin-top:           1px;
+    margin-right:         1px;
+}
+
+body, td {
+    font-family: arial;
+    font-size: 13px;
+}
+
+a.document {
+    font-weight: 500;
+    font-size: 12px;
+}
+
+

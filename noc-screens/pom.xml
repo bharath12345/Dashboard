@@ -14,10 +14,6 @@
 
     <repositories>
         <repository>
-            <id>repo</id>
-            <url>https://github.com/xbib/maven-repo/raw/master/releases</url>
-        </repository>
-        <repository>
             <id>MavenCentral</id>
             <name>Maven repository</name>
             <url>http://repo1.maven.org/maven2</url>
@@ -51,10 +47,21 @@
             </releases>
         </repository>
         <repository>
-            <id>glassfish</id>
+            <id>glassfish1</id>
             <name>Glassfish repository</name>
             <url>http://download.java.net/maven/1</url>
-            <layout>legacy</layout>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>glassfish2
+            </id>
+            <name>Glassfish repository</name>
+            <url>http://download.java.net/maven/2</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
@@ -65,9 +72,7 @@
         <repository>
             <id>apache.snapshots</id>
             <name>Apache Snapshot Repository</name>
-            <url>
-                http://people.apache.org/repo/m2-snapshot-repository
-            </url>
+            <url>http://people.apache.org/repo/m2-snapshot-repository</url>
             <releases>
                 <enabled>false</enabled>
             </releases>
@@ -108,13 +113,10 @@
     <packaging>war</packaging>
     <properties>
         <dojoSrc>${basedir}/src/main/js/dojo-release-${dojo.version}-src</dojoSrc>
-        <uncompressed>uncompressed</uncompressed>
         <doh-dir>${basedir}/src/main/js/util/doh</doh-dir>
         <shrinksafe-dir>${basedir}/src/main/js/util/shrinksafe</shrinksafe-dir>
         <closure-dir>${basedir}/src/main/js/util/closureCompiler</closure-dir>
         <dojo-build-dir>${basedir}/src/main/js/util/buildscripts</dojo-build-dir>
-        <dojo-uncompressed-build-dir>${basedir}/src/main/js/uncompressed/util/buildscripts
-        </dojo-uncompressed-build-dir>
         <release-dir>${basedir}/target/noc-screens/js</release-dir>
 
         <gui.target.location>${basedir}${file.separator}target</gui.target.location>
@@ -130,6 +132,7 @@
 
         <maven.clean.plugin.version>2.5</maven.clean.plugin.version>
         <spring.version>3.1.3.RELEASE</spring.version>
+        <struts.version>2.1.8</struts.version>
     </properties>
 
     <profiles>
@@ -154,30 +157,6 @@
                         <version>2.5</version>
                         <executions>
                             <execution>
-                                <id>clean-resource-dojo</id>
-                                <phase>initialize</phase>
-                                <goals>
-                                    <goal>clean</goal>
-                                </goals>
-                                <configuration>
-                                    <excludeDefaultDirectories>true</excludeDefaultDirectories>
-                                    <filesets>
-                                        <fileset>
-                                            <directory>${js-dir}</directory>
-                                            <includes>
-                                                <include>dijit</include>
-                                                <include>dojo</include>
-                                                <include>dojox</include>
-                                                <include>util</include>
-                                                <include>${uncompressed}</include>
-                                                <include>${dojo.source.basename}</include>
-                                            </includes>
-                                            <followSymlinks>false</followSymlinks>
-                                        </fileset>
-                                    </filesets>
-                                </configuration>
-                            </execution>
-                            <execution>
                                 <id>clean-resources</id>
                                 <phase>clean</phase>
                                 <goals>
@@ -193,7 +172,6 @@
                                                 <include>dojo</include>
                                                 <include>dojox</include>
                                                 <include>util</include>
-                                                <include>${uncompressed}</include>
                                                 <include>${dojo.source.basename}</include>
                                             </includes>
                                             <followSymlinks>false</followSymlinks>
@@ -328,68 +306,6 @@
                                                     <include name="util/"/>
                                                 </fileset>
                                             </copy>
-                                            <copy todir="${js-dir}/${uncompressed}/bootstrap"
-                                                  failonerror="false">
-                                                <fileset dir="${js-dir}/bootstrap">
-                                                    <include name="**/*"/>
-                                                </fileset>
-                                            </copy>
-                                            <copy todir="${js-dir}/${uncompressed}/dbind"
-                                                  failonerror="false">
-                                                <fileset dir="${js-dir}/dbind">
-                                                    <include name="**/*"/>
-                                                </fileset>
-                                            </copy>
-                                            <copy todir="${js-dir}/${uncompressed}/dgrid"
-                                                  failonerror="false">
-                                                <fileset dir="${js-dir}/dgrid">
-                                                    <include name="**/*"/>
-                                                </fileset>
-                                            </copy>
-                                            <copy todir="${js-dir}/${uncompressed}/put-selector"
-                                                  failonerror="false">
-                                                <fileset dir="${js-dir}/put-selector">
-                                                    <include name="**/*"/>
-                                                </fileset>
-                                            </copy>
-                                            <copy todir="${js-dir}/${uncompressed}/xstyle"
-                                                  failonerror="false">
-                                                <fileset dir="${js-dir}/xstyle">
-                                                    <include name="**/*"/>
-                                                </fileset>
-                                            </copy>
-                                            <copy todir="${js-dir}/${uncompressed}/d3" failonerror="false">
-                                                <fileset dir="${js-dir}/d3">
-                                                    <include name="**/*"/>
-                                                </fileset>
-                                            </copy>
-                                            <copy todir="${js-dir}/${uncompressed}/noc" failonerror="false">
-                                                <fileset dir="${js-dir}/noc">
-                                                    <include name="**/*"/>
-                                                </fileset>
-                                            </copy>
-                                        </parallel>
-                                        <parallel>
-                                            <move todir="${js-dir}/${uncompressed}" failonerror="false">
-                                                <fileset dir="${dojoSrc}">
-                                                    <include name="dijit/"/>
-                                                </fileset>
-                                            </move>
-                                            <move todir="${js-dir}/${uncompressed}" failonerror="false">
-                                                <fileset dir="${dojoSrc}">
-                                                    <include name="dojox/"/>
-                                                </fileset>
-                                            </move>
-                                            <move todir="${js-dir}/${uncompressed}" failonerror="false">
-                                                <fileset dir="${dojoSrc}">
-                                                    <include name="dojo/"/>
-                                                </fileset>
-                                            </move>
-                                            <move todir="${js-dir}/${uncompressed}" failonerror="false">
-                                                <fileset dir="${dojoSrc}">
-                                                    <include name="util/"/>
-                                                </fileset>
-                                            </move>
                                         </parallel>
                                         <delete dir="${dojoSrc}" quiet="true"/>
                                     </tasks>
@@ -408,7 +324,6 @@
                                             <delete dir="${js-dir}/dijit" quiet="true"/>
                                             <delete dir="${js-dir}/dojox" quiet="true"/>
                                             <delete dir="${js-dir}/util" quiet="true"/>
-                                            <delete dir="${js-dir}/${uncompressed}" quiet="true"/>
                                             <delete dir="${js-dir}/${dojo.source.basename}" quiet="true"/>
                                             <delete dir="${basedir}/target" quiet="true"/>
                                         </parallel>
@@ -432,15 +347,6 @@
                                                 <arg value="baseUrl=${js-dir}/dojo"/>
                                                 <arg value="load=build"/>
                                                 <arg line="--profile ${basedir}/noc.profile.js"/>
-                                                <arg value="--release"/>
-                                            </java>
-                                            <java classname="org.mozilla.javascript.tools.shell.Main"
-                                                  fork="true" maxmemory="512m" failonerror="false"
-                                                  classpath="${shrinksafe-dir}/js.jar${path.separator}${closure-dir}/compiler.jar${path.separator}${shrinksafe-dir}/shrinksafe.jar">
-                                                <arg value="${js-dir}/${uncompressed}/dojo/dojo.js"/>
-                                                <arg value="baseUrl=${js-dir}/${uncompressed}/dojo"/>
-                                                <arg value="load=build"/>
-                                                <arg line="--profile ${basedir}/uncompressed.profile.js"/>
                                                 <arg value="--release"/>
                                             </java>
                                         </parallel>
@@ -546,15 +452,13 @@
         </profile>
 
         <!-- ***************************************************************************** -->
-        <!-- To build ONLY the COMPRESSED JS - FAST FAST FAST BUILD -->
-        <!-- Important: Using this option ASSUMES that UNZIPED Dojo is available
-            in -->
-        <!-- /src/main/js. It does not delete the extracted -->
-        <!-- dojo from files from /src/main/resources either. This is so to aid -->
-        <!-- faster development cycles (extracting and copying Dojo is slow). Be -->
-        <!-- COGNIZANT of this when you use this option -->
-        <!-- USAGE:
-         -->
+        <!-- To build ONLY the COMPRESSED JS - FAST FAST FAST BUILD                        -->
+        <!-- Important: Using this option ASSUMES that UNZIPED Dojo is available in        -->
+        <!-- /src/main/js. It does not delete the extracted                                -->
+        <!-- dojo from files from /src/main/resources either. This is so to aid            -->
+        <!-- faster development cycles (extracting and copying Dojo is slow). Be           -->
+        <!-- COGNIZANT of this when you use this option                                    -->
+        <!-- USAGE: mvn clean install -DskipFullBuild -Dbuild=postUnZip                    -->
         <!-- ***************************************************************************** -->
         <profile>
             <id>build-compressed</id>
@@ -562,63 +466,207 @@
                 <activeByDefault>false</activeByDefault>
                 <property>
                     <name>build</name>
-                    <value>compressed</value>
+                    <value>postUnZip</value>
                 </property>
             </activation>
             <build>
-                <resources>
-                    <resource>
-                        <directory>${js-dir}</directory>
-                        <excludes>
-                            <!-- Exclude all resources, since all we need in target is the zip
-                                file -->
-                            <exclude>**/**</exclude>
-                        </excludes>
-                    </resource>
-                </resources>
-
+                <finalName>noc-screens</finalName>
                 <plugins>
+                    <plugin>
+                        <artifactId>maven-clean-plugin</artifactId>
+                        <version>2.5</version>
+                        <executions>
+                            <execution>
+                                <id>clean-js</id>
+                                <phase>prepare-package</phase>
+                                <goals>
+                                    <goal>clean</goal>
+                                </goals>
+                                <configuration>
+                                    <excludeDefaultDirectories>true</excludeDefaultDirectories>
+                                    <filesets>
+                                        <fileset>
+                                            <directory>${release-dir}/noc</directory>
+                                            <includes>
+                                                <include>**/*uncompressed.js</include>
+                                            </includes>
+                                            <followSymlinks>true</followSymlinks>
+                                        </fileset>
+                                        <fileset>
+                                            <directory>${release-dir}/dbind</directory>
+                                            <includes>
+                                                <include>**/*uncompressed.js</include>
+                                            </includes>
+                                            <followSymlinks>true</followSymlinks>
+                                        </fileset>
+                                        <fileset>
+                                            <directory>${release-dir}/dgrid</directory>
+                                            <includes>
+                                                <include>**/*uncompressed.js</include>
+                                            </includes>
+                                            <followSymlinks>true</followSymlinks>
+                                        </fileset>
+                                        <fileset>
+                                            <directory>${release-dir}/put-selector</directory>
+                                            <includes>
+                                                <include>**/*uncompressed.js</include>
+                                            </includes>
+                                            <followSymlinks>true</followSymlinks>
+                                        </fileset>
+                                        <fileset>
+                                            <directory>${release-dir}/xstyle</directory>
+                                            <includes>
+                                                <include>**/*uncompressed.js</include>
+                                            </includes>
+                                            <followSymlinks>true</followSymlinks>
+                                        </fileset>
+                                        <fileset>
+                                            <directory>${release-dir}/dojo</directory>
+                                            <includes>
+                                                <include>**/*uncompressed.js</include>
+                                            </includes>
+                                            <followSymlinks>true</followSymlinks>
+                                        </fileset>
+                                        <fileset>
+                                            <directory>${release-dir}/dijit</directory>
+                                            <includes>
+                                                <include>**/*uncompressed.js</include>
+                                            </includes>
+                                            <followSymlinks>true</followSymlinks>
+                                        </fileset>
+                                        <fileset>
+                                            <directory>${release-dir}/dojox</directory>
+                                            <includes>
+                                                <include>**/*uncompressed.js</include>
+                                            </includes>
+                                            <followSymlinks>true</followSymlinks>
+                                        </fileset>
+                                    </filesets>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>1.7</version>
+                        <executions>
+                            <execution>
+                                <id>AppsOne dojo ${dojo.version} Custom Build</id>
+                                <phase>compile</phase>
+                                <configuration>
+                                    <tasks>
+                                        <parallel>
+                                            <java classname="org.mozilla.javascript.tools.shell.Main"
+                                                  fork="true" maxmemory="512m" failonerror="false"
+                                                  classpath="${shrinksafe-dir}/js.jar${path.separator}${closure-dir}/compiler.jar${path.separator}${shrinksafe-dir}/shrinksafe.jar">
+                                                <arg value="${js-dir}/dojo/dojo.js"/>
+                                                <arg value="baseUrl=${js-dir}/dojo"/>
+                                                <arg value="load=build"/>
+                                                <arg line="--profile ${basedir}/noc.profile.js"/>
+                                                <arg value="--release"/>
+                                            </java>
+                                        </parallel>
+                                    </tasks>
+                                </configuration>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>compress-css</id>
+                                <phase>compile</phase>
+                                <configuration>
+                                    <tasks>
+                                        <!--exec executable="${basedir}/csstidy.exe" osfamily="windows">
+                                            <arg value="${basedir}/src/main/scripts/css/common.css"></arg> <arg value="${basedir}/target/noc-screens/css/common.tidy.css"></arg>
+                                            </exec> <exec executable="${basedir}/csstidy" osfamily="unix"> <arg value="${basedir}/src/main/css/stack.css"></arg>
+                                            <arg value="${basedir}/target/noc-screens/css/stack.tidy.css"></arg> </exec -->
+
+                                        <concat destfile="${basedir}/target/noc-screens/css/noc.merged.css"
+                                                eol="cr">
+                                            <filelist dir="${basedir}/src/main/css" files="treemap.css,noc.css"/>
+                                        </concat>
+
+                                        <exec executable="java">
+                                            <arg value="-jar"/>
+                                            <arg value="yuicompressor-2.4.2.jar"/>
+                                            <arg value="--type"/>
+                                            <arg value="css"/>
+                                            <arg value="--charset"/>
+                                            <arg value="utf8"/>
+                                            <arg value="-o"/>
+                                            <arg
+                                                    value="${basedir}/target/noc-screens/css/noc.merged.compressed.css"/>
+                                            <arg value="-v"/>
+                                            <arg value="${basedir}/target/noc-screens/css/noc.merged.css"/>
+                                        </exec>
+
+                                    </tasks>
+                                </configuration>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+
+                    <plugin>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <version>2.6</version>
+                        <executions>
+                            <execution>
+                                <id>copy-d3</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${gui.target.gui.location}/js/d3</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>${js-dir}/d3</directory>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>copy-bootstrap</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${gui.target.gui.location}/js/bootstrap</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>${js-dir}/bootstrap</directory>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>copy-example-data</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${gui.target.gui.location}/data
+                                    </outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>${basedir}/src/main/data</directory>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
                 </plugins>
             </build>
         </profile>
-
-        <!-- ***************************************************************************** -->
-        <!-- To build ONLY the UNCOMPRESSED JS - FAST FAST FAST BUILD -->
-        <!-- Important: Using this option ASSUMES that UNZIPED Dojo is available
-            in -->
-        <!-- ui-js/src/main/resources does not delete. It does not delete the extracted -->
-        <!-- dojo from files from ui-js/src/main/resources either. This is so to
-            aid -->
-        <!-- faster development cycles (extracting and copying Dojo is slow). Be -->
-        <!-- COGNIZANT of this when you use this option -->
-        <!-- USAGE: mvn clean install -DskipFullBuild -Dbuild=uncompressed -->
-        <!-- ***************************************************************************** -->
-        <profile>
-            <id>build-uncompressed</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-                <property>
-                    <name>build</name>
-                    <value>uncompressed</value>
-                </property>
-            </activation>
-            <build>
-                <resources>
-                    <resource>
-                        <directory>${js-dir}</directory>
-                        <excludes>
-                            <!-- Exclude all resources, since all we need in target is the zip
-                                file -->
-                            <exclude>**/**</exclude>
-                        </excludes>
-                    </resource>
-                </resources>
-
-                <plugins>
-                </plugins>
-            </build>
-        </profile>
-
     </profiles>
 
     <dependencies>
@@ -631,17 +679,22 @@
         <dependency>
             <groupId>org.apache.struts</groupId>
             <artifactId>struts2-core</artifactId>
-            <version>2.1.8</version>
+            <version>${struts.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.struts</groupId>
             <artifactId>struts2-convention-plugin</artifactId>
-            <version>2.1.8</version>
+            <version>${struts.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.struts</groupId>
             <artifactId>struts2-json-plugin</artifactId>
-            <version>2.1.8</version>
+            <version>${struts.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.struts</groupId>
+            <artifactId>struts2-spring-plugin</artifactId>
+            <version>${struts.version}</version>
         </dependency>
 
         <!-- SPRING -->
@@ -708,6 +761,11 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
             <version>${spring.version}</version>
         </dependency>
         <dependency>

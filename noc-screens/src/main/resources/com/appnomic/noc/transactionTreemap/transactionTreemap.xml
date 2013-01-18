@@ -9,7 +9,7 @@
 		Struts 2 components, such as actions and results, into logical units. -->
 	<package name="transactionTreemap" namespace="/transactionTreemap" extends="json-default">
 
-		<action name="TransactionTreemapMeta" class="com.appnomic.noc.transactionTreemap.TransactionTreemapMetaAction">
+		<action name="TransactionTreemapMeta" class="com.appnomic.noc.action.transactionTreemap.TransactionTreemapMetaAction">
 			<result type="json"></result>
 		</action>
 

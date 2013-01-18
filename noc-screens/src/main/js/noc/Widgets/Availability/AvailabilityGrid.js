@@ -7,7 +7,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid',
 
             create:function (data) {
                 this.data = data;
-                d3.json("availability/AvailabilityMeta.action", dojo.hitch(this, function (m) {
+                d3.json(CONSTANTS.AVAILABILITY.META, dojo.hitch(this, function (m) {
                     this.renderGrid(m);
                 }));
             },
@@ -178,7 +178,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid',
                     position: [xpos,ypos],
                     custom: [objectSize,gridType]
                 };
-                var baseUrl = "noc/RequestHandler.action";
+                var baseUrl = CONSTANTS.REQUEST_HANDLER;
                 Utility.xhrPostCentral(baseUrl, viewMeta);
             },
 

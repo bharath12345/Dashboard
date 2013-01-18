@@ -1,7 +1,7 @@
 define(['require', "dojo/_base/declare", "dojo/i18n",
-    "dojo/i18n!noc/nls/noc"],
+    "dojo/i18n!noc/nls/noc", "noc/Constants"],
 
-    function (require, declare, i18n, i18nString) {
+    function (require, declare, i18n, i18nString, CONSTANTS) {
 
         var AvailMatrix = declare("noc.Components.Availability.AvailMatrix", null, {
 
@@ -11,13 +11,13 @@ define(['require', "dojo/_base/declare", "dojo/i18n",
                 var url;
                 switch(gridType) {
                     case AvailMatrix.COMPONENT:
-                        url = "availabilityDataComponent/AvailabilityDataComponent.action";
+                        url = CONSTANTS.AVAILABILITY.COMPONENT;
                         break;
                     case AvailMatrix.CLUSTER:
-                        url = "availabilityDataCluster/AvailabilityDataCluster.action";
+                        url = CONSTANTS.AVAILABILITY.CLUSTER;
                         break;
                     case AvailMatrix.HOST:
-                        url = "availabilityDataHost/AvailabilityDataHost.action";
+                        url = CONSTANTS.AVAILABILITY.HOST;
                         break;
                     default:
                         console.log("unknown grid type = " + gridType);

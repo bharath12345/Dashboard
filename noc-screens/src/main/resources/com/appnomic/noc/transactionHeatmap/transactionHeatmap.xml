@@ -9,7 +9,7 @@
 		Struts 2 components, such as actions and results, into logical units. -->
 	<package name="transactionHeatmap" namespace="/transactionHeatmap" extends="json-default">
 
-		<action name="TransactionHeatmapMeta" class="com.appnomic.noc.transactionHeatmap.TransactionHeatmapMetaAction">
+		<action name="TransactionHeatmapMeta" class="com.appnomic.noc.action.transactionHeatmap.TransactionHeatmapMetaAction">
 			<result type="json"></result>
 		</action>
 

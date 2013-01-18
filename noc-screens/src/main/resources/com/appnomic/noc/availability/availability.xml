@@ -6,22 +6,22 @@
 	<!-- The package element provides a mechanism by which to group related 
 		Struts 2 components, such as actions and results, into logical units. -->
 	<package name="availability" namespace="/availability" extends="json-default">
-		<action name="AvailabilityMeta" class="com.appnomic.noc.availability.AvailabilityMetaAction">
+		<action name="AvailabilityMeta" class="com.appnomic.noc.action.availability.AvailabilityMetaAction">
 			<result type="json"></result>
 		</action>
 	</package>
 	<package name="availabilityDataComponent" namespace="/availabilityDataComponent" extends="json-default">
-		<action name="AvailabilityDataComponent" class="com.appnomic.noc.availability.AvailabilityDataComponentAction">
+		<action name="AvailabilityDataComponent" class="com.appnomic.noc.action.availability.AvailabilityDataComponentAction">
 			<result type="json"></result>
 		</action>
 	</package>
 	<package name="availabilityDataCluster" namespace="/availabilityDataCluster" extends="json-default">
-		<action name="AvailabilityDataCluster" class="com.appnomic.noc.availability.AvailabilityDataClusterAction">
+		<action name="AvailabilityDataCluster" class="com.appnomic.noc.action.availability.AvailabilityDataClusterAction">
 			<result type="json"></result>
 		</action>
 	</package>
 	<package name="availabilityDataHost" namespace="/availabilityDataHost" extends="json-default">
-		<action name="AvailabilityDataHost" class="com.appnomic.noc.availability.AvailabilityDataHostAction">
+		<action name="AvailabilityDataHost" class="com.appnomic.noc.availability.action.AvailabilityDataHostAction">
 			<result type="json"></result>
 		</action>
 	</package>

@@ -9,7 +9,7 @@
 		Struts 2 components, such as actions and results, into logical units. -->
 	<package name="componentMatrix" namespace="/componentMatrix" extends="json-default">
 
-		<action name="ComponentMatrixMeta" class="com.appnomic.noc.componentMatrix.ComponentMatrixMetaAction">
+		<action name="ComponentMatrixMeta" class="com.appnomic.noc.action.componentMatrix.ComponentMatrixMetaAction">
 			<result type="json"></result>
 		</action>
 

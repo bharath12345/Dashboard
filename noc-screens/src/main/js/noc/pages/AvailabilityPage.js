@@ -40,7 +40,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                     custom: []
                 };
 
-                var baseUrl = "noc/RequestHandler.action";
+                var baseUrl = CONSTANTS.REQUEST_HANDLER;
                 Utility.xhrPostCentral(baseUrl, viewMeta);
 
             }
