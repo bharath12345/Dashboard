@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd">
+
+    <defaultCache eternal="true"
+                  maxElementsInMemory="100"
+                  overflowToDisk="false"
+                  timeToIdleSeconds="0"
+                  timeToLiveSeconds="300"
+                  memoryStoreEvictionPolicy="LRU" />
+
+   <cache name="componentNameCache"
+          maxElementsInMemory="500"
+          overflowToDisk="false"
+          timeToIdleSeconds="0"
+          timeToLiveSeconds="6000"
+          memoryStoreEvictionPolicy="LRU" />
+    <cache name="componentKeyCache"
+           maxElementsInMemory="500"
+           timeToIdleSeconds="0"
+           timeToLiveSeconds="6000"
+           memoryStoreEvictionPolicy="LRU" />
+
+    <cache name="hostsCache"
+           maxElementsInMemory="100"
+           timeToIdleSeconds="0"
+           timeToLiveSeconds="6000"
+           memoryStoreEvictionPolicy="LRU" />
+
+    <cache name="BizGroupCache"
+           maxElementsInMemory="20"
+           timeToIdleSeconds="0"
+           timeToLiveSeconds="6000"
+           memoryStoreEvictionPolicy="LRU" />
+
+
+
+
+    <cache name="ApplicationDefnCache"
+           maxElementsInMemory="20"
+           timeToIdleSeconds="0"
+           timeToLiveSeconds="6000"
+           memoryStoreEvictionPolicy="LRU" />
+
+    <cache name="ClusterDefnCache"
+           maxElementsInMemory="20"
+           timeToIdleSeconds="0"
+           timeToLiveSeconds="6000"
+           memoryStoreEvictionPolicy="LRU" />
+
+    <cache name="AppServerCache"
+           maxElementsInMemory="20"
+           timeToIdleSeconds="0"
+           timeToLiveSeconds="6000"
+           memoryStoreEvictionPolicy="LRU" />
+
+    <cache name="DBServerCache"
+           maxElementsInMemory="20"
+           timeToIdleSeconds="0"
+           timeToLiveSeconds="6000"
+           memoryStoreEvictionPolicy="LRU" />
+
+    <cache name="EnterpriseDefnCache"
+           maxElementsInMemory="20"
+           timeToIdleSeconds="0"
+           timeToLiveSeconds="6000"
+           memoryStoreEvictionPolicy="LRU" />
+
+
+   <cache name="WebserverDefnCache"
+           maxElementsInMemory="20"
+           timeToIdleSeconds="0"
+           timeToLiveSeconds="6000"
+           memoryStoreEvictionPolicy="LRU" />
+
+
+
+
+</ehcache>

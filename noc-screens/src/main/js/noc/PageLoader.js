@@ -10,22 +10,16 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
 
             initMain:function () {
 
-                // 1. the idea is that every div will be populated by its own AJAX call
-                // 2. all that will be assigned to the div is the URL to query from and some meta for the
-                //  kind of info it has to render
-                // 3.
-                //
-                //
                 var viewPort = win.getBox();
                 console.log("window height = " + viewPort.h + " width = " + viewPort.w);
 
                 this.createSections(viewPort);
 
                 new AvailabilityPage().loadPage();
-                new TxTimeSeriesPage().loadPage();
-                new ComponentPage().loadPage();
-                new TxTreemapPage().loadPage();
-                new TxServiceLevelPage().loadPage();
+                setTimeout(function(){new TxTimeSeriesPage().loadPage()}, 10*1000);
+                setTimeout(function(){new ComponentPage().loadPage()}, 20*1000);
+                setTimeout(function(){new TxTreemapPage().loadPage()}, 30*1000);
+                setTimeout(function(){new TxServiceLevelPage().loadPage()}, 40*1000);
 
                 //PageLoader.pageScroll(viewPort);
             },

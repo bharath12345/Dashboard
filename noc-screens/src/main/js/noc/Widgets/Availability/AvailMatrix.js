@@ -10,15 +10,18 @@ define(['require', "dojo/_base/declare", "dojo/i18n",
                 var gridType = parseInt(data.custom[1]);
                 var url;
                 switch(gridType) {
-                    case 0:
+                    case AvailMatrix.COMPONENT:
                         url = "availabilityDataComponent/AvailabilityDataComponent.action";
                         break;
-                    case 1:
+                    case AvailMatrix.CLUSTER:
                         url = "availabilityDataCluster/AvailabilityDataCluster.action";
                         break;
-                    case 2:
+                    case AvailMatrix.HOST:
                         url = "availabilityDataHost/AvailabilityDataHost.action";
                         break;
+                    default:
+                        console.log("unknown grid type = " + gridType);
+                        return;
                 }
 
                 // ToDo: you SHOULD use data.id in the below fetch URL to get the data for the exact point
@@ -40,17 +43,17 @@ define(['require', "dojo/_base/declare", "dojo/i18n",
 
                     var length, sub;
                     switch(gridType) {
-                        case 0:
+                        case AvailMatrix.COMPONENT:
                             length = m.componentData.times.length;
                             sub = m.componentData.times;
                             break;
 
-                        case 1:
+                        case AvailMatrix.CLUSTER:
                             length = m.clusterData.times.length;
                             sub = m.clusterData.times;
                             break;
 
-                        case 2:
+                        case AvailMatrix.HOST:
                             length = m.hostData.times.length;
                             sub = m.hostData.times;
                             break;
@@ -61,15 +64,15 @@ define(['require', "dojo/_base/declare", "dojo/i18n",
                         data[i] = new Array();
                         var columnSet;
                         switch(gridType) {
-                            case 0:
+                            case AvailMatrix.COMPONENT:
                                 columnSet = sub[i].cluster;
                                 break;
 
-                            case 1:
+                            case AvailMatrix.CLUSTER:
                                 columnSet = sub[i].host;
                                 break;
 
-                            case 2:
+                            case AvailMatrix.HOST:
                                 columnSet = sub[i].kpi;
                                 break;
                         }
@@ -119,6 +122,10 @@ define(['require', "dojo/_base/declare", "dojo/i18n",
                     .style("stroke", '#555');
             }
         });
+
+        AvailMatrix.COMPONENT = 1;
+        AvailMatrix.CLUSTER = 2;
+        AvailMatrix.HOST = 3;
 
         return AvailMatrix;
 

@@ -1,6 +1,5 @@
 package com.appnomic.noc.availability;
 
-import java.util.ArrayList;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.ParameterAware;

@@ -6,9 +6,16 @@
 	<display-name>AppsOne NOC Screens</display-name>
 
 	<context-param>
-		<param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
-		<param-value>AppsOneResources</param-value>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+                              <param-value>classpath:META-INF/spring/applicationContext.xml</param-value>
+
+                </param-value>
 	</context-param>
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
 
 	<filter>
 		<filter-name>http-context-filter</filter-name>

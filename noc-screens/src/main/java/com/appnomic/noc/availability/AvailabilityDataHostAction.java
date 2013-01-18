@@ -63,7 +63,7 @@ public class AvailabilityDataHostAction implements ParameterAware {
 			
 			int kpiDataPoints = 2;
 			KpiDataPoint [] kpiDataPoint = new KpiDataPoint[kpiDataPoints];
-			kpiTimes[i].setHost(kpiDataPoint);
+			kpiTimes[i].setKpi(kpiDataPoint);
 			for(int j=0;j<kpiDataPoints;j++) {
 				kpiDataPoint[j] = new KpiDataPoint();
 				kpiDataPoint[j].setName("KpiX");

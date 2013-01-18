@@ -1,40 +1,40 @@
-{"componentData":{
-    "instanceName":"ComponentX",
+{"clusterData":{
+    "instanceName":"ClusterX",
     "times":[
         {
-            "cluster":[
+            "host":[
                 {
-                    "name":"ClusterX",
+                    "name":"HostX",
                     "value":0
                 },
                 {
-                    "name":"ClusterX",
+                    "name":"HostX",
                     "value":1
                 }
             ],
             "time":"10:10"
         },
         {
-            "cluster":[
+            "host":[
                 {
-                    "name":"ClusterX",
+                    "name":"HostX",
                     "value":0
                 },
                 {
-                    "name":"ClusterX",
+                    "name":"HostX",
                     "value":1
                 }
             ],
             "time":"10:10"
         },
         {
-            "cluster":[
+            "host":[
                 {
-                    "name":"ClusterX",
+                    "name":"HostX",
                     "value":0
                 },
                 {
-                    "name":"ClusterX",
+                    "name":"HostX",
                     "value":1
                 }
             ],

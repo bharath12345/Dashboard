@@ -48,7 +48,7 @@ public class AvailabilityMetaAction /*implements Action*/ {
 				for(int z=0;z<clusterMembers;z++) {
 					host[z] = new Host();
 					host[z].setKpiCount(3);
-					host[z].setHostname("kpi"+z);
+					host[z].setHostname("host"+z);
 				}
 			}
 			
