@@ -9,7 +9,6 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>
             <param-value>classpath:META-INF/spring/applicationContext.xml</param-value>
-
         </param-value>
     </context-param>
 
@@ -38,19 +37,77 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
-    <servlet>
-        <servlet-name>NOC Screen Browser</servlet-name>
-        <servlet-class>org.apache.catalina.servlets.DefaultServlet</servlet-class>
-        <init-param>
-            <param-name>listings</param-name>
-            <param-value>true</param-value>
-        </init-param>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
+    <filter-mapping>
+        <filter-name>http-context-filter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
-    <servlet-mapping>
-        <servlet-name>NOC Screen Browser</servlet-name>
-        <url-pattern>*.html</url-pattern>
-    </servlet-mapping>
+    <welcome-file-list>
+        <welcome-file>signin.jsp</welcome-file>
+    </welcome-file-list>
+
+    <error-page>
+        <error-code>500</error-code>
+        <location>/error.jsp</location>
+    </error-page>
+
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <form-login-config>
+            <form-login-page>/signin.jsp</form-login-page>
+            <form-error-page>/error.jsp</form-error-page>
+        </form-login-config>
+    </login-config>
+
+    <security-role>
+        <role-name>admin</role-name>
+    </security-role>
+    <security-role>
+        <role-name>user</role-name>
+    </security-role>
+
+    <security-constraint>
+        <display-name>AppsOne Protected Resources</display-name>
+        <web-resource-collection>
+            <web-resource-name>Protected Resources accessible only to admin</web-resource-name>
+            <description>Require users to authenticate to access one of these protected URLs</description>
+            <url-pattern>*.jsp</url-pattern>
+            <http-method>POST</http-method>
+            <http-method>GET</http-method>
+        </web-resource-collection>
+
+        <auth-constraint>
+            <description>Only allow admin roles to access this resource</description>
+            <role-name>admin</role-name>
+            <role-name>user</role-name>
+        </auth-constraint>
+
+        <user-data-constraint>
+            <description>Encryption is not required</description>
+            <transport-guarantee>NONE</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+
+    <security-constraint>
+        <display-name>Non Protected Resources</display-name>
+        <web-resource-collection>
+            <web-resource-name>Resources accessible to any role</web-resource-name>
+            <description>Anyone can go to these pages</description>
+            <url-pattern>/index.jsp</url-pattern>
+            <http-method>POST</http-method>
+            <http-method>GET</http-method>
+        </web-resource-collection>
+
+        <auth-constraint>
+            <description>Let all roles access this resource</description>
+            <role-name>admin</role-name>
+            <role-name>user</role-name>
+        </auth-constraint>
+
+        <user-data-constraint>
+            <description>Encryption is not required</description>
+            <transport-guarantee>NONE</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
 
 </web-app>

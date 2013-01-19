@@ -11,6 +11,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
 
         CONSTANTS.ACTION = {};
         CONSTANTS.ACTION.REQUEST_HANDLER = "noc/RequestHandler.action";
+        CONSTANTS.ACTION.LOGIN = "user/UserLogin.action";
         CONSTANTS.ACTION.AVAILABILITY = {};
         CONSTANTS.ACTION.AVAILABILITY.META = "availability/AvailabilityMeta.action";
         CONSTANTS.ACTION.AVAILABILITY.COMPONENT = "availabilityDataComponent/AvailabilityDataComponent.action";

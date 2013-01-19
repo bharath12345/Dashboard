@@ -6,23 +6,22 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.ParameterAware;
 
-import com.app.domainobject.Cluster;
-import com.app.domainobject.Host;
-import com.app.service.ClusterDataService;
-import com.app.service.ComponentDataService;
+import com.appnomic.domainobject.Cluster;
+import com.appnomic.domainobject.Host;
+import com.appnomic.service.ClusterDataService;
+import com.appnomic.service.ComponentDataService;
+import com.appnomic.noc.action.AbstractNocAction;
 import com.appnomic.noc.viewobject.availability.ClusterDataVO;
 import com.appnomic.noc.viewobject.availability.HostDataPointVO;
 import com.appnomic.noc.viewobject.availability.HostTimesVO;
 import com.opensymphony.xwork2.Action;
 
-public class AvailabilityDataClusterAction implements ParameterAware {
+public class AvailabilityDataClusterAction extends AbstractNocAction {
 	
-	private ComponentDataService componentDataService;	
 	private ClusterDataService clusterDataService;
 	
 	private ClusterDataVO clusterData;
-	private Map<String, String[]> parameters;
-	
+
 	public ClusterDataVO getClusterData() {
 		return clusterData;
 	}
@@ -33,14 +32,6 @@ public class AvailabilityDataClusterAction implements ParameterAware {
 
 	public AvailabilityDataClusterAction() {
 		setDummyData();
-	}
-	
-	public void setParameters(Map<String, String[]> parameters) {
-		this.parameters = parameters;
-	}
-
-	public Map<String, String[]> getParameters() {
-		return this.parameters;
 	}
 	
 	public void setDummyData() {
@@ -82,14 +73,6 @@ public class AvailabilityDataClusterAction implements ParameterAware {
 		}
 		
 		return Action.SUCCESS;
-	}
-
-	public ComponentDataService getComponentDataService() {
-		return componentDataService;
-	}
-
-	public void setComponentDataService(ComponentDataService componentDataService) {
-		this.componentDataService = componentDataService;
 	}
 
 	public ClusterDataService getClusterDataService() {

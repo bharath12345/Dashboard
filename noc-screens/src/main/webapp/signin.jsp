@@ -8,80 +8,12 @@
     <title>Appnomic Appsone NOC Screens</title>
 
 	<link rel="stylesheet" type="text/css" href="./css/noc.merged.compressed.css"/>
-
-	<script type="text/javascript">
-        function expandCollapse() {
-            var elem = document.getElementById(expandCollapse.arguments[0]);
-            elem.style.visibility = (expandCollapse.arguments[1] == 'on') ? 'globalvisible' : 'globalhidden';
-        }
-
-        function setFocusToUserName() {
-            var elem = document.getElementById("j_username");
-            elem.focus();
-        }
-
-        function signInOnLoad() {
-			loadImages();
-
-			var Constants_browser = navigator.appName;
-			var lang;
-			if (Constants_browser == "Netscape") {
-				lang = navigator.language;
-			} else {
-				lang = navigator.browserLanguage;
-			}
-
-			var usernameSpan = document.getElementById("usernameSpan");
-			var passwordSpan = document.getElementById("passwordSpan");
-
-			var signInSpan = document.getElementById("signInSpan");
-			var clearSpan = document.getElementById("clearSpan");
-			var signingInSpan = document.getElementById("signingInSpan");
-
-			var langOnly = lang.split("-");
-				usernameSpan.innerHTML = "User Name";
-				passwordSpan.innerHTML = "Password";
-				signInSpan.innerHTML = "Sign In";
-				clearSpan.innerHTML = "Clear";
-				signingInSpan.innerHTML = "Signing In ...";
-
-        	    setFocusToUserName();
-        }
-
-		function loadImages() {
-			var login_logo = document.createElement("globalimg");
-			login_logo.src="images/login_logo.gif";
-			login_logo.setAttribute("alt","login");
-			login_logo.setAttribute("border","0");
-			document.getElementById("login_logo").appendChild(login_logo);
-
-			var login_appname = document.createElement("globalimg");
-			login_appname.src="images/login_traffic.png";
-			login_appname.setAttribute("alt","NNM iSPI Performance for Traffic");
-			login_appname.setAttribute("border","0");
-			document.getElementById("login_appname").appendChild(login_appname);
-
-			var login_top_right = document.createElement("globalimg");
-			login_top_right.src="images/dot_trans.gif";
-			login_top_right.setAttribute("border","0");
-			login_top_right.setAttribute("height","20");
-			login_top_right.setAttribute("width","20");
-			document.getElementById("login_top_right").appendChild(login_top_right);
-
-			var sending = document.createElement("globalimg");
-			sending.src="images/progress_bar_small.gif";
-			sending.setAttribute("alt","Progress Bar");
-			document.getElementById("sending").appendChild(sending);
-
-			var login_bot_left = document.createElement("globalimg");
-			login_bot_left.src="images/JavaLogo.gif";
-			login_bot_left.setAttribute("alt","Image of Java Logo");
-			document.getElementById("login_bot_left").appendChild(login_bot_left);
-		}
-	</script>
+    <script type="text/javascript" data-dojo-config="async: 1, tlmSiblingOfDojo: 0, isDebug: 1" src="./js/dojo/dojo.js"></script>
 </head>
-<body class="login_body" onload="signInOnLoad();">
-<table class="full_HV" border="0" cellspacing="0" cellpadding="0">
+<body class="login_body">
+    <script src="./js/noc/runLogin.js"></script>
+
+    <table class="full_HV" border="0" cellspacing="0" cellpadding="0">
     <tbody>
     <!DOCTYPE html    PUBLIC "-//W3C//DTD	HTML 4.01 Transitional//EN"    "http://www.w3.org/TR/html4/loose.dtd">
     <meta http-equiv="Content-Type" content="text/html;	charset=UTF-8">
@@ -123,17 +55,15 @@
             </table>
         </td>
         <td class="login_mid_right">
-            <form action="j_security_check" method="post" id="contactform"
-                  onsubmit="expandCollapse('sending','on');return true;">
                 <table class="full_H" border="0" cellspacing="0" cellpadding="0">
                     <tr>
                         <td class="login_fields">
-                            <input id="j_username" class="login_name" type="text" name="j_username" size="15"/>
+                            <input id="username" class="login_name" type="text" size="15"/>
                         </td>
                     </tr>
                     <tr>
                         <td class="login_fields">
-                            <input id="j_password" class="login_password" type="password" name="j_password" size="15"/>
+                            <input id="password" class="login_password" type="password" size="15"/>
                         </td>
                     </tr>
                     <tr>
@@ -142,10 +72,10 @@
                     </tr>
                     <tr>
                         <td class="login_button_field">
-                            <button name="btnSignIn:btnCommandButton" id="btnSignIn_btnCommandButton" type="submit" class="login_button">
+                            <button id="btnSignIn_btnCommandButton" type="submit" class="login_button" onclick="Login.login();">
                                 <span id="signInSpan"></span>
                             </button>
-                            <button name="btnClear:btnCommandButton" id="btnClear_btnCommandButton" type="reset" class="login_button">
+                            <button id="btnClear_btnCommandButton" type="reset" class="login_button" onclick="Login.clear();">
                                 <span id="clearSpan"></span>
                             </button>
                             <div id="sending" style="visibility:hidden;">
@@ -157,7 +87,6 @@
                         </td>
                     </tr>
                 </table>
-            </form>
         </td>
     </tr>
     <tr>

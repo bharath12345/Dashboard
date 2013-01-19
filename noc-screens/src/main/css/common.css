@@ -116,16 +116,19 @@ td.login_top_left
     background-position: right;
     vertical-align: top;
     width: 60%;
+    height: 40%;
     padding: 25px 10px 40px 20px;
     border-bottom: 7px solid #fff;
 }
 td.login_top_right
 {
-    background-color: #527dbe;
+    background-color: #fff;
     background-image: url("../images/login_pict_bac.jpg");
     background-repeat: no-repeat;
+    background-position:center;
     vertical-align: top;
     width: 40%;
+    height: 40%;
     border-bottom: 7px solid #fff;
     border-left: 7px solid #fff;
 }

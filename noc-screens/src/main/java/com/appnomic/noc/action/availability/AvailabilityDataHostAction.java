@@ -1,19 +1,32 @@
 package com.appnomic.noc.action.availability;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.ParameterAware;
 
+import com.appnomic.domainobject.Host;
+import com.appnomic.noc.action.AbstractNocAction;
 import com.appnomic.noc.viewobject.availability.HostDataVO;
 import com.appnomic.noc.viewobject.availability.KpiDataPointVO;
 import com.appnomic.noc.viewobject.availability.KpiTimesVO;
+import com.appnomic.service.HostDataService;
 import com.opensymphony.xwork2.Action;
 
-public class AvailabilityDataHostAction implements ParameterAware {
+public class AvailabilityDataHostAction extends AbstractNocAction  {
+	
+	private HostDataService hostDataService;
 	
 	private HostDataVO hostData;
-	private Map<String, String[]> parameters;
+
+	public HostDataService getHostDataService() {
+		return hostDataService;
+	}
+
+	public void setHostDataService(HostDataService hostDataService) {
+		this.hostDataService = hostDataService;
+	}
 
 	public HostDataVO getHostData() {
 		return hostData;
@@ -26,15 +39,7 @@ public class AvailabilityDataHostAction implements ParameterAware {
 	public AvailabilityDataHostAction() {
 		setDummyData();
 	}
-	
-	public void setParameters(Map<String, String[]> parameters) {
-		this.parameters = parameters;
-	}
-
-	public Map<String, String[]> getParameters() {
-		return this.parameters;
-	}
-	
+		
 	public void setDummyData() {
 		hostData = new HostDataVO();
 		hostData.setInstanceName("HostX");
@@ -58,6 +63,11 @@ public class AvailabilityDataHostAction implements ParameterAware {
 	}
 
 	public String execute() {
+		List<Host> hosts = hostDataService.getAllHosts();
+		for(Host host : hosts) {
+			host.getComponents();
+			host.getInCluster();
+		}
 		return Action.SUCCESS;
 	}
 

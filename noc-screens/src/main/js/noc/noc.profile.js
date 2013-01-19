@@ -26,7 +26,9 @@ var profile = (function () {
                     "noc/runMain.js":1,
                     "noc/NocMain.js":1,
                     "noc/noc.profile":1,
-                    "noc/package.json":1
+                    "noc/package.json":1,
+                    "noc/runLogin.js":1,
+                    "noc/NocLogin.js":1
                 };
                 return (mid in list);
             },

@@ -56,6 +56,10 @@
     </bean>
         -->
 
+    <bean id="userDataServiceImpl" class="com.appnomic.service.impl.UserDataServiceImpl" />
+    <bean id="componentDataService" class="com.appnomic.service.ComponentDataService" />
+    <bean id="clusterDataService" class="com.appnomic.service.ClusterDataService" />
+
 
     <bean
             id="propertyConfigurer"

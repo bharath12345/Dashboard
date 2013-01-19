@@ -21,6 +21,7 @@
 		above the referring element. -->
 
     <include file="com/appnomic/noc/action/noc.xml" />
+    <include file="com/appnomic/noc/action/user/user.xml" />
     <include file="com/appnomic/noc/action/availability/availability.xml" />
     <include file="com/appnomic/noc/action/componentMatrix/componentMatrix.xml" />
     <include file="com/appnomic/noc/action/transactionHeatmap/transactionHeatmap.xml" />

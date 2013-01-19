@@ -2,6 +2,7 @@ package com.appnomic.noc.action.availability;
 
 import java.util.ArrayList;
 
+import com.appnomic.noc.action.AbstractNocAction;
 import com.appnomic.noc.viewobject.availability.ClusterVO;
 import com.appnomic.noc.viewobject.availability.ComponentVO;
 import com.appnomic.noc.viewobject.availability.HostVO;
@@ -13,7 +14,7 @@ import com.opensymphony.xwork2.Action;
  * Note: there is NO Query parameter here. The exact meta to send back is configured by the user in a 
  * separate configuration console. So this Action gets input from that configuration
  */
-public class AvailabilityMetaAction /*implements Action*/ {
+public class AvailabilityMetaAction extends AbstractNocAction  {
 
 	private ComponentVO [] components = null;
 	

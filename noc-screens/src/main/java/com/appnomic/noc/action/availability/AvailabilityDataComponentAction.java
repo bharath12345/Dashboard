@@ -1,18 +1,23 @@
 package com.appnomic.noc.action.availability;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.ParameterAware;
 
+import com.appnomic.domainobject.Component;
+import com.appnomic.noc.action.AbstractNocAction;
 import com.appnomic.noc.viewobject.availability.ClusterDataPointVO;
 import com.appnomic.noc.viewobject.availability.ClusterTimesVO;
 import com.appnomic.noc.viewobject.availability.ComponentDataVO;
+import com.appnomic.service.ComponentDataService;
 import com.opensymphony.xwork2.Action;
 
-public class AvailabilityDataComponentAction implements ParameterAware {
+public class AvailabilityDataComponentAction extends AbstractNocAction  {
+	
+	private ComponentDataService componentDataService;	
 	
 	private ComponentDataVO componentData;
-	private Map<String, String[]> parameters;
 	
 	public ComponentDataVO getComponentData() {
 		return componentData;
@@ -26,12 +31,12 @@ public class AvailabilityDataComponentAction implements ParameterAware {
 		setDummyData();
 	}
 	
-	public void setParameters(Map<String, String[]> parameters) {
-		this.parameters = parameters;
+	public ComponentDataService getComponentDataService() {
+		return componentDataService;
 	}
 
-	public Map<String, String[]> getParameters() {
-		return this.parameters;
+	public void setComponentDataService(ComponentDataService componentDataService) {
+		this.componentDataService = componentDataService;
 	}
 	
 	public void setDummyData() {
@@ -59,6 +64,11 @@ public class AvailabilityDataComponentAction implements ParameterAware {
 	}
 
 	public String execute() {
+		List<Component> components = componentDataService.getAllComponents();
+		for(Component component: components) {
+			component.getAvailKpiDataTypes();
+		}
+		
 		return Action.SUCCESS;
 	}
 
