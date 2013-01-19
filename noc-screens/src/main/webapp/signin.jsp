@@ -1,6 +1,5 @@
 <%@page pageEncoding="UTF-8"%>
 <%@page contentType="text/html;charset=UTF-8"%>
-<%@ taglib uri='http://java.sun.com/jstl/fmt' prefix='fmt'%>
 
 <html>
 <head>
@@ -8,11 +7,9 @@
     <meta http-equiv="Pragma" content="no-cache"/>
     <title>Appnomic Appsone NOC Screens</title>
 
+	<link rel="stylesheet" type="text/css" href="./css/noc.merged.compressed.css"/>
+
 	<script type="text/javascript">
-        var relativePath = "./";
-
-        document.write('<link rel="stylesheet" type="text/css" href="'+relativePath+'/css/traffic.merged.compressed.css">');
-
         function expandCollapse() {
             var elem = document.getElementById(expandCollapse.arguments[0]);
             elem.style.visibility = (expandCollapse.arguments[1] == 'on') ? 'globalvisible' : 'globalhidden';
@@ -53,31 +50,31 @@
 
 		function loadImages() {
 			var login_logo = document.createElement("globalimg");
-			login_logo.src=relativePath+"images/login_logo.gif";
+			login_logo.src="images/login_logo.gif";
 			login_logo.setAttribute("alt","login");
 			login_logo.setAttribute("border","0");
 			document.getElementById("login_logo").appendChild(login_logo);
 
 			var login_appname = document.createElement("globalimg");
-			login_appname.src=relativePath+"images/login_traffic.png";
+			login_appname.src="images/login_traffic.png";
 			login_appname.setAttribute("alt","NNM iSPI Performance for Traffic");
 			login_appname.setAttribute("border","0");
 			document.getElementById("login_appname").appendChild(login_appname);
 
 			var login_top_right = document.createElement("globalimg");
-			login_top_right.src=relativePath+"images/dot_trans.gif";
+			login_top_right.src="images/dot_trans.gif";
 			login_top_right.setAttribute("border","0");
 			login_top_right.setAttribute("height","20");
 			login_top_right.setAttribute("width","20");
 			document.getElementById("login_top_right").appendChild(login_top_right);
 
 			var sending = document.createElement("globalimg");
-			sending.src=relativePath+"images/progress_bar_small.gif";
+			sending.src="images/progress_bar_small.gif";
 			sending.setAttribute("alt","Progress Bar");
 			document.getElementById("sending").appendChild(sending);
 
 			var login_bot_left = document.createElement("globalimg");
-			login_bot_left.src=relativePath+"images/JavaLogo.gif";
+			login_bot_left.src="images/JavaLogo.gif";
 			login_bot_left.setAttribute("alt","Image of Java Logo");
 			document.getElementById("login_bot_left").appendChild(login_bot_left);
 		}

@@ -34,13 +34,13 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
 
                 var viewMeta = {
                     id:"availGrid",
-                    type: CONSTANTS.AVAILABILITY,
+                    type: CONSTANTS.TYPE.AVAILABILITY,
                     dimensions:[AvailabilityPage.CP.w, AvailabilityPage.CP.h],
                     position:[xpos,ypos],
                     custom: []
                 };
 
-                var baseUrl = CONSTANTS.REQUEST_HANDLER;
+                var baseUrl = CONSTANTS.ACTION.REQUEST_HANDLER;
                 Utility.xhrPostCentral(baseUrl, viewMeta);
 
             }

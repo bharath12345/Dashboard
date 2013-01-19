@@ -20,11 +20,11 @@
 		The only thing to consider is that a referenced element must have been declared 
 		above the referring element. -->
 
-    <include file="com/appnomic/noc/noc.xml" />
-    <include file="com/appnomic/noc/availability/availability.xml" />
-    <include file="com/appnomic/noc/componentMatrix/componentMatrix.xml" />
-    <include file="com/appnomic/noc/transactionHeatmap/transactionHeatmap.xml" />
-    <include file="com/appnomic/noc/transactionTimeseries/transactionTimeseries.xml" />
-    <include file="com/appnomic/noc/transactionTreemap/transactionTreemap.xml" />
+    <include file="com/appnomic/noc/action/noc.xml" />
+    <include file="com/appnomic/noc/action/availability/availability.xml" />
+    <include file="com/appnomic/noc/action/componentMatrix/componentMatrix.xml" />
+    <include file="com/appnomic/noc/action/transactionHeatmap/transactionHeatmap.xml" />
+    <include file="com/appnomic/noc/action/transactionTimeseries/transactionTimeseries.xml" />
+    <include file="com/appnomic/noc/action/transactionTreemap/transactionTreemap.xml" />
 
 </struts>

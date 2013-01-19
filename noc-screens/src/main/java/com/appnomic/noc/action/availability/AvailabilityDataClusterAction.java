@@ -5,10 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.ParameterAware;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.app.domainobject.Cluster;
-import com.app.domainobject.Component;
 import com.app.domainobject.Host;
 import com.app.service.ClusterDataService;
 import com.app.service.ComponentDataService;
@@ -19,10 +17,7 @@ import com.opensymphony.xwork2.Action;
 
 public class AvailabilityDataClusterAction implements ParameterAware {
 	
-	@Autowired
-	private ComponentDataService componentDataService;
-	
-	@Autowired
+	private ComponentDataService componentDataService;	
 	private ClusterDataService clusterDataService;
 	
 	private ClusterDataVO clusterData;
@@ -87,6 +82,22 @@ public class AvailabilityDataClusterAction implements ParameterAware {
 		}
 		
 		return Action.SUCCESS;
+	}
+
+	public ComponentDataService getComponentDataService() {
+		return componentDataService;
+	}
+
+	public void setComponentDataService(ComponentDataService componentDataService) {
+		this.componentDataService = componentDataService;
+	}
+
+	public ClusterDataService getClusterDataService() {
+		return clusterDataService;
+	}
+
+	public void setClusterDataService(ClusterDataService clusterDataService) {
+		this.clusterDataService = clusterDataService;
 	}
 
 }

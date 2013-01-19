@@ -21,7 +21,7 @@
 		</action>
 	</package>
 	<package name="availabilityDataHost" namespace="/availabilityDataHost" extends="json-default">
-		<action name="AvailabilityDataHost" class="com.appnomic.noc.availability.action.AvailabilityDataHostAction">
+		<action name="AvailabilityDataHost" class="com.appnomic.noc.action.availability.AvailabilityDataHostAction">
 			<result type="json"></result>
 		</action>
 	</package>

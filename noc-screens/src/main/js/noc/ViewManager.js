@@ -31,13 +31,13 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
             ViewManager.addView(data);
 
             switch(data.type) {
-                case CONSTANTS.AVAILABILITY:
+                case CONSTANTS.TYPE.AVAILABILITY:
                     require(['noc/Widgets/Availability/AvailabilityGrid'], function (AvailabilityGrid) {
                         new AvailabilityGrid().create(data);
                     });
                     break;
 
-                case CONSTANTS.AVAILABILITY_DATA:
+                case CONSTANTS.TYPE.AVAILABILITY_DATA:
                     require(['noc/Widgets/Availability/AvailMatrix'], function (AvailMatrix) {
                         new AvailMatrix().create(data);
                     });

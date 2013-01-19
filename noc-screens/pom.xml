@@ -14,6 +14,17 @@
 
     <repositories>
         <repository>
+            <id>Jarvana</id>
+            <name>Maven repository</name>
+            <url>http://www.jarvana.com/jarvana/browse</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
             <id>MavenCentral</id>
             <name>Maven repository</name>
             <url>http://repo1.maven.org/maven2</url>
@@ -368,7 +379,7 @@
 
                                         <concat destfile="${basedir}/target/noc-screens/css/noc.merged.css"
                                                 eol="cr">
-                                            <filelist dir="${basedir}/src/main/css" files="treemap.css,noc.css"/>
+                                            <filelist dir="${basedir}/src/main/css" files="treemap.css,noc.css,common.css"/>
                                         </concat>
 
                                         <exec executable="java">
@@ -441,6 +452,22 @@
                                     <resources>
                                         <resource>
                                             <directory>${basedir}/src/main/data</directory>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>copy-images</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${gui.target.gui.location}/images
+                                    </outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>${basedir}/src/main/images</directory>
                                         </resource>
                                     </resources>
                                 </configuration>
@@ -658,6 +685,22 @@
                                     <resources>
                                         <resource>
                                             <directory>${basedir}/src/main/data</directory>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>copy-images</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${gui.target.gui.location}/images
+                                    </outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>${basedir}/src/main/images</directory>
                                         </resource>
                                     </resources>
                                 </configuration>

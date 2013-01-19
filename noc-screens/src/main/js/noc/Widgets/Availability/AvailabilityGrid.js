@@ -7,7 +7,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid',
 
             create:function (data) {
                 this.data = data;
-                d3.json(CONSTANTS.AVAILABILITY.META, dojo.hitch(this, function (m) {
+                d3.json(CONSTANTS.ACTION.AVAILABILITY.META, dojo.hitch(this, function (m) {
                     this.renderGrid(m);
                 }));
             },
@@ -173,12 +173,12 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid',
                 var xpos= 0, ypos=0;
                 var viewMeta = {
                     id:objectName,
-                    type: CONSTANTS.AVAILABILITY_DATA,
+                    type: CONSTANTS.TYPE.AVAILABILITY_DATA,
                     dimensions:[domNode.offsetWidth,domNode.offsetHeight],
                     position: [xpos,ypos],
                     custom: [objectSize,gridType]
                 };
-                var baseUrl = CONSTANTS.REQUEST_HANDLER;
+                var baseUrl = CONSTANTS.ACTION.REQUEST_HANDLER;
                 Utility.xhrPostCentral(baseUrl, viewMeta);
             },
 
