@@ -9,18 +9,15 @@
 		<action name="AvailabilityMeta" class="com.appnomic.noc.action.availability.AvailabilityMetaAction">
 			<result type="json"></result>
 		</action>
-	</package>
-	<package name="availabilityDataComponent" namespace="/availabilityDataComponent" extends="json-default">
+	
 		<action name="AvailabilityDataComponent" class="com.appnomic.noc.action.availability.AvailabilityDataComponentAction">
 			<result type="json"></result>
 		</action>
-	</package>
-	<package name="availabilityDataCluster" namespace="/availabilityDataCluster" extends="json-default">
+
 		<action name="AvailabilityDataCluster" class="com.appnomic.noc.action.availability.AvailabilityDataClusterAction">
 			<result type="json"></result>
 		</action>
-	</package>
-	<package name="availabilityDataHost" namespace="/availabilityDataHost" extends="json-default">
+
 		<action name="AvailabilityDataHost" class="com.appnomic.noc.action.availability.AvailabilityDataHostAction">
 			<result type="json"></result>
 		</action>

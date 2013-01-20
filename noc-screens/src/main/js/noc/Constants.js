@@ -14,9 +14,9 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.ACTION.LOGIN = "user/UserLogin.action";
         CONSTANTS.ACTION.AVAILABILITY = {};
         CONSTANTS.ACTION.AVAILABILITY.META = "availability/AvailabilityMeta.action";
-        CONSTANTS.ACTION.AVAILABILITY.COMPONENT = "availabilityDataComponent/AvailabilityDataComponent.action";
-        CONSTANTS.ACTION.AVAILABILITY.CLUSTER = "availabilityDataCluster/AvailabilityDataCluster.action";
-        CONSTANTS.ACTION.AVAILABILITY.HOST = "availabilityDataHost/AvailabilityDataHost.action";
+        CONSTANTS.ACTION.AVAILABILITY.COMPONENT = "availability/AvailabilityDataComponent.action";
+        CONSTANTS.ACTION.AVAILABILITY.CLUSTER = "availability/AvailabilityDataCluster.action";
+        CONSTANTS.ACTION.AVAILABILITY.HOST = "availability/AvailabilityDataHost.action";
 
         return CONSTANTS;
     });

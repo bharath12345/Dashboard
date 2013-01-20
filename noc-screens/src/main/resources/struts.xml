@@ -12,6 +12,10 @@
 	<constant name="struts.devMode" value="true" />
     <constant name="struts.objectFactory" value="org.apache.struts2.spring.StrutsSpringObjectFactory" />
 
+    <!-- Below ones are for improved URL mapping -->
+    <constant name="struts.mapper.alwaysSelectFullNamespace" value="false"/>
+    <constant name="struts.enable.SlashesInActionNames" value="true"/>
+    <constant name="struts.patternMatcher" value="namedVariable"/>
 
 	<!-- You can define packages directly in this file, but its probably best 
 		to modularize the configuration files with separate xml files for each package. 

@@ -5,9 +5,12 @@ import java.util.Map;
 import org.apache.struts2.interceptor.ParameterAware;
 import org.apache.struts2.interceptor.SessionAware;
 
+import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 
-public abstract class AbstractNocAction extends ActionSupport implements ParameterAware, SessionAware {
+public abstract class AbstractNocAction 
+							extends ActionSupport 
+							implements ParameterAware, SessionAware, Action {
 	
 	private Map<String, String[]> parameters;
 	
@@ -28,5 +31,6 @@ public abstract class AbstractNocAction extends ActionSupport implements Paramet
 	public Map<String, String[]> getParameters() {
 		return this.parameters;
 	}
-
+	
+	abstract public String execute();
 }

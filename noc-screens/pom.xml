@@ -13,7 +13,7 @@
     <description>Build and packaging for the NOC UI screens of AppsOne</description>
 
     <repositories>
-        <repository>
+        <!--repository>
             <id>Jarvana</id>
             <name>Maven repository</name>
             <url>http://www.jarvana.com/jarvana/browse</url>
@@ -23,7 +23,7 @@
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
-        </repository>
+        </repository-->
         <repository>
             <id>MavenCentral</id>
             <name>Maven repository</name>
@@ -702,6 +702,8 @@
             <version>2.5</version>
             <scope>provided</scope>
         </dependency>
+
+        <!-- STRUTS -->
         <dependency>
             <groupId>org.apache.struts</groupId>
             <artifactId>struts2-core</artifactId>
@@ -722,6 +724,17 @@
             <artifactId>struts2-spring-plugin</artifactId>
             <version>${struts.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.struts</groupId>
+            <artifactId>struts2-config-browser-plugin</artifactId>
+            <version>${struts.version}</version>
+        </dependency>
+        <!-- Including the below Struts 2 REST Plugin seems to strangely screw up the deployment -->
+        <!--dependency>
+            <groupId>org.apache.struts</groupId>
+            <artifactId>struts2-rest-plugin</artifactId>
+            <version>${struts.version}</version>
+        </dependency-->
 
         <!-- SPRING -->
         <dependency>
@@ -769,11 +782,11 @@
             <artifactId>spring-jdbc</artifactId>
             <version>${spring.version}</version>
         </dependency>
-        <dependency>
+        <!--dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-asm</artifactId>
             <version>${spring.version}</version>
-        </dependency>
+        </dependency-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-aop</artifactId>
