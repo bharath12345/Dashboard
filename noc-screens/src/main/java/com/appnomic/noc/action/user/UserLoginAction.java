@@ -1,14 +1,23 @@
 package com.appnomic.noc.action.user;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Result;
+
 
 import com.appnomic.domainobject.User;
 import com.appnomic.service.impl.UserDataServiceImpl;
 import com.appnomic.noc.action.AbstractNocAction;
 import com.google.gson.Gson;
-import com.opensymphony.xwork2.Action;
+//import com.opensymphony.xwork2.Action;
 
+@ParentPackage("json-default")
+@Namespace("/user")
 public class UserLoginAction extends AbstractNocAction {
 
     private UserDataServiceImpl userDataServiceImpl;
@@ -32,7 +41,16 @@ public class UserLoginAction extends AbstractNocAction {
 		this.password = password;
 	}
 
-	public String execute() {
+	@Action(value="/user/UserLogin", results = {
+	        @Result(name="success", type="json", params = {
+	        		"excludeProperties",
+	                "parameters,session,SUCCESS,ERROR,username,password",
+	                "enableGZIP", "true",
+	        		"encoding", "UTF-8",
+	                "noCache","true",
+	                "excludeNullProperties","true"
+	            })})
+	public String nocAction() {
 		System.out.println("parameters from json mapping, user = " + username + " pass = " + password);
 		
 		System.out.println("parameters from sessionaware = " + getParameters());
@@ -58,7 +76,7 @@ public class UserLoginAction extends AbstractNocAction {
 		} else {
 			System.out.println("user " + userlocal.getPassword() +" auth failed.");
 		}
-		return Action.SUCCESS;
+		return "success";
 	}
 
     public UserDataServiceImpl getUserDataServiceImpl() {
@@ -68,5 +86,11 @@ public class UserLoginAction extends AbstractNocAction {
     public void setUserDataServiceImpl(UserDataServiceImpl userDataServiceImpl) {
         this.userDataServiceImpl = userDataServiceImpl;
     }
+
+	@Override
+	public void setDummyData() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

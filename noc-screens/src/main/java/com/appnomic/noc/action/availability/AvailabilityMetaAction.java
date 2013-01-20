@@ -2,11 +2,15 @@ package com.appnomic.noc.action.availability;
 
 import java.util.ArrayList;
 
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Namespace;
+
 import com.appnomic.noc.action.AbstractNocAction;
 import com.appnomic.noc.viewobject.availability.ClusterVO;
 import com.appnomic.noc.viewobject.availability.ComponentVO;
 import com.appnomic.noc.viewobject.availability.HostVO;
-import com.opensymphony.xwork2.Action;
 
 /*
  * This action always retrieves the 'Meta' for the Grid to be displayed
@@ -14,6 +18,8 @@ import com.opensymphony.xwork2.Action;
  * Note: there is NO Query parameter here. The exact meta to send back is configured by the user in a 
  * separate configuration console. So this Action gets input from that configuration
  */
+@ParentPackage("json-default")
+@Namespace("/availability")
 public class AvailabilityMetaAction extends AbstractNocAction  {
 
 	private ComponentVO [] components = null;
@@ -47,8 +53,17 @@ public class AvailabilityMetaAction extends AbstractNocAction  {
 		}
 	}
 
-	public String execute() {
-		return Action.SUCCESS;
+	@Action(value="/Meta", results = {
+	        @Result(name="success", type="json", params = {
+	        		"excludeProperties",
+	                "parameters,session,SUCCESS,ERROR",
+	        		"enableGZIP", "true",
+	        		"encoding", "UTF-8",
+	                "noCache","true",
+	                "excludeNullProperties","true"
+	            })})
+	public String nocAction() {
+		return "success";
 	}
 
 	public ComponentVO[] getComponents() {

@@ -1,33 +1,35 @@
-package com.appnomic.noc.action;
+package com.appnomic.noc.action.component;
+
+import java.util.ArrayList;
 
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Action;
 
+import com.appnomic.noc.action.AbstractNocAction;
+
 @ParentPackage("json-default")
-@Namespace("/noc")
-public class RequestHandlerAction extends AbstractNocAction  {
+@Namespace("/component")
+public class ComponentMatrixMetaAction extends AbstractNocAction {
 	
-	public RequestHandlerAction() {
+	public ComponentMatrixMetaAction() {
+		setDummyData();
 	}
 	
-	@Action(value="/noc/RequestHandler", results = {
+	public void setDummyData() {
+	}
+
+	@Action(value="/MatrixMeta", results = {
 	        @Result(name="success", type="json", params = {
 	        		"excludeProperties",
 	                "parameters,session,SUCCESS,ERROR",
-	                "enableGZIP", "true",
+	        		"enableGZIP", "true",
 	        		"encoding", "UTF-8",
 	                "noCache","true",
 	                "excludeNullProperties","true"
 	            })})
-	public String nocAction() {
+public String nocAction() {
 		return SUCCESS;
 	}
-
-	@Override
-	public void setDummyData() {
-		// TODO Auto-generated method stub
-	}
-
 }

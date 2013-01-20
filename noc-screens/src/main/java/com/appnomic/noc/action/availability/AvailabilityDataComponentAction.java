@@ -3,6 +3,10 @@ package com.appnomic.noc.action.availability;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.interceptor.ParameterAware;
 
 import com.appnomic.domainobject.Component;
@@ -11,8 +15,9 @@ import com.appnomic.noc.viewobject.availability.ClusterDataPointVO;
 import com.appnomic.noc.viewobject.availability.ClusterTimesVO;
 import com.appnomic.noc.viewobject.availability.ComponentDataVO;
 import com.appnomic.service.ComponentDataService;
-import com.opensymphony.xwork2.Action;
 
+@ParentPackage("json-default")
+@Namespace("/availability")
 public class AvailabilityDataComponentAction extends AbstractNocAction  {
 	
 	private ComponentDataService componentDataService;	
@@ -63,13 +68,22 @@ public class AvailabilityDataComponentAction extends AbstractNocAction  {
 		
 	}
 
-	public String execute() {
+	@Action(value="/availability/ComponentData", results = {
+	        @Result(name="success", type="json", params = {
+	                "excludeProperties",
+	                "parameters,session,SUCCESS,ERROR,componentDataService",
+	        		"enableGZIP", "true",
+	        		"encoding", "UTF-8",
+	                "noCache","true",
+	                "excludeNullProperties","true"
+	            })})
+	public String nocAction() {
 		List<Component> components = componentDataService.getAllComponents();
 		for(Component component: components) {
 			component.getAvailKpiDataTypes();
 		}
 		
-		return Action.SUCCESS;
+		return SUCCESS;
 	}
 
 }

@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.interceptor.ParameterAware;
 
 import com.appnomic.domainobject.Host;
@@ -12,8 +16,9 @@ import com.appnomic.noc.viewobject.availability.HostDataVO;
 import com.appnomic.noc.viewobject.availability.KpiDataPointVO;
 import com.appnomic.noc.viewobject.availability.KpiTimesVO;
 import com.appnomic.service.HostDataService;
-import com.opensymphony.xwork2.Action;
 
+@ParentPackage("json-default")
+@Namespace("/availability")
 public class AvailabilityDataHostAction extends AbstractNocAction  {
 	
 	private HostDataService hostDataService;
@@ -62,13 +67,22 @@ public class AvailabilityDataHostAction extends AbstractNocAction  {
 		}
 	}
 
-	public String execute() {
+	@Action(value="/availability/HostData", results = {
+	        @Result(name="success", type="json", params = {
+	                "excludeProperties",
+	                "parameters,session,SUCCESS,ERROR,hostDataService",
+	        		"enableGZIP", "true",
+	        		"encoding", "UTF-8",
+	                "noCache","true",
+	                "excludeNullProperties","true"
+	            })})
+	public String nocAction() {
 		List<Host> hosts = hostDataService.getAllHosts();
 		for(Host host : hosts) {
 			host.getComponents();
 			host.getInCluster();
 		}
-		return Action.SUCCESS;
+		return SUCCESS;
 	}
 
 }

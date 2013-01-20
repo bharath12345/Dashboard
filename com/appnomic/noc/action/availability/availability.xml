@@ -8,18 +8,34 @@
 	<package name="availability" namespace="/availability" extends="json-default">
 		<action name="AvailabilityMeta" class="com.appnomic.noc.action.availability.AvailabilityMetaAction">
 			<result type="json"></result>
+		        <param name="enableGZIP">true</param>
+                <param name="encoding">UTF-8</param>
+                <param name="noCache">true</param>
+                <param name="excludeNullProperties">true</param>
 		</action>
 	
 		<action name="AvailabilityDataComponent" class="com.appnomic.noc.action.availability.AvailabilityDataComponentAction">
 			<result type="json"></result>
+                <param name="enableGZIP">true</param>
+                <param name="encoding">UTF-8</param>
+                <param name="noCache">true</param>
+                <param name="excludeNullProperties">true</param>
 		</action>
 
 		<action name="AvailabilityDataCluster" class="com.appnomic.noc.action.availability.AvailabilityDataClusterAction">
 			<result type="json"></result>
+                <param name="enableGZIP">true</param>
+                <param name="encoding">UTF-8</param>
+                <param name="noCache">true</param>
+                <param name="excludeNullProperties">true</param>
 		</action>
 
 		<action name="AvailabilityDataHost" class="com.appnomic.noc.action.availability.AvailabilityDataHostAction">
 			<result type="json"></result>
+                <param name="enableGZIP">true</param>
+                <param name="encoding">UTF-8</param>
+                <param name="noCache">true</param>
+                <param name="excludeNullProperties">true</param>
 		</action>
 	</package>
 </struts>

@@ -24,12 +24,10 @@
 		The only thing to consider is that a referenced element must have been declared 
 		above the referring element. -->
 
-    <include file="com/appnomic/noc/action/noc.xml" />
+    <!--include file="com/appnomic/noc/action/noc.xml" />
     <include file="com/appnomic/noc/action/user/user.xml" />
     <include file="com/appnomic/noc/action/availability/availability.xml" />
-    <include file="com/appnomic/noc/action/componentMatrix/componentMatrix.xml" />
-    <include file="com/appnomic/noc/action/transactionHeatmap/transactionHeatmap.xml" />
-    <include file="com/appnomic/noc/action/transactionTimeseries/transactionTimeseries.xml" />
-    <include file="com/appnomic/noc/action/transactionTreemap/transactionTreemap.xml" />
+    <include file="com/appnomic/noc/action/component/component.xml" />
+    <include file="com/appnomic/noc/action/transaction/transaction.xml" /-->
 
 </struts>

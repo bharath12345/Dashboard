@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.interceptor.ParameterAware;
+import org.apache.struts2.convention.annotation.Action;
 
 import com.appnomic.domainobject.Cluster;
 import com.appnomic.domainobject.Host;
@@ -14,8 +18,10 @@ import com.appnomic.noc.action.AbstractNocAction;
 import com.appnomic.noc.viewobject.availability.ClusterDataVO;
 import com.appnomic.noc.viewobject.availability.HostDataPointVO;
 import com.appnomic.noc.viewobject.availability.HostTimesVO;
-import com.opensymphony.xwork2.Action;
+//import com.opensymphony.xwork2.Action;
 
+@ParentPackage("json-default")
+@Namespace("/availability")
 public class AvailabilityDataClusterAction extends AbstractNocAction {
 	
 	private ClusterDataService clusterDataService;
@@ -58,7 +64,16 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 		}
 	}
 
-	public String execute() {
+	@Action(value="/availability/ClusterData", results = {
+	        @Result(name="success", type="json", params = {
+	                "excludeProperties",
+	                "parameters,session,SUCCESS,ERROR,clusterDataService",
+	        		"enableGZIP", "true",
+	        		"encoding", "UTF-8",
+	                "noCache","true",
+	                "excludeNullProperties","true"
+	            })})
+	public String nocAction() {
 		//List<Component> components= componentDataService.getAllComponents();
 		
 		List<Cluster> clusters = clusterDataService.getAll();
@@ -72,7 +87,7 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 			}
 		}
 		
-		return Action.SUCCESS;
+		return "success";
 	}
 
 	public ClusterDataService getClusterDataService() {

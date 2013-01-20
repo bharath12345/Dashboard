@@ -13,8 +13,10 @@ public abstract class AbstractNocAction
 							implements ParameterAware, SessionAware, Action {
 	
 	private Map<String, String[]> parameters;
-	
 	private Map session;
+	
+	protected static final String SUCCESS = Action.SUCCESS;
+	protected static final String ERROR = Action.ERROR;
 	
 	public Map getSession() {
 		return session;
@@ -32,5 +34,6 @@ public abstract class AbstractNocAction
 		return this.parameters;
 	}
 	
-	abstract public String execute();
+	abstract public String nocAction();
+	abstract public void setDummyData();
 }
