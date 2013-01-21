@@ -1,10 +1,17 @@
 package com.appnomic.noc.action.user;
 
-public class UserLocal {
+public class LoginInput {
 
 	String username;
 	String password;
+	int type;
 	
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
+	}
 	public String getUsername() {
 		return username;
 	}

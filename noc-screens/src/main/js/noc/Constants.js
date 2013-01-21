@@ -8,6 +8,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // VARIOUS TYPES FOR SWITCHING IN ViewManager
         CONSTANTS.TYPE = {};
+        CONSTANTS.TYPE.LOGIN = 1653;
         CONSTANTS.TYPE.AVAILABILITY = 1;
         CONSTANTS.TYPE.AVAILABILITY_DATA = 2;
         CONSTANTS.TYPE.COMPONENT_ZONES = 3;
@@ -33,6 +34,8 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // WIDGET CLASS PATHS
         CONSTANTS.WIDGETS = {};
+
+        CONSTANTS.WIDGETS.LOGIN = "Login";
 
         CONSTANTS.WIDGETS.AVAILABILITY = {};
         CONSTANTS.WIDGETS.AVAILABILITY.GRID = 'noc/Widgets/Availability/AvailabilityGrid';

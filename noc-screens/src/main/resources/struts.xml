@@ -10,24 +10,11 @@
 		information on error pages as well as reloading of various resources with 
 		each request. -->
 	<constant name="struts.devMode" value="true" />
-    <constant name="struts.objectFactory" value="org.apache.struts2.spring.StrutsSpringObjectFactory" />
+    <!--constant name="struts.objectFactory" value="org.apache.struts2.spring.StrutsSpringObjectFactory" /-->
 
     <!-- Below ones are for improved URL mapping -->
     <constant name="struts.mapper.alwaysSelectFullNamespace" value="false"/>
     <constant name="struts.enable.SlashesInActionNames" value="true"/>
     <constant name="struts.patternMatcher" value="namedVariable"/>
-
-	<!-- You can define packages directly in this file, but its probably best 
-		to modularize the configuration files with separate xml files for each package. 
-		Ultimately its all the same because the include element, seen below, pulls 
-		the included configuration document directly in to the primary document. 
-		The only thing to consider is that a referenced element must have been declared 
-		above the referring element. -->
-
-    <!--include file="com/appnomic/noc/action/noc.xml" />
-    <include file="com/appnomic/noc/action/user/user.xml" />
-    <include file="com/appnomic/noc/action/availability/availability.xml" />
-    <include file="com/appnomic/noc/action/component/component.xml" />
-    <include file="com/appnomic/noc/action/transaction/transaction.xml" /-->
 
 </struts>

@@ -1,32 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
-        http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
-         version="2.4">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
     <display-name>AppsOne NOC Screens</display-name>
+    
+    <welcome-file-list>
+        <welcome-file>signin.jsp</welcome-file>
+    </welcome-file-list>
 
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>
-            <param-value>classpath:META-INF/spring/applicationContext.xml</param-value>
-        </param-value>
-    </context-param>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/error.jsp</location>
+    </error-page>
 
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
-
-    <filter>
-        <filter-name>http-context-filter</filter-name>
-        <filter-class>com.appnomic.noc.filter.HttpContextFilter</filter-class>
-    </filter>
-
-    <!-- The Struts 2 filter should be mapped to ALL requests coming into the
-        web application. As a filter, it can let the non-struts requests pass through
-        and they will arrive at which ever servlets to which they may be mapped.
-        When the filter recognizes a Struts 2 request, typically by the .action extension,
-        the normal filter chaining of a web application is aborted and the request
-        is completely handled by the Struts 2 system. -->
     <filter>
         <filter-name>struts2</filter-name>
         <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
@@ -41,19 +25,35 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:applicationContext.xml</param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    
+    <listener>
+    	<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+    </listener>
+
+    <filter>
+        <filter-name>http-context-filter</filter-name>
+        <filter-class>com.appnomic.noc.filter.HttpContextFilter</filter-class>
+    </filter>
+
+    <!-- The Struts 2 filter should be mapped to ALL requests coming into the
+        web application. As a filter, it can let the non-struts requests pass through
+        and they will arrive at which ever servlets to which they may be mapped.
+        When the filter recognizes a Struts 2 request, typically by the .action extension,
+        the normal filter chaining of a web application is aborted and the request
+        is completely handled by the Struts 2 system. -->
+
     <filter-mapping>
         <filter-name>http-context-filter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-
-    <welcome-file-list>
-        <welcome-file>signin.jsp</welcome-file>
-    </welcome-file-list>
-
-    <error-page>
-        <error-code>500</error-code>
-        <location>/error.jsp</location>
-    </error-page>
 
     <login-config>
         <auth-method>FORM</auth-method>

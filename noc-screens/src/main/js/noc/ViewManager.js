@@ -39,6 +39,12 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
             ViewManager.addView(data);
 
             switch(data.type) {
+                case CONSTANTS.TYPE.LOGIN:
+                    require([CONSTANTS.WIDGETS.LOGIN], function (Login) {
+                        Login.successPostProcess();
+                    });
+                    break;
+
                 case CONSTANTS.TYPE.AVAILABILITY:
                     require([CONSTANTS.WIDGETS.AVAILABILITY.GRID], function (AvailabilityGrid) {
                         new AvailabilityGrid().create(data);

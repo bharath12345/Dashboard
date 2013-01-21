@@ -53,7 +53,7 @@ public class AvailabilityMetaAction extends AbstractNocAction  {
 		}
 	}
 
-	@Action(value="/Meta", results = {
+	@Action(value="/availability/Meta", results = {
 	        @Result(name="success", type="json", params = {
 	        		"excludeProperties",
 	                "parameters,session,SUCCESS,ERROR",

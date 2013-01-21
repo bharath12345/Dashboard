@@ -20,7 +20,7 @@ public class ComponentMatrixMetaAction extends AbstractNocAction {
 	public void setDummyData() {
 	}
 
-	@Action(value="/MatrixMeta", results = {
+	@Action(value="/component/MatrixMeta", results = {
 	        @Result(name="success", type="json", params = {
 	        		"excludeProperties",
 	                "parameters,session,SUCCESS,ERROR",

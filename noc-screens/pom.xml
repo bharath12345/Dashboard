@@ -816,6 +816,11 @@
 
         <dependency>
             <groupId>com.appnomic</groupId>
+            <artifactId>appnomic-common</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.appnomic</groupId>
             <artifactId>appnomic-service</artifactId>
             <version>1.0</version>
         </dependency>

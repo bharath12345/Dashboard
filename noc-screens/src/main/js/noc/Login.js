@@ -83,10 +83,25 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Utility
             var uname = document.getElementById("username").value;
             var pword = document.getElementById("password").value;
             var userData = {
+                type:CONSTANTS.TYPE.LOGIN,
                 "username":uname,
                 "password":pword
             };
             Utility.xhrPostCentral(CONSTANTS.ACTION.LOGIN, dojo.toJson(userData));
+        };
+
+        Login.successPostProcess = function() {
+            //login has succeeded - recreate the page if the user is on index.jsp
+            // if the user is on signin.jsp then move him to index.jsp
+
+            if(window.location.href.endsWith("index.jsp")) {
+
+            } else if(window.location.href.endsWith("signin.jsp")) {
+                window.location.href = window.document.location.host + "/noc-screens/index.jsp";
+            } else {
+                window.location.href = window.document.location.host + "/noc-screens/error.jsp";
+            }
+
         };
 
         return Login;

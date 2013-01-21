@@ -7,7 +7,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
 
             create:function (data) {
                 // data has all 3 - component name, kpi name and value
-                // find the cell with the id and set its background color 
+                // find the cell with the id and set its background color
             }
 
         });
