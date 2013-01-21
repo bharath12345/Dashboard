@@ -10,7 +10,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Utility
         };
 
         Login.setFocusToUserName = function() {
-            var elem = document.getElementById("username");
+            var elem = document.getElementById("j_username");
             elem.focus();
         };
 
@@ -74,28 +74,30 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Utility
         };
 
         Login.clear = function() {
-            document.getElementById("username").value = "";
-            document.getElementById("password").value = "";
+            document.getElementById("j_username").value = "";
+            document.getElementById("j_password").value = "";
         };
 
         Login.login = function() {
             Login.expandCollapse('sending','on');
-            var uname = document.getElementById("username").value;
-            var pword = document.getElementById("password").value;
+            var uname = document.getElementById("j_username").value;
+            var pword = document.getElementById("j_password").value;
             var userData = {
                 type:CONSTANTS.TYPE.LOGIN,
-                "username":uname,
-                "password":pword
+                "j_username":uname,
+                "j_password":pword
             };
             Utility.xhrPostCentral(CONSTANTS.ACTION.LOGIN, dojo.toJson(userData));
         };
 
-        Login.successPostProcess = function() {
+        Login.successPostProcess = function(data) {
+            console.log("post process data = " + dojo.toJson(data));
+
             //login has succeeded - recreate the page if the user is on index.jsp
             // if the user is on signin.jsp then move him to index.jsp
 
             if(window.location.href.endsWith("index.jsp")) {
-
+                window.location.href = window.location.href;
             } else if(window.location.href.endsWith("signin.jsp")) {
                 window.location.href = window.document.location.host + "/noc-screens/index.jsp";
             } else {

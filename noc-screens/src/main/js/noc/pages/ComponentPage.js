@@ -1,7 +1,7 @@
 define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/GridContainer",
-    "dojo/_base/lang", "dojo/i18n!noc/nls/noc"],
+    "dojo/_base/lang", "dojo/i18n!noc/nls/noc", "noc/Constants", "noc/Utility"],
 
-    function (require, declare, i18n, TitlePane, GridContainer, lang, i18nString) {
+    function (require, declare, i18n, TitlePane, GridContainer, lang, i18nString, CONSTANTS, Utility) {
 
         var ComponentPage = declare("noc.pages.ComponentPage", null, {
 

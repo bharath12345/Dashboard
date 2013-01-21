@@ -40,11 +40,12 @@ public class UserLoginAction extends AbstractNocAction {
 		Set<String> keys = getParameters().keySet();
 		for(String key : keys) {
 			System.out.println("key = " + key + " value[0] = " + getParameters().get(key)[0]);
-			userlocal = gson.fromJson(key, LoginInput.class);
+			//userlocal = gson.fromJson(key, LoginInput.class);
 		}
 		
-		getSession().put("username", userlocal.getUsername());
-		System.out.println("username from gson = " + userlocal.getUsername() + " p = " + userlocal.getPassword());
+		/*
+		//getSession().put("username", userlocal.getUsername());
+		//System.out.println("username from gson = " + userlocal.getUsername() + " p = " + userlocal.getPassword());
 		
 		if(userDataServiceImpl == null) {
 			System.out.println("userDataServiceImpl is NULL");
@@ -65,7 +66,7 @@ public class UserLoginAction extends AbstractNocAction {
 		} 
 		
 		login.setAuthentication(false);		
-		System.out.println("user " + userlocal.getPassword() +" auth failed.");
+		System.out.println("user " + userlocal.getPassword() +" auth failed.");*/
 		return SUCCESS;
 	}
 

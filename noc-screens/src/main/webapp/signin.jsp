@@ -54,16 +54,18 @@
                 </tr>
             </table>
         </td>
-        <td class="login_mid_right">
+         <td class="login_mid_right">
+            <form action="j_security_check" method="post" id="contactform"
+                  onsubmit="Login.expandCollapse('sending','on');return true;">
                 <table class="full_H" border="0" cellspacing="0" cellpadding="0">
                     <tr>
                         <td class="login_fields">
-                            <input id="username" class="login_name" type="text" size="15"/>
+                            <input id="j_username" class="login_name" type="text" name="j_username" size="15"/>
                         </td>
                     </tr>
                     <tr>
                         <td class="login_fields">
-                            <input id="password" class="login_password" type="password" size="15"/>
+                            <input id="j_password" class="login_password" type="password" name="j_password" size="15"/>
                         </td>
                     </tr>
                     <tr>
@@ -72,10 +74,10 @@
                     </tr>
                     <tr>
                         <td class="login_button_field">
-                            <button id="btnSignIn_btnCommandButton" type="submit" class="login_button" onclick="Login.login();">
+                            <button name="btnSignIn:btnCommandButton" id="btnSignIn_btnCommandButton" type="submit" class="login_button">
                                 <span id="signInSpan"></span>
                             </button>
-                            <button id="btnClear_btnCommandButton" type="reset" class="login_button" onclick="Login.clear();">
+                            <button name="btnClear:btnCommandButton" id="btnClear_btnCommandButton" type="reset" class="login_button">
                                 <span id="clearSpan"></span>
                             </button>
                             <div id="sending" style="visibility:hidden;">
@@ -87,6 +89,7 @@
                         </td>
                     </tr>
                 </table>
+            </form>
         </td>
     </tr>
     <tr>

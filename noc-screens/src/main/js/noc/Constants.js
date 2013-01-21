@@ -35,7 +35,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         // WIDGET CLASS PATHS
         CONSTANTS.WIDGETS = {};
 
-        CONSTANTS.WIDGETS.LOGIN = "Login";
+        CONSTANTS.WIDGETS.LOGIN = "noc/Login";
 
         CONSTANTS.WIDGETS.AVAILABILITY = {};
         CONSTANTS.WIDGETS.AVAILABILITY.GRID = 'noc/Widgets/Availability/AvailabilityGrid';
