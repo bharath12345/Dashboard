@@ -290,7 +290,7 @@
 
                     <plugin>
                         <artifactId>maven-antrun-plugin</artifactId>
-                        <version>1.7</version>
+                        <!--version>1.7</version-->
                         <executions>
                             <execution>
                                 <id>Copy Dojo</id>
@@ -374,7 +374,8 @@
                                     <tasks>
                                         <concat destfile="${basedir}/target/noc-screens/css/noc.merged.css"
                                                 eol="cr">
-                                            <filelist dir="${basedir}/src/main/css" files="treemap.css,noc.css,common.css"/>
+                                            <filelist dir="${basedir}/src/main/css"
+                                                      files="treemap.css,noc.css,common.css"/>
                                         </concat>
                                         <exec executable="java">
                                             <arg value="-jar"/>
@@ -568,7 +569,7 @@
 
                     <plugin>
                         <artifactId>maven-antrun-plugin</artifactId>
-                        <version>1.7</version>
+                        <!--version>1.7</version-->
                         <executions>
                             <execution>
                                 <id>AppsOne dojo ${dojo.version} Custom Build</id>
@@ -599,7 +600,8 @@
                                     <tasks>
                                         <concat destfile="${basedir}/target/noc-screens/css/noc.merged.css"
                                                 eol="cr">
-                                            <filelist dir="${basedir}/src/main/css" files="treemap.css,noc.css,common.css"/>
+                                            <filelist dir="${basedir}/src/main/css"
+                                                      files="treemap.css,noc.css,common.css"/>
                                         </concat>
                                         <exec executable="java">
                                             <arg value="-jar"/>
@@ -827,8 +829,12 @@
 
         <!-- once dojo Sources are available in the central maven repo, use a dependency
             stmt like below to download -->
-        <!--dependency> <groupId>org.dojotoolkit</groupId> <artifactId>dojo</artifactId>
-            <version>1.8.1</version> </dependency -->
+        <!--dependency>
+            <groupId>org.dojotoolkit</groupId>
+            <artifactId>dojo</artifactId>
+            <version>1.8.1</version>
+            <type>zip</type>
+        </dependency-->
 
     </dependencies>
 </project>

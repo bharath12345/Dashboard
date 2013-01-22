@@ -21,10 +21,10 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.ACTION.LOGIN = "user/UserLogin.action";
 
         CONSTANTS.ACTION.AVAILABILITY = {};
-        CONSTANTS.ACTION.AVAILABILITY.META = "availability/AvailabilityMeta.action";
-        CONSTANTS.ACTION.AVAILABILITY.COMPONENT = "availability/AvailabilityDataComponent.action";
-        CONSTANTS.ACTION.AVAILABILITY.CLUSTER = "availability/AvailabilityDataCluster.action";
-        CONSTANTS.ACTION.AVAILABILITY.HOST = "availability/AvailabilityDataHost.action";
+        CONSTANTS.ACTION.AVAILABILITY.META = "availability/Meta.action";
+        CONSTANTS.ACTION.AVAILABILITY.COMPONENT = "availability/ComponentData.action";
+        CONSTANTS.ACTION.AVAILABILITY.CLUSTER = "availability/ClusterData.action";
+        CONSTANTS.ACTION.AVAILABILITY.HOST = "availability/HostData.action";
 
         CONSTANTS.ACTION.COMPONENT = {};
         CONSTANTS.ACTION.COMPONENT.ZONES = "component/zones.action";

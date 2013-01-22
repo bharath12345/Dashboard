@@ -6,6 +6,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid',
         var AvailabilityGrid = declare("noc.Components.Availability.AvailabilityGrid", null, {
 
             create:function (data) {
+                console.log("triggering availability grid creation");
                 this.data = data;
                 d3.json(CONSTANTS.ACTION.AVAILABILITY.META, dojo.hitch(this, function (m) {
                     this.renderGrid(m);

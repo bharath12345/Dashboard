@@ -25,7 +25,7 @@ public class UserLoginAction extends AbstractNocAction {
 	@Action(value="/user/UserLogin", results = {
 	        @Result(name="success", type="json", params = {
 	        		"excludeProperties",
-	                "parameters,session,SUCCESS,ERROR,username,password,userDataServiceImpl",
+	                "parameters,session,SUCCESS,ERROR,userDataServiceImpl",
 	                "enableGZIP", "true",
 	        		"encoding", "UTF-8",
 	                "noCache","true",
@@ -34,27 +34,29 @@ public class UserLoginAction extends AbstractNocAction {
 	public String nocAction() {
 		
 		System.out.println("parameters from sessionaware = " + getParameters());
-		LoginInput userlocal = null;
-		Gson gson = new Gson();
-
+		LoginInput userlocal = new LoginInput();
+		
 		Set<String> keys = getParameters().keySet();
 		for(String key : keys) {
 			System.out.println("key = " + key + " value[0] = " + getParameters().get(key)[0]);
-			//userlocal = gson.fromJson(key, LoginInput.class);
 		}
 		
-		/*
-		//getSession().put("username", userlocal.getUsername());
-		//System.out.println("username from gson = " + userlocal.getUsername() + " p = " + userlocal.getPassword());
+		System.out.println("incoming username = " + getParameters().get("j_username"));
+		System.out.println("incoming password = " + getParameters().get("j_password"));
+		
+		userlocal.setPassword(getParameters().get("j_password")[0]);
+		userlocal.setUsername(getParameters().get("j_username")[0]);
+		
+		getSession().put("username", userlocal.getUsername());
 		
 		if(userDataServiceImpl == null) {
 			System.out.println("userDataServiceImpl is NULL");
 		}
 		
-		//List<User> users = userDataServiceImpl.getAllUsers();
-		//for(User user : users) {
-		//	System.out.println("username = " + user.getUserName());
-		//}
+		List<User> users = userDataServiceImpl.getAllUsers();
+		for(User user : users) {
+			System.out.println("username = " + user.getUserName());
+		}
 		
 		login.setType(userlocal.getType());
 		login.setUsername(userlocal.getUsername());
@@ -66,8 +68,8 @@ public class UserLoginAction extends AbstractNocAction {
 		} 
 		
 		login.setAuthentication(false);		
-		System.out.println("user " + userlocal.getPassword() +" auth failed.");*/
-		return SUCCESS;
+		System.out.println("user " + userlocal.getPassword() +" auth failed.");
+		return ERROR;
 	}
 
 	public LoginOutput getLogin() {

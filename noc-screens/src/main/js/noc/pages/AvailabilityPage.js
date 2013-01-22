@@ -40,8 +40,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                     custom: []
                 };
 
-                var baseUrl = CONSTANTS.ACTION.REQUEST_HANDLER;
-                Utility.xhrPostCentral(baseUrl, viewMeta);
+                Utility.xhrPostCentral(CONSTANTS.ACTION.REQUEST_HANDLER, viewMeta);
 
             }
         });

@@ -32,11 +32,11 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
 
 
 
-    <!--
+    
 
     <import resource="classpath:META-INF/spring/dbconnection.xml" />
 
-    -->
+
     <!--
 
 <bean id="mysqlDS" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
