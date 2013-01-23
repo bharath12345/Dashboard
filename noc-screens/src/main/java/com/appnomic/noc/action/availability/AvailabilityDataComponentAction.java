@@ -9,8 +9,11 @@ import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.interceptor.ParameterAware;
 
+import com.appnomic.domainobject.Cluster;
 import com.appnomic.domainobject.Component;
 import com.appnomic.noc.action.AbstractNocAction;
+import com.appnomic.noc.action.ActionHelper;
+import com.appnomic.noc.action.RequestNameId;
 import com.appnomic.noc.viewobject.availability.ClusterDataPointVO;
 import com.appnomic.noc.viewobject.availability.ClusterTimesVO;
 import com.appnomic.noc.viewobject.availability.ComponentDataVO;
@@ -78,10 +81,9 @@ public class AvailabilityDataComponentAction extends AbstractNocAction  {
 	                "excludeNullProperties","true"
 	            })})
 	public String nocAction() {
-		List<Component> components = componentDataService.getAllComponents();
-		for(Component component: components) {
-			component.getAvailKpiDataTypes();
-		}
+		RequestNameId rn = ActionHelper.getRequestName(getParameters());		
+		Component component = componentDataService.getComponentInstance(Integer.parseInt(rn.getName()));
+		
 		
 		return SUCCESS;
 	}

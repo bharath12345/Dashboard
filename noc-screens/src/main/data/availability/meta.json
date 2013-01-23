@@ -5,11 +5,11 @@
                 "clusterName":"cluster0",
                 "host":[
                     {
-                        "hostname":"host0",
+                        "compInstanceName":"host0",
                         "kpiCount":3
                     },
                     {
-                        "hostname":"host1",
+                        "compInstanceName":"host1",
                         "kpiCount":3
                     }
                 ]
@@ -18,11 +18,11 @@
                 "clusterName":"cluster1",
                 "host":[
                     {
-                        "hostname":"host0",
+                        "compInstanceName":"host0",
                         "kpiCount":3
                     },
                     {
-                        "hostname":"host1",
+                        "compInstanceName":"host1",
                         "kpiCount":3
                     }
                 ]
@@ -31,11 +31,11 @@
                 "clusterName":"cluster2",
                 "host":[
                     {
-                        "hostname":"host0",
+                        "compInstanceName":"host0",
                         "kpiCount":3
                     },
                     {
-                        "hostname":"host1",
+                        "compInstanceName":"host1",
                         "kpiCount":3
                     }
                 ]
@@ -44,11 +44,11 @@
                 "clusterName":"cluster3",
                 "host":[
                     {
-                        "hostname":"host0",
+                        "compInstanceName":"host0",
                         "kpiCount":3
                     },
                     {
-                        "hostname":"host1",
+                        "compInstanceName":"host1",
                         "kpiCount":3
                     }
                 ]
@@ -62,11 +62,11 @@
                 "clusterName":"cluster0",
                 "host":[
                     {
-                        "hostname":"host0",
+                        "compInstanceName":"host0",
                         "kpiCount":3
                     },
                     {
-                        "hostname":"host1",
+                        "compInstanceName":"host1",
                         "kpiCount":3
                     }
                 ]
@@ -75,11 +75,11 @@
                 "clusterName":"cluster1",
                 "host":[
                     {
-                        "hostname":"host0",
+                        "compInstanceName":"host0",
                         "kpiCount":3
                     },
                     {
-                        "hostname":"host1",
+                        "compInstanceName":"host1",
                         "kpiCount":3
                     }
                 ]
@@ -88,11 +88,11 @@
                 "clusterName":"cluster2",
                 "host":[
                     {
-                        "hostname":"host0",
+                        "compInstanceName":"host0",
                         "kpiCount":3
                     },
                     {
-                        "hostname":"host1",
+                        "compInstanceName":"host1",
                         "kpiCount":3
                     }
                 ]
@@ -101,11 +101,11 @@
                 "clusterName":"cluster3",
                 "host":[
                     {
-                        "hostname":"host0",
+                        "compInstanceName":"host0",
                         "kpiCount":3
                     },
                     {
-                        "hostname":"host1",
+                        "compInstanceName":"host1",
                         "kpiCount":3
                     }
                 ]
@@ -119,11 +119,11 @@
                 "clusterName":"cluster0",
                 "host":[
                     {
-                        "hostname":"host0",
+                        "compInstanceName":"host0",
                         "kpiCount":3
                     },
                     {
-                        "hostname":"host1",
+                        "compInstanceName":"host1",
                         "kpiCount":3
                     }
                 ]
@@ -132,11 +132,11 @@
                 "clusterName":"cluster1",
                 "host":[
                     {
-                        "hostname":"host0",
+                        "compInstanceName":"host0",
                         "kpiCount":3
                     },
                     {
-                        "hostname":"host1",
+                        "compInstanceName":"host1",
                         "kpiCount":3
                     }
                 ]
@@ -145,11 +145,11 @@
                 "clusterName":"cluster2",
                 "host":[
                     {
-                        "hostname":"host0",
+                        "compInstanceName":"host0",
                         "kpiCount":3
                     },
                     {
-                        "hostname":"host1",
+                        "compInstanceName":"host1",
                         "kpiCount":3
                     }
                 ]
@@ -158,11 +158,11 @@
                 "clusterName":"cluster3",
                 "host":[
                     {
-                        "hostname":"host0",
+                        "compInstanceName":"host0",
                         "kpiCount":3
                     },
                     {
-                        "hostname":"host1",
+                        "compInstanceName":"host1",
                         "kpiCount":3
                     }
                 ]
@@ -176,11 +176,11 @@
                 "clusterName":"cluster0",
                 "host":[
                     {
-                        "hostname":"host0",
+                        "compInstanceName":"host0",
                         "kpiCount":3
                     },
                     {
-                        "hostname":"host1",
+                        "compInstanceName":"host1",
                         "kpiCount":3
                     }
                 ]
@@ -189,11 +189,11 @@
                 "clusterName":"cluster1",
                 "host":[
                     {
-                        "hostname":"host0",
+                        "compInstanceName":"host0",
                         "kpiCount":3
                     },
                     {
-                        "hostname":"host1",
+                        "compInstanceName":"host1",
                         "kpiCount":3
                     }
                 ]
@@ -202,11 +202,11 @@
                 "clusterName":"cluster2",
                 "host":[
                     {
-                        "hostname":"host0",
+                        "compInstanceName":"host0",
                         "kpiCount":3
                     },
                     {
-                        "hostname":"host1",
+                        "compInstanceName":"host1",
                         "kpiCount":3
                     }
                 ]
@@ -215,11 +215,11 @@
                 "clusterName":"cluster3",
                 "host":[
                     {
-                        "hostname":"host0",
+                        "compInstanceName":"host0",
                         "kpiCount":3
                     },
                     {
-                        "hostname":"host1",
+                        "compInstanceName":"host1",
                         "kpiCount":3
                     }
                 ]
@@ -233,11 +233,11 @@
                 "clusterName":"cluster0",
                 "host":[
                     {
-                        "hostname":"host0",
+                        "compInstanceName":"host0",
                         "kpiCount":3
                     },
                     {
-                        "hostname":"host1",
+                        "compInstanceName":"host1",
                         "kpiCount":3
                     }
                 ]
@@ -246,11 +246,11 @@
                 "clusterName":"cluster1",
                 "host":[
                     {
-                        "hostname":"host0",
+                        "compInstanceName":"host0",
                         "kpiCount":3
                     },
                     {
-                        "hostname":"host1",
+                        "compInstanceName":"host1",
                         "kpiCount":3
                     }
                 ]
@@ -259,11 +259,11 @@
                 "clusterName":"cluster2",
                 "host":[
                     {
-                        "hostname":"host0",
+                        "compInstanceName":"host0",
                         "kpiCount":3
                     },
                     {
-                        "hostname":"host1",
+                        "compInstanceName":"host1",
                         "kpiCount":3
                     }
                 ]
@@ -272,11 +272,11 @@
                 "clusterName":"cluster3",
                 "host":[
                     {
-                        "hostname":"host0",
+                        "compInstanceName":"host0",
                         "kpiCount":3
                     },
                     {
-                        "hostname":"host1",
+                        "compInstanceName":"host1",
                         "kpiCount":3
                     }
                 ]
@@ -290,11 +290,11 @@
                 "clusterName":"cluster0",
                 "host":[
                     {
-                        "hostname":"host0",
+                        "compInstanceName":"host0",
                         "kpiCount":3
                     },
                     {
-                        "hostname":"host1",
+                        "compInstanceName":"host1",
                         "kpiCount":3
                     }
                 ]
@@ -303,11 +303,11 @@
                 "clusterName":"cluster1",
                 "host":[
                     {
-                        "hostname":"host0",
+                        "compInstanceName":"host0",
                         "kpiCount":3
                     },
                     {
-                        "hostname":"host1",
+                        "compInstanceName":"host1",
                         "kpiCount":3
                     }
                 ]
@@ -316,11 +316,11 @@
                 "clusterName":"cluster2",
                 "host":[
                     {
-                        "hostname":"host0",
+                        "compInstanceName":"host0",
                         "kpiCount":3
                     },
                     {
-                        "hostname":"host1",
+                        "compInstanceName":"host1",
                         "kpiCount":3
                     }
                 ]
@@ -329,11 +329,11 @@
                 "clusterName":"cluster3",
                 "host":[
                     {
-                        "hostname":"host0",
+                        "compInstanceName":"host0",
                         "kpiCount":3
                     },
                     {
-                        "hostname":"host1",
+                        "compInstanceName":"host1",
                         "kpiCount":3
                     }
                 ]

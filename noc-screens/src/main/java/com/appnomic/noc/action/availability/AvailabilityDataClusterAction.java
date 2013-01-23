@@ -3,6 +3,7 @@ package com.appnomic.noc.action.availability;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -15,10 +16,13 @@ import com.appnomic.domainobject.Host;
 import com.appnomic.service.ClusterDataService;
 import com.appnomic.service.ComponentDataService;
 import com.appnomic.noc.action.AbstractNocAction;
+import com.appnomic.noc.action.ActionHelper;
+import com.appnomic.noc.action.RequestNameId;
 import com.appnomic.noc.viewobject.availability.ClusterDataVO;
-import com.appnomic.noc.viewobject.availability.HostDataPointVO;
-import com.appnomic.noc.viewobject.availability.HostTimesVO;
+import com.appnomic.noc.viewobject.availability.CompInstanceDataPointVO;
+import com.appnomic.noc.viewobject.availability.CompInstanceTimesVO;
 //import com.opensymphony.xwork2.Action;
+import com.google.gson.Gson;
 
 @ParentPackage("json-default")
 @Namespace("/availability")
@@ -27,6 +31,8 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 	private ClusterDataService clusterDataService;
 	
 	private ClusterDataVO clusterData;
+	
+	private String clusterName;
 
 	public ClusterDataVO getClusterData() {
 		return clusterData;
@@ -45,19 +51,19 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 		clusterData.setInstanceName("ClusterX");
 		
 		int hostCount = 3;
-		HostTimesVO [] hostTimes = new HostTimesVO[hostCount]; // cluster has 2 hosts
+		CompInstanceTimesVO [] hostTimes = new CompInstanceTimesVO[hostCount]; // cluster has 2 hosts
 		clusterData.setTimes(hostTimes);
 		
 		for(int i=0;i<hostCount;i++) {
-			hostTimes[i] = new HostTimesVO();
+			hostTimes[i] = new CompInstanceTimesVO();
 			hostTimes[i].setTime("10:10");
 			
 			int hostDataPoints = 2;
-			HostDataPointVO [] hostDataPoint = new HostDataPointVO[hostDataPoints];
-			hostTimes[i].setHost(hostDataPoint);
+			CompInstanceDataPointVO [] hostDataPoint = new CompInstanceDataPointVO[hostDataPoints];
+			hostTimes[i].setInstances(hostDataPoint);
 			
 			for(int j=0;j<hostDataPoints;j++) {
-				hostDataPoint[j] = new HostDataPointVO();
+				hostDataPoint[j] = new CompInstanceDataPointVO();
 				hostDataPoint[j].setName("HostX");
 				hostDataPoint[j].setValue(j); // in this dummy sample, j is just 0/1
 			}
@@ -72,22 +78,14 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 	        		"encoding", "UTF-8",
 	                "noCache","true",
 	                "excludeNullProperties","true"
-	            })})
+	         })
+	})
 	public String nocAction() {
-		//List<Component> components= componentDataService.getAllComponents();
+		RequestNameId rn = ActionHelper.getRequestName(getParameters());		
+		Cluster clusters = clusterDataService.getById(Integer.parseInt(rn.getName()));
 		
-		List<Cluster> clusters = clusterDataService.getAll();
-		for(Cluster cluster : clusters) {
-			List<Host> hosts = cluster.getHosts();
-			for(Host host : hosts) {
-				List<Host.Component> components = host.getComponents();
-				for(Host.Component component : components) {
-					
-				}
-			}
-		}
 		
-		return "success";
+		return SUCCESS;
 	}
 
 	public ClusterDataService getClusterDataService() {

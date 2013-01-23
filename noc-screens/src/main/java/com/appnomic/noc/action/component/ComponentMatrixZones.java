@@ -1,5 +1,7 @@
 package com.appnomic.noc.action.component;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.apache.struts2.convention.annotation.Namespace;
@@ -7,6 +9,7 @@ import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Action;
 
+import com.appnomic.domainobject.Component;
 import com.appnomic.noc.action.AbstractNocAction;
 import com.appnomic.noc.viewobject.component.ComponentMatrixZonesVO;
 import com.appnomic.service.ComponentDataService;
@@ -65,13 +68,15 @@ public class ComponentMatrixZones extends AbstractNocAction {
 			componentMatrixZonesVO = gson.fromJson(key, ComponentMatrixZonesVO.class);
 		}
 
+		Set<String> componentTypes = new HashSet<String>();
+		List<Component> components = componentDataService.getAllComponents();
+		for(Component component: components) {
+			componentTypes.add(component.getType());
+		}
+		
 		// Find the number of different component groups
 		//componentDataService.getAllComponents();
-		String [] zoneNames = new String[4];
-		zoneNames[0] = "Windows";
-		zoneNames[1] = "Linux";
-		zoneNames[2] = "WAS";
-		zoneNames[3] = "Oracle";
+		String [] zoneNames = (String[]) componentTypes.toArray();
 		componentMatrixZonesVO.setZoneNames(zoneNames);
 		
 		return SUCCESS;

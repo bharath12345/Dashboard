@@ -3,7 +3,15 @@ package com.appnomic.noc.viewobject.availability;
 public class ComponentVO {
 
 	private String componentName;
+	private int id;
 	private ClusterVO [] clusters;
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	
 	public String getComponentName() {
 		return componentName;

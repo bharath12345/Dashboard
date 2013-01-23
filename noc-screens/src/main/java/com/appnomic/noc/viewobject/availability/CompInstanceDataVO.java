@@ -1,6 +1,6 @@
 package com.appnomic.noc.viewobject.availability;
 
-public class HostDataVO {
+public class CompInstanceDataVO {
 	private String instanceName;
 	private KpiTimesVO [] times;
 	

@@ -14,10 +14,12 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "dojo/reques
                 headers:Utility.JSON_HEADER
             }).then(function(data){
                     // Do something with the handled data
-                    console.log("xhr data = " + data);
+
+                    //console.log("xhr data = " + data);
                     require(["noc/ViewManager"], function (ViewManager) {
                         ViewManager.manageView(data);
                     });
+
                 }, function(err){
                     // Handle the error condition
                     console.log("xhr error = " + err);

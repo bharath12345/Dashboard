@@ -1,6 +1,6 @@
 package com.appnomic.noc.viewobject.availability;
 
-public class HostDataPointVO {
+public class CompInstanceDataPointVO {
 	private String name;
 	private int value;
 	

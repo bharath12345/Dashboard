@@ -3,18 +3,25 @@ package com.appnomic.noc.viewobject.availability;
 public class ClusterVO {
 
 	private String clusterName;
-	private HostVO [] host;
+	private InstanceVO [] instances;
+	private int id;
 	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getClusterName() {
 		return clusterName;
 	}
 	public void setClusterName(String clusterName) {
 		this.clusterName = clusterName;
 	}
-	public HostVO[] getHost() {
-		return host;
+	public InstanceVO[] getInstances() {
+		return instances;
 	}
-	public void setHost(HostVO[] host) {
-		this.host = host;
+	public void setIntances(InstanceVO[] host) {
+		this.instances = host;
 	}
 }

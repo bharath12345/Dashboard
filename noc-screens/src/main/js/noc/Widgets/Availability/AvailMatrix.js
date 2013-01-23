@@ -11,13 +11,13 @@ define(['require', "dojo/_base/declare", "dojo/i18n",
                 var url;
                 switch(gridType) {
                     case AvailMatrix.COMPONENT:
-                        url = CONSTANTS.ACTION.AVAILABILITY.COMPONENT;
+                        url = CONSTANTS.ACTION.AVAILABILITY.COMPONENT + "?name=" + data.id;
                         break;
                     case AvailMatrix.CLUSTER:
-                        url = CONSTANTS.ACTION.AVAILABILITY.CLUSTER;
+                        url = CONSTANTS.ACTION.AVAILABILITY.CLUSTER + "?name=" + data.id;
                         break;
                     case AvailMatrix.HOST:
-                        url = CONSTANTS.ACTION.AVAILABILITY.HOST;
+                        url = CONSTANTS.ACTION.AVAILABILITY.HOST + "?name=" + data.id;
                         break;
                     default:
                         console.log("unknown grid type = " + gridType);
