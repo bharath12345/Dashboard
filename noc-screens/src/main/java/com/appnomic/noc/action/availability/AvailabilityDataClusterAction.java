@@ -1,6 +1,7 @@
 package com.appnomic.noc.action.availability;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -12,7 +13,9 @@ import org.apache.struts2.interceptor.ParameterAware;
 import org.apache.struts2.convention.annotation.Action;
 
 import com.appnomic.domainobject.Cluster;
+import com.appnomic.domainobject.Cluster.ComponentData;
 import com.appnomic.domainobject.Host;
+import com.appnomic.entity.NormalizedAvailabilityKpi;
 import com.appnomic.service.ClusterDataService;
 import com.appnomic.service.ComponentDataService;
 import com.appnomic.noc.action.AbstractNocAction;
@@ -21,6 +24,8 @@ import com.appnomic.noc.request.objects.RequestNameId;
 import com.appnomic.noc.viewobject.availability.ClusterDataVO;
 import com.appnomic.noc.viewobject.availability.CompInstanceDataPointVO;
 import com.appnomic.noc.viewobject.availability.CompInstanceTimesVO;
+import com.appnomic.noc.viewobject.availability.KpiDataPointVO;
+import com.appnomic.noc.viewobject.availability.KpiTimesVO;
 //import com.opensymphony.xwork2.Action;
 import com.google.gson.Gson;
 
@@ -33,6 +38,16 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 	private ClusterDataVO clusterData;
 	
 	private String clusterName;
+	
+	private ComponentDataService componentDataService;
+	
+	public ComponentDataService getComponentDataService() {
+		return componentDataService;
+	}
+
+	public void setComponentDataService(ComponentDataService componentDataService) {
+		this.componentDataService = componentDataService;
+	}
 
 	public ClusterDataVO getClusterData() {
 		return clusterData;
@@ -50,22 +65,22 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 		clusterData = new ClusterDataVO();
 		clusterData.setInstanceName("ClusterX");
 		
-		int hostCount = 3;
-		CompInstanceTimesVO [] hostTimes = new CompInstanceTimesVO[hostCount]; // cluster has 2 hosts
-		clusterData.setTimes(hostTimes);
+		int instanceCount = 3;
+		CompInstanceTimesVO [] instanceTimes = new CompInstanceTimesVO[instanceCount]; // cluster has 2 hosts
+		clusterData.setTimes(instanceTimes);
 		
-		for(int i=0;i<hostCount;i++) {
-			hostTimes[i] = new CompInstanceTimesVO();
-			hostTimes[i].setTime("10:10");
+		for(int i=0;i<instanceCount;i++) {
+			instanceTimes[i] = new CompInstanceTimesVO();
+			instanceTimes[i].setTime("10:10");
 			
-			int hostDataPoints = 2;
-			CompInstanceDataPointVO [] hostDataPoint = new CompInstanceDataPointVO[hostDataPoints];
-			hostTimes[i].setInstances(hostDataPoint);
+			int instanceDataPoints = 2;
+			CompInstanceDataPointVO [] instanceDataPoint = new CompInstanceDataPointVO[instanceDataPoints];
+			instanceTimes[i].setInstances(instanceDataPoint);
 			
-			for(int j=0;j<hostDataPoints;j++) {
-				hostDataPoint[j] = new CompInstanceDataPointVO();
-				hostDataPoint[j].setName("HostX");
-				hostDataPoint[j].setValue(j); // in this dummy sample, j is just 0/1
+			for(int j=0;j<instanceDataPoints;j++) {
+				instanceDataPoint[j] = new CompInstanceDataPointVO();
+				instanceDataPoint[j].setName("IntanceX");
+				instanceDataPoint[j].setValue(j); // in this dummy sample, j is just 0/1
 			}
 		}
 	}
@@ -82,8 +97,64 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 	})
 	public String nocAction() {
 		RequestNameId rn = RequestHelper.getRequestName(getParameters());		
-		Cluster clusters = clusterDataService.getById(Integer.parseInt(rn.getName()));
+		Cluster cluster = clusterDataService.getById(rn.getId());
+		int sampleSize = 5;
 		
+		clusterData = new ClusterDataVO();
+		clusterData.setInstanceName(cluster.getName());
+		
+		List<ComponentData> componentList = cluster.getComponents();
+		CompInstanceTimesVO [] instanceTimes = new CompInstanceTimesVO[componentList.size()];
+		
+		int i = 0;
+		for(ComponentData component : componentList) {
+			Map<String, boolean[]> kpiAvailMap = new HashMap<String, boolean[]>();
+			
+			// cache the availability kpi values
+			Map<String, NormalizedAvailabilityKpi> availSamples = componentDataService.getNormalizedAvailabilityData(component.getId(), sampleSize);
+			Set<String> kpiNames = availSamples.keySet();
+			for(String kpiName: kpiNames) {
+				boolean [] availArray = kpiAvailMap.get(kpiName);
+				if(availArray == null) {
+					availArray = new boolean[sampleSize];
+				}
+				
+				NormalizedAvailabilityKpi samples = availSamples.get(kpiName);					
+				for(int j=0;j<sampleSize;j++) {
+					availArray[j] = samples.get(j);
+				}
+			}
+			
+			instanceTimes[i] = new CompInstanceTimesVO();
+			instanceTimes[i].setTime((new Integer(i)).toString());
+			
+			CompInstanceDataPointVO [] instanceDataPoint = new CompInstanceDataPointVO[sampleSize];
+			instanceTimes[i].setInstances(instanceDataPoint);
+			
+			// pluck from the cache and check if cluster has to be set RED or GREEN
+			for(int j=0;j<sampleSize;j++) {
+				instanceDataPoint[j] = new CompInstanceDataPointVO();
+				instanceDataPoint[j].setName(component.getName());
+				
+				boolean foundOneViolated = false;
+				for(String kpiName: kpiNames) {
+					boolean [] availArray = kpiAvailMap.get(kpiName);
+					for(boolean kpiAvail : availArray) {
+						// 0 is NOT Available and 1 is Available
+						if(kpiAvail == false) {
+							foundOneViolated = true;
+							break;
+						}
+					}
+					if(foundOneViolated == true) {
+						break;
+					}
+				}
+				instanceDataPoint[j].setValue(foundOneViolated?0:1); // if violated is found then set the value to 0, else 1
+			}
+		
+			i++;
+		}
 		
 		return SUCCESS;
 	}

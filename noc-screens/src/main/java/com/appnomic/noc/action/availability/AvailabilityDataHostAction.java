@@ -91,9 +91,7 @@ public class AvailabilityDataHostAction extends AbstractNocAction  {
 		Map<String, NormalizedAvailabilityKpi> availSamples = componentDataService.getNormalizedAvailabilityData(rn.getId(), sampleSize);
 		
 		String instanceName = componentDataService.getComponentInstance(rn.getId()).getName();
-		
-		Map<String,String> kpiDataTypes = componentDataService.getComponentInstance(rn.getId()).getAvailKpiDataTypes();
-		
+				
 		compInstanceDataVO = new CompInstanceDataVO();
 		compInstanceDataVO.setInstanceName(instanceName);
 		
@@ -109,12 +107,12 @@ public class AvailabilityDataHostAction extends AbstractNocAction  {
 			int j = 0;
 			for(String kpiName: kpiNames) {
 				NormalizedAvailabilityKpi samples = availSamples.get(kpiName);
-				String kpiDataType = kpiDataTypes.get(kpiName);
 				
 				kpiDataPoint[j] = new KpiDataPointVO();
 				kpiDataPoint[j].setName(kpiName);
 				
 				int value = samples.get(i) ? 1 : 0;
+				// 0 is NOT Available and 1 is Available
 				kpiDataPoint[j].setValue(value);
 				j++;
 			}
