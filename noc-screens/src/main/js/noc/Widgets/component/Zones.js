@@ -58,7 +58,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
                 for(var i = 0; i<zoneNames.length;i++) {
                     var zoneName = zoneNames[i] + "Zone";
                     this.fetchMeta(zoneName,
-                        "./data/compMatrix/matrixMeta.json", //CONSTANTS.ACTION.COMPONENT.META
+                        CONSTANTS.ACTION.COMPONENT.META + "?zoneName="+zoneName,
                         paneWidth, paneHeight, 40, 40);
                 }
             },
@@ -101,12 +101,14 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
 
                             // now fetch data for this component-name and kpi-name
                             var viewMeta = {
-                                componentName: componentName,
-                                kpiName: kpiName,
-                                type: CONSTANTS.TYPE.COMPONENT.META
+                                id: "NA",
+                                type: CONSTANTS.TYPE.COMPONENT_DATA,
+                                dimensions:[gridWidth,gridHeight],
+                                position: [0,0],
+                                custom: [componentName,kpiName]
                             };
                             Utility.xhrPostCentral(
-                                "./data/compMatrix/matrixData.json", //CONSTANTS.ACTION.COMPONENT.DATA
+                                CONSTANTS.ACTION.COMPONENT.DATA,
                                 dojo.toJson(viewMeta));
                         }
                     }

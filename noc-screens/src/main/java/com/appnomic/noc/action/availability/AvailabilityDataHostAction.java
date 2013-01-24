@@ -14,9 +14,10 @@ import org.apache.struts2.interceptor.ParameterAware;
 import com.appnomic.domainobject.Component;
 import com.appnomic.domainobject.Host;
 import com.appnomic.entity.AvailabilityKpiSamples;
+import com.appnomic.entity.NormalizedAvailabilityKpi;
 import com.appnomic.noc.action.AbstractNocAction;
-import com.appnomic.noc.action.ActionHelper;
-import com.appnomic.noc.action.RequestNameId;
+import com.appnomic.noc.request.RequestHelper;
+import com.appnomic.noc.request.objects.RequestNameId;
 import com.appnomic.noc.viewobject.availability.CompInstanceDataVO;
 import com.appnomic.noc.viewobject.availability.KpiDataPointVO;
 import com.appnomic.noc.viewobject.availability.KpiTimesVO;
@@ -84,9 +85,11 @@ public class AvailabilityDataHostAction extends AbstractNocAction  {
 	                "excludeNullProperties","true"
 	            })})
 	public String nocAction() {
-		RequestNameId rn = ActionHelper.getRequestName(getParameters());	
+		RequestNameId rn = RequestHelper.getRequestName(getParameters());	
 		int sampleSize = 5;
-		Map<String, AvailabilityKpiSamples> availSamples = componentDataService.getAvailabilityData(rn.getId(), sampleSize);
+		//Map<String, AvailabilityKpiSamples> availSamples = componentDataService.getAvailabilityData(rn.getId(), sampleSize);
+		Map<String, NormalizedAvailabilityKpi> availSamples = componentDataService.getNormalizedAvailabilityData(rn.getId(), sampleSize);
+		
 		String instanceName = componentDataService.getComponentInstance(rn.getId()).getName();
 		
 		Map<String,String> kpiDataTypes = componentDataService.getComponentInstance(rn.getId()).getAvailKpiDataTypes();
@@ -105,30 +108,14 @@ public class AvailabilityDataHostAction extends AbstractNocAction  {
 			kpiTimes[i].setKpi(kpiDataPoint);
 			int j = 0;
 			for(String kpiName: kpiNames) {
-				AvailabilityKpiSamples samples = availSamples.get(kpiName);
+				NormalizedAvailabilityKpi samples = availSamples.get(kpiName);
 				String kpiDataType = kpiDataTypes.get(kpiName);
 				
 				kpiDataPoint[j] = new KpiDataPointVO();
 				kpiDataPoint[j].setName(kpiName);
 				
-				int value = 0;
-				// Ask Sumanth (team) to make the return type of kpi-data-type to be a Enum and NOT string
-				if(kpiDataType.equalsIgnoreCase("INT") || kpiDataType.equalsIgnoreCase("LONG") || kpiDataType.equalsIgnoreCase("BIGINT")) {
-						
-					Gson gson = new Gson();
-					String samplesJson = gson.toJson(samples);
-						
-				} else if(kpiDataType.equalsIgnoreCase("FLOAT") || kpiDataType.equalsIgnoreCase("DOUBLE")) {
-					
-				} else if(kpiDataType.equalsIgnoreCase("STRING")) {
-					
-				} else if(kpiDataType.equalsIgnoreCase("UNKNOWN")) {
-					
-				} else {
-					System.out.println("unknown data type = " + kpiDataType);
-				}
-					
-				kpiDataPoint[j].setValue(value); 
+				int value = samples.get(i) ? 1 : 0;
+				kpiDataPoint[j].setValue(value);
 				j++;
 			}
 		}

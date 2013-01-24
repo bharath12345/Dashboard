@@ -12,8 +12,8 @@ import org.apache.struts2.interceptor.ParameterAware;
 import com.appnomic.domainobject.Cluster;
 import com.appnomic.domainobject.Component;
 import com.appnomic.noc.action.AbstractNocAction;
-import com.appnomic.noc.action.ActionHelper;
-import com.appnomic.noc.action.RequestNameId;
+import com.appnomic.noc.request.RequestHelper;
+import com.appnomic.noc.request.objects.RequestNameId;
 import com.appnomic.noc.viewobject.availability.ClusterDataPointVO;
 import com.appnomic.noc.viewobject.availability.ClusterTimesVO;
 import com.appnomic.noc.viewobject.availability.ComponentDataVO;
@@ -81,7 +81,7 @@ public class AvailabilityDataComponentAction extends AbstractNocAction  {
 	                "excludeNullProperties","true"
 	            })})
 	public String nocAction() {
-		RequestNameId rn = ActionHelper.getRequestName(getParameters());		
+		RequestNameId rn = RequestHelper.getRequestName(getParameters());		
 		Component component = componentDataService.getComponentInstance(Integer.parseInt(rn.getName()));
 		
 		

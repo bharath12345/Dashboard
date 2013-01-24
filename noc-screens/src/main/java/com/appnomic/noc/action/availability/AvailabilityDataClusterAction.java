@@ -16,8 +16,8 @@ import com.appnomic.domainobject.Host;
 import com.appnomic.service.ClusterDataService;
 import com.appnomic.service.ComponentDataService;
 import com.appnomic.noc.action.AbstractNocAction;
-import com.appnomic.noc.action.ActionHelper;
-import com.appnomic.noc.action.RequestNameId;
+import com.appnomic.noc.request.RequestHelper;
+import com.appnomic.noc.request.objects.RequestNameId;
 import com.appnomic.noc.viewobject.availability.ClusterDataVO;
 import com.appnomic.noc.viewobject.availability.CompInstanceDataPointVO;
 import com.appnomic.noc.viewobject.availability.CompInstanceTimesVO;
@@ -81,7 +81,7 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 	         })
 	})
 	public String nocAction() {
-		RequestNameId rn = ActionHelper.getRequestName(getParameters());		
+		RequestNameId rn = RequestHelper.getRequestName(getParameters());		
 		Cluster clusters = clusterDataService.getById(Integer.parseInt(rn.getName()));
 		
 		

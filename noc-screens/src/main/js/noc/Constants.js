@@ -28,8 +28,8 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
 
         CONSTANTS.ACTION.COMPONENT = {};
         CONSTANTS.ACTION.COMPONENT.ZONES = "component/zones.action";
-        CONSTANTS.ACTION.COMPONENT.META = 'component/Meta.action';
-        CONSTANTS.ACTION.COMPONENT.DATA = 'component/Data.acton';
+        CONSTANTS.ACTION.COMPONENT.META = 'component/KpiMatrixMeta.action';
+        CONSTANTS.ACTION.COMPONENT.DATA = 'component/KpiMatrixData.acton';
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // WIDGET CLASS PATHS

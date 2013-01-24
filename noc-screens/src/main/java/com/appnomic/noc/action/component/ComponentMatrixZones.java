@@ -11,6 +11,7 @@ import org.apache.struts2.convention.annotation.Action;
 
 import com.appnomic.domainobject.Component;
 import com.appnomic.noc.action.AbstractNocAction;
+import com.appnomic.noc.request.RequestHelper;
 import com.appnomic.noc.viewobject.component.ComponentMatrixZonesVO;
 import com.appnomic.service.ComponentDataService;
 import com.google.gson.Gson;
@@ -60,14 +61,8 @@ public class ComponentMatrixZones extends AbstractNocAction {
 	                "excludeNullProperties","true"
 	            })})
 	public String nocAction() {		
-		Gson gson = new Gson();
-
-		Set<String> keys = getParameters().keySet();
-		for(String key : keys) {
-			System.out.println("key = " + key + " value[0] = " + getParameters().get(key)[0]);
-			componentMatrixZonesVO = gson.fromJson(key, ComponentMatrixZonesVO.class);
-		}
-
+		componentMatrixZonesVO = RequestHelper.getRequestZoneInfo(getParameters());
+		
 		Set<String> componentTypes = new HashSet<String>();
 		List<Component> components = componentDataService.getAllComponents();
 		for(Component component: components) {
