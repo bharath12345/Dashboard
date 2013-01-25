@@ -14,31 +14,52 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid',
             },
 
             renderGrid:function (gridMeta) {
-
                 // How to build the table - METHODOLOGY
                 // 1. The number of Broad columns is fixed at 3
                 // 2. Parse the JSON to find the number of items in Column 3 - this should NOT be more than 5
-                var maxCol3 = gridMeta.componentVO.length;
+                var col3Length = gridMeta.componentVO.length;
 
                 // 3. Parse the JSON to find the MAX number of columns among the '5' of step 2 for column 2 (children). Lets say it is 4
                 // 4. Parse the JSON to find the MAX number of columns among the '4' of step 3 for column 1 (children). Lets say it is 3
 
-                var maxCol2 = 0, maxCol1 = 0;
-                for (var i = 0; i < maxCol3; i++) {
-                    if(gridMeta.componentVO[i] == null) {
+                var maxCol3 = 0;
+                for (var i = 0; i < col3Length; i++) {
+                    if (gridMeta.componentVO[i] == null) {
                         continue;
                     }
                     var clusters = gridMeta.componentVO[i].clusters;
-                    if(clusters == null) {
+                    if (clusters == null) {
                         continue;
                     }
-                    if (clusters.length > maxCol2) {
-                        maxCol2 = clusters.length;
-                    }
-                    for (var j = 0; j < clusters.length; j++) {
-                        if (clusters[j].instances.length > maxCol1) {
-                            maxCol1 = clusters[j].instances.length;
-                        }
+                    maxCol3++;
+                }
+
+                for (var i = 0; i < maxCol3; i++) {
+                    var compDiv = dojo.create("div");
+                    compDiv.id = gridMeta.componentVO[i].componentName;
+                    dojo.byId("availGrid").appendChild(compDiv);
+                    var compGridMeta = {};
+                    compGridMeta.componentVO = [];
+                    compGridMeta.componentVO.push(gridMeta.componentVO[i]);
+                    this.createSingleComponentGrid(gridMeta.componentVO[i].componentName, compGridMeta);
+                }
+            },
+
+            createSingleComponentGrid:function (compName, gridMeta) {
+                // How to build the table - METHODOLOGY
+                // 1. The number of Broad columns is fixed at 3
+                // 2. We create one grid per component
+                // 3. Parse the JSON to find the MAX number of cluster rows for this component. Lets say it is 4
+                // 4. Parse the JSON to find the MAX number of instance rows among the '4' of step 3 for column 1 (children).
+                // ...Lets say it is 3
+
+                var maxCol3 = 1, maxCol2 = 0, maxCol1 = 0;
+
+                var clusters = gridMeta.componentVO[0].clusters;
+                maxCol2 = clusters.length;
+                for (var j = 0; j < clusters.length; j++) {
+                    if (clusters[j].instances.length > maxCol1) {
+                        maxCol1 = clusters[j].instances.length;
                     }
                 }
 
@@ -96,38 +117,31 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid',
                 console.log("table meta json" + dojo.toJson(subSubRows));
 
                 var gridData = [];
-                for (var i = 0; i < maxCol3; i++) {
-                    var dataPoint = new Object();
-                    if(gridMeta.componentVO[i] == null) {
-                        continue;
-                    }
-                    dataPoint.row0col3 = gridMeta.componentVO[i].componentName;
+                var dataPoint = new Object();
 
-                    var lastpoint = 0;
-                    var clusters = gridMeta.componentVO[i].clusters;
-                    if(clusters == null) {
-                        continue;
-                    }
-                    for (var j = 0; j < clusters.length; j++) {
-                        var point2 = "row" + (2 * j) + "col2";
-                        dataPoint[point2] = clusters[j].clusterName;
+                dataPoint.row0col3 = gridMeta.componentVO[0].componentName;
 
-                        for (var z = 0; z < clusters[j].instances.length; z++) {
-                            var point1 = "row" + (lastpoint + (2 * z)) + "col1";
-                            //console.log("point 1 = " + point1);
-                            dataPoint[point1] = clusters[j].instances[z].instanceName;
-                            if (z == (clusters[j].instances.length - 1)) {
-                                lastpoint = (2 * z) + 2;
-                            }
+                var lastpoint = 0;
+                var clusters = gridMeta.componentVO[0].clusters;
+                for (var j = 0; j < clusters.length; j++) {
+                    var point2 = "row" + (2 * j) + "col2";
+                    dataPoint[point2] = clusters[j].clusterName;
+
+                    for (var z = 0; z < clusters[j].instances.length; z++) {
+                        var point1 = "row" + (lastpoint + (2 * z)) + "col1";
+                        //console.log("point 1 = " + point1);
+                        dataPoint[point1] = clusters[j].instances[z].instanceName;
+                        if (z == (clusters[j].instances.length - 1)) {
+                            lastpoint = (2 * z) + 2;
                         }
                     }
-                    gridData.push(dataPoint);
                 }
+                gridData.push(dataPoint);
+
                 console.log("table data json" + dojo.toJson(gridData));
 
                 var grid = new Grid({subRows:subSubRows, showHeader:false,
-                    style:"width:" + this.data.dimensions.width +
-                        "height:" + this.data.dimensions.height}, "availGrid");
+                    style:"width:" + this.data.dimensions.width}, compName);
                 grid.renderArray(gridData);
                 dojo.byId("dijit_TitlePane_0_pane").style.padding = "0px";
 
@@ -138,72 +152,60 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid',
                 //this.removeUnwantedRows("availGrid-row-2", toRemove);
 
                 var i = 0;
-                dojo.query("td.field-row1col3").forEach(function (node) {
-                    if(gridMeta.componentVO[i] != null) {
-                        node.id = gridMeta.componentVO[i].componentName;
-                        console.log("i = " + i + " this is the div in cell = " + node);
-                        i++;
-                    }
+                dojo.query("#"+compName+" td.field-row1col3").forEach(function (node) {
+                    node.id = gridMeta.componentVO[0].componentName;
+                    console.log("i = " + i + " this is the div in cell = " + node);
+                    i++;
+
                 });
 
                 for (var i = 0; i < maxCol2; i++) {
-                    this.markCol2Ids(i, maxCol3, gridMeta);
+                    this.markCol2Ids(i, maxCol3, gridMeta, compName);
                 }
 
                 console.log("max col 3 = " + maxCol3);
-                for (var i = 0; i < maxCol3; i++) {
-                    if(gridMeta.componentVO[i] == null) {
-                        continue;
-                    }
-                    var cluster = gridMeta.componentVO[i].clusters;
-                    if(cluster == null) {
-                        continue;
-                    }
-                    //console.log("working on clusters in = " + gridMeta.componentVO[i].componentName);
-                    var instancesOfCluster = [];
-                    this.cacheClusterInstances(cluster, instancesOfCluster);
 
-                    for (var j = 0; j < maxCol1; j++) {
-                        dojo.query("div#availGrid-row-" + i + " td.field-row" + ((j * 2) + 1) + "col1").forEach(function (node) {
-                            if (instancesOfCluster[j] != null && instancesOfCluster[j] != undefined) {
-                                node.id = instancesOfCluster[j];
-                                console.log("j = " + instancesOfCluster[j] + " div in cell = " + node.className);
-                            }
-                        });
-                    }
+                var cluster = gridMeta.componentVO[0].clusters;
+
+                //console.log("working on clusters in = " + gridMeta.componentVO[0].componentName);
+                var instancesOfCluster = [];
+                this.cacheClusterInstances(cluster, instancesOfCluster);
+
+                for (var j = 0; j < maxCol1; j++) {
+                    dojo.query("#"+compName+ " td.field-row" + ((j * 2) + 1) + "col1").forEach(function (node) {
+                        if (instancesOfCluster[j] != null && instancesOfCluster[j] != undefined) {
+                            node.id = instancesOfCluster[j];
+                            console.log("j = " + instancesOfCluster[j] + " div in cell = " + node.className);
+                        }
+                    });
                 }
+
 
                 // By this point all 'td' are ready with the correct id's
                 // Traverse the meta and fire queries for the correct instance, cluster, component
                 // Render them
-                for (var i = 0; i < gridMeta.componentVO.length; i++) {
-                    if(gridMeta.componentVO[i] == null) {
-                        continue;
-                    }
-                    this.renderSVG(gridMeta.componentVO[i].componentName, 30, 0);
-                    var clusters = gridMeta.componentVO[i].clusters;
-                    if(clusters == null) {
-                        continue;
-                    }
-                    for (var j = 0; j < clusters.length; j++) {
-                        this.renderSVG(clusters[j].clusterName, 20, 1);
-                        var instance = clusters[j].instances;
-                        for (var z = 0; z < instance.length; z++) {
-                            this.renderSVG(instance[z].instanceName, 10, 2);
-                        }
+
+                //this.renderSVG(gridMeta.componentVO[0].componentName, 30, 0);
+                var clusters = gridMeta.componentVO[0].clusters;
+                for (var j = 0; j < clusters.length; j++) {
+                    //this.renderSVG(clusters[j].clusterName, 20, 1);
+                    var instance = clusters[j].instances;
+                    for (var z = 0; z < instance.length; z++) {
+                        //this.renderSVG(instance[z].instanceName, 10, 2);
                     }
                 }
+
             },
 
             renderSVG:function (objectName, objectSize, gridType) {
                 var domNode = dojo.byId(objectName);
-                var xpos= 0, ypos=0;
+                var xpos = 0, ypos = 0;
                 var viewMeta = {
                     id:objectName,
-                    type: CONSTANTS.TYPE.AVAILABILITY_DATA,
-                    dimensions:[domNode.offsetWidth,domNode.offsetHeight],
-                    position: [xpos,ypos],
-                    custom: [objectSize,gridType]
+                    type:CONSTANTS.TYPE.AVAILABILITY_DATA,
+                    dimensions:[domNode.offsetWidth, domNode.offsetHeight],
+                    position:[xpos, ypos],
+                    custom:[objectSize, gridType]
                 };
                 var baseUrl = CONSTANTS.ACTION.REQUEST_HANDLER;
                 Utility.xhrPostCentral(baseUrl, viewMeta);
@@ -219,14 +221,14 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid',
                 }
             },
 
-            markCol2Ids:function (rowNum, maxCol3, gridMeta) {
+            markCol2Ids:function (rowNum, maxCol3, gridMeta, compName) {
                 var clusterOfType = [];
                 for (var i = 0; i < maxCol3; i++) {
-                    if(gridMeta.componentVO[i] == null) {
+                    if (gridMeta.componentVO[i] == null) {
                         continue;
                     }
                     var clusters = gridMeta.componentVO[i].clusters;
-                    if(clusters == null) {
+                    if (clusters == null) {
                         continue;
                     }
                     if (clusters[rowNum] != null && clusters[rowNum] != undefined) {
@@ -235,7 +237,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid',
                     }
                 }
                 var i = 0;
-                dojo.query("td.field-row" + ((rowNum * 2) + 1) + "col2").forEach(function (node) {
+                dojo.query("#"+compName+" td.field-row" + ((rowNum * 2) + 1) + "col2").forEach(function (node) {
                     if (clusterOfType[i] != null && clusterOfType[i] != undefined) {
                         node.id = clusterOfType[i];
                         //console.log("i = " + clusterOfType[i] + " div in cell = " + node.className);
