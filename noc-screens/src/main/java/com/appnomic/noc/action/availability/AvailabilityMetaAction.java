@@ -53,6 +53,11 @@ public class AvailabilityMetaAction extends AbstractNocAction  {
 		this.clusterDataService = clusterDataService;
 	}
 
+	
+	// this is the variable returned as JSON by the struts plugin
+	// Note: there is strong binding between this variable name and code in JS
+	// So if you rename this variable make sure that the right JS file is also fixed
+	// Best - Dont modify this variable name unless it is necessary
 	private ComponentVO [] componentVO = null;
 	
 	public AvailabilityMetaAction() {
@@ -93,26 +98,21 @@ public class AvailabilityMetaAction extends AbstractNocAction  {
 	                "noCache","true",
 	                "excludeNullProperties","true"
 	            })})
-	public String nocAction() {
-		
-		// ToDo: remove the below call to get for ALL components and get for PARTICULAR components ONLY
-		Set<String> componentTypes = new HashSet<String>();
-		List<Component> components = componentDataService.getAllComponents();
-		for(Component component: components) {
-			componentTypes.add(component.getType());
-		}
+	public String nocAction() {		
+		List<String> componentTypes = componentDataService.getComponentTypes();
 		
 		// ToDo: ask Sumanth (team) to implement get-cluster-by-type and use that
 		List<Cluster> clusters = clusterDataService.getAll();
 		componentVO = new ComponentVO[componentTypes.size()];
 		int i = 0;	
 		for(String componentType : componentTypes){
-			componentVO[i].setComponentName(componentType);
 			List<ClusterVO> clustersOfType = new ArrayList<ClusterVO>();
+						
 			for(Cluster cluster : clusters) {
 				if(!cluster.getType().equals(componentType)) {
 					continue;
 				}
+				
 				ClusterVO clusterVO = new ClusterVO();
 				clusterVO.setClusterName(cluster.getName());
 				clusterVO.setId(cluster.getId());
@@ -122,19 +122,24 @@ public class AvailabilityMetaAction extends AbstractNocAction  {
 				InstanceVO [] instanceVO = new InstanceVO[instances.size()];
 				int j = 0;
 				for(ComponentData instance : instances) {
+					instanceVO[j] = new InstanceVO();
 					instanceVO[j].setInstanceName(instance.getName());
 					instanceVO[j].setId(instance.getId());
-					
-					// ToDo: Ask Sumanth (team) to give a get-availability-kpi names only - ALL KPI should NOT be used here
-					instanceVO[j].setKpiCount(componentDataService.getComponentInstance(instance.getId()).getKPINames().size());
+					instanceVO[j].setKpiCount(componentDataService.getComponentInstance(instance.getId()).getAvailKpiDataTypes().size());
+					j++;
 				}
 				clusterVO.setIntances(instanceVO);
 			}
-			componentVO[i].setClusters((ClusterVO[]) clustersOfType.toArray());			
-			i++;
+			ClusterVO [] clusterArray = clustersOfType.toArray(new ClusterVO[clustersOfType.size()]);
+			if(clusterArray.length > 0) {
+				componentVO[i] = new ComponentVO();
+				componentVO[i].setComponentName(componentType);
+				componentVO[i].setClusters(clusterArray);
+				i++;
+			}
 		}
 		
-		return "success";
+		return SUCCESS;
 	}
 
 	public ComponentVO[] getComponentVO() {
@@ -144,7 +149,4 @@ public class AvailabilityMetaAction extends AbstractNocAction  {
 	public void setComponentVO(ComponentVO[] componentVO) {
 		this.componentVO = componentVO;
 	}
-
-	
-
 }

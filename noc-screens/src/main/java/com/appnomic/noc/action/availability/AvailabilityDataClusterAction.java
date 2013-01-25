@@ -88,7 +88,7 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 	@Action(value="/availability/ClusterData", results = {
 	        @Result(name="success", type="json", params = {
 	                "excludeProperties",
-	                "parameters,session,SUCCESS,ERROR,clusterDataService",
+	                "parameters,session,SUCCESS,ERROR,clusterDataService,componentDataService",
 	        		"enableGZIP", "true",
 	        		"encoding", "UTF-8",
 	                "noCache","true",
@@ -100,11 +100,13 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 		Cluster cluster = clusterDataService.getById(rn.getId());
 		int sampleSize = 5;
 		
-		clusterData = new ClusterDataVO();
-		clusterData.setInstanceName(cluster.getName());
-		
 		List<ComponentData> componentList = cluster.getComponents();
 		CompInstanceTimesVO [] instanceTimes = new CompInstanceTimesVO[componentList.size()];
+		
+		if(componentList.size() > 0) {
+			clusterData = new ClusterDataVO();
+			clusterData.setInstanceName(cluster.getName());	
+		}
 		
 		int i = 0;
 		for(ComponentData component : componentList) {
@@ -125,16 +127,22 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 				}
 			}
 			
-			instanceTimes[i] = new CompInstanceTimesVO();
-			instanceTimes[i].setTime((new Integer(i)).toString());
+			CompInstanceDataPointVO [] instanceDataPoint = null;
+			if(availSamples.size() > 0) {
+				instanceTimes[i] = new CompInstanceTimesVO();
+				instanceTimes[i].setTime((new Integer(i)).toString());
 			
-			CompInstanceDataPointVO [] instanceDataPoint = new CompInstanceDataPointVO[sampleSize];
-			instanceTimes[i].setInstances(instanceDataPoint);
+				instanceDataPoint = new CompInstanceDataPointVO[sampleSize];
+				instanceTimes[i].setInstances(instanceDataPoint);
+			}
 			
 			// pluck from the cache and check if cluster has to be set RED or GREEN
 			for(int j=0;j<sampleSize;j++) {
-				instanceDataPoint[j] = new CompInstanceDataPointVO();
-				instanceDataPoint[j].setName(component.getName());
+				
+				if(kpiNames.size() > 0) {
+					instanceDataPoint[j] = new CompInstanceDataPointVO();
+					instanceDataPoint[j].setName(component.getName());
+				}
 				
 				boolean foundOneViolated = false;
 				for(String kpiName: kpiNames) {
@@ -152,10 +160,8 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 				}
 				instanceDataPoint[j].setValue(foundOneViolated?0:1); // if violated is found then set the value to 0, else 1
 			}
-		
 			i++;
 		}
-		
 		return SUCCESS;
 	}
 

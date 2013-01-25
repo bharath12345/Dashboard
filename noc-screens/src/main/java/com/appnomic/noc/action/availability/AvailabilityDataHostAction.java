@@ -78,7 +78,7 @@ public class AvailabilityDataHostAction extends AbstractNocAction  {
 	@Action(value="/availability/HostData", results = {
 	        @Result(name="success", type="json", params = {
 	                "excludeProperties",
-	                "parameters,session,SUCCESS,ERROR,hostDataService",
+	                "parameters,session,SUCCESS,ERROR,componentDataService",
 	        		"enableGZIP", "true",
 	        		"encoding", "UTF-8",
 	                "noCache","true",
@@ -87,23 +87,27 @@ public class AvailabilityDataHostAction extends AbstractNocAction  {
 	public String nocAction() {
 		RequestNameId rn = RequestHelper.getRequestName(getParameters());	
 		int sampleSize = 5;
-		//Map<String, AvailabilityKpiSamples> availSamples = componentDataService.getAvailabilityData(rn.getId(), sampleSize);
 		Map<String, NormalizedAvailabilityKpi> availSamples = componentDataService.getNormalizedAvailabilityData(rn.getId(), sampleSize);
-		
 		String instanceName = componentDataService.getComponentInstance(rn.getId()).getName();
-				
-		compInstanceDataVO = new CompInstanceDataVO();
-		compInstanceDataVO.setInstanceName(instanceName);
+		KpiTimesVO [] kpiTimes = null;
 		
-		KpiTimesVO [] kpiTimes = new KpiTimesVO[sampleSize];
-		compInstanceDataVO.setTimes(kpiTimes);
+		if(availSamples.size() > 0) {
+			compInstanceDataVO = new CompInstanceDataVO();
+			compInstanceDataVO.setInstanceName(instanceName);
+			kpiTimes = new KpiTimesVO[sampleSize];
+			compInstanceDataVO.setTimes(kpiTimes);
+		}
+		
 		for(int i=0;i<sampleSize;i++) {
-			kpiTimes[i] = new KpiTimesVO();
-			kpiTimes[i].setTime((new Integer(i)).toString());
-			
 			Set<String> kpiNames = availSamples.keySet();
-			KpiDataPointVO [] kpiDataPoint = new KpiDataPointVO[kpiNames.size()];
-			kpiTimes[i].setKpi(kpiDataPoint);
+			KpiDataPointVO [] kpiDataPoint = null;
+			if(kpiNames.size() > 0) {
+				kpiTimes[i] = new KpiTimesVO();
+				kpiTimes[i].setTime((new Integer(i)).toString());				
+				kpiDataPoint = new KpiDataPointVO[kpiNames.size()];
+				kpiTimes[i].setKpi(kpiDataPoint);
+			}
+			
 			int j = 0;
 			for(String kpiName: kpiNames) {
 				NormalizedAvailabilityKpi samples = availSamples.get(kpiName);
@@ -117,9 +121,6 @@ public class AvailabilityDataHostAction extends AbstractNocAction  {
 				j++;
 			}
 		}
-		
-		
-		
 		
 		return SUCCESS;
 	}

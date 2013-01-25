@@ -100,9 +100,6 @@ public class AvailabilityDataComponentAction extends AbstractNocAction  {
 	public String nocAction() {
 		RequestNameId rn = RequestHelper.getRequestName(getParameters());		
 		
-		componentData = new ComponentDataVO();
-		componentData.setInstanceName(rn.getName());
-		
 		Set<Cluster> clusterList = new HashSet<Cluster>();
 		
 		List<Cluster> clusters = clusterDataService.getAll();
@@ -115,6 +112,11 @@ public class AvailabilityDataComponentAction extends AbstractNocAction  {
 
 		ClusterTimesVO [] clusterTimes = new ClusterTimesVO[clusterList.size()];
 		componentData.setTimes(clusterTimes);
+		
+		if(clusterList.size() > 0) {
+			componentData = new ComponentDataVO();
+			componentData.setInstanceName(rn.getName());	
+		}
 
 		int i = 0;
 		int sampleSize = 5;
@@ -142,14 +144,20 @@ public class AvailabilityDataComponentAction extends AbstractNocAction  {
 				}
 			}
 			
-			clusterTimes[i] = new ClusterTimesVO();
-			clusterTimes[i].setTime((new Integer(i)).toString());
+			ClusterDataPointVO [] clusterDataPoint = null;
+			if(compKpiAvailMap.size() > 0) {
+				clusterTimes[i] = new ClusterTimesVO();
+				clusterTimes[i].setTime((new Integer(i)).toString());
 			
-			ClusterDataPointVO [] clusterDataPoint = new ClusterDataPointVO[sampleSize];
-			clusterTimes[i].setCluster(clusterDataPoint);
+				clusterDataPoint = new ClusterDataPointVO[sampleSize];
+				clusterTimes[i].setCluster(clusterDataPoint);
+			}
+			
 			for(int j=0;j<sampleSize;j++) {
-				clusterDataPoint[j] = new ClusterDataPointVO();
-				clusterDataPoint[j].setName(cluster.getName());
+				if(componentList.size() > 0) {
+					clusterDataPoint[j] = new ClusterDataPointVO();
+					clusterDataPoint[j].setName(cluster.getName());
+				}
 				
 				// pluck from the cache and check if cluster has to be set RED or GREEN
 				boolean foundOneViolated = false;

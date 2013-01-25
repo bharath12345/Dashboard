@@ -71,7 +71,7 @@ public class ComponentMatrixZones extends AbstractNocAction {
 		
 		// Find the number of different component groups
 		//componentDataService.getAllComponents();
-		String [] zoneNames = (String[]) componentTypes.toArray();
+		String [] zoneNames = componentTypes.toArray(new String[componentTypes.size()]);
 		componentMatrixZonesVO.setZoneNames(zoneNames);
 		
 		return SUCCESS;

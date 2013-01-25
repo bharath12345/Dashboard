@@ -60,12 +60,15 @@ public class ComponentMatrixMetaAction extends AbstractNocAction {
 			if(!component.getType().equals(rzn.getZoneName())){
 				continue;
 			}
+			
+			componentVO[i] = new ComponentMetaVO();
 			componentVO[i].setComponentName(component.getName());
 			
 			// pick only those kpi which are numbers (int, float etc)
 			Map<String, String> dataTypes = component.getKpiDataTypes();
 			Set<String> kpiNames = dataTypes.keySet();
 			Set<String> numericKpiNames = new HashSet<String>();
+			
 			for(String kpiName : kpiNames) {
 				String kpiDataType = dataTypes.get(kpiName);
 				
@@ -75,7 +78,7 @@ public class ComponentMatrixMetaAction extends AbstractNocAction {
 					numericKpiNames.add(kpiName);
 				} 
 			}
-			componentVO[i].setKpiNames((String[]) numericKpiNames.toArray());
+			componentVO[i].setKpiNames(numericKpiNames.toArray(new String[numericKpiNames.size()]));
 			i++;
 		}
 		return SUCCESS;
