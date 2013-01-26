@@ -3,6 +3,7 @@ package com.appnomic.noc.action.availability;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 
 import org.apache.struts2.convention.annotation.Namespace;
@@ -16,6 +17,7 @@ import com.appnomic.domainobject.Host;
 import com.appnomic.entity.AvailabilityKpiSamples;
 import com.appnomic.entity.NormalizedAvailabilityKpi;
 import com.appnomic.noc.action.AbstractNocAction;
+import com.appnomic.noc.action.DefaultResponse;
 import com.appnomic.noc.request.RequestHelper;
 import com.appnomic.noc.request.objects.RequestNameId;
 import com.appnomic.noc.viewobject.availability.CompInstanceDataVO;
@@ -28,9 +30,10 @@ import com.google.gson.Gson;
 
 @ParentPackage("json-default")
 @Namespace("/availability")
-public class AvailabilityDataHostAction extends AbstractNocAction  {
+public class AvailabilityDataInstanceAction extends AbstractNocAction  {
 	
 	private CompInstanceDataVO compInstanceDataVO;
+	private Map<String, String[]> param;
 	private ComponentDataService componentDataService;
 	
 	public ComponentDataService getComponentDataService() {
@@ -49,13 +52,13 @@ public class AvailabilityDataHostAction extends AbstractNocAction  {
 		this.compInstanceDataVO = compInstanceDataVO;
 	}
 
-	public AvailabilityDataHostAction() {
+	public AvailabilityDataInstanceAction() {
 		setDummyData();
 	}
 		
 	public void setDummyData() {
 		compInstanceDataVO = new CompInstanceDataVO();
-		compInstanceDataVO.setInstanceName("HostX");
+		compInstanceDataVO.setInstanceName("InstanceX");
 		
 		int kpiCount = 3;
 		KpiTimesVO [] kpiTimes = new KpiTimesVO[kpiCount];
@@ -74,21 +77,41 @@ public class AvailabilityDataHostAction extends AbstractNocAction  {
 			}
 		}
 	}
+	
+	public Map<String, String[]> getParam() {
+		return param;
+	}
 
-	@Action(value="/availability/HostData", results = {
+	public void setParam(Map<String, String[]> param) {
+		this.param = param;
+	}
+
+	@Action(value="/availability/InstanceData", results = {
 	        @Result(name="success", type="json", params = {
 	                "excludeProperties",
-	                "parameters,session,SUCCESS,ERROR,componentDataService",
+	                "session,SUCCESS,ERROR,componentDataService",
 	        		"enableGZIP", "true",
 	        		"encoding", "UTF-8",
 	                "noCache","true",
 	                "excludeNullProperties","true"
 	            })})
 	public String nocAction() {
-		RequestNameId rn = RequestHelper.getRequestName(getParameters());	
+		param = getParameters();
+		
+		String keyVal = "Instance Availability: ";
+		for(String key : parameters.keySet()) {
+			keyVal += "[ " + key + " = ";
+			for(String value : parameters.get(key)) {
+				keyVal += value + ", ";
+			}
+			keyVal += "] ";
+		}
+		System.out.println("key value map = " + keyVal);
+		int id = Integer.parseInt(parameters.get("id")[0]);
+		
 		int sampleSize = 5;
-		Map<String, NormalizedAvailabilityKpi> availSamples = componentDataService.getNormalizedAvailabilityData(rn.getId(), sampleSize);
-		String instanceName = componentDataService.getComponentInstance(rn.getId()).getName();
+		Map<String, NormalizedAvailabilityKpi> availSamples = componentDataService.getNormalizedAvailabilityData(id, sampleSize);
+		String instanceName = componentDataService.getComponentInstance(id).getName();
 		KpiTimesVO [] kpiTimes = null;
 		
 		if(availSamples.size() > 0) {
@@ -97,6 +120,8 @@ public class AvailabilityDataHostAction extends AbstractNocAction  {
 			kpiTimes = new KpiTimesVO[sampleSize];
 			compInstanceDataVO.setTimes(kpiTimes);
 		}
+		
+		Random random = new Random();
 		
 		for(int i=0;i<sampleSize;i++) {
 			Set<String> kpiNames = availSamples.keySet();
@@ -115,7 +140,10 @@ public class AvailabilityDataHostAction extends AbstractNocAction  {
 				kpiDataPoint[j] = new KpiDataPointVO();
 				kpiDataPoint[j].setName(kpiName);
 				
-				int value = samples.get(i) ? 1 : 0;
+				System.out.println("samples size = " + samples.size());
+				//int value = samples.get(0) ? 1 : 0;
+				
+				int value = random.nextBoolean() ? 1:0;
 				// 0 is NOT Available and 1 is Available
 				kpiDataPoint[j].setValue(value);
 				j++;

@@ -12,8 +12,8 @@ public abstract class AbstractNocAction
 							extends ActionSupport 
 							implements ParameterAware, SessionAware, Action {
 	
-	private Map<String, String[]> parameters;
-	private Map session;
+	protected Map<String, String[]> parameters;
+	protected Map session;
 	
 	protected static final String SUCCESS = Action.SUCCESS;
 	protected static final String ERROR = Action.ERROR;

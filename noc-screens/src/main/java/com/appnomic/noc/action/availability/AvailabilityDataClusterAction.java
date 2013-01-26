@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 
 import org.apache.struts2.convention.annotation.Namespace;
@@ -19,6 +20,7 @@ import com.appnomic.entity.NormalizedAvailabilityKpi;
 import com.appnomic.service.ClusterDataService;
 import com.appnomic.service.ComponentDataService;
 import com.appnomic.noc.action.AbstractNocAction;
+import com.appnomic.noc.action.DefaultResponse;
 import com.appnomic.noc.request.RequestHelper;
 import com.appnomic.noc.request.objects.RequestNameId;
 import com.appnomic.noc.viewobject.availability.ClusterDataVO;
@@ -34,12 +36,9 @@ import com.google.gson.Gson;
 public class AvailabilityDataClusterAction extends AbstractNocAction {
 	
 	private ClusterDataService clusterDataService;
-	
-	private ClusterDataVO clusterData;
-	
-	private String clusterName;
-	
+	private ClusterDataVO clusterDataVO;
 	private ComponentDataService componentDataService;
+	private Map<String, String[]> param;
 	
 	public ComponentDataService getComponentDataService() {
 		return componentDataService;
@@ -49,12 +48,12 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 		this.componentDataService = componentDataService;
 	}
 
-	public ClusterDataVO getClusterData() {
-		return clusterData;
+	public ClusterDataVO getClusterDataVO() {
+		return clusterDataVO;
 	}
 
-	public void setClusterData(ClusterDataVO clusterData) {
-		this.clusterData = clusterData;
+	public void setClusterDataVO(ClusterDataVO clusterDataVO) {
+		this.clusterDataVO = clusterDataVO;
 	}
 
 	public AvailabilityDataClusterAction() {
@@ -62,12 +61,12 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 	}
 	
 	public void setDummyData() {
-		clusterData = new ClusterDataVO();
-		clusterData.setInstanceName("ClusterX");
+		clusterDataVO = new ClusterDataVO();
+		clusterDataVO.setInstanceName("ClusterX");
 		
 		int instanceCount = 3;
 		CompInstanceTimesVO [] instanceTimes = new CompInstanceTimesVO[instanceCount]; // cluster has 2 hosts
-		clusterData.setTimes(instanceTimes);
+		clusterDataVO.setTimes(instanceTimes);
 		
 		for(int i=0;i<instanceCount;i++) {
 			instanceTimes[i] = new CompInstanceTimesVO();
@@ -85,10 +84,18 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 		}
 	}
 
+	public Map<String, String[]> getParam() {
+		return param;
+	}
+
+	public void setParam(Map<String, String[]> param) {
+		this.param = param;
+	}
+	
 	@Action(value="/availability/ClusterData", results = {
 	        @Result(name="success", type="json", params = {
 	                "excludeProperties",
-	                "parameters,session,SUCCESS,ERROR,clusterDataService,componentDataService",
+	                "session,SUCCESS,ERROR,clusterDataService,componentDataService",
 	        		"enableGZIP", "true",
 	        		"encoding", "UTF-8",
 	                "noCache","true",
@@ -96,19 +103,31 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 	         })
 	})
 	public String nocAction() {
-		RequestNameId rn = RequestHelper.getRequestName(getParameters());		
-		Cluster cluster = clusterDataService.getById(rn.getId());
+		param = getParameters();
+		
+		String keyVal = "Cluster Availability: ";
+		for(String key : parameters.keySet()) {
+			keyVal += "[ " + key + " = ";
+			for(String value : parameters.get(key)) {
+				keyVal += value + ", ";
+			}
+			keyVal += "] ";
+		}
+		System.out.println("key value map = " + keyVal);
+		int id = Integer.parseInt(parameters.get("id")[0]);
+		
+		Cluster cluster = clusterDataService.getById(id);
 		int sampleSize = 5;
 		
 		List<ComponentData> componentList = cluster.getComponents();
 		CompInstanceTimesVO [] instanceTimes = new CompInstanceTimesVO[componentList.size()];
 		
 		if(componentList.size() > 0) {
-			clusterData = new ClusterDataVO();
-			clusterData.setInstanceName(cluster.getName());	
+			clusterDataVO = new ClusterDataVO();
+			clusterDataVO.setInstanceName(cluster.getName());	
 		}
 		
-		int i = 0;
+		int i = 0; Random random = new Random();
 		for(ComponentData component : componentList) {
 			Map<String, boolean[]> kpiAvailMap = new HashMap<String, boolean[]>();
 			
@@ -123,7 +142,8 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 				
 				NormalizedAvailabilityKpi samples = availSamples.get(kpiName);					
 				for(int j=0;j<sampleSize;j++) {
-					availArray[j] = samples.get(j);
+					//availArray[j] = samples.get(j);
+					availArray[j] = random.nextBoolean();
 				}
 			}
 			

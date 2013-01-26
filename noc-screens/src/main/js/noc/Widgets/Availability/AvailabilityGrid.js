@@ -154,7 +154,8 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid',
                 var i = 0;
                 dojo.query("#"+compName+" td.field-row1col3").forEach(function (node) {
                     node.id = gridMeta.componentVO[0].componentName;
-                    console.log("i = " + i + " this is the div in cell = " + node);
+                    node.setAttribute(CONSTANTS.ATTRIBUTE.AVAILABILITY.COMPONENT, gridMeta.componentVO[0].id);
+                    console.log("i = " + i + " comp id = " + gridMeta.componentVO[0].id + " this is the div in cell = " + node);
                     i++;
 
                 });
@@ -168,14 +169,16 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid',
                 var cluster = gridMeta.componentVO[0].clusters;
 
                 //console.log("working on clusters in = " + gridMeta.componentVO[0].componentName);
-                var instancesOfCluster = [];
-                this.cacheClusterInstances(cluster, instancesOfCluster);
+                var instanceNamesOfCluster = [];
+                var instanceIdsOfCluster = [];
+                this.cacheClusterInstances(cluster, instanceNamesOfCluster, instanceIdsOfCluster);
 
                 for (var j = 0; j < maxCol1; j++) {
                     dojo.query("#"+compName+ " td.field-row" + ((j * 2) + 1) + "col1").forEach(function (node) {
-                        if (instancesOfCluster[j] != null && instancesOfCluster[j] != undefined) {
-                            node.id = instancesOfCluster[j];
-                            console.log("j = " + instancesOfCluster[j] + " div in cell = " + node.className);
+                        if (instanceNamesOfCluster[j] != null && instanceNamesOfCluster[j] != undefined) {
+                            node.id = instanceNamesOfCluster[j];
+                            node.setAttribute(CONSTANTS.ATTRIBUTE.AVAILABILITY.INSTANCE, instanceIdsOfCluster[j]);
+                            console.log("j = " + instanceNamesOfCluster[j] + " div in cell = " + node.className);
                         }
                     });
                 }
@@ -185,44 +188,63 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid',
                 // Traverse the meta and fire queries for the correct instance, cluster, component
                 // Render them
 
-                //this.renderSVG(gridMeta.componentVO[0].componentName, 30, 0);
+                //this.renderSVG(gridMeta.componentVO[0].componentName, 30, CONSTANTS.SUBTYPE.AVAILABILITY.COMPONENT);
                 var clusters = gridMeta.componentVO[0].clusters;
                 for (var j = 0; j < clusters.length; j++) {
-                    //this.renderSVG(clusters[j].clusterName, 20, 1);
+                    this.renderSVG(clusters[j].clusterName,clusters[j].id, 20, CONSTANTS.SUBTYPE.AVAILABILITY.CLUSTER);
                     var instance = clusters[j].instances;
                     for (var z = 0; z < instance.length; z++) {
-                        //this.renderSVG(instance[z].instanceName, 10, 2);
+                        this.renderSVG(instance[z].instanceName,instance[z].id, 10, CONSTANTS.SUBTYPE.AVAILABILITY.INSTANCE);
                     }
                 }
 
             },
 
-            renderSVG:function (objectName, objectSize, gridType) {
+            renderSVG:function (objectName, id, objectSize, gridType) {
+                console.log("render svg grid type " + gridType);
                 var domNode = dojo.byId(objectName);
                 var xpos = 0, ypos = 0;
                 var viewMeta = {
-                    id:objectName,
-                    type:CONSTANTS.TYPE.AVAILABILITY_DATA,
+                    id:id,
+                    name: objectName,
+                    type:CONSTANTS.TYPE.AVAILABILITY,
+                    subtype: gridType,
                     dimensions:[domNode.offsetWidth, domNode.offsetHeight],
                     position:[xpos, ypos],
-                    custom:[objectSize, gridType]
+                    custom:[objectSize]
                 };
-                var baseUrl = CONSTANTS.ACTION.REQUEST_HANDLER;
-                Utility.xhrPostCentral(baseUrl, viewMeta);
+                var url;
+                switch(gridType) {
+                    case CONSTANTS.SUBTYPE.AVAILABILITY.COMPONENT:
+                        url = CONSTANTS.ACTION.AVAILABILITY.COMPONENT;
+                        break;
+                    case CONSTANTS.SUBTYPE.AVAILABILITY.CLUSTER:
+                        url = CONSTANTS.ACTION.AVAILABILITY.CLUSTER;
+                        break;
+                    case CONSTANTS.SUBTYPE.AVAILABILITY.INSTANCE:
+                        url = CONSTANTS.ACTION.AVAILABILITY.INSTANCE;
+                        break;
+                    default:
+                        console.log("unknown grid type = " + gridType);
+                        return;
+                }
+                Utility.xhrPostCentral(url, viewMeta);
             },
 
-            cacheClusterInstances:function (cluster, instancesOfCluster) {
+            cacheClusterInstances:function (cluster, instanceNamesOfCluster, instanceIdsOfCluster) {
                 for (var j = 0; j < cluster.length; j++) {
                     var instance = cluster[j].instances;
                     for (var z = 0; z < instance.length; z++) {
-                        instancesOfCluster.push(instance[z].instanceName);
+                        instanceNamesOfCluster.push(instance[z].instanceName);
+                        instanceIdsOfCluster.push(instance[z].id);
                         //console.log("pushed instance = " + instance[z].instanceName);
                     }
                 }
             },
 
             markCol2Ids:function (rowNum, maxCol3, gridMeta, compName) {
-                var clusterOfType = [];
+                var clusterNameOfType = [];
+                var clusterIdOfType = [];
                 for (var i = 0; i < maxCol3; i++) {
                     if (gridMeta.componentVO[i] == null) {
                         continue;
@@ -232,15 +254,17 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid',
                         continue;
                     }
                     if (clusters[rowNum] != null && clusters[rowNum] != undefined) {
-                        clusterOfType.push(clusters[rowNum].clusterName);
+                        clusterNameOfType.push(clusters[rowNum].clusterName);
                         //console.log("pushed cluster = " + clusters[rowNum].clusterName);
+                        clusterIdOfType.push(clusters[rowNum].id);
                     }
                 }
                 var i = 0;
                 dojo.query("#"+compName+" td.field-row" + ((rowNum * 2) + 1) + "col2").forEach(function (node) {
-                    if (clusterOfType[i] != null && clusterOfType[i] != undefined) {
-                        node.id = clusterOfType[i];
-                        //console.log("i = " + clusterOfType[i] + " div in cell = " + node.className);
+                    if (clusterNameOfType[i] != null && clusterNameOfType[i] != undefined) {
+                        node.id = clusterNameOfType[i];
+                        node.setAttribute(CONSTANTS.ATTRIBUTE.AVAILABILITY.CLUSTER, clusterIdOfType[i]);
+                        //console.log("i = " + clusterNameOfType[i] + " div in cell = " + node.className);
                     }
                     i++;
                 });

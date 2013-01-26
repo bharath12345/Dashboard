@@ -24,6 +24,9 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
                     if(input.param.type != undefined) {
                         data.type = parseInt(input.param.type[0]);
                     }
+                    if(input.param.subtype != undefined) {
+                        data.subtype = parseInt(input.param.subtype[0]);
+                    }
                     if(input.param.dimensions != undefined) {
                         data.dimensions = {};
                         data.dimensions.width = parseInt(input.param.dimensions[0]);
@@ -36,6 +39,9 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
                     }
                     if(input.param.custom != undefined) {
                         data.custom = input.param.custom;
+                    }
+                    if(input.param.name != undefined) {
+                        data.name = input.param.name;
                     }
                     console.log("data type = " + data.type);
                 } else {
@@ -56,15 +62,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
                         break;
 
                     case CONSTANTS.TYPE.AVAILABILITY:
-                        require([CONSTANTS.WIDGETS.AVAILABILITY.GRID], function (AvailabilityGrid) {
-                            new AvailabilityGrid().create(data);
-                        });
-                        break;
-
-                    case CONSTANTS.TYPE.AVAILABILITY_DATA:
-                        require([CONSTANTS.WIDGETS.AVAILABILITY.MATRIX], function (AvailMatrix) {
-                            new AvailMatrix().create(data);
-                        });
+                        ViewManager.manageAvailabilitySubView(data, input);
                         break;
 
                     case CONSTANTS.TYPE.COMPONENT_ZONES:
@@ -88,7 +86,34 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
         };
 
         ViewManager.manageAvailabilitySubView = function(data, input) {
+            switch(data.subtype) {
+                case CONSTANTS.SUBTYPE.AVAILABILITY.COMPONENT:
+                    require([CONSTANTS.WIDGETS.AVAILABILITY.MATRIX], function (AvailMatrix) {
+                        new AvailMatrix().create(data, input.componentDataVO);
+                    });
+                    break;
 
+                case CONSTANTS.SUBTYPE.AVAILABILITY.CLUSTER:
+                    require([CONSTANTS.WIDGETS.AVAILABILITY.MATRIX], function (AvailMatrix) {
+                        new AvailMatrix().create(data, input.clusterDataVO);
+                    });
+                    break;
+
+                case CONSTANTS.SUBTYPE.AVAILABILITY.INSTANCE:
+                    require([CONSTANTS.WIDGETS.AVAILABILITY.MATRIX], function (AvailMatrix) {
+                        new AvailMatrix().create(data, input.compInstanceDataVO);
+                    });
+                    break;
+
+                case CONSTANTS.SUBTYPE.AVAILABILITY.META:
+                    require([CONSTANTS.WIDGETS.AVAILABILITY.GRID], function (AvailabilityGrid) {
+                        new AvailabilityGrid().create(data);
+                    });
+                    break;
+
+                default:
+                    console.log("unknown availability type = " + data.subtype);
+            }
         };
 
         ViewManager.manageComponentSubView = function(data, input) {

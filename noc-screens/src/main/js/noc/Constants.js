@@ -8,11 +8,22 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // VARIOUS TYPES FOR SWITCHING IN ViewManager
         CONSTANTS.TYPE = {};
+        CONSTANTS.SUBTYPE = {};
+
         CONSTANTS.TYPE.LOGIN = 1653;
+
         CONSTANTS.TYPE.AVAILABILITY = 1;
-        CONSTANTS.TYPE.AVAILABILITY_DATA = 2;
-        CONSTANTS.TYPE.COMPONENT_ZONES = 3;
-        CONSTANTS.TYPE.COMPONENT_DATA = 4;
+        CONSTANTS.TYPE.COMPONENT = 2;
+
+        CONSTANTS.SUBTYPE.AVAILABILITY = {};
+        CONSTANTS.SUBTYPE.AVAILABILITY.COMPONENT = 1;
+        CONSTANTS.SUBTYPE.AVAILABILITY.CLUSTER = 2;
+        CONSTANTS.SUBTYPE.AVAILABILITY.INSTANCE = 3;
+        CONSTANTS.SUBTYPE.AVAILABILITY.META = 4;
+
+        CONSTANTS.SUBTYPE.COMPONENT = {};
+        CONSTANTS.SUBTYPE.COMPONENT.ZONES = 1;
+        CONSTANTS.SUBTYPE.COMPONENT.DATA = 2;
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // ACTION URLs
@@ -24,7 +35,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.ACTION.AVAILABILITY.META = "availability/Meta.action";
         CONSTANTS.ACTION.AVAILABILITY.COMPONENT = "availability/ComponentData.action";
         CONSTANTS.ACTION.AVAILABILITY.CLUSTER = "availability/ClusterData.action";
-        CONSTANTS.ACTION.AVAILABILITY.HOST = "availability/HostData.action";
+        CONSTANTS.ACTION.AVAILABILITY.INSTANCE = "availability/InstanceData.action";
 
         CONSTANTS.ACTION.COMPONENT = {};
         CONSTANTS.ACTION.COMPONENT.ZONES = "component/zones.action";
@@ -44,6 +55,15 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.WIDGETS.COMPONENT = {};
         CONSTANTS.WIDGETS.COMPONENT.ZONES = 'noc/Widgets/component/Zones';
         CONSTANTS.WIDGETS.COMPONENT.CELLMAKER = 'noc/Widgets/component/CellMaker';
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////        
+
+        CONSTANTS.ATTRIBUTE = {};
+
+        CONSTANTS.ATTRIBUTE.AVAILABILITY = {};
+        CONSTANTS.ATTRIBUTE.AVAILABILITY.COMPONENT = "data-component-id";
+        CONSTANTS.ATTRIBUTE.AVAILABILITY.CLUSTER = "data-cluster-id";
+        CONSTANTS.ATTRIBUTE.AVAILABILITY.INSTANCE = "data-instance-id";
 
         return CONSTANTS;
     });

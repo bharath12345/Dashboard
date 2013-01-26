@@ -33,8 +33,10 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                 var xpos=0, ypos=0;
 
                 var viewMeta = {
-                    id:"availGrid",
+                    id:0,
+                    name:"availGrid",
                     type: CONSTANTS.TYPE.AVAILABILITY,
+                    subtype: CONSTANTS.SUBTYPE.AVAILABILITY.META,
                     dimensions:[AvailabilityPage.CP.w, AvailabilityPage.CP.h],
                     position:[xpos,ypos],
                     custom: []

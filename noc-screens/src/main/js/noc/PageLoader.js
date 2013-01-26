@@ -16,10 +16,10 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
                 this.createSections(viewPort);
 
                 new AvailabilityPage().loadPage();
-                setTimeout(function(){new TxTimeSeriesPage().loadPage()}, 10*1000);
-                setTimeout(function(){new ComponentPage().loadPage()}, 20*1000);
-                setTimeout(function(){new TxTreemapPage().loadPage()}, 30*1000);
-                setTimeout(function(){new TxServiceLevelPage().loadPage()}, 40*1000);
+                //setTimeout(function(){new TxTimeSeriesPage().loadPage()}, 10*1000);
+                //setTimeout(function(){new ComponentPage().loadPage()}, 20*1000);
+                //setTimeout(function(){new TxTreemapPage().loadPage()}, 30*1000);
+                //setTimeout(function(){new TxServiceLevelPage().loadPage()}, 40*1000);
 
                 //PageLoader.pageScroll(viewPort);
             },

@@ -2,17 +2,25 @@ package com.appnomic.noc.action;
 
 public class DefaultResponse {
 
-	private String id;
+	private int id;
+	private String name;
 	private int type;
+	private int subtype;
 	private int [] dimensions;
 	private int [] position;
 	private String [] custom;
 	
-	public String getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	public int getType() {
 		return type;
@@ -37,5 +45,11 @@ public class DefaultResponse {
 	}
 	public void setCustom(String[] custom) {
 		this.custom = custom;
+	}
+	public int getSubtype() {
+		return subtype;
+	}
+	public void setSubtype(int subtype) {
+		this.subtype = subtype;
 	}
 }

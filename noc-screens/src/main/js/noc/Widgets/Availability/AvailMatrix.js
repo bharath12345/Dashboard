@@ -5,100 +5,58 @@ define(['require', "dojo/_base/declare", "dojo/i18n",
 
         var AvailMatrix = declare("noc.Components.Availability.AvailMatrix", null, {
 
-            create: function(data) {
-                var gridItemWidth = parseInt(data.custom[0]);
-                var gridType = parseInt(data.custom[1]);
-                var url;
-                switch(gridType) {
-                    case AvailMatrix.COMPONENT:
-                        url = CONSTANTS.ACTION.AVAILABILITY.COMPONENT + "?name=" + data.id;
-                        break;
-                    case AvailMatrix.CLUSTER:
-                        url = CONSTANTS.ACTION.AVAILABILITY.CLUSTER + "?name=" + data.id;
-                        break;
-                    case AvailMatrix.HOST:
-                        url = CONSTANTS.ACTION.AVAILABILITY.HOST + "?name=" + data.id;
-                        break;
-                    default:
-                        console.log("unknown grid type = " + gridType);
-                        return;
-                }
-
-                // ToDo: you SHOULD use data.id in the below fetch URL to get the data for the exact point
-                this.fetchData(url, data.id,
-                    data.dimensions.width, data.dimensions.height,
-                    data.position.xpos, data.position.ypos, gridItemWidth, gridType);
-            },
-
-            fetchData: function(jsonStore, id,
-                                gridWidth, gridHeight,
-                                topLeftX, topLeftY,
-                                gridItemWidth, gridType) {
-
-                d3.json(jsonStore, dojo.hitch (this, function(m) {
+            create:function (input, payload) {
+                console.log("in create avail matrix gridtype = " + input.subtype);
+                try {
                     var data = new Array();
-                    var ypos = topLeftY;
-                    var xpos = topLeftX;
+                    var gridItemWidth = parseInt(input.custom[0]);
                     var gridItemHeight = gridItemWidth; // for square boxes
 
-                    var length, sub;
-                    switch(gridType) {
-                        case AvailMatrix.COMPONENT:
-                            length = m.componentData.times.length;
-                            sub = m.componentData.times;
-                            break;
+                    var length = payload.times.length;
+                    var sub = payload.times;
 
-                        case AvailMatrix.CLUSTER:
-                            length = m.clusterData.times.length;
-                            sub = m.clusterData.times;
-                            break;
-
-                        case AvailMatrix.HOST:
-                            length = m.hostData.times.length;
-                            sub = m.hostData.times;
-                            break;
-                    }
-
-                    for(var i=0; i<length; i++) {
+                    var xpos = 0;
+                    for (var i = 0; i < length; i++) {
                         xpos += gridItemWidth;
                         data[i] = new Array();
                         var columnSet;
-                        switch(gridType) {
-                            case AvailMatrix.COMPONENT:
+                        switch (input.subtype) {
+                            case CONSTANTS.SUBTYPE.AVAILABILITY.COMPONENT:
                                 columnSet = sub[i].cluster;
                                 break;
 
-                            case AvailMatrix.CLUSTER:
-                                columnSet = sub[i].host;
+                            case CONSTANTS.SUBTYPE.AVAILABILITY.CLUSTER:
+                                columnSet = sub[i].instances;
                                 break;
 
-                            case AvailMatrix.HOST:
+                            case CONSTANTS.SUBTYPE.AVAILABILITY.INSTANCE:
                                 columnSet = sub[i].kpi;
                                 break;
                         }
 
 
-                        for(var j=0; j<columnSet.length;j++) {
+                        for (var j = 0; j < columnSet.length; j++) {
                             data[i][j] = {
-                                name: columnSet[j].name,
-                                value: columnSet[j].value,
-                                width: gridItemWidth,
-                                height: gridItemHeight,
-                                x: xpos,
-                                y: ypos
+                                name:columnSet[j].name,
+                                value:columnSet[j].value,
+                                width:gridItemWidth,
+                                height:gridItemHeight,
+                                x:input.position.xpos,
+                                y:input.position.ypos
                             };
                             xpos += gridItemWidth;
                         }
                     }
-
-                    this.renderGrid(data, id, gridWidth, gridHeight);
-                }));
+                    this.renderGrid(data, input.name, input.dimensions.width, input.dimensions.height);
+                } catch (e) {
+                    console.log("exception " + e);
+                }
             },
 
-            renderGrid: function(data, id, width, height) {
+            renderGrid:function (data, id, width, height) {
                 //console.log(data);
 
-                var grid = d3.select("#"+id).append("svg")
+                var grid = d3.select("#" + id).append("svg")
                     .attr("width", width)
                     .attr("height", height)
                     .attr("class", "chart");
@@ -108,24 +66,32 @@ define(['require', "dojo/_base/declare", "dojo/i18n",
                     .enter().append("svg:g")
                     .attr("class", "row");
 
-                var color=d3.scale.category20c();
+                var color = d3.scale.category20c();
 
                 var col = row.selectAll(".cell")
-                    .data(function (d) { return d; })
+                    .data(function (d) {
+                        return d;
+                    })
                     .enter().append("svg:rect")
                     .attr("class", "cell")
-                    .attr("x", function(d) { return d.x; })
-                    .attr("y", function(d) { return d.y; })
-                    .attr("width", function(d) { return d.width; })
-                    .attr("height", function(d) { return d.height; })
-                    .style("fill", function(d) { return color(d.value); })
+                    .attr("x", function (d) {
+                        return d.x;
+                    })
+                    .attr("y", function (d) {
+                        return d.y;
+                    })
+                    .attr("width", function (d) {
+                        return d.width;
+                    })
+                    .attr("height", function (d) {
+                        return d.height;
+                    })
+                    .style("fill", function (d) {
+                        return color(d.value);
+                    })
                     .style("stroke", '#555');
             }
         });
-
-        AvailMatrix.COMPONENT = 1;
-        AvailMatrix.CLUSTER = 2;
-        AvailMatrix.HOST = 3;
 
         return AvailMatrix;
 
