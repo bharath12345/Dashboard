@@ -27,7 +27,7 @@
 
         <!-- List of JS. First one should always be Dojo -->
         <script type="text/javascript" data-dojo-config="async: 1, tlmSiblingOfDojo: 0, isDebug: 1" src="./js/dojo/dojo.js"></script>
-        <script type="text/javascript" src="./js/d3/d3.v2.10.3.min.js"></script>
+        <script type="text/javascript" src="./js/d3/d3.v3.0.4.min.js"></script>
 
         </head>
         <body class="claro">
