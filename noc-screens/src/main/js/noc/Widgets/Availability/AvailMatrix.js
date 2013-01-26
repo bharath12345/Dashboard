@@ -43,7 +43,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n",
                                 value:columnSet[j].value,
                                 width:gridItemWidth,
                                 height:gridItemHeight,
-                                x:input.position.xpos,
+                                x:xpos,
                                 y:input.position.ypos
                             };
                             xpos += gridItemWidth;
