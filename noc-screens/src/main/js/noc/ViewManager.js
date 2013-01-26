@@ -88,18 +88,21 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
         ViewManager.manageAvailabilitySubView = function(data, input) {
             switch(data.subtype) {
                 case CONSTANTS.SUBTYPE.AVAILABILITY.COMPONENT:
+                    console.log("component grid data received");
                     require([CONSTANTS.WIDGETS.AVAILABILITY.MATRIX], function (AvailMatrix) {
                         new AvailMatrix().create(data, input.componentDataVO);
                     });
                     break;
 
                 case CONSTANTS.SUBTYPE.AVAILABILITY.CLUSTER:
+                    console.log("cluster grid data received");
                     require([CONSTANTS.WIDGETS.AVAILABILITY.MATRIX], function (AvailMatrix) {
                         new AvailMatrix().create(data, input.clusterDataVO);
                     });
                     break;
 
                 case CONSTANTS.SUBTYPE.AVAILABILITY.INSTANCE:
+                    console.log("instance grid data received");
                     require([CONSTANTS.WIDGETS.AVAILABILITY.MATRIX], function (AvailMatrix) {
                         new AvailMatrix().create(data, input.compInstanceDataVO);
                     });

@@ -13,6 +13,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n",
                     var gridItemHeight = gridItemWidth; // for square boxes
 
                     var length = payload.times.length;
+                    console.log("payload len = " + length + " gridtype = " + input.subtype);
                     var sub = payload.times;
 
                     var xpos = 0;
@@ -34,6 +35,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n",
                                 break;
                         }
 
+                        console.log("column set len = " + columnSet.length + " gridtype = " + input.subtype);
 
                         for (var j = 0; j < columnSet.length; j++) {
                             data[i][j] = {
@@ -47,6 +49,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n",
                             xpos += gridItemWidth;
                         }
                     }
+                    console.log("going to render grid for = " + input.name + "dimensions w = " + input.dimensions.width + " h = " + input.dimensions.height);
                     this.renderGrid(data, input.name, input.dimensions.width, input.dimensions.height);
                 } catch (e) {
                     console.log("exception " + e);
@@ -54,42 +57,53 @@ define(['require', "dojo/_base/declare", "dojo/i18n",
             },
 
             renderGrid:function (data, id, width, height) {
-                //console.log(data);
 
-                var grid = d3.select("#" + id).append("svg")
-                    .attr("width", width)
-                    .attr("height", height)
-                    .attr("class", "chart");
+                try {
+                    console.log("render id = " + id + " grid data = "+dojo.toJson(data));
 
-                var row = grid.selectAll(".row")
-                    .data(data)
-                    .enter().append("svg:g")
-                    .attr("class", "row");
+                    //var myd = dojo.create("svg");
+                    //console.log("myd = " + document.getElementById(id));
+                    //document.getElementById(id).appendChild(myd);
 
-                var color = d3.scale.category20c();
+                    var grid = d3.select("#" + id).append("svg")
+                        .attr("width", width)
+                        .attr("height", height)
+                        .attr("class", "chart");
 
-                var col = row.selectAll(".cell")
-                    .data(function (d) {
-                        return d;
-                    })
-                    .enter().append("svg:rect")
-                    .attr("class", "cell")
-                    .attr("x", function (d) {
-                        return d.x;
-                    })
-                    .attr("y", function (d) {
-                        return d.y;
-                    })
-                    .attr("width", function (d) {
-                        return d.width;
-                    })
-                    .attr("height", function (d) {
-                        return d.height;
-                    })
-                    .style("fill", function (d) {
-                        return color(d.value);
-                    })
-                    .style("stroke", '#555');
+
+                    var row = grid.selectAll(".row")
+                        .data(data)
+                        .enter().append("svg:g")
+                        .attr("class", "row");
+
+                    var color = d3.scale.category20c();
+
+                    var col = row.selectAll(".cell")
+                        .data(function (d) {
+                            return d;
+                        })
+                        .enter().append("svg:rect")
+                        .attr("class", "cell")
+                        .attr("x", function (d) {
+                            return d.x;
+                        })
+                        .attr("y", function (d) {
+                            return d.y;
+                        })
+                        .attr("width", function (d) {
+                            return d.width;
+                        })
+                        .attr("height", function (d) {
+                            return d.height;
+                        })
+                        .style("fill", function (d) {
+                            return color(d.value);
+                        })
+                        .style("stroke", '#555');
+
+                } catch(e) {
+                    console.log("render exception = " + e);
+                }
             }
         });
 

@@ -53,7 +53,7 @@ public class AvailabilityDataInstanceAction extends AbstractNocAction  {
 	}
 
 	public AvailabilityDataInstanceAction() {
-		setDummyData();
+		//setDummyData();
 	}
 		
 	public void setDummyData() {

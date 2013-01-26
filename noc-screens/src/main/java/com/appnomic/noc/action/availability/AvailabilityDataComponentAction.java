@@ -50,7 +50,7 @@ public class AvailabilityDataComponentAction extends AbstractNocAction  {
 	}
 
 	public AvailabilityDataComponentAction() {
-		setDummyData();
+		//setDummyData();
 	}
 	
 	public ComponentDataService getComponentDataService() {
@@ -122,31 +122,29 @@ public class AvailabilityDataComponentAction extends AbstractNocAction  {
 		}
 		System.out.println("key value map = " + keyVal);
 		
+		String compType = (parameters.get("name")[0]).split("COMPONENT_CELL_")[1];
+		System.out.println("component type being assembled = " + compType);
 		Set<Cluster> clusterList = new HashSet<Cluster>();
 		List<Cluster> clusters = clusterDataService.getAll();
 		for(Cluster cluster : clusters) {
-			if(!cluster.getType().equals(parameters.get("name")[0])) {
+			if(!cluster.getType().equals(compType)) {
 				continue;
 			}
 			clusterList.add(cluster);
 		}
 
-		ClusterTimesVO [] clusterTimes = new ClusterTimesVO[clusterList.size()];
-		componentDataVO.setTimes(clusterTimes);
-		
 		if(clusterList.size() > 0) {
 			componentDataVO = new ComponentDataVO();
 			componentDataVO.setInstanceName(parameters.get("name")[0]);	
 		}
-
-		int i = 0;
+		
 		Random random = new Random();
 		int sampleSize = 5;
+		Map<String, HashMap<String, boolean[]>> compKpiAvailMap = new HashMap<String, HashMap<String, boolean[]>>();
 		for(Cluster cluster : clusterList) {
 			List<ComponentData> componentList = cluster.getComponents();
 			
 			// cache the availability kpi values
-			Map<String, HashMap<String, boolean[]>> compKpiAvailMap = new HashMap<String, HashMap<String, boolean[]>>();
 			for(ComponentData component : componentList) {
 				HashMap<String, boolean[]> kpiAvailMap = new HashMap<String, boolean[]>();
 				compKpiAvailMap.put(component.getName(), kpiAvailMap);
@@ -157,6 +155,7 @@ public class AvailabilityDataComponentAction extends AbstractNocAction  {
 					boolean [] availArray = kpiAvailMap.get(kpiName);
 					if(availArray == null) {
 						availArray = new boolean[sampleSize];
+						kpiAvailMap.put(kpiName, availArray);
 					}
 					
 					NormalizedAvailabilityKpi samples = availSamples.get(kpiName);					
@@ -166,21 +165,23 @@ public class AvailabilityDataComponentAction extends AbstractNocAction  {
 					}
 				}
 			}
-			
-			ClusterDataPointVO [] clusterDataPoint = null;
-			if(compKpiAvailMap.size() > 0) {
-				clusterTimes[i] = new ClusterTimesVO();
-				clusterTimes[i].setTime((new Integer(i)).toString());
-			
-				clusterDataPoint = new ClusterDataPointVO[sampleSize];
-				clusterTimes[i].setCluster(clusterDataPoint);
-			}
+		}
+		
+		List<ClusterDataPointVO[]> clusterDataPointVOList = new ArrayList<ClusterDataPointVO[]>();
+		for(int j=0;j<sampleSize;j++) {
+			ClusterDataPointVO [] clusterDataPoint = new ClusterDataPointVO[clusterList.size()];
+			clusterDataPointVOList.add(clusterDataPoint);
+		}
+		
+		int i = 0;
+		for(Cluster cluster : clusterList) {
+			List<ComponentData> componentList = cluster.getComponents();
+			ClusterTimesVO [] clusterTimes = new ClusterTimesVO[sampleSize];
+			componentDataVO.setTimes(clusterTimes);
 			
 			for(int j=0;j<sampleSize;j++) {
-				if(componentList.size() > 0) {
-					clusterDataPoint[j] = new ClusterDataPointVO();
-					clusterDataPoint[j].setName(cluster.getName());
-				}
+				clusterTimes[j] = new ClusterTimesVO();
+				clusterTimes[j].setTime((new Integer(j)).toString());
 				
 				// pluck from the cache and check if cluster has to be set RED or GREEN
 				boolean foundOneViolated = false;
@@ -204,7 +205,12 @@ public class AvailabilityDataComponentAction extends AbstractNocAction  {
 						break;
 					}
 				}
-				clusterDataPoint[j].setValue(foundOneViolated?0:1); // if violated is found then set the value to 0, else 1
+				
+				ClusterDataPointVO [] clusterDataPoints = clusterDataPointVOList.get(j);
+				clusterDataPoints[i] = new ClusterDataPointVO();
+				clusterDataPoints[i].setName(cluster.getName());
+				clusterDataPoints[i].setValue(foundOneViolated?0:1); // if violated is found then set the value to 0, else 1
+				clusterTimes[j].setCluster(clusterDataPoints);
 			}
 			i++;
 		}

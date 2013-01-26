@@ -2,39 +2,39 @@
     "instanceName":"ClusterX",
     "times":[
         {
-            "host":[
+            "instances":[
                 {
-                    "name":"HostX",
+                    "name":"instancesX",
                     "value":0
                 },
                 {
-                    "name":"HostX",
+                    "name":"instancesX",
                     "value":1
                 }
             ],
             "time":"10:10"
         },
         {
-            "host":[
+            "instances":[
                 {
-                    "name":"HostX",
+                    "name":"instancesX",
                     "value":0
                 },
                 {
-                    "name":"HostX",
+                    "name":"instancesX",
                     "value":1
                 }
             ],
             "time":"10:10"
         },
         {
-            "host":[
+            "instances":[
                 {
-                    "name":"HostX",
+                    "name":"instancesX",
                     "value":0
                 },
                 {
-                    "name":"HostX",
+                    "name":"instancesX",
                     "value":1
                 }
             ],

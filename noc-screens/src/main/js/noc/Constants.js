@@ -65,5 +65,13 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.ATTRIBUTE.AVAILABILITY.CLUSTER = "data-cluster-id";
         CONSTANTS.ATTRIBUTE.AVAILABILITY.INSTANCE = "data-instance-id";
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////        
+
+        CONSTANTS.PREFIX = {};
+        CONSTANTS.PREFIX.COMPONENT_GRID = "COMPONENT_GRID_";
+        CONSTANTS.PREFIX.COMPONENT_CELL = "COMPONENT_CELL_";
+        CONSTANTS.PREFIX.CLUSTER_CELL = "CLUSTER_CELL_";
+        CONSTANTS.PREFIX.INSTANCE_CELL = "INSTANCE_CELL_";
+
         return CONSTANTS;
     });
