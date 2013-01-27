@@ -10,7 +10,7 @@ import org.apache.struts2.convention.annotation.Action;
 import com.appnomic.noc.action.AbstractNocAction;
 
 @ParentPackage("json-default")
-@Namespace("/noc")
+@Namespace("/alert")
 public class AlertInfoAction extends AbstractNocAction  {
 	
 	private Map<String, String[]> param;
@@ -40,6 +40,21 @@ public class AlertInfoAction extends AbstractNocAction  {
 	                "excludeNullProperties","true"
 	            })})
 	public String componentAlertAction() {
+		param = getParameters();
+		
+		String keyVal = "Component Alert: ";
+		for(String key : parameters.keySet()) {
+			keyVal += "[ " + key + " = ";
+			for(String value : parameters.get(key)) {
+				keyVal += value + ", ";
+			}
+			keyVal += "] ";
+		}
+		System.out.println("key value map = " + keyVal);
+		
+		String compType = (parameters.get("name")[0]);
+		System.out.println("component type being assembled = " + compType);
+		
 		
 		return SUCCESS;
 	}
@@ -54,6 +69,21 @@ public class AlertInfoAction extends AbstractNocAction  {
 	                "excludeNullProperties","true"
 	            })})
 	public String clusterAlertAction() {
+		param = getParameters();
+		
+		String keyVal = "Cluster Alert: ";
+		for(String key : parameters.keySet()) {
+			keyVal += "[ " + key + " = ";
+			for(String value : parameters.get(key)) {
+				keyVal += value + ", ";
+			}
+			keyVal += "] ";
+		}
+		System.out.println("key value map = " + keyVal);
+		
+		String clusterName = (parameters.get("name")[0]);
+		System.out.println("cluster name being assembled = " + clusterName);
+		
 		
 		return SUCCESS;
 	}
@@ -68,7 +98,20 @@ public class AlertInfoAction extends AbstractNocAction  {
 	                "excludeNullProperties","true"
 	            })})
 	public String instanceAlertAction() {
+		param = getParameters();
 		
+		String keyVal = "Instance Alert: ";
+		for(String key : parameters.keySet()) {
+			keyVal += "[ " + key + " = ";
+			for(String value : parameters.get(key)) {
+				keyVal += value + ", ";
+			}
+			keyVal += "] ";
+		}
+		System.out.println("key value map = " + keyVal);
+		
+		String instanceName = (parameters.get("name")[0]);
+		System.out.println("instance name being assembled = " + instanceName);
 		return SUCCESS;
 	}
 	

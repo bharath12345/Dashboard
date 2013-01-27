@@ -117,7 +117,12 @@ define(['require', "dojo/_base/declare", "dojo/i18n",
                             return d.height;
                         })
                         .style("fill", function (d) {
-                            return color(d.value);
+                            //return color(d.value);
+                            if(d.value == 0) {
+                                return "orangered";
+                            } else {
+                                return "yellowgreen";
+                            }
                         })
                         .style("stroke", '#555');
 
