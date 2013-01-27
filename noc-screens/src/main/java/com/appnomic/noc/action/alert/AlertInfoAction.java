@@ -56,6 +56,7 @@ public class AlertInfoAction extends AbstractNocAction  {
 		System.out.println("component type being assembled = " + compType);
 		
 		
+		
 		return SUCCESS;
 	}
 

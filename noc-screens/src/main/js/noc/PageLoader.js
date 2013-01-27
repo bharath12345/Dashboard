@@ -15,7 +15,8 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
 
                 this.createSections(viewPort);
 
-                new AvailabilityPage().loadPage();
+                new AvailabilityPage().loadPage(0, "availabilityPage_0", componentName);
+                new AvailabilityPage().loadPage(1, "availabilityPage_1", componentName);
                 //setTimeout(function(){new TxTimeSeriesPage().loadPage()}, 10*1000);
                 //setTimeout(function(){new ComponentPage().loadPage()}, 20*1000);
                 //setTimeout(function(){new TxTreemapPage().loadPage()}, 30*1000);

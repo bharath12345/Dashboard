@@ -5,25 +5,25 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
 
         var AvailabilityPage = declare("noc.pages.AvailabilityPage", null, {
 
-            loadPage:function () {
+            loadPage:function (pageNumber, pageName, componentName) {
 
-                AvailabilityPage.CP = noc.PageLoader.CpCenter[0];
+                AvailabilityPage.CP[pageNumber] = noc.PageLoader.CpCenter[pageNumber];
 
-                var paneWidth = AvailabilityPage.CP.w;
-                var paneHeight = AvailabilityPage.CP.h;
+                var paneWidth = AvailabilityPage.CP[pageNumber].w;
+                var paneHeight = AvailabilityPage.CP[pageNumber].h;
                 var styleString = "width: " + paneWidth + "; height: " + paneHeight + ";"
 
                 var titlePane = new TitlePane({
                     splitter:false,
                     style:styleString,
-                    content:"<div id='availGrid' style='width: 100%; height: 100%;'></div>",
+                    content:"<div id='"+pageName+"' style='width: 100%; height: 100%;'></div>",
                     title:"Availability Grid",
-                    "class":"soria", toggleable:false
+                    toggleable:false
                 });
 
                 var gridContainer = new GridContainer({nbZones:1, isAutoOrganized:true,
-                    style:"width: 100%; height: 100%;", "class":"soria"});
-                AvailabilityPage.CP.addChild(gridContainer);
+                    style:"width: 100%; height: 100%;"});
+                AvailabilityPage.CP[pageNumber].addChild(gridContainer);
                 gridContainer.disableDnd();
 
                 gridContainer.addChild(titlePane, 0);
@@ -34,12 +34,12 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
 
                 var viewMeta = {
                     id:0,
-                    name:"availGrid",
+                    name: pageName,
                     type: CONSTANTS.TYPE.AVAILABILITY,
                     subtype: CONSTANTS.SUBTYPE.AVAILABILITY.META,
-                    dimensions:[AvailabilityPage.CP.w, AvailabilityPage.CP.h],
+                    dimensions:[AvailabilityPage.CP[pageNumber].w, AvailabilityPage.CP[pageNumber].h],
                     position:[xpos,ypos],
-                    custom: []
+                    custom: [componentName]
                 };
 
                 Utility.xhrPostCentral(CONSTANTS.ACTION.REQUEST_HANDLER, viewMeta);
@@ -48,10 +48,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
         });
 
         // static variables of this class
-
-        AvailabilityPage.PageCounter = 0;
-        AvailabilityPage.CP = null;
-        AvailabilityPage.GridID = 0;
+        AvailabilityPage.CP = [];
 
         return AvailabilityPage;
     });

@@ -1,7 +1,7 @@
-define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid',
+define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/request/xhr",
     "dojo/i18n!noc/nls/noc", "noc/Utility", "noc/Constants"],
 
-    function (require, declare, i18n, Grid, i18nString, Utility, CONSTANTS) {
+    function (require, declare, i18n, Grid, xhr, i18nString, Utility, CONSTANTS) {
 
         var AvailabilityGrid = declare("noc.Components.Availability.AvailabilityGrid", null, {
 
@@ -13,6 +13,22 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid',
                     console.log("m " + m);
                     this.renderGrid(m);
                 }));
+
+                var options = {};
+                options.componentName = data.custom[0];
+
+                xhr(CONSTANTS.ACTION.AVAILABILITY.COMPONENTMETA, {
+                    handleAs:"json",
+                    method:"POST",
+                    query:options,
+                    headers:Utility.JSON_HEADER
+                }).then(function (data) {
+                        this.renderGrid(data);
+                    }, function (err) {
+                        // Handle the error condition
+                        console.log("xhr error = " + err);
+                    }, function (evt) {
+                    });
             },
 
             renderGrid:function (gridMeta) {
@@ -157,7 +173,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid',
                 //this.removeUnwantedRows("availGrid-row-2", toRemove);
 
                 var i = 0;
-                dojo.query("#"+compName+" td.field-row1col3").forEach(function (node) {
+                dojo.query("#" + compName + " td.field-row1col3").forEach(function (node) {
                     node.id = CONSTANTS.PREFIX.COMPONENT_CELL + gridMeta.componentVO[0].componentName;
                     node.setAttribute(CONSTANTS.ATTRIBUTE.AVAILABILITY.COMPONENT, gridMeta.componentVO[0].id);
                     console.log("i = " + i + " comp id = " + gridMeta.componentVO[0].id + " this is the div in cell = " + node);
@@ -179,7 +195,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid',
                 this.cacheClusterInstances(cluster, instanceNamesOfCluster, instanceIdsOfCluster);
 
                 for (var j = 0; j < maxCol1; j++) {
-                    dojo.query("#"+compName+ " td.field-row" + ((j * 2) + 1) + "col1").forEach(function (node) {
+                    dojo.query("#" + compName + " td.field-row" + ((j * 2) + 1) + "col1").forEach(function (node) {
                         if (instanceNamesOfCluster[j] != null && instanceNamesOfCluster[j] != undefined) {
                             node.id = CONSTANTS.PREFIX.INSTANCE_CELL + instanceNamesOfCluster[j];
                             node.setAttribute(CONSTANTS.ATTRIBUTE.AVAILABILITY.INSTANCE, instanceIdsOfCluster[j]);
@@ -193,13 +209,13 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid',
                 // Traverse the meta and fire queries for the correct instance, cluster, component
                 // Render them
 
-                this.renderSVG(CONSTANTS.PREFIX.COMPONENT_CELL+gridMeta.componentVO[0].componentName, gridMeta.componentVO[0].id, 30, CONSTANTS.SUBTYPE.AVAILABILITY.COMPONENT);
+                this.renderSVG(CONSTANTS.PREFIX.COMPONENT_CELL + gridMeta.componentVO[0].componentName, gridMeta.componentVO[0].id, 30, CONSTANTS.SUBTYPE.AVAILABILITY.COMPONENT);
                 var clusters = gridMeta.componentVO[0].clusters;
                 for (var j = 0; j < clusters.length; j++) {
-                    this.renderSVG(CONSTANTS.PREFIX.CLUSTER_CELL+clusters[j].clusterName,clusters[j].id, 20, CONSTANTS.SUBTYPE.AVAILABILITY.CLUSTER);
+                    this.renderSVG(CONSTANTS.PREFIX.CLUSTER_CELL + clusters[j].clusterName, clusters[j].id, 20, CONSTANTS.SUBTYPE.AVAILABILITY.CLUSTER);
                     var instance = clusters[j].instances;
                     for (var z = 0; z < instance.length; z++) {
-                        this.renderSVG(CONSTANTS.PREFIX.INSTANCE_CELL+instance[z].instanceName,instance[z].id, 10, CONSTANTS.SUBTYPE.AVAILABILITY.INSTANCE);
+                        this.renderSVG(CONSTANTS.PREFIX.INSTANCE_CELL + instance[z].instanceName, instance[z].id, 10, CONSTANTS.SUBTYPE.AVAILABILITY.INSTANCE);
                     }
                 }
 
@@ -211,15 +227,15 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid',
                 var xpos = 0, ypos = 10;
                 var viewMeta = {
                     id:id,
-                    name: objectName,
+                    name:objectName,
                     type:CONSTANTS.TYPE.AVAILABILITY,
-                    subtype: gridType,
+                    subtype:gridType,
                     dimensions:[domNode.offsetWidth, domNode.offsetHeight],
                     position:[xpos, ypos],
                     custom:[objectSize]
                 };
                 var url;
-                switch(gridType) {
+                switch (gridType) {
                     case CONSTANTS.SUBTYPE.AVAILABILITY.COMPONENT:
                         url = CONSTANTS.ACTION.AVAILABILITY.COMPONENT;
                         break;
@@ -265,7 +281,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid',
                     }
                 }
                 var i = 0;
-                dojo.query("#"+compName+" td.field-row" + ((rowNum * 2) + 1) + "col2").forEach(function (node) {
+                dojo.query("#" + compName + " td.field-row" + ((rowNum * 2) + 1) + "col2").forEach(function (node) {
                     if (clusterNameOfType[i] != null && clusterNameOfType[i] != undefined) {
                         node.id = CONSTANTS.PREFIX.CLUSTER_CELL + clusterNameOfType[i];
                         node.setAttribute(CONSTANTS.ATTRIBUTE.AVAILABILITY.CLUSTER, clusterIdOfType[i]);
@@ -283,18 +299,18 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid',
                 }
             },
 
-            enrichWithAlerts: function(tableName, queryName, pointName, queryType) {
+            enrichWithAlerts:function (tableName, queryName, pointName, queryType) {
                 var viewMeta = {
                     id:1,
-                    name: queryName,
-                    type: CONSTANTS.TYPE.ALERT,
-                    subtype: queryType,
+                    name:queryName,
+                    type:CONSTANTS.TYPE.ALERT,
+                    subtype:queryType,
                     dimensions:[0, 0],
                     position:[0, 0],
                     custom:[tableName, pointName]
                 };
                 var url;
-                switch(queryType) {
+                switch (queryType) {
                     case CONSTANTS.SUBTYPE.AVAILABILITY.COMPONENT:
                         console.log("component alert enrichment for " + tableName + " query name = " + queryName + " point name = " + pointName);
                         url = CONSTANTS.ACTION.ALERT.COMPONENT;

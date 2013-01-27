@@ -106,40 +106,74 @@ public class AvailabilityMetaAction extends AbstractNocAction  {
 		componentVO = new ComponentVO[componentTypes.size()];
 		int i = 0;	
 		for(String componentType : componentTypes){
-			List<ClusterVO> clustersOfType = new ArrayList<ClusterVO>();
-						
-			for(Cluster cluster : clusters) {
-				if(!cluster.getType().equals(componentType)) {
-					continue;
-				}
-				
-				ClusterVO clusterVO = new ClusterVO();
-				clusterVO.setClusterName(cluster.getName());
-				clusterVO.setId(cluster.getId());
-				clustersOfType.add(clusterVO);
-				
-				List<ComponentData> instances = cluster.getComponents();
-				InstanceVO [] instanceVO = new InstanceVO[instances.size()];
-				int j = 0;
-				for(ComponentData instance : instances) {
-					instanceVO[j] = new InstanceVO();
-					instanceVO[j].setInstanceName(instance.getName());
-					instanceVO[j].setId(instance.getId());
-					instanceVO[j].setKpiCount(componentDataService.getComponentInstance(instance.getId()).getAvailKpiDataTypes().size());
-					j++;
-				}
-				clusterVO.setIntances(instanceVO);
-			}
-			ClusterVO [] clusterArray = clustersOfType.toArray(new ClusterVO[clustersOfType.size()]);
-			if(clusterArray.length > 0) {
-				componentVO[i] = new ComponentVO();
-				componentVO[i].setComponentName(componentType);
-				componentVO[i].setClusters(clusterArray);
-				i++;
-			}
+			i = assembleType(componentType, clusters, i);
 		}
 		
 		return SUCCESS;
+	}
+	
+	@Action(value="/availability/ComponentMeta", results = {
+	        @Result(name="success", type="json", params = {
+	        		"excludeProperties",
+	                "parameters,session,SUCCESS,ERROR,clusterDataService,componentDataService",
+	        		"enableGZIP", "true",
+	        		"encoding", "UTF-8",
+	                "noCache","true",
+	                "excludeNullProperties","true"
+	            })})
+	public String componentMetaAction() {
+		
+		String keyVal = "Component Meta Availability: ";
+		for(String key : parameters.keySet()) {
+			keyVal += "[ " + key + " = ";
+			for(String value : parameters.get(key)) {
+				keyVal += value + ", ";
+			}
+			keyVal += "] ";
+		}
+		String compType = (parameters.get("name")[0]);
+		System.out.println("component type being assembled = " + compType);
+		
+		componentVO = new ComponentVO[1];
+		List<Cluster> clusters = clusterDataService.getAll();
+		assembleType(compType, clusters, 0);
+		
+		return SUCCESS;
+	}
+	
+	public int assembleType(String componentType, List<Cluster> clusters, int i) {
+		List<ClusterVO> clustersOfType = new ArrayList<ClusterVO>();
+		
+		for(Cluster cluster : clusters) {
+			if(!cluster.getType().equals(componentType)) {
+				continue;
+			}
+			
+			ClusterVO clusterVO = new ClusterVO();
+			clusterVO.setClusterName(cluster.getName());
+			clusterVO.setId(cluster.getId());
+			clustersOfType.add(clusterVO);
+			
+			List<ComponentData> instances = cluster.getComponents();
+			InstanceVO [] instanceVO = new InstanceVO[instances.size()];
+			int j = 0;
+			for(ComponentData instance : instances) {
+				instanceVO[j] = new InstanceVO();
+				instanceVO[j].setInstanceName(instance.getName());
+				instanceVO[j].setId(instance.getId());
+				instanceVO[j].setKpiCount(componentDataService.getComponentInstance(instance.getId()).getAvailKpiDataTypes().size());
+				j++;
+			}
+			clusterVO.setIntances(instanceVO);
+		}
+		ClusterVO [] clusterArray = clustersOfType.toArray(new ClusterVO[clustersOfType.size()]);
+		if(clusterArray.length > 0) {
+			componentVO[i] = new ComponentVO();
+			componentVO[i].setComponentName(componentType);
+			componentVO[i].setClusters(clusterArray);
+			i++;
+		}
+		return i;
 	}
 
 	public ComponentVO[] getComponentVO() {

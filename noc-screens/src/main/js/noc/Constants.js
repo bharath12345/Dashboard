@@ -34,6 +34,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
 
         CONSTANTS.ACTION.AVAILABILITY = {};
         CONSTANTS.ACTION.AVAILABILITY.META = "availability/Meta.action";
+        CONSTANTS.ACTION.AVAILABILITY.COMPONENTMETA = "availability/ComponentMeta.action";
         CONSTANTS.ACTION.AVAILABILITY.COMPONENT = "availability/ComponentData.action";
         CONSTANTS.ACTION.AVAILABILITY.CLUSTER = "availability/ClusterData.action";
         CONSTANTS.ACTION.AVAILABILITY.INSTANCE = "availability/InstanceData.action";
