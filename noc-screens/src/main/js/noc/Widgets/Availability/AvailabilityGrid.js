@@ -120,32 +120,35 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid',
 
                 var gridData = [];
                 var dataPoint = new Object();
-
                 dataPoint.row0col3 = gridMeta.componentVO[0].componentName;
-
+                this.enrichWithAlerts(gridMeta.componentVO[0].componentName,
+                    gridMeta.componentVO[0].componentName, "row0col3", CONSTANTS.SUBTYPE.AVAILABILITY.COMPONENT);
                 var lastpoint = 0;
                 var clusters = gridMeta.componentVO[0].clusters;
                 for (var j = 0; j < clusters.length; j++) {
                     var point2 = "row" + (2 * j) + "col2";
                     dataPoint[point2] = clusters[j].clusterName;
+                    this.enrichWithAlerts(gridMeta.componentVO[0].componentName,
+                        clusters[j].clusterName, point2, CONSTANTS.SUBTYPE.AVAILABILITY.CLUSTER);
 
                     for (var z = 0; z < clusters[j].instances.length; z++) {
                         var point1 = "row" + (lastpoint + (2 * z)) + "col1";
                         //console.log("point 1 = " + point1);
                         dataPoint[point1] = clusters[j].instances[z].instanceName;
+                        this.enrichWithAlerts(gridMeta.componentVO[0].componentName,
+                            clusters[j].instances[z].instanceName, point1, CONSTANTS.SUBTYPE.AVAILABILITY.INSTANCE);
                         if (z == (clusters[j].instances.length - 1)) {
                             lastpoint = (2 * z) + 2;
                         }
                     }
                 }
                 gridData.push(dataPoint);
-
                 console.log("table data json" + dojo.toJson(gridData));
-
                 var grid = new Grid({subRows:subSubRows, showHeader:false,
                     style:"width:" + this.data.dimensions.width}, compName);
                 grid.renderArray(gridData);
                 dojo.byId("dijit_TitlePane_0_pane").style.padding = "0px";
+
 
                 // 6. There will be many among the '5' of column-3 who dont have as many as 4 children in column-2 - DELETE THEM. There will be many among the '4' of column-2 who dont have as many as 3 children in column-1 - DELETE THEM. But note - DONT resize the grid cell sizes - if the uniformity is gone then human eye will have problem perceiving hierarchy and will attach significane to some abstract big cell
                 //remove row3col1 AND row5col1 because this oracle standalone instance has only one child
@@ -278,6 +281,36 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid',
                     var divList = d3.select("#" + rowId).selectAll(divClass).remove();
                     console.log("div list = " + divList.length);
                 }
+            },
+
+            enrichWithAlerts: function(tableName, queryName, pointName, queryType) {
+                var viewMeta = {
+                    id:1,
+                    name: queryName,
+                    type: CONSTANTS.TYPE.ALERT,
+                    subtype: queryType,
+                    dimensions:[0, 0],
+                    position:[0, 0],
+                    custom:[tableName, pointName]
+                };
+                var url;
+                switch(queryType) {
+                    case CONSTANTS.SUBTYPE.AVAILABILITY.COMPONENT:
+                        console.log("component alert enrichment for " + tableName + " query name = " + queryName + " point name = " + pointName);
+                        url = CONSTANTS.ACTION.ALERT.COMPONENT;
+                        break;
+
+                    case CONSTANTS.SUBTYPE.AVAILABILITY.CLUSTER:
+                        console.log("cluster alert enrichment for " + tableName + " query name = " + queryName + " point name = " + pointName);
+                        url = CONSTANTS.ACTION.ALERT.CLUSTER;
+                        break;
+
+                    case CONSTANTS.SUBTYPE.AVAILABILITY.INSTANCE:
+                        console.log("instance alert enrichment for " + tableName + " query name = " + queryName + " point name = " + pointName);
+                        url = CONSTANTS.ACTION.ALERT.INSTANCE;
+                        break;
+                }
+                Utility.xhrPostCentral(url, viewMeta);
             }
         });
 

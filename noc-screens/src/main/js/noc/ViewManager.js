@@ -65,6 +65,10 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
                         ViewManager.manageAvailabilitySubView(data, input);
                         break;
 
+                    case CONSTANTS.TYPE.ALERT:
+                        ViewManager.manageAlertSubView(data, input);
+                        break;
+
                     case CONSTANTS.TYPE.COMPONENT_ZONES:
                         require([CONSTANTS.WIDGETS.COMPONENT.ZONES], function (Zones) {
                             new Zones().create(input);
@@ -121,6 +125,28 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
 
         ViewManager.manageComponentSubView = function(data, input) {
 
+        };
+
+        ViewManager.manageAlertSubView = function(data, input) {
+            switch(data.subtype) {
+                case CONSTANTS.SUBTYPE.AVAILABILITY.COMPONENT:
+                    require([CONSTANTS.WIDGETS.ALERT.AVAILABILITY], function (AlertAvailabilityGrid) {
+                        new AlertAvailabilityGrid().createComponentString(data, input);
+                    });
+                break;
+
+                case CONSTANTS.SUBTYPE.AVAILABILITY.CLUSTER:
+                    require([CONSTANTS.WIDGETS.ALERT.AVAILABILITY], function (AlertAvailabilityGrid) {
+                        new AlertAvailabilityGrid().createClusterString(data, input);
+                    });
+                    break;
+
+                case CONSTANTS.SUBTYPE.AVAILABILITY.INSTANCE:
+                    require([CONSTANTS.WIDGETS.ALERT.AVAILABILITY], function (AlertAvailabilityGrid) {
+                        new AlertAvailabilityGrid().createAlertString(data, input);
+                    });
+                    break;
+            }
         };
 
         return ViewManager;
