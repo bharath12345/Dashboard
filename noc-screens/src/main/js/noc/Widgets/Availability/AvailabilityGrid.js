@@ -205,7 +205,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid',
             renderSVG:function (objectName, id, objectSize, gridType) {
                 console.log("render svg grid type " + gridType);
                 var domNode = dojo.byId(objectName);
-                var xpos = 0, ypos = 0;
+                var xpos = 0, ypos = 10;
                 var viewMeta = {
                     id:id,
                     name: objectName,

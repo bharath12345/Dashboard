@@ -8,7 +8,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n",
             create:function (input, payload) {
                 console.log("in create avail matrix gridtype = " + input.subtype);
                 try {
-                    var data = new Array();
+                    var data = new Array(); var timedata = new Array();
                     var gridItemWidth = parseInt(input.custom[0]);
                     var gridItemHeight = gridItemWidth; // for square boxes
 
@@ -35,6 +35,12 @@ define(['require', "dojo/_base/declare", "dojo/i18n",
                                 break;
                         }
 
+                        timedata[i] = {
+                            time: sub[i].time,
+                            x: xpos,
+                            y: input.position.ypos
+                        };
+
                         console.log("column set len = " + columnSet.length + " gridtype = " + input.subtype);
 
                         for (var j = 0; j < columnSet.length; j++) {
@@ -50,26 +56,40 @@ define(['require', "dojo/_base/declare", "dojo/i18n",
                         }
                     }
                     console.log("going to render grid for = " + input.name + "dimensions w = " + input.dimensions.width + " h = " + input.dimensions.height);
-                    this.renderGrid(data, input.name, input.dimensions.width, input.dimensions.height);
+                    console.log("timedata = " + dojo.toJson(timedata));
+
+                    this.renderGrid(data, timedata, input.name, input.dimensions.width, input.dimensions.height);
                 } catch (e) {
                     console.log("exception " + e);
                 }
             },
 
-            renderGrid:function (data, id, width, height) {
+            renderGrid:function (data, timedata, id, width, height) {
 
                 try {
                     console.log("render id = " + id + " grid data = "+dojo.toJson(data));
 
-                    //var myd = dojo.create("svg");
-                    //console.log("myd = " + document.getElementById(id));
-                    //document.getElementById(id).appendChild(myd);
+                    var rowhead = d3.select("#" + id).append("svg")
+                        .attr("class", "timegroup");
+
+                    rowhead.selectAll(".timehead")
+                        .data(timedata).enter()
+                        .append("text")
+                        .text(function(d) {
+                            console.log("time fragment = " + d.time);
+                            return d.time;
+                        })
+                        .attr("x", function (d) {
+                            return d.x;
+                        })
+                        .attr("y", function (d) {
+                            return d.y;
+                        });
 
                     var grid = d3.select("#" + id).append("svg")
                         .attr("width", width)
                         .attr("height", height)
                         .attr("class", "chart");
-
 
                     var row = grid.selectAll(".row")
                         .data(data)
@@ -100,6 +120,30 @@ define(['require', "dojo/_base/declare", "dojo/i18n",
                             return color(d.value);
                         })
                         .style("stroke", '#555');
+
+                    row.selectAll(".rowtext")
+                        .data(function (d) {
+                            return d;
+                        })
+                        .enter().append("text")
+                        .attr("x", function (d) {
+                            return d.x;
+                        })
+                        .attr("y", function (d) {
+                            return d.y;
+                        })
+                        .attr("width", function (d) {
+                            return d.width;
+                        })
+                        .attr("height", function (d) {
+                            return d.height;
+                        })
+                        .text(function(d) {
+                            return d.name;
+                        })
+                        .attr("transform",function (d) {
+                            return "rotate(90," + (d.x-d.width) + "," + d.height + ")";
+                        });
 
                 } catch(e) {
                     console.log("render exception = " + e);
