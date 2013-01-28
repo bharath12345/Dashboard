@@ -15,13 +15,42 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
 
                 this.createSections(viewPort);
 
-                new AvailabilityPage().loadPage(0, "availabilityPage_0", "LINUXHOST");
-                new AvailabilityPage().loadPage(1, "availabilityPage_1", "WINDOWSHOST");
-                new AvailabilityPage().loadPage(2, "availabilityPage_2", "APP_SERVER");
+                //new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "LINUXHOST");
+                //new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "WINDOWSHOST");
+                //new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "CUSTOM");
+                //new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "CLUSTER");
+
+
                 //setTimeout(function(){new TxTimeSeriesPage().loadPage()}, 10*1000);
                 //setTimeout(function(){new ComponentPage().loadPage()}, 20*1000);
                 //setTimeout(function(){new TxTreemapPage().loadPage()}, 30*1000);
                 //setTimeout(function(){new TxServiceLevelPage().loadPage()}, 40*1000);
+
+                new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "DB", "ALL");
+
+                new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "WEB_SERVER", "FLXRET_IHS");
+                new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "WEB_SERVER", "CRMNextCommIIS");
+                new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "WEB_SERVER", "FinnoneLOS_WebSrv");
+                new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "WEB_SERVER", "ENET_IHS");
+
+                new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "APP_SERVER", "FLXRETWAS1");
+                new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "APP_SERVER", "FLXRETWAS2");
+                new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "APP_SERVER", "FLXRETWAS3");
+                new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "APP_SERVER", "FLXRETWAS4");
+                new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "APP_SERVER", "FLXRETWAS5");
+                new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "APP_SERVER", "FLXRETWAS6");
+                new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "APP_SERVER", "FLXRETWAS7");
+                new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "APP_SERVER", "FLXRETWAS8");
+                new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "APP_SERVER", "FinnoneLOSWAS1");
+                new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "APP_SERVER", "FinnoneLOSWAS2");
+                new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "APP_SERVER", "FinnoneLOSWAS3");
+                new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "APP_SERVER", "FinnoneLOSWAS4");
+                new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "APP_SERVER", "FinnoneLOSWAS5");
+                new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "APP_SERVER", "FinnoneLOSWAS6");
+                new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "APP_SERVER", "FinnoneLOSWAS7");
+                new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "APP_SERVER", "FLXRETWASALL");
+                new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "APP_SERVER", "NCB_UAT_APP");
+                new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "APP_SERVER", "ENETWASALL");
 
                 //PageLoader.pageScroll(viewPort);
             },
@@ -41,11 +70,9 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
             },
 
             createSections: function(viewPort) {
-                this.createBorderContainer(this.getSection(), viewPort, 0);
-                this.createBorderContainer(this.getSection(), viewPort, 1);
-                this.createBorderContainer(this.getSection(), viewPort, 2);
-                this.createBorderContainer(this.getSection(), viewPort, 3);
-                this.createBorderContainer(this.getSection(), viewPort, 4);
+                for(var i=0; i<24; i++) {
+                    this.createBorderContainer(this.getSection(), viewPort, i);
+                }
             },
 
             createBorderContainer: function(section, viewPort, pageCounter) {
@@ -110,6 +137,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
         // when the page loads, this variable is set to 0
         // after that, this counter is spinning between 1 to 5
         PageLoader.PageCounter = 0;
+        PageLoader.TotalPages = 0;
 
         PageLoader.TopBc = [];
         PageLoader.CpTop = [];

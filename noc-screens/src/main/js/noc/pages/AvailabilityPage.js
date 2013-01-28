@@ -5,7 +5,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
 
         var AvailabilityPage = declare("noc.pages.AvailabilityPage", null, {
 
-            loadPage:function (pageNumber, pageName, componentName) {
+            loadPage:function (pageNumber, pageName, componentName, clusterName) {
 
                 AvailabilityPage.CP[pageNumber] = noc.PageLoader.CpCenter[pageNumber];
 
@@ -39,7 +39,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                     subtype: CONSTANTS.SUBTYPE.AVAILABILITY.META,
                     dimensions:[AvailabilityPage.CP[pageNumber].w, AvailabilityPage.CP[pageNumber].h],
                     position:[xpos,ypos],
-                    custom: [componentName]
+                    custom: [componentName, clusterName]
                 };
 
                 Utility.xhrPostCentral(CONSTANTS.ACTION.REQUEST_HANDLER, viewMeta);

@@ -28,12 +28,29 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
 
                 for (var i = 0; i < maxCol3; i++) {
                     var compDiv = dojo.create("div");
-                    compDiv.id = CONSTANTS.PREFIX.COMPONENT_GRID + gridMeta.componentVO[i].componentName;
+                    if(gridMeta.clusterName != "ALL") {
+                        compDiv.id = CONSTANTS.PREFIX.COMPONENT_GRID + gridMeta.componentName + "_" + gridMeta.clusterName;
+                    } else {
+                        compDiv.id = CONSTANTS.PREFIX.COMPONENT_GRID + gridMeta.componentName;
+                    }
                     dojo.byId(gridMeta.pageName).appendChild(compDiv);
                     var compGridMeta = {};
                     compGridMeta.componentVO = [];
                     compGridMeta.componentVO.push(gridMeta.componentVO[i]);
-                    this.createSingleComponentGrid(compDiv.id, compGridMeta);
+
+                    if(gridMeta.clusterName != "ALL") {
+                        // remove all clusters except the one in the request
+
+                        var clusters = gridMeta.componentVO[0].clusters;
+                        for (var j = 0; j < clusters.length; j++) {
+                            if (clusters[j].clusterName != gridMeta.clusterName) {
+                                delete clusters[j];
+                            }
+                        }
+                    }
+
+                    console.log("creating availability grid for component = " + gridMeta.componentName + " cluster = " + gridMeta.clusterName + " in page = " + gridMeta.pageName);
+                    this.createSingleComponentGrid(compDiv.id, compGridMeta, gridMeta.clusterName);
                 }
             },
 
@@ -149,7 +166,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
                 dojo.query("#" + compName + " td.field-row1col3").forEach(function (node) {
                     node.id = CONSTANTS.PREFIX.COMPONENT_CELL + gridMeta.componentVO[0].componentName;
                     node.setAttribute(CONSTANTS.ATTRIBUTE.AVAILABILITY.COMPONENT, gridMeta.componentVO[0].id);
-                    console.log("i = " + i + " comp id = " + gridMeta.componentVO[0].id + " this is the div in cell = " + node);
+                    //console.log("i = " + i + " comp id = " + gridMeta.componentVO[0].id + " this is the div in cell = " + node);
                     i++;
 
                 });
@@ -172,7 +189,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
                         if (instanceNamesOfCluster[j] != null && instanceNamesOfCluster[j] != undefined) {
                             node.id = CONSTANTS.PREFIX.INSTANCE_CELL + instanceNamesOfCluster[j];
                             node.setAttribute(CONSTANTS.ATTRIBUTE.AVAILABILITY.INSTANCE, instanceIdsOfCluster[j]);
-                            console.log("j = " + instanceNamesOfCluster[j] + " div in cell = " + node.className);
+                            //console.log("j = " + instanceNamesOfCluster[j] + " div in cell = " + node.className);
                         }
                     });
                 }

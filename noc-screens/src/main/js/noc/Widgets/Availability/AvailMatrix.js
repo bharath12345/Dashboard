@@ -88,8 +88,10 @@ define(['require', "dojo/_base/declare", "dojo/i18n",
 
                     var grid = d3.select("#" + id).append("svg")
                         .attr("width", width)
-                        .attr("height", height)
-                        .attr("class", "chart");
+                        //.attr("height", height)
+                        .attr("class", "chart")
+                        .attr("top", "10")
+                        .attr("left", "10");
 
                     var row = grid.selectAll(".row")
                         .data(data)

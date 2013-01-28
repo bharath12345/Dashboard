@@ -1,5 +1,5 @@
 define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Logger", "noc/Constants",
-"noc/Widgets/Incident/IncidentAvailabilityGrid"],
+    "noc/Widgets/Incident/IncidentAvailabilityGrid"],
 
     function (require, declare, i18n, i18nString, Logger, CONSTANTS, IncidentAvailabilityGrid) {
 
@@ -134,7 +134,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
                     require([CONSTANTS.WIDGETS.INCIDENT.AVAILABILITY], function (IncidentAvailabilityGrid) {
                         new IncidentAvailabilityGrid().createComponentString(data, input);
                     });
-                break;
+                    break;
 
                 case CONSTANTS.SUBTYPE.AVAILABILITY.CLUSTER:
                     require([CONSTANTS.WIDGETS.INCIDENT.AVAILABILITY], function (IncidentAvailabilityGrid) {

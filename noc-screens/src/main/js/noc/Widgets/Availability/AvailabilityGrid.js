@@ -8,15 +8,11 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
             create:function (data) {
                 console.log("triggering availability grid creation");
                 this.data = data;
-                /*d3.json(CONSTANTS.ACTION.AVAILABILITY.META, dojo.hitch(this, function (error, m) {
-                 console.log("err " + error);
-                 console.log("m " + m);
-                 this.renderGrid(m);
-                 }));*/
 
                 var options = {};
-                options.componentName = data.custom[0];
                 options.pageName = data.name;
+                options.componentName = data.custom[0];
+                options.clusterName = data.custom[1];
 
                 xhr(CONSTANTS.ACTION.AVAILABILITY.COMPONENTMETA, {
                     handleAs:"json",
@@ -24,7 +20,6 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
                     query:options,
                     headers:Utility.JSON_HEADER
                 }).then(function (data) {
-                        console.log("data = " + data);
                         require([CONSTANTS.WIDGETS.AVAILABILITY.AVAILABILITY], function (Availability) {
                             new Availability().renderGrid(data);
                         });
@@ -32,7 +27,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
                         // Handle the error condition
                         console.log("xhr error = " + err);
                     }, function (evt) {
-                        console.log("xhr event = " + evt);
+                        //console.log("xhr event = " + evt);
                     });
             }
         });
