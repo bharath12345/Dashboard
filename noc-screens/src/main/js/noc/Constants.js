@@ -6,6 +6,10 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         var CONSTANTS = declare("noc.Constants", null, {});
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        CONSTANTS.CLASSNAME = {};
+        CONSTANTS.CLASSNAME.PAGELOADER = "noc.PageLoader";
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // VARIOUS TYPES FOR SWITCHING IN ViewManager
         CONSTANTS.TYPE = {};
         CONSTANTS.SUBTYPE = {};
@@ -31,6 +35,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.ACTION = {};
         CONSTANTS.ACTION.REQUEST_HANDLER = "noc/RequestHandler.action";
         CONSTANTS.ACTION.LOGIN = "user/UserLogin.action";
+        CONSTANTS.ACTION.LOGGER = "logger/Logger.action"
 
         CONSTANTS.ACTION.AVAILABILITY = {};
         CONSTANTS.ACTION.AVAILABILITY.META = "availability/Meta.action";

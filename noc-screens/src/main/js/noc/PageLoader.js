@@ -1,12 +1,13 @@
 define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/layout/BorderContainer", "dojo/window",
     "dojo/i18n!noc/nls/noc", "noc/pages/AvailabilityPage", "noc/pages/TxTreemapPage",
-    "noc/pages/ComponentPage", "noc/pages/TxTimeSeriesPage","noc/pages/TxServiceLevelPage"],
+    "noc/pages/ComponentPage", "noc/pages/TxTimeSeriesPage","noc/pages/TxServiceLevelPage",
+    "noc/Logger"],
 
     function (require, declare, i18n, ContentPane, BorderContainer, win,
               i18nString, AvailabilityPage, TxTimeSeriesPage, ComponentPage,
-              TxTreemapPage, TxServiceLevelPage) {
+              TxTreemapPage, TxServiceLevelPage, Logger) {
 
-        var PageLoader = declare("noc.PageLoader", null, {
+        var PageLoader = declare(CONSTANTS.CLASSNAME.PAGELOADER, null, {
 
             initMain:function () {
 
@@ -131,6 +132,8 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
             }
 
         });
+
+        var LOG = Logger.getLogger(CONSTANTS.CLASSNAME.PAGELOADER);
 
         // static variables of this class
 
