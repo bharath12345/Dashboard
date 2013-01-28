@@ -3,7 +3,7 @@
     position: relative;
     overflow: hidden; /* This is needed by IE to prevent crazy scrollbar flashing */
     border: 1px solid #ddd;
-    height: 30em;
+    height: 100%;
     display: block;
 }
 

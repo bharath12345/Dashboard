@@ -14,7 +14,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
 
         CONSTANTS.TYPE.AVAILABILITY = 1;
         CONSTANTS.TYPE.COMPONENT = 2;
-        CONSTANTS.TYPE.ALERT = 3;
+        CONSTANTS.TYPE.INCIDENT = 3;
 
         CONSTANTS.SUBTYPE.AVAILABILITY = {};
         CONSTANTS.SUBTYPE.AVAILABILITY.COMPONENT = 1;
@@ -44,10 +44,10 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.ACTION.COMPONENT.META = 'component/KpiMatrixMeta.action';
         CONSTANTS.ACTION.COMPONENT.DATA = 'component/KpiMatrixData.acton';
 
-        CONSTANTS.ACTION.ALERT = {};
-        CONSTANTS.ACTION.ALERT.COMPONENT = "alert/Component.action";
-        CONSTANTS.ACTION.ALERT.CLUSTER = "alert/Cluster.action";
-        CONSTANTS.ACTION.ALERT.INSTANCE = "alert/Instance.action";
+        CONSTANTS.ACTION.INCIDENT = {};
+        CONSTANTS.ACTION.INCIDENT.COMPONENT = "alert/Component.action";
+        CONSTANTS.ACTION.INCIDENT.CLUSTER = "alert/Cluster.action";
+        CONSTANTS.ACTION.INCIDENT.INSTANCE = "alert/Instance.action";
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // WIDGET CLASS PATHS
@@ -58,13 +58,14 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.WIDGETS.AVAILABILITY = {};
         CONSTANTS.WIDGETS.AVAILABILITY.GRID = 'noc/Widgets/Availability/AvailabilityGrid';
         CONSTANTS.WIDGETS.AVAILABILITY.MATRIX = 'noc/Widgets/Availability/AvailMatrix';
+        CONSTANTS.WIDGETS.AVAILABILITY.AVAILABILITY = 'noc/Widgets/Availability/Availability';
 
         CONSTANTS.WIDGETS.COMPONENT = {};
         CONSTANTS.WIDGETS.COMPONENT.ZONES = 'noc/Widgets/component/Zones';
         CONSTANTS.WIDGETS.COMPONENT.CELLMAKER = 'noc/Widgets/component/CellMaker';
 
-        CONSTANTS.WIDGETS.ALERT = {};
-        CONSTANTS.WIDGETS.ALERT.AVAILABILITY = 'noc/Widgets/Alert/AlertAvailabilityGrid';
+        CONSTANTS.WIDGETS.INCIDENT = {};
+        CONSTANTS.WIDGETS.INCIDENT.AVAILABILITY = 'noc/Widgets/Incident/IncidentAvailabilityGrid';
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////        
 

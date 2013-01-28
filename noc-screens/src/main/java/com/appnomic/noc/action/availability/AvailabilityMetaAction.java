@@ -36,6 +36,7 @@ public class AvailabilityMetaAction extends AbstractNocAction  {
 
 	private ComponentDataService componentDataService;
 	private ClusterDataService clusterDataService;
+	private String pageName;
 	
 	public ComponentDataService getComponentDataService() {
 		return componentDataService;
@@ -52,8 +53,16 @@ public class AvailabilityMetaAction extends AbstractNocAction  {
 	public void setClusterDataService(ClusterDataService clusterDataService) {
 		this.clusterDataService = clusterDataService;
 	}
-
 	
+	public String getPageName() {
+		return pageName;
+	}
+
+	public void setPageName(String pageName) {
+		this.pageName = pageName;
+	}
+
+
 	// this is the variable returned as JSON by the struts plugin
 	// Note: there is strong binding between this variable name and code in JS
 	// So if you rename this variable make sure that the right JS file is also fixed
@@ -131,7 +140,11 @@ public class AvailabilityMetaAction extends AbstractNocAction  {
 			}
 			keyVal += "] ";
 		}
-		String compType = (parameters.get("name")[0]);
+		System.out.println("key value map = " + keyVal);
+		
+		String compType = (parameters.get("componentName")[0]);
+		pageName = (parameters.get("pageName")[0]);
+		
 		System.out.println("component type being assembled = " + compType);
 		
 		componentVO = new ComponentVO[1];

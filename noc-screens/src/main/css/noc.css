@@ -73,3 +73,14 @@ a.document {
 }
 
 
+.timegroup{
+    position:relative;
+    top:10px; left:10px;
+}
+
+.chart {
+    position:relative;
+    top:10px; left:10px;
+}
+
+
