@@ -1,15 +1,15 @@
-define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Logger", "noc/Constants"],
+define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Logger", "noc/Constants", "noc/Utility"],
 
-    function (require, declare, i18n, i18nString, Logger, CONSTANTS) {
+    function (require, declare, i18n, i18nString, Logger, CONSTANTS, Utility) {
 
         // this is a completely static class
-        var CellMaker = declare("noc.component.CellMaker", null, {
+        var CellMaker = declare(CONSTANTS.CLASSNAME.WIDGETS.COMPONENT.CELLMAKER, null, {
 
             create:function (data, id, width, height) {
                 // data has all 3 - component name, kpi name and value
                 // find the cell with the id and set its background color
 
-                //console.log(data);
+                //CellMaker.LOG.log(Logger.SEVERITY.SEVERE, data);
 
                 var grid = d3.select("#" + id).append("svg")
                     .attr("width", width)
@@ -21,7 +21,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
                     .data(data[0])
                     .enter().append("text")
                     .attr("x", function (d) {
-                        console.log(d);
+                        CellMaker.LOG.log(Logger.SEVERITY.SEVERE, d);
                         return d.x;
                     })
                     .attr("y", 20)
@@ -76,6 +76,8 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
             }
 
         });
+
+        CellMaker.LOG = new Logger(CONSTANTS.CLASSNAME.WIDGETS.COMPONENT.CELLMAKER);
 
         return CellMaker;
     });

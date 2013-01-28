@@ -1,12 +1,12 @@
 define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/request/xhr", "dojo/_base/lang",
-    "dojo/i18n!noc/nls/noc", "noc/Utility", "noc/Constants"],
+    "dojo/i18n!noc/nls/noc", "noc/Utility", "noc/Constants", "noc/Logger"],
 
-    function (require, declare, i18n, Grid, xhr, lang, i18nString, Utility, CONSTANTS) {
+    function (require, declare, i18n, Grid, xhr, lang, i18nString, Utility, CONSTANTS, Logger) {
 
-        var AvailabilityGrid = declare("noc.Components.Availability.AvailabilityGrid", null, {
+        var AvailabilityGrid = declare(CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILABILITYGRID, null, {
 
             create:function (data) {
-                console.log("triggering availability grid creation");
+                AvailabilityGrid.LOG.log(Logger.SEVERITY.SEVERE, "triggering availability grid creation");
                 this.data = data;
 
                 var options = {};
@@ -25,14 +25,15 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
                         });
                     }, function (err) {
                         // Handle the error condition
-                        console.log("xhr error = " + err);
+                        AvailabilityGrid.LOG.log(Logger.SEVERITY.SEVERE, "xhr error = " + err);
                     }, function (evt) {
-                        //console.log("xhr event = " + evt);
+                        //AvailabilityGrid.LOG.log(Logger.SEVERITY.SEVERE, "xhr event = " + evt);
                     });
             }
         });
 
         // static variables of this class
+        AvailabilityGrid.LOG = new Logger(CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILABILITYGRID);
 
         AvailabilityGrid.PageCounter = 0;
         AvailabilityGrid.CP = null;

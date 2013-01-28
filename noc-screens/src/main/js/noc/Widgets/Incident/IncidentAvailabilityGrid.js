@@ -1,8 +1,8 @@
-define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Logger", "noc/Constants"],
+define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Logger", "noc/Constants", "noc/Utility"],
 
-    function (declare, i18n, i18nString, Logger, CONSTANTS) {
+    function (declare, i18n, i18nString, Logger, CONSTANTS, Utility) {
 
-        var IncidentAvailabilityGrid = declare("noc.Widgets.Incident.IncidentAvailabilityGrid", null, {
+        var IncidentAvailabilityGrid = declare(CONSTANTS.CLASSNAME.WIDGETS.INCIDENT.INCIDENTAVAILABILITYGRID, null, {
 
             createComponentString: function(data, input) {
                 dojo.query("#" + data.custom[0] + " " + data.custom[1]).forEach(function (node) {
@@ -23,6 +23,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Logger"
             }
 
         });
+
+        IncidentAvailabilityGrid.LOG = new Logger(CONSTANTS.CLASSNAME.WIDGETS.INCIDENT.INCIDENTAVAILABILITYGRID);
 
         return IncidentAvailabilityGrid;
     });

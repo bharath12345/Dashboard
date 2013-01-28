@@ -1,9 +1,9 @@
 define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/request/xhr", "dojo/_base/lang",
-    "dojo/i18n!noc/nls/noc", "noc/Utility", "noc/Constants"],
+    "dojo/i18n!noc/nls/noc", "noc/Utility", "noc/Constants", "noc/Logger"],
 
-    function (require, declare, i18n, Grid, xhr, lang, i18nString, Utility, CONSTANTS) {
+    function (require, declare, i18n, Grid, xhr, lang, i18nString, Utility, CONSTANTS, Logger) {
 
-        var Availability = declare("noc.Components.Availability.Availability", null, {
+        var Availability = declare(CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILABILITY, null, {
 
             renderGrid:function (gridMeta) {
                 // How to build the table - METHODOLOGY
@@ -49,7 +49,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
                         }
                     }
 
-                    console.log("creating availability grid for component = " + gridMeta.componentName + " cluster = " + gridMeta.clusterName + " in page = " + gridMeta.pageName);
+                    Availability.LOG.log(Logger.SEVERITY.SEVERE, "creating availability grid for component = " + gridMeta.componentName + " cluster = " + gridMeta.clusterName + " in page = " + gridMeta.pageName);
                     this.createSingleComponentGrid(compDiv.id, compGridMeta, gridMeta.clusterName);
                 }
             },
@@ -81,7 +81,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
                 maxCol1 = maxCol1 * maxCol2;
                 maxCol1 *= 2;
                 var col2break = maxCol1 / maxCol2;
-                console.log("1=" + maxCol1 + " 2=" + maxCol2 + " 3=" + maxCol3);
+                Availability.LOG.log(Logger.SEVERITY.SEVERE, "1=" + maxCol1 + " 2=" + maxCol2 + " 3=" + maxCol3);
 
                 var subSubRows = [], firstFound = false, secondFound = false;
                 for (var i = 0, j = 0, z = 0; i < maxCol1; i++, z++) {
@@ -123,7 +123,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
                     }
                     subSubRows.push(subRows);
                 }
-                console.log("table meta json" + dojo.toJson(subSubRows));
+                Availability.LOG.log(Logger.SEVERITY.SEVERE, "table meta json" + dojo.toJson(subSubRows));
 
                 var gridData = [];
                 var dataPoint = new Object();
@@ -140,7 +140,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
 
                     for (var z = 0; z < clusters[j].instances.length; z++) {
                         var point1 = "row" + (lastpoint + (2 * z)) + "col1";
-                        //console.log("point 1 = " + point1);
+                        //Availability.LOG.log(Logger.SEVERITY.SEVERE, "point 1 = " + point1);
                         dataPoint[point1] = clusters[j].instances[z].instanceName;
                         this.enrichWithIncidents(gridMeta.componentVO[0].componentName,
                             clusters[j].instances[z].instanceName, point1, CONSTANTS.SUBTYPE.AVAILABILITY.INSTANCE);
@@ -150,7 +150,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
                     }
                 }
                 gridData.push(dataPoint);
-                console.log("table data json" + dojo.toJson(gridData));
+                Availability.LOG.log(Logger.SEVERITY.SEVERE, "table data json" + dojo.toJson(gridData));
                 var grid = new Grid({subRows:subSubRows, showHeader:false}, compName);
                 grid.renderArray(gridData);
                 dojo.byId("dijit_TitlePane_0_pane").style.padding = "0px";
@@ -166,7 +166,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
                 dojo.query("#" + compName + " td.field-row1col3").forEach(function (node) {
                     node.id = CONSTANTS.PREFIX.COMPONENT_CELL + gridMeta.componentVO[0].componentName;
                     node.setAttribute(CONSTANTS.ATTRIBUTE.AVAILABILITY.COMPONENT, gridMeta.componentVO[0].id);
-                    //console.log("i = " + i + " comp id = " + gridMeta.componentVO[0].id + " this is the div in cell = " + node);
+                    //Availability.LOG.log(Logger.SEVERITY.SEVERE, "i = " + i + " comp id = " + gridMeta.componentVO[0].id + " this is the div in cell = " + node);
                     i++;
 
                 });
@@ -175,11 +175,11 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
                     this.markCol2Ids(i, maxCol3, gridMeta, compName);
                 }
 
-                console.log("max col 3 = " + maxCol3);
+                Availability.LOG.log(Logger.SEVERITY.SEVERE, "max col 3 = " + maxCol3);
 
                 var cluster = gridMeta.componentVO[0].clusters;
 
-                //console.log("working on clusters in = " + gridMeta.componentVO[0].componentName);
+                //Availability.LOG.log(Logger.SEVERITY.SEVERE, "working on clusters in = " + gridMeta.componentVO[0].componentName);
                 var instanceNamesOfCluster = [];
                 var instanceIdsOfCluster = [];
                 this.cacheClusterInstances(cluster, instanceNamesOfCluster, instanceIdsOfCluster);
@@ -189,7 +189,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
                         if (instanceNamesOfCluster[j] != null && instanceNamesOfCluster[j] != undefined) {
                             node.id = CONSTANTS.PREFIX.INSTANCE_CELL + instanceNamesOfCluster[j];
                             node.setAttribute(CONSTANTS.ATTRIBUTE.AVAILABILITY.INSTANCE, instanceIdsOfCluster[j]);
-                            //console.log("j = " + instanceNamesOfCluster[j] + " div in cell = " + node.className);
+                            //Availability.LOG.log(Logger.SEVERITY.SEVERE, "j = " + instanceNamesOfCluster[j] + " div in cell = " + node.className);
                         }
                     });
                 }
@@ -212,7 +212,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
             },
 
             renderSVG:function (objectName, id, objectSize, gridType) {
-                console.log("render svg grid type " + gridType);
+                Availability.LOG.log(Logger.SEVERITY.SEVERE, "render svg grid type " + gridType);
                 var domNode = dojo.byId(objectName);
                 var xpos = 0, ypos = 10;
                 var viewMeta = {
@@ -236,7 +236,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
                         url = CONSTANTS.ACTION.AVAILABILITY.INSTANCE;
                         break;
                     default:
-                        console.log("unknown grid type = " + gridType);
+                        Availability.LOG.log(Logger.SEVERITY.SEVERE, "unknown grid type = " + gridType);
                         return;
                 }
                 Utility.xhrPostCentral(url, viewMeta);
@@ -248,7 +248,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
                     for (var z = 0; z < instance.length; z++) {
                         instanceNamesOfCluster.push(instance[z].instanceName);
                         instanceIdsOfCluster.push(instance[z].id);
-                        //console.log("pushed instance = " + instance[z].instanceName);
+                        //Availability.LOG.log(Logger.SEVERITY.SEVERE, "pushed instance = " + instance[z].instanceName);
                     }
                 }
             },
@@ -266,7 +266,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
                     }
                     if (clusters[rowNum] != null && clusters[rowNum] != undefined) {
                         clusterNameOfType.push(clusters[rowNum].clusterName);
-                        //console.log("pushed cluster = " + clusters[rowNum].clusterName);
+                        //Availability.LOG.log(Logger.SEVERITY.SEVERE, "pushed cluster = " + clusters[rowNum].clusterName);
                         clusterIdOfType.push(clusters[rowNum].id);
                     }
                 }
@@ -275,7 +275,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
                     if (clusterNameOfType[i] != null && clusterNameOfType[i] != undefined) {
                         node.id = CONSTANTS.PREFIX.CLUSTER_CELL + clusterNameOfType[i];
                         node.setAttribute(CONSTANTS.ATTRIBUTE.AVAILABILITY.CLUSTER, clusterIdOfType[i]);
-                        //console.log("i = " + clusterNameOfType[i] + " div in cell = " + node.className);
+                        //Availability.LOG.log(Logger.SEVERITY.SEVERE, "i = " + clusterNameOfType[i] + " div in cell = " + node.className);
                     }
                     i++;
                 });
@@ -285,7 +285,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
                 for (var i = 0; i < toRemove.length; i++) {
                     var divClass = ".field-row" + toRemove[i][0] + "col" + toRemove[i][1];
                     var divList = d3.select("#" + rowId).selectAll(divClass).remove();
-                    console.log("div list = " + divList.length);
+                    Availability.LOG.log(Logger.SEVERITY.SEVERE, "div list = " + divList.length);
                 }
             },
 
@@ -302,17 +302,17 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
                 var url;
                 switch (queryType) {
                     case CONSTANTS.SUBTYPE.AVAILABILITY.COMPONENT:
-                        console.log("component alert enrichment for " + tableName + " query name = " + queryName + " point name = " + pointName);
+                        Availability.LOG.log(Logger.SEVERITY.SEVERE, "component alert enrichment for " + tableName + " query name = " + queryName + " point name = " + pointName);
                         url = CONSTANTS.ACTION.INCIDENT.COMPONENT;
                         break;
 
                     case CONSTANTS.SUBTYPE.AVAILABILITY.CLUSTER:
-                        console.log("cluster alert enrichment for " + tableName + " query name = " + queryName + " point name = " + pointName);
+                        Availability.LOG.log(Logger.SEVERITY.SEVERE, "cluster alert enrichment for " + tableName + " query name = " + queryName + " point name = " + pointName);
                         url = CONSTANTS.ACTION.INCIDENT.CLUSTER;
                         break;
 
                     case CONSTANTS.SUBTYPE.AVAILABILITY.INSTANCE:
-                        console.log("instance alert enrichment for " + tableName + " query name = " + queryName + " point name = " + pointName);
+                        Availability.LOG.log(Logger.SEVERITY.SEVERE, "instance alert enrichment for " + tableName + " query name = " + queryName + " point name = " + pointName);
                         url = CONSTANTS.ACTION.INCIDENT.INSTANCE;
                         break;
                 }
@@ -321,6 +321,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
         });
 
         // static variables of this class
+        Availability.LOG = new Logger(CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILABILITY);
 
         return Availability;
     });

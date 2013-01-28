@@ -1,9 +1,9 @@
-define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Logger", "noc/Constants"],
+define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Logger", "noc/Constants", "noc/Utility"],
 
-    function (require, declare, i18n, i18nString, Logger, CONSTANTS) {
+    function (require, declare, i18n, i18nString, Logger, CONSTANTS, Utility) {
 
         // this is a completely static class
-        var Zones = declare("noc.component.Zones", null, {
+        var Zones = declare(CONSTANTS.CLASSNAME.WIDGETS.COMPONENT.ZONES, null, {
 
             create:function (data) {
                 var paneWidth, paneHeight, nbZones;
@@ -29,7 +29,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
                         nbZones = 3;
                         break;
                     default:
-                        console.log("unusual number of zones = "+zoneNames.length);
+                        Zones.LOG.log(Logger.SEVERITY.SEVERE, "unusual number of zones = "+zoneNames.length);
                         return;
                 }
 
@@ -116,6 +116,8 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
             }
 
         });
+
+        Zones.LOG = new Logger(CONSTANTS.CLASSNAME.WIDGETS.COMPONENT.ZONES);
 
         return Zones;
     });

@@ -2,7 +2,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Utility
 
     function (declare, i18n, i18nString, Utility, CONSTANTS) {
 
-        var Login = declare("Login", null, {});
+        var Login = declare(CONSTANTS.CLASSNAME.LOGIN, null, {});
+
+        Login.LOG = new Logger(CONSTANTS.CLASSNAME.LOGIN);
 
         Login.expandCollapse = function() {
             var elem = document.getElementById(Login.expandCollapse.arguments[0]);
@@ -91,7 +93,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Utility
         };
 
         Login.successPostProcess = function(data) {
-            console.log("post process data = " + dojo.toJson(data));
+            Login.LOG.log(Logger.SEVERITY.SEVERE, "post process data = " + dojo.toJson(data));
 
             //login has succeeded - recreate the page if the user is on index.jsp
             // if the user is on signin.jsp then move him to index.jsp

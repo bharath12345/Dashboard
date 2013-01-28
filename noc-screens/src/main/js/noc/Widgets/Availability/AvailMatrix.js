@@ -1,19 +1,19 @@
 define(['require', "dojo/_base/declare", "dojo/i18n",
-    "dojo/i18n!noc/nls/noc", "noc/Constants"],
+    "dojo/i18n!noc/nls/noc", "noc/Constants", "noc/Utility", "noc/Logger"],
 
-    function (require, declare, i18n, i18nString, CONSTANTS) {
+    function (require, declare, i18n, i18nString, CONSTANTS, Utility, Logger) {
 
-        var AvailMatrix = declare("noc.Components.Availability.AvailMatrix", null, {
+        var AvailMatrix = declare(CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILMATRIX, null, {
 
             create:function (input, payload) {
-                console.log("in create avail matrix gridtype = " + input.subtype);
+                AvailMatrix.LOG.log(Logger.SEVERITY.SEVERE, "in create avail matrix gridtype = " + input.subtype);
                 try {
                     var data = new Array(); var timedata = new Array();
                     var gridItemWidth = parseInt(input.custom[0]);
                     var gridItemHeight = gridItemWidth; // for square boxes
 
                     var length = payload.times.length;
-                    console.log("payload len = " + length + " gridtype = " + input.subtype);
+                    AvailMatrix.LOG.log(Logger.SEVERITY.SEVERE, "payload len = " + length + " gridtype = " + input.subtype);
                     var sub = payload.times;
 
                     var xpos = 0;
@@ -41,7 +41,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n",
                             y: input.position.ypos
                         };
 
-                        console.log("column set len = " + columnSet.length + " gridtype = " + input.subtype);
+                        AvailMatrix.LOG.log(Logger.SEVERITY.SEVERE, "column set len = " + columnSet.length + " gridtype = " + input.subtype);
 
                         for (var j = 0; j < columnSet.length; j++) {
                             data[i][j] = {
@@ -55,19 +55,19 @@ define(['require', "dojo/_base/declare", "dojo/i18n",
                             xpos += gridItemWidth;
                         }
                     }
-                    console.log("going to render grid for = " + input.name + "dimensions w = " + input.dimensions.width + " h = " + input.dimensions.height);
-                    console.log("timedata = " + dojo.toJson(timedata));
+                    AvailMatrix.LOG.log(Logger.SEVERITY.SEVERE, "going to render grid for = " + input.name + "dimensions w = " + input.dimensions.width + " h = " + input.dimensions.height);
+                    AvailMatrix.LOG.log(Logger.SEVERITY.SEVERE, "timedata = " + dojo.toJson(timedata));
 
                     this.renderGrid(data, timedata, input.name, input.dimensions.width, input.dimensions.height);
                 } catch (e) {
-                    console.log("exception " + e);
+                    AvailMatrix.LOG.log(Logger.SEVERITY.SEVERE, "exception " + e);
                 }
             },
 
             renderGrid:function (data, timedata, id, width, height) {
 
                 try {
-                    console.log("render id = " + id + " grid data = "+dojo.toJson(data));
+                    AvailMatrix.LOG.log(Logger.SEVERITY.SEVERE, "render id = " + id + " grid data = "+dojo.toJson(data));
 
                     var rowhead = d3.select("#" + id).append("svg")
                         .attr("class", "timegroup");
@@ -76,7 +76,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n",
                         .data(timedata).enter()
                         .append("text")
                         .text(function(d) {
-                            console.log("time fragment = " + d.time);
+                            AvailMatrix.LOG.log(Logger.SEVERITY.SEVERE, "time fragment = " + d.time);
                             return d.time;
                         })
                         .attr("x", function (d) {
@@ -153,10 +153,11 @@ define(['require', "dojo/_base/declare", "dojo/i18n",
                         });
 
                 } catch(e) {
-                    console.log("render exception = " + e);
+                    AvailMatrix.LOG.log(Logger.SEVERITY.SEVERE, "render exception = " + e);
                 }
             }
         });
+        AvailMatrix.LOG = new Logger(CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILMATRIX);
 
         return AvailMatrix;
 

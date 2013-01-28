@@ -1,9 +1,9 @@
 define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/GridContainer",
-    "dojo/i18n!noc/nls/noc", "noc/Utility", "noc/Constants"],
+    "dojo/i18n!noc/nls/noc", "noc/Utility", "noc/Constants", "noc/Logger"],
 
-    function (require, declare, i18n, TitlePane, GridContainer, i18nString, Utility, CONSTANTS) {
+    function (require, declare, i18n, TitlePane, GridContainer, i18nString, Utility, CONSTANTS, Logger) {
 
-        var AvailabilityPage = declare("noc.pages.AvailabilityPage", null, {
+        var AvailabilityPage = declare(CONSTANTS.CLASSNAME.PAGES.AVAILABILITYPAGE, null, {
 
             loadPage:function (pageNumber, pageName, componentName, clusterName) {
 
@@ -48,6 +48,8 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
         });
 
         // static variables of this class
+        AvailabilityPage.LOG = new Logger(CONSTANTS.CLASSNAME.PAGES.AVAILABILITYPAGE);
+
         AvailabilityPage.CP = [];
 
         return AvailabilityPage;

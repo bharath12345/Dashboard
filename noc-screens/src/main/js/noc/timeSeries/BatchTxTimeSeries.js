@@ -1,8 +1,8 @@
-define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
+define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Constants", "noc/Utility", "noc/Logger"],
 
-    function (declare, i18n, i18nString) {
+    function (declare, i18n, i18nString, CONSTANTS, Utility, Logger) {
 
-        var BatchTxTimeSeries = declare("noc.BatchTxTimeSeries", null, {
+        var BatchTxTimeSeries = declare(CONSTANTS.CLASSNAME.TIMESERIES.BATCHTX, null, {
         
 		createTimeSeries: function(jsonStore, id, gridWidth, gridHeight, topLeftX, topLeftY) {				
 				d3.json(jsonStore, dojo.hitch (this, function(m) {
@@ -36,7 +36,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
 			},
 			
 			renderBatchTxGrid: function(data, id, width, height) {
-				//console.log(data);
+				//ComponentPage.LOG.log(Logger.SEVERITY.SEVERE, data);
 			
 				var grid = d3.select("#"+id).append("svg")
 								.attr("width", width)
@@ -47,7 +47,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
             	grid.selectAll(".coltext")
 					.data(data[0])
 					.enter().append("text")
-					.attr("x", function(d) { console.log(d); return d.x; })
+					.attr("x", function(d) { ComponentPage.LOG.log(Logger.SEVERITY.SEVERE, d); return d.x; })
             		.attr("y", 20)
             		//.attr("dy", "-.5em") // .32em before rotating
             		//.attr("dx", ".5em") 
@@ -85,6 +85,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
 			}
         
         });
+
+        BatchTxTimeSeries.LOG = new Logger(CONSTANTS.CLASSNAME.TIMESERIES.BATCHTX);
 
         return BatchTxTimeSeries;
 

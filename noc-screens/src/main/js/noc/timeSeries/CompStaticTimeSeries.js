@@ -1,8 +1,8 @@
-define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
+define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Constants", "noc/Utility", "noc/Logger"],
 
-    function (declare, i18n, i18nString) {
+    function (declare, i18n, i18nString, CONSTANTS, Utility, Logger) {
 
-        var CompStaticTimeSeries = declare("noc.CompStaticTimeSeries", null, {
+        var CompStaticTimeSeries = declare(CONSTANTS.CLASSNAME.TIMESERIES.COMPSTATIC, null, {
 
             createTimeSeries: function(jsonStore, id, gridWidth, gridHeight, topLeftX, topLeftY) {
                 d3.json(jsonStore, dojo.hitch (this, function(m) {
@@ -38,15 +38,15 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
                     for(var i=0;i<data.length;i++) { //all timestamps
                         var kpiArray = [];
                         var timeDataPoint = data[i];
-                        console.log("time data point = " + dojo.toJson(timeDataPoint));
+                        CompStaticTimeSeries.LOG.log(Logger.SEVERITY.SEVERE, "time data point = " + dojo.toJson(timeDataPoint));
 
                         for(var j=0;j<timeDataPoint.data.length;j++) { // one type in the timestamp
                             var kpiPoint = timeDataPoint.data[j];
-                            console.log("kpi point = " + dojo.toJson(kpiPoint));
+                            CompStaticTimeSeries.LOG.log(Logger.SEVERITY.SEVERE, "kpi point = " + dojo.toJson(kpiPoint));
                             var y0 = 0; var z = 0;
                             var d = {}; d.kpi = [];
                             d.kpi = color.domain().map(function(name) { //across kpi's in a type and timestamp
-                                console.log("name in color call " + name + " z = " + z);
+                                CompStaticTimeSeries.LOG.log(Logger.SEVERITY.SEVERE, "name in color call " + name + " z = " + z);
                                 var val = {
                                     type: name,
                                     y0: y0 = y0 * 1,
@@ -58,7 +58,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
                             d.total = d.kpi[d.kpi.length - 1].y1;
                             d.name = kpiPoint.type;
                             kpiArray[j] = d;
-                            console.log("kpi data = " + dojo.toJson(d));
+                            CompStaticTimeSeries.LOG.log(Logger.SEVERITY.SEVERE, "kpi data = " + dojo.toJson(d));
                         } // end of j loop
 
                         var timeContent = {};
@@ -92,6 +92,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
             }
 
         });
+
+        CompStaticTimeSeries.LOG = new Logger(CONSTANTS.CLASSNAME.TIMESERIES.COMPSTATIC);
 
         return CompStaticTimeSeries;
 

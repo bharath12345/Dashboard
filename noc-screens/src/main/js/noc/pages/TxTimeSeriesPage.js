@@ -1,16 +1,16 @@
 define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/GridContainer",
     "dojo/_base/lang",
     "dojo/i18n!noc/nls/noc", "noc/timeSeries/OnlineTxTimeSeries", "noc/timeSeries/BatchTxTimeSeries",
-    "noc/timeSeries/CompStaticTimeSeries"],
+    "noc/timeSeries/CompStaticTimeSeries", "noc/Constants", "noc/Utility", "noc/Logger"],
 
     function (require, declare, i18n, TitlePane, GridContainer, lang, i18nString,
-              OnlineTxTimeSeries, BatchTxTimeSeries, CompStaticTimeSeries) {
+              OnlineTxTimeSeries, BatchTxTimeSeries, CompStaticTimeSeries, CONSTANTS, Utility, Logger) {
 
-        var TxTimeSeriesPage = declare("noc.pages.TxTimeSeriesPage", null, {
+        var TxTimeSeriesPage = declare(CONSTANTS.CLASSNAME.PAGES.TXTIMESERIESPAGE, null, {
 
             loadPage:function () {
 
-                console.log("in component load page");
+                TxTimeSeriesPage.LOG.log(Logger.SEVERITY.SEVERE, "in component load page");
 
                 TxTimeSeriesPage.CP = noc.PageLoader.CpCenter[3];
 
@@ -48,7 +48,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
 
             createSeries: function(type, id, width, height, cpane) {
                 var xpos = cpane.domNode.offsetLeft + 40, ypos = 0;
-                console.log("xpos = " + xpos + " ypos = " + ypos);
+                TxTimeSeriesPage.LOG.log(Logger.SEVERITY.SEVERE, "xpos = " + xpos + " ypos = " + ypos);
 
                 switch(type) {
                     case 1:
@@ -67,7 +67,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                         break;
 
                     default:
-                        console.log("unhandled type of time series");
+                        TxTimeSeriesPage.LOG.log(Logger.SEVERITY.SEVERE, "unhandled type of time series");
                         return;
                 }
             }
@@ -75,6 +75,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
         });
 
         // static variables of this class
+        TxTimeSeriesPage.LOG = new Logger(CONSTANTS.CLASSNAME.PAGES.TXTIMESERIESPAGE);
 
         TxTimeSeriesPage.CP = null;
 

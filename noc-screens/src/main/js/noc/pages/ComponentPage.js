@@ -1,13 +1,13 @@
 define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/GridContainer",
-    "dojo/_base/lang", "dojo/i18n!noc/nls/noc", "noc/Constants", "noc/Utility"],
+    "dojo/_base/lang", "dojo/i18n!noc/nls/noc", "noc/Constants", "noc/Utility", "noc/Logger"],
 
-    function (require, declare, i18n, TitlePane, GridContainer, lang, i18nString, CONSTANTS, Utility) {
+    function (require, declare, i18n, TitlePane, GridContainer, lang, i18nString, CONSTANTS, Utility, Logger) {
 
-        var ComponentPage = declare("noc.pages.ComponentPage", null, {
+        var ComponentPage = declare(CONSTANTS.CLASSNAME.PAGES.COMPONENTPAGE, null, {
 
             loadPage:function () {
 
-                console.log("in component load page");
+                ComponentPage.LOG.log(Logger.SEVERITY.SEVERE, "in component load page");
 
                 ComponentPage.CP = noc.PageLoader.CpCenter[2];
 
@@ -23,6 +23,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
         });
 
         // static variables of this class
+        ComponentPage.LOG = new Logger(CONSTANTS.CLASSNAME.PAGES.COMPONENTPAGE);
 
         ComponentPage.CP = null;
 

@@ -8,6 +8,29 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         CONSTANTS.CLASSNAME = {};
         CONSTANTS.CLASSNAME.PAGELOADER = "noc.PageLoader";
+        CONSTANTS.CLASSNAME.UTILITY = "noc.Utility";
+        CONSTANTS.CLASSNAME.VIEWMANAGER = "noc.ViewManager";
+        CONSTANTS.CLASSNAME.PAGES = {};
+        CONSTANTS.CLASSNAME.PAGES.AVAILABILITYPAGE = "noc.pages.AvailabilityPage";
+        CONSTANTS.CLASSNAME.PAGES.COMPONENTPAGE = "noc.pages.ComponentPage";
+        CONSTANTS.CLASSNAME.PAGES.TXTIMESERIESPAGE = "noc.pages.TxTimeSeriesPage";
+        CONSTANTS.CLASSNAME.PAGES.TXTREEMAPPAGE = "noc.pages.TxTreemapPage";
+        CONSTANTS.CLASSNAME.TIMESERIES = {};
+        CONSTANTS.CLASSNAME.TIMESERIES.BATCHTX = "noc.timeseries.BatchTxTimeSeries";
+        CONSTANTS.CLASSNAME.TIMESERIES.COMPSTATIC = "noc.timeseries.CompStaticTimeSeries";
+        CONSTANTS.CLASSNAME.TIMESERIES.ONLINETX = "noc.timeseries.OnlineTxTimeSeries";
+        CONSTANTS.CLASSNAME.WIDGETS = {};
+        CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY = {};
+        CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILABILITY = "noc.Components.Availability.Availability";
+        CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILABILITYGRID = "noc.Components.Availability.AvailabilityGrid";
+        CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILMATRIX = "noc.Components.Availability.AvailMatrix";
+        CONSTANTS.CLASSNAME.WIDGETS.COMPONENT = {};
+        CONSTANTS.CLASSNAME.WIDGETS.COMPONENT.CELLMAKER = "noc.component.CellMaker";
+        CONSTANTS.CLASSNAME.WIDGETS.COMPONENT.ZONES = "noc.component.Zones";
+        CONSTANTS.CLASSNAME.WIDGETS.INCIDENT.INCIDENTAVAILABILITYGRID = "noc.Widgets.Incident.IncidentAvailabilityGrid";
+        CONSTANTS.CLASSNAME.LOGIN = "Login";
+        CONSTANTS.CLASSNAME.UTILITY = "noc.Utility";
+        CONSTANTS.CLASSNAME.VIEWMANAGER = "noc.ViewManager";
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // VARIOUS TYPES FOR SWITCHING IN ViewManager

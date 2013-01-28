@@ -1,10 +1,12 @@
 define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Logger", "noc/Constants",
-    "noc/Widgets/Incident/IncidentAvailabilityGrid"],
+    "noc/Widgets/Incident/IncidentAvailabilityGrid", "noc/Utility"],
 
-    function (require, declare, i18n, i18nString, Logger, CONSTANTS, IncidentAvailabilityGrid) {
+    function (require, declare, i18n, i18nString, Logger, CONSTANTS, IncidentAvailabilityGrid, Utility) {
 
         // this is a completely static class
-        var ViewManager = declare("noc.ViewManager", null, {});
+        var ViewManager = declare(CONSTANTS.CLASSNAME.VIEWMANAGER, null, {});
+
+        ViewManager.LOG = new Logger(CONSTANTS.CLASSNAME.VIEWMANAGER);
 
         ViewManager.views = [];
 
@@ -44,13 +46,13 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
                     if(input.param.name != undefined) {
                         data.name = input.param.name;
                     }
-                    console.log("data type = " + data.type);
+                    ViewManager.LOG.log(Logger.SEVERITY.SEVERE, "data type = " + data.type);
                 } else {
-                    console.log("input param is undefind");
+                    ViewManager.LOG.log(Logger.SEVERITY.SEVERE, "input param is undefind");
                 }
                 if(input.login != undefined && input.login.type != undefined) {
                     data.type = parseInt(input.login.type);
-                    console.log("login data type = " + data.type);
+                    ViewManager.LOG.log(Logger.SEVERITY.SEVERE, "login data type = " + data.type);
                 }
 
                 //ViewManager.addView(data);
@@ -86,28 +88,28 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
                         Logger.log("ViewManager","unknown data type = " + data.type);
                 }
             } catch ( e) {
-                console.log("exception e = " + e);
+                ViewManager.LOG.log(Logger.SEVERITY.SEVERE, "exception e = " + e);
             }
         };
 
         ViewManager.manageAvailabilitySubView = function(data, input) {
             switch(data.subtype) {
                 case CONSTANTS.SUBTYPE.AVAILABILITY.COMPONENT:
-                    console.log("component grid data received");
+                    ViewManager.LOG.log(Logger.SEVERITY.SEVERE, "component grid data received");
                     require([CONSTANTS.WIDGETS.AVAILABILITY.MATRIX], function (AvailMatrix) {
                         new AvailMatrix().create(data, input.componentDataVO);
                     });
                     break;
 
                 case CONSTANTS.SUBTYPE.AVAILABILITY.CLUSTER:
-                    console.log("cluster grid data received");
+                    ViewManager.LOG.log(Logger.SEVERITY.SEVERE, "cluster grid data received");
                     require([CONSTANTS.WIDGETS.AVAILABILITY.MATRIX], function (AvailMatrix) {
                         new AvailMatrix().create(data, input.clusterDataVO);
                     });
                     break;
 
                 case CONSTANTS.SUBTYPE.AVAILABILITY.INSTANCE:
-                    console.log("instance grid data received");
+                    ViewManager.LOG.log(Logger.SEVERITY.SEVERE, "instance grid data received");
                     require([CONSTANTS.WIDGETS.AVAILABILITY.MATRIX], function (AvailMatrix) {
                         new AvailMatrix().create(data, input.compInstanceDataVO);
                     });
@@ -120,7 +122,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
                     break;
 
                 default:
-                    console.log("unknown availability type = " + data.subtype);
+                    ViewManager.LOG.log(Logger.SEVERITY.SEVERE, "unknown availability type = " + data.subtype);
             }
         };
 

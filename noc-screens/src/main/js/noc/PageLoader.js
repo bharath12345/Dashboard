@@ -1,18 +1,20 @@
 define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/layout/BorderContainer", "dojo/window",
     "dojo/i18n!noc/nls/noc", "noc/pages/AvailabilityPage", "noc/pages/TxTreemapPage",
     "noc/pages/ComponentPage", "noc/pages/TxTimeSeriesPage","noc/pages/TxServiceLevelPage",
-    "noc/Logger"],
+    "noc/Logger", "noc/Constants", "noc/Utility"],
 
     function (require, declare, i18n, ContentPane, BorderContainer, win,
               i18nString, AvailabilityPage, TxTimeSeriesPage, ComponentPage,
-              TxTreemapPage, TxServiceLevelPage, Logger) {
+              TxTreemapPage, TxServiceLevelPage, Logger, CONSTANTS, Utility) {
 
         var PageLoader = declare(CONSTANTS.CLASSNAME.PAGELOADER, null, {
 
             initMain:function () {
 
+                PageLoader.LOG.log(Logger.SEVERITY.SEVERE, "Logging Success!");
+
                 var viewPort = win.getBox();
-                console.log("window height = " + viewPort.h + " width = " + viewPort.w);
+                PageLoader.LOG.log(Logger.SEVERITY.SEVERE, "window height = " + viewPort.h + " width = " + viewPort.w);
 
                 this.createSections(viewPort);
 
@@ -116,10 +118,10 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
                 // remove offset of all contentpane
                 var childCP = PageLoader.TopBc[pageCounter].domNode.childNodes;
                 for(var i = 0; i < childCP.length; i++) {
-                    //console.log(childCP[i]);
+                    //PageLoader.LOG.log(Logger.SEVERITY.SEVERE, childCP[i]);
                     childCP[i].style.left = "0px";
                     childCP[i].style.top = "0px";
-                    //console.log(childCP[i]);
+                    //PageLoader.LOG.log(Logger.SEVERITY.SEVERE, childCP[i]);
                 }
 
                 PageLoader.TopBc[pageCounter].resize();
@@ -133,7 +135,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
 
         });
 
-        var LOG = Logger.getLogger(CONSTANTS.CLASSNAME.PAGELOADER);
+        PageLoader.LOG = new Logger(CONSTANTS.CLASSNAME.PAGELOADER);
 
         // static variables of this class
 
