@@ -18,42 +18,14 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
 
                 this.createSections(viewPort);
 
-                //new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "LINUXHOST");
-                //new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "WINDOWSHOST");
-                //new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "CUSTOM");
-                //new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "CLUSTER");
-
-
                 //setTimeout(function(){new TxTimeSeriesPage().loadPage()}, 10*1000);
                 //setTimeout(function(){new ComponentPage().loadPage()}, 20*1000);
                 //setTimeout(function(){new TxTreemapPage().loadPage()}, 30*1000);
                 //setTimeout(function(){new TxServiceLevelPage().loadPage()}, 40*1000);
 
-                new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "DB", "ALL");
-
-                new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "WEB_SERVER", "FLXRET_IHS");
-                new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "WEB_SERVER", "CRMNextCommIIS");
-                new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "WEB_SERVER", "FinnoneLOS_WebSrv");
-                new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "WEB_SERVER", "ENET_IHS");
-
-                new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "APP_SERVER", "FLXRETWAS1");
-                new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "APP_SERVER", "FLXRETWAS2");
-                new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "APP_SERVER", "FLXRETWAS3");
-                new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "APP_SERVER", "FLXRETWAS4");
-                new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "APP_SERVER", "FLXRETWAS5");
-                new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "APP_SERVER", "FLXRETWAS6");
-                new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "APP_SERVER", "FLXRETWAS7");
-                new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "APP_SERVER", "FLXRETWAS8");
-                new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "APP_SERVER", "FinnoneLOSWAS1");
-                new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "APP_SERVER", "FinnoneLOSWAS2");
-                new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "APP_SERVER", "FinnoneLOSWAS3");
-                new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "APP_SERVER", "FinnoneLOSWAS4");
-                new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "APP_SERVER", "FinnoneLOSWAS5");
-                new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "APP_SERVER", "FinnoneLOSWAS6");
-                new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "APP_SERVER", "FinnoneLOSWAS7");
-                new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "APP_SERVER", "FLXRETWASALL");
-                new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "APP_SERVER", "NCB_UAT_APP");
-                new AvailabilityPage().loadPage(PageLoader.TotalPages, "availabilityPage_" + PageLoader.TotalPages++, "APP_SERVER", "ENETWASALL");
+                for(var i=0;i<PageLoader.TotalPages;i++) {
+                    new AvailabilityPage().loadPage(i, "availabilityPage_" + i, PageLoader.Pages[i].componentName, PageLoader.Pages[i].clusterName);
+                }
 
                 //PageLoader.pageScroll(viewPort);
             },
@@ -73,7 +45,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
             },
 
             createSections: function(viewPort) {
-                for(var i=0; i<24; i++) {
+                for(var i=0; i<PageLoader.TotalPages; i++) {
                     this.createBorderContainer(this.getSection(), viewPort, i);
                 }
             },
@@ -142,7 +114,6 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
         // when the page loads, this variable is set to 0
         // after that, this counter is spinning between 1 to 5
         PageLoader.PageCounter = 0;
-        PageLoader.TotalPages = 0;
 
         PageLoader.TopBc = [];
         PageLoader.CpTop = [];
@@ -164,6 +135,40 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
             }
             scrolldelay = setTimeout('noc.PageLoader.pageScroll()', 2 * 1000);
         };
+
+        PageLoader.TotalPages = 0;
+        PageLoader.Pages = [];
+        PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "DB",clusterName: "ALL"};
+        /*PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "LINUXHOST",clusterName: "ALL"};
+        PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "WINDOWSHOST",clusterName: "ALL"};
+        PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "CUSTOM",clusterName: "ALL"};
+        PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "CLUSTER",clusterName: "ALL"};
+
+        PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "WEB_SERVER",clusterName: "FLXRET_IHS"};
+        PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "WEB_SERVER",clusterName: "CRMNextCommIIS"};
+        PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "WEB_SERVER",clusterName: "FinnoneLOS_WebSrv"};
+        PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "WEB_SERVER",clusterName: "ENET_IHS"};
+
+        PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "APP_SERVER",clusterName: "FLXRETWAS1"};
+        PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "APP_SERVER",clusterName: "FLXRETWAS2"};
+        PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "APP_SERVER",clusterName: "FLXRETWAS3"};
+        PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "APP_SERVER",clusterName: "FLXRETWAS4"};
+        PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "APP_SERVER",clusterName: "FLXRETWAS5"};
+        PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "APP_SERVER",clusterName: "FLXRETWAS6"};
+        PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "APP_SERVER",clusterName: "FLXRETWAS7"};
+        PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "APP_SERVER",clusterName: "FLXRETWAS8"};
+
+        PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "APP_SERVER",clusterName: "FinnoneLOSWAS1"};
+        PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "APP_SERVER",clusterName: "FinnoneLOSWAS2"};
+        PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "APP_SERVER",clusterName: "FinnoneLOSWAS3"};
+        PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "APP_SERVER",clusterName: "FinnoneLOSWAS4"};
+        PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "APP_SERVER",clusterName: "FinnoneLOSWAS5"};
+        PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "APP_SERVER",clusterName: "FinnoneLOSWAS6"};
+        PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "APP_SERVER",clusterName: "FinnoneLOSWAS7"};
+
+        PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "APP_SERVER",clusterName: "FLXRETWASALL"};
+        PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "APP_SERVER",clusterName: "NCB_UAT_APP"};
+        PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "APP_SERVER",clusterName: "ENETWASALL"};*/
 
         return PageLoader;
     });
