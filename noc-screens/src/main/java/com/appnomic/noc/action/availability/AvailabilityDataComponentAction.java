@@ -50,7 +50,7 @@ public class AvailabilityDataComponentAction extends AbstractNocAction  {
 	}
 
 	public AvailabilityDataComponentAction() {
-		//setDummyData();
+		setDummyData();
 	}
 	
 	public ComponentDataService getComponentDataService() {
@@ -71,22 +71,22 @@ public class AvailabilityDataComponentAction extends AbstractNocAction  {
 	
 	public void setDummyData() {
 		componentDataVO = new ComponentDataVO();
-		componentDataVO.setInstanceName("ComponentX");
+		componentDataVO.setInstanceName("DB");
 		
 		int clusterCount = 3;
 		ClusterTimesVO [] clusterTimes = new ClusterTimesVO[clusterCount];
 		componentDataVO.setTimes(clusterTimes);
 		for(int i=0;i<clusterCount;i++) {
 			clusterTimes[i] = new ClusterTimesVO();
-			clusterTimes[i].setTime("10:10");
+			clusterTimes[i].setTime("10:0"+i);
 			
-			int clusterDataPoints = 2;
+			int clusterDataPoints = 1;
 			ClusterDataPointVO [] clusterDataPoint = new ClusterDataPointVO[clusterDataPoints];
 			clusterTimes[i].setCluster(clusterDataPoint);
 			
 			for(int j=0;j<clusterDataPoints;j++) {
 				clusterDataPoint[j] = new ClusterDataPointVO();
-				clusterDataPoint[j].setName("ClusterX");
+				clusterDataPoint[j].setName("FLXRET_DB");
 				clusterDataPoint[j].setValue(j);//in this dummy sample, j is only 0/1
 			}
 		}
@@ -110,6 +110,7 @@ public class AvailabilityDataComponentAction extends AbstractNocAction  {
 	                "excludeNullProperties","true"
 	            })})
 	public String nocAction() {
+		/// working code starts here
 		param = getParameters();
 		
 		String keyVal = "Component Availability: ";
@@ -124,7 +125,7 @@ public class AvailabilityDataComponentAction extends AbstractNocAction  {
 		
 		String compType = (parameters.get("name")[0]).split("COMPONENT_CELL_")[1];
 		System.out.println("component type being assembled = " + compType);
-		Set<Cluster> clusterList = new HashSet<Cluster>();
+		/*Set<Cluster> clusterList = new HashSet<Cluster>();
 		List<Cluster> clusters = clusterDataService.getAll();
 		for(Cluster cluster : clusters) {
 			if(!cluster.getType().equals(compType)) {
@@ -213,7 +214,7 @@ public class AvailabilityDataComponentAction extends AbstractNocAction  {
 				clusterTimes[j].setCluster(clusterDataPoints);
 			}
 			i++;
-		}
+		}*/
 		return SUCCESS;
 	}
 

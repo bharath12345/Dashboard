@@ -57,12 +57,12 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 	}
 
 	public AvailabilityDataClusterAction() {
-		//setDummyData();
+		setDummyData();
 	}
 	
 	public void setDummyData() {
 		clusterDataVO = new ClusterDataVO();
-		clusterDataVO.setInstanceName("ClusterX");
+		clusterDataVO.setInstanceName("FLXRET_DB");
 		
 		int instanceCount = 3;
 		CompInstanceTimesVO [] instanceTimes = new CompInstanceTimesVO[instanceCount]; // cluster has 2 hosts
@@ -70,17 +70,23 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 		
 		for(int i=0;i<instanceCount;i++) {
 			instanceTimes[i] = new CompInstanceTimesVO();
-			instanceTimes[i].setTime("10:10");
+			instanceTimes[i].setTime("10:0"+i);
 			
-			int instanceDataPoints = 2;
+			int instanceDataPoints = 3;
 			CompInstanceDataPointVO [] instanceDataPoint = new CompInstanceDataPointVO[instanceDataPoints];
 			instanceTimes[i].setInstances(instanceDataPoint);
 			
-			for(int j=0;j<instanceDataPoints;j++) {
-				instanceDataPoint[j] = new CompInstanceDataPointVO();
-				instanceDataPoint[j].setName("IntanceX");
-				instanceDataPoint[j].setValue(j); // in this dummy sample, j is just 0/1
-			}
+			instanceDataPoint[0] = new CompInstanceDataPointVO();
+			instanceDataPoint[0].setName("FLEXRETDB1");
+			instanceDataPoint[0].setValue(0); // in this dummy sample, j is just 0/1
+			
+			instanceDataPoint[1] = new CompInstanceDataPointVO();
+			instanceDataPoint[1].setName("HBNETPRODDB1");
+			instanceDataPoint[1].setValue(1); // in this dummy sample, j is just 0/1
+			
+			instanceDataPoint[2] = new CompInstanceDataPointVO();
+			instanceDataPoint[2].setName("HBNETPRODDB2");
+			instanceDataPoint[2].setValue(0); // in this dummy sample, j is just 0/1
 		}
 	}
 
@@ -103,6 +109,7 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 	         })
 	})
 	public String nocAction() {
+		// working code starts here
 		param = getParameters();
 		
 		String keyVal = "Cluster Availability: ";
@@ -116,7 +123,7 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 		System.out.println("key value map = " + keyVal);
 		int id = Integer.parseInt(parameters.get("id")[0]);
 		
-		Cluster cluster = clusterDataService.getById(id);
+		/*Cluster cluster = clusterDataService.getById(id);
 		int sampleSize = 5;
 		
 		List<ComponentData> componentList = cluster.getComponents();
@@ -191,7 +198,7 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 				instanceTimes[j].setInstances(instanceDataPoints);
 			}
 			i++;
-		}
+		}*/
 		return SUCCESS;
 	}
 

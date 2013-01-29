@@ -16,6 +16,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "dojo/reques
                 var logMessage = "[" + date + "] [" + severity + "] [" + this.classname + "] " + message;
                 console.log(logMessage);
 
+                return;
+
                 //this.messages.push(logMessage);
                 Logger.MESSAGES[Logger.INDEX]= logMessage;
                 Logger.INDEX++;

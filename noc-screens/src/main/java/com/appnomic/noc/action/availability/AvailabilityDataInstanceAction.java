@@ -53,7 +53,7 @@ public class AvailabilityDataInstanceAction extends AbstractNocAction  {
 	}
 
 	public AvailabilityDataInstanceAction() {
-		//setDummyData();
+		setDummyData();
 	}
 		
 	public void setDummyData() {
@@ -66,6 +66,28 @@ public class AvailabilityDataInstanceAction extends AbstractNocAction  {
 		for(int i=0;i<kpiCount;i++) {
 			kpiTimes[i] = new KpiTimesVO();
 			kpiTimes[i].setTime("10:10");
+			
+			int kpiDataPoints = 2;
+			KpiDataPointVO [] kpiDataPoint = new KpiDataPointVO[kpiDataPoints];
+			kpiTimes[i].setKpi(kpiDataPoint);
+			for(int j=0;j<kpiDataPoints;j++) {
+				kpiDataPoint[j] = new KpiDataPointVO();
+				kpiDataPoint[j].setName("KpiX");
+				kpiDataPoint[j].setValue(j); // in this dummy example, j is just 0/1
+			}
+		}
+	}
+	
+	public void setData(String name) {
+		compInstanceDataVO = new CompInstanceDataVO();
+		compInstanceDataVO.setInstanceName(name);
+		
+		int kpiCount = 3;
+		KpiTimesVO [] kpiTimes = new KpiTimesVO[kpiCount];
+		compInstanceDataVO.setTimes(kpiTimes);
+		for(int i=0;i<kpiCount;i++) {
+			kpiTimes[i] = new KpiTimesVO();
+			kpiTimes[i].setTime("10:0"+i);
 			
 			int kpiDataPoints = 2;
 			KpiDataPointVO [] kpiDataPoint = new KpiDataPointVO[kpiDataPoints];
@@ -96,6 +118,7 @@ public class AvailabilityDataInstanceAction extends AbstractNocAction  {
 	                "excludeNullProperties","true"
 	            })})
 	public String nocAction() {
+		// working code starts here
 		param = getParameters();
 		
 		String keyVal = "Instance Availability: ";
@@ -108,8 +131,10 @@ public class AvailabilityDataInstanceAction extends AbstractNocAction  {
 		}
 		System.out.println("key value map = " + keyVal);
 		int id = Integer.parseInt(parameters.get("id")[0]);
+		String name = parameters.get("name")[0];
+		setData(name);
 		
-		int sampleSize = 5;
+		/*int sampleSize = 5;
 		Map<String, NormalizedAvailabilityKpi> availSamples = componentDataService.getNormalizedAvailabilityData(id, sampleSize);
 		String instanceName = componentDataService.getComponentInstance(id).getName();
 		KpiTimesVO [] kpiTimes = null;
@@ -148,8 +173,7 @@ public class AvailabilityDataInstanceAction extends AbstractNocAction  {
 				kpiDataPoint[j].setValue(value);
 				j++;
 			}
-		}
-		
+		}*/
 		return SUCCESS;
 	}
 

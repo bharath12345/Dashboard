@@ -26,6 +26,8 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
                     maxCol3++;
                 }
 
+                console.log("max col = " + maxCol3);
+
                 for (var i = 0; i < maxCol3; i++) {
                     var compDiv = dojo.create("div");
                     if(gridMeta.clusterName != "ALL") {
@@ -49,12 +51,14 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
                         }
                     }
 
+                    Availability.LOG.log(Logger.SEVERITY.SEVERE, "component grid meta = " + dojo.toJson(compGridMeta));
+
                     Availability.LOG.log(Logger.SEVERITY.SEVERE, "creating availability grid for component = " + gridMeta.componentName + " cluster = " + gridMeta.clusterName + " in page = " + gridMeta.pageName);
                     this.createSingleComponentGrid(compDiv.id, compGridMeta, gridMeta.clusterName);
                 }
             },
 
-            createSingleComponentGrid:function (compName, gridMeta) {
+            createSingleComponentGrid:function (compName, gridMeta, clusterName) {
                 // How to build the table - METHODOLOGY
                 // 1. The number of Broad columns is fixed at 3
                 // 2. We create one grid per component
@@ -66,12 +70,18 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
 
                 var clusters = gridMeta.componentVO[0].clusters;
                 maxCol2 = clusters.length;
-                Availability.LOG.log(Logger.SEVERITY.SEVERE, "component = " + gridMeta.componentName + " number of clusters = " + maxCol2);
+                var realClusterLen = 0;
+                Availability.LOG.log(Logger.SEVERITY.SEVERE, "component = " + compName + " number of clusters = " + maxCol2);
                 for (var j = 0; j < clusters.length; j++) {
+                    if(clusters[j] == undefined) {
+                        continue;
+                    }
+                    realClusterLen++;
                     if (clusters[j].instances.length > maxCol1) {
                         maxCol1 = clusters[j].instances.length;
                     }
                 }
+                maxCol2 = realClusterLen;
 
                 // 5. With the following data points - we need to build a matrix with
                 // a) column 3: 5 rows
@@ -134,6 +144,9 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
                 var lastpoint = 0;
                 var clusters = gridMeta.componentVO[0].clusters;
                 for (var j = 0; j < clusters.length; j++) {
+                    if(clusters[j] == undefined) {
+                        continue;
+                    }
                     var point2 = "row" + (2 * j) + "col2";
                     dataPoint[point2] = clusters[j].clusterName;
                     this.enrichWithIncidents(gridMeta.componentVO[0].componentName,
@@ -203,6 +216,9 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
                 this.renderSVG(CONSTANTS.PREFIX.COMPONENT_CELL + gridMeta.componentVO[0].componentName, gridMeta.componentVO[0].id, 30, CONSTANTS.SUBTYPE.AVAILABILITY.COMPONENT);
                 var clusters = gridMeta.componentVO[0].clusters;
                 for (var j = 0; j < clusters.length; j++) {
+                    if(clusters[j] == undefined) {
+                        continue;
+                    }
                     this.renderSVG(CONSTANTS.PREFIX.CLUSTER_CELL + clusters[j].clusterName, clusters[j].id, 20, CONSTANTS.SUBTYPE.AVAILABILITY.CLUSTER);
                     var instance = clusters[j].instances;
                     for (var z = 0; z < instance.length; z++) {
@@ -215,6 +231,10 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
             renderSVG:function (objectName, id, objectSize, gridType) {
                 Availability.LOG.log(Logger.SEVERITY.SEVERE, "render svg grid type " + gridType);
                 var domNode = dojo.byId(objectName);
+                if(domNode == null) {
+                    Availability.LOG.log(Logger.SEVERITY.SEVERE, "domnode null for = " + objectName);
+                    return;
+                }
                 var xpos = 0, ypos = 10;
                 var viewMeta = {
                     id:id,
@@ -245,6 +265,9 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
 
             cacheClusterInstances:function (cluster, instanceNamesOfCluster, instanceIdsOfCluster) {
                 for (var j = 0; j < cluster.length; j++) {
+                    if(cluster[j] == undefined) {
+                        continue;
+                    }
                     var instance = cluster[j].instances;
                     for (var z = 0; z < instance.length; z++) {
                         instanceNamesOfCluster.push(instance[z].instanceName);
