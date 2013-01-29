@@ -33,7 +33,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
         });
 
         // static variables of this class
-        AvailabilityGrid.LOG = new Logger(CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILABILITYGRID);
+        AvailabilityGrid.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILABILITYGRID));
 
         AvailabilityGrid.PageCounter = 0;
         AvailabilityGrid.CP = null;

@@ -4,7 +4,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "dojo/reques
 
         var Utility = declare(CONSTANTS.CLASSNAME.UTILITY, null, {});
 
-        Utility.LOG = new Logger(CONSTANTS.CLASSNAME.LOGIN);
+        Utility.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.LOGIN));
 
         Utility.JSON_HEADER = { 'Content-Type': 'application/json' };
 

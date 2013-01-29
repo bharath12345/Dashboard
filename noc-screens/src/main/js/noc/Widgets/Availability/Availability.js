@@ -66,6 +66,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
 
                 var clusters = gridMeta.componentVO[0].clusters;
                 maxCol2 = clusters.length;
+                Availability.LOG.log(Logger.SEVERITY.SEVERE, "component = " + gridMeta.componentName + " number of clusters = " + maxCol2);
                 for (var j = 0; j < clusters.length; j++) {
                     if (clusters[j].instances.length > maxCol1) {
                         maxCol1 = clusters[j].instances.length;
@@ -321,7 +322,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
         });
 
         // static variables of this class
-        Availability.LOG = new Logger(CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILABILITY);
+        Availability.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILABILITY));
 
         return Availability;
     });

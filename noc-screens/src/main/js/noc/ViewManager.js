@@ -6,7 +6,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
         // this is a completely static class
         var ViewManager = declare(CONSTANTS.CLASSNAME.VIEWMANAGER, null, {});
 
-        ViewManager.LOG = new Logger(CONSTANTS.CLASSNAME.VIEWMANAGER);
+        ViewManager.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.VIEWMANAGER));
 
         ViewManager.views = [];
 

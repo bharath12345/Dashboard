@@ -117,7 +117,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
 
         });
 
-        Zones.LOG = new Logger(CONSTANTS.CLASSNAME.WIDGETS.COMPONENT.ZONES);
+        Zones.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.WIDGETS.COMPONENT.ZONES));
 
         return Zones;
     });

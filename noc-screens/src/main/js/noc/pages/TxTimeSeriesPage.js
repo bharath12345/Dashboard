@@ -75,7 +75,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
         });
 
         // static variables of this class
-        TxTimeSeriesPage.LOG = new Logger(CONSTANTS.CLASSNAME.PAGES.TXTIMESERIESPAGE);
+        TxTimeSeriesPage.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.PAGES.TXTIMESERIESPAGE));
 
         TxTimeSeriesPage.CP = null;
 

@@ -77,7 +77,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
 
         });
 
-        CellMaker.LOG = new Logger(CONSTANTS.CLASSNAME.WIDGETS.COMPONENT.CELLMAKER);
+        CellMaker.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.WIDGETS.COMPONENT.CELLMAKER));
 
         return CellMaker;
     });

@@ -1,6 +1,7 @@
 package com.appnomic.noc.action.logging;
 
 import java.util.Map;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -30,27 +31,21 @@ public class LoggerAction extends AbstractNocAction  {
 	                "excludeNullProperties","true"
 	            })})
 	public String nocAction() {
-		String keyVal = "Component Meta Availability: ";
-		for(String key : parameters.keySet()) {
-			keyVal += "[ " + key + " = ";
-			for(String value : parameters.get(key)) {
-				keyVal += value + ", ";
-			}
-			keyVal += "] ";
-		}
-		System.out.println("key value map = " + keyVal);
 		
-		String severity = (parameters.get("severity")[0]);
-		String classname = (parameters.get("classname")[0]);
-		String message = (parameters.get("message")[0]);
+		Set<String> keys = parameters.keySet();
+		//String severity = (parameters.get("severity")[0]);
 		
-		if(severity.equalsIgnoreCase(Level.SEVERE.toString())) {
+		String message = keys.toArray(new String[keys.size()])[0];
+		System.out.println(message);
+		LOGGER.log(Level.INFO, message);
+		
+		/*if(severity.equalsIgnoreCase(Level.SEVERE.toString())) {
 			LOGGER.log(Level.SEVERE, classname + " " + message);
 		} else if(severity.equalsIgnoreCase(Level.INFO.toString())) {
 			LOGGER.log(Level.INFO, classname + " " + message);
 		} else {
 			LOGGER.log(Level.FINE, classname + " " + message);
-		}
+		}*/
 		
 		return SUCCESS;
 	}

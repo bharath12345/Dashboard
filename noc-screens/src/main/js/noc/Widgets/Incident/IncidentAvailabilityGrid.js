@@ -24,7 +24,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Logger"
 
         });
 
-        IncidentAvailabilityGrid.LOG = new Logger(CONSTANTS.CLASSNAME.WIDGETS.INCIDENT.INCIDENTAVAILABILITYGRID);
+        IncidentAvailabilityGrid.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.WIDGETS.INCIDENT.INCIDENTAVAILABILITYGRID));
 
         return IncidentAvailabilityGrid;
     });

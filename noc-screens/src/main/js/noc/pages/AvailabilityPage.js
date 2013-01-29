@@ -48,7 +48,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
         });
 
         // static variables of this class
-        AvailabilityPage.LOG = new Logger(CONSTANTS.CLASSNAME.PAGES.AVAILABILITYPAGE);
+        AvailabilityPage.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.PAGES.AVAILABILITYPAGE));
 
         AvailabilityPage.CP = [];
 

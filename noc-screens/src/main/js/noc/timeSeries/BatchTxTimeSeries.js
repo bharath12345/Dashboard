@@ -86,7 +86,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Constan
         
         });
 
-        BatchTxTimeSeries.LOG = new Logger(CONSTANTS.CLASSNAME.TIMESERIES.BATCHTX);
+        BatchTxTimeSeries.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.TIMESERIES.BATCHTX));
 
         return BatchTxTimeSeries;
 

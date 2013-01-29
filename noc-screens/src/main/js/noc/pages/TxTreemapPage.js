@@ -110,7 +110,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojox/layout/GridContaine
         });
 
         // static variables of this class
-        TxTreemapPage.LOG = new Logger(CONSTANTS.CLASSNAME.PAGES.TXTREEMAPPAGE);
+        TxTreemapPage.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.PAGES.TXTREEMAPPAGE));
 
         TxTreemapPage.PageCounter = 0;
 

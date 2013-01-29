@@ -140,7 +140,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Constan
             }
         });
 
-        OnlineTxTimeSeries.LOG = new Logger(CONSTANTS.CLASSNAME.TIMESERIES.ONLINETX);
+        OnlineTxTimeSeries.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.TIMESERIES.ONLINETX));
 
         return OnlineTxTimeSeries;
 

@@ -1,10 +1,10 @@
-define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Utility", "noc/Constants"],
+define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Utility", "noc/Constants", "noc/Logger"],
 
-    function (declare, i18n, i18nString, Utility, CONSTANTS) {
+    function (declare, i18n, i18nString, Utility, CONSTANTS, Logger) {
 
         var Login = declare(CONSTANTS.CLASSNAME.LOGIN, null, {});
 
-        Login.LOG = new Logger(CONSTANTS.CLASSNAME.LOGIN);
+        Login.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.LOGIN));
 
         Login.expandCollapse = function() {
             var elem = document.getElementById(Login.expandCollapse.arguments[0]);

@@ -93,7 +93,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Constan
 
         });
 
-        CompStaticTimeSeries.LOG = new Logger(CONSTANTS.CLASSNAME.TIMESERIES.COMPSTATIC);
+        CompStaticTimeSeries.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.TIMESERIES.COMPSTATIC));
 
         return CompStaticTimeSeries;
 

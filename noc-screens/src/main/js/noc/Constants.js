@@ -27,6 +27,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.CLASSNAME.WIDGETS.COMPONENT = {};
         CONSTANTS.CLASSNAME.WIDGETS.COMPONENT.CELLMAKER = "noc.component.CellMaker";
         CONSTANTS.CLASSNAME.WIDGETS.COMPONENT.ZONES = "noc.component.Zones";
+        CONSTANTS.CLASSNAME.WIDGETS.INCIDENT = {};
         CONSTANTS.CLASSNAME.WIDGETS.INCIDENT.INCIDENTAVAILABILITYGRID = "noc.Widgets.Incident.IncidentAvailabilityGrid";
         CONSTANTS.CLASSNAME.LOGIN = "Login";
         CONSTANTS.CLASSNAME.UTILITY = "noc.Utility";
