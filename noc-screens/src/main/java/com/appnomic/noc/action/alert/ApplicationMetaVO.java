@@ -3,7 +3,7 @@ package com.appnomic.noc.action.alert;
 public class ApplicationMetaVO {
 
 	String [] metrics;
-	String [] applications;
+	ApplicationVO [] applications;
 	
 	public String[] getMetrics() {
 		return metrics;
@@ -11,10 +11,11 @@ public class ApplicationMetaVO {
 	public void setMetrics(String[] metrics) {
 		this.metrics = metrics;
 	}
-	public String[] getApplications() {
+	public ApplicationVO[] getApplications() {
 		return applications;
 	}
-	public void setApplications(String[] applications) {
+	public void setApplications(ApplicationVO[] applications) {
 		this.applications = applications;
 	}
 }
+

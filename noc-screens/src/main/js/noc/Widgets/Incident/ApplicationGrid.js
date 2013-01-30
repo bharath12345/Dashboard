@@ -18,12 +18,43 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", 'dgrid/Grid'
                     columnMeta.push(col);
                 }
 
+                // create blank grid
                 var gridata = [];
-                var blankrow = {appName: "-"};
-                gridata.push(blankrow);
-
+                for(var i=0;i<input.applicationVO.applications.length;i++) {
+                    var row = {};
+                    var apps = input.applicationVO.applications;
+                    row.appName = apps[i].name;
+                    for(var j=0;j<metrics.length;j++) {
+                        row[metrics[j]] = "-";
+                    }
+                    gridata.push(row);
+                }
                 var grid = new Grid({columns: columnMeta}, data.name);
                 grid.renderArray(gridata);
+
+                // assign ids to nodes
+                for(var i=0;i<input.applicationVO.applications.length;i++) {
+                    var apps = input.applicationVO.applications;
+                    for(var j=0;j<metrics.length;j++) {
+                        dojo.query("#IncidentGrid-row-" + i + " td.field-"+metrics[j]).forEach(function (node) {
+                           node.id = apps[i].name + "_" + apps[i].id + "_" + metrics[j];
+                        });
+                    }
+                }
+
+                for(var i=0;i<input.applicationVO.applications.length;i++) {
+                    var apps = input.applicationVO.applications;
+                    var viewMeta = {
+                        id:apps[i].id,
+                        name:apps[i].name,
+                        type:CONSTANTS.TYPE.INCIDENT,
+                        subtype:CONSTANTS.SUBTYPE.INCIDENT.DATA,
+                        dimensions:[0, 0],
+                        position:[0, 0],
+                        custom:[0]
+                    };
+                    Utility.xhrPostCentral(CONSTANTS.ACTION.INCIDENT.APPLICATIONDATA, viewMeta);
+                }
             }
 
         });

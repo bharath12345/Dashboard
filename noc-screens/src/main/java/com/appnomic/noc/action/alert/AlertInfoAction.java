@@ -13,6 +13,9 @@ import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Action;
 
 import com.appnomic.dao.AlertsDaoImpl;
+import com.appnomic.domainobject.AlertCountSummary;
+import com.appnomic.domainobject.AlertCountSummary.SUMMARY_CATEGORY;
+import com.appnomic.domainobject.AlertSeverity;
 import com.appnomic.domainobject.ApplicationData;
 import com.appnomic.domainobject.Component;
 import com.appnomic.domainobject.ComponentAlertSummary;
@@ -32,17 +35,6 @@ public class AlertInfoAction extends AbstractNocAction  {
 	
 	private ApplicationMetaVO applicationMetaVO;
 	private ApplicationDataVO applicationDataVO;
-	
-	private static final String [] metrics = {
-			"Static Batch Alerts",
-            "Dynamic Batch Alerts",
-            "Static Online Alerts",
-            "Dynamic Online Alerts",
-            "Component Availability Alerts",
-            "Component Static Alerts",
-            "Component Dynamic Alerts"
-            };
-
 	
 	public ComponentDataService getComponentDataService() {
 		return componentDataService;
@@ -106,13 +98,23 @@ public class AlertInfoAction extends AbstractNocAction  {
 		param = getParameters();
 		
 		applicationMetaVO = new ApplicationMetaVO();
+		
+		String [] metrics = new String[5];
+		metrics[0] = SUMMARY_CATEGORY.COMPONENT_ANALYTIC.name();
+		metrics[1] = SUMMARY_CATEGORY.COMPONENT_AVAILABILITY.name();
+		metrics[2] = SUMMARY_CATEGORY.COMPONENT_STATIC.name();
+		metrics[3] = SUMMARY_CATEGORY.TRANSACTION_BATCH_ANALYTIC.name();
+		metrics[4] = SUMMARY_CATEGORY.TRANSACTION_ONLINE_ANALYTIC.name();
 		applicationMetaVO.setMetrics(metrics);
 		
 		List<ApplicationData> allApplications = applicationDataService.getAll();
-		String [] applications = new String[allApplications.size()];
+		ApplicationVO [] applications = new ApplicationVO[allApplications.size()];
 		int i = 0;
 		for(ApplicationData application : allApplications) {
-			applications[i++] = application.getName();
+			applications[i] = new ApplicationVO();
+			applications[i].setId(application.getId());
+			applications[i].setName(application.getName());
+			i++;
 		}
 		return SUCCESS;
 	}
@@ -139,9 +141,9 @@ public class AlertInfoAction extends AbstractNocAction  {
 		}
 		System.out.println("key value map = " + keyVal);
 		
-		String compType = (parameters.get("name")[0]);
+		String applicationName = (parameters.get("name")[0]);
 		int id = Integer.parseInt(parameters.get("id")[0]);
-		System.out.println("component type being assembled = " + compType);
+		System.out.println("application being assembled = " + applicationName);
 		
 		Date currentTime = Calendar.getInstance().getTime();
 		Calendar hourBefore = Calendar.getInstance();
@@ -152,58 +154,36 @@ public class AlertInfoAction extends AbstractNocAction  {
 		String startTime = timeFormat.format(currentTime);
 		String endTime = timeFormat.format(oneHourBeforeTime);
 		
-		ApplicationData application = applicationDataService.getById(id);
-		List<ApplicationData.Component> components = application.getComponents();
-		//application.getTransactions();
-		
-		List<Integer> allids = new ArrayList<Integer>();
-		for(ApplicationData.Component component : components) {
-			allids.add(component.getId());
-		}
-		Map<Integer,ComponentAlertSummary> alertSummary = alertsImpl.getAlertsOnComponents(allids, startTime, endTime);
-		
-		ApplicationDataVO applicationDataVO = new ApplicationDataVO();
-		applicationDataVO.setApplicationName(application.getName());
-		
-		MetricData [] metricDataset = new MetricData[7];
+		MetricData [] metricDataset = new MetricData[5];
 		applicationDataVO.setMetrics(metricDataset);
+		applicationDataVO.setApplicationName(applicationName);
 		
-		metricDataset[0] = new MetricData();
-		metricDataset[0].setCount(1);
-		metricDataset[0].setName(metrics[0]);
-		metricDataset[0].setViolated(true);
+		AlertCountSummary acs = alertsImpl.getCountSummary(id, startTime, endTime);
 		
-		metricDataset[1] = new MetricData();
-		metricDataset[1].setCount(2);
-		metricDataset[1].setName(metrics[1]);
-		metricDataset[1].setViolated(false);
+		metricDataset[0] = getMetricData(acs, SUMMARY_CATEGORY.COMPONENT_ANALYTIC);
+		metricDataset[1] = getMetricData(acs, SUMMARY_CATEGORY.COMPONENT_AVAILABILITY);
+		metricDataset[2] = getMetricData(acs, SUMMARY_CATEGORY.COMPONENT_STATIC);
+		metricDataset[3] = getMetricData(acs, SUMMARY_CATEGORY.TRANSACTION_BATCH_ANALYTIC);
+		metricDataset[4] = getMetricData(acs, SUMMARY_CATEGORY.TRANSACTION_ONLINE_ANALYTIC);
 		
-		metricDataset[2] = new MetricData();
-		metricDataset[2].setCount(3);
-		metricDataset[2].setName(metrics[2]);
-		metricDataset[2].setViolated(true);
-		
-		metricDataset[3] = new MetricData();
-		metricDataset[3].setCount(4);
-		metricDataset[3].setName(metrics[3]);
-		metricDataset[3].setViolated(false);
-		
-		metricDataset[4] = new MetricData();
-		metricDataset[4].setCount(5);
-		metricDataset[4].setName(metrics[4]);
-		metricDataset[4].setViolated(true);
-		
-		metricDataset[6] = new MetricData();
-		metricDataset[6].setCount(6);
-		metricDataset[6].setName(metrics[5]);
-		metricDataset[6].setViolated(false);
-
-		metricDataset[7] = new MetricData();
-		metricDataset[7].setCount(7);
-		metricDataset[7].setName(metrics[6]);
-		metricDataset[7].setViolated(true);
-
 		return SUCCESS;
+	}
+	
+	private MetricData getMetricData(AlertCountSummary acs, SUMMARY_CATEGORY category) {
+		MetricData metricDataset = new MetricData();
+		int [] counts = new int[3];
+		if(acs != null) {
+			counts[0] = acs.getCount(category, AlertSeverity.HIGH);
+			counts[1] = acs.getCount(category, AlertSeverity.MEDIUM);
+			counts[2] = acs.getCount(category, AlertSeverity.LOW);
+		} else {
+			counts[0] = 10;
+			counts[1] = 20;
+			counts[2] = 30;
+		}
+		metricDataset.setCount(counts);
+		metricDataset.setName(category.name());
+		return metricDataset;
 	}
 
 	@Action(value="/alert/Cluster", results = {

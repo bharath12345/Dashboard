@@ -36,6 +36,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.CLASSNAME.WIDGETS.INCIDENT = {};
         CONSTANTS.CLASSNAME.WIDGETS.INCIDENT.INCIDENTAVAILABILITYGRID = "noc.Widgets.Incident.IncidentAvailabilityGrid";
         CONSTANTS.CLASSNAME.WIDGETS.INCIDENT.APPLICATIONGRID = "noc.Widgets.Incident.ApplicationGrid";
+        CONSTANTS.CLASSNAME.WIDGETS.INCIDENT.APPLICATIONDATA = "noc.Widgets.Incident.ApplicationData";
 
         CONSTANTS.CLASSNAME.LOGIN = "Login";
         CONSTANTS.CLASSNAME.UTILITY = "noc.Utility";
@@ -64,11 +65,12 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
 
         CONSTANTS.SUBTYPE.INCIDENT = {};
         CONSTANTS.SUBTYPE.INCIDENT.META = 1;
+        CONSTANTS.SUBTYPE.INCIDENT.DATA = 2;
         CONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY = {};
-        CONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY.COMPONENT = 2;
-        CONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY.CLUSTER = 3;
-        CONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY.INSTANCE = 4;
-        CONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY.META = 5;
+        CONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY.COMPONENT = 3;
+        CONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY.CLUSTER = 4;
+        CONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY.INSTANCE = 5;
+        CONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY.META = 6;
 
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////

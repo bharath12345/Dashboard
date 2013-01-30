@@ -134,7 +134,7 @@
         <gui.target.gui.location>${basedir}${file.separator}target${file.separator}noc-screens</gui.target.gui.location>
         <js-dir>${basedir}/src/main/js</js-dir>
 
-        <dojo.version>1.8.1</dojo.version>
+        <dojo.version>1.8.3</dojo.version>
         <dojo.source.basename>dojo-release-${dojo.version}-src</dojo.source.basename>
         <dojo.source.local.unpacked.location>${gui.target.location}${file.separator}${dojo.source.basename}
         </dojo.source.local.unpacked.location>

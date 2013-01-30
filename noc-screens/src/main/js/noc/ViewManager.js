@@ -155,6 +155,12 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
                         new ApplicationGrid().create(data, input);
                     });
                     break;
+
+                case CONSTANTS.SUBTYPE.INCIDENT.DATA:
+                    require([CONSTANTS.WIDGETS.INCIDENT.APPLICATIONDATA], function (ApplicationData) {
+                        new ApplicationData().create(data, input);
+                    });
+                    break;
             }
         };
 

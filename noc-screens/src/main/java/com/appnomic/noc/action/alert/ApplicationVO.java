@@ -1,8 +1,8 @@
 package com.appnomic.noc.action.alert;
 
-public class MetricData {
+public class ApplicationVO {
 	String name;
-	int [] count;
+	int id;
 	
 	public String getName() {
 		return name;
@@ -10,10 +10,10 @@ public class MetricData {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int[] getCount() {
-		return count;
+	public int getId() {
+		return id;
 	}
-	public void setCount(int[] count) {
-		this.count = count;
+	public void setId(int id) {
+		this.id = id;
 	}
 }
