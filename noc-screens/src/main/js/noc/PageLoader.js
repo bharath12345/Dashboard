@@ -1,11 +1,11 @@
 define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/layout/BorderContainer", "dojo/window",
     "dojo/i18n!noc/nls/noc", "noc/pages/AvailabilityPage", "noc/pages/TxTreemapPage",
-    "noc/pages/ComponentPage", "noc/pages/TxTimeSeriesPage",
+    "noc/pages/ComponentPage", "noc/pages/TxTimeSeriesPage", "noc/pages/IncidentPage",
     "noc/Logger", "noc/Constants", "noc/Utility"],
 
     function (require, declare, i18n, ContentPane, BorderContainer, win,
               i18nString, AvailabilityPage, TxTreemapPage, ComponentPage,
-              TxTimeSeriesPage, Logger, CONSTANTS, Utility) {
+              TxTimeSeriesPage, IncidentPage, Logger, CONSTANTS, Utility) {
 
         var PageLoader = declare(CONSTANTS.CLASSNAME.PAGELOADER, null, {
 
@@ -18,13 +18,17 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
 
                 this.createSections(viewPort);
 
+                new IncidentPage().loadPage(0, "IncidentGrid");
+                return;
+
                 //setTimeout(function(){new TxTimeSeriesPage().loadPage()}, 10*1000);
                 //setTimeout(function(){new ComponentPage().loadPage()}, 20*1000);
                 //setTimeout(function(){new TxTreemapPage().loadPage()}, 30*1000);
                 //setTimeout(function(){new TxServiceLevelPage().loadPage()}, 40*1000);
 
+                var startPageCounter = 1;
                 for(var i=0;i<PageLoader.TotalPages;i++) {
-                    new AvailabilityPage().loadPage(i, "availabilityPage_" + i, PageLoader.Pages[i].componentName, PageLoader.Pages[i].clusterName);
+                    new AvailabilityPage().loadPage(i+startPageCounter, "availabilityPage_" + (i+startPageCounter), PageLoader.Pages[i].componentName, PageLoader.Pages[i].clusterName);
                 }
 
                 //PageLoader.pageScroll(viewPort);
@@ -45,7 +49,10 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
             },
 
             createSections: function(viewPort) {
-                for(var i=0; i<PageLoader.TotalPages; i++) {
+                this.createBorderContainer(this.getSection(), viewPort, 0);
+
+                var startPageCounter = 1;
+                for(var i=startPageCounter; i<PageLoader.TotalPages+startPageCounter; i++) {
                     this.createBorderContainer(this.getSection(), viewPort, i);
                 }
             },

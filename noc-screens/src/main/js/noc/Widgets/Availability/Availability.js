@@ -140,7 +140,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
                 var dataPoint = new Object();
                 dataPoint.row0col3 = gridMeta.componentVO[0].componentName;
                 this.enrichWithIncidents(gridMeta.componentVO[0].componentName,
-                    gridMeta.componentVO[0].componentName, "row0col3", CONSTANTS.SUBTYPE.AVAILABILITY.COMPONENT);
+                    gridMeta.componentVO[0].componentName, "row0col3", CONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY.COMPONENT);
                 var lastpoint = 0;
                 var clusters = gridMeta.componentVO[0].clusters;
                 for (var j = 0; j < clusters.length; j++) {
@@ -150,14 +150,14 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
                     var point2 = "row" + (2 * j) + "col2";
                     dataPoint[point2] = clusters[j].clusterName;
                     this.enrichWithIncidents(gridMeta.componentVO[0].componentName,
-                        clusters[j].clusterName, point2, CONSTANTS.SUBTYPE.AVAILABILITY.CLUSTER);
+                        clusters[j].clusterName, point2, CONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY.CLUSTER);
 
                     for (var z = 0; z < clusters[j].instances.length; z++) {
                         var point1 = "row" + (lastpoint + (2 * z)) + "col1";
                         //Availability.LOG.log(Logger.SEVERITY.SEVERE, "point 1 = " + point1);
                         dataPoint[point1] = clusters[j].instances[z].instanceName;
                         this.enrichWithIncidents(gridMeta.componentVO[0].componentName,
-                            clusters[j].instances[z].instanceName, point1, CONSTANTS.SUBTYPE.AVAILABILITY.INSTANCE);
+                            clusters[j].instances[z].instanceName, point1, CONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY.INSTANCE);
                         if (z == (clusters[j].instances.length - 1)) {
                             lastpoint = (2 * z) + 2;
                         }
@@ -325,17 +325,17 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
                 };
                 var url;
                 switch (queryType) {
-                    case CONSTANTS.SUBTYPE.AVAILABILITY.COMPONENT:
+                    case CONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY.COMPONENT:
                         Availability.LOG.log(Logger.SEVERITY.SEVERE, "component alert enrichment for " + tableName + " query name = " + queryName + " point name = " + pointName);
                         url = CONSTANTS.ACTION.INCIDENT.COMPONENT;
                         break;
 
-                    case CONSTANTS.SUBTYPE.AVAILABILITY.CLUSTER:
+                    case CONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY.CLUSTER:
                         Availability.LOG.log(Logger.SEVERITY.SEVERE, "cluster alert enrichment for " + tableName + " query name = " + queryName + " point name = " + pointName);
                         url = CONSTANTS.ACTION.INCIDENT.CLUSTER;
                         break;
 
-                    case CONSTANTS.SUBTYPE.AVAILABILITY.INSTANCE:
+                    case CONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY.INSTANCE:
                         Availability.LOG.log(Logger.SEVERITY.SEVERE, "instance alert enrichment for " + tableName + " query name = " + queryName + " point name = " + pointName);
                         url = CONSTANTS.ACTION.INCIDENT.INSTANCE;
                         break;

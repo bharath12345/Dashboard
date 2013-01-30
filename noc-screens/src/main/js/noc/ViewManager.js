@@ -132,21 +132,27 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
 
         ViewManager.manageIncidentSubView = function(data, input) {
             switch(data.subtype) {
-                case CONSTANTS.SUBTYPE.AVAILABILITY.COMPONENT:
+                case CONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY.COMPONENT:
                     require([CONSTANTS.WIDGETS.INCIDENT.AVAILABILITY], function (IncidentAvailabilityGrid) {
                         new IncidentAvailabilityGrid().createComponentString(data, input);
                     });
                     break;
 
-                case CONSTANTS.SUBTYPE.AVAILABILITY.CLUSTER:
+                case CONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY.CLUSTER:
                     require([CONSTANTS.WIDGETS.INCIDENT.AVAILABILITY], function (IncidentAvailabilityGrid) {
                         new IncidentAvailabilityGrid().createClusterString(data, input);
                     });
                     break;
 
-                case CONSTANTS.SUBTYPE.AVAILABILITY.INSTANCE:
+                case CONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY.INSTANCE:
                     require([CONSTANTS.WIDGETS.INCIDENT.AVAILABILITY], function (IncidentAvailabilityGrid) {
                         new IncidentAvailabilityGrid().createIncidentString(data, input);
+                    });
+                    break;
+
+                case CONSTANTS.SUBTYPE.INCIDENT.META:
+                    require([CONSTANTS.WIDGETS.INCIDENT.APPLICATIONGRID], function (ApplicationGrid) {
+                        new ApplicationGrid().create(data, input);
                     });
                     break;
             }

@@ -10,25 +10,33 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.CLASSNAME.PAGELOADER = "noc.PageLoader";
         CONSTANTS.CLASSNAME.UTILITY = "noc.Utility";
         CONSTANTS.CLASSNAME.VIEWMANAGER = "noc.ViewManager";
+
         CONSTANTS.CLASSNAME.PAGES = {};
         CONSTANTS.CLASSNAME.PAGES.AVAILABILITYPAGE = "noc.pages.AvailabilityPage";
         CONSTANTS.CLASSNAME.PAGES.COMPONENTPAGE = "noc.pages.ComponentPage";
         CONSTANTS.CLASSNAME.PAGES.TXTIMESERIESPAGE = "noc.pages.TxTimeSeriesPage";
         CONSTANTS.CLASSNAME.PAGES.TXTREEMAPPAGE = "noc.pages.TxTreemapPage";
+        CONSTANTS.CLASSNAME.PAGES.INCIDENTPAGE = "noc.pages.IncidentPage";
+
         CONSTANTS.CLASSNAME.TIMESERIES = {};
         CONSTANTS.CLASSNAME.TIMESERIES.BATCHTX = "noc.timeseries.BatchTxTimeSeries";
         CONSTANTS.CLASSNAME.TIMESERIES.COMPSTATIC = "noc.timeseries.CompStaticTimeSeries";
         CONSTANTS.CLASSNAME.TIMESERIES.ONLINETX = "noc.timeseries.OnlineTxTimeSeries";
+
         CONSTANTS.CLASSNAME.WIDGETS = {};
         CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY = {};
         CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILABILITY = "noc.Components.Availability.Availability";
         CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILABILITYGRID = "noc.Components.Availability.AvailabilityGrid";
         CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILMATRIX = "noc.Components.Availability.AvailMatrix";
+
         CONSTANTS.CLASSNAME.WIDGETS.COMPONENT = {};
         CONSTANTS.CLASSNAME.WIDGETS.COMPONENT.CELLMAKER = "noc.component.CellMaker";
         CONSTANTS.CLASSNAME.WIDGETS.COMPONENT.ZONES = "noc.component.Zones";
+
         CONSTANTS.CLASSNAME.WIDGETS.INCIDENT = {};
         CONSTANTS.CLASSNAME.WIDGETS.INCIDENT.INCIDENTAVAILABILITYGRID = "noc.Widgets.Incident.IncidentAvailabilityGrid";
+        CONSTANTS.CLASSNAME.WIDGETS.INCIDENT.APPLICATIONGRID = "noc.Widgets.Incident.ApplicationGrid";
+
         CONSTANTS.CLASSNAME.LOGIN = "Login";
         CONSTANTS.CLASSNAME.UTILITY = "noc.Utility";
         CONSTANTS.CLASSNAME.VIEWMANAGER = "noc.ViewManager";
@@ -54,6 +62,15 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.SUBTYPE.COMPONENT.ZONES = 1;
         CONSTANTS.SUBTYPE.COMPONENT.DATA = 2;
 
+        CONSTANTS.SUBTYPE.INCIDENT = {};
+        CONSTANTS.SUBTYPE.INCIDENT.META = 1;
+        CONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY = {};
+        CONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY.COMPONENT = 2;
+        CONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY.CLUSTER = 3;
+        CONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY.INSTANCE = 4;
+        CONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY.META = 5;
+
+
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // ACTION URLs
         CONSTANTS.ACTION = {};
@@ -77,6 +94,8 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.ACTION.INCIDENT.COMPONENT = "alert/Component.action";
         CONSTANTS.ACTION.INCIDENT.CLUSTER = "alert/Cluster.action";
         CONSTANTS.ACTION.INCIDENT.INSTANCE = "alert/Instance.action";
+        CONSTANTS.ACTION.INCIDENT.APPLICATIONMETA = "alert/ApplicationMeta.action";
+        CONSTANTS.ACTION.INCIDENT.APPLICATIONDATA = "alert/ApplicationData.action";
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // WIDGET CLASS PATHS
@@ -95,6 +114,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
 
         CONSTANTS.WIDGETS.INCIDENT = {};
         CONSTANTS.WIDGETS.INCIDENT.AVAILABILITY = 'noc/Widgets/Incident/IncidentAvailabilityGrid';
+        CONSTANTS.WIDGETS.INCIDENT.APPLICATIONGRID = 'noc/Widgets/Incident/ApplicationGrid';
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////        
 
