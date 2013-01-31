@@ -24,6 +24,7 @@ import com.appnomic.noc.action.DefaultResponse;
 import com.appnomic.noc.request.RequestHelper;
 import com.appnomic.noc.request.objects.RequestNameId;
 import com.appnomic.noc.viewobject.availability.ClusterDataVO;
+import com.appnomic.noc.viewobject.availability.ClusterVO;
 import com.appnomic.noc.viewobject.availability.CompInstanceDataPointVO;
 import com.appnomic.noc.viewobject.availability.CompInstanceTimesVO;
 import com.appnomic.noc.viewobject.availability.KpiDataPointVO;
@@ -39,6 +40,7 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 	private ClusterDataVO clusterDataVO;
 	private ComponentDataService componentDataService;
 	private Map<String, String[]> param;
+	private ClusterVO [] clusterVOs;
 	
 	public ComponentDataService getComponentDataService() {
 		return componentDataService;
@@ -60,6 +62,14 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 		setDummyData();
 	}
 	
+	public ClusterVO[] getClusterVOs() {
+		return clusterVOs;
+	}
+
+	public void setClusterVOs(ClusterVO[] clusterVOs) {
+		this.clusterVOs = clusterVOs;
+	}
+
 	public void setDummyData() {
 		clusterDataVO = new ClusterDataVO();
 		clusterDataVO.setInstanceName("FLXRET_DB");
@@ -96,6 +106,29 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 
 	public void setParam(Map<String, String[]> param) {
 		this.param = param;
+	}
+	
+	@Action(value="/availability/ClusterZones", results = {
+	        @Result(name="success", type="json", params = {
+	                "excludeProperties",
+	                "session,SUCCESS,ERROR,clusterDataService,componentDataService",
+	        		"enableGZIP", "true",
+	        		"encoding", "UTF-8",
+	                "noCache","true",
+	                "excludeNullProperties","true"
+	         })
+	})
+	public String clusterZones() {
+		param = getParameters();
+		List<Cluster> clusters = clusterDataService.getAll();
+		clusterVOs = new ClusterVO[clusters.size()];
+		int i = 0;
+		for(Cluster cluster: clusters) {
+			clusterVOs[i].setClusterName(cluster.getName());
+			clusterVOs[i].setId(cluster.getId());
+			i++;
+		}
+		return SUCCESS;
 	}
 	
 	@Action(value="/availability/ClusterData", results = {

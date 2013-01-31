@@ -1,11 +1,11 @@
 define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/layout/BorderContainer", "dojo/window",
     "dojo/i18n!noc/nls/noc", "noc/pages/AvailabilityPage", "noc/pages/TxTreemapPage",
-    "noc/pages/ComponentPage", "noc/pages/TxTimeSeriesPage", "noc/pages/IncidentPage",
+    "noc/pages/ComponentPage", "noc/pages/TxTimeSeriesPage", "noc/pages/IncidentPage", "noc/pages/AllClusterAvailability",
     "noc/Logger", "noc/Constants", "noc/Utility"],
 
     function (require, declare, i18n, ContentPane, BorderContainer, win,
               i18nString, AvailabilityPage, TxTreemapPage, ComponentPage,
-              TxTimeSeriesPage, IncidentPage, Logger, CONSTANTS, Utility) {
+              TxTimeSeriesPage, IncidentPage, AllClusterAvailability, Logger, CONSTANTS, Utility) {
 
         var PageLoader = declare(CONSTANTS.CLASSNAME.PAGELOADER, null, {
 
@@ -19,6 +19,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
                 this.createSections(viewPort);
 
                 new IncidentPage().loadPage(0, "IncidentGrid");
+                new AllClusterAvailability().loadPage(1, "AllClusterAvailability");
                 return;
 
                 //setTimeout(function(){new TxTimeSeriesPage().loadPage()}, 10*1000);

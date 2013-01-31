@@ -17,6 +17,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.CLASSNAME.PAGES.TXTIMESERIESPAGE = "noc.pages.TxTimeSeriesPage";
         CONSTANTS.CLASSNAME.PAGES.TXTREEMAPPAGE = "noc.pages.TxTreemapPage";
         CONSTANTS.CLASSNAME.PAGES.INCIDENTPAGE = "noc.pages.IncidentPage";
+        CONSTANTS.CLASSNAME.PAGES.ALLCLUSTERAVAILABILITY = "noc.pages.AllClusterAvailability";
 
         CONSTANTS.CLASSNAME.TIMESERIES = {};
         CONSTANTS.CLASSNAME.TIMESERIES.BATCHTX = "noc.timeseries.BatchTxTimeSeries";
@@ -28,6 +29,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILABILITY = "noc.Components.Availability.Availability";
         CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILABILITYGRID = "noc.Components.Availability.AvailabilityGrid";
         CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILMATRIX = "noc.Components.Availability.AvailMatrix";
+        CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.CLUSTERZONES = "noc.Components.Availability.ClusterZones";
 
         CONSTANTS.CLASSNAME.WIDGETS.COMPONENT = {};
         CONSTANTS.CLASSNAME.WIDGETS.COMPONENT.CELLMAKER = "noc.component.CellMaker";
@@ -58,6 +60,8 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.SUBTYPE.AVAILABILITY.CLUSTER = 2;
         CONSTANTS.SUBTYPE.AVAILABILITY.INSTANCE = 3;
         CONSTANTS.SUBTYPE.AVAILABILITY.META = 4;
+        CONSTANTS.SUBTYPE.AVAILABILITY.ALLCLUSTER = 5;
+        CONSTANTS.SUBTYPE.AVAILABILITY.CLUSTERZONES = 6;
 
         CONSTANTS.SUBTYPE.COMPONENT = {};
         CONSTANTS.SUBTYPE.COMPONENT.ZONES = 1;
@@ -86,6 +90,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.ACTION.AVAILABILITY.COMPONENT = "availability/ComponentData.action";
         CONSTANTS.ACTION.AVAILABILITY.CLUSTER = "availability/ClusterData.action";
         CONSTANTS.ACTION.AVAILABILITY.INSTANCE = "availability/InstanceData.action";
+        CONSTANTS.ACTION.AVAILABILITY.CLUSTERZONES = "availability/ClusterZones.action";
 
         CONSTANTS.ACTION.COMPONENT = {};
         CONSTANTS.ACTION.COMPONENT.ZONES = "component/zones.action";

@@ -121,6 +121,12 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
                     });
                     break;
 
+                case CONSTANTS.SUBTYPE.AVAILABILITY.ALLCLUSTER:
+                    require([CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.CLUSTERZONES], function (ClusterZones) {
+                        new ClusterZones().create(data);
+                    });
+                    break;
+
                 default:
                     ViewManager.LOG.log(Logger.SEVERITY.SEVERE, "unknown availability type = " + data.subtype);
             }
