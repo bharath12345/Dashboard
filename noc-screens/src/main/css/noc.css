@@ -87,4 +87,8 @@ a.document {
     overflow:hidden!important;
 }
 
+.dgrid-cell {
+    text-align:center!important;
+}
+
 

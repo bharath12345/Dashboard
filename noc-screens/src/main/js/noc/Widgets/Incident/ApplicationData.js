@@ -12,8 +12,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", 'dgrid/Grid'
                     console.log("node id = " + nodeId);
                     var node = dojo.byId(nodeId);
 
-                    for(var j=0;j<data.applicationDataVO.metrics.length;j++) {
-                        var payload = data.applicationDataVO.metrics[j];
+                    for(var j=0;j<input.applicationDataVO.metrics.length;j++) {
+                        var payload = input.applicationDataVO.metrics[j];
                         if(payload.name != metric) {
                             continue;
                         }
@@ -25,17 +25,17 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", 'dgrid/Grid'
                         var highSpan = dojo.create("span");
                         highSpan.className = "label label-important";
                         highSpan.innerHTML = highAlert;
-                        node.append(highSpan);
+                        node.appendChild(highSpan);
 
                         var mediumSpan = dojo.create("span");
                         mediumSpan.className = "label label-warning";
                         mediumSpan.innerHTML = mediumAlert;
-                        node.append(mediumSpan);
+                        node.appendChild(mediumSpan);
 
                         var lowSpan = dojo.create("span");
                         lowSpan.className = "label label-info";
                         lowSpan.innerHTML = lowAlert;
-                        node.append(lowSpan);
+                        node.appendChild(lowSpan);
 
                         break;
                     }

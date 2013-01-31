@@ -25,7 +25,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", 'dgrid/Grid'
                     var apps = input.applicationVO.applications;
                     row.appName = apps[i].name;
                     for(var j=0;j<metrics.length;j++) {
-                        row[metrics[j]] = "-";
+                        row[metrics[j]] = "";
                     }
                     gridata.push(row);
                 }

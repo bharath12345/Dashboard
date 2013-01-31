@@ -1,7 +1,7 @@
 {
     "name":"noc",
     "description":"AppsOne NOC Screens",
-    "version":"9.30",
+    "version":"1",
     "keywords":["JavaScript", "Dojo", "Toolkit", "DojoX", "NOC", "Screens"],
     "maintainers":[
         {
@@ -14,9 +14,9 @@
         }
     ],
     "dependencies":{
-        "dojo":"~1.8.0",
-        "dijit":"~1.8.0",
-        "dojox":"~1.8.0"
+        "dojo":"~1.8.3",
+        "dijit":"~1.8.3",
+        "dojox":"~1.8.3"
     },
     "main":"NocMain",
     "dojoBuild":"noc.profile.js"

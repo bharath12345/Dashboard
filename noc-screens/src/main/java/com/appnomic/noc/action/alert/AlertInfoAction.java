@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -35,6 +36,9 @@ public class AlertInfoAction extends AbstractNocAction  {
 	
 	private ApplicationMetaVO applicationMetaVO;
 	private ApplicationDataVO applicationDataVO;
+	
+	private Random rand;
+	private static final int min = 0, max = 100;
 	
 	public ComponentDataService getComponentDataService() {
 		return componentDataService;
@@ -68,6 +72,14 @@ public class AlertInfoAction extends AbstractNocAction  {
 
 	public void setApplicationVO(ApplicationMetaVO applicationVO) {
 		this.applicationMetaVO = applicationVO;
+	}
+	
+	public ApplicationDataVO getApplicationDataVO() {
+		return applicationDataVO;
+	}
+
+	public void setApplicationDataVO(ApplicationDataVO applicationDataVO) {
+		this.applicationDataVO = applicationDataVO;
 	}
 
 	public AlertInfoAction() {
@@ -120,6 +132,30 @@ public class AlertInfoAction extends AbstractNocAction  {
 		return SUCCESS;
 	}
 	
+	private void setDummyApplicationData(String applicationName, ApplicationDataVO applicationDataVO) {
+		MetricData [] metricDataset = new MetricData[5];
+		applicationDataVO.setMetrics(metricDataset);
+		applicationDataVO.setApplicationName(applicationName);
+	
+		metricDataset[0] = getDummyMetricData(SUMMARY_CATEGORY.COMPONENT_ANALYTIC);
+		metricDataset[1] = getDummyMetricData(SUMMARY_CATEGORY.COMPONENT_AVAILABILITY);
+		metricDataset[2] = getDummyMetricData(SUMMARY_CATEGORY.COMPONENT_STATIC);
+		metricDataset[3] = getDummyMetricData(SUMMARY_CATEGORY.TRANSACTION_BATCH_ANALYTIC);
+		metricDataset[4] = getDummyMetricData(SUMMARY_CATEGORY.TRANSACTION_ONLINE_ANALYTIC);
+	}
+	
+	private MetricData getDummyMetricData(SUMMARY_CATEGORY category) {
+		MetricData metricDataset = new MetricData();
+		int [] counts = new int[3];
+		rand = new Random();
+		counts[0] = rand.nextInt(max - min + 1) + min;
+		counts[1] = rand.nextInt(max - min + 1) + min;
+		counts[2] = rand.nextInt(max - min + 1) + min;
+		metricDataset.setCount(counts);
+		metricDataset.setName(category.name());
+		return metricDataset;
+	}
+	
 	@Action(value="/alert/ApplicationData", results = {
 	        @Result(name="success", type="json", params = {
 	        		"excludeProperties",
@@ -146,7 +182,10 @@ public class AlertInfoAction extends AbstractNocAction  {
 		int id = Integer.parseInt(parameters.get("id")[0]);
 		System.out.println("application being assembled = " + applicationName);
 		
-		Date currentTime = Calendar.getInstance().getTime();
+		applicationDataVO = new ApplicationDataVO();
+		setDummyApplicationData(applicationName, applicationDataVO);
+		
+		/*Date currentTime = Calendar.getInstance().getTime();
 		Calendar hourBefore = Calendar.getInstance();
 		hourBefore.set(Calendar.HOUR_OF_DAY, hourBefore.get(Calendar.HOUR_OF_DAY));
 		Date oneHourBeforeTime = hourBefore.getTime();
@@ -156,7 +195,6 @@ public class AlertInfoAction extends AbstractNocAction  {
 		String endTime = timeFormat.format(oneHourBeforeTime);
 		
 		MetricData [] metricDataset = new MetricData[5];
-		applicationDataVO = new ApplicationDataVO();
 		applicationDataVO.setMetrics(metricDataset);
 		applicationDataVO.setApplicationName(applicationName);
 		
@@ -166,7 +204,7 @@ public class AlertInfoAction extends AbstractNocAction  {
 		metricDataset[1] = getMetricData(acs, SUMMARY_CATEGORY.COMPONENT_AVAILABILITY);
 		metricDataset[2] = getMetricData(acs, SUMMARY_CATEGORY.COMPONENT_STATIC);
 		metricDataset[3] = getMetricData(acs, SUMMARY_CATEGORY.TRANSACTION_BATCH_ANALYTIC);
-		metricDataset[4] = getMetricData(acs, SUMMARY_CATEGORY.TRANSACTION_ONLINE_ANALYTIC);
+		metricDataset[4] = getMetricData(acs, SUMMARY_CATEGORY.TRANSACTION_ONLINE_ANALYTIC);*/
 		
 		return SUCCESS;
 	}
