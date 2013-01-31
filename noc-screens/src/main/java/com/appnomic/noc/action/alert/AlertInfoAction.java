@@ -183,16 +183,17 @@ public class AlertInfoAction extends AbstractNocAction  {
 		System.out.println("application being assembled = " + applicationName);
 		
 		applicationDataVO = new ApplicationDataVO();
-		setDummyApplicationData(applicationName, applicationDataVO);
+		//setDummyApplicationData(applicationName, applicationDataVO);
 		
-		/*Date currentTime = Calendar.getInstance().getTime();
+		Date currentTime = Calendar.getInstance().getTime();
 		Calendar hourBefore = Calendar.getInstance();
-		hourBefore.set(Calendar.HOUR_OF_DAY, hourBefore.get(Calendar.HOUR_OF_DAY));
+		//hourBefore.set(Calendar.HOUR_OF_DAY, hourBefore.get(Calendar.HOUR_OF_DAY)-1);
+		hourBefore.set(Calendar.MONTH, hourBefore.get(Calendar.MONTH)-2);
 		Date oneHourBeforeTime = hourBefore.getTime();
 		
 		SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-		String startTime = timeFormat.format(currentTime);
-		String endTime = timeFormat.format(oneHourBeforeTime);
+		String endTime = timeFormat.format(currentTime);
+		String startTime = timeFormat.format(oneHourBeforeTime);
 		
 		MetricData [] metricDataset = new MetricData[5];
 		applicationDataVO.setMetrics(metricDataset);
@@ -204,7 +205,7 @@ public class AlertInfoAction extends AbstractNocAction  {
 		metricDataset[1] = getMetricData(acs, SUMMARY_CATEGORY.COMPONENT_AVAILABILITY);
 		metricDataset[2] = getMetricData(acs, SUMMARY_CATEGORY.COMPONENT_STATIC);
 		metricDataset[3] = getMetricData(acs, SUMMARY_CATEGORY.TRANSACTION_BATCH_ANALYTIC);
-		metricDataset[4] = getMetricData(acs, SUMMARY_CATEGORY.TRANSACTION_ONLINE_ANALYTIC);*/
+		metricDataset[4] = getMetricData(acs, SUMMARY_CATEGORY.TRANSACTION_ONLINE_ANALYTIC);
 		
 		return SUCCESS;
 	}
