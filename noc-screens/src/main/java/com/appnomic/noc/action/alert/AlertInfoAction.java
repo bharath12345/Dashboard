@@ -12,7 +12,6 @@ import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Action;
 
-import com.appnomic.dao.AlertsDaoImpl;
 import com.appnomic.domainobject.AlertCountSummary;
 import com.appnomic.domainobject.AlertCountSummary.SUMMARY_CATEGORY;
 import com.appnomic.domainobject.AlertSeverity;
@@ -22,6 +21,7 @@ import com.appnomic.domainobject.ComponentAlertSummary;
 import com.appnomic.noc.action.AbstractNocAction;
 import com.appnomic.service.ApplicationDataService;
 import com.appnomic.service.ComponentDataService;
+import com.appnomic.service.AlertDataService;
 
 @ParentPackage("json-default")
 @Namespace("/alert")
@@ -29,7 +29,7 @@ public class AlertInfoAction extends AbstractNocAction  {
 	
 	private Map<String, String[]> param;
 	
-	private AlertsDaoImpl alertsImpl;
+	private AlertDataService alertDataService;
 	private ComponentDataService componentDataService;
 	private ApplicationDataService applicationDataService;
 	
@@ -54,14 +54,6 @@ public class AlertInfoAction extends AbstractNocAction  {
 		this.applicationDataService = applicationDataService;
 	}
 
-	public AlertsDaoImpl getAlertsImpl() {
-		return alertsImpl;
-	}
-
-	public void setAlertsImpl(AlertsDaoImpl alertsImpl) {
-		this.alertsImpl = alertsImpl;
-	}
-
 	public Map<String, String[]> getParam() {
 		return param;
 	}
@@ -84,11 +76,19 @@ public class AlertInfoAction extends AbstractNocAction  {
 	public String nocAction() {		
 		return SUCCESS;
 	}
-	
+
+	public AlertDataService getAlertDataService() {
+		return alertDataService;
+	}
+
+	public void setAlertDataService(AlertDataService alertDataService) {
+		this.alertDataService = alertDataService;
+	}
+
 	@Action(value="/alert/ApplicationMeta", results = {
 	        @Result(name="success", type="json", params = {
 	        		"excludeProperties",
-	                "session,SUCCESS,ERROR,alertsImpl,componentDataService,applicationDataService",
+	                "session,SUCCESS,ERROR,alertDataService,componentDataService,applicationDataService,applicationDataVO",
 	                "enableGZIP", "true",
 	        		"encoding", "UTF-8",
 	                "noCache","true",
@@ -116,13 +116,14 @@ public class AlertInfoAction extends AbstractNocAction  {
 			applications[i].setName(application.getName());
 			i++;
 		}
+		applicationMetaVO.setApplications(applications);
 		return SUCCESS;
 	}
 	
 	@Action(value="/alert/ApplicationData", results = {
 	        @Result(name="success", type="json", params = {
 	        		"excludeProperties",
-	                "session,SUCCESS,ERROR,alertsImpl,componentDataService,applicationDataService",
+	                "session,SUCCESS,ERROR,alertDataService,componentDataService,applicationDataService,applicationMetaVO",
 	                "enableGZIP", "true",
 	        		"encoding", "UTF-8",
 	                "noCache","true",
@@ -155,10 +156,11 @@ public class AlertInfoAction extends AbstractNocAction  {
 		String endTime = timeFormat.format(oneHourBeforeTime);
 		
 		MetricData [] metricDataset = new MetricData[5];
+		applicationDataVO = new ApplicationDataVO();
 		applicationDataVO.setMetrics(metricDataset);
 		applicationDataVO.setApplicationName(applicationName);
 		
-		AlertCountSummary acs = alertsImpl.getCountSummary(id, startTime, endTime);
+		AlertCountSummary acs = alertDataService.getCountSummary(id, startTime, endTime);
 		
 		metricDataset[0] = getMetricData(acs, SUMMARY_CATEGORY.COMPONENT_ANALYTIC);
 		metricDataset[1] = getMetricData(acs, SUMMARY_CATEGORY.COMPONENT_AVAILABILITY);
@@ -177,9 +179,9 @@ public class AlertInfoAction extends AbstractNocAction  {
 			counts[1] = acs.getCount(category, AlertSeverity.MEDIUM);
 			counts[2] = acs.getCount(category, AlertSeverity.LOW);
 		} else {
-			counts[0] = 10;
-			counts[1] = 20;
-			counts[2] = 30;
+			counts[0] = -1;
+			counts[1] = -1;
+			counts[2] = -1;
 		}
 		metricDataset.setCount(counts);
 		metricDataset.setName(category.name());
@@ -189,7 +191,7 @@ public class AlertInfoAction extends AbstractNocAction  {
 	@Action(value="/alert/Cluster", results = {
 	        @Result(name="success", type="json", params = {
 	        		"excludeProperties",
-	                "session,SUCCESS,ERROR,alertsImpl,componentDataService,applicationDataService",
+	                "session,SUCCESS,ERROR,alertDataService,componentDataService,applicationDataService",
 	                "enableGZIP", "true",
 	        		"encoding", "UTF-8",
 	                "noCache","true",
@@ -218,7 +220,7 @@ public class AlertInfoAction extends AbstractNocAction  {
 	@Action(value="/alert/Instance", results = {
 	        @Result(name="success", type="json", params = {
 	        		"excludeProperties",
-	                "session,SUCCESS,ERROR,alertsImpl,componentDataService,applicationDataService",
+	                "session,SUCCESS,ERROR,alertDataService,componentDataService,applicationDataService",
 	                "enableGZIP", "true",
 	        		"encoding", "UTF-8",
 	                "noCache","true",

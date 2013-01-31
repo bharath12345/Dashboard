@@ -117,6 +117,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.WIDGETS.INCIDENT = {};
         CONSTANTS.WIDGETS.INCIDENT.AVAILABILITY = 'noc/Widgets/Incident/IncidentAvailabilityGrid';
         CONSTANTS.WIDGETS.INCIDENT.APPLICATIONGRID = 'noc/Widgets/Incident/ApplicationGrid';
+        CONSTANTS.WIDGETS.INCIDENT.APPLICATIONDATA = 'noc/Widgets/Incident/ApplicationData';
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////        
 

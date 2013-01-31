@@ -37,11 +37,12 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", 'dgrid/Grid'
                     var apps = input.applicationVO.applications;
                     for(var j=0;j<metrics.length;j++) {
                         dojo.query("#IncidentGrid-row-" + i + " td.field-"+metrics[j]).forEach(function (node) {
-                           node.id = apps[i].name + "_" + apps[i].id + "_" + metrics[j];
+                            node.id = apps[i].name + "_" + apps[i].id + "_" + metrics[j];
                         });
                     }
                 }
 
+                var metricsJson = dojo.toJson(metrics);
                 for(var i=0;i<input.applicationVO.applications.length;i++) {
                     var apps = input.applicationVO.applications;
                     var viewMeta = {
@@ -51,7 +52,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", 'dgrid/Grid'
                         subtype:CONSTANTS.SUBTYPE.INCIDENT.DATA,
                         dimensions:[0, 0],
                         position:[0, 0],
-                        custom:[0]
+                        custom:[metricsJson]
                     };
                     Utility.xhrPostCentral(CONSTANTS.ACTION.INCIDENT.APPLICATIONDATA, viewMeta);
                 }
