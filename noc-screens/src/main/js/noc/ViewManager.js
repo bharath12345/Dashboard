@@ -84,11 +84,31 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
                         });
                         break;
 
+                    case CONSTANTS.TYPE.TRANSACTION:
+                        ViewManager.manageTransactionSubView(data, input);
+                        break;
+
                     default:
                         Logger.log("ViewManager","unknown data type = " + data.type);
                 }
             } catch ( e) {
                 ViewManager.LOG.log(Logger.SEVERITY.SEVERE, "exception e = " + e);
+            }
+        };
+
+        ViewManager.manageTransactionSubView = function(data, input){
+            switch(data.subtype) {
+                case CONSTANTS.SUBTYPE.TRANSACTION.META:
+                    require([CONSTANTS.WIDGETS.TRANSACTION.META], function (GridMeta) {
+                        new GridMeta().create(data, input);
+                    });
+                break;
+
+                case CONSTANTS.SUBTYPE.TRANSACTION.DATA:
+                    require([CONSTANTS.WIDGETS.TRANSACTION.DATA], function (GridData) {
+                        new GridData().create(data, input);
+                    });
+                break;
             }
         };
 

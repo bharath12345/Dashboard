@@ -18,6 +18,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.CLASSNAME.PAGES.TXTREEMAPPAGE = "noc.pages.TxTreemapPage";
         CONSTANTS.CLASSNAME.PAGES.INCIDENTPAGE = "noc.pages.IncidentPage";
         CONSTANTS.CLASSNAME.PAGES.ALLCLUSTERAVAILABILITY = "noc.pages.AllClusterAvailability";
+        CONSTANTS.CLASSNAME.PAGES.TRANSACTIONGRID = "noc.pages.TransactionGrid";
 
         CONSTANTS.CLASSNAME.TIMESERIES = {};
         CONSTANTS.CLASSNAME.TIMESERIES.BATCHTX = "noc.timeseries.BatchTxTimeSeries";
@@ -41,6 +42,10 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.CLASSNAME.WIDGETS.INCIDENT.APPLICATIONGRID = "noc.Widgets.Incident.ApplicationGrid";
         CONSTANTS.CLASSNAME.WIDGETS.INCIDENT.APPLICATIONDATA = "noc.Widgets.Incident.ApplicationData";
 
+        CONSTANTS.CLASSNAME.WIDGETS.TRANSACTION = {};
+        CONSTANTS.CLASSNAME.WIDGETS.TRANSACTION.GRIDMETA = "noc.Widgets.Transaction.GridMeta";
+        CONSTANTS.CLASSNAME.WIDGETS.TRANSACTION.GRIDDATA = "noc.Widgets.Transaction.GridData";
+
         CONSTANTS.CLASSNAME.LOGIN = "Login";
         CONSTANTS.CLASSNAME.UTILITY = "noc.Utility";
         CONSTANTS.CLASSNAME.VIEWMANAGER = "noc.ViewManager";
@@ -55,6 +60,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.TYPE.AVAILABILITY = 1;
         CONSTANTS.TYPE.COMPONENT = 2;
         CONSTANTS.TYPE.INCIDENT = 3;
+        CONSTANTS.TYPE.TRANSACTION = 4;
 
         CONSTANTS.SUBTYPE.AVAILABILITY = {};
         CONSTANTS.SUBTYPE.AVAILABILITY.COMPONENT = 1;
@@ -76,6 +82,10 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY.CLUSTER = 4;
         CONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY.INSTANCE = 5;
         CONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY.META = 6;
+
+        CONSTANTS.SUBTYPE.TRANSACTION = {};
+        CONSTANTS.SUBTYPE.TRANSACTION.META = 1;
+        CONSTANTS.SUBTYPE.TRANSACTION.DATA = 2;
 
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -105,6 +115,10 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.ACTION.INCIDENT.APPLICATIONMETA = "alert/ApplicationMeta.action";
         CONSTANTS.ACTION.INCIDENT.APPLICATIONDATA = "alert/ApplicationData.action";
 
+        CONSTANTS.ACTION.TRANSACTION = {};
+        CONSTANTS.ACTION.TRANSACTION.META = "transaction/Meta.action";
+        CONSTANTS.ACTION.TRANSACTION.DATA = "transaction/Data.action";
+
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // WIDGET CLASS PATHS
         CONSTANTS.WIDGETS = {};
@@ -126,6 +140,10 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.WIDGETS.INCIDENT.AVAILABILITY = 'noc/Widgets/Incident/IncidentAvailabilityGrid';
         CONSTANTS.WIDGETS.INCIDENT.APPLICATIONGRID = 'noc/Widgets/Incident/ApplicationGrid';
         CONSTANTS.WIDGETS.INCIDENT.APPLICATIONDATA = 'noc/Widgets/Incident/ApplicationData';
+
+        CONSTANTS.WIDGETS.TRANSACTION = {};
+        CONSTANTS.WIDGETS.TRANSACTION.META = "noc/Widgets/Transaction/GridMeta";
+        CONSTANTS.WIDGETS.TRANSACTION.DATA = "noc/Widgets/Transaction/GridData";
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////        
 

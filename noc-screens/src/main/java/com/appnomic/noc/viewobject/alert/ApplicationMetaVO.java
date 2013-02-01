@@ -1,4 +1,5 @@
-package com.appnomic.noc.action.alert;
+package com.appnomic.noc.viewobject.alert;
+
 
 public class ApplicationMetaVO {
 
