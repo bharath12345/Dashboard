@@ -95,21 +95,21 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
         ViewManager.manageAvailabilitySubView = function(data, input) {
             switch(data.subtype) {
                 case CONSTANTS.SUBTYPE.AVAILABILITY.COMPONENT:
-                    ViewManager.LOG.log(Logger.SEVERITY.SEVERE, "component grid data received");
+                    //ViewManager.LOG.log(Logger.SEVERITY.SEVERE, "component grid data received");
                     require([CONSTANTS.WIDGETS.AVAILABILITY.MATRIX], function (AvailMatrix) {
                         new AvailMatrix().create(data, input.componentDataVO);
                     });
                     break;
 
                 case CONSTANTS.SUBTYPE.AVAILABILITY.CLUSTER:
-                    ViewManager.LOG.log(Logger.SEVERITY.SEVERE, "cluster grid data received");
+                    //ViewManager.LOG.log(Logger.SEVERITY.SEVERE, "cluster grid data received");
                     require([CONSTANTS.WIDGETS.AVAILABILITY.MATRIX], function (AvailMatrix) {
                         new AvailMatrix().create(data, input.clusterDataVO);
                     });
                     break;
 
                 case CONSTANTS.SUBTYPE.AVAILABILITY.INSTANCE:
-                    ViewManager.LOG.log(Logger.SEVERITY.SEVERE, "instance grid data received");
+                    //ViewManager.LOG.log(Logger.SEVERITY.SEVERE, "instance grid data received");
                     require([CONSTANTS.WIDGETS.AVAILABILITY.MATRIX], function (AvailMatrix) {
                         new AvailMatrix().create(data, input.compInstanceDataVO);
                     });
@@ -124,6 +124,12 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
                 case CONSTANTS.SUBTYPE.AVAILABILITY.ALLCLUSTER:
                     require([CONSTANTS.WIDGETS.AVAILABILITY.CLUSTERZONES], function (ClusterZones) {
                         new ClusterZones().create(data, input);
+                    });
+                    break;
+
+                case CONSTANTS.SUBTYPE.AVAILABILITY.CLUSTER2:
+                    require([CONSTANTS.WIDGETS.AVAILABILITY.MATRIX2], function (AvailMatrix2) {
+                        new AvailMatrix2().create(data, input.clusterDataVO);
                     });
                     break;
 

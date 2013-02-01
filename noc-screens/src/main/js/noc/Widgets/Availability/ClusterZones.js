@@ -40,13 +40,20 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                 gridContainer.startup();
                 gridContainer.resize();
 
+                // remove padding
+                var innerPane = dojo.query(".dijitTitlePaneContentInner", gridContainer.domNode);
+                console.log("inner len = " + innerPane.length);
+                for(var i=0;i<innerPane.length;i++) {
+                    innerPane[i].style.padding=0;
+                }
+
                 var xpos=0, ypos=0;
                 for(var i=0;i<input.clusterVOs.length;i++) {
                     var viewMeta = {
                         id:input.clusterVOs[i].id,
                         name:input.clusterVOs[i].clusterName,
                         type:CONSTANTS.TYPE.AVAILABILITY,
-                        subtype:CONSTANTS.SUBTYPE.AVAILABILITY.CLUSTER,
+                        subtype:CONSTANTS.SUBTYPE.AVAILABILITY.CLUSTER2,
                         dimensions:[titlepanes[i].domNode.offsetWidth, titlepanes[i].domNode.offsetHeight],
                         position:[xpos, ypos],
                         custom:[10]

@@ -29,6 +29,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILABILITY = "noc.Components.Availability.Availability";
         CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILABILITYGRID = "noc.Components.Availability.AvailabilityGrid";
         CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILMATRIX = "noc.Components.Availability.AvailMatrix";
+        CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILMATRIX2 = "noc.Components.Availability.AvailMatrix2";
         CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.CLUSTERZONES = "noc.Components.Availability.ClusterZones";
 
         CONSTANTS.CLASSNAME.WIDGETS.COMPONENT = {};
@@ -115,6 +116,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.WIDGETS.AVAILABILITY.MATRIX = 'noc/Widgets/Availability/AvailMatrix';
         CONSTANTS.WIDGETS.AVAILABILITY.AVAILABILITY = 'noc/Widgets/Availability/Availability';
         CONSTANTS.WIDGETS.AVAILABILITY.CLUSTERZONES = "noc/Widgets/Availability/ClusterZones";
+        CONSTANTS.WIDGETS.AVAILABILITY.MATRIX2 = 'noc/Widgets/Availability/AvailMatrix2';
 
         CONSTANTS.WIDGETS.COMPONENT = {};
         CONSTANTS.WIDGETS.COMPONENT.ZONES = 'noc/Widgets/component/Zones';
