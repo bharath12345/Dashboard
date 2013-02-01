@@ -114,6 +114,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.WIDGETS.AVAILABILITY.GRID = 'noc/Widgets/Availability/AvailabilityGrid';
         CONSTANTS.WIDGETS.AVAILABILITY.MATRIX = 'noc/Widgets/Availability/AvailMatrix';
         CONSTANTS.WIDGETS.AVAILABILITY.AVAILABILITY = 'noc/Widgets/Availability/Availability';
+        CONSTANTS.WIDGETS.AVAILABILITY.CLUSTERZONES = "noc/Widgets/Availability/ClusterZones";
 
         CONSTANTS.WIDGETS.COMPONENT = {};
         CONSTANTS.WIDGETS.COMPONENT.ZONES = 'noc/Widgets/component/Zones';

@@ -183,7 +183,6 @@ public class AlertInfoAction extends AbstractNocAction  {
 		System.out.println("application being assembled = " + applicationName);
 		
 		applicationDataVO = new ApplicationDataVO();
-		//setDummyApplicationData(applicationName, applicationDataVO);
 		
 		Date currentTime = Calendar.getInstance().getTime();
 		Calendar hourBefore = Calendar.getInstance();
@@ -200,6 +199,10 @@ public class AlertInfoAction extends AbstractNocAction  {
 		applicationDataVO.setApplicationName(applicationName);
 		
 		AlertCountSummary acs = alertDataService.getCountSummary(id, startTime, endTime);
+		if(acs == null) {
+			setDummyApplicationData(applicationName, applicationDataVO);
+			return SUCCESS;
+		}
 		
 		metricDataset[0] = getMetricData(acs, SUMMARY_CATEGORY.COMPONENT_ANALYTIC);
 		metricDataset[1] = getMetricData(acs, SUMMARY_CATEGORY.COMPONENT_AVAILABILITY);

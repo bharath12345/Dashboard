@@ -27,7 +27,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
                 //setTimeout(function(){new TxTreemapPage().loadPage()}, 30*1000);
                 //setTimeout(function(){new TxServiceLevelPage().loadPage()}, 40*1000);
 
-                var startPageCounter = 1;
+                var startPageCounter = 2;
                 for(var i=0;i<PageLoader.TotalPages;i++) {
                     new AvailabilityPage().loadPage(i+startPageCounter, "availabilityPage_" + (i+startPageCounter), PageLoader.Pages[i].componentName, PageLoader.Pages[i].clusterName);
                 }
@@ -51,8 +51,9 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
 
             createSections: function(viewPort) {
                 this.createBorderContainer(this.getSection(), viewPort, 0);
+                this.createBorderContainer(this.getSection(), viewPort, 1);
 
-                var startPageCounter = 1;
+                var startPageCounter = 2;
                 for(var i=startPageCounter; i<PageLoader.TotalPages+startPageCounter; i++) {
                     this.createBorderContainer(this.getSection(), viewPort, i);
                 }
@@ -147,7 +148,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
         PageLoader.TotalPages = 0;
         PageLoader.Pages = [];
 
-        // Total = 1 + 4 + 8 + 7 + 3 = 23 Clusters of 4 Types
+        // Total = 1 + 5 + 8 + 7 + 3 = 24 Clusters of 4 Types
         // 1 DB
         PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "DB",clusterName: "ALL"};
 
@@ -158,6 +159,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
 
         // 4 WEB Servers
         PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "WEB_SERVER",clusterName: "FLXRET_IHS"};
+        PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "WEB_SERVER",clusterName: "FLXRET_DB"};
         PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "WEB_SERVER",clusterName: "CRMNextCommIIS"};
         PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "WEB_SERVER",clusterName: "FinnoneLOS_WebSrv"};
         PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "WEB_SERVER",clusterName: "ENET_IHS"};
@@ -172,7 +174,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
          PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "APP_SERVER",clusterName: "FLXRETWAS7"};
          PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "APP_SERVER",clusterName: "FLXRETWAS8"};
 
-        // 7 APP Servers of type FinnoneLOSWAS
+         // 7 APP Servers of type FinnoneLOSWAS
          PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "APP_SERVER",clusterName: "FinnoneLOSWAS1"};
          PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "APP_SERVER",clusterName: "FinnoneLOSWAS2"};
          PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "APP_SERVER",clusterName: "FinnoneLOSWAS3"};
@@ -181,7 +183,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
          PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "APP_SERVER",clusterName: "FinnoneLOSWAS6"};
          PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "APP_SERVER",clusterName: "FinnoneLOSWAS7"};
 
-        // 3 APP Servers miscellaneous
+         // 3 APP Servers miscellaneous
          PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "APP_SERVER",clusterName: "FLXRETWASALL"};
          PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "APP_SERVER",clusterName: "NCB_UAT_APP"};
          PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "APP_SERVER",clusterName: "ENETWASALL"};*/

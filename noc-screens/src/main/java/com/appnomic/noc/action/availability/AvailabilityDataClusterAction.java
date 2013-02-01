@@ -37,10 +37,11 @@ import com.google.gson.Gson;
 public class AvailabilityDataClusterAction extends AbstractNocAction {
 	
 	private ClusterDataService clusterDataService;
-	private ClusterDataVO clusterDataVO;
 	private ComponentDataService componentDataService;
+	
 	private Map<String, String[]> param;
 	private ClusterVO [] clusterVOs;
+	private ClusterDataVO clusterDataVO;
 	
 	public ComponentDataService getComponentDataService() {
 		return componentDataService;
@@ -111,7 +112,7 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 	@Action(value="/availability/ClusterZones", results = {
 	        @Result(name="success", type="json", params = {
 	                "excludeProperties",
-	                "session,SUCCESS,ERROR,clusterDataService,componentDataService",
+	                "session,SUCCESS,ERROR,clusterDataService,componentDataService,clusterDataVO",
 	        		"enableGZIP", "true",
 	        		"encoding", "UTF-8",
 	                "noCache","true",
@@ -124,6 +125,7 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 		clusterVOs = new ClusterVO[clusters.size()];
 		int i = 0;
 		for(Cluster cluster: clusters) {
+			clusterVOs[i] = new ClusterVO();
 			clusterVOs[i].setClusterName(cluster.getName());
 			clusterVOs[i].setId(cluster.getId());
 			i++;
@@ -134,7 +136,7 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 	@Action(value="/availability/ClusterData", results = {
 	        @Result(name="success", type="json", params = {
 	                "excludeProperties",
-	                "session,SUCCESS,ERROR,clusterDataService,componentDataService",
+	                "session,SUCCESS,ERROR,clusterDataService,componentDataService,clusterVOs",
 	        		"enableGZIP", "true",
 	        		"encoding", "UTF-8",
 	                "noCache","true",

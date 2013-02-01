@@ -46,7 +46,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
                     if(input.param.name != undefined) {
                         data.name = input.param.name;
                     }
-                    ViewManager.LOG.log(Logger.SEVERITY.SEVERE, "data type = " + data.type + " sub type = " + data.subtype);
+                    //ViewManager.LOG.log(Logger.SEVERITY.SEVERE, "data type = " + data.type + " sub type = " + data.subtype);
                 } else {
                     ViewManager.LOG.log(Logger.SEVERITY.SEVERE, "input param is undefind");
                 }
@@ -122,8 +122,8 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
                     break;
 
                 case CONSTANTS.SUBTYPE.AVAILABILITY.ALLCLUSTER:
-                    require([CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.CLUSTERZONES], function (ClusterZones) {
-                        new ClusterZones().create(data);
+                    require([CONSTANTS.WIDGETS.AVAILABILITY.CLUSTERZONES], function (ClusterZones) {
+                        new ClusterZones().create(data, input);
                     });
                     break;
 
@@ -137,7 +137,6 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
         };
 
         ViewManager.manageIncidentSubView = function(data, input) {
-            console.log("in manage incident sub view");
             switch(data.subtype) {
                 case CONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY.COMPONENT:
                     require([CONSTANTS.WIDGETS.INCIDENT.AVAILABILITY], function (IncidentAvailabilityGrid) {
@@ -164,7 +163,6 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
                     break;
 
                 case CONSTANTS.SUBTYPE.INCIDENT.DATA:
-                    console.log("in CONSTANTS.SUBTYPE.INCIDENT.DATA");
                     require([CONSTANTS.WIDGETS.INCIDENT.APPLICATIONDATA], function (ApplicationData) {
                         new ApplicationData().create(data, input);
                     });
