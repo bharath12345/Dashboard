@@ -24,13 +24,18 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                     for(var j=0;j<aVO.transactionGroups.length;j++) {
                         var txGroup = aVO.transactionGroups[j];
                         for(var k=0;k<txGroup.transactions.length;k++) {
+                            var id=input.applicationVO[i].applicationName + "_" +
+                            input.applicationVO[i].transactionGroups[j].groupName + "_" +
+                                input.applicationVO[i].transactionGroups[j].transactions[k].name;
                             titlepanes[z] = new TitlePane({
                                 splitter:false,
                                 style:styleString,
-                                content:"<div id='" + input.applicationVO[i].applicationName + "_" +
-                                    input.applicationVO[i].transactionGroups[j].groupName + "_" +
-                                    input.applicationVO[i].transactionGroups[j].transactions[k].name + "' style='width: 100%; " +
-                                    "height: 100%;'></div>",
+                                content:"<table id='"+id+"' style='width: 100%; " +
+                                    "height: 100%;'><tr>" +
+                                    "<td id='"+id+"_Alert"+"'></td>" +
+                                    "<td id='"+id+"_Response"+"'></td>" +
+                                    "<td id='"+id+"_Volume"+"'></td>" +
+                                    "</tr></table>",
                                 title:"["+input.applicationVO[i].applicationName + "] [" + input.applicationVO[i].applicationName+"]",
                                 toggleable:false
                             });
@@ -90,7 +95,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                                 subtype:CONSTANTS.SUBTYPE.TRANSACTION.DATA,
                                 dimensions:[titlepanes[i].domNode.offsetWidth, titlepanes[i].domNode.offsetHeight],
                                 position:[xpos, ypos],
-                                custom:[10]
+                                custom:[input.applicationVO[i].applicationName, input.applicationVO[i].transactionGroups[j].groupName]
                             };
                             Utility.xhrPostCentral(CONSTANTS.ACTION.TRANSACTION.DATA, viewMeta);
                         }

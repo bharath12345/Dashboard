@@ -1,14 +1,54 @@
-define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", 'dgrid/Grid', "noc/Logger", "noc/Constants", "noc/Utility"],
+define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Logger", "noc/Constants", "noc/Utility"],
 
-    function (declare, i18n, i18nString, Grid, Logger, CONSTANTS, Utility) {
+    function (declare, i18n, i18nString, Logger, CONSTANTS, Utility) {
 
         var GridData = declare(CONSTANTS.CLASSNAME.WIDGETS.TRANSACTION.GRIDDATA, null, {
 
             create: function(data, input) {
-                // 1) Create two rows in the client area of the title pane
-                // 2) in the top row write the name of the Transaction
-                // 3) In the second row interpret the response and fill the 3 cells for
-                //   Tx-Volume, Tx-Alerts, Tx-response-time
+                // fill the 3 cells for Tx-Volume, Tx-Alerts, Tx-response-time
+
+                var id = input.param.custom[0]+"_"+input.param.custom[1]+"_"+input.param.name;
+                //console.log("grid data id = " + id);
+                var alertId = id + "_Alert";
+                this.appendRectangle(alertId, 10, 10, input.txDataVO.alerts, CONSTANTS.TXGRID.ALERTS);
+
+                var responseId = id + "_Response";
+                this.appendRectangle(responseId, 10, 10, input.txDataVO.response, CONSTANTS.TXGRID.RESPONSE);
+
+                var volumeId = id + "_Volume";
+
+            },
+
+            appendRectangle: function(cellId, width, height, value, type) {
+                d3.select("#" + cellId)
+                    .append("svg")
+                    .append("svg:rect")
+                    .attr("class", "cell")
+                    .attr("width", width)
+                    .attr("height", height)
+                    .style("fill", function () {
+                        //return color(d.value);
+
+                        switch(type) {
+                            case CONSTANTS.TXGRID.ALERTS:
+                                if(value == "HIGH") {
+                                    return "orangered";
+                                } else {
+                                    return "yellowgreen";
+                                }
+                            break;
+
+                            case CONSTANTS.TXGRID.RESPONSE:
+                                if(value == "SLOW") {
+                                    return "orangered";
+                                } else {
+                                    return "yellowgreen";
+                                }
+                            break;
+
+                        }
+
+                    });
             }
 
         });

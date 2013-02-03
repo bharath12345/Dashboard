@@ -162,5 +162,12 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.PREFIX.CLUSTER_CELL = "CLUSTER_CELL_";
         CONSTANTS.PREFIX.INSTANCE_CELL = "INSTANCE_CELL_";
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        CONSTANTS.TXGRID = {};
+        CONSTANTS.TXGRID.ALERTS = 1;
+        CONSTANTS.TXGRID.RESPONSE = 2;
+        CONSTANTS.TXGRID.VOLUME = 3;
+
         return CONSTANTS;
     });
