@@ -32,9 +32,9 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                                 style:styleString,
                                 content:"<table id='"+id+"' style='width: 100%; " +
                                     "height: 100%;'><tr>" +
-                                    "<td id='"+id+"_Alert"+"'></td>" +
-                                    "<td id='"+id+"_Response"+"'></td>" +
-                                    "<td id='"+id+"_Volume"+"'></td>" +
+                                    "<td id='" + id + "_Alert"    + "' style='width:11px'></td>" +
+                                    "<td id='" + id + "_Response" + "' style='width:11px''></td>" +
+                                    "<td id='" + id + "_Volume"   + "'></td>" +
                                     "</tr></table>",
                                 title:"["+input.applicationVO[i].applicationName + "] [" + input.applicationVO[i].applicationName+"]",
                                 toggleable:false

@@ -14,33 +14,45 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
 
                 PageLoader.LOG.log(Logger.SEVERITY.SEVERE, "Logging Success!");
 
-                var viewPort = win.getBox();
-                PageLoader.LOG.log(Logger.SEVERITY.SEVERE, "window height = " + viewPort.h + " width = " + viewPort.w);
+                var startPageCounter = 0;
+                this.createIncidentSectionAndPage(startPageCounter++);
+                this.createClusterAvailabilitySectionAndPage(startPageCounter++);
+                this.createTxGridSectionAndPage(startPageCounter++);
 
-                this.createSections(viewPort);
-
-                new IncidentPage().loadPage(0, "IncidentGrid");
-                new AllClusterAvailability().loadPage(1, "AllClusterAvailability");
-                new TransactionGrid().loadPage(2, "TransactionGrid");
-                return;
+                //for(var i=0;i<PageLoader.TotalPages;i++) {
+                //    this.createAvailabilitySectionAndPage(startPageCounter++);
+                //}
 
                 //setTimeout(function(){new TxTimeSeriesPage().loadPage()}, 10*1000);
                 //setTimeout(function(){new ComponentPage().loadPage()}, 20*1000);
                 //setTimeout(function(){new TxTreemapPage().loadPage()}, 30*1000);
                 //setTimeout(function(){new TxServiceLevelPage().loadPage()}, 40*1000);
 
-                var startPageCounter = 3;
-                for(var i=0;i<PageLoader.TotalPages;i++) {
-                    new AvailabilityPage().loadPage(i+startPageCounter, "availabilityPage_" + (i+startPageCounter), PageLoader.Pages[i].componentName, PageLoader.Pages[i].clusterName);
-                }
-
-                //PageLoader.pageScroll(viewPort);
+                PageLoader.PageCounter = startPageCounter - 1;
+                PageLoader.pageScroll();
             },
 
-            getViewPortDimensions: function(viewPort) {
-                if(viewPort == null || viewPort == undefined) {
-                    viewPort = win.getBox();
-                }
+            createIncidentSectionAndPage: function(pageNum) {
+                this.createBorderContainer(this.getSection(pageNum), pageNum);
+                new IncidentPage().loadPage(pageNum, "IncidentGrid");
+            },
+
+            createClusterAvailabilitySectionAndPage: function(pageNum) {
+                this.createBorderContainer(this.getSection(pageNum), pageNum);
+                new AllClusterAvailability().loadPage(pageNum, "AllClusterAvailability");
+            },
+
+            createTxGridSectionAndPage: function(pageNum) {
+                this.createBorderContainer(this.getSection(pageNum), pageNum);
+                new TransactionGrid().loadPage(pageNum, "TransactionGrid");
+            },
+
+            createAvailabilitySectionAndPage: function(pageNum) {
+                this.createBorderContainer(this.getSection(pageNum), pageNum);
+                new AvailabilityPage().loadPage(pageNum, "availabilityPage_" + (pageNum), PageLoader.Pages[pageNum].componentName, PageLoader.Pages[pageNum].clusterName);
+            },
+
+            getViewPortDimensions: function() {
                 if(PageLoader.ViewPortStyle == null) {
                     PageLoader.ViewPortStyle="width: " + (document.body.clientWidth) + "; height: " + (document.body.clientHeight) + ";";
                     return PageLoader.ViewPortStyle;
@@ -48,36 +60,26 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
                 return PageLoader.ViewPortStyle;
             },
 
-            getSection: function(viewPort) {
+            getSection: function(pageNum) {
                 var section = dojo.create("section");
-                section.style.cssText = this.getViewPortDimensions(viewPort);
+                section.id = PageLoader.SECTION + pageNum;
+                section.style.cssText = this.getViewPortDimensions();
                 section.style.overflow = "hidden";
                 document.body.appendChild(section);
+                PageLoader.PageStack.push(section);
                 return section;
             },
 
-            createSections: function(viewPort) {
-                this.createBorderContainer(this.getSection(), viewPort, 0);
-                this.createBorderContainer(this.getSection(), viewPort, 1);
-                this.createBorderContainer(this.getSection(), viewPort, 2);
-                return;
-
-                var startPageCounter = 3;
-                for(var i=startPageCounter; i<PageLoader.TotalPages+startPageCounter; i++) {
-                    this.createBorderContainer(this.getSection(), viewPort, i);
-                }
-            },
-
-            createBorderContainer: function(section, viewPort, pageCounter) {
+            createBorderContainer: function(section, pageCounter) {
                 var node = dojo.create("div");
-                node.style.cssText = this.getViewPortDimensions(viewPort);
+                node.style.cssText = this.getViewPortDimensions();
                 section.appendChild(node);
 
                 PageLoader.TopBc[pageCounter] = new BorderContainer({
                     design:"headline",
                     liveSplitters:false,
                     persist:true
-                    //style: this.getViewPortDimensions(viewPort)
+                    //style: this.getViewPortDimensions()
                 }, node);
 
                 //PageLoader.CpTop[pageCounter] = new ContentPane({
@@ -125,32 +127,25 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
         PageLoader.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.PAGELOADER));
 
         // static variables of this class
-
-        // when the page loads, this variable is set to 0
-        // after that, this counter is spinning between 1 to 5
-        PageLoader.PageCounter = 0;
+        PageLoader.SECTION = "section_";
 
         PageLoader.TopBc = [];
-        PageLoader.CpTop = [];
+        //PageLoader.CpTop = [];
         PageLoader.CpCenter = [];
-        PageLoader.CpBottom = [];
+        //PageLoader.CpBottom = [];
 
         PageLoader.ViewPortStyle = null;
 
-        PageLoader.pageScroll = function(viewPort) {
-            if(PageLoader.PageCounter >= 5) {
-                document.body.scrollTop = document.documentElement.scrollTop = 0;
-                PageLoader.PageCounter = 1;
-            } else {
-                if(PageLoader.PageCounter != 0) {
-                    if(viewPort == null || viewPort == undefined) {
-                        viewPort = win.getBox();
-                    }
-                    window.scrollBy(0, (0.98*viewPort.h)); // horizontal and vertical scroll increments
-                }
-                PageLoader.PageCounter++;
+        PageLoader.PageStack = [];
+        PageLoader.PageCounter = 0;
+
+        PageLoader.pageScroll = function(pageCount) {
+            PageLoader.PageStack[PageLoader.PageCounter].scrollIntoView();
+            PageLoader.PageCounter++;
+            if(PageLoader.PageCounter >= PageLoader.PageStack.length) {
+                PageLoader.PageCounter = 0;
             }
-            scrolldelay = setTimeout('noc.PageLoader.pageScroll()', 2 * 1000);
+            setTimeout('noc.PageLoader.pageScroll()', 2 * 1000);
         };
 
         PageLoader.TotalPages = 0;
