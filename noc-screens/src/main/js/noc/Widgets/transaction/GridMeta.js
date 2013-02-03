@@ -13,8 +13,8 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                 var paneWidth = data.dimensions.width;
                 var paneHeight = data.dimensions.height;
 
-                var nbZ = 14; // 14 columns and 28 rows approximately
-                var rows = 28;
+                var nbZ = 16; // 14 columns and 28 rows approximately
+                var rows = 25;
                 var styleString = "width: " + (paneWidth/nbZ) + "; height: " + (paneHeight/rows) + ";"
                 console.log("style string = " + styleString);
                 var titlepanes = [];
@@ -31,7 +31,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                                     input.applicationVO[i].transactionGroups[j].groupName + "_" +
                                     input.applicationVO[i].transactionGroups[j].transactions[k].name + "' style='width: 100%; " +
                                     "height: 100%;'></div>",
-                                title:input.applicationVO[i].applicationName,
+                                title:"["+input.applicationVO[i].applicationName + "] [" + input.applicationVO[i].applicationName+"]",
                                 toggleable:false
                             });
                             z++;
@@ -58,6 +58,23 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                 //console.log("inner len = " + innerPane.length);
                 for(var i=0;i<innerPane.length;i++) {
                     innerPane[i].style.padding=0;
+                }
+
+                var textNode = dojo.query(".dijitTitlePaneTextNode", gridContainer.domNode);
+                for(var i=0;i<textNode.length;i++) {
+                    textNode[i].style.fontSize="7px";
+                }
+
+                var head = dojo.query(".dijitTitlePaneTitle", gridContainer.domNode)
+                for(var i=0;i<head.length;i++) {
+                    head[i].style.padding=0;
+                    head[i].style.minHeight = 0;
+                }
+
+                var headFocus = dojo.query(".dijitTitlePaneTitleFocus", gridContainer.domNode)
+                for(var i=0;i<headFocus.length;i++) {
+                    headFocus[i].style.margin=0;
+                    headFocus[i].style.padding=0;
                 }
 
                 var xpos=0, ypos=0;

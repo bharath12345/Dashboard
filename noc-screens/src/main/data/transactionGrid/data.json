@@ -1,5 +1,6 @@
 {
     "txName": "tx1",
+    "txId": 123,
     "alerts": "HIGH",
     "response": "SLOW",
     "volume": "2k"

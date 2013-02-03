@@ -6,7 +6,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
 
     function (require, declare, i18n, ContentPane, BorderContainer, win,
               i18nString, AvailabilityPage, TxTreemapPage, ComponentPage,
-              TxTimeSeriesPage, IncidentPage, AllClusterAvailability, Logger, CONSTANTS, Utility) {
+              TxTimeSeriesPage, IncidentPage, AllClusterAvailability, TransactionGrid, Logger, CONSTANTS, Utility) {
 
         var PageLoader = declare(CONSTANTS.CLASSNAME.PAGELOADER, null, {
 
@@ -41,12 +41,17 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
                 if(viewPort == null || viewPort == undefined) {
                     viewPort = win.getBox();
                 }
-                return "width: " + (document.body.clientWidth - 15) + "; height: " + (document.body.clientHeight - 15) + ";";
+                if(PageLoader.ViewPortStyle == null) {
+                    PageLoader.ViewPortStyle="width: " + (document.body.clientWidth) + "; height: " + (document.body.clientHeight) + ";";
+                    return PageLoader.ViewPortStyle;
+                }
+                return PageLoader.ViewPortStyle;
             },
 
             getSection: function(viewPort) {
                 var section = dojo.create("section");
                 section.style.cssText = this.getViewPortDimensions(viewPort);
+                section.style.overflow = "hidden";
                 document.body.appendChild(section);
                 return section;
             },
@@ -55,7 +60,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
                 this.createBorderContainer(this.getSection(), viewPort, 0);
                 this.createBorderContainer(this.getSection(), viewPort, 1);
                 this.createBorderContainer(this.getSection(), viewPort, 2);
-
+                return;
 
                 var startPageCounter = 3;
                 for(var i=startPageCounter; i<PageLoader.TotalPages+startPageCounter; i++) {
@@ -71,45 +76,42 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
                 PageLoader.TopBc[pageCounter] = new BorderContainer({
                     design:"headline",
                     liveSplitters:false,
-                    persist:true,
-                    style: this.getViewPortDimensions(viewPort)
+                    persist:true
+                    //style: this.getViewPortDimensions(viewPort)
                 }, node);
 
-                PageLoader.CpTop[pageCounter] = new ContentPane({
-                    region:"top",
-                    splitter:false
-                });
+                //PageLoader.CpTop[pageCounter] = new ContentPane({
+                //    region:"top",
+                //    splitter:false
+                //});
 
                 PageLoader.CpCenter[pageCounter] = new ContentPane({
                     region:"center",
                     splitter:false
                 });
 
-                PageLoader.CpBottom[pageCounter] = new ContentPane({
-                    region:"bottom",
-                    splitter:false
-                });
+                //PageLoader.CpBottom[pageCounter] = new ContentPane({
+                //    region:"bottom",
+                //    splitter:false
+                //});
 
-                PageLoader.TopBc[pageCounter].addChild(PageLoader.CpTop[pageCounter]);
+                //PageLoader.TopBc[pageCounter].addChild(PageLoader.CpTop[pageCounter]);
                 PageLoader.TopBc[pageCounter].addChild(PageLoader.CpCenter[pageCounter]);
-                PageLoader.TopBc[pageCounter].addChild(PageLoader.CpBottom[pageCounter]);
+                //PageLoader.TopBc[pageCounter].addChild(PageLoader.CpBottom[pageCounter]);
                 PageLoader.TopBc[pageCounter].startup();
 
                 // remove all contentpane paddings and top/bottom contentpane border
-                this.removeBorderPadding(PageLoader.CpTop[pageCounter].domNode);
+                //this.removeBorderPadding(PageLoader.CpTop[pageCounter].domNode);
                 PageLoader.CpCenter[pageCounter].domNode.style.padding = "0px";
-                this.removeBorderPadding(PageLoader.CpBottom[pageCounter].domNode);
+                //this.removeBorderPadding(PageLoader.CpBottom[pageCounter].domNode);
 
                 // remove offset of all contentpane
-                var childCP = PageLoader.TopBc[pageCounter].domNode.childNodes;
-                for(var i = 0; i < childCP.length; i++) {
-                    //PageLoader.LOG.log(Logger.SEVERITY.SEVERE, childCP[i]);
-                    childCP[i].style.left = "0px";
-                    childCP[i].style.top = "0px";
-                    //PageLoader.LOG.log(Logger.SEVERITY.SEVERE, childCP[i]);
-                }
+                PageLoader.CpCenter[pageCounter].domNode.style.left = "0";
+                PageLoader.CpCenter[pageCounter].domNode.style.top = "0";
+                PageLoader.CpCenter[pageCounter].domNode.style.overflow = "hidden";
 
                 PageLoader.TopBc[pageCounter].resize();
+                PageLoader.CpCenter[pageCounter].domNode.style.overflow = "hidden";
 
             },
 
@@ -132,6 +134,8 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
         PageLoader.CpTop = [];
         PageLoader.CpCenter = [];
         PageLoader.CpBottom = [];
+
+        PageLoader.ViewPortStyle = null;
 
         PageLoader.pageScroll = function(viewPort) {
             if(PageLoader.PageCounter >= 5) {

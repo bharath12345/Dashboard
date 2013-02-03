@@ -26,6 +26,7 @@ import com.appnomic.noc.viewobject.availability.ComponentDataVO;
 import com.appnomic.noc.viewobject.availability.ComponentVO;
 import com.appnomic.noc.viewobject.availability.InstanceVO;
 import com.appnomic.noc.viewobject.transaction.ApplicationVO;
+import com.appnomic.noc.viewobject.transaction.TransactionDataVO;
 import com.appnomic.noc.viewobject.transaction.TransactionGroupVO;
 import com.appnomic.noc.viewobject.transaction.TransactionVO;
 import com.appnomic.service.ApplicationDataService;
@@ -43,10 +44,11 @@ import com.appnomic.service.ComponentDataService;
 @Namespace("/transaction")
 public class TransactionMetaAction extends AbstractNocAction  {
 
-	private TransactionDaoImpl transactionDaoImpl;
+	//private TransactionDaoImpl transactionDaoImpl;
 	private ApplicationDataService applicationDataService;
 	
-	ApplicationVO [] applicationVO;
+	private ApplicationVO [] applicationVO;
+	private TransactionDataVO txDataVO = new TransactionDataVO();
 	private Map<String, String[]> param;
 	
 	public ApplicationDataService getApplicationDataService() {
@@ -58,6 +60,14 @@ public class TransactionMetaAction extends AbstractNocAction  {
 		this.applicationDataService = applicationDataService;
 	}
 
+	public TransactionDataVO getTxDataVO() {
+		return txDataVO;
+	}
+
+	public void setTxDataVO(TransactionDataVO txDataVO) {
+		this.txDataVO = txDataVO;
+	}
+
 	public ApplicationVO[] getApplicationVO() {
 		return applicationVO;
 	}
@@ -66,19 +76,38 @@ public class TransactionMetaAction extends AbstractNocAction  {
 		this.applicationVO = applicationVO;
 	}
 
-	public TransactionDaoImpl getTransactionDaoImpl() {
-		return transactionDaoImpl;
-	}
-
-	public void setTransactionDaoImpl(TransactionDaoImpl transactionDaoImpl) {
-		this.transactionDaoImpl = transactionDaoImpl;
-	}
-
 	public TransactionMetaAction() {
-		//setDummyData();
+		setDummyData();
 	}
 	
 	public void setDummyData() {
+		int appCount = 10;
+		applicationVO = new ApplicationVO[appCount];
+		for(int i=0;i<10;i++) {
+			applicationVO[i] = new ApplicationVO();
+			applicationVO[i].setApplicationName("App_"+i);
+			applicationVO[i].setId(i);
+		
+			int txGroupCount = 5;
+			TransactionGroupVO [] transactionGroups = new TransactionGroupVO[txGroupCount];
+			applicationVO[i].setTransactionGroups(transactionGroups);
+			for(int j=0;j<txGroupCount;j++) {
+				transactionGroups[j] = new TransactionGroupVO();
+				transactionGroups[j].setGroupName("Group_"+j);
+				transactionGroups[j].setId(j);
+				
+				int txCount = 8; // 10 * 5 * 8 = 400 = approx num of Tx in HDFC
+				TransactionVO [] transactions = new TransactionVO[txCount];
+				transactionGroups[j].setTransactions(transactions);
+				
+				for(int k=0;k<txCount;k++) {
+					transactions[k] = new TransactionVO();
+					transactions[k].setId(k);
+					transactions[k].setName("tx_"+k);
+				}
+			}
+		}
+		
 	}
 	
 	public Map<String, String[]> getParam() {
@@ -88,20 +117,62 @@ public class TransactionMetaAction extends AbstractNocAction  {
 	public void setParam(Map<String, String[]> param) {
 		this.param = param;
 	}
-
-	@Action(value="/transaction/Meta", results = {
+	
+	public String nocAction() {
+		return SUCCESS;
+	}
+	
+	private void setDummy(int id, String transactionName){
+		txDataVO.setAlerts("HIGH");
+		txDataVO.setResponse("SLOW");
+		txDataVO.setTxId(id);
+		txDataVO.setTxName(transactionName);
+		txDataVO.setVolume("2k");
+	}
+	
+	@Action(value="/transaction/Data", results = {
 	        @Result(name="success", type="json", params = {
 	        		"excludeProperties",
-	                "parameters,session,SUCCESS,ERROR,transactionDaoImpl",
+	                "parameters,session,SUCCESS,ERROR,transactionDaoImpl,applicationDataService,applicationVO",
 	        		"enableGZIP", "true",
 	        		"encoding", "UTF-8",
 	                "noCache","true",
 	                "excludeNullProperties","true"
 	            })})
-	public String nocAction() {
+	public String transactionData() {
 		param = getParameters();
 		
-		List<ApplicationData> applications = applicationDataService.getAll();
+		String keyVal = "Transaction Data: ";
+		for(String key : parameters.keySet()) {
+			keyVal += "[ " + key + " = ";
+			for(String value : parameters.get(key)) {
+				keyVal += value + ", ";
+			}
+			keyVal += "] ";
+		}
+		System.out.println("key value map = " + keyVal);
+		
+		String transactionName = (parameters.get("name")[0]);
+		int id = Integer.parseInt(parameters.get("id")[0]);
+		System.out.println("transaction data being assembled = " + transactionName);
+		
+		setDummy(id, transactionName);
+		return SUCCESS;
+	}
+
+	@Action(value="/transaction/Meta", results = {
+	        @Result(name="success", type="json", params = {
+	        		"excludeProperties",
+	                "parameters,session,SUCCESS,ERROR,transactionDaoImpl,applicationDataService,txDataVO",
+	        		"enableGZIP", "true",
+	        		"encoding", "UTF-8",
+	                "noCache","true",
+	                "excludeNullProperties","true"
+	            })})
+	public String transactionMeta() {
+		param = getParameters();
+		
+		/*List<ApplicationData> applications = applicationDataService.getAll();
 		applicationVO = new ApplicationVO[applications.size()];
 		int i = 0;
 		for(ApplicationData application : applications) {
@@ -137,7 +208,7 @@ public class TransactionMetaAction extends AbstractNocAction  {
 				j++;
 			}
 			i++;
-		}
+		}*/
 		
 		return SUCCESS;
 	}

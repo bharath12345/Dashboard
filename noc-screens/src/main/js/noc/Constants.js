@@ -142,8 +142,8 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.WIDGETS.INCIDENT.APPLICATIONDATA = 'noc/Widgets/Incident/ApplicationData';
 
         CONSTANTS.WIDGETS.TRANSACTION = {};
-        CONSTANTS.WIDGETS.TRANSACTION.META = "noc/Widgets/Transaction/GridMeta";
-        CONSTANTS.WIDGETS.TRANSACTION.DATA = "noc/Widgets/Transaction/GridData";
+        CONSTANTS.WIDGETS.TRANSACTION.META = "noc/Widgets/transaction/GridMeta";
+        CONSTANTS.WIDGETS.TRANSACTION.DATA = "noc/Widgets/transaction/GridData";
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////        
 
