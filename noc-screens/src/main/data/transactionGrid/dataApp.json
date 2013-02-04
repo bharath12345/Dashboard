@@ -1,0 +1,51 @@
+{
+    "applications": [
+        {
+            "applicationName": "CRMNext",
+            "id": 12,
+            "transactionGroups": [
+                {
+                    "groupName": "groupOne",
+                    "id": 111,
+                    "transactions": [
+                        {
+                            "txName": "tx1",
+                            "txId": 123,
+                            "alerts": "HIGH",
+                            "response": "SLOW",
+                            "volume": "2k"
+
+                        },
+                        {
+                            "txName": "tx2",
+                            "txId": 1234,
+                            "alerts": "HIGH",
+                            "response": "SLOW",
+                            "volume": "2k"
+                        }
+                    ]
+                },
+                {
+                    "groupName": "groupTwo",
+                    "id": "23",
+                    "transactions": [
+                        {
+                            "txName": "tx3",
+                            "txId": 12345,
+                            "alerts": "HIGH",
+                            "response": "SLOW",
+                            "volume": "2k"
+                        },
+                        {
+                            "txName": "tx4",
+                            "txId": 123456,
+                            "alerts": "HIGH",
+                            "response": "SLOW",
+                            "volume": "2k"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

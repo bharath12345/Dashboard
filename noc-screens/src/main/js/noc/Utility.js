@@ -33,6 +33,13 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "dojo/reques
                 });
         };
 
+        Utility.removeChildren = function (elem){
+            while (elem.hasChildNodes()) {
+                Utility.removeChildren(elem.lastChild)
+                elem.removeChild(elem.lastChild);
+            }
+        };
+
         Utility.LOG = new Logger(CONSTANTS.CLASSNAME.UTILITY);
 
         return Utility;

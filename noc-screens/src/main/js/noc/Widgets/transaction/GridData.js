@@ -10,9 +10,11 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Logger"
                 var id = input.param.custom[0]+"_"+input.param.custom[1]+"_"+input.param.name;
                 //console.log("grid data id = " + id);
                 var alertId = id + "_Alert";
+                Utility.removeChildren(document.getElementById(alertId));
                 this.appendRectangle(alertId, 10, 10, input.txDataVO.alerts, CONSTANTS.TXGRID.ALERTS);
 
                 var responseId = id + "_Response";
+                Utility.removeChildren(document.getElementById(responseId));
                 this.appendRectangle(responseId, 10, 10, input.txDataVO.response, CONSTANTS.TXGRID.RESPONSE);
 
                 var volumeId = id + "_Volume";
@@ -36,7 +38,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Logger"
                                 } else {
                                     return "yellowgreen";
                                 }
-                            break;
+                                break;
 
                             case CONSTANTS.TXGRID.RESPONSE:
                                 if(value == "SLOW") {
@@ -44,7 +46,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Logger"
                                 } else {
                                     return "yellowgreen";
                                 }
-                            break;
+                                break;
 
                         }
 
