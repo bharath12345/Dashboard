@@ -119,7 +119,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.ACTION.TRANSACTION = {};
         CONSTANTS.ACTION.TRANSACTION.META = "transaction/Meta.action";
         CONSTANTS.ACTION.TRANSACTION.DATA = "transaction/Data.action";
-        CONSTANTS.ACTION.TRANSACTION.DATA = "transaction/AppData.action";
+        CONSTANTS.ACTION.TRANSACTION.APPDATA = "transaction/AppData.action";
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // WIDGET CLASS PATHS

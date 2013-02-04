@@ -254,23 +254,30 @@ public class TransactionAction extends AbstractNocAction  {
 				transactions[k].setTxId(tx.getId());
 				transactions[k].setTxName(tx.getName());
 				
-				TransactionSummary summary = txSummary.get(tx.getId());
-				if( summary.getAlertsCount() == null || summary.getAlertsCount() == 0) {
-					transactions[k].setAlerts(false);	
+				if(txSummary != null) {
+					TransactionSummary summary = txSummary.get(tx.getId());
+					if( summary.getAlertsCount() == null || summary.getAlertsCount() == 0) {
+						transactions[k].setAlerts(false);	
+					} else {
+						transactions[k].setAlerts(true); // true ==> alerts are present
+					}
+					
+					if(summary.getFailedCount() > 0 || summary.getTimedOutCount()>0) {
+						transactions[k].setStatus(TxResponseStatus.FAIL.name());
+					} else if(summary.getSlowCount() > 0) {
+						transactions[k].setStatus(TxResponseStatus.SLOW.name());
+					} else {
+						transactions[k].setStatus(TxResponseStatus.OKAY.name());
+					}
+					
+					transactions[k].setResponse(summary.getAvgResponseTime().toString());
+					transactions[k].setVolume(summary.getVolume().toString());
 				} else {
-					transactions[k].setAlerts(true); // true ==> alerts are present
+					transactions[j].setVolume("2k");
+					transactions[j].setAlerts(true);
+					transactions[j].setStatus(TxResponseStatus.FAIL.name());
+					transactions[j].setResponse("0.1ms");
 				}
-				
-				if(summary.getFailedCount() > 0 || summary.getTimedOutCount()>0) {
-					transactions[k].setStatus(TxResponseStatus.FAIL.name());
-				} else if(summary.getSlowCount() > 0) {
-					transactions[k].setStatus(TxResponseStatus.SLOW.name());
-				} else {
-					transactions[k].setStatus(TxResponseStatus.OKAY.name());
-				}
-				
-				transactions[k].setResponse(summary.getAvgResponseTime().toString());
-				transactions[k].setVolume(summary.getVolume().toString());
 				k++;
 			}
 			j++;

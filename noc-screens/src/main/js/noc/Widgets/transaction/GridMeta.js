@@ -37,7 +37,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                                     "<td id='" + id + "_Response" + "'></td>" +
                                     "<td id='" + id + "_Volume" + "'></td>" +
                                     "</tr></table>",
-                                title:"[" + input.applicationVO[i].applicationName + "] [" + input.applicationVO[i].applicationName + "]",
+                                title:"[" + input.applicationVO[i].applicationName + "] [" + input.applicationVO[i].transactionGroups[j].transactions[k].name + "]",
                                 toggleable:false
                             });
                             z++;
@@ -68,7 +68,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
 
                 var textNode = dojo.query(".dijitTitlePaneTextNode", gridContainer.domNode);
                 for (var i = 0; i < textNode.length; i++) {
-                    textNode[i].style.fontSize = "7px";
+                    textNode[i].style.fontSize = "6px";
                 }
 
                 var head = dojo.query(".dijitTitlePaneTitle", gridContainer.domNode)
@@ -122,8 +122,8 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
 
             periodicApp:function () {
                 // make the first call immediately since setInterval always waits for the first timeperiod for initial execution
-                this.periodicPost();
-                setInterval(this.periodicAppPost, GridMeta.APP_ROLLOVER_PERIOD * 1000);
+                noc.Widgets.Transaction.GridMeta.prototype.periodicAppPost();
+                setInterval(noc.Widgets.Transaction.GridMeta.prototype.periodicAppPost, GridMeta.APP_ROLLOVER_PERIOD * 1000);
             },
 
             periodicAppPost:function () {

@@ -10,7 +10,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Logger"
                 var id = input.param.custom[0]+"_"+input.param.custom[1]+"_"+input.param.name;
                 //console.log("grid data id = " + id);
 
-                this.fillData(id, input.txDataVO);
+                this.fillData(id, input.appDataVO);
             },
 
             appendRectangle: function(cellId, width, height, value, type) {
@@ -54,8 +54,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Logger"
             },
 
             createUsingApp: function(data, input) {
-                var appName = input.txDataVO.appName;
-                var txGroupList =  input.txDataVO.txGroupVO;
+                var appName = input.appDataVO.appName;
+                var txGroupList =  input.appDataVO.txGroupVO;
                 for(var i=0;i<txGroupList.length;i++) {
                     var groupName = txGroupList[i].groupName;
                     var txList = txGroupList[i].txDataVO;
@@ -79,11 +79,11 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Logger"
 
                 var volumeId = id + "_Volume";
                 Utility.removeChildren(document.getElementById(volumeId));
-                this.appendRectangle(volumeId, 10, 10, payload.response, CONSTANTS.TXGRID.VOLUME);
+                this.appendText(volumeId, 10, 10, payload.response, CONSTANTS.TXGRID.VOLUME);
 
                 var responseId = id + "_Response";
                 Utility.removeChildren(document.getElementById(responseId));
-                this.appendRectangle(responseId, 10, 10, payload.volume, CONSTANTS.TXGRID.RESPONSE);
+                this.appendText(responseId, 10, 10, payload.volume, CONSTANTS.TXGRID.RESPONSE);
             }
 
         });
