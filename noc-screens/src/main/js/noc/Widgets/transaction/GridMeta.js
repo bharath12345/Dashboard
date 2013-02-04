@@ -144,6 +144,9 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                 Utility.xhrPostCentral(CONSTANTS.ACTION.TRANSACTION.APPDATA, viewMeta);
 
                 GridMeta.APP_COUNTER++;
+                if(GridMeta.APP_COUNTER >= (GridMeta.POSTSET.appdataset.length-1)){
+                    GridMeta.APP_COUNTER = 0;
+                }
             },
 
             periodicTxPost:function () {

@@ -75,6 +75,14 @@
            memoryStoreEvictionPolicy="LRU" />
 
 
+    <cache name="TxnDefCache"
+           maxElementsInMemory="200"
+           timeToIdleSeconds="0"
+           timeToLiveSeconds="6000"
+           memoryStoreEvictionPolicy="LRU" />
+
+
+
 
 
 </ehcache>

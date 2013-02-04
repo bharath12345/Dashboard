@@ -42,25 +42,69 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", 'dgrid/Grid'
                     }
                 }
 
-                var metricsJson = dojo.toJson(metrics);
+                ApplicationGrid.POSTSET.type = CONSTANTS.TYPE.INCIDENT;
+                ApplicationGrid.POSTSET.subtype = CONSTANTS.SUBTYPE.INCIDENT.DATA;
+                ApplicationGrid.POSTSET.metricsJson = dojo.toJson(metrics);
+                ApplicationGrid.POSTSET.dataset = [];
+
                 for(var i=0;i<input.applicationVO.applications.length;i++) {
                     var apps = input.applicationVO.applications;
-                    var viewMeta = {
-                        id:apps[i].id,
-                        name:apps[i].name,
-                        type:CONSTANTS.TYPE.INCIDENT,
-                        subtype:CONSTANTS.SUBTYPE.INCIDENT.DATA,
-                        dimensions:[0, 0],
-                        position:[0, 0],
-                        custom:[metricsJson]
-                    };
-                    Utility.xhrPostCentral(CONSTANTS.ACTION.INCIDENT.APPLICATIONDATA, viewMeta);
+                    var datum = {};
+                    datum.id = apps[i].id;
+                    datum.name = apps[i].name;
+                    ApplicationGrid.POSTSET.dataset.push(datum);
+                }
+
+                var period = 1;
+                for (var i = 0; i < ApplicationGrid.POSTSET.dataset.length; i++) {
+                    // first one launches after one second
+                    // 2nd one at 4 sec, 3rd one at 7 sec and so on till --> 1 + (3*20) = 61 seconds
+                    setTimeout(this.periodicApp, period * 1000);
+                    period += ApplicationGrid.APP_STAGGER_PERIOD;
+                }
+
+                for(var i=0;i < ApplicationGrid.POSTSET.dataset.length; i++) {
+                    this.periodicAppPost();
+                }
+            },
+
+            periodicApp:function () {
+                // make the first call immediately since setInterval always waits for the first timeperiod for initial execution
+                setInterval(noc.Widgets.Incident.ApplicationGrid.prototype.periodicAppPost,
+                    ApplicationGrid.POSTSET.dataset.length * ApplicationGrid.APP_ROLLOVER_PERIOD * 1000);
+            },
+
+            periodicAppPost: function() {
+                var appDataSet = ApplicationGrid.POSTSET.dataset[ApplicationGrid.APP_COUNTER];
+
+                console.log("querying for app = " + appDataSet.name);
+
+                var viewMeta = {
+                    id:appDataSet.id,
+                    name:appDataSet.name,
+                    type:CONSTANTS.TYPE.INCIDENT,
+                    subtype:CONSTANTS.SUBTYPE.INCIDENT.DATA,
+                    dimensions:[0, 0],
+                    position:[0, 0],
+                    custom:[ApplicationGrid.POSTSET.metricsJson]
+                };
+                Utility.xhrPostCentral(CONSTANTS.ACTION.INCIDENT.APPLICATIONDATA, viewMeta);
+
+                ApplicationGrid.APP_COUNTER++;
+                if(ApplicationGrid.APP_COUNTER > (ApplicationGrid.POSTSET.dataset.length-1)){
+                    ApplicationGrid.APP_COUNTER = 0;
                 }
             }
 
         });
 
         ApplicationGrid.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.WIDGETS.INCIDENT.APPLICATIONGRID));
+
+        ApplicationGrid.POSTSET = {};
+        ApplicationGrid.APP_COUNTER = 0;
+
+        ApplicationGrid.APP_STAGGER_PERIOD = 3;
+        ApplicationGrid.APP_ROLLOVER_PERIOD = 3;
 
         return ApplicationGrid;
     });

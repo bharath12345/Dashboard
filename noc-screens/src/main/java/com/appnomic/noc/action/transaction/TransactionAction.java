@@ -343,6 +343,7 @@ public class TransactionAction extends AbstractNocAction  {
 					txGroupMap.put(appTx.getGroupName(), txList);
 				}
 				txList.add(appTx);
+				System.out.println("added tx = " + appTx.getName() + " of group = " + appTx.getGroupName() + " of app = " + appTx.getAppName());
 			}
 			
 			int j = 0;

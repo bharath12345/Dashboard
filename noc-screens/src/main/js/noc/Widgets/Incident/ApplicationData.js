@@ -11,6 +11,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", 'dgrid/Grid'
                     var nodeId = data.name + "_" + data.id + "_" + metric;
                     console.log("node id = " + nodeId);
                     var node = dojo.byId(nodeId);
+                    Utility.removeChildren(document.getElementById(nodeId));
 
                     for(var j=0;j<input.applicationDataVO.metrics.length;j++) {
                         var payload = input.applicationDataVO.metrics[j];
