@@ -66,6 +66,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n",
                     AvailMatrix2.LOG.log(Logger.SEVERITY.SEVERE, "going to render grid for = " + input.name + "dimensions w = " + input.dimensions.width + " h = " + input.dimensions.height);
                     AvailMatrix2.LOG.log(Logger.SEVERITY.SEVERE, "timedata = " + dojo.toJson(timedata));
 
+                    Utility.removeChildren(document.getElementById(input.name));
                     this.renderGrid(data, timedata, input.name, input.dimensions.width, input.dimensions.height);
                 } catch (e) {
                     AvailMatrix2.LOG.log(Logger.SEVERITY.SEVERE, "exception " + e);
@@ -77,29 +78,8 @@ define(['require', "dojo/_base/declare", "dojo/i18n",
                 try {
                     AvailMatrix2.LOG.log(Logger.SEVERITY.SEVERE, "render id = " + id + " grid data = "+dojo.toJson(data));
 
-                    /*var rowhead = d3.select("#" + id).append("svg")
-                     .attr("class", "timegroup");
-
-                     rowhead.selectAll(".timehead")
-                     .data(timedata).enter()
-                     .append("text")
-                     .text(function(d) {
-                     AvailMatrix2.LOG.log(Logger.SEVERITY.SEVERE, "time fragment = " + d.time);
-                     return d.time;
-                     })
-                     .attr("x", function (d) {
-                     return d.x;
-                     })
-                     .attr("y", function (d) {
-                     return d.y;
-                     });*/
-
                     var grid = d3.select("#" + id).append("svg")
-                        //.attr("width", width)
-                        //.attr("height", height)
                         .attr("class", "chart")
-                        //.attr("top", "10")
-                        //.attr("left", "10");
                         .attr("left",document.getElementById(id).offsetParent.offsetLeft)
                         .attr("top",document.getElementById(id).offsetTop);
 

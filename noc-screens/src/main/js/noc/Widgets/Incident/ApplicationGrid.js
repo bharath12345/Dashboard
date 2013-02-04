@@ -63,15 +63,15 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", 'dgrid/Grid'
                     period += ApplicationGrid.APP_STAGGER_PERIOD;
                 }
 
+                // do the first time population immediately
                 for(var i=0;i < ApplicationGrid.POSTSET.dataset.length; i++) {
                     this.periodicAppPost();
                 }
             },
 
             periodicApp:function () {
-                // make the first call immediately since setInterval always waits for the first timeperiod for initial execution
                 setInterval(noc.Widgets.Incident.ApplicationGrid.prototype.periodicAppPost,
-                    ApplicationGrid.POSTSET.dataset.length * ApplicationGrid.APP_ROLLOVER_PERIOD * 1000);
+                    ApplicationGrid.POSTSET.dataset.length * ApplicationGrid.APP_STAGGER_PERIOD * 1000);
             },
 
             periodicAppPost: function() {
@@ -102,9 +102,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", 'dgrid/Grid'
 
         ApplicationGrid.POSTSET = {};
         ApplicationGrid.APP_COUNTER = 0;
-
         ApplicationGrid.APP_STAGGER_PERIOD = 3;
-        ApplicationGrid.APP_ROLLOVER_PERIOD = 3;
 
         return ApplicationGrid;
     });

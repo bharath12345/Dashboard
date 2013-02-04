@@ -273,10 +273,10 @@ public class TransactionAction extends AbstractNocAction  {
 					transactions[k].setResponse(summary.getAvgResponseTime().toString());
 					transactions[k].setVolume(summary.getVolume().toString());
 				} else {
-					transactions[j].setVolume("2k");
-					transactions[j].setAlerts(true);
-					transactions[j].setStatus(TxResponseStatus.FAIL.name());
-					transactions[j].setResponse("0.1ms");
+					transactions[k].setVolume("2k");
+					transactions[k].setAlerts(true);
+					transactions[k].setStatus(TxResponseStatus.FAIL.name());
+					transactions[k].setResponse("0.1ms");
 				}
 				k++;
 			}
