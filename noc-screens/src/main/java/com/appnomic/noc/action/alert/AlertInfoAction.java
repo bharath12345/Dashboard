@@ -19,7 +19,9 @@ import com.appnomic.domainobject.AlertSeverity;
 import com.appnomic.domainobject.ApplicationData;
 import com.appnomic.domainobject.Component;
 import com.appnomic.domainobject.ComponentAlertSummary;
+import com.appnomic.exception.InvalidTimeIntervalException;
 import com.appnomic.noc.action.AbstractNocAction;
+import com.appnomic.noc.action.TimeUtility;
 import com.appnomic.noc.viewobject.alert.ApplicationDataVO;
 import com.appnomic.noc.viewobject.alert.ApplicationMetaVO;
 import com.appnomic.noc.viewobject.alert.ApplicationVO;
@@ -52,7 +54,6 @@ public class AlertInfoAction extends AbstractNocAction  {
 		this.componentDataService = componentDataService;
 	}
 
-	
 	public ApplicationDataService getApplicationDataService() {
 		return applicationDataService;
 	}
@@ -188,21 +189,18 @@ public class AlertInfoAction extends AbstractNocAction  {
 		
 		applicationDataVO = new ApplicationDataVO();
 		
-		Date currentTime = Calendar.getInstance().getTime();
-		Calendar hourBefore = Calendar.getInstance();
-		//hourBefore.set(Calendar.HOUR_OF_DAY, hourBefore.get(Calendar.HOUR_OF_DAY)-1);
-		hourBefore.set(Calendar.MONTH, hourBefore.get(Calendar.MONTH)-2);
-		Date oneHourBeforeTime = hourBefore.getTime();
-		
-		SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-		String endTime = timeFormat.format(currentTime);
-		String startTime = timeFormat.format(oneHourBeforeTime);
-		
+		String[] startEndTimes = TimeUtility.get5MinStartEnd();
 		MetricData [] metricDataset = new MetricData[5];
 		applicationDataVO.setMetrics(metricDataset);
 		applicationDataVO.setApplicationName(applicationName);
 		
-		AlertCountSummary acs = alertDataService.getCountSummary(id, startTime, endTime);
+		AlertCountSummary acs = null;
+		try {
+			acs = alertDataService.getCountSummary(id, startEndTimes[0], startEndTimes[1]);
+		} catch (InvalidTimeIntervalException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if(acs == null) {
 			setDummyApplicationData(applicationName, applicationDataVO);
 			return SUCCESS;

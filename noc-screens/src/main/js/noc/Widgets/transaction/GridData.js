@@ -9,16 +9,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Logger"
 
                 var id = input.param.custom[0]+"_"+input.param.custom[1]+"_"+input.param.name;
                 //console.log("grid data id = " + id);
-                var alertId = id + "_Alert";
-                Utility.removeChildren(document.getElementById(alertId));
-                this.appendRectangle(alertId, 10, 10, input.txDataVO.alerts, CONSTANTS.TXGRID.ALERTS);
 
-                var responseId = id + "_Response";
-                Utility.removeChildren(document.getElementById(responseId));
-                this.appendRectangle(responseId, 10, 10, input.txDataVO.response, CONSTANTS.TXGRID.RESPONSE);
-
-                var volumeId = id + "_Volume";
-
+                this.fillData(id, input.txDataVO);
             },
 
             appendRectangle: function(cellId, width, height, value, type) {
@@ -40,17 +32,58 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Logger"
                                 }
                                 break;
 
-                            case CONSTANTS.TXGRID.RESPONSE:
+                            case CONSTANTS.TXGRID.STATUS:
                                 if(value == "SLOW") {
+                                    return "orange";
+                                } else if(value == "FAIL") {
                                     return "orangered";
                                 } else {
                                     return "yellowgreen";
                                 }
                                 break;
-
                         }
 
                     });
+            },
+
+            appendText: function(cellId, width, height, value, type) {
+                d3.select("#" + cellId)
+                    .append("svg")
+                    .append("text")
+                    .text(value);
+            },
+
+            createUsingApp: function(data, input) {
+                var appName = input.txDataVO.appName;
+                var txGroupList =  input.txDataVO.txGroupVO;
+                for(var i=0;i<txGroupList.length;i++) {
+                    var groupName = txGroupList[i].groupName;
+                    var txList = txGroupList[i].txDataVO;
+                    for(var j=0;j<txList.length;j++) {
+                        var txName = txList[j].txName;
+                        var id = appName + "_" + groupName + "_" + txName;
+                        //console.log("grid data id = " + id);
+                        this.fillData(id, txList[j]);
+                    }
+                }
+            },
+
+            fillData: function(id, payload) {
+                var alertId = id + "_Alert";
+                Utility.removeChildren(document.getElementById(alertId));
+                this.appendRectangle(alertId, 10, 10, payload.alerts, CONSTANTS.TXGRID.ALERTS);
+
+                var statusId = id + "_Status";
+                Utility.removeChildren(document.getElementById(statusId));
+                this.appendRectangle(statusId, 10, 10, payload.status, CONSTANTS.TXGRID.STATUS);
+
+                var volumeId = id + "_Volume";
+                Utility.removeChildren(document.getElementById(volumeId));
+                this.appendRectangle(volumeId, 10, 10, payload.response, CONSTANTS.TXGRID.VOLUME);
+
+                var responseId = id + "_Response";
+                Utility.removeChildren(document.getElementById(responseId));
+                this.appendRectangle(responseId, 10, 10, payload.volume, CONSTANTS.TXGRID.RESPONSE);
             }
 
         });

@@ -86,6 +86,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.SUBTYPE.TRANSACTION = {};
         CONSTANTS.SUBTYPE.TRANSACTION.META = 1;
         CONSTANTS.SUBTYPE.TRANSACTION.DATA = 2;
+        CONSTANTS.SUBTYPE.TRANSACTION.APPDATA = 3;
 
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -118,6 +119,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.ACTION.TRANSACTION = {};
         CONSTANTS.ACTION.TRANSACTION.META = "transaction/Meta.action";
         CONSTANTS.ACTION.TRANSACTION.DATA = "transaction/Data.action";
+        CONSTANTS.ACTION.TRANSACTION.DATA = "transaction/AppData.action";
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // WIDGET CLASS PATHS
@@ -168,6 +170,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.TXGRID.ALERTS = 1;
         CONSTANTS.TXGRID.RESPONSE = 2;
         CONSTANTS.TXGRID.VOLUME = 3;
+        CONSTANTS.TXGRID.STATUS = 4;
 
         return CONSTANTS;
     });

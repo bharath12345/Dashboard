@@ -4,7 +4,8 @@ public class TransactionDataVO {
 
 	String txName;
 	int txId;
-	String alerts;
+	boolean alerts;
+	String status;
 	String response;
 	String volume;
 	
@@ -20,11 +21,17 @@ public class TransactionDataVO {
 	public void setTxId(int txId) {
 		this.txId = txId;
 	}
-	public String getAlerts() {
+	public boolean isAlerts() {
 		return alerts;
 	}
-	public void setAlerts(String alerts) {
+	public void setAlerts(boolean alerts) {
 		this.alerts = alerts;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	public String getResponse() {
 		return response;

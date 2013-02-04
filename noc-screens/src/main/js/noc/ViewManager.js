@@ -109,6 +109,12 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
                         new GridData().create(data, input);
                     });
                 break;
+
+                case CONSTANTS.SUBTYPE.TRANSACTION.APPDATA:
+                    require([CONSTANTS.WIDGETS.TRANSACTION.DATA], function (GridData) {
+                        new GridData().createUsingApp(data, input);
+                    });
+                break;
             }
         };
 

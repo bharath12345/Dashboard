@@ -33,7 +33,8 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                                 content:"<table id='" + id + "' style='width: 100%; " +
                                     "height: 100%;'><tr>" +
                                     "<td id='" + id + "_Alert" + "' style='width:11px'></td>" +
-                                    "<td id='" + id + "_Response" + "' style='width:11px''></td>" +
+                                    "<td id='" + id + "_Status" + "' style='width:11px'></td>" +
+                                    "<td id='" + id + "_Response" + "'></td>" +
                                     "<td id='" + id + "_Volume" + "'></td>" +
                                     "</tr></table>",
                                 title:"[" + input.applicationVO[i].applicationName + "] [" + input.applicationVO[i].applicationName + "]",
@@ -82,47 +83,86 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                     headFocus[i].style.padding = 0;
                 }
 
+                // there would be some transactions that need App level refresh
+                // there would be some transactions that need group level refresh
+                // there would be some transactions that need transaction level refresh
+                // currently only app level refresh is coded to keep performance managable..
+                // rest need to be developed along with configuration
+
                 GridMeta.POSTSET.type = CONSTANTS.TYPE.TRANSACTION;
-                GridMeta.POSTSET.subType = CONSTANTS.SUBTYPE.TRANSACTION.DATA;
-                GridMeta.POSTSET.dataset = [];
+                GridMeta.POSTSET.subType = CONSTANTS.SUBTYPE.TRANSACTION.APPDATA;
+                GridMeta.POSTSET.appdataset = [];
 
                 for (var i = 0; i < input.applicationVO.length; i++) {
                     var aVO = input.applicationVO[i];
+                    var dataset = {};
+                    dataset.appName = aVO.applicationName;
+                    dataset.appId = aVO.id;
+                    dataset.counter = 0;
                     for (var j = 0; j < aVO.transactionGroups.length; j++) {
                         var txGroup = aVO.transactionGroups[j];
                         for (var k = 0; k < txGroup.transactions.length; k++) {
-                            var datum = {};
-                            datum.txName = input.applicationVO[i].transactionGroups[j].transactions[k].name;
-                            datum.txId = input.applicationVO[i].transactionGroups[j].transactions[k].id;
-                            datum.width = titlepanes[i].domNode.offsetWidth;
-                            datum.height = titlepanes[i].domNode.offsetHeight;
-                            datum.appName = input.applicationVO[i].applicationName;
-                            datum.groupName = input.applicationVO[i].transactionGroups[j].groupName;
-                            GridMeta.POSTSET.dataset.push(datum);
+                            dataset.counter++;
                         }
                     }
+                    GridMeta.POSTSET.appdataset.push(dataset);
                 }
 
-                setTimeout(this.periodicPost, 2 * 1000);
-                //setTimeout(this.periodicPost, 20 * 1000);
+                // collect the tx data at app level
+                // stagger the collection of each application by 10 seconds duration to keep the load on db managable
+
+                var period = 1;
+                for (var i = 0; i < GridMeta.POSTSET.appdataset.length; i++) {
+                    // first one launches after one second
+                    // 2nd one at 11 sec, 3rd one at 21 sec and so on
+                    setTimeout(this.periodicApp, period * 1000);
+                    period += GridMeta.APP_STAGGER_PERIOD;
+                }
             },
 
-            periodicPost:function () {
-                var xpos = 0, ypos = 0;
-                console.log("in periodic tx grid post. length = " + GridMeta.POSTSET.dataset.length);
+            periodicApp:function () {
+                // make the first call immediately since setInterval always waits for the first timeperiod for initial execution
+                this.periodicPost();
+                setInterval(this.periodicAppPost, GridMeta.APP_ROLLOVER_PERIOD * 1000);
+            },
 
-                for(var i=0;i<GridMeta.POSTSET.dataset.length;i++) {
-                    var viewMeta = {
-                        id:GridMeta.POSTSET.dataset[i].txId,
-                        name:GridMeta.POSTSET.dataset[i].txName,
-                        type:GridMeta.POSTSET.type,
-                        subtype:GridMeta.POSTSET.subType,
-                        dimensions:[GridMeta.POSTSET.dataset[i].width, GridMeta.POSTSET.dataset[i].height],
-                        position:[xpos, ypos],
-                        custom:[GridMeta.POSTSET.dataset[i].appName, GridMeta.POSTSET.dataset[i].groupName]
-                    };
-                    Utility.xhrPostCentral(CONSTANTS.ACTION.TRANSACTION.DATA, viewMeta);
-                }
+            periodicAppPost:function () {
+                var xpos = 0, ypos = 0;
+                var width = 0, height = 0;
+                var appDataSet = GridMeta.POSTSET.appdataset[GridMeta.APP_COUNTER];
+                console.log("in periodic tx grid post. app name = " + appDataSet.appName + " tx count = " + appDataSet.counter);
+
+                var viewMeta = {
+                    id:appDataSet.appId,
+                    name:appDataSet.appName,
+                    type:GridMeta.POSTSET.type,
+                    subtype:GridMeta.POSTSET.subType,
+                    dimensions:[width, height],
+                    position:[xpos, ypos],
+                    custom:[]
+                };
+                Utility.xhrPostCentral(CONSTANTS.ACTION.TRANSACTION.APPDATA, viewMeta);
+
+                GridMeta.APP_COUNTER++;
+            },
+
+            periodicTxPost:function () {
+                /*for(var i=0;i<GridMeta.POSTSET.dataset.length;i++) {
+                 var viewMeta = {
+                 id:GridMeta.POSTSET.dataset[i].txId,
+                 name:GridMeta.POSTSET.dataset[i].txName,
+                 type:GridMeta.POSTSET.type,
+                 subtype:GridMeta.POSTSET.subType,
+                 dimensions:[GridMeta.POSTSET.dataset[i].width, GridMeta.POSTSET.dataset[i].height],
+                 position:[xpos, ypos],
+                 custom:[GridMeta.POSTSET.dataset[i].appName, GridMeta.POSTSET.dataset[i].groupName]
+                 };
+                 Utility.xhrPostCentral(CONSTANTS.ACTION.TRANSACTION.DATA, viewMeta);
+                 }*/
+            },
+
+            periodicGroupPost:function () {
+
             }
         });
 
@@ -130,6 +170,10 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
         GridMeta.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.WIDGETS.TRANSACTION.GRIDMETA));
 
         GridMeta.POSTSET = {};
+        GridMeta.APP_COUNTER = 0;
+
+        GridMeta.APP_STAGGER_PERIOD = 10;
+        GridMeta.APP_ROLLOVER_PERIOD = 120;
 
         return GridMeta;
     });
