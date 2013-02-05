@@ -115,8 +115,9 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                 for (var i = 0; i < GridMeta.POSTSET.appdataset.length; i++) {
                     // first one launches after one second
                     // 2nd one at 11 sec, 3rd one at 21 sec and so on
-                    setTimeout(this.periodicApp, period * 1000);
+                    var timer = setTimeout(this.periodicApp, period * 1000);
                     period += GridMeta.APP_STAGGER_PERIOD;
+                    GridMeta.TIMERS.push(timer);
                 }
 
                 for (var i = 0; i < GridMeta.POSTSET.appdataset.length; i++) {
@@ -125,8 +126,9 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
             },
 
             periodicApp:function () {
-                setInterval(noc.Widgets.Transaction.GridMeta.prototype.periodicAppPost,
+                var timer = setInterval(noc.Widgets.Transaction.GridMeta.prototype.periodicAppPost,
                     GridMeta.POSTSET.appdataset.length * GridMeta.APP_STAGGER_PERIOD * 1000);
+                GridMeta.TIMERS.push(timer);
             },
 
             periodicAppPost:function () {
@@ -179,6 +181,8 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
         GridMeta.APP_COUNTER = 0;
 
         GridMeta.APP_STAGGER_PERIOD = 10;
+
+        GridMeta.TIMERS = [];
 
         return GridMeta;
     });

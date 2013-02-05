@@ -59,8 +59,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", 'dgrid/Grid'
                 for (var i = 0; i < ApplicationGrid.POSTSET.dataset.length; i++) {
                     // first one launches after one second
                     // 2nd one at 4 sec, 3rd one at 7 sec and so on till --> 1 + (3*20) = 61 seconds
-                    setTimeout(this.periodicApp, period * 1000);
+                    var timer = setTimeout(this.periodicApp, period * 1000);
                     period += ApplicationGrid.APP_STAGGER_PERIOD;
+                    ApplicationGrid.TIMERS.push(timer);
                 }
 
                 // do the first time population immediately
@@ -70,8 +71,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", 'dgrid/Grid'
             },
 
             periodicApp:function () {
-                setInterval(noc.Widgets.Incident.ApplicationGrid.prototype.periodicAppPost,
+                var timer = setInterval(noc.Widgets.Incident.ApplicationGrid.prototype.periodicAppPost,
                     ApplicationGrid.POSTSET.dataset.length * ApplicationGrid.APP_STAGGER_PERIOD * 1000);
+                ApplicationGrid.TIMERS.push(timer);
             },
 
             periodicAppPost: function() {
@@ -103,6 +105,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", 'dgrid/Grid'
         ApplicationGrid.POSTSET = {};
         ApplicationGrid.APP_COUNTER = 0;
         ApplicationGrid.APP_STAGGER_PERIOD = 3;
+
+        ApplicationGrid.TIMERS = [];
 
         return ApplicationGrid;
     });

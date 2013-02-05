@@ -4,9 +4,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
     "noc/pages/TransactionGrid",
     "noc/Logger", "noc/Constants", "noc/Utility"],
 
-    function (require, declare, i18n, ContentPane, BorderContainer, win,
-              i18nString, AvailabilityPage, TxTreemapPage, ComponentPage,
-              TxTimeSeriesPage, IncidentPage, AllClusterAvailability, TransactionGrid, Logger, CONSTANTS, Utility) {
+    function (require, declare, i18n, ContentPane, BorderContainer, win, i18nString, AvailabilityPage, TxTreemapPage, ComponentPage, TxTimeSeriesPage, IncidentPage, AllClusterAvailability, TransactionGrid, Logger, CONSTANTS, Utility) {
 
         var PageLoader = declare(CONSTANTS.CLASSNAME.PAGELOADER, null, {
 
@@ -28,39 +26,46 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
                 //setTimeout(function(){new TxTreemapPage().loadPage()}, 30*1000);
                 //setTimeout(function(){new TxServiceLevelPage().loadPage()}, 40*1000);
 
-                PageLoader.PageCounter = startPageCounter - 1;
-                PageLoader.pageScroll();
+                PageLoader.SCROLL_TIMER = setInterval(this.pageScroll, PageLoader.SCROLL_PERIOD);
             },
 
-            createIncidentSectionAndPage: function(pageNum) {
+            pageScroll:function (pageCount) {
+                PageLoader.PageStack[PageLoader.PageCounter].scrollIntoView();
+                PageLoader.PageCounter++;
+                if (PageLoader.PageCounter >= PageLoader.PageStack.length) {
+                    PageLoader.PageCounter = 0;
+                }
+            },
+
+            createIncidentSectionAndPage:function (pageNum) {
                 this.createBorderContainer(this.getSection(pageNum), pageNum);
                 new IncidentPage().loadPage(pageNum, "IncidentGrid");
             },
 
-            createClusterAvailabilitySectionAndPage: function(pageNum) {
+            createClusterAvailabilitySectionAndPage:function (pageNum) {
                 this.createBorderContainer(this.getSection(pageNum), pageNum);
                 new AllClusterAvailability().loadPage(pageNum, "AllClusterAvailability");
             },
 
-            createTxGridSectionAndPage: function(pageNum) {
+            createTxGridSectionAndPage:function (pageNum) {
                 this.createBorderContainer(this.getSection(pageNum), pageNum);
                 new TransactionGrid().loadPage(pageNum, "TransactionGrid");
             },
 
-            createAvailabilitySectionAndPage: function(pageNum) {
+            createAvailabilitySectionAndPage:function (pageNum) {
                 this.createBorderContainer(this.getSection(pageNum), pageNum);
                 new AvailabilityPage().loadPage(pageNum, "availabilityPage_" + (pageNum), PageLoader.Pages[pageNum].componentName, PageLoader.Pages[pageNum].clusterName);
             },
 
-            getViewPortDimensions: function() {
-                if(PageLoader.ViewPortStyle == null) {
-                    PageLoader.ViewPortStyle="width: " + (document.body.clientWidth) + "; height: " + (document.body.clientHeight) + ";";
+            getViewPortDimensions:function () {
+                if (PageLoader.ViewPortStyle == null) {
+                    PageLoader.ViewPortStyle = "width: " + (document.body.clientWidth) + "; height: " + (document.body.clientHeight) + ";";
                     return PageLoader.ViewPortStyle;
                 }
                 return PageLoader.ViewPortStyle;
             },
 
-            getSection: function(pageNum) {
+            getSection:function (pageNum) {
                 var section = dojo.create("section");
                 section.id = PageLoader.SECTION + pageNum;
                 section.style.cssText = this.getViewPortDimensions();
@@ -70,7 +75,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
                 return section;
             },
 
-            createBorderContainer: function(section, pageCounter) {
+            createBorderContainer:function (section, pageCounter) {
                 var node = dojo.create("div");
                 node.style.cssText = this.getViewPortDimensions();
                 section.appendChild(node);
@@ -117,7 +122,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
 
             },
 
-            removeBorderPadding: function (domNode) {
+            removeBorderPadding:function (domNode) {
                 domNode.style.borderStyle = "none";
                 domNode.style.padding = "0px";
             }
@@ -139,21 +144,15 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
         PageLoader.PageStack = [];
         PageLoader.PageCounter = 0;
 
-        PageLoader.pageScroll = function(pageCount) {
-            PageLoader.PageStack[PageLoader.PageCounter].scrollIntoView();
-            PageLoader.PageCounter++;
-            if(PageLoader.PageCounter >= PageLoader.PageStack.length) {
-                PageLoader.PageCounter = 0;
-            }
-            setTimeout('noc.PageLoader.pageScroll()', 2 * 1000);
-        };
+        PageLoader.SCROLL_TIMER = null;
+        PageLoader.SCROLL_PERIOD = 2 * 1000;
 
         PageLoader.TotalPages = 0;
         PageLoader.Pages = [];
 
         // Total = 1 + 5 + 8 + 7 + 3 = 24 Clusters of 4 Types
         // 1 DB
-        PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "DB",clusterName: "ALL"};
+        PageLoader.Pages[PageLoader.TotalPages++] = {componentName:"DB", clusterName:"ALL"};
 
         /*PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "LINUXHOST",clusterName: "ALL"};
          PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "WINDOWSHOST",clusterName: "ALL"};
@@ -161,11 +160,11 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
          PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "CLUSTER",clusterName: "ALL"};*/
 
         // 4 WEB Servers
-        PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "WEB_SERVER",clusterName: "FLXRET_IHS"};
-        PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "WEB_SERVER",clusterName: "FLXRET_DB"};
-        PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "WEB_SERVER",clusterName: "CRMNextCommIIS"};
-        PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "WEB_SERVER",clusterName: "FinnoneLOS_WebSrv"};
-        PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "WEB_SERVER",clusterName: "ENET_IHS"};
+        PageLoader.Pages[PageLoader.TotalPages++] = {componentName:"WEB_SERVER", clusterName:"FLXRET_IHS"};
+        PageLoader.Pages[PageLoader.TotalPages++] = {componentName:"WEB_SERVER", clusterName:"FLXRET_DB"};
+        PageLoader.Pages[PageLoader.TotalPages++] = {componentName:"WEB_SERVER", clusterName:"CRMNextCommIIS"};
+        PageLoader.Pages[PageLoader.TotalPages++] = {componentName:"WEB_SERVER", clusterName:"FinnoneLOS_WebSrv"};
+        PageLoader.Pages[PageLoader.TotalPages++] = {componentName:"WEB_SERVER", clusterName:"ENET_IHS"};
 
         // 8 APP Servers of type FLXRETWAS
         /*PageLoader.Pages[PageLoader.TotalPages++] = {componentName: "APP_SERVER",clusterName: "FLXRETWAS1"};

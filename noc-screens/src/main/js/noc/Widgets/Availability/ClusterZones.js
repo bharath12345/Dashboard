@@ -62,8 +62,9 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                 for (var i = 0; i < input.clusterVOs.length; i++) {
                     // first cluster launches after one second
                     // 2nd cluster at 11 sec, 3rd cluster at 21 sec and so on till --> 1 + (cluter-count*10) seconds
-                    setTimeout(this.periodicCluster, period * 1000);
+                    var timer = setTimeout(this.periodicCluster, period * 1000);
                     period += ClusterZones.CLUSTER_STAGGER_PERIOD;
+                    ClusterZones.TIMERS.push(timer);
                 }
 
                 // do the first time population immediately
@@ -73,8 +74,9 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
             },
 
             periodicCluster:function () {
-                setInterval(noc.Widgets.Availability.ClusterZones.prototype.periodicClusterPost,
+                var timer = setInterval(noc.Widgets.Availability.ClusterZones.prototype.periodicClusterPost,
                     ClusterZones.POSTSET.dataset.length * ClusterZones.CLUSTER_STAGGER_PERIOD * 1000);
+                ClusterZones.TIMERS.push(timer);
             },
 
             periodicClusterPost:function () {
@@ -106,6 +108,8 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
         ClusterZones.POSTSET = {};
         ClusterZones.CLUSTER_COUNTER = 0;
         ClusterZones.CLUSTER_STAGGER_PERIOD = 3;
+
+        ClusterZones.TIMERS = [];
 
         return ClusterZones;
     });
