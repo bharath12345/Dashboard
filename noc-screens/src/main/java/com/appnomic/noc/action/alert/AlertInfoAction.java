@@ -189,7 +189,10 @@ public class AlertInfoAction extends AbstractNocAction  {
 		
 		applicationDataVO = new ApplicationDataVO();
 		
-		String[] startEndTimes = TimeUtility.get5MinStartEnd();
+		//String[] startEndTimes = TimeUtility.get5MinStartEnd();
+		String[] startEndTimes = TimeUtility.get30MinStartEnd();
+		System.out.println("Times = ["+startEndTimes[0] + "] [" + startEndTimes[1] + "]");
+		
 		MetricData [] metricDataset = new MetricData[5];
 		applicationDataVO.setMetrics(metricDataset);
 		applicationDataVO.setApplicationName(applicationName);
@@ -202,6 +205,7 @@ public class AlertInfoAction extends AbstractNocAction  {
 			e.printStackTrace();
 		}
 		if(acs == null) {
+			System.out.println("Actual alerts were NOT found. Displaying dummy data");
 			setDummyApplicationData(applicationName, applicationDataVO);
 			return SUCCESS;
 		}
@@ -252,12 +256,9 @@ public class AlertInfoAction extends AbstractNocAction  {
 			}
 			keyVal += "] ";
 		}
-		System.out.println("key value map = " + keyVal);
-		
+		System.out.println("key value map = " + keyVal);		
 		String clusterName = (parameters.get("name")[0]);
 		System.out.println("cluster name being assembled = " + clusterName);
-		
-		
 		return SUCCESS;
 	}
 	

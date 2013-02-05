@@ -219,9 +219,9 @@ public class TransactionAction extends AbstractNocAction  {
 		appDataVO.setAppName(appName);
 		appDataVO.setId(id);
 		
-		String[] startEndTimes = TimeUtility.get5MinStartEnd();
+		//String[] startEndTimes = TimeUtility.get5MinStartEnd();
+		String[] startEndTimes = TimeUtility.get30MinStartEnd();
 		Map<Integer, TransactionSummary> txSummary = transactionDataService.getTransactionSummaryForApp(id, startEndTimes[0], startEndTimes[1]);
-		
 		
 		List<Transaction> appTransactions = transactionDataService.getTransactionPerApplication(id);
 		Map<String, ArrayList<Transaction>> txGroupMap = new HashMap<String, ArrayList<Transaction>>();

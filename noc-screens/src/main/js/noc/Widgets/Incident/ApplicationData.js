@@ -4,18 +4,18 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", 'dgrid/Grid'
 
         var ApplicationData = declare(CONSTANTS.CLASSNAME.WIDGETS.INCIDENT.APPLICATIONDATA, null, {
 
-            create: function(data, input) {
+            create:function (data, input) {
                 customMetrics = dojo.fromJson(data.custom[0]);
-                for(var i=0;i<customMetrics.length;i++) {
+                for (var i = 0; i < customMetrics.length; i++) {
                     var metric = customMetrics[i];
                     var nodeId = data.name + "_" + data.id + "_" + metric;
                     console.log("node id = " + nodeId);
                     var node = dojo.byId(nodeId);
                     Utility.removeChildren(document.getElementById(nodeId));
 
-                    for(var j=0;j<input.applicationDataVO.metrics.length;j++) {
+                    for (var j = 0; j < input.applicationDataVO.metrics.length; j++) {
                         var payload = input.applicationDataVO.metrics[j];
-                        if(payload.name != metric) {
+                        if (payload.name != metric) {
                             continue;
                         }
 
@@ -23,20 +23,29 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", 'dgrid/Grid'
                         var mediumAlert = payload.count[1];
                         var lowAlert = payload.count[2];
 
-                        var highSpan = dojo.create("span");
-                        highSpan.className = "label label-important";
-                        highSpan.innerHTML = highAlert;
-                        node.appendChild(highSpan);
 
-                        var mediumSpan = dojo.create("span");
-                        mediumSpan.className = "label label-warning";
-                        mediumSpan.innerHTML = mediumAlert;
-                        node.appendChild(mediumSpan);
+                        if (parseInt(highAlert) > 0) {
+                            var highSpan = dojo.create("span");
+                            highSpan.className = "label label-important";
+                            highSpan.innerHTML = highAlert;
+                            highSpan.style.width = "40";
+                            node.appendChild(highSpan);
+                        }
+
+                        if (parseInt(mediumAlert) > 0) {
+                            var mediumSpan = dojo.create("span");
+                            mediumSpan.className = "label label-warning";
+                            mediumSpan.innerHTML = mediumAlert;
+                            mediumSpan.style.width = "40";
+                            node.appendChild(mediumSpan);
+                        }
 
                         var lowSpan = dojo.create("span");
                         lowSpan.className = "label label-info";
                         lowSpan.innerHTML = lowAlert;
+                        lowSpan.style.width = "40";
                         node.appendChild(lowSpan);
+
 
                         break;
                     }

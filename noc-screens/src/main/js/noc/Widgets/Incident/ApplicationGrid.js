@@ -32,6 +32,13 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", 'dgrid/Grid'
                 var grid = new Grid({columns: columnMeta}, data.name);
                 grid.renderArray(gridata);
 
+                var textNode = dojo.query(".dgrid-cell", grid.domNode);
+                console.log("count of dgrid cells = " + textNode.length);
+                for (var i = 0; i < textNode.length; i++) {
+                    textNode[i].style.fontSize = "12px";
+                }
+
+
                 // assign ids to nodes
                 for(var i=0;i<input.applicationVO.applications.length;i++) {
                     var apps = input.applicationVO.applications;

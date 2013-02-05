@@ -78,10 +78,7 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 		clusterDataVO.setInstanceName("FLXRET_DB");
 
 		int instanceCount = 1;
-		CompInstanceTimesVO[] instanceTimes = new CompInstanceTimesVO[instanceCount]; // cluster
-																						// has
-																						// 2
-																						// hosts
+		CompInstanceTimesVO[] instanceTimes = new CompInstanceTimesVO[instanceCount]; 
 		clusterDataVO.setTimes(instanceTimes);
 
 		for (int i = 0; i < instanceCount; i++) {
@@ -192,9 +189,15 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 
 					NormalizedAvailabilityKpi samples = availSamples
 							.get(kpiName);
-					for (int j = 0; j < sampleSize; j++) {
-						// availArray[j] = samples.get(j);
-						availArray[j] = random.nextBoolean();
+					if(samples == null || samples.size() < 1) {
+						System.out.println("Samples null for component = " + component.getName() + " so using RANDOM DUMMY USELESS values");
+						for (int j = 0; j < samples.size(); j++) {
+							availArray[j] = random.nextBoolean();
+						}
+					} else {
+						for (int j = 0; j < samples.size(); j++) {
+							availArray[j] = samples.get(j);
+						}
 					}
 					kpiAvailMap.put(kpiName, availArray);
 				}
@@ -243,18 +246,7 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 						.get(j);
 				instanceDataPoints[i] = new CompInstanceDataPointVO();
 				instanceDataPoints[i].setName(compName);
-				instanceDataPoints[i].setValue(foundOneViolated ? 0 : 1);// if
-																			// violated
-																			// is
-																			// found
-																			// then
-																			// set
-																			// the
-																			// value
-																			// to
-																			// 0,
-																			// else
-																			// 1
+				instanceDataPoints[i].setValue(foundOneViolated ? 0 : 1);
 				instanceTimes[j].setInstances(instanceDataPoints);
 			}
 			i++;

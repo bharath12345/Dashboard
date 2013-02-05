@@ -5571,7 +5571,7 @@ a.badge:hover {
 
 .label-important,
 .badge-important {
-  background-color: #b94a48;
+  background-color: #ff4500;
 }
 
 .label-important[href],
@@ -5601,7 +5601,7 @@ a.badge:hover {
 
 .label-info,
 .badge-info {
-  background-color: #3a87ad;
+  background-color: #2e8b57;
 }
 
 .label-info[href],

@@ -32,6 +32,11 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
 
                 dojo.query(".dijitTitlePaneContentInner")[0].style.padding = "0px";
 
+                var textNode = dojo.query(".dijitTitlePaneTextNode", gridContainer.domNode);
+                for (var i = 0; i < textNode.length; i++) {
+                    textNode[i].style.fontSize = "16px";
+                }
+
                 var xpos=0, ypos=0;
 
                 var viewMeta = {

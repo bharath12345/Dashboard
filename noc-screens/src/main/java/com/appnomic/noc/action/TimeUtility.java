@@ -21,14 +21,25 @@ public class TimeUtility {
 	public static String[] get3HourStartEnd() {
 		return alltime(Calendar.HOUR, 3);
 	}
+	
+	public static Date convertGmtToIndiaTimeDate(Calendar gmtTime) {
+		gmtTime.set(Calendar.HOUR, gmtTime.get(Calendar.HOUR) - 5);
+		gmtTime.set(Calendar.MINUTE, gmtTime.get(Calendar.MINUTE) - 30);
+		return gmtTime.getTime();
+	}
+	
+	public static Calendar convertGmtToIndiaTimeCalendar(Calendar gmtTime) {
+		gmtTime.set(Calendar.HOUR, gmtTime.get(Calendar.HOUR) - 5);
+		gmtTime.set(Calendar.MINUTE, gmtTime.get(Calendar.MINUTE) - 30);
+		return gmtTime;
+	}
 
 	private static String[] alltime(int field, int delta) {
-		Date currentTime = Calendar.getInstance().getTime();
-		Calendar hourBefore = Calendar.getInstance();
-		// hourBefore.set(Calendar.HOUR_OF_DAY,
-		// hourBefore.get(Calendar.HOUR_OF_DAY)-1);
-		hourBefore.set(field, hourBefore.get(field) - delta);
-		Date oneHourBeforeTime = hourBefore.getTime();
+		Date currentTime = convertGmtToIndiaTimeDate(Calendar.getInstance());
+		Calendar previousTime = convertGmtToIndiaTimeCalendar(Calendar.getInstance());
+		
+		previousTime.set(field, previousTime.get(field) - delta);
+		Date oneHourBeforeTime = previousTime.getTime();
 
 		SimpleDateFormat timeFormat = new SimpleDateFormat(
 				"yyyy-MM-dd hh:mm:ss");
