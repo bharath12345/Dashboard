@@ -10,6 +10,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.CLASSNAME.PAGELOADER = "noc.PageLoader";
         CONSTANTS.CLASSNAME.UTILITY = "noc.Utility";
         CONSTANTS.CLASSNAME.VIEWMANAGER = "noc.ViewManager";
+        CONSTANTS.CLASSNAME.CONFIG = "noc.Config";
 
         CONSTANTS.CLASSNAME.PAGES = {};
         CONSTANTS.CLASSNAME.PAGES.AVAILABILITYPAGE = "noc.pages.AvailabilityPage";

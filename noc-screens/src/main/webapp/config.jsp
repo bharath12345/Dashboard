@@ -20,17 +20,11 @@
         <link rel="stylesheet" type="test/css" href="./js/dgrid/css/dgrid.css"/>
         <link rel="stylesheet" type="test/css" href="./js/dgrid/css/skins/claro.css"/>
         <link rel="stylesheet" type="text/css" href="./css/noc.merged.compressed.css"/>
-        <link rel="stylesheet" type="text/css" href="./css/smoothness/jquery-ui-1.10.0.custom.min.css"/>
 
         <!-- List of JS. First one should always be Dojo -->
         <script type="text/javascript" data-dojo-config="async: 1, tlmSiblingOfDojo: 0, isDebug: 1" src="./js/dojo/dojo.js"></script>
-        <script type="text/javascript" src="./js/d3/d3.v3.0.4.min.js"></script>
-        <script type="text/javascript" src="./js/jquery-1.9.1.min.js"></script>
-        <script type="text/javascript" src="./js/jquery-ui-1.10.0.custom.min.js"></script>
-        <script type="text/javascript" src="./js/jquery.jsPlumb-1.3.16-all-min.js"></script>
-
     </head>
     <body class="claro">
-        <script src="./js/noc/runMain.js"></script>
+        <script src="./js/noc/runConfig.js"></script>
     </body>
 </html>
