@@ -78,7 +78,7 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 		clusterDataVO.setInstanceName("FLXRET_DB");
 
 		int instanceCount = 1;
-		CompInstanceTimesVO[] instanceTimes = new CompInstanceTimesVO[instanceCount]; 
+		CompInstanceTimesVO[] instanceTimes = new CompInstanceTimesVO[instanceCount];
 		clusterDataVO.setTimes(instanceTimes);
 
 		for (int i = 0; i < instanceCount; i++) {
@@ -154,7 +154,7 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 		int id = Integer.parseInt(parameters.get("id")[0]);
 
 		Cluster cluster = clusterDataService.getById(id);
-		int sampleSize = 1;
+		int sampleSize = 10;
 
 		List<ComponentData> componentList = cluster.getComponents();
 
@@ -171,15 +171,14 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 
 			try {
 				// cache the availability kpi values
-				
-				
+
 				Map<String, NormalizedAvailabilityKpi> availSamples = componentDataService
 						.getNormalizedAvailabilityData(component.getId(),
 								sampleSize);
-				if(availSamples == null) {
+				if (availSamples == null) {
 					continue;
 				}
-				
+
 				Set<String> kpiNames = availSamples.keySet();
 				for (String kpiName : kpiNames) {
 					boolean[] availArray = kpiAvailMap.get(kpiName);
@@ -189,12 +188,16 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 
 					NormalizedAvailabilityKpi samples = availSamples
 							.get(kpiName);
-					if(samples == null || samples.size() < 1) {
-						System.out.println("Samples null for component = " + component.getName() + " so using RANDOM DUMMY USELESS values");
+					if (samples == null || samples.size() < 1) {
+						System.out.println("Samples null for component = "
+								+ component.getName()
+								+ " so using RANDOM DUMMY USELESS values");
 						for (int j = 0; j < samples.size(); j++) {
 							availArray[j] = random.nextBoolean();
 						}
 					} else {
+						System.out.println("Samples NOT null for component = "
+								+ component.getName());
 						for (int j = 0; j < samples.size(); j++) {
 							availArray[j] = samples.get(j);
 						}
@@ -202,16 +205,19 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 					kpiAvailMap.put(kpiName, availArray);
 				}
 			} catch (Exception e) {
-				//System.out.println("Exception e = " + e.getLocalizedMessage());
-			} 
+				e.printStackTrace();
+				// System.out.println("Exception e = " +
+				// e.getLocalizedMessage());
+			}
 		}
 
-		List<CompInstanceDataPointVO[]> instanceDataPointList = new ArrayList<CompInstanceDataPointVO[]>();
-		for (int i = 0; i < sampleSize; i++) {
-			CompInstanceDataPointVO[] instanceDataPoint = new CompInstanceDataPointVO[componentList
-					.size()];
-			instanceDataPointList.add(instanceDataPoint);
-		}
+		CompInstanceTimesVO[] instanceTimes = new CompInstanceTimesVO[1];
+		instanceTimes[0] = new CompInstanceTimesVO();
+		instanceTimes[0].setTime((new Integer(0)).toString());
+		clusterDataVO.setTimes(instanceTimes);
+		
+		CompInstanceDataPointVO[] instanceDataPointList = new CompInstanceDataPointVO[componentList.size()];
+		instanceTimes[0].setInstances(instanceDataPointList);
 
 		int i = 0;
 		Set<String> compNames = compKpiMap.keySet();
@@ -219,36 +225,27 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 			Map<String, boolean[]> kpiAvailMap = compKpiMap.get(compName);
 			Set<String> kpiNames = kpiAvailMap.keySet();
 
-			CompInstanceTimesVO[] instanceTimes = new CompInstanceTimesVO[sampleSize];
 			// pluck from the cache and check if cluster has to be set RED or
 			// GREEN
-			for (int j = 0; j < sampleSize; j++) {
-				instanceTimes[j] = new CompInstanceTimesVO();
-				instanceTimes[j].setTime((new Integer(j)).toString());
-				clusterDataVO.setTimes(instanceTimes);
-
-				boolean foundOneViolated = false;
-				for (String kpiName : kpiNames) {
-					boolean[] availArray = kpiAvailMap.get(kpiName);
-					for (boolean kpiAvail : availArray) {
-						// 0 is NOT Available and 1 is Available
-						if (kpiAvail == false) {
-							foundOneViolated = true;
-							break;
-						}
-					}
-					if (foundOneViolated == true) {
+			boolean foundOneViolated = false;
+			for (String kpiName : kpiNames) {
+				boolean[] availArray = kpiAvailMap.get(kpiName);
+				for (boolean kpiAvail : availArray) {
+					// 0 is NOT Available and 1 is Available
+					if (kpiAvail == false) {
+						foundOneViolated = true;
 						break;
 					}
 				}
-
-				CompInstanceDataPointVO[] instanceDataPoints = instanceDataPointList
-						.get(j);
-				instanceDataPoints[i] = new CompInstanceDataPointVO();
-				instanceDataPoints[i].setName(compName);
-				instanceDataPoints[i].setValue(foundOneViolated ? 0 : 1);
-				instanceTimes[j].setInstances(instanceDataPoints);
+				if (foundOneViolated == true) {
+					break;
+				}
 			}
+
+			instanceDataPointList[i] = new CompInstanceDataPointVO();
+			instanceDataPointList[i].setName(compName);
+			instanceDataPointList[i].setValue(foundOneViolated ? 0 : 1);
+
 			i++;
 		}
 		return SUCCESS;

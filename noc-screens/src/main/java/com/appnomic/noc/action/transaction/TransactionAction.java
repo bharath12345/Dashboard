@@ -330,6 +330,14 @@ public class TransactionAction extends AbstractNocAction  {
 		applicationVO = new ApplicationVO[applications.size()];
 		int i = 0;
 		for(ApplicationData application : applications) {
+			boolean impApp = application.getName().equalsIgnoreCase("NetBanking") || 
+					//application.getName().equalsIgnoreCase("RTGSPI") || 
+					//application.getName().equalsIgnoreCase("UBS") || 
+					application.getName().equalsIgnoreCase("CRMNext");
+			if(!impApp) {
+				continue;
+			}
+			
 			applicationVO[i] = new ApplicationVO();
 			applicationVO[i].setApplicationName(application.getName());
 			applicationVO[i].setId(application.getId());

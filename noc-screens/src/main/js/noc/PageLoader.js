@@ -145,7 +145,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
         PageLoader.PageCounter = 0;
 
         PageLoader.SCROLL_TIMER = null;
-        PageLoader.SCROLL_PERIOD = 2 * 1000;
+        PageLoader.SCROLL_PERIOD = 10 * 1000;
 
         PageLoader.TotalPages = 0;
         PageLoader.Pages = [];

@@ -46,13 +46,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Logger"
                     });
             },
 
-            appendText: function(cellId, width, height, value, type) {
-                d3.select("#" + cellId)
-                    .append("svg")
-                    .append("text")
-                    .text(value);
-            },
-
             createUsingApp: function(data, input) {
                 var appName = input.appDataVO.appName;
                 var txGroupList =  input.appDataVO.txGroupVO;
@@ -79,11 +72,11 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Logger"
 
                 var volumeId = id + "_Volume";
                 Utility.removeChildren(document.getElementById(volumeId));
-                this.appendText(volumeId, 10, 10, payload.response, CONSTANTS.TXGRID.VOLUME);
+                dojo.byId(volumeId).innerHTML = payload.volume;
 
                 var responseId = id + "_Response";
                 Utility.removeChildren(document.getElementById(responseId));
-                this.appendText(responseId, 10, 10, payload.volume, CONSTANTS.TXGRID.RESPONSE);
+                dojo.byId(responseId).innerHTML = payload.response;
             }
 
         });

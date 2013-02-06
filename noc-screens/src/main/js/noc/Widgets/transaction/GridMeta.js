@@ -13,16 +13,22 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                 var paneWidth = data.dimensions.width;
                 var paneHeight = data.dimensions.height;
 
-                var nbZ = 16; // 14 columns and 28 rows approximately
-                var rows = 25;
+                var nbZ = 7;
+                var rows = 19;
                 var styleString = "width: " + (paneWidth / nbZ) + "; height: " + (paneHeight / rows) + ";"
                 console.log("style string = " + styleString);
                 var titlepanes = [];
                 var z = 0;
                 for (var i = 0; i < input.applicationVO.length; i++) {
                     var aVO = input.applicationVO[i];
+                    if(aVO == null || aVO == "null") {
+                        continue;
+                    }
                     for (var j = 0; j < aVO.transactionGroups.length; j++) {
                         var txGroup = aVO.transactionGroups[j];
+                        if(txGroup == null || txGroup == "null") {
+                            continue;
+                        }
                         for (var k = 0; k < txGroup.transactions.length; k++) {
                             var id = input.applicationVO[i].applicationName + "_" +
                                 input.applicationVO[i].transactionGroups[j].groupName + "_" +
@@ -37,7 +43,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                                     "<td id='" + id + "_Response" + "'></td>" +
                                     "<td id='" + id + "_Volume" + "'></td>" +
                                     "</tr></table>",
-                                title:"[" + input.applicationVO[i].applicationName + "] [" + input.applicationVO[i].transactionGroups[j].transactions[k].name + "]",
+                                title:input.applicationVO[i].applicationName + "/" + input.applicationVO[i].transactionGroups[j].transactions[k].name,
                                 toggleable:false
                             });
                             z++;
@@ -68,7 +74,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
 
                 var textNode = dojo.query(".dijitTitlePaneTextNode", gridContainer.domNode);
                 for (var i = 0; i < textNode.length; i++) {
-                    textNode[i].style.fontSize = "6px";
+                    textNode[i].style.fontSize = "10px";
                 }
 
                 var head = dojo.query(".dijitTitlePaneTitle", gridContainer.domNode)
@@ -95,6 +101,9 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
 
                 for (var i = 0; i < input.applicationVO.length; i++) {
                     var aVO = input.applicationVO[i];
+                    if(aVO == null || aVO == "null") {
+                        continue;
+                    }
                     var dataset = {};
                     dataset.appName = aVO.applicationName;
                     dataset.appId = aVO.id;
