@@ -48,6 +48,12 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.CLASSNAME.WIDGETS.TRANSACTION.GRIDMETA = "noc.Widgets.Transaction.GridMeta";
         CONSTANTS.CLASSNAME.WIDGETS.TRANSACTION.GRIDDATA = "noc.Widgets.Transaction.GridData";
 
+        CONSTANTS.CLASSNAME.WIDGETS.TOPOLOGY = {};
+        CONSTANTS.CLASSNAME.WIDGETS.TOPOLOGY.RENDERNODES = "noc.Widgets.Topology.RenderNodes";
+        CONSTANTS.CLASSNAME.WIDGETS.TOPOLOGY.RENDERCONNECTIVITY = "noc.Widgets.Topology.RenderConnectivity";
+        CONSTANTS.CLASSNAME.WIDGETS.TOPOLOGY.NODESTATUS = "noc.Widgets.Topology.NodeStatus";
+        CONSTANTS.CLASSNAME.WIDGETS.TOPOLOGY.CONNECTIONSTATUS = "noc.Widgets.Topology.ConnectionStatus";
+
         CONSTANTS.CLASSNAME.LOGIN = "Login";
         CONSTANTS.CLASSNAME.UTILITY = "noc.Utility";
         CONSTANTS.CLASSNAME.VIEWMANAGER = "noc.ViewManager";
@@ -63,6 +69,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.TYPE.COMPONENT = 2;
         CONSTANTS.TYPE.INCIDENT = 3;
         CONSTANTS.TYPE.TRANSACTION = 4;
+        CONSTANTS.TYPE.TOPOLOGY = 5;
 
         CONSTANTS.SUBTYPE.AVAILABILITY = {};
         CONSTANTS.SUBTYPE.AVAILABILITY.COMPONENT = 1;
@@ -89,6 +96,12 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.SUBTYPE.TRANSACTION.META = 1;
         CONSTANTS.SUBTYPE.TRANSACTION.DATA = 2;
         CONSTANTS.SUBTYPE.TRANSACTION.APPDATA = 3;
+
+        CONSTANTS.SUBTYPE.TOPOLOGY = {};
+        CONSTANTS.SUBTYPE.TOPOLOGY.NODES = 1;
+        CONSTANTS.SUBTYPE.TOPOLOGY.CONNECTIVITY = 2;
+        CONSTANTS.SUBTYPE.TOPOLOGY.NODESTATUS = 3;
+        CONSTANTS.SUBTYPE.TOPOLOGY.CONNECTIONSTATUS = 4;
 
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -123,6 +136,12 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.ACTION.TRANSACTION.DATA = "transaction/Data.action";
         CONSTANTS.ACTION.TRANSACTION.APPDATA = "transaction/AppData.action";
 
+        CONSTANTS.ACTION.TOPOLOGY = {};
+        CONSTANTS.ACTION.TOPOLOGY.NODES = "topology/Nodes.action";
+        CONSTANTS.ACTION.TOPOLOGY.CONNECTIONS = "topology/Connections.action";
+        CONSTANTS.ACTION.TOPOLOGY.NODESTATUS = "topology/NodeStatus.action";
+        CONSTANTS.ACTION.TOPOLOGY.CONNECTIONSTATUS = "topology/ConnectionStatus.action";
+
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // WIDGET CLASS PATHS
         CONSTANTS.WIDGETS = {};
@@ -148,6 +167,12 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.WIDGETS.TRANSACTION = {};
         CONSTANTS.WIDGETS.TRANSACTION.META = "noc/Widgets/transaction/GridMeta";
         CONSTANTS.WIDGETS.TRANSACTION.DATA = "noc/Widgets/transaction/GridData";
+
+        CONSTANTS.WIDGETS.TOPOLOGY = {};
+        CONSTANTS.WIDGETS.TOPOLOGY.NODES = "noc/Widgets/Topology/RenderNodes";
+        CONSTANTS.WIDGETS.TOPOLOGY.CONNECTIONS = "noc/Widgets/Topology/RenderConnectivity";
+        CONSTANTS.WIDGETS.TOPOLOGY.NODESTATUS = "noc/Widgets/Topology/NodeStatus";
+        CONSTANTS.WIDGETS.TOPOLOGY.CONNECTIONSTATUS = "noc/Widgets/Topology/ConnectionStatus";
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////        
 

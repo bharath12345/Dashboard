@@ -20,6 +20,20 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                     toggleable:false
                 });
 
+                var xpos=0, ypos=0;
+
+                var viewMeta = {
+                    id:pageName,
+                    name: pageName,
+                    type: CONSTANTS.TYPE.TOPOLOGY,
+                    subtype: CONSTANTS.SUBTYPE.TOPOLOGY.NODES,
+                    dimensions:[TopologyPage.CP[pageNumber].w, TopologyPage.CP[pageNumber].h],
+                    position:[xpos,ypos],
+                    custom: []
+                };
+
+                Utility.xhrPostCentral(CONSTANTS.ACTION.TOPOLOGY.NODES, viewMeta);
+
             }
         });
 

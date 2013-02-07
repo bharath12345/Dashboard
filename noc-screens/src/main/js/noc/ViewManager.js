@@ -88,11 +88,48 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
                         ViewManager.manageTransactionSubView(data, input);
                         break;
 
+                    case CONSTANTS.TYPE.TOPOLOGY:
+                        ViewManager.manageTopologySubView(data, input);
+                        break;
+
                     default:
                         Logger.log("ViewManager","unknown data type = " + data.type);
+                    break;
                 }
             } catch ( e) {
                 ViewManager.LOG.log(Logger.SEVERITY.SEVERE, "exception e = " + e);
+            }
+        };
+
+        ViewManager.manageTopologySubView = function(data, input) {
+            switch(data.subtype) {
+                case CONSTANTS.SUBTYPE.TOPOLOGY.NODES:
+                    require([CONSTANTS.WIDGETS.TOPOLOGY.NODES], function (RenderNodes) {
+                        new RenderNodes().create(data, input);
+                    });
+                break;
+
+                case CONSTANTS.SUBTYPE.TOPOLOGY.CONNECTIVITY:
+                    require([CONSTANTS.WIDGETS.TOPOLOGY.CONNECTIONS], function (RenderConnectivity) {
+                        new RenderConnectivity().create(data, input);
+                    });
+                break;
+
+                case CONSTANTS.SUBTYPE.TOPOLOGY.NODESTATUS:
+                    require([CONSTANTS.WIDGETS.TOPOLOGY.NODESTATUS], function (NodeStatus) {
+                        new NodeStatus().create(data, input);
+                    });
+                break;
+
+                case CONSTANTS.SUBTYPE.TOPOLOGY.CONNECTIONSTATUS:
+                    require([CONSTANTS.WIDGETS.TOPOLOGY.CONNECTIONSTATUS], function (ConnectionStatus) {
+                        new ConnectionStatus().create(data, input);
+                    });
+                break;
+
+                default:
+                    Logger.log("ViewManager","unknown topology data sub type = " + data.subtype);
+                break;
             }
         };
 
