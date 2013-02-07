@@ -1,0 +1,7 @@
+{
+    "webServers": ["FLXRET_IHS1","FLXRET_IHS2","FLXRET_IHS3","FLXRET_IHS4","FLXRET_IHS5","FLXRET_IHS6"],
+    "appServers": ["FLXRETWAS1","FLXRETWAS2","FLXRETWAS3","FLXRETWAS4","FLXRETWAS5","FLXRETWAS6","FLXRETWAS7","FLXRETWAS8"],
+    "databases": ["FLXRETDB1", "HBNETPRODDB1", "HBNETPRODDB2", "CoreBankingDB", "ExternalDB1", "ExternalDB2"],
+    "messageQueues": ["RTGS_MSGQ", "NEFT_MSGQ"],
+    "tcpEndpoints": ["TCP_ENDPNT1", "TCP_ENDPNT2"]
+}

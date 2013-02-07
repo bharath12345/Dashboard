@@ -14,8 +14,9 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
 
                 var startPageCounter = 0;
                 this.createIncidentSectionAndPage(startPageCounter++);
-                //this.createClusterAvailabilitySectionAndPage(startPageCounter++);
-                //this.createTxGridSectionAndPage(startPageCounter++);
+                this.createClusterAvailabilitySectionAndPage(startPageCounter++);
+                this.createTxGridSectionAndPage(startPageCounter++);
+                this.createTopology(startPageCounter++);
 
                 //for(var i=0;i<PageLoader.TotalPages;i++) {
                 //    this.createAvailabilitySectionAndPage(startPageCounter++);
@@ -39,6 +40,11 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
                 if (PageLoader.PageCounter >= PageLoader.PageStack.length) {
                     PageLoader.PageCounter = 0;
                 }
+            },
+
+            createTopology: function(pageNum) {
+                this.createBorderContainer(this.getSection(pageNum), pageNum);
+                new TopologyPage().loadPage(pageNum, "NetBankingTopology");
             },
 
             createIncidentSectionAndPage:function (pageNum) {

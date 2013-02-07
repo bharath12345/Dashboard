@@ -419,6 +419,36 @@
                                 </configuration>
                             </execution>
                             <execution>
+                                <id>copy-jQuery</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${gui.target.gui.location}/js/jQuery</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>${js-dir}/jQuery</directory>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>copy-jsPlumb</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${gui.target.gui.location}/js/jsPlumb</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>${js-dir}/jsPlumb</directory>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                            <execution>
                                 <id>copy-example-data</id>
                                 <phase>process-resources</phase>
                                 <goals>
@@ -624,6 +654,36 @@
                                     <resources>
                                         <resource>
                                             <directory>${js-dir}/d3</directory>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>copy-jQuery</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${gui.target.gui.location}/js/jQuery</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>${js-dir}/jQuery</directory>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>copy-jsPlumb</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${gui.target.gui.location}/js/jsPlumb</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>${js-dir}/jsPlumb</directory>
                                         </resource>
                                     </resources>
                                 </configuration>

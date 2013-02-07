@@ -20,6 +20,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.CLASSNAME.PAGES.INCIDENTPAGE = "noc.pages.IncidentPage";
         CONSTANTS.CLASSNAME.PAGES.ALLCLUSTERAVAILABILITY = "noc.pages.AllClusterAvailability";
         CONSTANTS.CLASSNAME.PAGES.TRANSACTIONGRID = "noc.pages.TransactionGrid";
+        CONSTANTS.CLASSNAME.PAGES.TOPOLOGYPAGE = "noc.pages.TopologyPage";
 
         CONSTANTS.CLASSNAME.TIMESERIES = {};
         CONSTANTS.CLASSNAME.TIMESERIES.BATCHTX = "noc.timeseries.BatchTxTimeSeries";
