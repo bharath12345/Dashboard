@@ -37,7 +37,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                     subtype: CONSTANTS.SUBTYPE.TOPOLOGY.NODES,
                     dimensions:[TopologyPage.CP[pageNumber].w, TopologyPage.CP[pageNumber].h],
                     position:[xpos,ypos],
-                    custom: [pageName]
+                    custom: []
                 };
 
                 Utility.xhrPostCentral(CONSTANTS.ACTION.TOPOLOGY.NODES, viewMeta);
