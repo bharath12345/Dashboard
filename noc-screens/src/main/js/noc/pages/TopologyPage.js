@@ -20,8 +20,16 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                     toggleable:false
                 });
 
-                var xpos=0, ypos=0;
+                var gridContainer = new GridContainer({nbZones:1, isAutoOrganized:true,
+                    style:"width: 100%; height: 100%;"});
+                TopologyPage.CP[pageNumber].addChild(gridContainer);
+                gridContainer.disableDnd();
 
+                gridContainer.addChild(titlePane, 0);
+                gridContainer.startup();
+                gridContainer.resize();
+
+                var xpos=0, ypos=0;
                 var viewMeta = {
                     id:pageName,
                     name: pageName,
@@ -29,7 +37,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                     subtype: CONSTANTS.SUBTYPE.TOPOLOGY.NODES,
                     dimensions:[TopologyPage.CP[pageNumber].w, TopologyPage.CP[pageNumber].h],
                     position:[xpos,ypos],
-                    custom: []
+                    custom: [pageName]
                 };
 
                 Utility.xhrPostCentral(CONSTANTS.ACTION.TOPOLOGY.NODES, viewMeta);

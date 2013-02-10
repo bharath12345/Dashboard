@@ -1,10 +1,13 @@
 define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/layout/BorderContainer", "dojo/window",
     "dojo/i18n!noc/nls/noc", "noc/pages/AvailabilityPage", "noc/pages/TxTreemapPage",
     "noc/pages/ComponentPage", "noc/pages/TxTimeSeriesPage", "noc/pages/IncidentPage", "noc/pages/AllClusterAvailability",
-    "noc/pages/TransactionGrid",
+    "noc/pages/TransactionGrid", "noc/pages/TopologyPage",
     "noc/Logger", "noc/Constants", "noc/Utility"],
 
-    function (require, declare, i18n, ContentPane, BorderContainer, win, i18nString, AvailabilityPage, TxTreemapPage, ComponentPage, TxTimeSeriesPage, IncidentPage, AllClusterAvailability, TransactionGrid, Logger, CONSTANTS, Utility) {
+    function (require, declare, i18n, ContentPane, BorderContainer, win, i18nString,
+              AvailabilityPage, TxTreemapPage, ComponentPage, TxTimeSeriesPage, IncidentPage,
+              AllClusterAvailability, TransactionGrid, TopologyPage,
+              Logger, CONSTANTS, Utility) {
 
         var PageLoader = declare(CONSTANTS.CLASSNAME.PAGELOADER, null, {
 
