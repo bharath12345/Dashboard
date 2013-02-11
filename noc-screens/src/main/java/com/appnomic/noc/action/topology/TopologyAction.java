@@ -77,6 +77,8 @@ public class TopologyAction extends AbstractNocAction  {
 	}
 	
 	private void setDummyNodesData(NetBankingNodesVO netBankingNodesVO) {
+		netBankingNodesVO.setNodeTypes(5);
+		
 		String [] webServers = {"FLXRET_IHS1","FLXRET_IHS2","FLXRET_IHS3","FLXRET_IHS4","FLXRET_IHS5","FLXRET_IHS6"};
 		netBankingNodesVO.setWebServers(webServers);
 		

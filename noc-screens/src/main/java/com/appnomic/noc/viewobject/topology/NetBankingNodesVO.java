@@ -1,6 +1,7 @@
 package com.appnomic.noc.viewobject.topology;
 
 public class NetBankingNodesVO {
+	int nodeTypes;
 	private String [] webServers;
 	private String [] appServers;
 	private String [] databases;
@@ -9,6 +10,12 @@ public class NetBankingNodesVO {
 	
 	public String[] getWebServers() {
 		return webServers;
+	}
+	public int getNodeTypes() {
+		return nodeTypes;
+	}
+	public void setNodeTypes(int nodeTypes) {
+		this.nodeTypes = nodeTypes;
 	}
 	public void setWebServers(String[] webServers) {
 		this.webServers = webServers;
