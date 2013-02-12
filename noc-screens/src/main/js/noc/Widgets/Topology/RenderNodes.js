@@ -15,18 +15,20 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc",
                 return svgIcon;
             },
 
-            createEndpoint:function (endPointsArray, divCol, type, width, height) {
+            createEndpoint:function (endPointsArray, endPointType, width, height) {
                 var styleString = "width: " + width + "; height: " + height + ";";
                 for (var i = 0; i < endPointsArray.length; i++) {
+                    var divCol = dojo.byId(endPointType + RenderNodes.ROW_SUFFIX);
                     var node = dojo.create("div");
-                    node.id = endPointsArray[i];
+                    node.id = endPointType + "_" + endPointsArray[i] + RenderNodes.ENDPOINT_SUFFIX;
+                    node.className = "topoIconContainer";
                     node.style.cssText = styleString;
                     divCol.appendChild(node);
                     //var endpoint = jsPlumb.addEndpoint(endPointName);
                     //TOPOLOGY.NODEMAP[endPointName] = endpoint;
 
                     var imgW = 50, imgH = 50;
-                    switch (type) {
+                    switch (endPointType) {
                         case RenderNodes.TYPE.WEBSERVER:
                             var svgIcon = this.getSvgIcon("./images/topology/osa_server_web.svg", imgW, imgH);
                             node.appendChild(svgIcon);
@@ -53,7 +55,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc",
                             break;
 
                         default:
-                            console.log("unknown end point type = " + type);
+                            console.log("unknown end point type = " + endPointType);
                             return;
                     }
                 }
@@ -131,7 +133,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc",
                         var innerPane = new TitlePane({
                             splitter:false,
                             style:styleString,
-                            content:"<div id='" + layers[i] + RenderNodes.ROW_SUFFIX + "' style='"+styleString+"'></div>",
+                            content:"<div id='" + layers[i] + RenderNodes.ROW_SUFFIX + "' style='" + styleString + "'></div>",
                             title:layers[i],
                             toggleable:false
                         });
@@ -157,56 +159,54 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc",
             create:function (data, input) {
                 var pageName = data.name;
 
-                var names = ["Ingress", "Core", "Egress"];
-                this.createColumnPanes(pageName, names, data.dimensions.width, data.dimensions.height);
+                var layerTypes = [];
+                for (var i = 0; i < input.netBankingLayersVO.length; i++) {
+                    layerTypes.push(input.netBankingLayersVO[i].layertype);
+                }
+                this.createColumnPanes(pageName, layerTypes, data.dimensions.width, data.dimensions.height);
 
-                var colWidth = data.dimensions.width/names.length;
+                var colWidth = data.dimensions.width / layerTypes.length;
                 var divW = 60, divH = 60;
-                var layers = ["webServers"];
-                this.createInnerPanes(layers, names[0], colWidth, data.dimensions.height);
-                this.createEndpoint(input.netBankingNodesVO.webServers,
-                    dojo.byId("webServers" + RenderNodes.ROW_SUFFIX), RenderNodes.TYPE.WEBSERVER, divW, divH);
+                for (var i = 0; i < input.netBankingLayersVO.length; i++) {
+                    var layer = input.netBankingLayersVO[i];
+                    var layerNames = [];
+                    for (var j = 0; j < layer.length; j++) {
+                        layerNames.push(layer[j].name);
+                    }
+                    this.createInnerPanes(layerNames, layerTypes[i], colWidth, data.dimensions.height);
+                    for (var j = 0; j < layer.length; j++) {
+                        this.createEndpoint(layer[j].value, layer[j].name, divW, divH);
 
-                layers = ["appServers"];
-                this.createInnerPanes(layers, names[1], colWidth, data.dimensions.height);
-                this.createEndpoint(input.netBankingNodesVO.appServers,
-                    dojo.byId("appServers" + RenderNodes.ROW_SUFFIX), RenderNodes.TYPE.APPSERVER, divW, divH);
+                        // by this point all nodes have been created
+                        // the next job is to draw connections
+                        // drawing connections has 2 tasks - create endpoints and then create a connection - all using jsPlumb
+                        // query connections for all nodes and start drawing
+                        // problem 1 -
+                        // if you query links for node A and find a link A --> B, then later querying links for B
+                        // will give us a B --> A which has to be ignored??
+                        // problem 2 - placement of endpoints on the node
 
-                layers = ["databases", "messageQueues", "tcpEndpoints"];
-                this.createInnerPanes(layers, names[2], colWidth, data.dimensions.height);
-                this.createEndpoint(input.netBankingNodesVO.databases,
-                    dojo.byId("databases" + RenderNodes.ROW_SUFFIX), RenderNodes.TYPE.DATABASES, divW, divH);
-                this.createEndpoint(input.netBankingNodesVO.messageQueues,
-                    dojo.byId("messageQueues" + RenderNodes.ROW_SUFFIX), RenderNodes.TYPE.MESSAGEQ, divW, divH);
-                this.createEndpoint(input.netBankingNodesVO.tcpEndpoints,
-                    dojo.byId("tcpEndpoints" + RenderNodes.ROW_SUFFIX), RenderNodes.TYPE.TCPENDPOINTS, divW, divH);
+                        for (var k = 0; k < layer[j].value.length; k++) {
+                            var xpos = 0, ypos = 0;
+                            var viewMeta = {
+                                id:layer[j].name, // this will be something like WebServers
+                                name:layer[j].value[k], // this will be something like FLXRET_IHS1
+                                type:CONSTANTS.TYPE.TOPOLOGY,
+                                subtype:CONSTANTS.SUBTYPE.TOPOLOGY.CONNECTIVITY,
+                                dimensions:[0, 0],
+                                position:[xpos, ypos],
+                                custom:[]
+                            };
+
+                            Utility.xhrPostCentral(CONSTANTS.ACTION.TOPOLOGY.CONNECTIONS, viewMeta);
+                        }
+                    }
+                }
 
                 var innerPane = dojo.query(".dijitTitlePaneContentOuter", noc.pages.TopologyPage.CP.domNode);
                 for (var i = 0; i < innerPane.length; i++) {
                     innerPane[i].style.border = 0;
                 }
-
-                // by this point all nodes have been created
-                // the next job is to draw connections
-                // drawing connections has 2 tasks - create endpoints and then create a connection - all using jsPlumb
-                // query connections for all nodes and start drawing
-                // problem 1 -
-                // if you query links for node A and find a link A --> B, then later querying links for B
-                // will give us a B --> A which has to be ignored??
-                // problem 2 - placement of endpoints on the node
-
-                var xpos = 0, ypos = 0;
-                var viewMeta = {
-                    id:pageName,
-                    name:pageName,
-                    type:CONSTANTS.TYPE.TOPOLOGY,
-                    subtype:CONSTANTS.SUBTYPE.TOPOLOGY.CONNECTIVITY,
-                    dimensions:[0, 0],
-                    position:[xpos, ypos],
-                    custom:[]
-                };
-
-                Utility.xhrPostCentral(CONSTANTS.ACTION.TOPOLOGY.CONNECTIONS, viewMeta);
 
             }
         });
@@ -214,14 +214,15 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc",
         RenderNodes.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.WIDGETS.TOPOLOGY.RENDERNODES));
 
         RenderNodes.TYPE = {};
-        RenderNodes.TYPE.WEBSERVER = 1;
-        RenderNodes.TYPE.APPSERVER = 2;
-        RenderNodes.TYPE.DATABASES = 3;
-        RenderNodes.TYPE.MESSAGEQ = 4;
-        RenderNodes.TYPE.TCPENDPOINTS = 5;
+        RenderNodes.TYPE.WEBSERVER = "WebServers";
+        RenderNodes.TYPE.APPSERVER = "AppServers";
+        RenderNodes.TYPE.DATABASES = "Databases";
+        RenderNodes.TYPE.MESSAGEQ = "MessageQueues";
+        RenderNodes.TYPE.TCPENDPOINTS = "TcpEndpoints";
 
         RenderNodes.COLUMN_SUFFIX = "_col";
         RenderNodes.ROW_SUFFIX = "_row";
+        RenderNodes.ENDPOINT_SUFFIX = "_endpoint";
 
         return RenderNodes;
     });
