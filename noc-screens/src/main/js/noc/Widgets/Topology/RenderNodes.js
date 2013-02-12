@@ -6,46 +6,49 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc",
 
         var RenderNodes = declare(CONSTANTS.CLASSNAME.WIDGETS.TOPOLOGY.RENDERNODES, null, {
 
-            getSvgIcon:function (src) {
+            getSvgIcon:function (src, width, height) {
                 var svgIcon = dojo.create("img");
                 svgIcon.src = src;
                 //svgIcon.type = "image/svg+xml";
-                svgIcon.height = "50";
-                svgIcon.width = "50";
+                svgIcon.height = width;
+                svgIcon.width = height;
                 return svgIcon;
             },
 
-            createEndpoint:function (endPointsArray, divCol, type) {
+            createEndpoint:function (endPointsArray, divCol, type, width, height) {
+                var styleString = "width: " + width + "; height: " + height + ";";
                 for (var i = 0; i < endPointsArray.length; i++) {
                     var node = dojo.create("div");
                     node.id = endPointsArray[i];
+                    node.style.cssText = styleString;
                     divCol.appendChild(node);
                     //var endpoint = jsPlumb.addEndpoint(endPointName);
                     //TOPOLOGY.NODEMAP[endPointName] = endpoint;
 
+                    var imgW = 50, imgH = 50;
                     switch (type) {
                         case RenderNodes.TYPE.WEBSERVER:
-                            var svgIcon = this.getSvgIcon("./images/topology/osa_server_web.svg");
+                            var svgIcon = this.getSvgIcon("./images/topology/osa_server_web.svg", imgW, imgH);
                             node.appendChild(svgIcon);
                             break;
 
                         case RenderNodes.TYPE.APPSERVER:
-                            var svgIcon = this.getSvgIcon("./images/topology/osa_server_application.svg");
+                            var svgIcon = this.getSvgIcon("./images/topology/osa_server_application.svg", imgW, imgH);
                             node.appendChild(svgIcon);
                             break;
 
                         case RenderNodes.TYPE.DATABASES:
-                            var svgIcon = this.getSvgIcon("./images/topology/Database.svg");
+                            var svgIcon = this.getSvgIcon("./images/topology/osa_database.svg", imgW, imgH);
                             node.appendChild(svgIcon);
                             break;
 
                         case RenderNodes.TYPE.MESSAGEQ:
-                            var svgIcon = this.getSvgIcon("./images/topology/Messaging_Queue.svg");
+                            var svgIcon = this.getSvgIcon("./images/topology/Messaging_Queue.svg", imgW, imgH);
                             node.appendChild(svgIcon);
                             break;
 
                         case RenderNodes.TYPE.TCPENDPOINTS:
-                            var svgIcon = this.getSvgIcon("./images/topology/osa_ics_drive.svg");
+                            var svgIcon = this.getSvgIcon("./images/topology/osa_ics_drive.svg", imgW, imgH);
                             node.appendChild(svgIcon);
                             break;
 
@@ -56,30 +59,13 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc",
                 }
             },
 
-            createColumnDiv:function (columnCount, nodeToAdd, names) {
-                var widthPercent = 100 / columnCount;
-                for (var i = 0; i < columnCount; i++) {
-                    var node = dojo.create("div");
-                    dojo.style(node, {
-                        "width":widthPercent + "%",
-                        "height":"100%",
-                        "float":"left"
-                    });
-                    node.id = names[i] + RenderNodes.COLUMN_SUFFIX;
-                    nodeToAdd.appendChild(node);
-                }
-                var node = dojo.create("div");
-                node.style = "clear:both;";
-                nodeToAdd.appendChild(node);
-            },
-
-            createColumnPanes:function (pageName, columnCount, names, width, height) {
-                console.log("in createColumnPanes = " + columnCount + " w = " + width + " h = " + height);
+            createColumnPanes:function (pageName, names, width, height) {
+                console.log("in createColumnPanes = " + (names.length) + " w = " + width + " h = " + height);
                 try {
-                    var styleString = "width: " + (width / columnCount) + "; height: " + height + ";";
+                    var styleString = "width: " + (width / (names.length)) + "; height: " + height + ";";
 
                     var titlePanes = [];
-                    for (var i = 0; i < columnCount; i++) {
+                    for (var i = 0; i < names.length; i++) {
                         console.log("new pane for = " + names[i]);
                         var titlePane = new TitlePane({
                             splitter:false,
@@ -93,15 +79,15 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc",
 
                     console.log("pageName = " + pageName);
 
-                    var gridContainer = new GridContainer({nbZones:columnCount, isAutoOrganized:true,
+                    var gridContainer = new GridContainer({nbZones:names.length, isAutoOrganized:true,
                         style:"width: 100%; height: 100%;"});
                     noc.pages.TopologyPage.TitlePane.addChild(gridContainer);
                     gridContainer.disableDnd();
 
                     var j = 0, k = 0;
-                    for (var i = 0; i < columnCount; i++) {
-                        j = (i % columnCount);
-                        k = parseInt(i / columnCount);
+                    for (var i = 0; i < names.length; i++) {
+                        j = (i % (names.length));
+                        k = parseInt(i / (names.length));
                         gridContainer.addChild(titlePanes[i], j, k);
                     }
                     gridContainer.startup();
@@ -145,15 +131,14 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc",
                         var innerPane = new TitlePane({
                             splitter:false,
                             style:styleString,
-                            content:"<div id='" + layers[i] + RenderNodes.ROW_SUFFIX + "' style='width: 100%; height: 100%;'></div>",
+                            content:"<div id='" + layers[i] + RenderNodes.ROW_SUFFIX + "' style='"+styleString+"'></div>",
                             title:layers[i],
                             toggleable:false
                         });
                         innerPanes[i] = innerPane;
                     }
 
-                    var gridContainer = new GridContainer({nbZones:1, isAutoOrganized:true,
-                        style:"width: 100%; height: 100%;"}, dojo.byId(name + RenderNodes.COLUMN_SUFFIX));
+                    var gridContainer = new GridContainer({nbZones:1, isAutoOrganized:true}, dojo.byId(name + RenderNodes.COLUMN_SUFFIX));
                     gridContainer.disableDnd();
 
                     for (var i = 0; i < layers.length; i++) {
@@ -172,32 +157,34 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc",
             create:function (data, input) {
                 var pageName = data.name;
 
-                var numColPanes = 3;
                 var names = ["Ingress", "Core", "Egress"];
-                this.createColumnPanes(pageName, numColPanes, names, data.dimensions.width, data.dimensions.height);
+                this.createColumnPanes(pageName, names, data.dimensions.width, data.dimensions.height);
 
+                var colWidth = data.dimensions.width/names.length;
+                var divW = 60, divH = 60;
                 var layers = ["webServers"];
-                this.createInnerPanes(layers, names[0], data.dimensions.width, data.dimensions.height);
+                this.createInnerPanes(layers, names[0], colWidth, data.dimensions.height);
+                this.createEndpoint(input.netBankingNodesVO.webServers,
+                    dojo.byId("webServers" + RenderNodes.ROW_SUFFIX), RenderNodes.TYPE.WEBSERVER, divW, divH);
 
                 layers = ["appServers"];
-                this.createInnerPanes(layers, names[1], data.dimensions.width, data.dimensions.height);
+                this.createInnerPanes(layers, names[1], colWidth, data.dimensions.height);
+                this.createEndpoint(input.netBankingNodesVO.appServers,
+                    dojo.byId("appServers" + RenderNodes.ROW_SUFFIX), RenderNodes.TYPE.APPSERVER, divW, divH);
 
                 layers = ["databases", "messageQueues", "tcpEndpoints"];
-                this.createInnerPanes(layers, names[2], data.dimensions.width, data.dimensions.height);
-
-                return;
-
-                var i = 0;
-                this.createEndpoint(input.netBankingNodesVO.webServers,
-                    dojo.byId(names[i++] + RenderNodes.COLUMN_SUFFIX), RenderNodes.TYPE.WEBSERVER);
-                this.createEndpoint(input.netBankingNodesVO.appServers,
-                    dojo.byId(names[i++] + RenderNodes.COLUMN_SUFFIX), RenderNodes.TYPE.APPSERVER);
+                this.createInnerPanes(layers, names[2], colWidth, data.dimensions.height);
                 this.createEndpoint(input.netBankingNodesVO.databases,
-                    dojo.byId(names[i++] + RenderNodes.COLUMN_SUFFIX), RenderNodes.TYPE.DATABASES);
+                    dojo.byId("databases" + RenderNodes.ROW_SUFFIX), RenderNodes.TYPE.DATABASES, divW, divH);
                 this.createEndpoint(input.netBankingNodesVO.messageQueues,
-                    dojo.byId(names[i++] + RenderNodes.COLUMN_SUFFIX), RenderNodes.TYPE.MESSAGEQ);
+                    dojo.byId("messageQueues" + RenderNodes.ROW_SUFFIX), RenderNodes.TYPE.MESSAGEQ, divW, divH);
                 this.createEndpoint(input.netBankingNodesVO.tcpEndpoints,
-                    dojo.byId(names[i++] + RenderNodes.COLUMN_SUFFIX), RenderNodes.TYPE.TCPENDPOINTS);
+                    dojo.byId("tcpEndpoints" + RenderNodes.ROW_SUFFIX), RenderNodes.TYPE.TCPENDPOINTS, divW, divH);
+
+                var innerPane = dojo.query(".dijitTitlePaneContentOuter", noc.pages.TopologyPage.CP.domNode);
+                for (var i = 0; i < innerPane.length; i++) {
+                    innerPane[i].style.border = 0;
+                }
 
                 // by this point all nodes have been created
                 // the next job is to draw connections

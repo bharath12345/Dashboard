@@ -7,10 +7,10 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
         var TopologyPage = declare(CONSTANTS.CLASSNAME.PAGES.TOPOLOGYPAGE, null, {
 
             loadPage:function (pageNumber, pageName) {
-                TopologyPage.CP[pageNumber] = noc.PageLoader.CpCenter[pageNumber];
+                TopologyPage.CP = noc.PageLoader.CpCenter[pageNumber];
 
-                var paneWidth = TopologyPage.CP[pageNumber].w;
-                var paneHeight = TopologyPage.CP[pageNumber].h;
+                var paneWidth = TopologyPage.CP.w;
+                var paneHeight = TopologyPage.CP.h;
                 var styleString = "width: " + paneWidth + "; height: " + paneHeight + ";"
 
                 TopologyPage.TitlePane = new ContentPane({
@@ -21,7 +21,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
 
                 var gridContainer = new GridContainer({nbZones:1, isAutoOrganized:true,
                     style:"width: 100%; height: 100%;"});
-                TopologyPage.CP[pageNumber].addChild(gridContainer);
+                TopologyPage.CP.addChild(gridContainer);
                 gridContainer.disableDnd();
 
                 gridContainer.addChild(TopologyPage.TitlePane, 0);
@@ -53,7 +53,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
         // static variables of this class
         TopologyPage.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.PAGES.TOPOLOGYPAGE));
 
-        TopologyPage.CP = [];
+        TopologyPage.CP = null;
         TopologyPage.TitlePane = null;
 
         return TopologyPage;
