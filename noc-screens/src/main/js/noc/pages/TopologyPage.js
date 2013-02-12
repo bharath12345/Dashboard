@@ -1,7 +1,8 @@
 define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/GridContainer",
+    "dijit/layout/ContentPane",
     "dojo/i18n!noc/nls/noc", "noc/Utility", "noc/Constants", "noc/Logger"],
 
-    function (require, declare, i18n, TitlePane, GridContainer, i18nString, Utility, CONSTANTS, Logger) {
+    function (require, declare, i18n, TitlePane, GridContainer, ContentPane, i18nString, Utility, CONSTANTS, Logger) {
 
         var TopologyPage = declare(CONSTANTS.CLASSNAME.PAGES.TOPOLOGYPAGE, null, {
 
@@ -12,12 +13,10 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                 var paneHeight = TopologyPage.CP[pageNumber].h;
                 var styleString = "width: " + paneWidth + "; height: " + paneHeight + ";"
 
-                var titlePane = new TitlePane({
+                TopologyPage.TitlePane = new ContentPane({
+                    region:"center",
                     splitter:false,
-                    style:styleString,
-                    content:"<div id='"+pageName+"' style='width: 100%; height: 100%;'></div>",
-                    title:"NetBanking Topology",
-                    toggleable:false
+                    style:styleString
                 });
 
                 var gridContainer = new GridContainer({nbZones:1, isAutoOrganized:true,
@@ -25,19 +24,25 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                 TopologyPage.CP[pageNumber].addChild(gridContainer);
                 gridContainer.disableDnd();
 
-                gridContainer.addChild(titlePane, 0);
+                gridContainer.addChild(TopologyPage.TitlePane, 0);
                 gridContainer.startup();
                 gridContainer.resize();
 
-                var xpos=0, ypos=0;
+                var innerPane = dojo.query(".dijitContentPane", gridContainer.domNode);
+                //console.log("inner len = " + innerPane.length);
+                for (var i = 0; i < innerPane.length; i++) {
+                    innerPane[i].style.padding = 0;
+                }
+
+                var xpos = 0, ypos = 0;
                 var viewMeta = {
                     id:pageName,
-                    name: pageName,
-                    type: CONSTANTS.TYPE.TOPOLOGY,
-                    subtype: CONSTANTS.SUBTYPE.TOPOLOGY.NODES,
-                    dimensions:[TopologyPage.CP[pageNumber].w, TopologyPage.CP[pageNumber].h],
-                    position:[xpos,ypos],
-                    custom: []
+                    name:pageName,
+                    type:CONSTANTS.TYPE.TOPOLOGY,
+                    subtype:CONSTANTS.SUBTYPE.TOPOLOGY.NODES,
+                    dimensions:[paneWidth, paneHeight],
+                    position:[xpos, ypos],
+                    custom:[]
                 };
 
                 Utility.xhrPostCentral(CONSTANTS.ACTION.TOPOLOGY.NODES, viewMeta);
@@ -49,6 +54,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
         TopologyPage.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.PAGES.TOPOLOGYPAGE));
 
         TopologyPage.CP = [];
+        TopologyPage.TitlePane = null;
 
         return TopologyPage;
     });
