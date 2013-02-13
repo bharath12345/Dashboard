@@ -18,8 +18,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Logger"
 
                     // blue endpoints 7 px; green endpoints 11.
                     Endpoints:[
-                        [ "Dot", {radius:7} ],
-                        [ "Dot", { radius:11 } ]
+                        [ "Dot", {radius:3} ],
+                        [ "Dot", { radius:5 } ]
                     ],
 
                     // the overlays to decorate each connection with.  note that the label overlay uses a function to generate the label text; in this
@@ -51,15 +51,25 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Logger"
                     var dstUuid = RenderConnectivity.FROM + connections[i] + RenderConnectivity.TO + data.name;
                     console.log("src uuid = " + srcUuid + " dst uuid = " + dstUuid);
 
-                    var sourceEP = jsPlumb.addEndpoint(lhsDivName, RenderConnectivity.sourceEndpoint,{uuid:srcUuid});
-                    var dstEP = jsPlumb.addEndpoint(rhsDivName, RenderConnectivity.targetEndpoint,{uuid:dstUuid});
+                    var sourceEP = jsPlumb.addEndpoint(lhsDivName,
+                        RenderConnectivity.sourceEndpoint,
+                        {
+                            uuid:srcUuid,
+                            container:noc.pages.TopologyPage.TitlePane.domNode,
+                            anchor:"RightMiddle"
+                        });
+
+
+                    var dstEP = jsPlumb.addEndpoint(rhsDivName,
+                        RenderConnectivity.targetEndpoint,
+                        {
+                            uuid:dstUuid,
+                            container:noc.pages.TopologyPage.TitlePane.domNode,
+                            anchor:"LeftMiddle"
+                        });
 
                     // create connection link
                     jsPlumb.connect({ source:sourceEP, target:dstEP, container:noc.pages.TopologyPage.TitlePane.domNode });
-
-                    //jsPlumb.connect({uuids:[srcUuid, dstUuid], editable:true});
-
-                    return;
 
                     // get and set the status of the connection link
                     var xpos=0, ypos=0;
@@ -86,25 +96,25 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Logger"
 
         // this is the paint style for the connecting lines..
         RenderConnectivity.connectorPaintStyle = {
-            lineWidth:5,
+            lineWidth:1,
             strokeStyle:"#deea18",
             joinstyle:"round",
             outlineColor:"#EAEDEF",
-            outlineWidth:7
+            outlineWidth:1
         };
 
         // .. and this is the hover style.
         RenderConnectivity.connectorHoverStyle = {
-            lineWidth:7,
+            lineWidth:2,
             strokeStyle:"#2e2aF8"
         };
 
         // the definition of source endpoints (the small blue ones)
         RenderConnectivity.sourceEndpoint = {
             endpoint:"Dot",
-            paintStyle:{ fillStyle:"#225588", radius:7 },
+            paintStyle:{ fillStyle:"#225588", radius:3 },
             isSource:true,
-            connector:[ "Flowchart", { stub:[40, 60], gap:10 } ],
+            connector:[ "Straight", { stub:[40, 60], gap:10 } ],
             connectorStyle:RenderConnectivity.connectorPaintStyle,
             hoverPaintStyle:RenderConnectivity.connectorHoverStyle,
             connectorHoverStyle:RenderConnectivity.connectorHoverStyle,
@@ -112,7 +122,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Logger"
             overlays:[
                 [ "Label", {
                     location:[0.5, 1.5],
-                    label:"Drag",
+                    label:"",
                     cssClass:"endpointSourceLabel"
                 } ]
             ]
@@ -126,7 +136,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Logger"
             dropOptions:{ hoverClass:"hover", activeClass:"active" },
             isTarget:true,
             overlays:[
-                [ "Label", { location:[0.5, -0.5], label:"Drop", cssClass:"endpointTargetLabel" } ]
+                [ "Label", { location:[0.5, -0.5], label:"", cssClass:"endpointTargetLabel" } ]
             ]
         };
 

@@ -155,15 +155,15 @@ public class TopologyAction extends AbstractNocAction  {
 	private NetBankingConnectivityVO setDummyWebServerConnectivityData(NetBankingConnectivityVO nbcvo, String name) {
 		int numAppServers = 8;
 		String [] connections = new String[numAppServers];
-		for(int j=1;j<=numAppServers;j++) {
-			connections[j] = "FLXRETWAS" + j;
+		for(int j=0;j<numAppServers;j++) {
+			connections[j] = "FLXRETWAS" + (j+1);
 		}
 		nbcvo.setConnections(connections);
 		return nbcvo;
 	}
 	
 	private NetBankingConnectivityVO setDummyAppServerConnectivityData(NetBankingConnectivityVO nbcvo, String name) {
-		String [] conn = new String[10];
+		String [] conn = new String[3];
 		conn[0] = "FLXRETDB1";
 		conn[1] = "HBNETPRODDB1";
 		conn[2] = "HBNETPRODDB2";
