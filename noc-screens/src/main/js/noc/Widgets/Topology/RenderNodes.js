@@ -159,24 +159,33 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc",
             create:function (data, input) {
                 var pageName = data.name;
 
+                var nbLayers = input.netBankingLayersVO.layers;
+
                 var layerTypes = [];
-                for (var i = 0; i < input.netBankingLayersVO.length; i++) {
-                    layerTypes.push(input.netBankingLayersVO[i].layertype);
+                for (var i = 0; i < nbLayers.length; i++) {
+                    layerTypes.push(nbLayers[i].layertype);
                 }
                 this.createColumnPanes(pageName, layerTypes, data.dimensions.width, data.dimensions.height);
 
                 var colWidth = data.dimensions.width / layerTypes.length;
                 var divW = 60, divH = 60;
-                for (var i = 0; i < input.netBankingLayersVO.length; i++) {
-                    var layer = input.netBankingLayersVO[i];
+                for (var i = 0; i < nbLayers.length; i++) {
+                    console.log("layer type = " + layerTypes[i]);
+
+                    var layer = nbLayers[i].layer;
+                    console.log("layer length = " + layer.length);
                     var layerNames = [];
                     for (var j = 0; j < layer.length; j++) {
+                        console.log("layer inner name = " + layer[j].name);
                         layerNames.push(layer[j].name);
                     }
                     this.createInnerPanes(layerNames, layerTypes[i], colWidth, data.dimensions.height);
                     for (var j = 0; j < layer.length; j++) {
                         this.createEndpoint(layer[j].value, layer[j].name, divW, divH);
+                    }
 
+                    // start drawing the connections ONLY after ALL nodes are rendered
+                    for (var j = 0; j < layer.length; j++) {
                         // by this point all nodes have been created
                         // the next job is to draw connections
                         // drawing connections has 2 tasks - create endpoints and then create a connection - all using jsPlumb
@@ -197,10 +206,29 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc",
                                 position:[xpos, ypos],
                                 custom:[]
                             };
-
                             Utility.xhrPostCentral(CONSTANTS.ACTION.TOPOLOGY.CONNECTIONS, viewMeta);
                         }
                     }
+
+                    // start putting in the node Status ONLY after ALL connection requests are despatched
+                    /*for (var j = 0; j < layer.length; j++) {
+                     for (var k = 0; k < layer[j].value.length; k++) {
+                     // get the STATUS of the nodes
+                     var pageName = data.name;
+                     var xpos = 0, ypos = 0;
+                     var viewMeta = {
+                     id:layer[j].value[k], // this will be something like FLXRET_IHS1
+                     name:layer[j].value[k], // this will be something like FLXRET_IHS1
+                     type:CONSTANTS.TYPE.TOPOLOGY,
+                     subtype:CONSTANTS.SUBTYPE.TOPOLOGY.NODESTATUS,
+                     dimensions:[0, 0],
+                     position:[xpos, ypos],
+                     custom:[]
+                     };
+                     Utility.xhrPostCentral(CONSTANTS.ACTION.TOPOLOGY.NODESTATUS, viewMeta);
+
+                     }
+                     }*/
                 }
 
                 var innerPane = dojo.query(".dijitTitlePaneContentOuter", noc.pages.TopologyPage.CP.domNode);

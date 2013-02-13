@@ -1,13 +1,34 @@
 package com.appnomic.noc.viewobject.topology;
 
 public class NetBankingConnectivityVO {
-	private String [] nodes;
 
-	public String[] getNodes() {
-		return nodes;
+	String sourceType;
+	String name;
+	String [] connections;
+	String dstType;
+	
+	public String getSourceType() {
+		return sourceType;
 	}
-
-	public void setNodes(String[] nodes) {
-		this.nodes = nodes;
+	public void setSourceType(String sourceType) {
+		this.sourceType = sourceType;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String[] getConnections() {
+		return connections;
+	}
+	public void setConnections(String[] connections) {
+		this.connections = connections;
+	}
+	public String getDstType() {
+		return dstType;
+	}
+	public void setDstType(String dstType) {
+		this.dstType = dstType;
 	}
 }

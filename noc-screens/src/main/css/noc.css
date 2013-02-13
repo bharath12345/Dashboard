@@ -122,4 +122,28 @@ a.document {
     filter:alpha(opacity=60);
 }
 
+.aLabel {
+    background-color:white;
+    padding:0.4em;
+    font:12px sans-serif;
+    color:#444;
+    z-index:21;
+    border:1px dotted gray;
+    opacity:0.8;
+    filter:alpha(opacity=80);
+}
+
+.active {
+    border:1px dotted green;
+}
+.hover {
+    border:1px dotted red;
+}
+
+._jsPlumb_connector { z-index:4; }
+._jsPlumb_endpoint, .endpointTargetLabel, .endpointSourceLabel{ z-index:21;cursor:pointer; }
+.hl { border:3px solid red; }
+#debug { position:absolute; background-color:black; color:red; z-index:5000 }
+
+
 
