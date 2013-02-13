@@ -19,7 +19,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Logger"
                     // blue endpoints 7 px; green endpoints 11.
                     Endpoints:[
                         [ "Dot", {radius:3} ],
-                        [ "Dot", { radius:5 } ]
+                        [ "Dot", { radius:3 } ]
                     ],
 
                     // the overlays to decorate each connection with.  note that the label overlay uses a function to generate the label text; in this
@@ -130,7 +130,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Logger"
 
         RenderConnectivity.targetEndpoint = {
             endpoint:"Dot",
-            paintStyle:{ fillStyle:"#558822", radius:11 },
+            paintStyle:{ fillStyle:"#558822", radius:3 },
             hoverPaintStyle:RenderConnectivity.connectorHoverStyle,
             maxConnections:-1,
             dropOptions:{ hoverClass:"hover", activeClass:"active" },

@@ -236,6 +236,11 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc",
                     innerPane[i].style.border = 0;
                 }
 
+                var gridText = dojo.query(".dijitTitlePaneTextNode", noc.pages.TopologyPage.CP.domNode);
+                for (var i = 0; i < gridText.length; i++) {
+                    gridText[i].style.display = "block";
+                    gridText[i].style.textAlign = "center";
+                }
             }
         });
 

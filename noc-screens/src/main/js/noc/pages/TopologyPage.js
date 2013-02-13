@@ -8,6 +8,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
 
             loadPage:function (pageNumber, pageName) {
                 TopologyPage.CP = noc.PageLoader.CpCenter[pageNumber];
+                TopologyPage.CP.domNode.style.border=0;
 
                 var paneWidth = TopologyPage.CP.w;
                 var paneHeight = TopologyPage.CP.h;
