@@ -25,7 +25,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Logger"
                     // the overlays to decorate each connection with.  note that the label overlay uses a function to generate the label text; in this
                     // case it returns the 'labelText' member that we set on each connection in the 'init' method below.
                     ConnectionOverlays:[
-                        [ "Arrow", { location:0.9 } ],
+                        [ "Arrow", { location:0.9, foldback:0.5, width:6 } ],
                         [ "Label", {
                             location:0.1,
                             id:"label",
