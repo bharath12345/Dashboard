@@ -1,6 +1,7 @@
-define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Utility", "noc/Constants", "noc/Logger"],
+define(["dojo/_base/declare", "dojo/i18n", "noc/Utility", "noc/Constants", "noc/Logger",
+            "dojo/i18n!login/nls/login"],
 
-    function (declare, i18n, i18nString, Utility, CONSTANTS, Logger) {
+    function (declare, i18n, Utility, CONSTANTS, Logger, i18nString) {
 
         var Login = declare(CONSTANTS.CLASSNAME.LOGIN, null, {});
 

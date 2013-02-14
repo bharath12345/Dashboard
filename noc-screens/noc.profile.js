@@ -104,10 +104,6 @@ var profile = (function () {
                 name:"dojox",
                 location:"dojox"
             },
-            //{
-            //    name:"d3",
-            //    location:"d3"
-            //},
             {
                 name:"dgrid",
                 location:"dgrid"
@@ -127,6 +123,14 @@ var profile = (function () {
             {
                 name:"noc",
                 location:"noc"
+            },
+            {
+                name:"login",
+                location:"login"
+            },
+            {
+                name:"config",
+                location:"config"
             }
         ],
 

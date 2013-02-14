@@ -23,10 +23,10 @@ var profile = (function () {
             // them and naively assumes they are scripts.
             copyOnly:function (filename, mid) {
                 var list = {
-                    "noc/runMain.js":1,
-                    "noc/NocMain.js":1,
-                    "noc/noc.profile":1,
-                    "noc/package.json":1
+                    "config/runConfig.js":1,
+                    "config/NocConfig.js":1,
+                    "config/config.profile":1,
+                    "config/package.json":1
                 };
                 return (mid in list);
             },

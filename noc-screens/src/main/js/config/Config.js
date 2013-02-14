@@ -1,6 +1,7 @@
-define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Utility", "noc/Constants", "noc/Logger"],
+define(["dojo/_base/declare", "dojo/i18n", "noc/Utility", "noc/Logger",
+    "config/Constants", "dojo/i18n!config/nls/config"],
 
-    function (declare, i18n, i18nString, Utility, CONSTANTS, Logger) {
+    function (declare, i18n, Utility, Logger, CONSTANTS, i18nString) {
 
         var Config = declare(CONSTANTS.CLASSNAME.CONFIG, null, {
             // create an Accordion with multiple links like in NNMi

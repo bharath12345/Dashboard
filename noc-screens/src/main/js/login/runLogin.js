@@ -22,7 +22,8 @@ require({
         'xstyle',
         'put-selector',
         'dbind',
-        { name:'noc', location:'noc', main:'NocLogin' }
+        'noc',
+        { name:'login', location:'login', main:'NocLogin' }
     ]
 // Require `noc`. This loads the main application module, `noc/NocMain`, since we registered the `noc` package above.
-}, [ 'noc' ]);
+}, [ 'login' ]);

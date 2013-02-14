@@ -207,6 +207,20 @@
                                             <followSymlinks>true</followSymlinks>
                                         </fileset>
                                         <fileset>
+                                            <directory>${release-dir}/login</directory>
+                                            <includes>
+                                                <include>**/*uncompressed.js</include>
+                                            </includes>
+                                            <followSymlinks>true</followSymlinks>
+                                        </fileset>
+                                        <fileset>
+                                            <directory>${release-dir}/config</directory>
+                                            <includes>
+                                                <include>**/*uncompressed.js</include>
+                                            </includes>
+                                            <followSymlinks>true</followSymlinks>
+                                        </fileset>
+                                        <fileset>
                                             <directory>${release-dir}/dbind</directory>
                                             <includes>
                                                 <include>**/*uncompressed.js</include>
@@ -522,6 +536,20 @@
                                     <filesets>
                                         <fileset>
                                             <directory>${release-dir}/noc</directory>
+                                            <includes>
+                                                <include>**/*uncompressed.js</include>
+                                            </includes>
+                                            <followSymlinks>true</followSymlinks>
+                                        </fileset>
+                                        <fileset>
+                                            <directory>${release-dir}/login</directory>
+                                            <includes>
+                                                <include>**/*uncompressed.js</include>
+                                            </includes>
+                                            <followSymlinks>true</followSymlinks>
+                                        </fileset>
+                                        <fileset>
+                                            <directory>${release-dir}/config</directory>
                                             <includes>
                                                 <include>**/*uncompressed.js</include>
                                             </includes>

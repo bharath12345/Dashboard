@@ -35,7 +35,7 @@ define([ 'dojo/has', 'require' ], function (has, require) {
          * require just `dojo/domReady`, it would load that module just like any other module, without the special
          * plugin functionality.
          */
-        require(['noc/Config', 'dojo/domReady!' ], function (Config) {
+        require(['config/Config', 'dojo/domReady!' ], function (Config) {
             var confg = new Config();
             config.load();
         });

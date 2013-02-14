@@ -4,7 +4,7 @@
  *
  * Our first dependency is to the `dojo/has` module, which allows us to conditionally execute code based on
  * configuration settings or environmental information. Unlike a normal conditional, these branches can be compiled
- * away by the build system; see `staticHasFeatures` in noc.profile.js for more information.
+ * away by the build system; see `staticHasFeatures` in login.profile.js for more information.
  *
  * Our second dependency is to the special module `require`; this allows us to make additional require calls using
  * module IDs relative to this module within the body of the define callback.
@@ -17,7 +17,7 @@
 define([ 'dojo/has', 'require' ], function (has, require) {
 
     /**
-     * This NocMain.js file conditionally executes different code depending upon the host environment it is loaded in.
+     * This LoginMain.js file conditionally executes different code depending upon the host environment it is loaded in.
      * This is an increasingly common pattern when dealing with applications that run in different environments that
      * require different functionality (i.e. client/server or desktop/tablet/phone).
      */
@@ -35,7 +35,7 @@ define([ 'dojo/has', 'require' ], function (has, require) {
          * require just `dojo/domReady`, it would load that module just like any other module, without the special
          * plugin functionality.
          */
-        require(['noc/Login', 'dojo/domReady!' ], function (Login) {
+        require(['login/Login', 'dojo/domReady!' ], function (Login) {
             new Login();
             Login.signInOnLoad();
 
