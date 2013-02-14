@@ -33,7 +33,4 @@ public abstract class AbstractNocAction
 	public Map<String, String[]> getParameters() {
 		return this.parameters;
 	}
-	
-	abstract public String nocAction();
-	abstract public void setDummyData();
 }
