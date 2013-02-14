@@ -11,7 +11,7 @@
         <meta http-equiv="Expires" content="0"/>
         <meta http-equiv="Pragma" content="no-cache"/>
 
-        <title>AppsOne NOC Screens</title>
+        <title>AppsOne NOC Screens Configuration UI</title>
 
         <link rel="shortcut icon" href="./images/favicon.ico"/>
 
@@ -19,12 +19,12 @@
         <link rel="stylesheet" type="text/css" href="./js/dijit/themes/claro/claro.css"/>
         <link rel="stylesheet" type="test/css" href="./js/dgrid/css/dgrid.css"/>
         <link rel="stylesheet" type="test/css" href="./js/dgrid/css/skins/claro.css"/>
-        <link rel="stylesheet" type="text/css" href="./css/noc.merged.compressed.css"/>
+        <link rel="stylesheet" type="test/css" href="./css/config.compressed.css"/>
 
-        <!-- List of JS. First one should always be Dojo -->
+    <!-- List of JS. First one should always be Dojo -->
         <script type="text/javascript" data-dojo-config="async: 1, tlmSiblingOfDojo: 0, isDebug: 1" src="./js/dojo/dojo.js"></script>
     </head>
     <body class="claro">
-        <script src="./js/noc/runConfig.js"></script>
+        <script src="./js/config/runConfig.js"></script>
     </body>
 </html>
