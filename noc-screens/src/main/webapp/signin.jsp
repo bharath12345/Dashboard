@@ -7,7 +7,7 @@
     <meta http-equiv="Pragma" content="no-cache"/>
     <title>Appnomic Appsone NOC Screens</title>
 
-	<link rel="stylesheet" type="text/css" href="./css/noc.compressed.css"/>
+	<link rel="stylesheet" type="text/css" href="./css/login.compressed.css"/>
     <script type="text/javascript" data-dojo-config="async: 1, tlmSiblingOfDojo: 0, isDebug: 1" src="./js/dojo/dojo.js"></script>
 </head>
 <body class="login_body">
@@ -19,20 +19,6 @@
     <meta http-equiv="Content-Type" content="text/html;	charset=UTF-8">
     <tr>
         <td class="login_top_left" colspan="2">
-            <table class="full_HV" border="0" cellspacing="0" cellpadding="0">
-                <tr>
-                    <td class="login_logo" id="login_logo">
-                    </td>
-                    <td>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                    </td>
-                    <td class="login_appname" id="login_appname">
-                    </td>
-                </tr>
-            </table>
         </td>
         <td class="login_top_right" id="login_top_right">
         </td>

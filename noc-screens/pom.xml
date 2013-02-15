@@ -413,7 +413,7 @@
                                             <arg value="-o"/>
                                             <arg value="${basedir}/target/noc-screens/css/login.compressed.css"/>
                                             <arg value="-v"/>
-                                            <arg value="${basedir}/target/noc-screens/css/login.css"/>
+                                            <arg value="${basedir}/src/main/css/login.css"/>
                                         </exec>
                                         <exec executable="java">
                                             <arg value="-jar"/>
@@ -425,7 +425,7 @@
                                             <arg value="-o"/>
                                             <arg value="${basedir}/target/noc-screens/css/config.compressed.css"/>
                                             <arg value="-v"/>
-                                            <arg value="${basedir}/target/noc-screens/css/config.css"/>
+                                            <arg value="${basedir}/src/main/css/config.css"/>
                                         </exec>
                                     </tasks>
                                 </configuration>
@@ -692,7 +692,7 @@
                                             <arg value="-o"/>
                                             <arg value="${basedir}/target/noc-screens/css/login.compressed.css"/>
                                             <arg value="-v"/>
-                                            <arg value="${basedir}/target/noc-screens/css/login.css"/>
+                                            <arg value="${basedir}/src/main/css/login.css"/>
                                         </exec>
                                         <exec executable="java">
                                             <arg value="-jar"/>
@@ -704,7 +704,7 @@
                                             <arg value="-o"/>
                                             <arg value="${basedir}/target/noc-screens/css/config.compressed.css"/>
                                             <arg value="-v"/>
-                                            <arg value="${basedir}/target/noc-screens/css/config.css"/>
+                                            <arg value="${basedir}/src/main/css/config.css"/>
                                         </exec>
                                     </tasks>
                                 </configuration>

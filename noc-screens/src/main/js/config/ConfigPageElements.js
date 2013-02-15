@@ -4,7 +4,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
     "config/Utility",
     "config/Constants", "dojo/i18n!config/nls/config"],
 
-    function (declare, i18n, ContentPane, BorderContainer, AccordionContainer, Utility, Logger, CONSTANTS, i18nString) {
+    function (declare, i18n, ContentPane, BorderContainer, AccordionContainer, Logger, Utility, CONSTANTS, i18nString) {
 
         var ConfigPageElements = declare(CONSTANTS.CLASSNAME.PAGEELEMENTS, null, {
             // create an Accordion with multiple links like in NNMi
@@ -126,7 +126,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
 
             createMast: function() {
                 var mastheadA1Logo = "./images/masthead_logo.png";
-                var mastheadAppName = "./images/mast_appsone.png";
+                var mastheadAppName = "./images/mast_a1.png";
 
                 var headerTrayDiv = dojo.create("div");
                 headerTrayDiv.id= "headerTray";
@@ -155,7 +155,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
 
                 var image = dojo.create("img");
                 image.setAttribute("alt", "Appnomic");
-                image.setAttribute("src", mastheadA1Logo);
+                //image.setAttribute("src", mastheadA1Logo);
 
                 mastRow.appendChild(mastCol);
                 mastCol.appendChild(image);

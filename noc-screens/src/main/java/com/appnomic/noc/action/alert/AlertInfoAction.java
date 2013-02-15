@@ -288,10 +288,5 @@ public class AlertInfoAction extends AbstractNocAction  {
 		System.out.println("instance name being assembled = " + instanceName);
 		return SUCCESS;
 	}
-	
-	@Override
-	public void setDummyData() {
-		// TODO Auto-generated method stub
-	}
 
 }

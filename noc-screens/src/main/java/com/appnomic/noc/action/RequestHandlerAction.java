@@ -39,9 +39,4 @@ public class RequestHandlerAction extends AbstractNocAction  {
 		return SUCCESS;
 	}
 
-	@Override
-	public void setDummyData() {
-		// TODO Auto-generated method stub
-	}
-
 }

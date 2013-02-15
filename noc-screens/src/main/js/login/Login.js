@@ -46,18 +46,6 @@ define(["dojo/_base/declare", "dojo/i18n", "noc/Utility", "noc/Constants", "noc/
         };
 
         Login.loadImages = function() {
-            var login_logo = document.createElement("globalimg");
-            login_logo.src="images/login_logo.gif";
-            login_logo.setAttribute("alt","login");
-            login_logo.setAttribute("border","0");
-            document.getElementById("login_logo").appendChild(login_logo);
-
-            var login_appname = document.createElement("globalimg");
-            login_appname.src="images/login_traffic.png";
-            login_appname.setAttribute("alt","Appnomic AppsOne");
-            login_appname.setAttribute("border","0");
-            document.getElementById("login_appname").appendChild(login_appname);
-
             var login_top_right = document.createElement("globalimg");
             login_top_right.src="images/dot_trans.gif";
             login_top_right.setAttribute("border","0");

@@ -1,7 +1,7 @@
-define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!config/nls/config", "dojo/request/xhr", "dojo/keys", "dojo/on",
+define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!config/nls/config", "dojo/request/xhr",
     "config/Constants", "noc/Logger"],
 
-    function (declare, i18n, i18nString, xhr, keys, on, CONSTANTS, Logger) {
+    function (declare, i18n, i18nString, xhr, CONSTANTS, Logger) {
 
         var Utility = declare(CONSTANTS.CLASSNAME.UTILITY, null, {});
 
@@ -17,7 +17,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!config/nls/config", "dojo/
                 headers:Utility.JSON_HEADER
             }).then(function (data) {
                     // Do something with the handled data
-
+                    Utility.handleResponse(data);
                 }, function (err) {
                     // Handle the error condition
                     Utility.LOG.log(Logger.SEVERITY.SEVERE, "xhr error = " + err);
@@ -27,6 +27,23 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!config/nls/config", "dojo/
                     //Utility.LOG.log(Logger.SEVERITY.SEVERE, "xhr event = " + evt);
                 });
         };
+
+        Utility.handleResponse = function(data) {
+            var type = parseInt(data.param.type[0]);
+            switch(type) {
+                case CONSTANTS.TYPE.ACCORDION:
+                    require([CONSTANTS.WIDGETS.ACCORDION], function (ConfigAccordion) {
+                        var ca = new ConfigAccordion();
+                        ca.renderAccordion(data);
+                    });
+                    break;
+
+                default:
+                    console.log("unknown response type = " + type);
+                    return;
+            }
+        };
+
 
         return Utility;
     });

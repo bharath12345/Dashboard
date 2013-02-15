@@ -382,9 +382,4 @@ public class TransactionAction extends AbstractNocAction  {
 		return SUCCESS;
 	}
 
-	@Override
-	public void setDummyData() {
-		// TODO Auto-generated method stub		
-	}
-	
 }

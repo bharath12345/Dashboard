@@ -88,9 +88,4 @@ public class UserLoginAction extends AbstractNocAction {
         this.userDataServiceImpl = userDataServiceImpl;
     }
 
-	@Override
-	public void setDummyData() {
-		// TODO Auto-generated method stub
-	}
-
 }

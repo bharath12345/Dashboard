@@ -292,12 +292,5 @@ public class TopologyAction extends AbstractNocAction  {
 
 	public void setDummyData() {
 		// TODO Auto-generated method stub		
-	}
-
-	@Override
-	public String nocAction() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
+	}	
 }
