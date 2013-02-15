@@ -1,4 +1,4 @@
-package com.appnomic.noc.action.alert;
+package com.appnomic.noc.action;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -20,8 +20,6 @@ import com.appnomic.domainobject.ApplicationData;
 import com.appnomic.domainobject.Component;
 import com.appnomic.domainobject.ComponentAlertSummary;
 import com.appnomic.exception.InvalidTimeIntervalException;
-import com.appnomic.noc.action.AbstractNocAction;
-import com.appnomic.noc.action.TimeUtility;
 import com.appnomic.noc.viewobject.alert.ApplicationDataVO;
 import com.appnomic.noc.viewobject.alert.ApplicationMetaVO;
 import com.appnomic.noc.viewobject.alert.ApplicationVO;

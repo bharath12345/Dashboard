@@ -1,4 +1,4 @@
-package com.appnomic.noc.action.component;
+package com.appnomic.noc.action;
 
 import java.util.HashSet;
 import java.util.List;
@@ -10,7 +10,6 @@ import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Action;
 
 import com.appnomic.domainobject.Component;
-import com.appnomic.noc.action.AbstractNocAction;
 import com.appnomic.noc.request.RequestHelper;
 import com.appnomic.noc.viewobject.component.ComponentMatrixZonesVO;
 import com.appnomic.service.ComponentDataService;

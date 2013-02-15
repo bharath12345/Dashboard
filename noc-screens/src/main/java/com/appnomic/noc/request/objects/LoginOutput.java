@@ -1,4 +1,4 @@
-package com.appnomic.noc.action.user;
+package com.appnomic.noc.request.objects;
 
 public class LoginOutput {
 

@@ -1,4 +1,4 @@
-package com.appnomic.noc.action.transaction;
+package com.appnomic.noc.action;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,8 +20,6 @@ import com.appnomic.domainobject.Host;
 import com.appnomic.domainobject.Transaction;
 import com.appnomic.domainobject.TransactionGroup;
 import com.appnomic.domainobject.TransactionSummary;
-import com.appnomic.noc.action.AbstractNocAction;
-import com.appnomic.noc.action.TimeUtility;
 import com.appnomic.noc.viewobject.availability.ClusterVO;
 import com.appnomic.noc.viewobject.availability.ComponentDataVO;
 import com.appnomic.noc.viewobject.availability.ComponentVO;

@@ -1,4 +1,4 @@
-package com.appnomic.noc.action.logging;
+package com.appnomic.noc.action;
 
 import java.util.Map;
 import java.util.Set;
@@ -10,7 +10,6 @@ import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Action;
 
-import com.appnomic.noc.action.AbstractNocAction;
 
 @ParentPackage("json-default")
 @Namespace("/logger")

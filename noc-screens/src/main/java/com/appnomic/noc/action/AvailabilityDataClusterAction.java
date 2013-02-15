@@ -1,4 +1,4 @@
-package com.appnomic.noc.action.availability;
+package com.appnomic.noc.action;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,8 +20,6 @@ import com.appnomic.domainobject.Host;
 import com.appnomic.entity.NormalizedAvailabilityKpi;
 import com.appnomic.service.ClusterDataService;
 import com.appnomic.service.ComponentDataService;
-import com.appnomic.noc.action.AbstractNocAction;
-import com.appnomic.noc.action.DefaultResponse;
 import com.appnomic.noc.request.RequestHelper;
 import com.appnomic.noc.request.objects.RequestNameId;
 import com.appnomic.noc.viewobject.availability.ClusterDataVO;

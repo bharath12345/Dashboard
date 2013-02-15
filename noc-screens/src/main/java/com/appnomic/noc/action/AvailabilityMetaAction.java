@@ -1,4 +1,4 @@
-package com.appnomic.noc.action.availability;
+package com.appnomic.noc.action;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,7 +16,6 @@ import com.appnomic.domainobject.Cluster;
 import com.appnomic.domainobject.Cluster.ComponentData;
 import com.appnomic.domainobject.Component;
 import com.appnomic.domainobject.Host;
-import com.appnomic.noc.action.AbstractNocAction;
 import com.appnomic.noc.viewobject.availability.ClusterVO;
 import com.appnomic.noc.viewobject.availability.ComponentDataVO;
 import com.appnomic.noc.viewobject.availability.ComponentVO;

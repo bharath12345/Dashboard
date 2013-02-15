@@ -1,4 +1,4 @@
-package com.appnomic.noc.action.topology;
+package com.appnomic.noc.action;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,7 +12,6 @@ import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 
-import com.appnomic.noc.action.AbstractNocAction;
 import com.appnomic.noc.viewobject.topology.LayerVO;
 import com.appnomic.noc.viewobject.topology.LayerValueVO;
 import com.appnomic.noc.viewobject.topology.NetBankingConnectivityStatusVO;

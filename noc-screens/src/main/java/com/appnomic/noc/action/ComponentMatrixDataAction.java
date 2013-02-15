@@ -1,4 +1,4 @@
-package com.appnomic.noc.action.component;
+package com.appnomic.noc.action;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,6 @@ import com.appnomic.domainobject.Component;
 import com.appnomic.domainobject.ComponentKPI;
 import com.appnomic.domainobject.ComponentMetricGroup;
 import com.appnomic.entity.KpiDataSamples;
-import com.appnomic.noc.action.AbstractNocAction;
 import com.appnomic.noc.request.RequestHelper;
 import com.appnomic.noc.request.objects.RequestComponentKpiName;
 import com.appnomic.noc.request.objects.RequestNameId;

@@ -1,4 +1,4 @@
-package com.appnomic.noc.action.user;
+package com.appnomic.noc.action;
 
 import java.util.List;
 import java.util.Map;
@@ -12,7 +12,8 @@ import org.apache.struts2.convention.annotation.Result;
 
 import com.appnomic.domainobject.User;
 import com.appnomic.service.impl.UserDataServiceImpl;
-import com.appnomic.noc.action.AbstractNocAction;
+import com.appnomic.noc.request.objects.LoginInput;
+import com.appnomic.noc.request.objects.LoginOutput;
 import com.google.gson.Gson;
 
 @ParentPackage("json-default")
