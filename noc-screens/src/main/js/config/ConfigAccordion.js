@@ -8,8 +8,8 @@ define(["dojo/_base/declare", "dojo/i18n",
 
             loadAccordion: function() {
                 var viewMeta = {
-                    id:pageName,
-                    name:pageName,
+                    id:"",
+                    name:"",
                     type:CONSTANTS.TYPE.ACCORDION,
                     subtype:CONSTANTS.SUBTYPE.ACCORDION,
                     custom:[]
@@ -17,7 +17,8 @@ define(["dojo/_base/declare", "dojo/i18n",
                 Utility.xhrPostCentral(CONSTANTS.ACTION.PAGESET, viewMeta);
             },
 
-            renderAccordion: function() {
+            renderAccordion: function(data) {
+                console.log("in render accordion. data = " + dojo.toJson(data));
                 var pageList = data.pageListVO;
                 for(var i=0;i<pageList.length; i++) {
                     var a = this.getNewA();
@@ -25,7 +26,7 @@ define(["dojo/_base/declare", "dojo/i18n",
                         this.showPageConfig(pageList[i].name, pageList[i].id);
                     };
                     a.innerHTML = ConfigAccordion.IMAGE + pageList[i].name;
-                    this.appendToAccDiv(a, ConfigPageElements.AccPane.domNode);
+                    this.appendToAccDiv(a, config.PageElements.AccPane.domNode);
                 }
             },
 
