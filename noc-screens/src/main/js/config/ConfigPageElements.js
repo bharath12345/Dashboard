@@ -1,8 +1,7 @@
 define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/layout/BorderContainer",
     "dijit/layout/AccordionContainer",
     "noc/Logger",
-    "config/Utility",
-    "config/Constants", "dojo/i18n!config/nls/config"],
+    "config/Utility", "config/Constants", "dojo/i18n!config/nls/config"],
 
     function (declare, i18n, ContentPane, BorderContainer, AccordionContainer, Logger, Utility, CONSTANTS, i18nString) {
 
@@ -125,7 +124,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
             },
 
             createMast: function() {
-                var mastheadA1Logo = "./images/masthead_logo.png";
+                var mastheadA1Logo = "./images/25pix-appnomic_logo-2.png";
                 var mastheadAppName = "./images/mast_a1.png";
 
                 var headerTrayDiv = dojo.create("div");
@@ -155,7 +154,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
 
                 var image = dojo.create("img");
                 image.setAttribute("alt", "Appnomic");
-                //image.setAttribute("src", mastheadA1Logo);
+                image.setAttribute("src", mastheadA1Logo);
 
                 mastRow.appendChild(mastCol);
                 mastCol.appendChild(image);

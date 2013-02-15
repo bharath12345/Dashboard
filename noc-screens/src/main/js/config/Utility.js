@@ -30,12 +30,10 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!config/nls/config", "dojo/
 
         Utility.handleResponse = function(data) {
             var type = parseInt(data.param.type[0]);
+            console.log("response type = " + type);
             switch(type) {
                 case CONSTANTS.TYPE.ACCORDION:
-                    require([CONSTANTS.WIDGETS.ACCORDION], function (ConfigAccordion) {
-                        var ca = new ConfigAccordion();
-                        ca.renderAccordion(data);
-                    });
+                    Utility.handleAccordion(data);
                     break;
 
                 default:
@@ -44,6 +42,23 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!config/nls/config", "dojo/
             }
         };
 
+        Utility.handleAccordion = function(data) {
+            var subtype = parseInt(data.param.subtype[0]);
+            console.log("response subtype = " + subtype);
+            require([CONSTANTS.WIDGETS.ACCORDION], function (ConfigAccordion) {
+                var ca = new ConfigAccordion();
+                switch(subtype) {
+                    case CONSTANTS.SUBTYPE.ACCORDIONMETA:
+                        ca.renderAccordion(data);
+                        break;
+
+                    case CONSTANTS.SUBTYPE.ACCORDIONDATA:
+                        ca.renderConfigParameters(data);
+                        break;
+                }
+            });
+
+        };
 
         return Utility;
     });

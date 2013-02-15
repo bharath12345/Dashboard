@@ -17,7 +17,9 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!config/nls/conf
         CONSTANTS.SUBTYPE = {};
 
         CONSTANTS.TYPE.ACCORDION = 1;
-        CONSTANTS.SUBTYPE.ACCORDION = 1;
+
+        CONSTANTS.SUBTYPE.ACCORDIONMETA = 1;
+        CONSTANTS.SUBTYPE.ACCORDIONDATA = 2;
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         CONSTANTS.ACTION = {};
