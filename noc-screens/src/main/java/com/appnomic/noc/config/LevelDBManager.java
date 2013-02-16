@@ -14,6 +14,7 @@ public class LevelDBManager {
     
 	private static final String DBPATH = "nocConfigDB";
 	private DB nocConfigDB = null;
+	private static final String characterSetEncoding = "UTF-8";
 	
     private LevelDBManager(){
     }
@@ -27,7 +28,7 @@ public class LevelDBManager {
     		return;
     	}
     	
-        String configDBFilePath = System.getProperty("catalina.base") + File.pathSeparator + DBPATH;
+        String configDBFilePath = System.getProperty("catalina.base") + File.separator + DBPATH;
         if (configDBFilePath==null){
             throw new ExceptionInInitializerError("Unbale to init Config DB Specified file is NULL; please specify the correct path");
         }
@@ -57,16 +58,32 @@ public class LevelDBManager {
     	nocConfigDB.put(key.getBytes(), val.getBytes());
     }
     
-    public String read(final String key) {
-    	return asString(nocConfigDB.get(key.getBytes()));
+    public String read(final String key) throws UnsupportedEncodingException {
+    	if(key == null) {
+    		return null;
+    	}
+    	if(nocConfigDB == null) {
+    		System.out.println("db still null. initialize level db before access");
+    	}
+    	byte[] keyBytes = key.getBytes(characterSetEncoding);
+    	if(keyBytes==null||keyBytes.length==0){
+    		System.out.println("unable to get byte array of key = " + key);
+    		return null;
+    	}
+    	byte[] value = nocConfigDB.get(keyBytes);
+    	if(value==null||value.length==0){
+    		System.out.println("value null for key = " + key);
+    		return null;
+    	}
+    	return asString(value);
     }
     
-    public static String asString(byte value[]) {
+    private static String asString(byte value[]) {
         if( value == null) {
             return null;
         }
         try {
-            return new String(value, "UTF-8");
+            return new String(value, characterSetEncoding);
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }

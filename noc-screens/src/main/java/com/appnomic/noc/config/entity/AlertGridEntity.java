@@ -7,8 +7,14 @@ public class AlertGridEntity extends ConfigEntity {
 	BooleanAttribute showAllGreenApplications;
 	StringAttribute fontName;
 	IntegerAttribute fontSize;
+	IntegerAttribute applicationRefreshTime;
 	
-	
+	public IntegerAttribute getApplicationRefreshTime() {
+		return applicationRefreshTime;
+	}
+	public void setApplicationRefreshTime(IntegerAttribute applicationRefreshTime) {
+		this.applicationRefreshTime = applicationRefreshTime;
+	}
 	public BooleanAttribute getShowAllGreenApplications() {
 		return showAllGreenApplications;
 	}

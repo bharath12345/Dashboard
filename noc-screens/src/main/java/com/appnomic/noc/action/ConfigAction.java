@@ -10,6 +10,7 @@ import org.apache.struts2.convention.annotation.Result;
 import com.appnomic.noc.config.AlertGridConfigManager;
 import com.appnomic.noc.config.attribute.*;
 import com.appnomic.noc.config.entity.AlertGridEntity;
+import com.appnomic.noc.viewobject.config.AlertGridConfigVO;
 import com.appnomic.noc.viewobject.config.PageListVO;
 
 @ParentPackage("json-default")
@@ -19,7 +20,16 @@ public class ConfigAction extends AbstractNocAction {
 	private PageListVO [] pageListVO;
 	private Map<String, String[]> param;
 	AlertGridEntity age;
+	AlertGridConfigVO agcVO;
 	
+	public AlertGridConfigVO getAgcVO() {
+		return agcVO;
+	}
+
+	public void setAgcVO(AlertGridConfigVO agcVO) {
+		this.agcVO = agcVO;
+	}
+
 	public AlertGridEntity getAge() {
 		return age;
 	}
@@ -47,13 +57,13 @@ public class ConfigAction extends AbstractNocAction {
 	@Action(value="/config/pages", results = {
 	        @Result(name="success", type="json", params = {
 	        		"excludeProperties",
-	                "parameters,session,SUCCESS,ERROR",
+	                "parameters,session,SUCCESS,ERROR,agcVO",
 	        		"enableGZIP", "true",
 	        		"encoding", "UTF-8",
 	                "noCache","true",
 	                "excludeNullProperties","true"
 	            })})
-	public String getPagesAction() {
+	public String pagesAction() {
 		param = getParameters();
 		pageListVO = getDummyList();
 		return SUCCESS;
@@ -83,23 +93,23 @@ public class ConfigAction extends AbstractNocAction {
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	@Action(value="/config/getAlertGridDetails", results = {
+	@Action(value="/config/alertGridDetailsRetrieve", results = {
 	        @Result(name="success", type="json", params = {
 	        		"excludeProperties",
-	                "parameters,session,SUCCESS,ERROR",
+	                "parameters,session,SUCCESS,ERROR,agcVO,pageListVO",
 	        		"enableGZIP", "true",
 	        		"encoding", "UTF-8",
 	                "noCache","true",
 	                "excludeNullProperties","true"
 	            })})
-	public String getAlertGridDetailsAction() {
+	public String alertGridDetailsRetrieveAction() {
 		param = getParameters();
 		AlertGridConfigManager agcm = AlertGridConfigManager.getInstance();
 		age = (AlertGridEntity)agcm.getConfig();
 		return SUCCESS;
 	}
 	
-	@Action(value="/config/setAlertGridDetails", results = {
+	@Action(value="/config/alertGridDetailsSave", results = {
 	        @Result(name="success", type="json", params = {
 	        		"excludeProperties",
 	                "parameters,session,SUCCESS,ERROR",
@@ -108,14 +118,45 @@ public class ConfigAction extends AbstractNocAction {
 	                "noCache","true",
 	                "excludeNullProperties","true"
 	            })})
-	public String setAlertGridDetailsAction() {
+	public String alertGridDetailsSaveAction() {
 		param = getParameters();
 		AlertGridConfigManager agcm = AlertGridConfigManager.getInstance();
 		AlertGridEntity age =  new AlertGridEntity();
-		age.setFontName(new StringAttribute(null, null, null));
+		age.setFontName(new StringAttribute("arial", "arial", "arial"));
 		age.setFontSize(new IntegerAttribute(0, 0, 0));
 		age.setShowAllGreenApplications(new BooleanAttribute(false, false, false));
+		age.setApplicationRefreshTime(new IntegerAttribute(0,0,0));
 		agcm.saveConfig(age);
+		return SUCCESS;
+	}
+	
+	@Action(value="/config/applicableAlertGridDetailsRetrive", results = {
+	        @Result(name="success", type="json", params = {
+	        		"excludeProperties",
+	                "parameters,session,SUCCESS,ERROR,age,pageListVO",
+	        		"enableGZIP", "true",
+	        		"encoding", "UTF-8",
+	                "noCache","true",
+	                "excludeNullProperties","true"
+	            })})
+	public String applicableAlertGridDetailsRetriveAction() {
+		param = getParameters();
+		
+		// inspect the param in query to find what level the user is at and form the response accordingly
+		// do NOT return the same entity which is persisted but a ViewObject which has values just
+		// right for the requesting user and is minimum in size - this object is what will be used by 
+		// the dashboard to actually render the UI
+		
+		AlertGridConfigManager agcm = AlertGridConfigManager.getInstance();
+		age = (AlertGridEntity)agcm.getConfig();
+		agcVO = new AlertGridConfigVO();
+		if(age != null) {
+			agcVO.setApplicationRefreshTime(age.getApplicationRefreshTime().getFactoryReadOnly());
+			agcVO.setFontName(age.getFontName().getFactoryReadOnly());
+			agcVO.setFontSize(age.getFontSize().getFactoryReadOnly());
+			agcVO.setShowAllGreenApplications(age.getShowAllGreenApplications().isFactoryReadOnly());
+		}
+		
 		return SUCCESS;
 	}
 	
