@@ -8,6 +8,7 @@ import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 
 import com.appnomic.noc.config.AlertGridConfigManager;
+import com.appnomic.noc.config.LevelDBManager;
 import com.appnomic.noc.config.attribute.*;
 import com.appnomic.noc.config.entity.AlertGridEntity;
 import com.appnomic.noc.viewobject.config.AlertGridConfigVO;
@@ -19,9 +20,18 @@ public class ConfigAction extends AbstractNocAction {
 
 	private PageListVO [] pageListVO;
 	private Map<String, String[]> param;
-	AlertGridEntity age;
-	AlertGridConfigVO agcVO;
+	private AlertGridEntity age;
+	private AlertGridConfigVO agcVO;
+	private Map<String, String> levelDbMap;
 	
+	public Map<String, String> getLevelDbMap() {
+		return levelDbMap;
+	}
+
+	public void setLevelDbMap(Map<String, String> levelDbMap) {
+		this.levelDbMap = levelDbMap;
+	}
+
 	public AlertGridConfigVO getAgcVO() {
 		return agcVO;
 	}
@@ -57,7 +67,7 @@ public class ConfigAction extends AbstractNocAction {
 	@Action(value="/config/pages", results = {
 	        @Result(name="success", type="json", params = {
 	        		"excludeProperties",
-	                "parameters,session,SUCCESS,ERROR,agcVO",
+	                "parameters,session,SUCCESS,ERROR,agcVO,levelDbMap",
 	        		"enableGZIP", "true",
 	        		"encoding", "UTF-8",
 	                "noCache","true",
@@ -96,7 +106,7 @@ public class ConfigAction extends AbstractNocAction {
 	@Action(value="/config/alertGridDetailsRetrieve", results = {
 	        @Result(name="success", type="json", params = {
 	        		"excludeProperties",
-	                "parameters,session,SUCCESS,ERROR,agcVO,pageListVO",
+	                "parameters,session,SUCCESS,ERROR,agcVO,pageListVO,levelDbMap",
 	        		"enableGZIP", "true",
 	        		"encoding", "UTF-8",
 	                "noCache","true",
@@ -112,7 +122,7 @@ public class ConfigAction extends AbstractNocAction {
 	@Action(value="/config/alertGridDetailsSave", results = {
 	        @Result(name="success", type="json", params = {
 	        		"excludeProperties",
-	                "parameters,session,SUCCESS,ERROR",
+	                "parameters,session,SUCCESS,ERROR,age,agcVO,pageListVO,levelDbMap",
 	        		"enableGZIP", "true",
 	        		"encoding", "UTF-8",
 	                "noCache","true",
@@ -133,7 +143,7 @@ public class ConfigAction extends AbstractNocAction {
 	@Action(value="/config/applicableAlertGridDetailsRetrive", results = {
 	        @Result(name="success", type="json", params = {
 	        		"excludeProperties",
-	                "parameters,session,SUCCESS,ERROR,age,pageListVO",
+	                "parameters,session,SUCCESS,ERROR,age,pageListVO,levelDbMap",
 	        		"enableGZIP", "true",
 	        		"encoding", "UTF-8",
 	                "noCache","true",
@@ -162,6 +172,29 @@ public class ConfigAction extends AbstractNocAction {
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	
+	@Action(value="/config/allConfigDump", results = {
+	        @Result(name="success", type="json", params = {
+	        		"excludeProperties",
+	                "parameters,session,SUCCESS,ERROR,age,agcVO,pageListVO",
+	        		"enableGZIP", "true",
+	        		"encoding", "UTF-8",
+	                "noCache","true",
+	                "excludeNullProperties","true"
+	            })})
+	public String allConfigDumpAction() {
+		LevelDBManager instance = null;
+		try {
+			instance = LevelDBManager.getInstance();
+			//instance.init();
+			levelDbMap = instance.getAllKeyValues();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(instance!=null) {
+				//instance.shutdown();
+			}
+		}
+		return SUCCESS;
+	}
 	
 }
