@@ -1,8 +1,8 @@
 define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/GridContainer",
     "noc/Logger",
-    "config/Utility", "config/Constants", "dojo/i18n!config/nls/config"],
+    "config/Utility", "config/Constants", "dojo/i18n!config/nls/config", "config/pages/IncidentGrid"],
 
-    function (declare, i18n, TitlePane, GridContainer, Logger, Utility, CONSTANTS, i18nString) {
+    function (declare, i18n, TitlePane, GridContainer, Logger, Utility, CONSTANTS, i18nString, IncidentGrid) {
 
         var RenderAttributes = declare(CONSTANTS.CLASSNAME.RENDERATTRIBUTES, null, {
 
@@ -34,13 +34,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
                 gridContainer.resize();
 
                 // all the title panes have been rendered - now render the innards
-                for(var attribute in data.agcVO) {
-                    var type = data.agcVO[attribute].type;
-                    var value = data.agcVO[attribute].value;
-
-                    console.log("type = " + type + " value = " + value);
-                }
-
+                var ag = new IncidentGrid();
+                ag.renderAttributes(data);
             }
         });
 

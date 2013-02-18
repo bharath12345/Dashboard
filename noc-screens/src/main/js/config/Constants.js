@@ -13,6 +13,12 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!config/nls/conf
         CONSTANTS.CLASSNAME.RENDERATTRIBUTES = "config.RenderAttributes";
         CONSTANTS.CLASSNAME.UTILITY = "config.Utility";
 
+        CONSTANTS.CLASSNAME.INCIDENTGRID = "config.pages.IncidentGrid";
+
+        CONSTANTS.CLASSNAME.COMBOBOX = "config.widgets.ComboBox";
+        CONSTANTS.CLASSNAME.NUMBERSPINNER = "config.widgets.NumberSpinner";
+        CONSTANTS.CLASSNAME.RADIOBUTTON = "config.widgets.RadioButton";
+
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         CONSTANTS.TYPE = {};
 
@@ -28,6 +34,10 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!config/nls/conf
         CONSTANTS.WIDGETS = {};
         CONSTANTS.WIDGETS.ACCORDION = "config/ConfigAccordion";
         CONSTANTS.WIDGETS.RENDERATTRIBUTES = "config/RenderAttributes";
+
+        CONSTANTS.WIDGETS.COMBOBOX = "config/widgets/ComboBox";
+        CONSTANTS.WIDGETS.NUMBERSPINNER = "config/widgets/NumberSpinner";
+        CONSTANTS.WIDGETS.RADIOBUTTON = "config/widgets/RadioButton";
 
         return CONSTANTS;
     });
