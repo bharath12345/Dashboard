@@ -2,34 +2,34 @@ package com.appnomic.noc.viewobject.config;
 
 public class AlertGridConfigVO {
 
-	Boolean showAllGreenApplications;
-	String fontName;
-	Integer fontSize;
-	Integer applicationRefreshTime;
+	BooleanAttributeVO showAllGreenApplications;
+	StringAttributeVO fontName;
+	IntegerAttributeVO fontSize;
+	IntegerAttributeVO applicationRefreshTime;
 	
-	public Boolean getShowAllGreenApplications() {
+	public BooleanAttributeVO getShowAllGreenApplications() {
 		return showAllGreenApplications;
 	}
-	public void setShowAllGreenApplications(Boolean showAllGreenApplications) {
+	public void setShowAllGreenApplications(
+			BooleanAttributeVO showAllGreenApplications) {
 		this.showAllGreenApplications = showAllGreenApplications;
 	}
-	public String getFontName() {
+	public StringAttributeVO getFontName() {
 		return fontName;
 	}
-	public void setFontName(String fontName) {
+	public void setFontName(StringAttributeVO fontName) {
 		this.fontName = fontName;
 	}
-	public Integer getFontSize() {
+	public IntegerAttributeVO getFontSize() {
 		return fontSize;
 	}
-	public void setFontSize(Integer fontSize) {
+	public void setFontSize(IntegerAttributeVO fontSize) {
 		this.fontSize = fontSize;
 	}
-	public Integer getApplicationRefreshTime() {
+	public IntegerAttributeVO getApplicationRefreshTime() {
 		return applicationRefreshTime;
 	}
-	public void setApplicationRefreshTime(Integer applicationRefreshTime) {
+	public void setApplicationRefreshTime(IntegerAttributeVO applicationRefreshTime) {
 		this.applicationRefreshTime = applicationRefreshTime;
 	}
-	
 }

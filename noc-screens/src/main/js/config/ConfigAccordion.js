@@ -11,7 +11,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
                     id:"",
                     name:"",
                     type:CONSTANTS.TYPE.ACCORDION,
-                    subtype:CONSTANTS.SUBTYPE.ACCORDIONMETA,
                     custom:[]
                 };
                 Utility.xhrPostCentral(CONSTANTS.ACTION.PAGESET, viewMeta);
@@ -54,38 +53,10 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
             showPageConfig: function(id) {
                 var viewMeta = {
                     id:id,
-                    type:CONSTANTS.TYPE.ACCORDION,
-                    subtype:CONSTANTS.SUBTYPE.ACCORDIONDATA,
+                    type:CONSTANTS.TYPE.PAGECONFIG,
                     custom:[]
                 };
-                Utility.xhrPostCentral(CONSTANTS.ACTION.PAGESET, viewMeta);
-            },
-
-            renderConfigParameters: function(data) {
-                var paneWidth = config.PageElements.CpCenterInner.w;
-                var paneHeight = config.PageElements.CpCenterInner.h;
-                var styleString = "width: " + paneWidth + "; height: " + paneHeight + ";"
-
-                var gridContainer = new GridContainer({nbZones:1, isAutoOrganized:true,
-                    style:"width: 100%; height: 100%;"});
-                config.PageElements.CpCenterInner.addChild(gridContainer);
-                gridContainer.disableDnd();
-
-                for(var i=0;i<20;i++) {
-                    var titlePane = new TitlePane({
-                        splitter:false,
-                        style:"width:"+paneWidth,
-                        content:"<div id='"+i+"' style='width: 100%; height: 100%;'></div>",
-                        title:"Attribute Pane",
-                        toggleable:true
-                    });
-                    gridContainer.addChild(titlePane, 0);
-                    titlePane.toggle();
-                }
-
-                gridContainer.startup();
-                gridContainer.resize();
-
+                Utility.xhrPostCentral(CONSTANTS.ACTION.ALERTGRIDATTRIBUTES, viewMeta);
             }
         });
 

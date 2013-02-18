@@ -8,11 +8,15 @@ import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 
 import com.appnomic.noc.config.AlertGridConfigManager;
+import com.appnomic.noc.config.ConfigType;
 import com.appnomic.noc.config.LevelDBManager;
 import com.appnomic.noc.config.attribute.*;
 import com.appnomic.noc.config.entity.AlertGridEntity;
 import com.appnomic.noc.viewobject.config.AlertGridConfigVO;
+import com.appnomic.noc.viewobject.config.BooleanAttributeVO;
+import com.appnomic.noc.viewobject.config.IntegerAttributeVO;
 import com.appnomic.noc.viewobject.config.PageListVO;
+import com.appnomic.noc.viewobject.config.StringAttributeVO;
 
 @ParentPackage("json-default")
 @Namespace("/config")
@@ -161,10 +165,21 @@ public class ConfigAction extends AbstractNocAction {
 		age = (AlertGridEntity)agcm.getConfig();
 		agcVO = new AlertGridConfigVO();
 		if(age != null) {
-			agcVO.setApplicationRefreshTime(age.getApplicationRefreshTime().getFactoryReadOnly());
-			agcVO.setFontName(age.getFontName().getFactoryReadOnly());
-			agcVO.setFontSize(age.getFontSize().getFactoryReadOnly());
-			agcVO.setShowAllGreenApplications(age.getShowAllGreenApplications().isFactoryReadOnly());
+			IntegerAttributeVO appRefreshTime = new IntegerAttributeVO();
+			appRefreshTime.setValue(age.getApplicationRefreshTime().getFactoryReadOnly());
+			agcVO.setApplicationRefreshTime(appRefreshTime);
+			
+			StringAttributeVO fontName = new StringAttributeVO();
+			fontName.setValue(age.getFontName().getFactoryReadOnly());
+			agcVO.setFontName(fontName);
+			
+			IntegerAttributeVO fontSize = new IntegerAttributeVO();
+			fontSize.setValue(age.getFontSize().getFactoryReadOnly());
+			agcVO.setFontSize(fontSize);
+			
+			BooleanAttributeVO showAllGreenApp = new BooleanAttributeVO();
+			showAllGreenApp.setValue(age.getShowAllGreenApplications().isFactoryReadOnly());
+			agcVO.setShowAllGreenApplications(showAllGreenApp);
 		}
 		
 		return SUCCESS;
