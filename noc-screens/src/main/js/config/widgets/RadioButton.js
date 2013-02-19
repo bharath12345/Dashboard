@@ -1,7 +1,7 @@
 define(["dojo/_base/declare", "dojo/i18n", "dijit/form/RadioButton", "noc/Logger",
     "config/Utility", "config/Constants", "dojo/i18n!config/nls/config"],
 
-    function (declare, i18n, RadioButton, Logger, Utility, CONSTANTS, i18nString) {
+    function (declare, i18n, DojoRadioButton, Logger, Utility, CONSTANTS, i18nString) {
 
         var RadioButton = declare(CONSTANTS.CLASSNAME.RADIOBUTTON, null, {
 
@@ -13,7 +13,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/form/RadioButton", "noc/Logger
                     var checked = false;
                     if(i==0) {checked = true;}
 
-                    var radioButton = new RadioButton({
+                    var radioButton = new DojoRadioButton({
                         id: attribute + RadioButton.POSTFIX + i,
                         checked: checked,
                         name: attribute,

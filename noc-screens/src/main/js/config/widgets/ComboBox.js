@@ -2,7 +2,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/store/Memory", "dijit/form/Comb
     "noc/Logger",
     "config/Utility", "config/Constants", "dojo/i18n!config/nls/config"],
 
-    function (declare, i18n, Memory, ComboBox, Logger, Utility, CONSTANTS, i18nString) {
+    function (declare, i18n, Memory, DojoComboBox, Logger, Utility, CONSTANTS, i18nString) {
 
         var ComboBox = declare(CONSTANTS.CLASSNAME.COMBOBOX, null, {
             renderComboBox: function(attribData, attribute, values) {
@@ -15,7 +15,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/store/Memory", "dijit/form/Comb
                     comboBoxStore.put(datum);
                 }
 
-                var comboBox = new ComboBox({
+                var comboBox = new DojoComboBox({
                     id: attribute + ComboBox.POSTFIX,
                     name: attribute,
                     value: "California",

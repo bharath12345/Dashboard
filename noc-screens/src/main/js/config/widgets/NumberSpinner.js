@@ -2,7 +2,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/form/NumberSpinner",
     "noc/Logger",
     "config/Utility", "config/Constants", "dojo/i18n!config/nls/config"],
 
-    function (declare, i18n, NumberSpinner, Logger, Utility, CONSTANTS, i18nString) {
+    function (declare, i18n, DojoNumberSpinner, Logger, Utility, CONSTANTS, i18nString) {
 
         var NumberSpinner = declare(CONSTANTS.CLASSNAME.NUMBERSPINNER, null, {
 
@@ -11,12 +11,12 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/form/NumberSpinner",
                 var node = dojo.create("div");
                 dojo.byId(attribute).appendChild(node);
 
-                var numberSpinner = new NumberSpinner({
+                var numberSpinner = new DojoNumberSpinner({
                     id: attribute + NumberSpinner.POSTFIX,
                     smallDelta: delta,
                     constraints: { min:min, max:max, places:0 }
                 }, node);
-                numberSpinner.startup();
+
             }
         });
 
