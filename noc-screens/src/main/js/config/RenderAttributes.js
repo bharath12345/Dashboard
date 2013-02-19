@@ -16,8 +16,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
                 this.createToolbarButtons();
 
                 // all the title panes have been rendered - now render the innards
-                var ag = new IncidentGrid();
-                ag.renderAttributes(data);
+                RenderAttributes.INCIDENTGRID = new IncidentGrid();
+                RenderAttributes.INCIDENTGRID.renderAttributes(data);
 
                 this.cleanupRendering(tc);
             },
@@ -88,7 +88,11 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
                     label: "Save",
                     iconClass:'dijitEditorIcon dijitEditorIconSave',
                     onClick: function(){
-
+                        var refreshTime = IncidentGrid.APPLICATIONREFRESHTIME.get('value');
+                        var fontName = IncidentGrid.FONTNAME.get('value');
+                        var fontSize = IncidentGrid.FONTSIZE.get('value');
+                        var showGreenApp = IncidentGrid.SHOWALLGREEN.get('value');
+                        console.log("refreshTime = " + refreshTime + " fontName = " + fontName + " fontSize = " + fontSize + " showGreen = " + showGreenApp);
                     }
                 });
                 toolbar.addChild(button);
@@ -98,6 +102,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
         RenderAttributes.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.RENDERATTRIBUTES));
         RenderAttributes.LOOKNFEELPANE = null;
         RenderAttributes.DATAPANE = null;
+        RenderAttributes.INCIDENTGRID = null;
 
         return RenderAttributes;
     });

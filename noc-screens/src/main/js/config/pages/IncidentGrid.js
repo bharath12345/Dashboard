@@ -15,24 +15,24 @@ define(["dojo/_base/declare", "dojo/i18n", "noc/Logger",
                     switch(attribute) {
                         case "applicationRefreshTime":
                             var ns = new NumberSpinner();
-                            ns.renderNumberSpinner(data.agcVO[attribute], attribute, 10, 60, 1);
+                            IncidentGrid.APPLICATIONREFRESHTIME = ns.renderNumberSpinner(data.agcVO[attribute], attribute, 10, 60, 1);
                             break;
 
                         case "fontName":
                             var values = ["Arial", "Verdana", "Times New Roman"];
                             var cb = new ComboBox();
-                            cb.renderComboBox(data.agcVO[attribute], attribute, values);
+                            IncidentGrid.FONTNAME = cb.renderComboBox(data.agcVO[attribute], attribute, values);
                             break;
 
                         case "fontSize":
                             var nss = new NumberSpinner();
-                            nss.renderNumberSpinner(data.agcVO[attribute], attribute, 6, 20, 1);
+                            IncidentGrid.FONTSIZE = nss.renderNumberSpinner(data.agcVO[attribute], attribute, 6, 20, 1);
                             break;
 
                         case "showAllGreenApplications":
                             var values = ["True", "False"];
                             var rb = new RadioButton();
-                            rb.renderRadioButton(data.agcVO[attribute],attribute, values);
+                            IncidentGrid.SHOWALLGREEN = rb.renderRadioButton(data.agcVO[attribute],attribute, values);
                             break;
 
                         default:
@@ -45,6 +45,10 @@ define(["dojo/_base/declare", "dojo/i18n", "noc/Logger",
         });
 
         IncidentGrid.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.INCIDENTGRID));
+        IncidentGrid.APPLICATIONREFRESHTIME = null;
+        IncidentGrid.FONTNAME = null;
+        IncidentGrid.FONTSIZE = null;
+        IncidentGrid.SHOWALLGREEN = null;
 
         return IncidentGrid;
     });

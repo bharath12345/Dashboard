@@ -17,6 +17,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/form/NumberSpinner",
                     constraints: { min:min, max:max, places:0 }
                 }, node);
 
+                return numberSpinner;
             }
         });
 

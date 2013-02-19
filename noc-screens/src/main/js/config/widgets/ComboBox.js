@@ -22,6 +22,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/store/Memory", "dijit/form/Comb
                     store: comboBoxStore,
                     searchAttr: "name"
                 }, node);
+
+                return comboBox;
             }
         });
 

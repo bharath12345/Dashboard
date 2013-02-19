@@ -19,6 +19,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/form/RadioButton", "noc/Logger
                         name: attribute,
                         value: values[i]
                     }, node);
+
+                    return radioButton;
                 }
             }
         });
