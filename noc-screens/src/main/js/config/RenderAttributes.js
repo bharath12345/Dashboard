@@ -1,21 +1,36 @@
 define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/GridContainer",
+    "dijit/layout/TabContainer", "dijit/layout/ContentPane",
     "noc/Logger",
     "config/Utility", "config/Constants", "dojo/i18n!config/nls/config", "config/pages/IncidentGrid"],
 
-    function (declare, i18n, TitlePane, GridContainer, Logger, Utility, CONSTANTS, i18nString, IncidentGrid) {
+    function (declare, i18n, TitlePane, GridContainer, TabContainer, ContentPane,
+              Logger, Utility, CONSTANTS, i18nString, IncidentGrid) {
 
         var RenderAttributes = declare(CONSTANTS.CLASSNAME.RENDERATTRIBUTES, null, {
 
             renderConfigParameters: function(data) {
                 console.log("renderConfigParameters data = " + data);
 
-                var paneWidth = config.PageElements.CpCenterInner.w;
-                var paneHeight = config.PageElements.CpCenterInner.h;
-                var styleString = "width: " + paneWidth + "; height: " + paneHeight + ";"
+                var tc = new TabContainer({style: "height: 100%; width: 100%;"});
+                config.PageElements.CpCenterInner.addChild(tc);
+
+                var cp1 = new ContentPane({title: "Look and Feel", style: "height: 100%; width: 100%;"});
+                tc.addChild(cp1);
+
+                var cp2 = new ContentPane({title: "Data", style: "height: 100%; width: 100%;"});
+                tc.addChild(cp2);
+
+                tc.startup();
+                tc.resize();
+
+                var paneWidth = cp1.domNode.offsetWidth;
+                var paneHeight = cp1.domNode.offsetHeight;
+                var styleString = "width: " + paneWidth + "; height: " + paneHeight + ";";
+                console.log("style string = " + styleString);
 
                 var gridContainer = new GridContainer({nbZones:1, isAutoOrganized:true,
                     style:"width: 100%; height: 100%;"});
-                config.PageElements.CpCenterInner.addChild(gridContainer);
+                cp1.addChild(gridContainer);
                 gridContainer.disableDnd();
 
                 for(var attribute in data.agcVO) {
@@ -36,6 +51,16 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
                 // all the title panes have been rendered - now render the innards
                 var ag = new IncidentGrid();
                 ag.renderAttributes(data);
+
+                var innerPane = dojo.query(".dijitTabInner", tc.domNode);
+                for (var i = 0; i < innerPane.length; i++) {
+                    innerPane[i].style.width = 300;
+                }
+
+                config.PageElements.CpCenterInner.domNode.style.padding=0;
+                config.PageElements.CpCenterInner.domNode.style.border=0;
+
+                config.PageElements.TopBc.resize();
             }
         });
 
