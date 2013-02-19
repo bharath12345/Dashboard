@@ -1,9 +1,9 @@
 define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/GridContainer",
-    "dijit/layout/TabContainer", "dijit/layout/ContentPane", "dijit/form/Button",
+    "dijit/layout/TabContainer", "dijit/layout/ContentPane", "dijit/form/Button", "dijit/Toolbar",
     "noc/Logger",
     "config/Utility", "config/Constants", "dojo/i18n!config/nls/config", "config/pages/IncidentGrid"],
 
-    function (declare, i18n, TitlePane, GridContainer, TabContainer, ContentPane, Button,
+    function (declare, i18n, TitlePane, GridContainer, TabContainer, ContentPane, Button, Toolbar,
               Logger, Utility, CONSTANTS, i18nString, IncidentGrid) {
 
         var RenderAttributes = declare(CONSTANTS.CLASSNAME.RENDERATTRIBUTES, null, {
@@ -11,26 +11,56 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
             renderConfigParameters: function(data) {
                 console.log("renderConfigParameters data = " + data);
 
+                var tc = this.createTabs();
+                this.createTitlePaneGrid(data);
+                this.createToolbarButtons();
+
+                // all the title panes have been rendered - now render the innards
+                var ag = new IncidentGrid();
+                ag.renderAttributes(data);
+
+                this.cleanupRendering(tc);
+            },
+
+            cleanupRendering: function(tc) {
+                // make the tab buttons larger
+                var innerPane = dojo.query(".dijitTabInner", tc.domNode);
+                for (var i = 0; i < innerPane.length; i++) {
+                    innerPane[i].style.width = 300;
+                }
+
+                // remove the boundary and padding of inner center pane
+                config.PageElements.CpCenterInner.domNode.style.padding=0;
+                config.PageElements.CpCenterInner.domNode.style.border=0;
+
+                config.PageElements.CpTopInner.domNode.style.padding=0;
+                config.PageElements.TopBc.resize();
+            },
+
+            createTabs: function() {
                 var tc = new TabContainer({style: "height: 100%; width: 100%;"});
                 config.PageElements.CpCenterInner.addChild(tc);
 
-                var cp1 = new ContentPane({title: "Look and Feel", style: "height: 100%; width: 100%;"});
-                tc.addChild(cp1);
+                RenderAttributes.LOOKNFEELPANE = new ContentPane({title: "Look and Feel", style: "height: 100%; width: 100%;"});
+                tc.addChild(RenderAttributes.LOOKNFEELPANE);
 
-                var cp2 = new ContentPane({title: "Data", style: "height: 100%; width: 100%;"});
-                tc.addChild(cp2);
+                RenderAttributes.DATAPANE = new ContentPane({title: "Data", style: "height: 100%; width: 100%;"});
+                tc.addChild(RenderAttributes.DATAPANE);
 
                 tc.startup();
                 tc.resize();
+                return tc;
+            },
 
-                var paneWidth = cp1.domNode.offsetWidth;
-                var paneHeight = cp1.domNode.offsetHeight;
+            createTitlePaneGrid: function(data) {
+                var paneWidth = RenderAttributes.LOOKNFEELPANE.domNode.offsetWidth;
+                var paneHeight = RenderAttributes.LOOKNFEELPANE.domNode.offsetHeight;
                 var styleString = "width: " + paneWidth + "; height: " + paneHeight + ";";
                 console.log("style string = " + styleString);
 
                 var gridContainer = new GridContainer({nbZones:1, isAutoOrganized:true,
                     style:"width: 100%; height: 100%;"});
-                cp1.addChild(gridContainer);
+                RenderAttributes.LOOKNFEELPANE.addChild(gridContainer);
                 gridContainer.disableDnd();
 
                 for(var attribute in data.agcVO) {
@@ -47,20 +77,13 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
 
                 gridContainer.startup();
                 gridContainer.resize();
+            },
 
-                // all the title panes have been rendered - now render the innards
-                var ag = new IncidentGrid();
-                ag.renderAttributes(data);
+            createToolbarButtons: function() {
+                var toolbar = new Toolbar({});
+                config.PageElements.CpTopInner.addChild(toolbar);
 
-                var innerPane = dojo.query(".dijitTabInner", tc.domNode);
-                for (var i = 0; i < innerPane.length; i++) {
-                    innerPane[i].style.width = 300;
-                }
-
-                config.PageElements.CpCenterInner.domNode.style.padding=0;
-                config.PageElements.CpCenterInner.domNode.style.border=0;
-
-                var myButton = new Button({
+                var button = new Button({
                     showLabel: true,
                     label: "Save",
                     iconClass:'dijitEditorIcon dijitEditorIconSave',
@@ -68,14 +91,13 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
 
                     }
                 });
-                config.PageElements.CpTopInner.addChild(myButton);
-                config.PageElements.CpTopInner.domNode.style.padding=0;
-
-                config.PageElements.TopBc.resize();
+                toolbar.addChild(button);
             }
         });
 
         RenderAttributes.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.RENDERATTRIBUTES));
+        RenderAttributes.LOOKNFEELPANE = null;
+        RenderAttributes.DATAPANE = null;
 
         return RenderAttributes;
     });
