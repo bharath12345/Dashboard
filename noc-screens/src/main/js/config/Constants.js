@@ -28,7 +28,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!config/nls/conf
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         CONSTANTS.ACTION = {};
         CONSTANTS.ACTION.PAGESET = "config/pages.action";
-        CONSTANTS.ACTION.ALERTGRIDATTRIBUTES = "config/applicableAlertGridDetailsRetrive";
+        CONSTANTS.ACTION.ALERTGRIDATTRIBUTES = "config/alertGridDetailsRetrieve";
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         CONSTANTS.WIDGETS = {};

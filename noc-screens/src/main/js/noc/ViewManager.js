@@ -92,12 +92,30 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
                         ViewManager.manageTopologySubView(data, input);
                         break;
 
+                    case CONSTANTS.TYPE.CONFIG:
+                        ViewManager.manageConfig(data, input);
+                        break;
+
                     default:
                         Logger.log("ViewManager","unknown data type = " + data.type);
                     break;
                 }
             } catch ( e) {
                 ViewManager.LOG.log(Logger.SEVERITY.SEVERE, "exception e = " + e);
+            }
+        };
+
+        ViewManager.manageConfig = function(data, input) {
+            switch(data.subtype) {
+                case CONSTANTS.SUBTYPE.APPALERTGRID:
+                    require([CONSTANTS.WIDGETS.CONFIG.APPALERTGRID], function (AppAlertGrid) {
+                        new AppAlertGrid().applyConfig(data, input);
+                    });
+                    break;
+
+                default:
+                    Logger.log("ViewManager","unknown config data sub type = " + data.subtype);
+                    break;
             }
         };
 

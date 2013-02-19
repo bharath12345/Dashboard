@@ -136,10 +136,10 @@ public class ConfigAction extends AbstractNocAction {
 		param = getParameters();
 		AlertGridConfigManager agcm = AlertGridConfigManager.getInstance();
 		AlertGridEntity age =  new AlertGridEntity();
-		age.setFontName(new StringAttribute("arial", "arial", "arial"));
-		age.setFontSize(new IntegerAttribute(0, 0, 0));
-		age.setShowAllGreenApplications(new BooleanAttribute(false, false, false));
-		age.setApplicationRefreshTime(new IntegerAttribute(0,0,0));
+		age.setFontName(new StringAttribute("Arial", "Arial", "Arial"));
+		age.setFontSize(new IntegerAttribute(12, 12, 12));
+		age.setShowAllGreenApplications(new BooleanAttribute(true, true, true));
+		age.setApplicationRefreshTime(new IntegerAttribute(60,60,60));
 		agcm.saveConfig(age);
 		return SUCCESS;
 	}

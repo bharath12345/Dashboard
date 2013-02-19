@@ -54,6 +54,9 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.CLASSNAME.WIDGETS.TOPOLOGY.NODESTATUS = "noc.Widgets.Topology.NodeStatus";
         CONSTANTS.CLASSNAME.WIDGETS.TOPOLOGY.CONNECTIONSTATUS = "noc.Widgets.Topology.ConnectionStatus";
 
+        CONSTANTS.CLASSNAME.WIDGETS.CONFIG = {};
+        CONSTANTS.CLASSNAME.WIDGETS.CONFIG.APPALERTGRID = "noc.Widgets.Config.AppAlertGrid";
+
         CONSTANTS.CLASSNAME.LOGIN = "Login";
         CONSTANTS.CLASSNAME.UTILITY = "noc.Utility";
         CONSTANTS.CLASSNAME.VIEWMANAGER = "noc.ViewManager";
@@ -70,6 +73,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.TYPE.INCIDENT = 3;
         CONSTANTS.TYPE.TRANSACTION = 4;
         CONSTANTS.TYPE.TOPOLOGY = 5;
+        CONSTANTS.TYPE.CONFIG = 6;
 
         CONSTANTS.SUBTYPE.AVAILABILITY = {};
         CONSTANTS.SUBTYPE.AVAILABILITY.COMPONENT = 1;
@@ -102,6 +106,9 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.SUBTYPE.TOPOLOGY.CONNECTIVITY = 2;
         CONSTANTS.SUBTYPE.TOPOLOGY.NODESTATUS = 3;
         CONSTANTS.SUBTYPE.TOPOLOGY.CONNECTIONSTATUS = 4;
+
+        CONSTANTS.SUBTYPE.CONFIG = {};
+        CONSTANTS.SUBTYPE.APPALERTGRID = 1;
 
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -142,6 +149,8 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.ACTION.TOPOLOGY.NODESTATUS = "topology/NodeStatus.action";
         CONSTANTS.ACTION.TOPOLOGY.CONNECTIONSTATUS = "topology/ConnectionStatus.action";
 
+        CONSTANTS.ACTION.CONFIG.APPALERTGRID = "config/applicableAlertGridDetailsRetrieve";
+
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // WIDGET CLASS PATHS
         CONSTANTS.WIDGETS = {};
@@ -173,6 +182,9 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.WIDGETS.TOPOLOGY.CONNECTIONS = "noc/Widgets/Topology/RenderConnectivity";
         CONSTANTS.WIDGETS.TOPOLOGY.NODESTATUS = "noc/Widgets/Topology/NodeStatus";
         CONSTANTS.WIDGETS.TOPOLOGY.CONNECTIONSTATUS = "noc/Widgets/Topology/ConnectionStatus";
+
+        CONSTANTS.WIDGETS.CONFIG = {};
+        CONSTANTS.WIDGETS.CONFIG.APPALERTGRID = "noc/Widgets/Config/AppAlertGrid";
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////        
 

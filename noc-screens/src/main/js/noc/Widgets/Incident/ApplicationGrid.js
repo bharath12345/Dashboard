@@ -75,6 +75,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", 'dgrid/Grid'
                 for(var i=0;i < ApplicationGrid.POSTSET.dataset.length; i++) {
                     this.periodicAppPost();
                 }
+
+                setInterval(this.applyConfig, ApplicationGrid.CONFIG_PERIOD * 1000);
             },
 
             periodicApp:function () {
@@ -103,6 +105,21 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", 'dgrid/Grid'
                 if(ApplicationGrid.APP_COUNTER > (ApplicationGrid.POSTSET.dataset.length-1)){
                     ApplicationGrid.APP_COUNTER = 0;
                 }
+            },
+
+            applyConfig: function() {
+
+                var viewMeta = {
+                    id:"",
+                    name:"",
+                    type:CONSTANTS.TYPE.CONFIG,
+                    subtype:CONSTANTS.SUBTYPE.APPALERTGRID,
+                    dimensions:[0, 0],
+                    position:[0, 0],
+                    custom:[]
+                };
+                Utility.xhrPostCentral(CONSTANTS.ACTION.CONFIG.APPALERTGRID, viewMeta);
+
             }
 
         });
@@ -112,6 +129,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", 'dgrid/Grid'
         ApplicationGrid.POSTSET = {};
         ApplicationGrid.APP_COUNTER = 0;
         ApplicationGrid.APP_STAGGER_PERIOD = 3;
+        ApplicationGrid.CONFIG_PERIOD = 5;
 
         ApplicationGrid.TIMERS = [];
 
