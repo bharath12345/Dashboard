@@ -65,8 +65,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
                     label: "Save",
                     iconClass:'dijitEditorIcon dijitEditorIconSave',
                     onClick: function(){
-                        // Do something:
-                        alert("ok, I shall save!");
+
                     }
                 });
                 config.PageElements.CpTopInner.addChild(myButton);

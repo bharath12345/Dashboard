@@ -18,7 +18,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/store/Memory", "dijit/form/Comb
                 var comboBox = new DojoComboBox({
                     id: attribute + ComboBox.POSTFIX,
                     name: attribute,
-                    value: "California",
+                    value: values[0],
                     store: comboBoxStore,
                     searchAttr: "name"
                 }, node);

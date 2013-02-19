@@ -1,7 +1,7 @@
-define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "dojo/request/xhr", "dojo/keys", "dojo/on",
+define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "dojo/request/xhr", "dojo/keys", "dojo/on", "dijit/Dialog",
     "noc/Constants", "noc/Logger"],
 
-    function (declare, i18n, i18nString, xhr, keys, on, CONSTANTS, Logger) {
+    function (declare, i18n, i18nString, xhr, keys, on, Dialog, CONSTANTS, Logger) {
 
         var Utility = declare(CONSTANTS.CLASSNAME.UTILITY, null, {});
 
@@ -52,10 +52,31 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "dojo/reques
                             if (Utility.ESCAPE_HIT == false) {
                                 Utility.ESCAPE_HIT = true;
                                 clearInterval(PageLoader.SCROLL_TIMER);
+                                var title = "Escape Hit";
+                                var content = "Stopped scrolling and refresh of all data";
+                                if(Utility.ESCAPE_DIALOG == null) {
+                                    Utility.ESCAPE_DIALOG = new Dialog({
+                                        title: title,
+                                        content: content
+                                    });
+                                    Utility.ESCAPE_DIALOG.show();
+                                } else {
+                                    Utility.ESCAPE_DIALOG.content = content;
+                                    Utility.ESCAPE_DIALOG.title = title;
+                                    Utility.ESCAPE_DIALOG.show();
+                                }
                             } else {
                                 Utility.ESCAPE_HIT = false;
                                 PageLoader.SCROLL_TIMER = setInterval(PageLoader.prototype.pageScroll, PageLoader.SCROLL_PERIOD);
+                                if(Utility.ESCAPE_DIALOG != null) {
+                                    Utility.ESCAPE_DIALOG.attr("content", "Restarted scrolling and refresh of data");
+                                    Utility.ESCAPE_DIALOG.attr("title", "Escape Hit Cleared");
+                                    Utility.ESCAPE_DIALOG.show();
+                                } else {
+                                    console.log("somehow escape dialog not initialized");
+                                }
                             }
+                            setTimeout(function(){noc.Utility.ESCAPE_DIALOG.hide();}, 2*1000);
                         });
                         break;
                     case keys.SPACE:
@@ -66,10 +87,31 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "dojo/reques
                             if (Utility.SPACE_HIT == false) {
                                 Utility.SPACE_HIT = true;
                                 clearInterval(PageLoader.SCROLL_TIMER);
+                                var title = "Space Hit";
+                                var content = "Stopped scrolling but data refresh continues...";
+                                if(Utility.SPACE_DIALOG == null) {
+                                    Utility.SPACE_DIALOG = new Dialog({
+                                        title: title,
+                                        content: content
+                                    });
+                                    Utility.SPACE_DIALOG.show();
+                                } else {
+                                    Utility.SPACE_DIALOG.content = content;
+                                    Utility.SPACE_DIALOG.title = title;
+                                    Utility.SPACE_DIALOG.show();
+                                }
                             } else {
                                 Utility.SPACE_HIT = false;
                                 PageLoader.SCROLL_TIMER = setInterval(PageLoader.prototype.pageScroll, PageLoader.SCROLL_PERIOD);
+                                if(Utility.SPACE_DIALOG != null) {
+                                    Utility.SPACE_DIALOG.attr("content", "Restarted scrolling and refresh of data");
+                                    Utility.SPACE_DIALOG.attr("title", "Space Hit Cleared");
+                                    Utility.SPACE_DIALOG.show();
+                                } else {
+                                    console.log("Somehow space hit but dialog not initialized");
+                                }
                             }
+                            setTimeout(function(){noc.Utility.SPACE_DIALOG.hide();}, 2*1000);
                         });
                         break;
                 }
@@ -77,8 +119,12 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "dojo/reques
         };
 
         Utility.LOG = new Logger(CONSTANTS.CLASSNAME.UTILITY);
+
         Utility.SPACE_HIT = false;
         Utility.ESCAPE_HIT = false;
+
+        Utility.ESCAPE_DIALOG = null;
+        Utility.SPACE_DIALOG = null;
 
         return Utility;
     });

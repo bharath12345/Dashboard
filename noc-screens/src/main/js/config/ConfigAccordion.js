@@ -45,9 +45,10 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
             },
 
             appendToAccDiv:function (a, aPane) {
-                aPane.appendChild(a);
-                var linebreak = dojo.create("br");
-                aPane.appendChild(linebreak);
+                var linkDiv = dojo.create("div");
+                linkDiv.className = "linkDiv";
+                aPane.appendChild(linkDiv);
+                linkDiv.appendChild(a);
             },
 
             showPageConfig: function(id) {
