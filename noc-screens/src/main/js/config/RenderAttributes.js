@@ -1,9 +1,9 @@
 define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/GridContainer",
-    "dijit/layout/TabContainer", "dijit/layout/ContentPane",
+    "dijit/layout/TabContainer", "dijit/layout/ContentPane", "dijit/form/Button",
     "noc/Logger",
     "config/Utility", "config/Constants", "dojo/i18n!config/nls/config", "config/pages/IncidentGrid"],
 
-    function (declare, i18n, TitlePane, GridContainer, TabContainer, ContentPane,
+    function (declare, i18n, TitlePane, GridContainer, TabContainer, ContentPane, Button,
               Logger, Utility, CONSTANTS, i18nString, IncidentGrid) {
 
         var RenderAttributes = declare(CONSTANTS.CLASSNAME.RENDERATTRIBUTES, null, {
@@ -59,6 +59,18 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
 
                 config.PageElements.CpCenterInner.domNode.style.padding=0;
                 config.PageElements.CpCenterInner.domNode.style.border=0;
+
+                var myButton = new Button({
+                    showLabel: true,
+                    label: "Save",
+                    iconClass:'dijitEditorIcon dijitEditorIconSave',
+                    onClick: function(){
+                        // Do something:
+                        alert("ok, I shall save!");
+                    }
+                });
+                config.PageElements.CpTopInner.addChild(myButton);
+                config.PageElements.CpTopInner.domNode.style.padding=0;
 
                 config.PageElements.TopBc.resize();
             }
