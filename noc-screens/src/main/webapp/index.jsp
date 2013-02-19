@@ -20,6 +20,9 @@
         <link rel="stylesheet" type="test/css" href="./js/dgrid/css/dgrid.css"/>
         <link rel="stylesheet" type="test/css" href="./js/dgrid/css/skins/claro.css"/>
         <link rel="stylesheet" type="text/css" href="./js/jQuery/smoothness/jquery-ui-1.10.0.custom.min.css"/>
+
+
+    <link rel="stylesheet" type="test/css" href="./js/bootstrap/css/bootstrap.min.css"/>
         <link rel="stylesheet" type="text/css" href="./css/noc.merged.compressed.css"/>
 
         <!-- List of JS. First one should always be Dojo -->

@@ -67,7 +67,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
                     var titlePane = new TitlePane({
                         splitter:false,
                         style:"width:"+paneWidth,
-                        content:"<div id='"+attribute+"' style='width: 100%; height: 100%;'></div>",
+                        content:this.getInnerDivString(attribute),
                         title:attribute,
                         toggleable:true
                     });
@@ -77,6 +77,41 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
 
                 gridContainer.startup();
                 gridContainer.resize();
+            },
+
+            getInnerDivString: function(attribute) {
+                var divString = "";
+                for(var i=0;i<3;i++) {
+                    divString += "<div id='";
+                    divString += attribute;
+                    switch(i) {
+                        case 0:
+                            divString += "_user";
+                            divString += "' class='alert alert-success'";
+                            break;
+
+                        case 1:
+                            divString += "_admin";
+                            divString += "' class='alert alert-info'";
+                            break;
+
+                        case 2:
+                            divString += "_factory";
+                            divString += "' class='alert alert-error'";
+                            break;
+                    }
+                    divString += " style='width: 100%; height: 100%;'>";
+                    switch(i) {
+                        case 0: divString += "<h5>User Config</h5>";
+                            break;
+                        case 1: divString += "<h5>Admin Config</h5>";
+                            break;
+                        case 2: divString += "<h5>Factory Config</h5>";
+                            break;
+                    }
+                    divString += "</div>";
+               }
+               return divString;
             },
 
             createToolbarButtons: function() {

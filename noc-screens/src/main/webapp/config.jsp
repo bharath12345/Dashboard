@@ -19,6 +19,7 @@
         <link rel="stylesheet" type="text/css" href="./js/dijit/themes/claro/claro.css"/>
         <link rel="stylesheet" type="test/css" href="./js/dgrid/css/dgrid.css"/>
         <link rel="stylesheet" type="test/css" href="./js/dgrid/css/skins/claro.css"/>
+        <link rel="stylesheet" type="test/css" href="./js/bootstrap/css/bootstrap.min.css"/>
         <link rel="stylesheet" type="test/css" href="./css/config.compressed.css"/>
 
     <!-- List of JS. First one should always be Dojo -->

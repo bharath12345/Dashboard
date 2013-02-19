@@ -7,8 +7,12 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/form/RadioButton", "noc/Logger
 
             renderRadioButton: function(attribData, attribute, values) {
                 for(var i=0;i<values.length;i++) {
+                    var divToAdd = dojo.byId(attribute+"_user");
+                    divToAdd.style.margin=1;
+                    //divToAdd.style.paddingLeft=1;
+
                     var node = dojo.create("div");
-                    dojo.byId(attribute).appendChild(node);
+                    divToAdd.appendChild(node);
 
                     var checked = false;
                     if(i==0) {checked = true;}

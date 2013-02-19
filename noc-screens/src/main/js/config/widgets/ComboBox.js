@@ -6,8 +6,12 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/store/Memory", "dijit/form/Comb
 
         var ComboBox = declare(CONSTANTS.CLASSNAME.COMBOBOX, null, {
             renderComboBox: function(attribData, attribute, values) {
+                var divToAdd = dojo.byId(attribute+"_user");
+                divToAdd.style.margin=1;
+                //divToAdd.style.paddingLeft=1;
+
                 var node = dojo.create("div");
-                dojo.byId(attribute).appendChild(node);
+                divToAdd.appendChild(node);
 
                 var comboBoxStore = new Memory();
                 for(var i=0;i<values.length;i++) {

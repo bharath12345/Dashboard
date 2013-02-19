@@ -394,7 +394,7 @@
                                         <concat destfile="${basedir}/target/noc-screens/css/noc.merged.css"
                                                 eol="cr">
                                             <filelist dir="${basedir}/src/main/css"
-                                                      files="treemap.css,noc.css,bootstrap.css"/>
+                                                      files="treemap.css,noc.css"/>
                                         </concat>
                                         <exec executable="java">
                                             <arg value="-jar"/>
@@ -487,6 +487,21 @@
                                     <resources>
                                         <resource>
                                             <directory>${js-dir}/jsPlumb</directory>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>copy-bootstrap</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${gui.target.gui.location}/js/bootstrap</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>${js-dir}/bootstrap</directory>
                                         </resource>
                                     </resources>
                                 </configuration>
@@ -673,7 +688,7 @@
                                         <concat destfile="${basedir}/target/noc-screens/css/noc.merged.css"
                                                 eol="cr">
                                             <filelist dir="${basedir}/src/main/css"
-                                                      files="treemap.css,noc.css,bootstrap.css"/>
+                                                      files="treemap.css,noc.css"/>
                                         </concat>
                                         <exec executable="java">
                                             <arg value="-jar"/>
@@ -765,6 +780,21 @@
                                     <resources>
                                         <resource>
                                             <directory>${js-dir}/jsPlumb</directory>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>copy-bootstrap</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${gui.target.gui.location}/js/bootstrap</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>${js-dir}/bootstrap</directory>
                                         </resource>
                                     </resources>
                                 </configuration>
