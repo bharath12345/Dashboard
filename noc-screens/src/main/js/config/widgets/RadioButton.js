@@ -11,7 +11,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/form/RadioButton", "noc/Logger
                 this.makeGroup(attribute, CONSTANTS.DIVTYPE.USER, values, radioButtonList);
                 this.makeGroup(attribute, CONSTANTS.DIVTYPE.ADMIN, values, radioButtonList);
                 this.makeGroup(attribute, CONSTANTS.DIVTYPE.FACTORY, values, radioButtonList);
-
                 return radioButtonList;
             },
 

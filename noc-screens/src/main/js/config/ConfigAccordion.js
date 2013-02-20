@@ -30,22 +30,39 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
                         console.log("exception = " + e);
                     }
                 }
+                ConfigAccordion.LINKARRAY[0].click();
             },
 
             renderPageAttrib: function(event) {
                 //console.log("event in renderPageAttrib = " + event.target+ " type = " + typeof(event.target));
-                var splitArray = String(event.target).split("/");
-                var pageId = parseInt(splitArray[splitArray.length-1]);
+                var pageId = this.getIdFromUrl(event.target);
+                this.setMarker(pageId);
                 this.showPageConfig(pageId);
+            },
+
+            getIdFromUrl: function(ss) {
+                var splitArray = String(ss).split("/");
+                return parseInt(splitArray[splitArray.length-1]);
+            },
+
+            setMarker: function(pageId) {
+                for(var i=0;i<ConfigAccordion.LINKARRAY.length;i++) {
+                    var hrefVal = this.getIdFromUrl(ConfigAccordion.LINKARRAY[i].href);
+                    //console.log("href = " + hrefVal + " compare = " + pageId);
+                    if(hrefVal == pageId) {
+                        ConfigAccordion.LINKARRAY[i].style.color = "rgb(0, 51, 102)";
+                    } else {
+                        ConfigAccordion.LINKARRAY[i].style.color = "rgb(0, 136, 204)";
+                    }
+                }
             },
 
             getNewA:function (name) {
                 var a = dojo.create("a");
                 a.className = "document";
                 a.href = name;
-                a.onclick = function () {
-                    return false;
-                };
+                a.onclick = function () {return false;};
+                ConfigAccordion.LINKARRAY.push(a);
                 return a;
             },
 
@@ -90,6 +107,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
 
         ConfigAccordion.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.ACCORDION));
         ConfigAccordion.IMAGE = "<img src=\".\/images\/Icon_ArrowRight_SW_16.gif\" border=\"0\" align=\"top\">";
+        ConfigAccordion.LINKARRAY = [];
 
         return ConfigAccordion;
     });
