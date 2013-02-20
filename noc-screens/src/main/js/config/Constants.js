@@ -14,6 +14,9 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!config/nls/conf
         CONSTANTS.CLASSNAME.UTILITY = "config.Utility";
 
         CONSTANTS.CLASSNAME.INCIDENTGRID = "config.pages.IncidentGrid";
+        CONSTANTS.CLASSNAME.CLUSTERGRID = "config.pages.ClusterGrid";
+        CONSTANTS.CLASSNAME.TRANSACTIONGRID = "config.pages.TransactionGrid";
+        CONSTANTS.CLASSNAME.TOPOLOGY = "config.pages.Topology";
 
         CONSTANTS.CLASSNAME.COMBOBOX = "config.widgets.ComboBox";
         CONSTANTS.CLASSNAME.NUMBERSPINNER = "config.widgets.NumberSpinner";
@@ -21,7 +24,6 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!config/nls/conf
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         CONSTANTS.TYPE = {};
-
         CONSTANTS.TYPE.ACCORDION = 1;
         CONSTANTS.TYPE.PAGECONFIG = 2;
 
@@ -29,15 +31,15 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!config/nls/conf
         CONSTANTS.ACTION = {};
         CONSTANTS.ACTION.PAGESET = "config/pages.action";
         CONSTANTS.ACTION.ALERTGRIDATTRIBUTES = "config/alertGridDetailsRetrieve";
+        CONSTANTS.ACTION.CLUSTERGRIDATTRIBUTES = "config/clusterGridDetailsRetrieve";
+        CONSTANTS.ACTION.TRANSACTIONGRIDATTRIBUTES = "config/transactionGridDetailsRetrieve";
+        CONSTANTS.ACTION.TOPOLOGYATTRIBUTES = "config/topologyDetailsRetrieve";
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        CONSTANTS.WIDGETS = {};
-        CONSTANTS.WIDGETS.ACCORDION = "config/ConfigAccordion";
-        CONSTANTS.WIDGETS.RENDERATTRIBUTES = "config/RenderAttributes";
 
-        CONSTANTS.WIDGETS.COMBOBOX = "config/widgets/ComboBox";
-        CONSTANTS.WIDGETS.NUMBERSPINNER = "config/widgets/NumberSpinner";
-        CONSTANTS.WIDGETS.RADIOBUTTON = "config/widgets/RadioButton";
+        CONSTANTS.getClassPath = function(name) {
+            return name.replace(/./g, "/");
+        }
 
         return CONSTANTS;
     });

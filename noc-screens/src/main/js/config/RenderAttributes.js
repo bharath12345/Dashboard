@@ -1,14 +1,14 @@
 define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/GridContainer",
     "dijit/layout/TabContainer", "dijit/layout/ContentPane", "dijit/form/Button", "dijit/Toolbar",
     "noc/Logger",
-    "config/Utility", "config/Constants", "dojo/i18n!config/nls/config", "config/pages/IncidentGrid"],
+    "config/Utility", "config/Constants", "dojo/i18n!config/nls/config"],
 
     function (declare, i18n, TitlePane, GridContainer, TabContainer, ContentPane, Button, Toolbar,
-              Logger, Utility, CONSTANTS, i18nString, IncidentGrid) {
+              Logger, Utility, CONSTANTS, i18nString) {
 
         var RenderAttributes = declare(CONSTANTS.CLASSNAME.RENDERATTRIBUTES, null, {
 
-            renderConfigParameters: function(data) {
+            renderConfigParameters: function(data, pageObj) {
                 console.log("renderConfigParameters data = " + data);
 
                 var tc = this.createTabs();
@@ -16,8 +16,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
                 this.createToolbarButtons();
 
                 // all the title panes have been rendered - now render the innards
-                RenderAttributes.INCIDENTGRID = new IncidentGrid();
-                RenderAttributes.INCIDENTGRID.renderAttributes(data);
+                pageObj.renderAttributes(data);
 
                 this.cleanupRendering(tc);
             },
@@ -38,6 +37,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
             },
 
             createTabs: function() {
+                config.PageElements.CpCenterInner.destroyDescendants(false);
+
                 var tc = new TabContainer({style: "height: 100%; width: 100%;"});
                 config.PageElements.CpCenterInner.addChild(tc);
 
@@ -115,6 +116,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
             },
 
             createToolbarButtons: function() {
+                config.PageElements.CpTopInner.destroyDescendants(false);
+
                 var toolbar = new Toolbar({});
                 config.PageElements.CpTopInner.addChild(toolbar);
 
@@ -137,7 +140,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
         RenderAttributes.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.RENDERATTRIBUTES));
         RenderAttributes.LOOKNFEELPANE = null;
         RenderAttributes.DATAPANE = null;
-        RenderAttributes.INCIDENTGRID = null;
 
         return RenderAttributes;
     });

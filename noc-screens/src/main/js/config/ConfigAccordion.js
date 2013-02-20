@@ -57,7 +57,29 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
                     type:CONSTANTS.TYPE.PAGECONFIG,
                     custom:[]
                 };
-                Utility.xhrPostCentral(CONSTANTS.ACTION.ALERTGRIDATTRIBUTES, viewMeta);
+                var actionClass;
+                switch(id) {
+                    case 0: // this is Alerts Grid
+                        actionClass = CONSTANTS.ACTION.ALERTGRIDATTRIBUTES;
+                        break;
+
+                    case 1: // this is Clusters Grid
+                        actionClass = CONSTANTS.ACTION.CLUSTERGRIDATTRIBUTES;
+                        break;
+
+                    case 2: // this is transaction Grid
+                        actionClass = CONSTANTS.ACTION.TRANSACTIONGRIDATTRIBUTES;
+                        break;
+
+                    case 3: // this is Topology Map
+                        actionClass = CONSTANTS.ACTION.TOPOLOGYATTRIBUTES;
+                        break;
+
+                    default:
+                        console.log("Unknown page id = " + id);
+                        return;
+                }
+                Utility.xhrPostCentral(actionClass, viewMeta);
             }
         });
 
