@@ -20,10 +20,15 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
                 console.log("in render accordion. data = " + dojo.toJson(data));
                 var pageList = data.pageListVO;
                 for(var i=0;i<pageList.length; i++) {
-                    var a = this.getNewA(pageList[i].id);
-                    on(a, "click", lang.hitch(this, "renderPageAttrib"));
-                    a.innerHTML = ConfigAccordion.IMAGE + pageList[i].name;
-                    this.appendToAccDiv(a, config.PageElements.AccPane.domNode);
+                    try {
+                        //console.log("rendering = " + pageList[i].id);
+                        var a = this.getNewA(pageList[i].id);
+                        on(a, "click", lang.hitch(this, "renderPageAttrib"));
+                        a.innerHTML = ConfigAccordion.IMAGE + pageList[i].name;
+                        this.appendToAccDiv(a, config.ConfigPageElements.AccPane.domNode);
+                    } catch(e) {
+                        console.log("exception = " + e);
+                    }
                 }
             },
 

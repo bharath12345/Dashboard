@@ -9,7 +9,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
         var RenderAttributes = declare(CONSTANTS.CLASSNAME.RENDERATTRIBUTES, null, {
 
             renderConfigParameters: function(data, pageObj) {
-                console.log("renderConfigParameters data = " + data);
+                console.log("renderConfigParameters data = " + dojo.toJson(data));
 
                 var tc = this.createTabs();
                 this.createTitlePaneGrid(data);
@@ -29,18 +29,18 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
                 }
 
                 // remove the boundary and padding of inner center pane
-                config.PageElements.CpCenterInner.domNode.style.padding=0;
-                config.PageElements.CpCenterInner.domNode.style.border=0;
+                config.ConfigPageElements.CpCenterInner.domNode.style.padding=0;
+                config.ConfigPageElements.CpCenterInner.domNode.style.border=0;
 
-                config.PageElements.CpTopInner.domNode.style.padding=0;
-                config.PageElements.TopBc.resize();
+                config.ConfigPageElements.CpTopInner.domNode.style.padding=0;
+                config.ConfigPageElements.TopBc.resize();
             },
 
             createTabs: function() {
-                config.PageElements.CpCenterInner.destroyDescendants(false);
+                config.ConfigPageElements.CpCenterInner.destroyDescendants(false);
 
                 var tc = new TabContainer({style: "height: 100%; width: 100%;"});
-                config.PageElements.CpCenterInner.addChild(tc);
+                config.ConfigPageElements.CpCenterInner.addChild(tc);
 
                 RenderAttributes.LOOKNFEELPANE = new ContentPane({title: "Look and Feel", style: "height: 100%; width: 100%;"});
                 tc.addChild(RenderAttributes.LOOKNFEELPANE);
@@ -116,10 +116,10 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
             },
 
             createToolbarButtons: function() {
-                config.PageElements.CpTopInner.destroyDescendants(false);
+                config.ConfigPageElements.CpTopInner.destroyDescendants(false);
 
                 var toolbar = new Toolbar({});
-                config.PageElements.CpTopInner.addChild(toolbar);
+                config.ConfigPageElements.CpTopInner.addChild(toolbar);
 
                 var button = new Button({
                     showLabel: true,

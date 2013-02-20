@@ -36,8 +36,8 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.CLUSTERZONES = "noc.Widgets.Availability.ClusterZones";
 
         CONSTANTS.CLASSNAME.WIDGETS.COMPONENT = {};
-        CONSTANTS.CLASSNAME.WIDGETS.COMPONENT.CELLMAKER = "noc.component.CellMaker";
-        CONSTANTS.CLASSNAME.WIDGETS.COMPONENT.ZONES = "noc.component.Zones";
+        CONSTANTS.CLASSNAME.WIDGETS.COMPONENT.CELLMAKER = "noc.Component.CellMaker";
+        CONSTANTS.CLASSNAME.WIDGETS.COMPONENT.ZONES = "noc.Component.Zones";
 
         CONSTANTS.CLASSNAME.WIDGETS.INCIDENT = {};
         CONSTANTS.CLASSNAME.WIDGETS.INCIDENT.INCIDENTAVAILABILITYGRID = "noc.Widgets.Incident.IncidentAvailabilityGrid";
@@ -57,7 +57,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.CLASSNAME.WIDGETS.CONFIG = {};
         CONSTANTS.CLASSNAME.WIDGETS.CONFIG.APPALERTGRID = "noc.Widgets.Config.AppAlertGrid";
 
-        CONSTANTS.CLASSNAME.LOGIN = "Login";
+        CONSTANTS.CLASSNAME.LOGIN = "login/Login";
         CONSTANTS.CLASSNAME.UTILITY = "noc.Utility";
         CONSTANTS.CLASSNAME.VIEWMANAGER = "noc.ViewManager";
 
@@ -149,42 +149,8 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.ACTION.TOPOLOGY.NODESTATUS = "topology/NodeStatus.action";
         CONSTANTS.ACTION.TOPOLOGY.CONNECTIONSTATUS = "topology/ConnectionStatus.action";
 
+        CONSTANTS.ACTION.CONFIG = {};
         CONSTANTS.ACTION.CONFIG.APPALERTGRID = "config/applicableAlertGridDetailsRetrieve";
-
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // WIDGET CLASS PATHS
-        CONSTANTS.WIDGETS = {};
-
-        CONSTANTS.WIDGETS.LOGIN = "noc/Login";
-
-        CONSTANTS.WIDGETS.AVAILABILITY = {};
-        CONSTANTS.WIDGETS.AVAILABILITY.GRID = 'noc/Widgets/Availability/AvailabilityGrid';
-        CONSTANTS.WIDGETS.AVAILABILITY.MATRIX = 'noc/Widgets/Availability/AvailMatrix';
-        CONSTANTS.WIDGETS.AVAILABILITY.AVAILABILITY = 'noc/Widgets/Availability/Availability';
-        CONSTANTS.WIDGETS.AVAILABILITY.CLUSTERZONES = "noc/Widgets/Availability/ClusterZones";
-        CONSTANTS.WIDGETS.AVAILABILITY.MATRIX2 = 'noc/Widgets/Availability/AvailMatrix2';
-
-        CONSTANTS.WIDGETS.COMPONENT = {};
-        CONSTANTS.WIDGETS.COMPONENT.ZONES = 'noc/Widgets/component/Zones';
-        CONSTANTS.WIDGETS.COMPONENT.CELLMAKER = 'noc/Widgets/component/CellMaker';
-
-        CONSTANTS.WIDGETS.INCIDENT = {};
-        CONSTANTS.WIDGETS.INCIDENT.AVAILABILITY = 'noc/Widgets/Incident/IncidentAvailabilityGrid';
-        CONSTANTS.WIDGETS.INCIDENT.APPLICATIONGRID = 'noc/Widgets/Incident/ApplicationGrid';
-        CONSTANTS.WIDGETS.INCIDENT.APPLICATIONDATA = 'noc/Widgets/Incident/ApplicationData';
-
-        CONSTANTS.WIDGETS.TRANSACTION = {};
-        CONSTANTS.WIDGETS.TRANSACTION.META = "noc/Widgets/transaction/GridMeta";
-        CONSTANTS.WIDGETS.TRANSACTION.DATA = "noc/Widgets/transaction/GridData";
-
-        CONSTANTS.WIDGETS.TOPOLOGY = {};
-        CONSTANTS.WIDGETS.TOPOLOGY.NODES = "noc/Widgets/Topology/RenderNodes";
-        CONSTANTS.WIDGETS.TOPOLOGY.CONNECTIONS = "noc/Widgets/Topology/RenderConnectivity";
-        CONSTANTS.WIDGETS.TOPOLOGY.NODESTATUS = "noc/Widgets/Topology/NodeStatus";
-        CONSTANTS.WIDGETS.TOPOLOGY.CONNECTIONSTATUS = "noc/Widgets/Topology/ConnectionStatus";
-
-        CONSTANTS.WIDGETS.CONFIG = {};
-        CONSTANTS.WIDGETS.CONFIG.APPALERTGRID = "noc/Widgets/Config/AppAlertGrid";
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////        
 
@@ -210,6 +176,12 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.TXGRID.RESPONSE = 2;
         CONSTANTS.TXGRID.VOLUME = 3;
         CONSTANTS.TXGRID.STATUS = 4;
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        CONSTANTS.getClassPath = function(name) {
+            return name.replace(/\./g, "/");
+        }
 
         return CONSTANTS;
     });

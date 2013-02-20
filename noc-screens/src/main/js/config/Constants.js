@@ -8,8 +8,8 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!config/nls/conf
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         CONSTANTS.CLASSNAME = {};
         CONSTANTS.CLASSNAME.CONFIG = "config.Config";
-        CONSTANTS.CLASSNAME.ACCORDION = "config.Accordion";
-        CONSTANTS.CLASSNAME.PAGEELEMENTS = "config.PageElements";
+        CONSTANTS.CLASSNAME.ACCORDION = "config.ConfigAccordion";
+        CONSTANTS.CLASSNAME.PAGEELEMENTS = "config.ConfigPageElements";
         CONSTANTS.CLASSNAME.RENDERATTRIBUTES = "config.RenderAttributes";
         CONSTANTS.CLASSNAME.UTILITY = "config.Utility";
 
@@ -38,7 +38,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!config/nls/conf
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         CONSTANTS.getClassPath = function(name) {
-            return name.replace(/./g, "/");
+            return name.replace(/\./g, "/");
         }
 
         return CONSTANTS;

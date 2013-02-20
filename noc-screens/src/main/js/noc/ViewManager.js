@@ -59,7 +59,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
 
                 switch(data.type) {
                     case CONSTANTS.TYPE.LOGIN:
-                        require([CONSTANTS.WIDGETS.LOGIN], function (Login) {
+                        require([CONSTANTS.getClassPath(CONSTANTS.CLASSNAME.LOGIN)], function (Login) {
                             Login.successPostProcess(data);
                         });
                         break;
@@ -73,13 +73,13 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
                         break;
 
                     case CONSTANTS.TYPE.COMPONENT_ZONES:
-                        require([CONSTANTS.WIDGETS.COMPONENT.ZONES], function (Zones) {
+                        require([CONSTANTS.getClassPath(CONSTANTS.CLASSNAME.WIDGETS.COMPONENT.ZONES)], function (Zones) {
                             new Zones().create(input);
                         });
                         break;
 
                     case CONSTANTS.TYPE.COMPONENT_DATA:
-                        require([CONSTANTS.WIDGETS.COMPONENT.CELLMAKER], function (CellMaker) {
+                        require([CONSTANTS.getClassPath(CONSTANTS.CLASSNAME.WIDGETS.COMPONENT.CELLMAKER)], function (CellMaker) {
                             new CellMaker().create(input);
                         });
                         break;
@@ -108,7 +108,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
         ViewManager.manageConfig = function(data, input) {
             switch(data.subtype) {
                 case CONSTANTS.SUBTYPE.APPALERTGRID:
-                    require([CONSTANTS.WIDGETS.CONFIG.APPALERTGRID], function (AppAlertGrid) {
+                    require([CONSTANTS.getClassPath(CONSTANTS.CLASSNAME.WIDGETS.CONFIG.APPALERTGRID)], function (AppAlertGrid) {
                         new AppAlertGrid().applyConfig(data, input);
                     });
                     break;
@@ -122,25 +122,25 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
         ViewManager.manageTopologySubView = function(data, input) {
             switch(data.subtype) {
                 case CONSTANTS.SUBTYPE.TOPOLOGY.NODES:
-                    require([CONSTANTS.WIDGETS.TOPOLOGY.NODES], function (RenderNodes) {
+                    require([CONSTANTS.getClassPath(CONSTANTS.CLASSNAME.WIDGETS.TOPOLOGY.RENDERNODES)], function (RenderNodes) {
                         new RenderNodes().create(data, input);
                     });
                 break;
 
                 case CONSTANTS.SUBTYPE.TOPOLOGY.CONNECTIVITY:
-                    require([CONSTANTS.WIDGETS.TOPOLOGY.CONNECTIONS], function (RenderConnectivity) {
+                    require([CONSTANTS.getClassPath(CONSTANTS.CLASSNAME.WIDGETS.TOPOLOGY.RENDERCONNECTIVITY)], function (RenderConnectivity) {
                         new RenderConnectivity().create(data, input);
                     });
                 break;
 
                 case CONSTANTS.SUBTYPE.TOPOLOGY.NODESTATUS:
-                    require([CONSTANTS.WIDGETS.TOPOLOGY.NODESTATUS], function (NodeStatus) {
+                    require([CONSTANTS.getClassPath(CONSTANTS.CLASSNAME.WIDGETS.TOPOLOGY.NODESTATUS)], function (NodeStatus) {
                         new NodeStatus().create(data, input);
                     });
                 break;
 
                 case CONSTANTS.SUBTYPE.TOPOLOGY.CONNECTIONSTATUS:
-                    require([CONSTANTS.WIDGETS.TOPOLOGY.CONNECTIONSTATUS], function (ConnectionStatus) {
+                    require([CONSTANTS.getClassPath(CONSTANTS.CLASSNAME.WIDGETS.TOPOLOGY.CONNECTIONSTATUS)], function (ConnectionStatus) {
                         new ConnectionStatus().create(data, input);
                     });
                 break;
@@ -154,19 +154,19 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
         ViewManager.manageTransactionSubView = function(data, input){
             switch(data.subtype) {
                 case CONSTANTS.SUBTYPE.TRANSACTION.META:
-                    require([CONSTANTS.WIDGETS.TRANSACTION.META], function (GridMeta) {
+                    require([CONSTANTS.getClassPath(CONSTANTS.CLASSNAME.WIDGETS.TRANSACTION.GRIDMETA)], function (GridMeta) {
                         new GridMeta().create(data, input);
                     });
                 break;
 
                 case CONSTANTS.SUBTYPE.TRANSACTION.DATA:
-                    require([CONSTANTS.WIDGETS.TRANSACTION.DATA], function (GridData) {
+                    require([CONSTANTS.getClassPath(CONSTANTS.CLASSNAME.WIDGETS.TRANSACTION.GRIDDATA)], function (GridData) {
                         new GridData().create(data, input);
                     });
                 break;
 
                 case CONSTANTS.SUBTYPE.TRANSACTION.APPDATA:
-                    require([CONSTANTS.WIDGETS.TRANSACTION.DATA], function (GridData) {
+                    require([CONSTANTS.getClassPath(CONSTANTS.CLASSNAME.WIDGETS.TRANSACTION.GRIDDATA)], function (GridData) {
                         new GridData().createUsingApp(data, input);
                     });
                 break;
@@ -177,39 +177,39 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
             switch(data.subtype) {
                 case CONSTANTS.SUBTYPE.AVAILABILITY.COMPONENT:
                     //ViewManager.LOG.log(Logger.SEVERITY.SEVERE, "component grid data received");
-                    require([CONSTANTS.WIDGETS.AVAILABILITY.MATRIX], function (AvailMatrix) {
+                    require([CONSTANTS.getClassPath(CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILMATRIX)], function (AvailMatrix) {
                         new AvailMatrix().create(data, input.componentDataVO);
                     });
                     break;
 
                 case CONSTANTS.SUBTYPE.AVAILABILITY.CLUSTER:
                     //ViewManager.LOG.log(Logger.SEVERITY.SEVERE, "cluster grid data received");
-                    require([CONSTANTS.WIDGETS.AVAILABILITY.MATRIX], function (AvailMatrix) {
+                    require([CONSTANTS.getClassPath(CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILMATRIX)], function (AvailMatrix) {
                         new AvailMatrix().create(data, input.clusterDataVO);
                     });
                     break;
 
                 case CONSTANTS.SUBTYPE.AVAILABILITY.INSTANCE:
                     //ViewManager.LOG.log(Logger.SEVERITY.SEVERE, "instance grid data received");
-                    require([CONSTANTS.WIDGETS.AVAILABILITY.MATRIX], function (AvailMatrix) {
+                    require([CONSTANTS.getClassPath(CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILMATRIX)], function (AvailMatrix) {
                         new AvailMatrix().create(data, input.compInstanceDataVO);
                     });
                     break;
 
                 case CONSTANTS.SUBTYPE.AVAILABILITY.META:
-                    require([CONSTANTS.WIDGETS.AVAILABILITY.GRID], function (AvailabilityGrid) {
+                    require([CONSTANTS.getClassPath(CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILABILITYGRID)], function (AvailabilityGrid) {
                         new AvailabilityGrid().create(data);
                     });
                     break;
 
                 case CONSTANTS.SUBTYPE.AVAILABILITY.ALLCLUSTER:
-                    require([CONSTANTS.WIDGETS.AVAILABILITY.CLUSTERZONES], function (ClusterZones) {
+                    require([CONSTANTS.getClassPath(CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.CLUSTERZONES)], function (ClusterZones) {
                         new ClusterZones().create(data, input);
                     });
                     break;
 
                 case CONSTANTS.SUBTYPE.AVAILABILITY.CLUSTER2:
-                    require([CONSTANTS.WIDGETS.AVAILABILITY.MATRIX2], function (AvailMatrix2) {
+                    require([CONSTANTS.getClassPath(CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILMATRIX2)], function (AvailMatrix2) {
                         new AvailMatrix2().create(data, input.clusterDataVO);
                     });
                     break;
@@ -226,31 +226,31 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
         ViewManager.manageIncidentSubView = function(data, input) {
             switch(data.subtype) {
                 case CONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY.COMPONENT:
-                    require([CONSTANTS.WIDGETS.INCIDENT.AVAILABILITY], function (IncidentAvailabilityGrid) {
+                    require([CONSTANTS.getClassPath(CONSTANTS.CLASSNAME.WIDGETS.INCIDENT.INCIDENTAVAILABILITYGRID)], function (IncidentAvailabilityGrid) {
                         new IncidentAvailabilityGrid().createComponentString(data, input);
                     });
                     break;
 
                 case CONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY.CLUSTER:
-                    require([CONSTANTS.WIDGETS.INCIDENT.AVAILABILITY], function (IncidentAvailabilityGrid) {
+                    require([CONSTANTS.getClassPath(CONSTANTS.CLASSNAME.WIDGETS.INCIDENT.INCIDENTAVAILABILITYGRID)], function (IncidentAvailabilityGrid) {
                         new IncidentAvailabilityGrid().createClusterString(data, input);
                     });
                     break;
 
                 case CONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY.INSTANCE:
-                    require([CONSTANTS.WIDGETS.INCIDENT.AVAILABILITY], function (IncidentAvailabilityGrid) {
+                    require([CONSTANTS.getClassPath(CONSTANTS.CLASSNAME.WIDGETS.INCIDENT.INCIDENTAVAILABILITYGRID)], function (IncidentAvailabilityGrid) {
                         new IncidentAvailabilityGrid().createIncidentString(data, input);
                     });
                     break;
 
                 case CONSTANTS.SUBTYPE.INCIDENT.META:
-                    require([CONSTANTS.WIDGETS.INCIDENT.APPLICATIONGRID], function (ApplicationGrid) {
+                    require([CONSTANTS.getClassPath(CONSTANTS.CLASSNAME.WIDGETS.INCIDENT.APPLICATIONGRID)], function (ApplicationGrid) {
                         new ApplicationGrid().create(data, input);
                     });
                     break;
 
                 case CONSTANTS.SUBTYPE.INCIDENT.DATA:
-                    require([CONSTANTS.WIDGETS.INCIDENT.APPLICATIONDATA], function (ApplicationData) {
+                    require([CONSTANTS.getClassPath(CONSTANTS.CLASSNAME.WIDGETS.INCIDENT.APPLICATIONDATA)], function (ApplicationData) {
                         new ApplicationData().create(data, input);
                     });
                     break;

@@ -47,6 +47,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!config/nls/config", "dojo/
         };
 
         Utility.handleAccordion = function(data) {
+            console.log("classname = " + CONSTANTS.getClassPath(CONSTANTS.CLASSNAME.ACCORDION));;
             require([CONSTANTS.getClassPath(CONSTANTS.CLASSNAME.ACCORDION)], function (ConfigAccordion) {
                 var ca = new ConfigAccordion();
                 ca.renderAccordion(data);

@@ -20,7 +20,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
                     query:options,
                     headers:Utility.JSON_HEADER
                 }).then(function (data) {
-                        require([CONSTANTS.WIDGETS.AVAILABILITY.AVAILABILITY], function (Availability) {
+                        require([CONSTANTS.getClassPath(CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILABILITY)], function (Availability) {
                             new Availability().renderGrid(data);
                         });
                     }, function (err) {
