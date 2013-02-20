@@ -7,10 +7,10 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
 
             loadPage:function (pageNumber, pageName) {
 
-                IncidentPage.CP[pageNumber] = noc.PageLoader.CpCenter[pageNumber];
+                IncidentPage.CP = noc.PageLoader.CpCenter[pageNumber];
 
-                var paneWidth = IncidentPage.CP[pageNumber].w;
-                var paneHeight = IncidentPage.CP[pageNumber].h;
+                var paneWidth = IncidentPage.CP.w;
+                var paneHeight = IncidentPage.CP.h;
                 var styleString = "width: " + paneWidth + "; height: " + paneHeight + ";"
 
                 var titlePane = new TitlePane({
@@ -23,7 +23,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
 
                 var gridContainer = new GridContainer({nbZones:1, isAutoOrganized:true,
                     style:"width: 100%; height: 100%;"});
-                IncidentPage.CP[pageNumber].addChild(gridContainer);
+                IncidentPage.CP.addChild(gridContainer);
                 gridContainer.disableDnd();
 
                 gridContainer.addChild(titlePane, 0);
@@ -44,7 +44,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                     name: pageName,
                     type: CONSTANTS.TYPE.INCIDENT,
                     subtype: CONSTANTS.SUBTYPE.INCIDENT.META,
-                    dimensions:[IncidentPage.CP[pageNumber].w, IncidentPage.CP[pageNumber].h],
+                    dimensions:[IncidentPage.CP.w, IncidentPage.CP.h],
                     position:[xpos,ypos],
                     custom: []
                 };
@@ -57,7 +57,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
         // static variables of this class
         IncidentPage.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.PAGES.AVAILABILITYPAGE));
 
-        IncidentPage.CP = [];
+        IncidentPage.CP = null;
 
         return IncidentPage;
     });

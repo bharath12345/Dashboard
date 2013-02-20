@@ -107,9 +107,9 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
 
         ViewManager.manageConfig = function(data, input) {
             switch(data.subtype) {
-                case CONSTANTS.SUBTYPE.APPALERTGRID:
-                    require([CONSTANTS.getClassPath(CONSTANTS.CLASSNAME.WIDGETS.CONFIG.APPALERTGRID)], function (AppAlertGrid) {
-                        new AppAlertGrid().applyConfig(data, input);
+                case CONSTANTS.SUBTYPE.APPINCIDENTGRID:
+                    require([CONSTANTS.getClassPath(CONSTANTS.CLASSNAME.WIDGETS.CONFIG.APPINCIDENTGRID)], function (AppIncidentGrid) {
+                        new AppIncidentGrid().applyConfig(input);
                     });
                     break;
 

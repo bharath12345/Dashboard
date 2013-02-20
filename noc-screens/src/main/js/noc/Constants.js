@@ -55,7 +55,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.CLASSNAME.WIDGETS.TOPOLOGY.CONNECTIONSTATUS = "noc.Widgets.Topology.ConnectionStatus";
 
         CONSTANTS.CLASSNAME.WIDGETS.CONFIG = {};
-        CONSTANTS.CLASSNAME.WIDGETS.CONFIG.APPALERTGRID = "noc.Widgets.Config.AppAlertGrid";
+        CONSTANTS.CLASSNAME.WIDGETS.CONFIG.APPINCIDENTGRID = "noc.Widgets.Config.AppIncidentGrid";
 
         CONSTANTS.CLASSNAME.LOGIN = "login/Login";
         CONSTANTS.CLASSNAME.UTILITY = "noc.Utility";
@@ -108,7 +108,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.SUBTYPE.TOPOLOGY.CONNECTIONSTATUS = 4;
 
         CONSTANTS.SUBTYPE.CONFIG = {};
-        CONSTANTS.SUBTYPE.APPALERTGRID = 1;
+        CONSTANTS.SUBTYPE.APPINCIDENTGRID = 1;
 
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -150,7 +150,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
         CONSTANTS.ACTION.TOPOLOGY.CONNECTIONSTATUS = "topology/ConnectionStatus.action";
 
         CONSTANTS.ACTION.CONFIG = {};
-        CONSTANTS.ACTION.CONFIG.APPALERTGRID = "config/applicableAlertGridDetailsRetrieve";
+        CONSTANTS.ACTION.CONFIG.APPINCIDENTGRID = "config/applicableAlertGridDetailsRetrieve.action";
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////        
 
