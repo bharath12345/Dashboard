@@ -8,19 +8,28 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/form/NumberSpinner",
 
             renderNumberSpinner: function(attribData, attribute, min, max, delta) {
                 console.log("creating number spinner in attrib = " + attribute);
-                var divToAdd = dojo.byId(attribute+"_user");
-                divToAdd.style.margin=1;
-                //divToAdd.style.paddingLeft=1;
 
-                var node = dojo.create("div");
-                divToAdd.appendChild(node);
+                var numberSpinnerList = [];
 
+                var type = CONSTANTS.DIVTYPE.USER;
+                numberSpinnerList[CONSTANTS.DIVTYPE.USER] = this.getNumberSpinner(attribute, type, min, max, delta);
+
+                type = CONSTANTS.DIVTYPE.ADMIN;
+                numberSpinnerList[CONSTANTS.DIVTYPE.ADMIN] = this.getNumberSpinner(attribute, type, min, max, delta);
+
+                type = CONSTANTS.DIVTYPE.FACTORY;
+                numberSpinnerList[CONSTANTS.DIVTYPE.FACTORY] = this.getNumberSpinner(attribute, type, min, max, delta);
+
+                return numberSpinnerList;
+            },
+
+            getNumberSpinner: function(attribute, type, min, max, delta) {
+                var node = Utility.getConfigDiv(attribute, type);
                 var numberSpinner = new DojoNumberSpinner({
-                    id: attribute + NumberSpinner.POSTFIX,
+                    id: attribute + type + NumberSpinner.POSTFIX,
                     smallDelta: delta,
                     constraints: { min:min, max:max, places:0 }
                 }, node);
-
                 return numberSpinner;
             }
         });

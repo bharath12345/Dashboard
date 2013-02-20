@@ -36,6 +36,12 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!config/nls/conf
         CONSTANTS.ACTION.TOPOLOGYATTRIBUTES = "config/topologyDetailsRetrieve";
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        CONSTANTS.DIVTYPE = {};
+        CONSTANTS.DIVTYPE.USER = "_user";
+        CONSTANTS.DIVTYPE.ADMIN = "_admin";
+        CONSTANTS.DIVTYPE.FACTORY = "_factory";
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         CONSTANTS.getClassPath = function(name) {
             return name.replace(/\./g, "/");

@@ -6,12 +6,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/store/Memory", "dijit/form/Comb
 
         var ComboBox = declare(CONSTANTS.CLASSNAME.COMBOBOX, null, {
             renderComboBox: function(attribData, attribute, values) {
-                var divToAdd = dojo.byId(attribute+"_user");
-                divToAdd.style.margin=1;
-                //divToAdd.style.paddingLeft=1;
-
-                var node = dojo.create("div");
-                divToAdd.appendChild(node);
 
                 var comboBoxStore = new Memory();
                 for(var i=0;i<values.length;i++) {
@@ -19,14 +13,29 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/store/Memory", "dijit/form/Comb
                     comboBoxStore.put(datum);
                 }
 
+                var comboBoxList = [];
+
+                var type = CONSTANTS.DIVTYPE.USER;
+                comboBoxList[CONSTANTS.DIVTYPE.USER] = this.getComboBox(attribute, type, values[0], comboBoxStore);
+
+                type = CONSTANTS.DIVTYPE.ADMIN;
+                comboBoxList[CONSTANTS.DIVTYPE.ADMIN] = this.getComboBox(attribute, type, values[0], comboBoxStore);
+
+                type = CONSTANTS.DIVTYPE.FACTORY;
+                comboBoxList[CONSTANTS.DIVTYPE.FACTORY] = this.getComboBox(attribute, type, values[0], comboBoxStore);
+
+                return comboBoxList;
+            },
+
+            getComboBox: function(attribute, type, selectedValue, comboBoxStore) {
+                var node = Utility.getConfigDiv(attribute, type);
                 var comboBox = new DojoComboBox({
-                    id: attribute + ComboBox.POSTFIX,
+                    id: attribute + type + ComboBox.POSTFIX,
                     name: attribute,
-                    value: values[0],
+                    value: selectedValue,
                     store: comboBoxStore,
                     searchAttr: "name"
                 }, node);
-
                 return comboBox;
             }
         });

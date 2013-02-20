@@ -6,25 +6,30 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/form/RadioButton", "noc/Logger
         var RadioButton = declare(CONSTANTS.CLASSNAME.RADIOBUTTON, null, {
 
             renderRadioButton: function(attribData, attribute, values) {
+
+                var radioButtonList = [];
+                this.makeGroup(attribute, CONSTANTS.DIVTYPE.USER, values, radioButtonList);
+                this.makeGroup(attribute, CONSTANTS.DIVTYPE.ADMIN, values, radioButtonList);
+                this.makeGroup(attribute, CONSTANTS.DIVTYPE.FACTORY, values, radioButtonList);
+
+                return radioButtonList;
+            },
+
+            makeGroup: function(attribute, type, values, radioButtonList) {
+                var node = Utility.getConfigDiv(attribute, type);
+
                 for(var i=0;i<values.length;i++) {
-                    var divToAdd = dojo.byId(attribute+"_user");
-                    divToAdd.style.margin=1;
-                    //divToAdd.style.paddingLeft=1;
-
-                    var node = dojo.create("div");
-                    divToAdd.appendChild(node);
-
                     var checked = false;
                     if(i==0) {checked = true;}
 
                     var radioButton = new DojoRadioButton({
-                        id: attribute + RadioButton.POSTFIX + i,
+                        id: attribute + RadioButton.POSTFIX + values[i],
                         checked: checked,
                         name: attribute,
                         value: values[i]
-                    }, node);
-
-                    return radioButton;
+                    });
+                    radioButtonList[type][values[i]] = radioButton;
+                    node.appendChild(radioButton.domNode);
                 }
             }
         });

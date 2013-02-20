@@ -16,6 +16,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
                 this.createToolbarButtons();
 
                 // all the title panes have been rendered - now render the innards
+                RenderAttributes.PAGEOBJ = pageObj;
                 pageObj.renderAttributes(data);
 
                 this.cleanupRendering(tc);
@@ -87,17 +88,17 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
                     divString += attribute;
                     switch(i) {
                         case 0:
-                            divString += "_user";
-                            divString += "' class='alert alert-success'";
+                            divString += CONSTANTS.DIVTYPE.USER;
+                            divString += "' class='alert alert-success'"; // this is coming from bootstrap
                             break;
 
                         case 1:
-                            divString += "_admin";
+                            divString += CONSTANTS.DIVTYPE.ADMIN;
                             divString += "' class='alert alert-info'";
                             break;
 
                         case 2:
-                            divString += "_factory";
+                            divString += CONSTANTS.DIVTYPE.FACTORY;
                             divString += "' class='alert alert-error'";
                             break;
                     }
@@ -126,11 +127,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
                     label: "Save",
                     iconClass:'dijitEditorIcon dijitEditorIconSave',
                     onClick: function(){
-                        var refreshTime = IncidentGrid.APPLICATIONREFRESHTIME.get('value');
-                        var fontName = IncidentGrid.FONTNAME.get('value');
-                        var fontSize = IncidentGrid.FONTSIZE.get('value');
-                        var showGreenApp = IncidentGrid.SHOWALLGREEN.get('value');
-                        console.log("refreshTime = " + refreshTime + " fontName = " + fontName + " fontSize = " + fontSize + " showGreen = " + showGreenApp);
+                        RenderAttributes.PAGEOBJ.saveValues();
                     }
                 });
                 toolbar.addChild(button);
@@ -138,8 +135,11 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
         });
 
         RenderAttributes.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.RENDERATTRIBUTES));
+
         RenderAttributes.LOOKNFEELPANE = null;
         RenderAttributes.DATAPANE = null;
+
+        RenderAttributes.PAGEOBJ = null;
 
         return RenderAttributes;
     });

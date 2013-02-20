@@ -6,45 +6,43 @@ define(["dojo/_base/declare", "dojo/i18n", "noc/Logger",
 
         var IncidentGrid = declare(CONSTANTS.CLASSNAME.INCIDENTGRID, null, {
             renderAttributes: function(data) {
-
-                for(var attribute in data.agcVO) {
-                    var type = data.agcVO[attribute].type;
-                    var value = data.agcVO[attribute].value;
+                var gridConfig = data.age;
+                for(var attribute in gridConfig) {
+                    var type = gridConfig[attribute].type;
+                    var value = gridConfig[attribute].value;
                     console.log("type = " + type + " value = " + value + " attribute = " + attribute);
-
-                    switch(attribute) {
-                        case "applicationRefreshTime":
-                            var ns = new NumberSpinner();
-                            IncidentGrid.APPLICATIONREFRESHTIME = ns.renderNumberSpinner(data.agcVO[attribute], attribute, 10, 60, 1);
-                            break;
-
-                        case "fontName":
-                            var values = ["Arial", "Verdana", "Times New Roman"];
-                            var cb = new ComboBox();
-                            IncidentGrid.FONTNAME = cb.renderComboBox(data.agcVO[attribute], attribute, values);
-                            break;
-
-                        case "fontSize":
-                            var nss = new NumberSpinner();
-                            IncidentGrid.FONTSIZE = nss.renderNumberSpinner(data.agcVO[attribute], attribute, 6, 20, 1);
-                            break;
-
-                        case "showAllGreenApplications":
-                            var values = ["True", "False"];
-                            var rb = new RadioButton();
-                            IncidentGrid.SHOWALLGREEN = rb.renderRadioButton(data.agcVO[attribute],attribute, values);
-                            break;
-
-                        default:
-                            console.log("unknown attribute = " + attribute);
-                            break;
-                    }
                 }
 
+                var applicationRefreshTime = "applicationRefreshTime";
+                var ns = new NumberSpinner();
+                IncidentGrid.APPLICATIONREFRESHTIME = ns.renderNumberSpinner(gridConfig[applicationRefreshTime], applicationRefreshTime, 10, 60, 1);
+
+                var fontName = "fontName";
+                var values = ["Arial", "Verdana", "Times New Roman"];
+                var cb = new ComboBox();
+                IncidentGrid.FONTNAME = cb.renderComboBox(gridConfig[fontName], fontName, values);
+
+                var fontSize = "fontSize";
+                var nss = new NumberSpinner();
+                IncidentGrid.FONTSIZE = nss.renderNumberSpinner(gridConfig[fontSize], fontSize, 6, 20, 1);
+
+                var showAllGreenApplications = "showAllGreenApplications";
+                values = ["True", "False"];
+                var rb = new RadioButton();
+                IncidentGrid.SHOWALLGREEN = rb.renderRadioButton(gridConfig[showAllGreenApplications],showAllGreenApplications, values);
+            },
+
+            saveValues: function() {
+                var refreshTime = IncidentGrid.APPLICATIONREFRESHTIME[CONSTANTS.DIVTYPE.USER].get('value');
+                var fontName = IncidentGrid.FONTNAME[CONSTANTS.DIVTYPE.USER].get('value');
+                var fontSize = IncidentGrid.FONTSIZE[CONSTANTS.DIVTYPE.USER].get('value');
+                var showGreenApp = null;//IncidentGrid.SHOWALLGREEN[CONSTANTS.DIVTYPE.USER].get('value');
+                console.log("refreshTime = " + refreshTime + " fontName = " + fontName + " fontSize = " + fontSize + " showGreen = " + showGreenApp);
             }
         });
 
         IncidentGrid.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.INCIDENTGRID));
+
         IncidentGrid.APPLICATIONREFRESHTIME = null;
         IncidentGrid.FONTNAME = null;
         IncidentGrid.FONTSIZE = null;

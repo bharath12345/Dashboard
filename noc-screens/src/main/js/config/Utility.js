@@ -94,5 +94,15 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!config/nls/config", "dojo/
             });
         };
 
+        Utility.getConfigDiv = function(attribute, type) {
+            var divToAdd = dojo.byId(attribute + type);
+            divToAdd.style.margin=1;
+            //divToAdd.style.paddingLeft=1;
+
+            var node = dojo.create("div");
+            divToAdd.appendChild(node);
+            return node;
+        };
+
         return Utility;
     });
