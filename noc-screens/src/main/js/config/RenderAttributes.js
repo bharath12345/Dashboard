@@ -65,7 +65,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
                 RenderAttributes.LOOKNFEELPANE.addChild(gridContainer);
                 gridContainer.disableDnd();
 
-                for(var attribute in data.agcVO) {
+                for(var attribute in data.age) {
                     var titlePane = new TitlePane({
                         splitter:false,
                         style:"width:"+paneWidth,

@@ -17,13 +17,13 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/form/RadioButton", "noc/Logger
 
             makeGroup: function(attribute, type, values, radioButtonList) {
                 var node = Utility.getConfigDiv(attribute, type);
-
+                radioButtonList[type] = [];
                 for(var i=0;i<values.length;i++) {
                     var checked = false;
                     if(i==0) {checked = true;}
 
                     var radioButton = new DojoRadioButton({
-                        id: attribute + RadioButton.POSTFIX + values[i],
+                        id: attribute + type + RadioButton.POSTFIX + values[i],
                         checked: checked,
                         name: attribute,
                         value: values[i]

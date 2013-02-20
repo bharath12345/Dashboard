@@ -8,14 +8,16 @@ define(["dojo/_base/declare", "dojo/i18n", "noc/Logger",
             renderAttributes: function(data) {
                 var gridConfig = data.age;
                 for(var attribute in gridConfig) {
-                    var type = gridConfig[attribute].type;
-                    var value = gridConfig[attribute].value;
-                    console.log("type = " + type + " value = " + value + " attribute = " + attribute);
+                    var adminSetting = gridConfig[attribute].adminSetting;
+                    var factoryModified = gridConfig[attribute].factoryModified;
+                    var factoryReadOnly = gridConfig[attribute].factoryReadOnly;
+                    var userSetting = gridConfig[attribute].userSetting;
+                    console.log("adminSetting = " + adminSetting + " factoryModified = " + factoryModified + " factoryReadOnly = " + factoryReadOnly + " userSetting = " + userSetting);
                 }
 
                 var applicationRefreshTime = "applicationRefreshTime";
                 var ns = new NumberSpinner();
-                IncidentGrid.APPLICATIONREFRESHTIME = ns.renderNumberSpinner(gridConfig[applicationRefreshTime], applicationRefreshTime, 10, 60, 1);
+                IncidentGrid.APPLICATIONREFRESHTIME = ns.renderNumberSpinner(gridConfig[applicationRefreshTime].userSetting, applicationRefreshTime, 10, 60, 1);
 
                 var fontName = "fontName";
                 var values = ["Arial", "Verdana", "Times New Roman"];
