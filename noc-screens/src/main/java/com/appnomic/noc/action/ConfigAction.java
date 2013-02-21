@@ -214,19 +214,19 @@ public class ConfigAction extends AbstractNocAction {
 		agcVO = new AlertGridConfigVO();
 		if(age != null) {
 			IntegerAttributeVO appRefreshTime = new IntegerAttributeVO();
-			appRefreshTime.setValue(age.getApplicationRefreshTime().getFactoryReadOnly());
+			appRefreshTime.setValue(age.getApplicationRefreshTime().getUserSetting());
 			agcVO.setApplicationRefreshTime(appRefreshTime);
 			
 			StringAttributeVO fontName = new StringAttributeVO();
-			fontName.setValue(age.getFontName().getFactoryReadOnly());
+			fontName.setValue(age.getFontName().getUserSetting());
 			agcVO.setFontName(fontName);
 			
 			IntegerAttributeVO fontSize = new IntegerAttributeVO();
-			fontSize.setValue(age.getFontSize().getFactoryReadOnly());
+			fontSize.setValue(age.getFontSize().getUserSetting());
 			agcVO.setFontSize(fontSize);
 			
 			BooleanAttributeVO showAllGreenApp = new BooleanAttributeVO();
-			showAllGreenApp.setValue(age.getShowAllGreenApplications().isFactoryReadOnly());
+			showAllGreenApp.setValue(age.getShowAllGreenApplications().isUserSetting());
 			agcVO.setShowAllGreenApplications(showAllGreenApp);
 		}
 		
