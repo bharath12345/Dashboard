@@ -70,7 +70,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
                         splitter:false,
                         style:"width:"+paneWidth,
                         content:this.getInnerDivString(attribute),
-                        title:attribute,
+                        title:i18nString[attribute],
                         toggleable:true
                     });
                     gridContainer.addChild(titlePane, 0);

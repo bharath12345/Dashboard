@@ -37,8 +37,10 @@ define(["dojo/_base/declare", "dojo/i18n", "noc/Logger",
                 var showAllGreenApplications = "showAllGreenApplications";
                 if(gridConfig[showAllGreenApplications] != null) {
                     values = ["True", "False"];
-                    var rb = new RadioButton();
-                    IncidentGrid.SHOWALLGREEN = rb.renderRadioButton(gridConfig[showAllGreenApplications],showAllGreenApplications, values);
+                    //var rb = new RadioButton();
+                    //IncidentGrid.SHOWALLGREEN = rb.renderRadioButton(gridConfig[showAllGreenApplications],showAllGreenApplications, values);
+                    var cb = new ComboBox();
+                    IncidentGrid.FONTNAME = cb.renderComboBox(gridConfig[showAllGreenApplications], showAllGreenApplications, values);
                 }
             },
 

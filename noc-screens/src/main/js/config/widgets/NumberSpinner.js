@@ -30,6 +30,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/form/NumberSpinner",
                     smallDelta: delta,
                     constraints: { min:min, max:max, places:0 }
                 }, node);
+                if(type != CONSTANTS.DIVTYPE.USER) {
+                    numberSpinner.set('disabled','disabled');
+                }
                 return numberSpinner;
             }
         });

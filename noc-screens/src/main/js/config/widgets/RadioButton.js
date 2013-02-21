@@ -18,6 +18,10 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/form/RadioButton", "noc/Logger
                 var node = Utility.getConfigDiv(attribute, type);
                 radioButtonList[type] = [];
                 for(var i=0;i<values.length;i++) {
+                    var innerDiv = dojo.create("div");
+                    innerDiv.style = "width: 100%; height: 100%;";
+                    node.appendChild(innerDiv);
+
                     var checked = false;
                     if(i==0) {checked = true;}
 
@@ -26,9 +30,12 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/form/RadioButton", "noc/Logger
                         checked: checked,
                         name: attribute,
                         value: values[i]
-                    });
+                    }, innerDiv);
+
+                    if(type != CONSTANTS.DIVTYPE.USER) {
+                        radioButton.set('disabled','disabled');
+                    }
                     radioButtonList[type][values[i]] = radioButton;
-                    node.appendChild(radioButton.domNode);
                 }
             }
         });
