@@ -24,6 +24,7 @@ noc-screens/src/main/js/dojox/
 noc-screens/src/main/js/util/
 noc-screens/src/main/js/uncompressed/
 noc-screens/src/main/js/dojo-release-1.8.1-src
+noc-screens/src/main/js/dojo-release-1.8.3-src
 
 dashboard/src/main/js/dojo/
 dashboard/src/main/js/dijit/
@@ -31,3 +32,4 @@ dashboard/src/main/js/dojox/
 dashboard/src/main/js/util/
 dashboard/src/main/js/uncompressed/
 dashboard/src/main/js/dojo-release-1.8.1-src
+dashboard/src/main/js/dojo-release-1.8.3-src

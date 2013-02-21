@@ -1,23 +1,23 @@
 package com.appnomic.noc.config;
 
-import com.appnomic.noc.config.entity.AlertGridEntity;
+import com.appnomic.noc.config.entity.ClusterGridEntity;
 import com.appnomic.noc.config.entity.ConfigEntity;
 import com.google.gson.Gson;
 
-public class AlertGridConfigManager implements ConfigManager {
-	private static final AlertGridConfigManager agcm = new AlertGridConfigManager();
+public class ClusterGridConfigManager implements ConfigManager {
+	private static final ClusterGridConfigManager agcm = new ClusterGridConfigManager();
 	private static final Gson gson = new Gson();
-	private static final String classKey = AlertGridEntity.class.getName();
+	private static final String classKey = ClusterGridEntity.class.getName();
 	
-	private AlertGridConfigManager() {		
+	private ClusterGridConfigManager() {		
 	}
 	
-	public static final AlertGridConfigManager getInstance() {
+	public static final ClusterGridConfigManager getInstance() {
 		return agcm;
 	}
 
 	public ConfigEntity getConfig() {
-		AlertGridEntity age = null;
+		ClusterGridEntity age = null;
 		LevelDBManager instance = null;
 		try {
 			instance = LevelDBManager.getInstance();
@@ -25,10 +25,10 @@ public class AlertGridConfigManager implements ConfigManager {
 			System.out.println("retrieving: key = " + classKey);
 			String json = instance.read(classKey);
 			if(json==null) {
-				DefaultTableCreator.createAlertGridDefaultConfig();
+				DefaultTableCreator.createClusterGridDefaultConfig();
 				json = instance.read(classKey);
 			}
-			age = gson.fromJson(json, AlertGridEntity.class);
+			age = gson.fromJson(json, ClusterGridEntity.class);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -44,7 +44,7 @@ public class AlertGridConfigManager implements ConfigManager {
 		try {
 			instance = LevelDBManager.getInstance();
 			//instance.init();
-			AlertGridEntity age = (AlertGridEntity)configEntity;
+			ClusterGridEntity age = (ClusterGridEntity)configEntity;
 			String json = gson.toJson(age);
 			System.out.println("saving: key = " + classKey + " value = " + json);
 			instance.write(classKey, json);

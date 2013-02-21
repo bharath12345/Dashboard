@@ -14,13 +14,16 @@
         <title>AppsOne NOC Screens Configuration UI</title>
 
         <link rel="shortcut icon" href="./images/favicon.ico"/>
+        
+        <style type="text/css">
+			@import url("./js/bootstrap/css/bootstrap.min.css");
+			@import url("./css/config.compressed.css");
+		</style>
 
         <!-- List of CSS -->
         <link rel="stylesheet" type="text/css" href="./js/dijit/themes/claro/claro.css"/>
         <link rel="stylesheet" type="test/css" href="./js/dgrid/css/dgrid.css"/>
         <link rel="stylesheet" type="test/css" href="./js/dgrid/css/skins/claro.css"/>
-        <link rel="stylesheet" type="test/css" href="./js/bootstrap/css/bootstrap.min.css"/>
-        <link rel="stylesheet" type="test/css" href="./css/config.compressed.css"/>
 
     <!-- List of JS. First one should always be Dojo -->
         <script type="text/javascript" data-dojo-config="async: 1, tlmSiblingOfDojo: 0, isDebug: 1" src="./js/dojo/dojo.js"></script>

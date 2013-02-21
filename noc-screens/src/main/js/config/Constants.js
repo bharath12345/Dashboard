@@ -21,6 +21,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!config/nls/conf
         CONSTANTS.CLASSNAME.COMBOBOX = "config.widgets.ComboBox";
         CONSTANTS.CLASSNAME.NUMBERSPINNER = "config.widgets.NumberSpinner";
         CONSTANTS.CLASSNAME.RADIOBUTTON = "config.widgets.RadioButton";
+        CONSTANTS.CLASSNAME.CHECKEDMULTISELECT = "config.widgets.CheckedMultiSelect";
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         CONSTANTS.TYPE = {};
@@ -30,6 +31,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!config/nls/conf
 
         CONSTANTS.SAVE = {};
         CONSTANTS.SAVE.INCIDENTGRID = 1;
+        CONSTANTS.SAVE.CLUSTERGRID = 2;
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         CONSTANTS.ACTION = {};
@@ -37,6 +39,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!config/nls/conf
 
         CONSTANTS.ACTION.ALERTGRIDATTRIBUTES = "config/alertGridDetailsRetrieve.action";
         CONSTANTS.ACTION.ALERTGRIDSAVE = "config/alertGridDetailsSave.action";
+        CONSTANTS.ACTION.CLUSTERGRIDSAVE = "config/clusterGridDetailsSave";
 
         CONSTANTS.ACTION.CLUSTERGRIDATTRIBUTES = "config/clusterGridDetailsRetrieve.action";
         CONSTANTS.ACTION.TRANSACTIONGRIDATTRIBUTES = "config/transactionGridDetailsRetrieve.action";

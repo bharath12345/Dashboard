@@ -6,17 +6,17 @@ import com.appnomic.noc.config.attribute.*;
 
 public class GlobalSetting {
 
-	List<IntegerAttribute> screenList;
+	StringAttribute [] screenOrder;
 	IntegerAttribute screenRefreshTime;
 	
-	public List<IntegerAttribute> getScreenList() {
-		return screenList;
-	}
-	public void setScreenList(List<IntegerAttribute> screenList) {
-		this.screenList = screenList;
-	}
 	public IntegerAttribute getScreenRefreshTime() {
 		return screenRefreshTime;
+	}
+	public StringAttribute[] getScreenOrder() {
+		return screenOrder;
+	}
+	public void setScreenOrder(StringAttribute[] screenOrder) {
+		this.screenOrder = screenOrder;
 	}
 	public void setScreenRefreshTime(IntegerAttribute screenRefreshTime) {
 		this.screenRefreshTime = screenRefreshTime;
