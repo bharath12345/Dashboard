@@ -61,8 +61,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "dojo/reques
                                     });
                                     Utility.ESCAPE_DIALOG.show();
                                 } else {
-                                    Utility.ESCAPE_DIALOG.content = content;
-                                    Utility.ESCAPE_DIALOG.title = title;
+                                    Utility.ESCAPE_DIALOG.attr("content", content);
+                                    Utility.ESCAPE_DIALOG.attr("title", title);
                                     Utility.ESCAPE_DIALOG.show();
                                 }
                             } else {
@@ -96,8 +96,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "dojo/reques
                                     });
                                     Utility.SPACE_DIALOG.show();
                                 } else {
-                                    Utility.SPACE_DIALOG.content = content;
-                                    Utility.SPACE_DIALOG.title = title;
+                                    Utility.SPACE_DIALOG.attr("content", content);
+                                    Utility.ESCAPE_DIALOG.attr("title", title);
                                     Utility.SPACE_DIALOG.show();
                                 }
                             } else {

@@ -135,7 +135,7 @@ public class AlertInfoAction extends AbstractNocAction  {
 		return SUCCESS;
 	}
 	
-	/*private void setDummyApplicationData(String applicationName, ApplicationDataVO applicationDataVO) {
+	private void setDummyApplicationData(String applicationName, ApplicationDataVO applicationDataVO) {
 		MetricData [] metricDataset = new MetricData[5];
 		applicationDataVO.setMetrics(metricDataset);
 		applicationDataVO.setApplicationName(applicationName);
@@ -157,7 +157,7 @@ public class AlertInfoAction extends AbstractNocAction  {
 		metricDataset.setCount(counts);
 		metricDataset.setName(category.name());
 		return metricDataset;
-	}*/
+	}
 	
 	@Action(value="/alert/ApplicationData", results = {
 	        @Result(name="success", type="json", params = {
@@ -196,23 +196,24 @@ public class AlertInfoAction extends AbstractNocAction  {
 		applicationDataVO.setApplicationName(applicationName);
 		
 		AlertCountSummary acs = null;
-		try {
+		/*try {
 			acs = alertDataService.getCountSummary(id, startEndTimes[0], startEndTimes[1]);
 		} catch (InvalidTimeIntervalException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		/*if(acs == null) {
-			System.out.println("Actual alerts were NOT found. Displaying dummy data");
-			setDummyApplicationData(applicationName, applicationDataVO);
-			return SUCCESS;
-		}*/
-		
 		metricDataset[0] = getMetricData(acs, SUMMARY_CATEGORY.COMPONENT_ANALYTIC);
 		metricDataset[1] = getMetricData(acs, SUMMARY_CATEGORY.COMPONENT_AVAILABILITY);
 		metricDataset[2] = getMetricData(acs, SUMMARY_CATEGORY.COMPONENT_STATIC);
 		metricDataset[3] = getMetricData(acs, SUMMARY_CATEGORY.TRANSACTION_BATCH_ANALYTIC);
 		metricDataset[4] = getMetricData(acs, SUMMARY_CATEGORY.TRANSACTION_ONLINE_ANALYTIC);
+		*/
+		
+		if(acs == null) {
+			System.out.println("Actual alerts were NOT found. Displaying dummy data");
+			setDummyApplicationData(applicationName, applicationDataVO);
+			return SUCCESS;
+		}
 		
 		return SUCCESS;
 	}

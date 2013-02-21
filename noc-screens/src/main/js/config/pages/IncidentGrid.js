@@ -16,29 +16,56 @@ define(["dojo/_base/declare", "dojo/i18n", "noc/Logger",
                 }
 
                 var applicationRefreshTime = "applicationRefreshTime";
-                var ns = new NumberSpinner();
-                IncidentGrid.APPLICATIONREFRESHTIME = ns.renderNumberSpinner(gridConfig[applicationRefreshTime].userSetting, applicationRefreshTime, 10, 60, 1);
+                if(gridConfig[applicationRefreshTime] != null) {
+                    var ns = new NumberSpinner();
+                    IncidentGrid.APPLICATIONREFRESHTIME = ns.renderNumberSpinner(gridConfig[applicationRefreshTime].userSetting, applicationRefreshTime, 10, 60, 1);
+                }
 
                 var fontName = "fontName";
-                var values = ["Arial", "Verdana", "Times New Roman"];
-                var cb = new ComboBox();
-                IncidentGrid.FONTNAME = cb.renderComboBox(gridConfig[fontName], fontName, values);
+                if(gridConfig[fontName] != null) {
+                    var values = ["Arial", "Verdana", "Times New Roman"];
+                    var cb = new ComboBox();
+                    IncidentGrid.FONTNAME = cb.renderComboBox(gridConfig[fontName], fontName, values);
+                }
 
                 var fontSize = "fontSize";
-                var nss = new NumberSpinner();
-                IncidentGrid.FONTSIZE = nss.renderNumberSpinner(gridConfig[fontSize], fontSize, 6, 20, 1);
+                if(gridConfig[fontSize] != null) {
+                    var nss = new NumberSpinner();
+                    IncidentGrid.FONTSIZE = nss.renderNumberSpinner(gridConfig[fontSize], fontSize, 6, 20, 1);
+                }
 
                 var showAllGreenApplications = "showAllGreenApplications";
-                values = ["True", "False"];
-                var rb = new RadioButton();
-                IncidentGrid.SHOWALLGREEN = rb.renderRadioButton(gridConfig[showAllGreenApplications],showAllGreenApplications, values);
+                if(gridConfig[showAllGreenApplications] != null) {
+                    values = ["True", "False"];
+                    var rb = new RadioButton();
+                    IncidentGrid.SHOWALLGREEN = rb.renderRadioButton(gridConfig[showAllGreenApplications],showAllGreenApplications, values);
+                }
             },
 
             saveValues: function() {
-                var refreshTime = IncidentGrid.APPLICATIONREFRESHTIME[CONSTANTS.DIVTYPE.USER].get('value');
-                var fontName = IncidentGrid.FONTNAME[CONSTANTS.DIVTYPE.USER].get('value');
-                var fontSize = IncidentGrid.FONTSIZE[CONSTANTS.DIVTYPE.USER].get('value');
-                var showGreenApp = null;//IncidentGrid.SHOWALLGREEN[CONSTANTS.DIVTYPE.USER].get('value');
+                var refreshTime, fontName, fontSize, showGreenApp;
+                if(IncidentGrid.APPLICATIONREFRESHTIME != null) {
+                    refreshTime = IncidentGrid.APPLICATIONREFRESHTIME[CONSTANTS.DIVTYPE.USER].get('value');
+                }
+                if(IncidentGrid.FONTNAME != null) {
+                    fontName = IncidentGrid.FONTNAME[CONSTANTS.DIVTYPE.USER].get('value');
+                }
+                if(IncidentGrid.FONTSIZE != null) {
+                    fontSize = IncidentGrid.FONTSIZE[CONSTANTS.DIVTYPE.USER].get('value');
+                }
+                if(IncidentGrid.SHOWALLGREEN != null) {
+                    showGreenApp = null;//IncidentGrid.SHOWALLGREEN[CONSTANTS.DIVTYPE.USER].get('value');
+                }
+
+                var saveData = {
+                    type: CONSTANTS.TYPE.SAVE,
+                    saveType: CONSTANTS.SAVE.INCIDENTGRID,
+                    refreshTime:refreshTime,
+                    fontName:fontName,
+                    fontSize:fontSize,
+                    showGreenApp:showGreenApp
+                };
+                Utility.xhrPostCentral(CONSTANTS.ACTION.ALERTGRIDSAVE, saveData);
                 console.log("refreshTime = " + refreshTime + " fontName = " + fontName + " fontSize = " + fontSize + " showGreen = " + showGreenApp);
             }
         });

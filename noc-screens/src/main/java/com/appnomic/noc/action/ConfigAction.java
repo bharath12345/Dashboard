@@ -134,17 +134,65 @@ public class ConfigAction extends AbstractNocAction {
 	            })})
 	public String alertGridDetailsSaveAction() {
 		param = getParameters();
+		
+		Integer refreshTime = getInteger("refreshTime");
+		Integer fontSize = getInteger("fontSize");
+		Boolean showGreenApp = getBoolean("showGreenApp");
+		String fontName = (parameters.get("fontName")[0]);
+		
 		AlertGridConfigManager agcm = AlertGridConfigManager.getInstance();
-		AlertGridEntity age =  new AlertGridEntity();
-		age.setFontName(new StringAttribute("Arial", "Arial", "Arial"));
-		age.setFontSize(new IntegerAttribute(12, 12, 12));
-		age.setShowAllGreenApplications(new BooleanAttribute(true, true, true));
-		age.setApplicationRefreshTime(new IntegerAttribute(60,60,60));
-		agcm.saveConfig(age);
+		age = (AlertGridEntity)agcm.getConfig();
+		AlertGridEntity newAge =  new AlertGridEntity();
+		
+		if(fontName != null) {
+			newAge.setFontName(new StringAttribute("Arial", "Arial", fontName));
+		} else {
+			newAge.setFontName(age.getFontName());
+		}
+		
+		if(fontSize != null) {
+			newAge.setFontSize(new IntegerAttribute(12, 12, fontSize));	
+		} else {
+			newAge.setFontSize(age.getFontSize());
+		}
+		
+		if(showGreenApp != null) {
+			newAge.setShowAllGreenApplications(new BooleanAttribute(true, true, showGreenApp));
+		} else {
+			newAge.setShowAllGreenApplications(age.getShowAllGreenApplications());
+		}
+		
+		if(refreshTime != null) {
+			newAge.setApplicationRefreshTime(new IntegerAttribute(60,60,refreshTime));
+		} else {
+			newAge.setApplicationRefreshTime(age.getApplicationRefreshTime());
+		}
+		
+		agcm.saveConfig(newAge);
 		return SUCCESS;
 	}
+		
+	private Integer getInteger(String name) {
+		Integer myint = null;
+		try {
+			myint = Integer.parseInt(parameters.get(name)[0]);
+		} catch(Exception e) {
+			//e.printStackTrace();
+		}
+		return myint;
+	}
 	
-	@Action(value="/config/applicableAlertGridDetailsRetrive", results = {
+	private Boolean getBoolean(String name) {
+		Boolean mybool = null;
+		try {
+			mybool = Boolean.parseBoolean(parameters.get(name)[0]);
+		} catch(Exception e) {
+			//e.printStackTrace();
+		}
+		return mybool;
+	}
+	
+	@Action(value="/config/applicableAlertGridDetailsRetrieve", results = {
 	        @Result(name="success", type="json", params = {
 	        		"excludeProperties",
 	                "parameters,session,SUCCESS,ERROR,age,pageListVO,levelDbMap",

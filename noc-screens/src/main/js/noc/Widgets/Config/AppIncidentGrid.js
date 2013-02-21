@@ -3,7 +3,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Logger"
 
     function (declare, i18n, i18nString, Logger, CONSTANTS, Utility, IncidentPage, ApplicationGrid) {
 
-        var AppAlertGrid = declare(CONSTANTS.CLASSNAME.WIDGETS.CONFIG.APPALERTGRID, null, {
+        var AppAlertGrid = declare(CONSTANTS.CLASSNAME.WIDGETS.CONFIG.APPINCIDENTGRID, null, {
 
             applyConfig:function (data) {
 
@@ -32,7 +32,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Logger"
 
         });
 
-        AppAlertGrid.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.WIDGETS.CONFIG.APPALERTGRID));
+        AppAlertGrid.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.WIDGETS.CONFIG.APPINCIDENTGRID));
 
         return AppAlertGrid;
     });

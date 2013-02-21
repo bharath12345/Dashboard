@@ -12,10 +12,21 @@ import org.iq80.leveldb.*;
 
 
 public class LevelDBManager {
-	private static final LevelDBManager LEVEL_DB_CONNECTION_MGR = new LevelDBManager();
-	private static final String DBPATH = "nocConfigDB";
+	private static LevelDBManager LEVEL_DB_CONNECTION_MGR;
+	private final static String DBPATH = "nocConfigDB";
+	private final static String characterSetEncoding = "UTF-8";
+	
+	static {
+		System.out.println("Initializing LevelDB...");
+		try {
+			LEVEL_DB_CONNECTION_MGR = new LevelDBManager();
+			System.out.println("Initializing LevelDB... Done.");
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	private DB nocConfigDB;
-	private static final String characterSetEncoding = "UTF-8";
 	private LevelDBLogger logger = new LevelDBLogger();
 
 	private LevelDBManager() {
@@ -27,11 +38,9 @@ public class LevelDBManager {
 	}
 
 	public void init() throws ExceptionInInitializerError {
-		String configDBFilePath = System.getProperty("catalina.base")
-				+ File.separator + DBPATH;
+		String configDBFilePath = System.getProperty("catalina.base") + File.separator + DBPATH;
 		if (configDBFilePath == null) {
-			throw new ExceptionInInitializerError(
-					"Unbale to init Config DB Specified file is NULL; please specify the correct path");
+			throw new ExceptionInInitializerError("Unbale to init Config DB Specified file is NULL; please specify the correct path");
 		}
 
 		Options options = new Options();
@@ -40,8 +49,7 @@ public class LevelDBManager {
 		options.logger(logger);
 		options.cacheSize(10 * 1048576); // 10MB cache
 
-		System.out.println("Creating the Configuration DB at "
-				+ configDBFilePath);
+		System.out.println("Creating the Configuration DB at "+ configDBFilePath);
 		try {
 			nocConfigDB = factory.open(new File(configDBFilePath), options);
 		} catch (IOException e) {
@@ -49,6 +57,7 @@ public class LevelDBManager {
 			throw new ExceptionInInitializerError(
 					"Unbale to init Config DB Please check log files for more errors");
 		}
+		
 	}
 
 	public void shutdown() {

@@ -9,13 +9,13 @@ public class AlertGridConfigManager implements ConfigManager {
 	private static final Gson gson = new Gson();
 	private static final String classKey = AlertGridEntity.class.getName();
 	
-	private AlertGridConfigManager() {
+	private AlertGridConfigManager() {		
 	}
 	
 	public static final AlertGridConfigManager getInstance() {
 		return agcm;
 	}
-	
+
 	public ConfigEntity getConfig() {
 		AlertGridEntity age = null;
 		LevelDBManager instance = null;
@@ -24,9 +24,11 @@ public class AlertGridConfigManager implements ConfigManager {
 			//instance.init();
 			System.out.println("retrieving: key = " + classKey);
 			String json = instance.read(classKey);
-			if(json!=null) {
-				age = gson.fromJson(json, AlertGridEntity.class);
+			if(json==null) {
+				DefaultTableCreator.createDefaultConfigTables();
+				json = instance.read(classKey);
 			}
+			age = gson.fromJson(json, AlertGridEntity.class);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

@@ -1,7 +1,7 @@
-define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!config/nls/config", "dojo/request/xhr",
+define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!config/nls/config", "dojo/request/xhr", "dijit/Dialog",
     "config/Constants", "noc/Logger"],
 
-    function (declare, i18n, i18nString, xhr, CONSTANTS, Logger) {
+    function (declare, i18n, i18nString, xhr, Dialog, CONSTANTS, Logger) {
 
         var Utility = declare(CONSTANTS.CLASSNAME.UTILITY, null, {});
 
@@ -40,10 +40,41 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!config/nls/config", "dojo/
                     Utility.handlePageConfig(data);
                     break;
 
+                case CONSTANTS.TYPE.SAVE:
+                    Utility.handleSave(data);
+                    break;
+
                 default:
                     console.log("unknown response type = " + type);
                     return;
             }
+        };
+
+        Utility.handleSave = function(data) {
+            var saveType = parseInt(data.param.saveType[0]);
+            var title = "Save Success", content;
+            switch(saveType) {
+                case CONSTANTS.SAVE.INCIDENTGRID:
+                    content = "Save of Alert Grid Configuration Successful.";
+                    break;
+
+                default:
+                    console.log("Unknown save type = " + saveType);
+                    return;
+            }
+
+            if(Utility.SAVE_DIALOG == null) {
+                Utility.SAVE_DIALOG = new Dialog({
+                    title: title,
+                    content: content
+                });
+                Utility.SAVE_DIALOG.show();
+            } else {
+                Utility.SAVE_DIALOG.attr("content", content);
+                Utility.SAVE_DIALOG.attr("title", title);
+                Utility.SAVE_DIALOG.show();
+            }
+            setTimeout(function(){config.Utility.SAVE_DIALOG.hide();}, 4*1000);
         };
 
         Utility.handleAccordion = function(data) {
@@ -103,6 +134,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!config/nls/config", "dojo/
             divToAdd.appendChild(node);
             return node;
         };
+
+        Utility.SAVE_DIALOG = null;
 
         return Utility;
     });

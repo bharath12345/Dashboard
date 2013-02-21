@@ -112,12 +112,12 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", 'dgrid/Grid'
                     id:"",
                     name:"",
                     type:CONSTANTS.TYPE.CONFIG,
-                    subtype:CONSTANTS.SUBTYPE.APPALERTGRID,
+                    subtype:CONSTANTS.SUBTYPE.APPINCIDENTGRID,
                     dimensions:[0, 0],
                     position:[0, 0],
                     custom:[]
                 };
-                Utility.xhrPostCentral(CONSTANTS.ACTION.CONFIG.APPALERTGRID, viewMeta);
+                Utility.xhrPostCentral(CONSTANTS.ACTION.CONFIG.APPINCIDENTGRID, viewMeta);
             }
 
         });

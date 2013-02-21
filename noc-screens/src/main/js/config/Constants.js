@@ -26,14 +26,21 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!config/nls/conf
         CONSTANTS.TYPE = {};
         CONSTANTS.TYPE.ACCORDION = 1;
         CONSTANTS.TYPE.PAGECONFIG = 2;
+        CONSTANTS.TYPE.SAVE = 3;
+
+        CONSTANTS.SAVE = {};
+        CONSTANTS.SAVE.INCIDENTGRID = 1;
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         CONSTANTS.ACTION = {};
         CONSTANTS.ACTION.PAGESET = "config/pages.action";
-        CONSTANTS.ACTION.ALERTGRIDATTRIBUTES = "config/alertGridDetailsRetrieve";
-        CONSTANTS.ACTION.CLUSTERGRIDATTRIBUTES = "config/clusterGridDetailsRetrieve";
-        CONSTANTS.ACTION.TRANSACTIONGRIDATTRIBUTES = "config/transactionGridDetailsRetrieve";
-        CONSTANTS.ACTION.TOPOLOGYATTRIBUTES = "config/topologyDetailsRetrieve";
+
+        CONSTANTS.ACTION.ALERTGRIDATTRIBUTES = "config/alertGridDetailsRetrieve.action";
+        CONSTANTS.ACTION.ALERTGRIDSAVE = "config/alertGridDetailsSave.action";
+
+        CONSTANTS.ACTION.CLUSTERGRIDATTRIBUTES = "config/clusterGridDetailsRetrieve.action";
+        CONSTANTS.ACTION.TRANSACTIONGRIDATTRIBUTES = "config/transactionGridDetailsRetrieve.action";
+        CONSTANTS.ACTION.TOPOLOGYATTRIBUTES = "config/topologyDetailsRetrieve.action";
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         CONSTANTS.DIVTYPE = {};
