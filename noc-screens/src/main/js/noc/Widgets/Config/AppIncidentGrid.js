@@ -11,17 +11,19 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Logger"
                 var value = data.agcVO[applicationRefreshTime].value;
 
                 var fontName = "fontName";
-                value = data.agcVO[fontName].value;
+                var fontValue = data.agcVO[fontName].value;
 
                 var fontSize = "fontSize";
                 value = parseInt(data.agcVO[fontSize].value);
-                if(value < 10) {
+                if(value < 6) {
                     value = 18;
                 }
                 console.log("font size retrived = " + value);
-                var cell = dojo.query(".dgrid-cell", IncidentPage.CP.domNode);
+                var cell = dojo.query(".dgrid-cell, .label", IncidentPage.CP.domNode);
                 for (var i = 0; i < cell.length; i++) {
                     cell[i].style.fontSize = value;
+                    cell[i].style.verticalAlign = "middle";
+                    cell[i].style.fontFamily = fontValue;
                 }
 
                 var showAllGreenApplications = "showAllGreenApplications";

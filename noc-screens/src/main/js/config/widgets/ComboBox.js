@@ -5,7 +5,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/store/Memory", "dijit/form/Comb
     function (declare, i18n, Memory, DojoComboBox, Logger, Utility, CONSTANTS, i18nString) {
 
         var ComboBox = declare(CONSTANTS.CLASSNAME.COMBOBOX, null, {
-            renderComboBox: function(attribData, attribute, values) {
+            renderComboBox: function(userData, attribute, values) {
 
                 var comboBoxStore = new Memory();
                 for(var i=0;i<values.length;i++) {
@@ -16,18 +16,18 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/store/Memory", "dijit/form/Comb
                 var comboBoxList = [];
 
                 var type = CONSTANTS.DIVTYPE.USER;
-                comboBoxList[CONSTANTS.DIVTYPE.USER] = this.getComboBox(attribute, type, values[0], comboBoxStore);
+                comboBoxList[CONSTANTS.DIVTYPE.USER] = this.getComboBox(attribute, type, comboBoxStore, userData);
 
                 type = CONSTANTS.DIVTYPE.ADMIN;
-                comboBoxList[CONSTANTS.DIVTYPE.ADMIN] = this.getComboBox(attribute, type, values[0], comboBoxStore);
+                comboBoxList[CONSTANTS.DIVTYPE.ADMIN] = this.getComboBox(attribute, type, comboBoxStore, "");
 
                 type = CONSTANTS.DIVTYPE.FACTORY;
-                comboBoxList[CONSTANTS.DIVTYPE.FACTORY] = this.getComboBox(attribute, type, values[0], comboBoxStore);
+                comboBoxList[CONSTANTS.DIVTYPE.FACTORY] = this.getComboBox(attribute, type, comboBoxStore, "");
 
                 return comboBoxList;
             },
 
-            getComboBox: function(attribute, type, selectedValue, comboBoxStore) {
+            getComboBox: function(attribute, type, comboBoxStore, selectedValue) {
                 var node = Utility.getConfigDiv(attribute, type);
                 var comboBox = new DojoComboBox({
                     id: attribute + type + ComboBox.POSTFIX,

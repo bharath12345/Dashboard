@@ -6,28 +6,29 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/form/NumberSpinner",
 
         var NumberSpinner = declare(CONSTANTS.CLASSNAME.NUMBERSPINNER, null, {
 
-            renderNumberSpinner: function(attribData, attribute, min, max, delta) {
+            renderNumberSpinner: function(userData, attribute, min, max, delta) {
                 console.log("creating number spinner in attrib = " + attribute);
 
                 var numberSpinnerList = [];
 
                 var type = CONSTANTS.DIVTYPE.USER;
-                numberSpinnerList[CONSTANTS.DIVTYPE.USER] = this.getNumberSpinner(attribute, type, min, max, delta);
+                numberSpinnerList[CONSTANTS.DIVTYPE.USER] = this.getNumberSpinner(attribute, type, min, max, delta, userData);
 
                 type = CONSTANTS.DIVTYPE.ADMIN;
-                numberSpinnerList[CONSTANTS.DIVTYPE.ADMIN] = this.getNumberSpinner(attribute, type, min, max, delta);
+                numberSpinnerList[CONSTANTS.DIVTYPE.ADMIN] = this.getNumberSpinner(attribute, type, min, max, delta, "");
 
                 type = CONSTANTS.DIVTYPE.FACTORY;
-                numberSpinnerList[CONSTANTS.DIVTYPE.FACTORY] = this.getNumberSpinner(attribute, type, min, max, delta);
+                numberSpinnerList[CONSTANTS.DIVTYPE.FACTORY] = this.getNumberSpinner(attribute, type, min, max, delta, "");
 
                 return numberSpinnerList;
             },
 
-            getNumberSpinner: function(attribute, type, min, max, delta) {
+            getNumberSpinner: function(attribute, type, min, max, delta, data) {
                 var node = Utility.getConfigDiv(attribute, type);
                 var numberSpinner = new DojoNumberSpinner({
                     id: attribute + type + NumberSpinner.POSTFIX,
                     smallDelta: delta,
+                    value: data,
                     constraints: { min:min, max:max, places:0 }
                 }, node);
                 if(type != CONSTANTS.DIVTYPE.USER) {

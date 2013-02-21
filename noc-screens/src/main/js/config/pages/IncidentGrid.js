@@ -23,24 +23,24 @@ define(["dojo/_base/declare", "dojo/i18n", "noc/Logger",
 
                 var fontName = "fontName";
                 if(gridConfig[fontName] != null) {
-                    var values = ["Arial", "Verdana", "Times New Roman"];
+                    var values = ["Arial", "Verdana", "Times New Roman", "Helvetica"];
                     var cb = new ComboBox();
-                    IncidentGrid.FONTNAME = cb.renderComboBox(gridConfig[fontName], fontName, values);
+                    IncidentGrid.FONTNAME = cb.renderComboBox(gridConfig[fontName].userSetting, fontName, values);
                 }
 
                 var fontSize = "fontSize";
                 if(gridConfig[fontSize] != null) {
                     var nss = new NumberSpinner();
-                    IncidentGrid.FONTSIZE = nss.renderNumberSpinner(gridConfig[fontSize], fontSize, 6, 20, 1);
+                    IncidentGrid.FONTSIZE = nss.renderNumberSpinner(gridConfig[fontSize].userSetting, fontSize, 6, 50, 1);
                 }
 
                 var showAllGreenApplications = "showAllGreenApplications";
                 if(gridConfig[showAllGreenApplications] != null) {
-                    values = ["True", "False"];
+                    values = ["true", "false"];
                     //var rb = new RadioButton();
                     //IncidentGrid.SHOWALLGREEN = rb.renderRadioButton(gridConfig[showAllGreenApplications],showAllGreenApplications, values);
                     var cb = new ComboBox();
-                    IncidentGrid.FONTNAME = cb.renderComboBox(gridConfig[showAllGreenApplications], showAllGreenApplications, values);
+                    IncidentGrid.SHOWALLGREEN = cb.renderComboBox(gridConfig[showAllGreenApplications].userSetting, showAllGreenApplications, values);
                 }
             },
 
@@ -50,13 +50,13 @@ define(["dojo/_base/declare", "dojo/i18n", "noc/Logger",
                     refreshTime = IncidentGrid.APPLICATIONREFRESHTIME[CONSTANTS.DIVTYPE.USER].get('value');
                 }
                 if(IncidentGrid.FONTNAME != null) {
-                    fontName = IncidentGrid.FONTNAME[CONSTANTS.DIVTYPE.USER].get('value');
+                    fontName = IncidentGrid.FONTNAME[CONSTANTS.DIVTYPE.USER].domNode.childNodes[2].childNodes[0].value;
                 }
                 if(IncidentGrid.FONTSIZE != null) {
                     fontSize = IncidentGrid.FONTSIZE[CONSTANTS.DIVTYPE.USER].get('value');
                 }
                 if(IncidentGrid.SHOWALLGREEN != null) {
-                    showGreenApp = null;//IncidentGrid.SHOWALLGREEN[CONSTANTS.DIVTYPE.USER].get('value');
+                    showGreenApp = IncidentGrid.SHOWALLGREEN[CONSTANTS.DIVTYPE.USER].domNode.childNodes[2].childNodes[0].value;;
                 }
 
                 var saveData = {
