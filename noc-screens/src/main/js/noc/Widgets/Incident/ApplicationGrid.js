@@ -29,10 +29,10 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", 'dgrid/Grid'
                     }
                     gridata.push(row);
                 }
-                var grid = new Grid({columns: columnMeta}, data.name);
-                grid.renderArray(gridata);
+                ApplicationGrid.Grid = new Grid({columns: columnMeta}, data.name);
+                ApplicationGrid.Grid.renderArray(gridata);
 
-                var textNode = dojo.query(".dgrid-cell", grid.domNode);
+                var textNode = dojo.query(".dgrid-cell", ApplicationGrid.Grid.domNode);
                 console.log("count of dgrid cells = " + textNode.length);
                 for (var i = 0; i < textNode.length; i++) {
                     textNode[i].style.fontSize = "12px";
@@ -112,12 +112,12 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", 'dgrid/Grid'
                     id:"",
                     name:"",
                     type:CONSTANTS.TYPE.CONFIG,
-                    subtype:CONSTANTS.SUBTYPE.APPINCIDENTGRID,
+                    subtype:CONSTANTS.SUBTYPE.APPALERTGRID,
                     dimensions:[0, 0],
                     position:[0, 0],
                     custom:[]
                 };
-                Utility.xhrPostCentral(CONSTANTS.ACTION.CONFIG.APPINCIDENTGRID, viewMeta);
+                Utility.xhrPostCentral(CONSTANTS.ACTION.CONFIG.APPALERTGRID, viewMeta);
             }
 
         });
@@ -128,6 +128,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", 'dgrid/Grid'
         ApplicationGrid.APP_COUNTER = 0;
         ApplicationGrid.APP_STAGGER_PERIOD = 3;
         ApplicationGrid.CONFIG_PERIOD = 5;
+        ApplicationGrid.Grid = null;
 
         ApplicationGrid.TIMERS = [];
 
