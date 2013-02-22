@@ -8,7 +8,10 @@ define({
         applicationRefreshTime: "Application Refresh Time",
         fontName: "Font Name",
         fontSize: "Font Size",
-        showAllGreenApplications: "Show All Green Applications"
+        showAllGreenApplications: "Show All Green Applications",
+
+        clusterNames: "Select Clusters",
+        clusterRefreshTime: "Cluster Refresh Time"
 
     }),
 

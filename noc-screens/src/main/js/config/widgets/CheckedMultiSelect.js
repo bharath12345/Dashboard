@@ -1,56 +1,58 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojox/form/CheckedMultiSelect", "dijit/form/Button", "dojo/_base/lang",
-    "noc/Logger",
-    "config/Utility", "config/Constants", "dojo/i18n!config/nls/config"],
+    "noc/Logger", "config/Utility", "config/Constants", "dojo/i18n!config/nls/config"],
 
     function (declare, i18n, DojoCheckedMultiSelect, Button, lang, Logger, Utility, CONSTANTS, i18nString) {
 
         var CheckedMultiSelect = declare(CONSTANTS.CLASSNAME.CHECKEDMULTISELECT, null, {
+
             renderCheckedMultiSelect: function(selectedValues, attribute, restValues) {
 
-                var checkedMSList = [];
-
                 var type = CONSTANTS.DIVTYPE.USER;
-                checkedMSList[CONSTANTS.DIVTYPE.USER] = this.getCMSL(attribute, type, selectedValues, restValues);
+                CheckedMultiSelect.checkedMSList[CONSTANTS.DIVTYPE.USER] = this.getCMSL(attribute, type, selectedValues, restValues);
 
                 /*type = CONSTANTS.DIVTYPE.ADMIN;
-                checkedMSList[CONSTANTS.DIVTYPE.ADMIN] = this.getCMSL(attribute, type, "");
+                 CheckedMultiSelect.checkedMSList[CONSTANTS.DIVTYPE.ADMIN] = this.getCMSL(attribute, type, "");
 
-                type = CONSTANTS.DIVTYPE.FACTORY;
-                checkedMSList[CONSTANTS.DIVTYPE.FACTORY] = this.getCMSL(attribute, type, "");
-                */
+                 type = CONSTANTS.DIVTYPE.FACTORY;
+                 CheckedMultiSelect.checkedMSList[CONSTANTS.DIVTYPE.FACTORY] = this.getCMSL(attribute, type, "");
+                 */
 
-                return checkedMSList;
+                return CheckedMultiSelect.checkedMSList;
             },
 
             getCMSL: function(attribute, type, selectedValue, restValues) {
                 var node = Utility.getConfigDiv(attribute, type);
-                this.createSkeleton(node);
+                this.createSkeleton(node, type);
 
-                CheckedMultiSelect.lhsCMS = this.makeCMS(restValues, "lhsSelect");
-                CheckedMultiSelect.rhsCMS = this.makeCMS(selectedValue, "rhsSelect");
+                var cmsl = [];
+                cmsl[0] = this.makeCMS(restValues, "lhsSelect");
+                cmsl[1] = this.makeCMS(selectedValue, "rhsSelect");
 
                 if(type != CONSTANTS.DIVTYPE.USER) {
-                    lhsCMS.set('disabled','disabled');
-                    rhsCMS.set('disabled','disabled');
+                    cmsl[0].set('disabled','disabled');
+                    cmsl[1].set('disabled','disabled');
                 }
                 return cmsl;
             },
 
             makeCMS: function(values, id) {
                 var options = [];
-                for(var i=0;i<values;i++) {
+                if(values == null || values == undefined) {
+                    values = [];
+                }
+                for(var i=0;i<values.length;i++) {
+                    console.log("cms id = " + id + " value = " + values[i]);
                     options[i] = {label:values[i], value:values[i], selected:false};
                 }
-                var CMS = new CheckedMultiSelect({
+                var CMS = new DojoCheckedMultiSelect({
                     multiple:true,
-                    name:"multiselect",
-                    style:CheckedMultiSelect.msStyle
+                    name:"multiselect"
                 }, id);
                 CMS.addOption(options);
                 return CMS;
             },
 
-            createSkeleton: function(node) {
+            createSkeleton: function(node, type) {
                 var table = dojo.create("table");
                 node.appendChild(table);
 
@@ -73,18 +75,48 @@ define(["dojo/_base/declare", "dojo/i18n", "dojox/form/CheckedMultiSelect", "dij
                 var addButtonObj = new Button({label:"Add"}, tempAdd);
                 var removeButtonObj = new Button({label:"Remove"}, tempRemove);
 
-                dojo.connect(addButtonObj, "onClick", lang.hitch(this, "moveLhsToRhs"));
-                dojo.connect(removeButtonObj, "onClick", lang.hitch(this, "moveRhsToLhs"));
+                if(type == CONSTANTS.DIVTYPE.USER) {
+                    dojo.connect(addButtonObj, "onClick", lang.hitch(this, "moveUserLhsToRhs"));
+                    dojo.connect(removeButtonObj, "onClick", lang.hitch(this, "moveUserRhsToLhs"));
+                } else if(type == CONSTANTS.DIVTYPE.ADMIN) {
+                    dojo.connect(addButtonObj, "onClick", lang.hitch(this, "moveAdminLhsToRhs"));
+                    dojo.connect(removeButtonObj, "onClick", lang.hitch(this, "moveAdminRhsToLhs"));
+                } else if(type == CONSTANTS.DIVTYPE.FACTORY) {
+                    dojo.connect(addButtonObj, "onClick", lang.hitch(this, "moveFactoryLhsToRhs"));
+                    dojo.connect(removeButtonObj, "onClick", lang.hitch(this, "moveFactoryRhsToLhs"));
+                } else {
+                    console.log("unknown type = " + type);
+                }
 
                 col = dojo.create("td");
                 select = dojo.create("select");
                 select.id = "rhsSelect";
                 col.appendChild(select);
+                row.appendChild(col);
             },
 
-            moveLhsToRhs: function() {
-                var msLhsOptions = CheckedMultiSelect.lhsCMS.getOptions();
-                var msRhsOptions = CheckedMultiSelect.rhsCMS.getOptions();
+            moveUserLhsToRhs: function() {
+                this.moveLhsToRhs(CheckedMultiSelect.checkedMSList[CONSTANTS.DIVTYPE.USER][0], CheckedMultiSelect.checkedMSList[CONSTANTS.DIVTYPE.USER][1]);
+            },
+            moveUserRhsToLhs: function() {
+                this.moveRhsToLhs(CheckedMultiSelect.checkedMSList[CONSTANTS.DIVTYPE.USER][1]);
+            },
+            moveAdminLhsToRhs: function() {
+                this.moveLhsToRhs(CheckedMultiSelect.checkedMSList[CONSTANTS.DIVTYPE.ADMIN][0], CheckedMultiSelect.checkedMSList[CONSTANTS.DIVTYPE.ADMIN][1]);
+            },
+            moveAdminRhsToLhs: function() {
+                this.moveRhsToLhs(CheckedMultiSelect.checkedMSList[CONSTANTS.DIVTYPE.ADMIN][1]);
+            },
+            moveFactoryLhsToRhs: function() {
+                this.moveLhsToRhs(CheckedMultiSelect.checkedMSList[CONSTANTS.DIVTYPE.FACTORY][0], CheckedMultiSelect.checkedMSList[CONSTANTS.DIVTYPE.FACTORY][1]);
+            },
+            moveFactoryRhsToLhs: function() {
+                this.moveRhsToLhs(CheckedMultiSelect.checkedMSList[CONSTANTS.DIVTYPE.FACTORY][1]);
+            },
+
+            moveLhsToRhs: function(lhsCMS, rhsCMS) {
+                var msLhsOptions = lhsCMS.getOptions();
+                var msRhsOptions = rhsCMS.getOptions();
                 for (var i = 0; i < msLhsOptions.length; i++) {
                     if (msLhsOptions[i].selected == true) {
                         console.log("selected option = " + msLhsOptions[i].value + " label = " + msLhsOptions[i].label);
@@ -99,17 +131,17 @@ define(["dojo/_base/declare", "dojo/i18n", "dojox/form/CheckedMultiSelect", "dij
                             continue;
                         }
                         var newRhsOption = {label:msLhsOptions[i].value, value:msLhsOptions[i].value, selected:false};
-                        CheckedMultiSelect.rhsCMS.addOption(newRhsOption);
+                        rhsCMS.addOption(newRhsOption);
                     }
                 }
             },
 
-            moveRhsToLhs: function() {
-                var msRhsOptions = CheckedMultiSelect.rhsCMS.getOptions();
+            moveRhsToLhs: function(rhsCMS) {
+                var msRhsOptions = rhsCMS.getOptions();
                 for (var i = 0; i < msRhsOptions.length; i++) {
                     if (msRhsOptions[i].selected == true) {
                         console.log("selected option = " + msRhsOptions[i].value + " label = " + msRhsOptions[i].label);
-                        CheckedMultiSelect.rhsCMS.removeOption(msRhsOptions[i]);
+                        rhsCMS.removeOption(msRhsOptions[i]);
                     }
                 }
             }
@@ -117,9 +149,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojox/form/CheckedMultiSelect", "dij
 
         CheckedMultiSelect.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.CHECKEDMULTISELECT));
         CheckedMultiSelect.POSTFIX = "_CheckedMultiSelect";
-        CheckedMultiSelect.msStyle = "width: 250px, height:400px;";
-        CheckedMultiSelect.lhsCMS = null;
-        CheckedMultiSelect.rhsCMS = null;
+        CheckedMultiSelect.checkedMSList = [];
 
         return CheckedMultiSelect;
     });

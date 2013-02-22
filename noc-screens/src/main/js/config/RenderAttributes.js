@@ -13,7 +13,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
 
                 var tc = this.createTabs();
 
-                this.createTitlePaneGrid(pageObj.getAttrib(data));
+                this.createTitlePaneGrid(pageObj.getAttrib(data), pageObj.getAttribIgnoreList());
                 this.createToolbarButtons();
 
                 // all the title panes have been rendered - now render the innards
@@ -56,7 +56,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
                 return tc;
             },
 
-            createTitlePaneGrid: function(attribContainer) {
+            createTitlePaneGrid: function(attribContainer, ignoreList) {
                 var paneWidth = RenderAttributes.LOOKNFEELPANE.domNode.offsetWidth;
                 var paneHeight = RenderAttributes.LOOKNFEELPANE.domNode.offsetHeight;
                 var styleString = "width: " + paneWidth + "; height: " + paneHeight + ";";
@@ -68,6 +68,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
                 gridContainer.disableDnd();
 
                 for(var attribute in attribContainer) {
+                    if(ignoreList[attribute]!=null) {
+                        continue;
+                    }
                     var titlePane = new TitlePane({
                         splitter:false,
                         style:"width:"+paneWidth,

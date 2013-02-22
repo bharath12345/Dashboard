@@ -9,6 +9,12 @@ define(["dojo/_base/declare", "dojo/i18n", "noc/Logger",
                 return data.cge;
             },
 
+            getAttribIgnoreList: function() {
+                var ignore = [];
+                ignore["allUserClusters"] = "allUserClusters";
+                return ignore;
+            },
+
             renderAttributes: function(data) {
                 var gridConfig = data.cge;
                 for(var attribute in gridConfig) {
@@ -27,20 +33,24 @@ define(["dojo/_base/declare", "dojo/i18n", "noc/Logger",
 
                 var clusterNames = "clusterNames";
                 if(gridConfig[clusterNames] != null) {
-                    var values = data.allUserClusters;
+                    var values = data.cge.allUserClusters;
                     var cb = new CheckedMultiSelect();
                     ClusterGrid.CLUSTERS = cb.renderCheckedMultiSelect(gridConfig[clusterNames].userSetting, clusterNames, values);
                 }
             },
 
             saveValues: function() {
-                var refreshTime, clusters;
+                var refreshTime, clusters = [];
                 if(ClusterGrid.CLUSTERREFRESHTIME != null) {
                     refreshTime = ClusterGrid.CLUSTERREFRESHTIME[CONSTANTS.DIVTYPE.USER].get('value');
                 }
 
                 if(ClusterGrid.CLUSTERS != null) {
-                    clusters = ClusterGrid.CLUSTERS[CONSTANTS.DIVTYPE.USER].get('value');
+                    var rhsCMS = CheckedMultiSelect.checkedMSList[CONSTANTS.DIVTYPE.USER][1];
+                    var msRhsOptions = rhsCMS.getOptions();
+                    for (var j = 0; j < msRhsOptions.length; j++) {
+                        clusters[j] = msRhsOptions[j].value;
+                    }
                 }
 
                 var saveData = {

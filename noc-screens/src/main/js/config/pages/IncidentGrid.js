@@ -9,6 +9,10 @@ define(["dojo/_base/declare", "dojo/i18n", "noc/Logger",
                 return data.age;
             },
 
+            getAttribIgnoreList: function() {
+                return [];
+            },
+
             renderAttributes: function(data) {
                 var gridConfig = data.age;
                 for(var attribute in gridConfig) {
