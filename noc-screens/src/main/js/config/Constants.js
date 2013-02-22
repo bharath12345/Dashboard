@@ -32,6 +32,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!config/nls/conf
         CONSTANTS.SAVE = {};
         CONSTANTS.SAVE.INCIDENTGRID = 1;
         CONSTANTS.SAVE.CLUSTERGRID = 2;
+        CONSTANTS.SAVE.TRANSACTIONGRID = 3;
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         CONSTANTS.ACTION = {};
@@ -40,6 +41,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!config/nls/conf
         CONSTANTS.ACTION.ALERTGRIDATTRIBUTES = "config/alertGridDetailsRetrieve.action";
         CONSTANTS.ACTION.ALERTGRIDSAVE = "config/alertGridDetailsSave.action";
         CONSTANTS.ACTION.CLUSTERGRIDSAVE = "config/clusterGridDetailsSave";
+        CONSTANTS.ACTION.TRANSACTIONGRIDSAVE = "config/transactionGridDetailsSave";
 
         CONSTANTS.ACTION.CLUSTERGRIDATTRIBUTES = "config/clusterGridDetailsRetrieve.action";
         CONSTANTS.ACTION.TRANSACTIONGRIDATTRIBUTES = "config/transactionGridDetailsRetrieve.action";

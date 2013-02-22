@@ -1,44 +1,44 @@
 package com.appnomic.noc.config;
 
-import com.appnomic.noc.config.entity.ClusterGridEntity;
+import com.appnomic.noc.config.entity.TransactionGridEntity;
 import com.appnomic.noc.config.entity.ConfigEntity;
 import com.google.gson.Gson;
 
-public class ClusterGridConfigManager implements ConfigManager {
-	private static final ClusterGridConfigManager agcm = new ClusterGridConfigManager();
+public class TransactionGridConfigManager implements ConfigManager {
+	private static final TransactionGridConfigManager tgcm = new TransactionGridConfigManager();
 	private static final Gson gson = new Gson();
-	private static final String classKey = ClusterGridEntity.class.getName();
+	private static final String classKey = TransactionGridEntity.class.getName();
 	
-	private ClusterGridConfigManager() {		
+	private TransactionGridConfigManager() {		
 	}
 	
-	public static final ClusterGridConfigManager getInstance() {
-		return agcm;
+	public static final TransactionGridConfigManager getInstance() {
+		return tgcm;
 	}
 
 	public ConfigEntity getConfig() {
-		ClusterGridEntity age = null;
+		TransactionGridEntity tge = null;
 		LevelDBManager instance = null;
 		try {
 			instance = LevelDBManager.getInstance();
 			System.out.println("retrieving: key = " + classKey);
 			String json = instance.read(classKey);
 			if(json==null) {
-				DefaultTableCreator.createClusterGridDefaultConfig();
+				DefaultTableCreator.createTransactionGridDefaultConfig();
 				json = instance.read(classKey);
 			}
-			age = gson.fromJson(json, ClusterGridEntity.class);
+			tge = gson.fromJson(json, TransactionGridEntity.class);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
-		return age;
+		return tge;
 	}
 	
 	public boolean saveConfig(ConfigEntity configEntity) {
 		LevelDBManager instance = null;
 		try {
 			instance = LevelDBManager.getInstance();
-			ClusterGridEntity age = (ClusterGridEntity)configEntity;
+			TransactionGridEntity age = (TransactionGridEntity)configEntity;
 			String json = gson.toJson(age);
 			System.out.println("saving: key = " + classKey + " value = " + json);
 			instance.write(classKey, json);

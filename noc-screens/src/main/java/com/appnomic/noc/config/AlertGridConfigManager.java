@@ -21,7 +21,6 @@ public class AlertGridConfigManager implements ConfigManager {
 		LevelDBManager instance = null;
 		try {
 			instance = LevelDBManager.getInstance();
-			//instance.init();
 			System.out.println("retrieving: key = " + classKey);
 			String json = instance.read(classKey);
 			if(json==null) {
@@ -31,11 +30,7 @@ public class AlertGridConfigManager implements ConfigManager {
 			age = gson.fromJson(json, AlertGridEntity.class);
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			if(instance!=null) {
-				//instance.shutdown();
-			}
-		}
+		} 
 		return age;
 	}
 	
@@ -43,7 +38,6 @@ public class AlertGridConfigManager implements ConfigManager {
 		LevelDBManager instance = null;
 		try {
 			instance = LevelDBManager.getInstance();
-			//instance.init();
 			AlertGridEntity age = (AlertGridEntity)configEntity;
 			String json = gson.toJson(age);
 			System.out.println("saving: key = " + classKey + " value = " + json);
@@ -51,11 +45,7 @@ public class AlertGridConfigManager implements ConfigManager {
 		} catch(Exception e) {
 			e.printStackTrace();
 			return false;
-		} finally {
-			if(instance!=null) {
-				//instance.shutdown();
-			}
-		}
+		} 
 		return true;
 	}
 }

@@ -6,6 +6,7 @@ import com.appnomic.noc.config.attribute.StringArrayAttribute;
 import com.appnomic.noc.config.attribute.StringAttribute;
 import com.appnomic.noc.config.entity.AlertGridEntity;
 import com.appnomic.noc.config.entity.ClusterGridEntity;
+import com.appnomic.noc.config.entity.TransactionGridEntity;
 
 public class DefaultTableCreator {
 	
@@ -34,6 +35,21 @@ public class DefaultTableCreator {
 		cgcm.saveConfig(cConfig);
 		
 		System.out.println("Saved default Cluster Grid configuration to LevelDB.");
+	}
+	
+	public static void createTransactionGridDefaultConfig() {
+		TransactionGridEntity tConfig = new TransactionGridEntity();
+		
+		StringArrayAttribute saa = new StringArrayAttribute(null, null, null);
+		tConfig.setApplicationNames(saa);
+		tConfig.setTransactionNames(saa);
+		tConfig.setTransactionRefreshTime(new IntegerAttribute(60,60,60));
+		tConfig.setAllUserTransactions(null);
+		
+		TransactionGridConfigManager tgcm = TransactionGridConfigManager.getInstance();
+		tgcm.saveConfig(tConfig);
+		
+		System.out.println("Saved default Transaction Grid configuration to LevelDB.");
 	}
 	
 }

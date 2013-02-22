@@ -62,6 +62,10 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!config/nls/config", "dojo/
                     content = "Save of Cluster Grid Configuration Successful.";
                     break;
 
+                case CONSTANTS.SAVE.TRANSACTIONGRID:
+                    content = "Save of Transaction Grid Configuration Successful.";
+                    break;
+
                 default:
                     console.log("Unknown save type = " + saveType);
                     return;

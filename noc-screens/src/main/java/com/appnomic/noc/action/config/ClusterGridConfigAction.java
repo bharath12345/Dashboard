@@ -91,7 +91,7 @@ public class ClusterGridConfigAction extends AbstractNocAction {
 	@Action(value="/config/clusterGridDetailsSave", results = {
 	        @Result(name="success", type="json", params = {
 	        		"excludeProperties",
-	                "parameters,session,SUCCESS,ERROR,cge,cgcVO,restUserClusters,clusterDataService",
+	                "parameters,session,SUCCESS,ERROR,cge,cgcVO,clusterDataService",
 	        		"enableGZIP", "true",
 	        		"encoding", "UTF-8",
 	                "noCache","true",
@@ -118,7 +118,7 @@ public class ClusterGridConfigAction extends AbstractNocAction {
 	@Action(value="/config/applicableClusterGridDetailsRetrieve", results = {
 	        @Result(name="success", type="json", params = {
 	        		"excludeProperties",
-	                "parameters,session,SUCCESS,ERROR,cge,restUserClusters,clusterDataService",
+	                "parameters,session,SUCCESS,ERROR,cge,clusterDataService",
 	        		"enableGZIP", "true",
 	        		"encoding", "UTF-8",
 	                "noCache","true",
