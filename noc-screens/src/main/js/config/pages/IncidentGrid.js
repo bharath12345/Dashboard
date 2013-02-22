@@ -5,6 +5,10 @@ define(["dojo/_base/declare", "dojo/i18n", "noc/Logger",
     function (declare, i18n, Logger, Utility, CONSTANTS, i18nString, NumberSpinner, ComboBox, RadioButton) {
 
         var IncidentGrid = declare(CONSTANTS.CLASSNAME.INCIDENTGRID, null, {
+            getAttrib: function(data) {
+                return data.age;
+            },
+
             renderAttributes: function(data) {
                 var gridConfig = data.age;
                 for(var attribute in gridConfig) {

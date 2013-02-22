@@ -1,5 +1,7 @@
 package com.appnomic.noc.action.config;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Action;
@@ -67,29 +69,35 @@ public class ConfigUtilityAction extends AbstractNocAction {
 	}
 	
 	private PageListVO[] getDummyList() {
-		PageListVO[] pageList = new PageListVO[4];
+		List<PageListVO> pageList = new ArrayList<PageListVO>();
 		
-		pageList[0] = new PageListVO();
-		pageList[0].setName("Alerts Grid");
-		pageList[0].setId(0);
+		PageListVO pageListVO = new PageListVO();
+		pageListVO.setName("Alerts Grid");
+		pageListVO.setId(0);
+		pageList.add(pageListVO);
 		
-		pageList[1] = new PageListVO();
-		pageList[1].setName("Clusters Grid");
-		pageList[1].setId(1);
+		pageListVO = new PageListVO();
+		pageListVO.setName("Clusters Grid");
+		pageListVO.setId(1);
+		pageList.add(pageListVO);
 		
-		pageList[2] = new PageListVO();
-		pageList[2].setName("Transactions Grid");
-		pageList[2].setId(2);
+		pageListVO = new PageListVO();
+		pageListVO.setName("Transactions Grid");
+		pageListVO.setId(2);
+		pageList.add(pageListVO);
 		
-		pageList[3] = new PageListVO();
-		pageList[3].setName("Topology View");
-		pageList[3].setId(3);
+		pageListVO = new PageListVO();
+		pageListVO.setName("Topology View");
+		pageListVO.setId(3);
+		pageList.add(pageListVO);
 		
-		pageList[4] = new PageListVO();
-		pageList[4].setName("Global Config");
-		pageList[4].setId(4);
+		pageListVO = new PageListVO();
+		pageListVO.setName("Global Config");
+		pageListVO.setId(4);
+		pageList.add(pageListVO);
 		
-		return pageList;
+		PageListVO [] pageArray = pageList.toArray(new PageListVO[pageList.size()]);
+		return pageArray;
 	}
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////

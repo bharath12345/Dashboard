@@ -28,6 +28,7 @@ public class DefaultTableCreator {
 		StringArrayAttribute saa = new StringArrayAttribute(null, null, null);
 		cConfig.setClusterNames(saa);
 		cConfig.setClusterRefreshTime(new IntegerAttribute(60,60,60));
+		cConfig.setAllUserClusters(null);
 		
 		ClusterGridConfigManager cgcm = ClusterGridConfigManager.getInstance();
 		cgcm.saveConfig(cConfig);

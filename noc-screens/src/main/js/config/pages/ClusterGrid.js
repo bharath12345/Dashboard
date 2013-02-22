@@ -5,6 +5,10 @@ define(["dojo/_base/declare", "dojo/i18n", "noc/Logger",
     function (declare, i18n, Logger, Utility, CONSTANTS, i18nString, NumberSpinner, ComboBox, RadioButton, CheckedMultiSelect) {
 
         var ClusterGrid = declare(CONSTANTS.CLASSNAME.CLUSTERGRID, null, {
+            getAttrib: function(data) {
+                return data.cge;
+            },
+
             renderAttributes: function(data) {
                 var gridConfig = data.cge;
                 for(var attribute in gridConfig) {

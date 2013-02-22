@@ -26,11 +26,9 @@ import com.appnomic.service.ClusterDataService;
 public class ClusterGridConfigAction extends AbstractNocAction {
 
 	private ClusterDataService clusterDataService;
-	
 	private Map<String, String[]> param;
 	private ClusterGridEntity cge;
 	private ClusterGridConfigVO cgcVO;
-	private String [] allUserClusters;
 	
 	public Map<String, String[]> getParam() {
 		return param;
@@ -64,20 +62,12 @@ public class ClusterGridConfigAction extends AbstractNocAction {
 		this.cgcVO = cgcVO;
 	}
 
-	public String[] getAllUserClusters() {
-		return allUserClusters;
-	}
-
-	public void setAllUserClusters(String[] allUserClusters) {
-		this.allUserClusters = allUserClusters;
-	}
-
 	////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@Action(value="/config/clusterGridDetailsRetrieve", results = {
 	        @Result(name="success", type="json", params = {
 	        		"excludeProperties",
-	                "parameters,session,SUCCESS,ERROR,cgcVO",
+	                "parameters,session,SUCCESS,ERROR,cgcVO,clusterDataService",
 	        		"enableGZIP", "true",
 	        		"encoding", "UTF-8",
 	                "noCache","true",
@@ -94,14 +84,14 @@ public class ClusterGridConfigAction extends AbstractNocAction {
 			userClusters.add(cluster.getName());
 		}
 		
-		allUserClusters = userClusters.toArray(new String[userClusters.size()]);
+		cge.setAllUserClusters(userClusters.toArray(new String[userClusters.size()]));
 		return SUCCESS;
 	}
 	
 	@Action(value="/config/clusterGridDetailsSave", results = {
 	        @Result(name="success", type="json", params = {
 	        		"excludeProperties",
-	                "parameters,session,SUCCESS,ERROR,cge,cgcVO,restUserClusters",
+	                "parameters,session,SUCCESS,ERROR,cge,cgcVO,restUserClusters,clusterDataService",
 	        		"enableGZIP", "true",
 	        		"encoding", "UTF-8",
 	                "noCache","true",
@@ -119,6 +109,7 @@ public class ClusterGridConfigAction extends AbstractNocAction {
 		ClusterGridEntity newC =  new ClusterGridEntity();
 		newC.setClusterRefreshTime(new IntegerAttribute(60, 60, refreshTime));
 		newC.setClusterNames(new StringArrayAttribute(null, null, clusterArray));
+		newC.setAllUserClusters(null); // this is just for the initial get and never for persistence
 		cgcm.saveConfig(newC);
 		
 		return SUCCESS;
@@ -127,7 +118,7 @@ public class ClusterGridConfigAction extends AbstractNocAction {
 	@Action(value="/config/applicableClusterGridDetailsRetrieve", results = {
 	        @Result(name="success", type="json", params = {
 	        		"excludeProperties",
-	                "parameters,session,SUCCESS,ERROR,cge,restUserClusters",
+	                "parameters,session,SUCCESS,ERROR,cge,restUserClusters,clusterDataService",
 	        		"enableGZIP", "true",
 	        		"encoding", "UTF-8",
 	                "noCache","true",
