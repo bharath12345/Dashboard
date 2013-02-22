@@ -1,4 +1,4 @@
-package com.appnomic.noc.viewobject.config;
+package com.appnomic.noc.viewobject.config.base;
 
 public abstract class AttributeVO {
 

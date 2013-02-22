@@ -1,5 +1,9 @@
 package com.appnomic.noc.viewobject.config;
 
+import com.appnomic.noc.viewobject.config.base.BooleanAttributeVO;
+import com.appnomic.noc.viewobject.config.base.IntegerAttributeVO;
+import com.appnomic.noc.viewobject.config.base.StringAttributeVO;
+
 public class AlertGridConfigVO {
 
 	BooleanAttributeVO showAllGreenApplications;

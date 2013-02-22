@@ -1,4 +1,4 @@
-package com.appnomic.noc.viewobject.config;
+package com.appnomic.noc.viewobject.config.base;
 
 import com.appnomic.noc.config.ConfigType;
 
@@ -7,7 +7,7 @@ public class StringArrayAttributeVO extends AttributeVO {
 	String [] value;
 	
 	public StringArrayAttributeVO() {
-		setType(ConfigType.STRING.name());
+		setType("STRINGARRAY");
 	}
 
 	public String[] getValue() {

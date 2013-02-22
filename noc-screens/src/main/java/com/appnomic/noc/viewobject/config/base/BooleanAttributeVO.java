@@ -1,4 +1,4 @@
-package com.appnomic.noc.viewobject.config;
+package com.appnomic.noc.viewobject.config.base;
 
 import com.appnomic.noc.config.ConfigType;
 

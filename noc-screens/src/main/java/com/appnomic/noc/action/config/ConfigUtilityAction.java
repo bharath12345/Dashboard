@@ -14,10 +14,10 @@ import com.appnomic.noc.config.LevelDBManager;
 import com.appnomic.noc.config.attribute.*;
 import com.appnomic.noc.config.entity.AlertGridEntity;
 import com.appnomic.noc.viewobject.config.AlertGridConfigVO;
-import com.appnomic.noc.viewobject.config.BooleanAttributeVO;
-import com.appnomic.noc.viewobject.config.IntegerAttributeVO;
 import com.appnomic.noc.viewobject.config.PageListVO;
-import com.appnomic.noc.viewobject.config.StringAttributeVO;
+import com.appnomic.noc.viewobject.config.base.BooleanAttributeVO;
+import com.appnomic.noc.viewobject.config.base.IntegerAttributeVO;
+import com.appnomic.noc.viewobject.config.base.StringAttributeVO;
 
 @ParentPackage("json-default")
 @Namespace("/config")

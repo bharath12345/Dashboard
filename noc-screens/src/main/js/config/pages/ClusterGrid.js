@@ -23,7 +23,7 @@ define(["dojo/_base/declare", "dojo/i18n", "noc/Logger",
 
                 var clusterNames = "clusterNames";
                 if(gridConfig[clusterNames] != null) {
-                    var values = data.clusterList;
+                    var values = data.allUserClusters;
                     var cb = new CheckedMultiSelect();
                     ClusterGrid.CLUSTERS = cb.renderCheckedMultiSelect(gridConfig[clusterNames].userSetting, clusterNames, values);
                 }

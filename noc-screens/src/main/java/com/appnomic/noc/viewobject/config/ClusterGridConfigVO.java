@@ -1,5 +1,8 @@
 package com.appnomic.noc.viewobject.config;
 
+import com.appnomic.noc.viewobject.config.base.IntegerAttributeVO;
+import com.appnomic.noc.viewobject.config.base.StringArrayAttributeVO;
+
 public class ClusterGridConfigVO {
 	StringArrayAttributeVO clusters;
 	IntegerAttributeVO clusterRefreshTime;

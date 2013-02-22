@@ -18,6 +18,7 @@
         <style type="text/css">
 			@import url("./js/bootstrap/css/bootstrap.min.css");
 			@import url("./css/config.compressed.css");
+            @import url("./js/dojox/form/resources/CheckedMultiSelect.css");
 		</style>
 
         <!-- List of CSS -->

@@ -1,5 +1,6 @@
 package com.appnomic.noc.action.config;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -11,16 +12,13 @@ import org.apache.struts2.convention.annotation.Result;
 import com.appnomic.domainobject.Cluster;
 import com.appnomic.noc.action.AbstractNocAction;
 import com.appnomic.noc.config.ClusterGridConfigManager;
-import com.appnomic.noc.config.ConfigType;
-import com.appnomic.noc.config.LevelDBManager;
 import com.appnomic.noc.config.attribute.*;
 import com.appnomic.noc.config.entity.ClusterGridEntity;
-import com.appnomic.noc.viewobject.config.BooleanAttributeVO;
 import com.appnomic.noc.viewobject.config.ClusterGridConfigVO;
-import com.appnomic.noc.viewobject.config.IntegerAttributeVO;
-import com.appnomic.noc.viewobject.config.PageListVO;
-import com.appnomic.noc.viewobject.config.StringArrayAttributeVO;
-import com.appnomic.noc.viewobject.config.StringAttributeVO;
+import com.appnomic.noc.viewobject.config.base.BooleanAttributeVO;
+import com.appnomic.noc.viewobject.config.base.IntegerAttributeVO;
+import com.appnomic.noc.viewobject.config.base.StringArrayAttributeVO;
+import com.appnomic.noc.viewobject.config.base.StringAttributeVO;
 import com.appnomic.service.ClusterDataService;
 
 @ParentPackage("json-default")
@@ -32,7 +30,7 @@ public class ClusterGridConfigAction extends AbstractNocAction {
 	private Map<String, String[]> param;
 	private ClusterGridEntity cge;
 	private ClusterGridConfigVO cgcVO;
-	private String [] clusterList;
+	private String [] allUserClusters;
 	
 	public Map<String, String[]> getParam() {
 		return param;
@@ -66,12 +64,12 @@ public class ClusterGridConfigAction extends AbstractNocAction {
 		this.cgcVO = cgcVO;
 	}
 
-	public String [] getClusterList() {
-		return clusterList;
+	public String[] getAllUserClusters() {
+		return allUserClusters;
 	}
 
-	public void setClusterList(String [] clusterList) {
-		this.clusterList = clusterList;
+	public void setAllUserClusters(String[] allUserClusters) {
+		this.allUserClusters = allUserClusters;
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
@@ -91,19 +89,19 @@ public class ClusterGridConfigAction extends AbstractNocAction {
 		cge = (ClusterGridEntity)cgcm.getConfig();
 		
 		List<Cluster> clusters = clusterDataService.getAll();
-		clusterList = new String[clusters.size()];
-		int i=0;
+		List<String> userClusters = new ArrayList<String>();
 		for(Cluster cluster: clusters) {
-			clusterList[i++] = cluster.getName();
+			userClusters.add(cluster.getName());
 		}
 		
+		allUserClusters = userClusters.toArray(new String[userClusters.size()]);
 		return SUCCESS;
 	}
 	
 	@Action(value="/config/clusterGridDetailsSave", results = {
 	        @Result(name="success", type="json", params = {
 	        		"excludeProperties",
-	                "parameters,session,SUCCESS,ERROR,cge,cgcVO,clusterList",
+	                "parameters,session,SUCCESS,ERROR,cge,cgcVO,restUserClusters",
 	        		"enableGZIP", "true",
 	        		"encoding", "UTF-8",
 	                "noCache","true",
@@ -129,7 +127,7 @@ public class ClusterGridConfigAction extends AbstractNocAction {
 	@Action(value="/config/applicableClusterGridDetailsRetrieve", results = {
 	        @Result(name="success", type="json", params = {
 	        		"excludeProperties",
-	                "parameters,session,SUCCESS,ERROR,cge,clusterList",
+	                "parameters,session,SUCCESS,ERROR,cge,restUserClusters",
 	        		"enableGZIP", "true",
 	        		"encoding", "UTF-8",
 	                "noCache","true",
