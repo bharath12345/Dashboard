@@ -35,6 +35,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
 
             renderPageAttrib: function(event) {
                 //console.log("event in renderPageAttrib = " + event.target+ " type = " + typeof(event.target));
+                config.Config.STANDBY.show();
                 var pageId = this.getIdFromUrl(event.target);
                 this.setMarker(pageId);
                 this.showPageConfig(pageId);

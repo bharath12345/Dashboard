@@ -20,6 +20,8 @@ import com.appnomic.domainobject.Host;
 import com.appnomic.entity.NormalizedAvailabilityKpi;
 import com.appnomic.service.ClusterDataService;
 import com.appnomic.service.ComponentDataService;
+import com.appnomic.noc.config.ClusterGridConfigManager;
+import com.appnomic.noc.config.entity.ClusterGridEntity;
 import com.appnomic.noc.request.RequestHelper;
 import com.appnomic.noc.request.objects.RequestNameId;
 import com.appnomic.noc.viewobject.availability.ClusterDataVO;
@@ -119,15 +121,32 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 			"excludeNullProperties", "true" }) })
 	public String clusterZones() {
 		param = getParameters();
+		
+		ClusterGridConfigManager cgcm = ClusterGridConfigManager.getInstance();
+		ClusterGridEntity cge = (ClusterGridEntity)cgcm.getConfig();
+		String [] userConfiguredClusterList = cge.getClusterNames().getUserSetting();
+		
 		List<Cluster> clusters = clusterDataService.getAll();
-		clusterVOs = new ClusterVO[clusters.size()];
-		int i = 0;
+		List<ClusterVO> clusterVOList = new ArrayList<ClusterVO>();
 		for (Cluster cluster : clusters) {
-			clusterVOs[i] = new ClusterVO();
-			clusterVOs[i].setClusterName(cluster.getName());
-			clusterVOs[i].setId(cluster.getId());
-			i++;
+			boolean found = false;
+			for(String userWantedCluster: userConfiguredClusterList) {
+				if(userWantedCluster.equalsIgnoreCase(cluster.getName())) {
+					found = true;
+					break;
+				}
+			}
+			if(found == false) {
+				System.out.println("cluster not in view list - ignoring it ==> " + cluster.getName());
+				continue;
+			}
+			System.out.println("Cluster in view list = " + cluster.getName());
+			ClusterVO clusterVO = new ClusterVO();
+			clusterVO.setClusterName(cluster.getName());
+			clusterVO.setId(cluster.getId());
+			clusterVOList.add(clusterVO);
 		}
+		clusterVOs = clusterVOList.toArray(new ClusterVO[clusterVOList.size()]);
 		return SUCCESS;
 	}
 

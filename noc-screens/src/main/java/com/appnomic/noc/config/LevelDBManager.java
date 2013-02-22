@@ -54,10 +54,16 @@ public class LevelDBManager {
 			nocConfigDB = factory.open(new File(configDBFilePath), options);
 		} catch (IOException e) {
 			e.printStackTrace();
-			throw new ExceptionInInitializerError(
-					"Unbale to init Config DB Please check log files for more errors");
+			throw new ExceptionInInitializerError("Unbale to init Config DB Please check log files for more errors");
 		}
 		
+		final Thread mainThread = Thread.currentThread();
+		Runtime.getRuntime().addShutdownHook(new Thread() {
+		    public void run() {
+		    	System.out.println("Shutting down the connection to LevelDB.");
+		    	shutdown();
+		    }
+		});
 	}
 
 	public void shutdown() {

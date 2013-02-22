@@ -5,25 +5,88 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
 
         var ClusterZones = declare(CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.CLUSTERZONES, null, {
 
+            computeZones:function (count) {
+                // screen width is higher than length. Following are the configs -
+                // 2 Cluster columns, 1 Row = 2
+                // 2 Cluster columns, 2 Rows = 4
+                // 3 Cluster columns, 2 Rows = 6
+                // 4 Cluster Columns, 2 Rows = 8
+                // 4 Cluster Columns, 3 Rows = 12
+                // 5 Cluster Columns, 3 Rows = 15
+                // 6 Cluster Columns, 3 Rows = 18 ==> This is the MAX
+                // So the maximum cluster supported on a single page is 18
+
+                var gridConfig = [];
+                if (count < 3) {
+                    gridConfig[0] = 2; // 0th entry in the array is for nbZ or column
+                    gridConfig[1] = 1; // this is for the row
+                    gridConfig[2] = 2; // number of grids being accomodated
+                } else if (count > 2 && count < 5) {
+                    gridConfig[0] = 2;
+                    gridConfig[1] = 2;
+                    gridConfig[2] = 4;
+                } else if (count > 4 && count < 7) {
+                    gridConfig[0] = 3;
+                    gridConfig[1] = 2;
+                    gridConfig[2] = 6;
+                } else if (count > 6 && count < 9) {
+                    gridConfig[0] = 4;
+                    gridConfig[1] = 2;
+                    gridConfig[2] = 6;
+                } else if (count > 8 && count < 13) {
+                    gridConfig[0] = 4;
+                    gridConfig[1] = 3;
+                    gridConfig[2] = 12;
+                } else if (count > 12 && count < 16) {
+                    gridConfig[0] = 5;
+                    gridConfig[1] = 3;
+                    gridConfig[2] = 15;
+                } else if (count > 15 && count < 19) {
+                    gridConfig[0] = 6;
+                    gridConfig[1] = 3;
+                    gridConfig[2] = 18;
+                } else {
+                    console.log("Invalid count for cluster zones = " + count);
+                    return null;
+                }
+                return gridConfig;
+            },
+
             create:function (data, input) {
 
                 console.log("data = " + dojo.toJson(data));
                 console.log("input = " + dojo.toJson(input));
 
+                var gridConfig = this.computeZones(input.clusterVOs.length);
+                var nbZ = gridConfig[0];
+                var nbA = gridConfig[1];
+                var roundoff = gridConfig[2];
+
                 var paneWidth = data.dimensions.width;
                 var paneHeight = data.dimensions.height;
-                var nbZ = 6;
-                var styleString = "width: " + (paneWidth / nbZ) + "; height: " + (paneHeight / 5) + ";"
+
+                var styleString = "width: " + (paneWidth / nbZ) + "; height: " + (paneHeight / nbA) + ";"
                 console.log("style string = " + styleString);
+
                 var titlepanes = [];
-                for (var i = 0; i < input.clusterVOs.length; i++) {
-                    titlepanes[i] = new TitlePane({
-                        splitter:false,
-                        style:styleString,
-                        content:"<div id='" + input.clusterVOs[i].clusterName + "' style='width: 100%; height: 100%;'></div>",
-                        title:input.clusterVOs[i].clusterName,
-                        toggleable:false
-                    });
+                for (var i = 0; i < roundoff; i++) {
+                    if (input.clusterVOs[i] == null) {
+                        titlepanes[i] = new TitlePane({
+                            splitter:false,
+                            style:styleString,
+                            content:"<div style='width: 100%; height: 100%;'></div>",
+                            title:"",
+                            toggleable:false
+                        });
+                    } else {
+                        titlepanes[i] = new TitlePane({
+                            splitter:false,
+                            style:styleString,
+                            content:"<div id='" + input.clusterVOs[i].clusterName + "' style='width: 100%; height: 100%;'></div>",
+                            title:input.clusterVOs[i].clusterName,
+                            toggleable:false
+                        });
+                    }
                 }
 
                 var gridContainer = new GridContainer({nbZones:nbZ, isAutoOrganized:true,
@@ -32,7 +95,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                 gridContainer.disableDnd();
 
                 var j = 0, k = 0;
-                for (var i = 0; i < input.clusterVOs.length; i++) {
+                for (var i = 0; i < roundoff; i++) {
                     j = (i % nbZ);
                     k = parseInt(i / nbZ);
                     gridContainer.addChild(titlepanes[i], j, k);
@@ -69,6 +132,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
 
                 // do the first time population immediately
                 for (var i = 0; i < input.clusterVOs.length; i++) {
+
                     this.periodicClusterPost();
                 }
             },
