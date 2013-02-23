@@ -62,13 +62,15 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Logger"
             },
 
             fillData: function(id, payload) {
+
                 var alertId = id + "_Alert";
+                console.log("alert id = " + alertId);
                 Utility.removeChildren(document.getElementById(alertId));
-                this.appendRectangle(alertId, 10, 10, payload.alerts, CONSTANTS.TXGRID.ALERTS);
+                this.appendRectangle(alertId, 25, 25, payload.alerts, CONSTANTS.TXGRID.ALERTS);
 
                 var statusId = id + "_Status";
                 Utility.removeChildren(document.getElementById(statusId));
-                this.appendRectangle(statusId, 10, 10, payload.status, CONSTANTS.TXGRID.STATUS);
+                this.appendRectangle(statusId, 25, 25, payload.status, CONSTANTS.TXGRID.STATUS);
 
                 var volumeId = id + "_Volume";
                 Utility.removeChildren(document.getElementById(volumeId));

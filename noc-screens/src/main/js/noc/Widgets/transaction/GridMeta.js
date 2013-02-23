@@ -90,13 +90,12 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                             titlepanes[z] = new TitlePane({
                                 splitter:false,
                                 style:styleString,
-                                content:"<table id='" + id + "' style='width: 100%; " +
-                                    "height: 100%;'><tr>" +
-                                    "<td id='" + id + "_Alert" + "' style='width:11px'></td>" +
-                                    "<td id='" + id + "_Status" + "' style='width:11px'></td>" +
-                                    "<td id='" + id + "_Response" + "'></td>" +
-                                    "<td id='" + id + "_Volume" + "'></td>" +
-                                    "</tr></table>",
+                                content:"<div class='row' id='" + id + "' style='width:100%;height:100%;padding:5px'>" +
+                                    "<div class='span1' id='" + id + "_Alert" + "' style='width:10px;'></div>" +
+                                    "<div class='span1' id='" + id + "_Status" + "' style='width:10px;'></div>" +
+                                    "<div class='span1' id='" + id + "_Response" + "' style='width:30px;'></div>" +
+                                    "<div class='span1' id='" + id + "_Volume" + "' style='width:30px;'></div>" +
+                                    "</div>",
                                 title:input.applicationVO[i].applicationName + "/" + input.applicationVO[i].transactionGroups[j].transactions[k].name,
                                 toggleable:false
                             });
@@ -136,10 +135,10 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                     innerPane[i].style.padding = 0;
                 }
 
-                var textNode = dojo.query(".dijitTitlePaneTextNode", gridContainer.domNode);
-                for (var i = 0; i < textNode.length; i++) {
-                    textNode[i].style.fontSize = "10px";
-                }
+                /*var textNode = dojo.query(".dijitTitlePaneTextNode", gridContainer.domNode);
+                 for (var i = 0; i < textNode.length; i++) {
+                 textNode[i].style.fontSize = "10px";
+                 }*/
 
                 var head = dojo.query(".dijitTitlePaneTitle", gridContainer.domNode)
                 for (var i = 0; i < head.length; i++) {

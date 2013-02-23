@@ -219,6 +219,10 @@ public class TransactionAction extends AbstractNocAction  {
 		appDataVO.setAppName(appName);
 		appDataVO.setId(id);
 		
+		TransactionGridConfigManager cgcm = TransactionGridConfigManager.getInstance();
+		TransactionGridEntity tge = (TransactionGridEntity)cgcm.getConfig();
+		String [] txInterestedIn = tge.getTransactionNames().getUserSetting();
+		
 		//String[] startEndTimes = TimeUtility.get5MinStartEnd();
 		String[] startEndTimes = TimeUtility.get30MinStartEnd();
 		Map<Integer, TransactionSummary> txSummary = transactionDataService.getTransactionSummaryForApp(id, startEndTimes[0], startEndTimes[1]);
@@ -226,6 +230,17 @@ public class TransactionAction extends AbstractNocAction  {
 		List<Transaction> appTransactions = transactionDataService.getTransactionPerApplication(id);
 		Map<String, ArrayList<Transaction>> txGroupMap = new HashMap<String, ArrayList<Transaction>>();
 		for(Transaction appTx : appTransactions) {
+			boolean txFound = false;
+			for(String intTx : txInterestedIn) {
+				if(appTx.getName().equalsIgnoreCase(intTx)) {
+					txFound = true;
+					break;
+				}
+			}
+			if(txFound == false) {
+				// user is has not saved this transactions as one he is interested in - IGNORE IT
+				continue;
+			}
 			ArrayList<Transaction> txList = txGroupMap.get(appTx.getGroupName());
 			if(txList == null || txList.size() == 0) {
 				txList = new ArrayList<Transaction>();
