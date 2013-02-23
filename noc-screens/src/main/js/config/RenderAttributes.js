@@ -87,38 +87,45 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
             },
 
             getInnerDivString: function(attribute) {
-                var divString = "";
+                var divString = "<div class='tabbable tabs-left'>";
+                divString += "<ul class='nav nav-tabs'>";
+                for(var i=0;i<3;i++) {
+                    switch(i) {
+                        case 0: divString += "<li class='active'><a href='#" + attribute+CONSTANTS.DIVTYPE.USER + "' data-toggle='tab'>User Config</a></li>";
+                            break;
+                        case 1: divString += "<li><a href='#" + attribute+CONSTANTS.DIVTYPE.ADMIN + "' data-toggle='tab'>Admin Config</a></li>";
+                            break;
+                        case 2: divString += "<li><a href='#" + attribute+CONSTANTS.DIVTYPE.FACTORY + "' data-toggle='tab'>Factory Config</a></li>";
+                            break;
+                    }
+                }
+                divString += "</ul>";
+                divString += "<div class='tab-content'>";
                 for(var i=0;i<3;i++) {
                     divString += "<div id='";
                     divString += attribute;
                     switch(i) {
                         case 0:
                             divString += CONSTANTS.DIVTYPE.USER;
-                            divString += "' class='alert alert-success'"; // this is coming from bootstrap
+                            divString += "' class='tab-pane active'"; // this is coming from bootstrap
                             break;
 
                         case 1:
                             divString += CONSTANTS.DIVTYPE.ADMIN;
-                            divString += "' class='alert alert-info'";
+                            divString += "' class='tab-pane fade'";
                             break;
 
                         case 2:
                             divString += CONSTANTS.DIVTYPE.FACTORY;
-                            divString += "' class='alert alert-error'";
+                            divString += "' class='tab-pane fade'";
                             break;
                     }
-                    divString += " style='width: 100%; height: 100%;'>";
-                    switch(i) {
-                        case 0: divString += "<h5>User Config</h5>";
-                            break;
-                        case 1: divString += "<h5>Admin Config</h5>";
-                            break;
-                        case 2: divString += "<h5>Factory Config</h5>";
-                            break;
-                    }
+                    //divString += " style='width: 100%; height: 100%;'";
+                    divString += ">";
                     divString += "</div>";
-               }
-               return divString;
+                }
+                divString += "</div>";
+                return divString;
             },
 
             createToolbarButtons: function() {
