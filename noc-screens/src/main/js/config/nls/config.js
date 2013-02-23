@@ -11,7 +11,11 @@ define({
         showAllGreenApplications: "Show All Green Applications",
 
         clusterNames: "Select Clusters",
-        clusterRefreshTime: "Cluster Refresh Time"
+        clusterRefreshTime: "Cluster Refresh Time",
+
+        transactionRefreshTime: "Transaction Refresh Time",
+        applicationNames: "Select Application",
+        transactionNames: "Select Transaction"
 
     }),
 

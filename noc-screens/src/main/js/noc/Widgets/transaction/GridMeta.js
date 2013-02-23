@@ -5,18 +5,72 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
 
         var GridMeta = declare(CONSTANTS.CLASSNAME.WIDGETS.TRANSACTION.GRIDMETA, null, {
 
-            create:function (data, input) {
+            computeZones:function (count) {
+                // screen width is higher than length. Following are the configs -
+                // 4 Tx columns, 0-8 Row = 0-32
+                // 5 Tx columns, 6-10 Row = 33-50
+                // 6 Tx columns, 8-12 Row = 51-72
+                // 7 Tx columns, 10-14 Row = 72-98
+                // So the maximum cluster supported on a single page is 98
 
+                var gridConfig = [];
+                if (count < 33) {
+                    gridConfig[0] = 4; // 0th entry in the array is for nbZ or column
+                    gridConfig[1] = 8; // this is for the row
+                    gridConfig[2] = 32; // number of grids being accomodated
+                } else if (count > 32 && count < 51) {
+                    gridConfig[0] = 5;
+                    gridConfig[1] = 10;
+                    gridConfig[2] = 50;
+                } else if (count > 50 && count < 73) {
+                    gridConfig[0] = 6;
+                    gridConfig[1] = 12;
+                    gridConfig[2] = 72;
+                } else if (count > 72 && count < 99) {
+                    gridConfig[0] = 7;
+                    gridConfig[1] = 14;
+                    gridConfig[2] = 98;
+                } else {
+                    console.log("Invalid count for tx zones = " + count);
+                    return null;
+                }
+                return gridConfig;
+            },
+
+            create:function (data, input) {
                 console.log("data = " + dojo.toJson(data));
                 console.log("input = " + dojo.toJson(input));
 
+                if(input.applicationVO == null || input.applicationVO.length == 0) {
+                    noc.pages.TransactionGrid.CP.domNode.innerHTML="No Applications and Transactions configured for display on the dashboard";
+                    return;
+                }
+
+                var txCount = 0;
+                for (var i = 0; i < input.applicationVO.length; i++) {
+                    var aVO = input.applicationVO[i];
+                    if(aVO == null || aVO == "null") {
+                        continue;
+                    }
+                    for (var j = 0; j < aVO.transactionGroups.length; j++) {
+                        var txGroup = aVO.transactionGroups[j];
+                        if(txGroup == null || txGroup == "null") {
+                            continue;
+                        }
+                        txCount += txGroup.transactions.length;
+                    }
+                }
+
+                var gridConfig = this.computeZones(txCount);
+                var nbZ = gridConfig[0];
+                var rows = gridConfig[1];
+                var roundoff = gridConfig[2];
+
                 var paneWidth = data.dimensions.width;
                 var paneHeight = data.dimensions.height;
-
-                var nbZ = 7;
-                var rows = 19;
                 var styleString = "width: " + (paneWidth / nbZ) + "; height: " + (paneHeight / rows) + ";"
                 console.log("style string = " + styleString);
+
                 var titlepanes = [];
                 var z = 0;
                 for (var i = 0; i < input.applicationVO.length; i++) {
@@ -49,6 +103,16 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                             z++;
                         }
                     }
+                }
+
+                for(var i=txCount; i<roundoff; i++) {
+                    titlepanes[i] = new TitlePane({
+                        splitter:false,
+                        style:styleString,
+                        content:"<div style='width: 100%; height: 100%;'></div>",
+                        title:"",
+                        toggleable:false
+                    });
                 }
 
                 var gridContainer = new GridContainer({nbZones:nbZ, isAutoOrganized:true,

@@ -98,6 +98,10 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
                         actionClass = CONSTANTS.ACTION.TOPOLOGYATTRIBUTES;
                         break;
 
+                    case 4:
+                        actionClass = CONSTANTS.ACTION.GLOBALATTRIBUTES;
+                        break;
+
                     default:
                         console.log("Unknown page id = " + id);
                         return;

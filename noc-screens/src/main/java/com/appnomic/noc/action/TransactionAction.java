@@ -20,6 +20,8 @@ import com.appnomic.domainobject.Host;
 import com.appnomic.domainobject.Transaction;
 import com.appnomic.domainobject.TransactionGroup;
 import com.appnomic.domainobject.TransactionSummary;
+import com.appnomic.noc.config.TransactionGridConfigManager;
+import com.appnomic.noc.config.entity.TransactionGridEntity;
 import com.appnomic.noc.viewobject.availability.ClusterVO;
 import com.appnomic.noc.viewobject.availability.ComponentDataVO;
 import com.appnomic.noc.viewobject.availability.ComponentVO;
@@ -324,37 +326,66 @@ public class TransactionAction extends AbstractNocAction  {
 	public String transactionMeta() {
 		param = getParameters();
 		
+		TransactionGridConfigManager cgcm = TransactionGridConfigManager.getInstance();
+		TransactionGridEntity tge = (TransactionGridEntity)cgcm.getConfig();
+		
+		String [] appsInterestedIn = tge.getApplicationNames().getUserSetting();
+		String [] txInterestedIn = tge.getTransactionNames().getUserSetting();
+		if(appsInterestedIn == null || txInterestedIn == null ||
+				appsInterestedIn.length == 0 || txInterestedIn.length == 0) {
+			applicationVO = null;
+			return SUCCESS;
+		}
+		
 		List<ApplicationData> applications = applicationDataService.getAll();
-		applicationVO = new ApplicationVO[applications.size()];
-		int i = 0;
+		List<ApplicationVO> appVOList = new ArrayList<ApplicationVO>();
+		
 		for(ApplicationData application : applications) {
-			boolean impApp = application.getName().equalsIgnoreCase("NetBanking") || 
-					//application.getName().equalsIgnoreCase("RTGSPI") || 
-					//application.getName().equalsIgnoreCase("UBS") || 
-					application.getName().equalsIgnoreCase("CRMNext");
-			if(!impApp) {
+			boolean appfound = false;
+			for(String intApp: appsInterestedIn) {
+				if(application.getName().equalsIgnoreCase(intApp)) {
+					appfound = true;
+					break;
+				}
+			}
+			if(appfound == false) {
+				// user is has not saved this application as one he is interested in
+				// so none of Tx in this app considered
 				continue;
 			}
 			
-			applicationVO[i] = new ApplicationVO();
-			applicationVO[i].setApplicationName(application.getName());
-			applicationVO[i].setId(application.getId());
+			ApplicationVO applicationVO = new ApplicationVO();
+			appVOList.add(applicationVO);
+			applicationVO.setApplicationName(application.getName());
+			applicationVO.setId(application.getId());
 			
 			List<Transaction> appTransactions = transactionDataService.getTransactionPerApplication(application.getId());
 			Map<String, ArrayList<Transaction>> txGroupMap = new HashMap<String, ArrayList<Transaction>>();
 			for(Transaction appTx : appTransactions) {
+				boolean txFound = false;
+				for(String intTx : txInterestedIn) {
+					if(appTx.getName().equalsIgnoreCase(intTx)) {
+						txFound = true;
+						break;
+					}
+				}
+				if(txFound == false) {
+					// user is has not saved this transactions as one he is interested in - IGNORE IT
+					continue;
+				}
 				ArrayList<Transaction> txList = txGroupMap.get(appTx.getGroupName());
 				if(txList == null || txList.size() == 0) {
 					txList = new ArrayList<Transaction>();
 					txGroupMap.put(appTx.getGroupName(), txList);
 				}
+					
 				txList.add(appTx);
 				System.out.println("added tx = " + appTx.getName() + " of group = " + appTx.getGroupName() + " of app = " + appTx.getAppName());
 			}
 			
 			int j = 0;
 			TransactionGroupVO [] transactionGroups = new TransactionGroupVO[txGroupMap.size()];
-			applicationVO[i].setTransactionGroups(transactionGroups);
+			applicationVO.setTransactionGroups(transactionGroups);
 			
 			Set<String> groupNames = txGroupMap.keySet();
 			for(String groupName:groupNames){
@@ -375,8 +406,8 @@ public class TransactionAction extends AbstractNocAction  {
 				}
 				j++;
 			}
-			i++;
 		}
+		applicationVO = appVOList.toArray(new ApplicationVO[appVOList.size()]);
 		return SUCCESS;
 	}
 

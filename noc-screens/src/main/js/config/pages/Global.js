@@ -4,7 +4,7 @@ define(["dojo/_base/declare", "dojo/i18n", "noc/Logger",
 
     function (declare, i18n, Logger, Utility, CONSTANTS, i18nString, NumberSpinner, ComboBox, RadioButton) {
 
-        var Topology = declare(CONSTANTS.CLASSNAME.TOPOLOGY, null, {
+        var Global = declare(CONSTANTS.CLASSNAME.GLOBAL, null, {
             getAttrib: function(data) {
                 return null;
             },
@@ -23,7 +23,7 @@ define(["dojo/_base/declare", "dojo/i18n", "noc/Logger",
             }
         });
 
-        Topology.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.TOPOLOGY));
+        Global.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.GLOBAL));
 
-        return Topology;
+        return Global;
     });

@@ -94,17 +94,34 @@ public class TransactionGridConfigAction extends AbstractNocAction {
 		tge = (TransactionGridEntity)cgcm.getConfig();
 		
 		List<ApplicationData> applications = applicationDataService.getAll();
-		List<String> userApplications = new ArrayList<String>();
+		String [] appsInterestedIn = tge.getApplicationNames().getUserSetting();
+		
+		List<String> allApplications = new ArrayList<String>();
 		List<String> userTransactions = new ArrayList<String>();
+		
 		for(ApplicationData application: applications) {
-			userApplications.add(application.getName());
+			allApplications.add(application.getName());
+			if(appsInterestedIn == null || appsInterestedIn.length == 0) {
+				continue;
+			}
+			boolean found = false;
+			for(String intApp: appsInterestedIn) {
+				if(application.getName().equalsIgnoreCase(intApp)) {
+					found = true;
+					break;
+				}
+			}
+			if(found == false) {
+				//user is has not YET saved this application as one he is interested in - so DONT show its Tx
+				continue;
+			}
 			List<Transaction> transactions = transactionDataService.getTransactionPerApplication(application.getId());
 			for(Transaction transaction : transactions) {
 				userTransactions.add(transaction.getName());
 			}
 		}
 		
-		tge.setAllUserApplications(userApplications.toArray(new String[userApplications.size()]));
+		tge.setAllUserApplications(allApplications.toArray(new String[allApplications.size()]));
 		tge.setAllUserTransactions(userTransactions.toArray(new String[userTransactions.size()]));
 		return SUCCESS;
 	}
@@ -130,8 +147,8 @@ public class TransactionGridConfigAction extends AbstractNocAction {
 		
 		TransactionGridEntity newTGE =  new TransactionGridEntity();
 		newTGE.setTransactionRefreshTime(new IntegerAttribute(60, 60, refreshTime));
-		newTGE.setTransactionNames(new StringArrayAttribute(null, null, applicationArray));
-		newTGE.setApplicationNames(new StringArrayAttribute(null, null, transactionArray));
+		newTGE.setTransactionNames(new StringArrayAttribute(null, null, transactionArray));
+		newTGE.setApplicationNames(new StringArrayAttribute(null, null, applicationArray));
 		newTGE.setAllUserTransactions(null); // this is just for the initial get and never for persistence
 		newTGE.setAllUserApplications(null);
 		tgcm.saveConfig(newTGE);

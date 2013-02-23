@@ -57,6 +57,11 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                 console.log("data = " + dojo.toJson(data));
                 console.log("input = " + dojo.toJson(input));
 
+                if(input.clusterVOs == null || input.clusterVOs.length == 0) {
+                    noc.pages.AllClusterAvailability.CP.domNode.innerHTML="No Clusters configured for display on the dashboard";
+                    return;
+                }
+
                 var gridConfig = this.computeZones(input.clusterVOs.length);
                 var nbZ = gridConfig[0];
                 var nbA = gridConfig[1];

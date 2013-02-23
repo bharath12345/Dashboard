@@ -45,8 +45,9 @@ define(["dojo/_base/declare", "dojo/i18n", "noc/Logger",
                     refreshTime = ClusterGrid.CLUSTERREFRESHTIME[CONSTANTS.DIVTYPE.USER].get('value');
                 }
 
+                var clusterNames = "clusterNames";
                 if(ClusterGrid.CLUSTERS != null) {
-                    var rhsCMS = CheckedMultiSelect.checkedMSList[CONSTANTS.DIVTYPE.USER][1];
+                    var rhsCMS = CheckedMultiSelect.checkedMSList[clusterNames + CONSTANTS.DIVTYPE.USER][1];
                     var msRhsOptions = rhsCMS.getOptions();
                     for (var j = 0; j < msRhsOptions.length; j++) {
                         clusters[j] = msRhsOptions[j].value;

@@ -8,13 +8,13 @@ define(["dojo/_base/declare", "dojo/i18n", "dojox/form/CheckedMultiSelect", "dij
             renderCheckedMultiSelect: function(selectedValues, attribute, restValues) {
 
                 var type = CONSTANTS.DIVTYPE.USER;
-                CheckedMultiSelect.checkedMSList[CONSTANTS.DIVTYPE.USER] = this.getCMSL(attribute, type, selectedValues, restValues);
+                CheckedMultiSelect.checkedMSList[attribute + CONSTANTS.DIVTYPE.USER] = this.getCMSL(attribute, type, selectedValues, restValues);
 
                 /*type = CONSTANTS.DIVTYPE.ADMIN;
-                 CheckedMultiSelect.checkedMSList[CONSTANTS.DIVTYPE.ADMIN] = this.getCMSL(attribute, type, "");
+                 CheckedMultiSelect.checkedMSList[attribute + CONSTANTS.DIVTYPE.ADMIN] = this.getCMSL(attribute, type, "");
 
                  type = CONSTANTS.DIVTYPE.FACTORY;
-                 CheckedMultiSelect.checkedMSList[CONSTANTS.DIVTYPE.FACTORY] = this.getCMSL(attribute, type, "");
+                 CheckedMultiSelect.checkedMSList[attribute + CONSTANTS.DIVTYPE.FACTORY] = this.getCMSL(attribute, type, "");
                  */
 
                 return CheckedMultiSelect.checkedMSList;
@@ -22,11 +22,11 @@ define(["dojo/_base/declare", "dojo/i18n", "dojox/form/CheckedMultiSelect", "dij
 
             getCMSL: function(attribute, type, selectedValue, restValues) {
                 var node = Utility.getConfigDiv(attribute, type);
-                this.createSkeleton(node, type);
+                this.createSkeleton(node, type, attribute);
 
                 var cmsl = [];
-                cmsl[0] = this.makeCMS(restValues, "lhsSelect");
-                cmsl[1] = this.makeCMS(selectedValue, "rhsSelect");
+                cmsl[0] = this.makeCMS(restValues, "lhsSelect"+type+attribute);
+                cmsl[1] = this.makeCMS(selectedValue, "rhsSelect"+type+attribute);
 
                 if(type != CONSTANTS.DIVTYPE.USER) {
                     cmsl[0].set('disabled','disabled');
@@ -52,7 +52,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojox/form/CheckedMultiSelect", "dij
                 return CMS;
             },
 
-            createSkeleton: function(node, type) {
+            createSkeleton: function(node, type, attribute) {
                 var table = dojo.create("table");
                 node.appendChild(table);
 
@@ -62,7 +62,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojox/form/CheckedMultiSelect", "dij
                 row.appendChild(col);
 
                 var select = dojo.create("select");
-                select.id = "lhsSelect";
+                select.id = "lhsSelect"+type+attribute;
                 col.appendChild(select);
 
                 col = dojo.create("td");
@@ -72,8 +72,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojox/form/CheckedMultiSelect", "dij
                 col.appendChild(tempRemove);
                 row.appendChild(col);
 
-                var addButtonObj = new Button({label:"Add"}, tempAdd);
-                var removeButtonObj = new Button({label:"Remove"}, tempRemove);
+                var addButtonObj = new Button({label:"Add", id: attribute + "_Add" + CheckedMultiSelect.BUTTONPOSTFIX}, tempAdd);
+                var removeButtonObj = new Button({label:"Remove", id: attribute + "_Remove" + CheckedMultiSelect.BUTTONPOSTFIX}, tempRemove);
 
                 if(type == CONSTANTS.DIVTYPE.USER) {
                     dojo.connect(addButtonObj, "onClick", lang.hitch(this, "moveUserLhsToRhs"));
@@ -90,28 +90,39 @@ define(["dojo/_base/declare", "dojo/i18n", "dojox/form/CheckedMultiSelect", "dij
 
                 col = dojo.create("td");
                 select = dojo.create("select");
-                select.id = "rhsSelect";
+                select.id = "rhsSelect"+type+attribute;
                 col.appendChild(select);
                 row.appendChild(col);
             },
 
-            moveUserLhsToRhs: function() {
-                this.moveLhsToRhs(CheckedMultiSelect.checkedMSList[CONSTANTS.DIVTYPE.USER][0], CheckedMultiSelect.checkedMSList[CONSTANTS.DIVTYPE.USER][1]);
+            getAttribute: function(id) {
+                var attribute = id.split("_")[0];
+                return attribute;
             },
-            moveUserRhsToLhs: function() {
-                this.moveRhsToLhs(CheckedMultiSelect.checkedMSList[CONSTANTS.DIVTYPE.USER][1]);
+
+            moveUserLhsToRhs: function(event) {
+                var attribute = this.getAttribute(event.target.id);
+                this.moveLhsToRhs(CheckedMultiSelect.checkedMSList[attribute + CONSTANTS.DIVTYPE.USER][0], CheckedMultiSelect.checkedMSList[attribute + CONSTANTS.DIVTYPE.USER][1]);
             },
-            moveAdminLhsToRhs: function() {
-                this.moveLhsToRhs(CheckedMultiSelect.checkedMSList[CONSTANTS.DIVTYPE.ADMIN][0], CheckedMultiSelect.checkedMSList[CONSTANTS.DIVTYPE.ADMIN][1]);
+            moveUserRhsToLhs: function(event) {
+                var attribute = this.getAttribute(event.target.id);
+                this.moveRhsToLhs(CheckedMultiSelect.checkedMSList[attribute + CONSTANTS.DIVTYPE.USER][1]);
             },
-            moveAdminRhsToLhs: function() {
-                this.moveRhsToLhs(CheckedMultiSelect.checkedMSList[CONSTANTS.DIVTYPE.ADMIN][1]);
+            moveAdminLhsToRhs: function(event) {
+                var attribute = this.getAttribute(event.target.id);
+                this.moveLhsToRhs(CheckedMultiSelect.checkedMSList[attribute + CONSTANTS.DIVTYPE.ADMIN][0], CheckedMultiSelect.checkedMSList[attribute + CONSTANTS.DIVTYPE.ADMIN][1]);
             },
-            moveFactoryLhsToRhs: function() {
-                this.moveLhsToRhs(CheckedMultiSelect.checkedMSList[CONSTANTS.DIVTYPE.FACTORY][0], CheckedMultiSelect.checkedMSList[CONSTANTS.DIVTYPE.FACTORY][1]);
+            moveAdminRhsToLhs: function(event) {
+                var attribute = this.getAttribute(event.target.id);
+                this.moveRhsToLhs(CheckedMultiSelect.checkedMSList[attribute + CONSTANTS.DIVTYPE.ADMIN][1]);
             },
-            moveFactoryRhsToLhs: function() {
-                this.moveRhsToLhs(CheckedMultiSelect.checkedMSList[CONSTANTS.DIVTYPE.FACTORY][1]);
+            moveFactoryLhsToRhs: function(event) {
+                var attribute = this.getAttribute(event.target.id);
+                this.moveLhsToRhs(CheckedMultiSelect.checkedMSList[attribute + CONSTANTS.DIVTYPE.FACTORY][0], CheckedMultiSelect.checkedMSList[attribute + CONSTANTS.DIVTYPE.FACTORY][1]);
+            },
+            moveFactoryRhsToLhs: function(event) {
+                var attribute = this.getAttribute(event.target.id);
+                this.moveRhsToLhs(CheckedMultiSelect.checkedMSList[attribute + CONSTANTS.DIVTYPE.FACTORY][1]);
             },
 
             moveLhsToRhs: function(lhsCMS, rhsCMS) {
@@ -149,6 +160,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojox/form/CheckedMultiSelect", "dij
 
         CheckedMultiSelect.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.CHECKEDMULTISELECT));
         CheckedMultiSelect.POSTFIX = "_CheckedMultiSelect";
+        CheckedMultiSelect.BUTTONPOSTFIX = CheckedMultiSelect.POSTFIX + "Button";
         CheckedMultiSelect.checkedMSList = [];
 
         return CheckedMultiSelect;

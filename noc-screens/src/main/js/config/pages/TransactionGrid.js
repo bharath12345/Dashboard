@@ -1,8 +1,8 @@
 define(["dojo/_base/declare", "dojo/i18n", "noc/Logger",
     "config/Utility", "config/Constants", "dojo/i18n!config/nls/config",
-    "config/widgets/NumberSpinner", "config/widgets/ComboBox", "config/widgets/RadioButton" ],
+    "config/widgets/NumberSpinner", "config/widgets/ComboBox", "config/widgets/RadioButton", "config/widgets/CheckedMultiSelect" ],
 
-    function (declare, i18n, Logger, Utility, CONSTANTS, i18nString, NumberSpinner, ComboBox, RadioButton) {
+    function (declare, i18n, Logger, Utility, CONSTANTS, i18nString, NumberSpinner, ComboBox, RadioButton, CheckedMultiSelect) {
 
         var TransactionGrid = declare(CONSTANTS.CLASSNAME.TRANSACTIONGRID, null, {
             getAttrib: function(data) {
@@ -53,16 +53,18 @@ define(["dojo/_base/declare", "dojo/i18n", "noc/Logger",
                     refreshTime = TransactionGrid.TRANSACTIONREFRESHTIME[CONSTANTS.DIVTYPE.USER].get('value');
                 }
 
+                var transactionNames = "transactionNames";
                 if(TransactionGrid.TRANSACTIONS != null) {
-                    var rhsCMS = CheckedMultiSelect.checkedMSList[CONSTANTS.DIVTYPE.USER][1];
+                    var rhsCMS = CheckedMultiSelect.checkedMSList[transactionNames + CONSTANTS.DIVTYPE.USER][1];
                     var msRhsOptions = rhsCMS.getOptions();
                     for (var j = 0; j < msRhsOptions.length; j++) {
                         transactions[j] = msRhsOptions[j].value;
                     }
                 }
 
+                var applicationNames = "applicationNames";
                 if(TransactionGrid.APPLICATIONS != null) {
-                    var rhsCMS = CheckedMultiSelect.checkedMSList[CONSTANTS.DIVTYPE.USER][1];
+                    var rhsCMS = CheckedMultiSelect.checkedMSList[applicationNames + CONSTANTS.DIVTYPE.USER][1];
                     var msRhsOptions = rhsCMS.getOptions();
                     for (var j = 0; j < msRhsOptions.length; j++) {
                         applications[j] = msRhsOptions[j].value;

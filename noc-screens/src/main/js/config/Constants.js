@@ -17,6 +17,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!config/nls/conf
         CONSTANTS.CLASSNAME.CLUSTERGRID = "config.pages.ClusterGrid";
         CONSTANTS.CLASSNAME.TRANSACTIONGRID = "config.pages.TransactionGrid";
         CONSTANTS.CLASSNAME.TOPOLOGY = "config.pages.Topology";
+        CONSTANTS.CLASSNAME.GLOBAL = "config.pages.Global";
 
         CONSTANTS.CLASSNAME.COMBOBOX = "config.widgets.ComboBox";
         CONSTANTS.CLASSNAME.NUMBERSPINNER = "config.widgets.NumberSpinner";
@@ -33,19 +34,24 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!config/nls/conf
         CONSTANTS.SAVE.INCIDENTGRID = 1;
         CONSTANTS.SAVE.CLUSTERGRID = 2;
         CONSTANTS.SAVE.TRANSACTIONGRID = 3;
+        CONSTANTS.SAVE.TOPOLOGY = 4;
+        CONSTANTS.SAVE.GLOBAL = 5;
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         CONSTANTS.ACTION = {};
         CONSTANTS.ACTION.PAGESET = "config/pages.action";
 
-        CONSTANTS.ACTION.ALERTGRIDATTRIBUTES = "config/alertGridDetailsRetrieve.action";
         CONSTANTS.ACTION.ALERTGRIDSAVE = "config/alertGridDetailsSave.action";
         CONSTANTS.ACTION.CLUSTERGRIDSAVE = "config/clusterGridDetailsSave";
         CONSTANTS.ACTION.TRANSACTIONGRIDSAVE = "config/transactionGridDetailsSave";
+        CONSTANTS.ACTION.TOPOLOGYSAVE = "config/topologyDetailsSave";
+        CONSTANTS.ACTION.GLOBALSAVE = "config/globalDetailsSave";
 
+        CONSTANTS.ACTION.ALERTGRIDATTRIBUTES = "config/alertGridDetailsRetrieve.action";
         CONSTANTS.ACTION.CLUSTERGRIDATTRIBUTES = "config/clusterGridDetailsRetrieve.action";
         CONSTANTS.ACTION.TRANSACTIONGRIDATTRIBUTES = "config/transactionGridDetailsRetrieve.action";
         CONSTANTS.ACTION.TOPOLOGYATTRIBUTES = "config/topologyDetailsRetrieve.action";
+        CONSTANTS.ACTION.GLOBALATTRIBUTES = "config/globalDetailsRetrieve.action";
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         CONSTANTS.DIVTYPE = {};

@@ -125,6 +125,10 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 		ClusterGridConfigManager cgcm = ClusterGridConfigManager.getInstance();
 		ClusterGridEntity cge = (ClusterGridEntity)cgcm.getConfig();
 		String [] userConfiguredClusterList = cge.getClusterNames().getUserSetting();
+		if(userConfiguredClusterList == null || userConfiguredClusterList.length == 0) {
+			clusterVOs = null;
+			return SUCCESS;
+		}
 		
 		List<Cluster> clusters = clusterDataService.getAll();
 		List<ClusterVO> clusterVOList = new ArrayList<ClusterVO>();

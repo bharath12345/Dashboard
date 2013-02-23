@@ -66,6 +66,14 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!config/nls/config", "dojo/
                     content = "Save of Transaction Grid Configuration Successful.";
                     break;
 
+                case CONSTANTS.SAVE.TOPOLOGY:
+                    content = "Save of Topology Configuration Successful.";
+                    break;
+
+                case CONSTANTS.SAVE.GLOBAL:
+                    content = "Save of Global Configuration Successful.";
+                    break;
+
                 default:
                     console.log("Unknown save type = " + saveType);
                     return;
@@ -123,6 +131,13 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!config/nls/config", "dojo/
                         require([CONSTANTS.getClassPath(CONSTANTS.CLASSNAME.TOPOLOGY)], function(Topology) {
                             var topology = new Topology();
                             ra.renderConfigParameters(data, topology);
+                        });
+                        break;
+
+                    case 4:
+                        require([CONSTANTS.getClassPath(CONSTANTS.CLASSNAME.GLOBAL)], function(Global) {
+                            var global = new Global();
+                            ra.renderConfigParameters(data, global);
                         });
                         break;
 
