@@ -9,7 +9,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n",
                 AvailMatrix2.LOG.log(Logger.SEVERITY.SEVERE, "in create avail matrix gridtype = " + input.subtype);
                 try {
                     var data = new Array(); var timedata = new Array();
-                    var gridItemWidth = parseInt(input.custom[0]);
+                    var gridItemWidth = 15;//parseInt(input.custom[0]);
                     var gridItemHeight = gridItemWidth; // for square boxes
 
                     var length = payload.times.length;
@@ -78,25 +78,28 @@ define(['require', "dojo/_base/declare", "dojo/i18n",
                 try {
                     AvailMatrix2.LOG.log(Logger.SEVERITY.SEVERE, "render id = " + id + " grid data = "+dojo.toJson(data));
 
+                    var obj = document.getElementById(id);
+                    var w = obj.offsetWidth;
+                    var h = obj.offsetHeight;
+
                     var grid = d3.select("#" + id).append("svg")
-                        .attr("class", "chart")
-                        .attr("left",document.getElementById(id).offsetParent.offsetLeft)
-                        .attr("top",document.getElementById(id).offsetTop);
+                        //.attr("left",document.getElementById(id).offsetParent.offsetLeft)
+                        //.attr("top",document.getElementById(id).offsetTop)
+                        .attr("viewBox", "0 0 " + w + " " + h);
 
-
-                    var row = grid.selectAll(".row")
+                    var svgrow = grid.selectAll(".svgrow")
                         .data(data)
                         .enter().append("svg:g")
-                        .attr("class", "row");
+                        .attr("class", "svgrow");
 
                     var color = d3.scale.category20c();
 
-                    var col = row.selectAll(".cell")
+                    var col = svgrow.selectAll(".svgcell")
                         .data(function (d) {
                             return d;
                         })
                         .enter().append("svg:rect")
-                        .attr("class", "cell")
+                        //.attr("class", "cell")
                         .attr("x", function (d) {
                             return d.x;
                         })
@@ -119,7 +122,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n",
                         })
                         .style("stroke", '#555');
 
-                    row.selectAll(".rowtext")
+                    svgrow.selectAll(".svgrowtext")
                         .data(function (d) {
                             return d;
                         })
@@ -128,7 +131,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n",
                             return 3*d.x;
                         })
                         .attr("y", function (d) {
-                            return d.y;
+                            return d.y+14;
                         })
                         .attr("width", function (d) {
                             return d.width;
@@ -139,11 +142,11 @@ define(['require', "dojo/_base/declare", "dojo/i18n",
                         .text(function(d) {
                             return d.name;
                         })
-                        .style("font-weight", 100)
-                        .style("font-size", "10px")
-                    //.attr("transform",function (d) {
-                    //    return "rotate(90," + (d.x-d.width) + "," + d.height + ")";
-                    //});
+                        //.style("font-weight", 100)
+                        .style("font-size", "13")
+                        //.attr("transform",function (d) {
+                        //    return "rotate(90," + (d.x-d.width) + "," + d.height + ")";
+                        //});
 
                 } catch(e) {
                     AvailMatrix2.LOG.log(Logger.SEVERITY.SEVERE, "render exception = " + e);
