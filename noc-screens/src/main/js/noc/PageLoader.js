@@ -16,8 +16,8 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
                 PageLoader.LOG.log(Logger.SEVERITY.SEVERE, "Logging Success!");
 
                 var startPageCounter = 0;
-                //this.createIncidentSectionAndPage(startPageCounter++);
-                //this.createClusterAvailabilitySectionAndPage(startPageCounter++);
+                this.createIncidentSectionAndPage(startPageCounter++);
+                this.createClusterAvailabilitySectionAndPage(startPageCounter++);
                 this.createTxGridSectionAndPage(startPageCounter++);
                 this.createTopology(startPageCounter++);
 

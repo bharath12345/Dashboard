@@ -12,6 +12,8 @@ public class DefaultTableCreator {
 	
 	public static void createAlertGridDefaultConfig() {
 		AlertGridEntity newAge =  new AlertGridEntity();
+		StringArrayAttribute saa = new StringArrayAttribute(null, null, null);
+		newAge.setApplicationNames(saa);
 		newAge.setFontName(new StringAttribute("Arial", "Arial", "Arial"));
 		newAge.setFontSize(new IntegerAttribute(12, 12, 12));	
 		newAge.setShowAllGreenApplications(new BooleanAttribute(true, true, true));
