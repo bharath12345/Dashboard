@@ -1,7 +1,7 @@
-define(["dojo/_base/declare", "dojo/i18n", "dojox/form/CheckedMultiSelect", "dijit/form/Button", "dojo/_base/lang",
+define(["dojo/_base/declare", "dojo/i18n", "dojox/form/CheckedMultiSelect", "dijit/form/Button", "dojo/_base/lang", "dojo/dom", "dojo/dom-style",
     "noc/Logger", "config/Utility", "config/Constants", "dojo/i18n!config/nls/config"],
 
-    function (declare, i18n, DojoCheckedMultiSelect, Button, lang, Logger, Utility, CONSTANTS, i18nString) {
+    function (declare, i18n, DojoCheckedMultiSelect, Button, lang, dom, domStyle, Logger, Utility, CONSTANTS, i18nString) {
 
         var CheckedMultiSelect = declare(CONSTANTS.CLASSNAME.CHECKEDMULTISELECT, null, {
 
@@ -66,18 +66,79 @@ define(["dojo/_base/declare", "dojo/i18n", "dojox/form/CheckedMultiSelect", "dij
                 col.appendChild(select);
 
                 col = dojo.create("td");
+                this.makeButtons(col, attribute, type);
+                row.appendChild(col, attribute);
+
+                col = dojo.create("td");
+                select = dojo.create("select");
+                select.id = "rhsSelect"+type+attribute;
+                col.appendChild(select);
+                row.appendChild(col);
+            },
+
+            getNewRowCol: function(table) {
+                var row = dojo.create("tr");
+                table.appendChild(row);
+                var col = dojo.create("td");
+                row.appendChild(col);
+                return col;
+            },
+
+            setButtonWidth: function(btn) {
+                domStyle.set(btn.domNode, "width", "150px");
+                domStyle.set(btn.domNode, "fontSize", "12");
+                domStyle.set(btn.domNode.firstChild, "display", "block");
+            },
+
+            makeButtons: function(bigCol, attribute, type) {
+                var table = dojo.create("table");
+                bigCol.appendChild(table);
+
+                var col = this.getNewRowCol(table);
                 var tempAdd = dojo.create("div");
                 col.appendChild(tempAdd);
                 var tempRemove = dojo.create("div");
                 col.appendChild(tempRemove);
-                row.appendChild(col);
 
+                col = this.getNewRowCol(table);
+                var tempSelectAllLeft = dojo.create("div");
+                col.appendChild(tempSelectAllLeft);
+                var tempUnselectAllLeft = dojo.create("div");
+                col.appendChild(tempUnselectAllLeft);
+
+                col = this.getNewRowCol(table);
+                var tempSelectAllRight = dojo.create("div");
+                col.appendChild(tempSelectAllRight);
+                var tempUnselectAllRight = dojo.create("div");
+                col.appendChild(tempUnselectAllRight);
+
+                var buttonStyle = "width: 100px; fontSize: 10;";
                 var addButtonObj = new Button({label:"Add", id: attribute + "_Add" + CheckedMultiSelect.BUTTONPOSTFIX}, tempAdd);
                 var removeButtonObj = new Button({label:"Remove", id: attribute + "_Remove" + CheckedMultiSelect.BUTTONPOSTFIX}, tempRemove);
+
+                var selectAllLeftButtonObj = new Button({label:"Select All on Left", id: attribute + "_SelectAllLeft" + CheckedMultiSelect.BUTTONPOSTFIX}, tempSelectAllLeft);
+                var unselectAllLeftButtonObj = new Button({label:"Unselect All on Left", id: attribute + "_UnselectAllLeft" + CheckedMultiSelect.BUTTONPOSTFIX}, tempUnselectAllLeft);
+
+                var selectAllRightButtonObj = new Button({label:"Select All on Right", id: attribute + "_SelectAllRight" + CheckedMultiSelect.BUTTONPOSTFIX}, tempSelectAllRight);
+                var unselectAllRightButtonObj = new Button({label:"Unselect All on Right", id: attribute + "_UnselectAllRight" + CheckedMultiSelect.BUTTONPOSTFIX}, tempUnselectAllRight);
+
+                this.setButtonWidth(addButtonObj);
+                this.setButtonWidth(removeButtonObj);
+                this.setButtonWidth(selectAllLeftButtonObj);
+                this.setButtonWidth(unselectAllLeftButtonObj);
+                this.setButtonWidth(selectAllRightButtonObj);
+                this.setButtonWidth(unselectAllRightButtonObj);
 
                 if(type == CONSTANTS.DIVTYPE.USER) {
                     dojo.connect(addButtonObj, "onClick", lang.hitch(this, "moveUserLhsToRhs"));
                     dojo.connect(removeButtonObj, "onClick", lang.hitch(this, "moveUserRhsToLhs"));
+
+                    dojo.connect(selectAllLeftButtonObj, "onClick", lang.hitch(this, "selectAllLeftUser"));
+                    dojo.connect(unselectAllLeftButtonObj, "onClick", lang.hitch(this, "unselectAllLeftUser"));
+
+                    dojo.connect(selectAllRightButtonObj, "onClick", lang.hitch(this, "selectAllRightUser"));
+                    dojo.connect(unselectAllRightButtonObj, "onClick", lang.hitch(this, "unselectAllRightUser"));
+
                 } else if(type == CONSTANTS.DIVTYPE.ADMIN) {
                     dojo.connect(addButtonObj, "onClick", lang.hitch(this, "moveAdminLhsToRhs"));
                     dojo.connect(removeButtonObj, "onClick", lang.hitch(this, "moveAdminRhsToLhs"));
@@ -87,12 +148,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojox/form/CheckedMultiSelect", "dij
                 } else {
                     console.log("unknown type = " + type);
                 }
-
-                col = dojo.create("td");
-                select = dojo.create("select");
-                select.id = "rhsSelect"+type+attribute;
-                col.appendChild(select);
-                row.appendChild(col);
             },
 
             getAttribute: function(id) {
@@ -125,7 +180,25 @@ define(["dojo/_base/declare", "dojo/i18n", "dojox/form/CheckedMultiSelect", "dij
                 this.moveRhsToLhs(CheckedMultiSelect.checkedMSList[attribute + CONSTANTS.DIVTYPE.FACTORY][1]);
             },
 
+            selectAllLeftUser: function(event) {
+                var attribute = this.getAttribute(event.target.id);
+                this.selectAllCMS(CheckedMultiSelect.checkedMSList[attribute + CONSTANTS.DIVTYPE.USER][0]);
+            },
+            unselectAllLeftUser: function(event) {
+                var attribute = this.getAttribute(event.target.id);
+                this.unselectAllCMS(CheckedMultiSelect.checkedMSList[attribute + CONSTANTS.DIVTYPE.USER][0]);
+            },
+            selectAllRightUser: function(event) {
+                var attribute = this.getAttribute(event.target.id);
+                this.selectAllCMS(CheckedMultiSelect.checkedMSList[attribute + CONSTANTS.DIVTYPE.USER][1]);
+            },
+            unselectAllRightUser: function(event) {
+                var attribute = this.getAttribute(event.target.id);
+                this.unselectAllCMS(CheckedMultiSelect.checkedMSList[attribute + CONSTANTS.DIVTYPE.USER][1]);
+            },
+
             moveLhsToRhs: function(lhsCMS, rhsCMS) {
+                config.Config.STANDBY.show();
                 var msLhsOptions = lhsCMS.getOptions();
                 var msRhsOptions = rhsCMS.getOptions();
                 for (var i = 0; i < msLhsOptions.length; i++) {
@@ -145,9 +218,11 @@ define(["dojo/_base/declare", "dojo/i18n", "dojox/form/CheckedMultiSelect", "dij
                         rhsCMS.addOption(newRhsOption);
                     }
                 }
+                config.Config.STANDBY.hide();
             },
 
             moveRhsToLhs: function(rhsCMS) {
+                config.Config.STANDBY.show();
                 var msRhsOptions = rhsCMS.getOptions();
                 for (var i = 0; i < msRhsOptions.length; i++) {
                     if (msRhsOptions[i].selected == true) {
@@ -155,7 +230,27 @@ define(["dojo/_base/declare", "dojo/i18n", "dojox/form/CheckedMultiSelect", "dij
                         rhsCMS.removeOption(msRhsOptions[i]);
                     }
                 }
+                config.Config.STANDBY.hide();
+            },
+
+            selectAllCMS: function(cms) {
+                this.cmsUpdate(true, cms);
+            },
+
+            unselectAllCMS: function(cms) {
+                this.cmsUpdate(false, cms);
+            },
+
+            cmsUpdate: function(bool, cms) {
+                config.Config.STANDBY.show();
+                var cmsOptions = cms.getOptions();
+                for (var i = 0; i < cmsOptions.length; i++) {
+                    cmsOptions[i].selected = bool;
+                }
+                cms.updateOption(cmsOptions);
+                config.Config.STANDBY.hide();
             }
+
         });
 
         CheckedMultiSelect.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.CHECKEDMULTISELECT));
