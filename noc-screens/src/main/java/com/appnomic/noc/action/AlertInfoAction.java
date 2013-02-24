@@ -20,6 +20,8 @@ import com.appnomic.domainobject.ApplicationData;
 import com.appnomic.domainobject.Component;
 import com.appnomic.domainobject.ComponentAlertSummary;
 import com.appnomic.exception.InvalidTimeIntervalException;
+import com.appnomic.noc.config.AlertGridConfigManager;
+import com.appnomic.noc.config.entity.AlertGridEntity;
 import com.appnomic.noc.viewobject.alert.ApplicationDataVO;
 import com.appnomic.noc.viewobject.alert.ApplicationMetaVO;
 import com.appnomic.noc.viewobject.alert.ApplicationVO;
@@ -122,16 +124,34 @@ public class AlertInfoAction extends AbstractNocAction  {
 		metrics[4] = SUMMARY_CATEGORY.TRANSACTION_ONLINE_ANALYTIC.name();
 		applicationMetaVO.setMetrics(metrics);
 		
-		List<ApplicationData> allApplications = applicationDataService.getAll();
-		ApplicationVO [] applications = new ApplicationVO[allApplications.size()];
-		int i = 0;
-		for(ApplicationData application : allApplications) {
-			applications[i] = new ApplicationVO();
-			applications[i].setId(application.getId());
-			applications[i].setName(application.getName());
-			i++;
+		AlertGridConfigManager agcm = AlertGridConfigManager.getInstance();
+		AlertGridEntity age = (AlertGridEntity)agcm.getConfig();
+		String [] appsInterestedIn = age.getApplicationNames().getUserSetting();
+		if(appsInterestedIn == null || appsInterestedIn.length == 0 ) {
+			applicationMetaVO = null;
+			return SUCCESS;
 		}
-		applicationMetaVO.setApplications(applications);
+		
+		List<ApplicationData> allApplications = applicationDataService.getAll();
+		List<ApplicationVO> applicationList = new ArrayList<ApplicationVO>();
+		for(ApplicationData application : allApplications) {
+			boolean appfound = false;
+			for(String intApp: appsInterestedIn) {
+				if(application.getName().equalsIgnoreCase(intApp)) {
+					appfound = true;
+					break;
+				}
+			}
+			if(appfound == false) {
+				// user has not saved this application as one he is interested in
+				continue;
+			}
+			ApplicationVO applicationVO = new ApplicationVO();
+			applicationVO.setId(application.getId());
+			applicationVO.setName(application.getName());
+			applicationList.add(applicationVO);
+		}
+		applicationMetaVO.setApplications(applicationList.toArray(new ApplicationVO[applicationList.size()]));
 		return SUCCESS;
 	}
 	

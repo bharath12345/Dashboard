@@ -2,6 +2,7 @@ package com.appnomic.noc.viewobject.config;
 
 import com.appnomic.noc.viewobject.config.base.BooleanAttributeVO;
 import com.appnomic.noc.viewobject.config.base.IntegerAttributeVO;
+import com.appnomic.noc.viewobject.config.base.StringArrayAttributeVO;
 import com.appnomic.noc.viewobject.config.base.StringAttributeVO;
 
 public class AlertGridConfigVO {
@@ -10,7 +11,14 @@ public class AlertGridConfigVO {
 	StringAttributeVO fontName;
 	IntegerAttributeVO fontSize;
 	IntegerAttributeVO applicationRefreshTime;
+	StringArrayAttributeVO applications;
 	
+	public StringArrayAttributeVO getApplications() {
+		return applications;
+	}
+	public void setApplications(StringArrayAttributeVO applications) {
+		this.applications = applications;
+	}
 	public BooleanAttributeVO getShowAllGreenApplications() {
 		return showAllGreenApplications;
 	}

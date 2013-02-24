@@ -1,5 +1,7 @@
 package com.appnomic.noc.action.config;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Action;
@@ -7,6 +9,7 @@ import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 
+import com.appnomic.domainobject.ApplicationData;
 import com.appnomic.noc.action.AbstractNocAction;
 import com.appnomic.noc.config.AlertGridConfigManager;
 import com.appnomic.noc.config.ConfigType;
@@ -17,7 +20,9 @@ import com.appnomic.noc.viewobject.config.AlertGridConfigVO;
 import com.appnomic.noc.viewobject.config.PageListVO;
 import com.appnomic.noc.viewobject.config.base.BooleanAttributeVO;
 import com.appnomic.noc.viewobject.config.base.IntegerAttributeVO;
+import com.appnomic.noc.viewobject.config.base.StringArrayAttributeVO;
 import com.appnomic.noc.viewobject.config.base.StringAttributeVO;
+import com.appnomic.service.ApplicationDataService;
 
 @ParentPackage("json-default")
 @Namespace("/config")
@@ -26,7 +31,17 @@ public class AlertGridConfigAction extends AbstractNocAction {
 	private Map<String, String[]> param;
 	private AlertGridEntity age;
 	private AlertGridConfigVO agcVO;
+	private ApplicationDataService applicationDataService;
 	
+	public ApplicationDataService getApplicationDataService() {
+		return applicationDataService;
+	}
+
+	public void setApplicationDataService(
+			ApplicationDataService applicationDataService) {
+		this.applicationDataService = applicationDataService;
+	}
+
 	public AlertGridConfigVO getAgcVO() {
 		return agcVO;
 	}
@@ -56,7 +71,7 @@ public class AlertGridConfigAction extends AbstractNocAction {
 	@Action(value="/config/alertGridDetailsRetrieve", results = {
 	        @Result(name="success", type="json", params = {
 	        		"excludeProperties",
-	                "parameters,session,SUCCESS,ERROR,agcVO",
+	                "parameters,session,SUCCESS,ERROR,agcVO,applicationDataService",
 	        		"enableGZIP", "true",
 	        		"encoding", "UTF-8",
 	                "noCache","true",
@@ -66,13 +81,20 @@ public class AlertGridConfigAction extends AbstractNocAction {
 		param = getParameters();
 		AlertGridConfigManager agcm = AlertGridConfigManager.getInstance();
 		age = (AlertGridEntity)agcm.getConfig();
+		
+		List<ApplicationData> applications = applicationDataService.getAll();
+		List<String> allApplications = new ArrayList<String>();
+		for(ApplicationData application: applications) {
+			allApplications.add(application.getName());
+		}
+		age.setAllUserApplications(allApplications.toArray(new String[allApplications.size()]));
 		return SUCCESS;
 	}
 	
 	@Action(value="/config/alertGridDetailsSave", results = {
 	        @Result(name="success", type="json", params = {
 	        		"excludeProperties",
-	                "parameters,session,SUCCESS,ERROR,age,agcVO",
+	                "parameters,session,SUCCESS,ERROR,age,agcVO,applicationDataService",
 	        		"enableGZIP", "true",
 	        		"encoding", "UTF-8",
 	                "noCache","true",
@@ -85,6 +107,7 @@ public class AlertGridConfigAction extends AbstractNocAction {
 		Integer fontSize = ConfigUtilityAction.getInteger("fontSize", param);
 		Boolean showGreenApp = ConfigUtilityAction.getBoolean("showGreenApp", param);
 		String fontName = (parameters.get("fontName")[0]);
+		String [] applicationArray = parameters.get("applications");
 		
 		AlertGridConfigManager agcm = AlertGridConfigManager.getInstance();
 		age = (AlertGridEntity)agcm.getConfig();
@@ -114,6 +137,8 @@ public class AlertGridConfigAction extends AbstractNocAction {
 			newAge.setApplicationRefreshTime(age.getApplicationRefreshTime());
 		}
 		
+		newAge.setApplicationNames(new StringArrayAttribute(null, null, applicationArray));
+		
 		agcm.saveConfig(newAge);
 		return SUCCESS;
 	}
@@ -122,7 +147,7 @@ public class AlertGridConfigAction extends AbstractNocAction {
 	@Action(value="/config/applicableAlertGridDetailsRetrieve", results = {
 	        @Result(name="success", type="json", params = {
 	        		"excludeProperties",
-	                "parameters,session,SUCCESS,ERROR,age",
+	                "parameters,session,SUCCESS,ERROR,age,applicationDataService",
 	        		"enableGZIP", "true",
 	        		"encoding", "UTF-8",
 	                "noCache","true",
@@ -155,6 +180,10 @@ public class AlertGridConfigAction extends AbstractNocAction {
 			BooleanAttributeVO showAllGreenApp = new BooleanAttributeVO();
 			showAllGreenApp.setValue(age.getShowAllGreenApplications().isUserSetting());
 			agcVO.setShowAllGreenApplications(showAllGreenApp);
+			
+			StringArrayAttributeVO saaVO = new StringArrayAttributeVO();
+			saaVO.setValue(age.getApplicationNames().getUserSetting());
+			agcVO.setApplications(saaVO);
 		}
 		
 		return SUCCESS;

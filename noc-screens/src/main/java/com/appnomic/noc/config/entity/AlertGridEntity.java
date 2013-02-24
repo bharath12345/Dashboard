@@ -9,6 +9,21 @@ public class AlertGridEntity extends ConfigEntity {
 	IntegerAttribute fontSize;
 	IntegerAttribute applicationRefreshTime;
 	
+	StringArrayAttribute applicationNames;
+	String [] allUserApplications;
+	
+	public StringArrayAttribute getApplicationNames() {
+		return applicationNames;
+	}
+	public void setApplicationNames(StringArrayAttribute applicationNames) {
+		this.applicationNames = applicationNames;
+	}
+	public String[] getAllUserApplications() {
+		return allUserApplications;
+	}
+	public void setAllUserApplications(String[] allUserApplications) {
+		this.allUserApplications = allUserApplications;
+	}
 	public IntegerAttribute getApplicationRefreshTime() {
 		return applicationRefreshTime;
 	}

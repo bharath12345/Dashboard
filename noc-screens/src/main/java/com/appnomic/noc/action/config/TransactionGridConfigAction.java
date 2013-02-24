@@ -183,7 +183,7 @@ public class TransactionGridConfigAction extends AbstractNocAction {
 			
 			saaVO = new StringArrayAttributeVO();
 			saaVO.setValue(tge.getApplicationNames().getUserSetting());
-			tgcVO.setTransactions(saaVO);
+			tgcVO.setApplications(saaVO);
 			
 			IntegerAttributeVO iaVO = new IntegerAttributeVO();
 			iaVO.setValue(tge.getTransactionRefreshTime().getUserSetting());

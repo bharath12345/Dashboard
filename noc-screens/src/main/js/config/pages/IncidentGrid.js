@@ -1,8 +1,8 @@
 define(["dojo/_base/declare", "dojo/i18n", "noc/Logger",
     "config/Utility", "config/Constants", "dojo/i18n!config/nls/config",
-    "config/widgets/NumberSpinner", "config/widgets/ComboBox", "config/widgets/RadioButton" ],
+    "config/widgets/NumberSpinner", "config/widgets/ComboBox", "config/widgets/RadioButton", "config/widgets/CheckedMultiSelect" ],
 
-    function (declare, i18n, Logger, Utility, CONSTANTS, i18nString, NumberSpinner, ComboBox, RadioButton) {
+    function (declare, i18n, Logger, Utility, CONSTANTS, i18nString, NumberSpinner, ComboBox, RadioButton, CheckedMultiSelect) {
 
         var IncidentGrid = declare(CONSTANTS.CLASSNAME.INCIDENTGRID, null, {
             getAttrib: function(data) {
@@ -10,7 +10,9 @@ define(["dojo/_base/declare", "dojo/i18n", "noc/Logger",
             },
 
             getAttribIgnoreList: function() {
-                return [];
+                var ignore = [];
+                ignore["allUserApplications"] = "allUserApplications";
+                return ignore;
             },
 
             renderAttributes: function(data) {
@@ -50,10 +52,18 @@ define(["dojo/_base/declare", "dojo/i18n", "noc/Logger",
                     var cb = new ComboBox();
                     IncidentGrid.SHOWALLGREEN = cb.renderComboBox(gridConfig[showAllGreenApplications].userSetting, showAllGreenApplications, values);
                 }
+
+                var applicationNames = "applicationNames";
+                if(gridConfig[applicationNames] != null) {
+                    var values = gridConfig.allUserApplications;
+                    var cb = new CheckedMultiSelect();
+                    IncidentGrid.APPLICATIONS = cb.renderCheckedMultiSelect(gridConfig[applicationNames].userSetting, applicationNames, values);
+                }
+
             },
 
             saveValues: function() {
-                var refreshTime, fontName, fontSize, showGreenApp;
+                var refreshTime, fontName, fontSize, showGreenApp, applications = [];
                 if(IncidentGrid.APPLICATIONREFRESHTIME != null) {
                     refreshTime = IncidentGrid.APPLICATIONREFRESHTIME[CONSTANTS.DIVTYPE.USER].get('value');
                 }
@@ -66,6 +76,14 @@ define(["dojo/_base/declare", "dojo/i18n", "noc/Logger",
                 if(IncidentGrid.SHOWALLGREEN != null) {
                     showGreenApp = IncidentGrid.SHOWALLGREEN[CONSTANTS.DIVTYPE.USER].domNode.childNodes[2].childNodes[0].value;;
                 }
+                var applicationNames = "applicationNames";
+                if(IncidentGrid.APPLICATIONS != null) {
+                    var rhsCMS = CheckedMultiSelect.checkedMSList[applicationNames + CONSTANTS.DIVTYPE.USER][1];
+                    var msRhsOptions = rhsCMS.getOptions();
+                    for (var j = 0; j < msRhsOptions.length; j++) {
+                        applications[j] = msRhsOptions[j].value;
+                    }
+                }
 
                 var saveData = {
                     type: CONSTANTS.TYPE.SAVE,
@@ -73,7 +91,8 @@ define(["dojo/_base/declare", "dojo/i18n", "noc/Logger",
                     refreshTime:refreshTime,
                     fontName:fontName,
                     fontSize:fontSize,
-                    showGreenApp:showGreenApp
+                    showGreenApp:showGreenApp,
+                    applications:applications
                 };
                 Utility.xhrPostCentral(CONSTANTS.ACTION.ALERTGRIDSAVE, saveData);
                 console.log("refreshTime = " + refreshTime + " fontName = " + fontName + " fontSize = " + fontSize + " showGreen = " + showGreenApp);
@@ -86,6 +105,7 @@ define(["dojo/_base/declare", "dojo/i18n", "noc/Logger",
         IncidentGrid.FONTNAME = null;
         IncidentGrid.FONTSIZE = null;
         IncidentGrid.SHOWALLGREEN = null;
+        IncidentGrid.APPLICATIONS = null;
 
         return IncidentGrid;
     });
