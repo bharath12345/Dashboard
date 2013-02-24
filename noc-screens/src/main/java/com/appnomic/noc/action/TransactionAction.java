@@ -119,8 +119,10 @@ public class TransactionAction extends AbstractNocAction  {
 	
 	private void setDummy(int id, String transactionName){
 		txDataVO = new TransactionDataVO();
-		txDataVO.setAlerts(true);
-		txDataVO.setStatus(TxResponseStatus.SLOW.name());
+		txDataVO.setAlertCount(100);
+		txDataVO.setFailCount(10);
+		txDataVO.setOkayCount(70);
+		txDataVO.setSlowCount(20);
 		txDataVO.setTxId(id);
 		txDataVO.setTxName(transactionName);
 		txDataVO.setVolume("2k");
@@ -180,9 +182,12 @@ public class TransactionAction extends AbstractNocAction  {
 				txVO[j].setTxId(j);
 				txVO[j].setTxName("txName_"+j);
 				txVO[j].setVolume("2k");
-				txVO[j].setAlerts(true);
-				txVO[j].setStatus(TxResponseStatus.FAIL.name());
 				txVO[j].setResponse("0.1ms");
+				
+				txVO[j].setAlertCount(100);
+				txVO[j].setFailCount(10);
+				txVO[j].setOkayCount(70);
+				txVO[j].setSlowCount(20);
 			}
 		}
 	}
@@ -271,27 +276,19 @@ public class TransactionAction extends AbstractNocAction  {
 				
 				if(txSummary != null) {
 					TransactionSummary summary = txSummary.get(tx.getId());
-					if( summary.getAlertsCount() == null || summary.getAlertsCount() == 0) {
-						transactions[k].setAlerts(false);	
-					} else {
-						transactions[k].setAlerts(true); // true ==> alerts are present
-					}
-					
-					if(summary.getFailedCount() > 0 || summary.getTimedOutCount()>0) {
-						transactions[k].setStatus(TxResponseStatus.FAIL.name());
-					} else if(summary.getSlowCount() > 0) {
-						transactions[k].setStatus(TxResponseStatus.SLOW.name());
-					} else {
-						transactions[k].setStatus(TxResponseStatus.OKAY.name());
-					}
-					
+					transactions[k].setAlertCount(summary.getAlertsCount());
+					transactions[k].setFailCount(summary.getFailedCount() + summary.getTimedOutCount() + summary.getUnknownCount());
+					transactions[k].setOkayCount(summary.getSuccessCount());
+					transactions[k].setSlowCount(summary.getSlowCount());
 					transactions[k].setResponse(summary.getAvgResponseTime().toString());
 					transactions[k].setVolume(summary.getVolume().toString());
 				} else {
 					transactions[k].setVolume("2k");
-					transactions[k].setAlerts(true);
-					transactions[k].setStatus(TxResponseStatus.FAIL.name());
 					transactions[k].setResponse("0.1ms");
+					transactions[k].setAlertCount(100);
+					transactions[k].setFailCount(10);
+					transactions[k].setOkayCount(70);
+					transactions[k].setSlowCount(20);
 				}
 				k++;
 			}

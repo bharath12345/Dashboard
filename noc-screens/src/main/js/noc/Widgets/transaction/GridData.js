@@ -13,37 +13,14 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Logger"
                 this.fillData(id, input.appDataVO);
             },
 
-            appendRectangle: function(cellId, width, height, value, type) {
+            appendRectangle: function(cellId, width, height, color) {
                 d3.select("#" + cellId)
                     .append("svg")
                     .append("svg:rect")
                     .attr("class", "cell")
                     .attr("width", width)
                     .attr("height", height)
-                    .style("fill", function () {
-                        //return color(d.value);
-
-                        switch(type) {
-                            case CONSTANTS.TXGRID.ALERTS:
-                                if(value == "HIGH") {
-                                    return "orangered";
-                                } else {
-                                    return "yellowgreen";
-                                }
-                                break;
-
-                            case CONSTANTS.TXGRID.STATUS:
-                                if(value == "SLOW") {
-                                    return "orange";
-                                } else if(value == "FAIL") {
-                                    return "orangered";
-                                } else {
-                                    return "yellowgreen";
-                                }
-                                break;
-                        }
-
-                    });
+                    .style("fill", color);
             },
 
             createUsingApp: function(data, input) {
@@ -61,24 +38,40 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Logger"
                 }
             },
 
+            fillText: function(id, text) {
+                console.log("id = " + id);
+                Utility.removeChildren(document.getElementById(id));
+                dojo.byId(id).innerHTML = text;
+            },
+
+            fillSVG: function(id, color) {
+                console.log("id = " + id);
+                Utility.removeChildren(document.getElementById(id));
+                this.appendRectangle(id, 15, 15, color);
+            },
+
+            maxOneRed: function(id, count) {
+                if(count>0) {
+                    this.fillSVG(id,"orangered");
+                } else {
+                    this.fillSVG(id,"yellowgreen");
+                }
+            },
+
             fillData: function(id, payload) {
 
-                var alertId = id + "_Alert";
-                console.log("alert id = " + alertId);
-                Utility.removeChildren(document.getElementById(alertId));
-                this.appendRectangle(alertId, 25, 25, payload.alerts, CONSTANTS.TXGRID.ALERTS);
+                this.fillText(id + "_AlertText", payload.alertCount);
+                this.fillText(id + "_VolumeText", payload.volume);
+                this.fillText(id + "_ResponseText", payload.response);
+                this.fillText(id + "_OkCountText", payload.okayCount);
+                this.fillText(id + "_SlowCountText", payload.slowCount);
+                this.fillText(id + "_FailCountText", payload.failCount);
 
-                var statusId = id + "_Status";
-                Utility.removeChildren(document.getElementById(statusId));
-                this.appendRectangle(statusId, 25, 25, payload.status, CONSTANTS.TXGRID.STATUS);
+                ////
 
-                var volumeId = id + "_Volume";
-                Utility.removeChildren(document.getElementById(volumeId));
-                dojo.byId(volumeId).innerHTML = payload.volume;
-
-                var responseId = id + "_Response";
-                Utility.removeChildren(document.getElementById(responseId));
-                dojo.byId(responseId).innerHTML = payload.response;
+                this.maxOneRed(id + "_AlertRect", parseInt(payload.alertCount));
+                this.maxOneRed(id + "_FailCountRect", parseInt(payload.failCount));
+                this.maxOneRed(id + "_SlowCountRect", parseInt(payload.slowCount));
             }
 
         });

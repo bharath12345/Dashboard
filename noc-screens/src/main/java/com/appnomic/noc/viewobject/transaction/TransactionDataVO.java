@@ -4,10 +4,13 @@ public class TransactionDataVO {
 
 	String txName;
 	int txId;
-	boolean alerts;
-	String status;
 	String response;
 	String volume;
+	
+	long alertCount;
+	long failCount;
+	long slowCount;
+	long okayCount;
 	
 	public String getTxName() {
 		return txName;
@@ -21,18 +24,6 @@ public class TransactionDataVO {
 	public void setTxId(int txId) {
 		this.txId = txId;
 	}
-	public boolean isAlerts() {
-		return alerts;
-	}
-	public void setAlerts(boolean alerts) {
-		this.alerts = alerts;
-	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
 	public String getResponse() {
 		return response;
 	}
@@ -45,4 +36,30 @@ public class TransactionDataVO {
 	public void setVolume(String volume) {
 		this.volume = volume;
 	}
+	public long getAlertCount() {
+		return alertCount;
+	}
+	public void setAlertCount(long alertCount) {
+		this.alertCount = alertCount;
+	}
+	public long getFailCount() {
+		return failCount;
+	}
+	public void setFailCount(long failCount) {
+		this.failCount = failCount;
+	}
+	public long getSlowCount() {
+		return slowCount;
+	}
+	public void setSlowCount(long slowCount) {
+		this.slowCount = slowCount;
+	}
+	public long getOkayCount() {
+		return okayCount;
+	}
+	public void setOkayCount(long okayCount) {
+		this.okayCount = okayCount;
+	}
+	
+	
 }

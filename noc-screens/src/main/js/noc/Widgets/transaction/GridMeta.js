@@ -37,15 +37,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                 return gridConfig;
             },
 
-            create:function (data, input) {
-                console.log("data = " + dojo.toJson(data));
-                console.log("input = " + dojo.toJson(input));
-
-                if(input.applicationVO == null || input.applicationVO.length == 0) {
-                    noc.pages.TransactionGrid.CP.domNode.innerHTML="No Applications and Transactions configured for display on the dashboard";
-                    return;
-                }
-
+            getTxCount: function(input) {
                 var txCount = 0;
                 for (var i = 0; i < input.applicationVO.length; i++) {
                     var aVO = input.applicationVO[i];
@@ -60,6 +52,75 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                         txCount += txGroup.transactions.length;
                     }
                 }
+                return txCount;
+            },
+
+            getSpan2: function(id) {
+                return "<div class='span2' style='font-size: 12px;' id='" + id + "''></div>"
+            },
+
+            getInnerHtml: function(id) {
+                var divString = "<div class='row-fluid'>" +
+                                    "<div class='span12' style='height:15px;min-height:15px;'>" +
+                                        "<div class='row-fluid' id='" + id + "' style='padding:2px'>" +
+                                            this.getSpan2(id + "_AlertRect") +
+                                            this.getSpan2(id + "_VolumeRect") +
+                                            this.getSpan2(id + "_ResponseRect") +
+                                            this.getSpan2(id + "_OkCountRect") +
+                                            this.getSpan2(id + "_SlowCountRect") +
+                                            this.getSpan2(id + "_FailCountRect") +
+                                        "</div>" +
+                                    "</div>" +
+                                    "<div class='span12'>" +
+                                        "<div class='row-fluid' style='padding:2px'>" +
+                                            this.getSpan2(id + "_AlertText") +
+                                            this.getSpan2(id + "_VolumeText") +
+                                            this.getSpan2(id + "_ResponseText") +
+                                            this.getSpan2(id + "_OkCountText") +
+                                            this.getSpan2(id + "_SlowCountText") +
+                                            this.getSpan2(id + "_FailCountText") +
+                                        "</div>" +
+                                    "</div>" +
+                                "</div>";
+                return divString;
+            },
+
+            cleanupRendering: function(gridContainer) {
+                // remove padding
+                var innerPane = dojo.query(".dijitTitlePaneContentInner", gridContainer.domNode);
+                //console.log("inner len = " + innerPane.length);
+                for (var i = 0; i < innerPane.length; i++) {
+                    innerPane[i].style.padding = 0;
+                }
+
+                /*var textNode = dojo.query(".dijitTitlePaneTextNode", gridContainer.domNode);
+                 for (var i = 0; i < textNode.length; i++) {
+                 textNode[i].style.fontSize = "10px";
+                 }*/
+
+                var head = dojo.query(".dijitTitlePaneTitle", gridContainer.domNode)
+                for (var i = 0; i < head.length; i++) {
+                    head[i].style.padding = 0;
+                    head[i].style.minHeight = 0;
+                }
+
+                var headFocus = dojo.query(".dijitTitlePaneTitleFocus", gridContainer.domNode)
+                for (var i = 0; i < headFocus.length; i++) {
+                    headFocus[i].style.margin = 0;
+                    headFocus[i].style.padding = 0;
+                }
+            },
+
+            create:function (data, input) {
+                console.log("data = " + dojo.toJson(data));
+                console.log("input = " + dojo.toJson(input));
+
+                if(input.applicationVO == null || input.applicationVO.length == 0) {
+                    noc.pages.TransactionGrid.CP.domNode.innerHTML="No Applications and Transactions configured for display on the dashboard";
+                    return;
+                }
+
+                var txCount = this.getTxCount(input);
 
                 var gridConfig = this.computeZones(txCount);
                 var nbZ = gridConfig[0];
@@ -90,12 +151,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                             titlepanes[z] = new TitlePane({
                                 splitter:false,
                                 style:styleString,
-                                content:"<div class='row' id='" + id + "' style='width:100%;height:100%;padding:5px'>" +
-                                    "<div class='span1' id='" + id + "_Alert" + "' style='width:10px;'></div>" +
-                                    "<div class='span1' id='" + id + "_Status" + "' style='width:10px;'></div>" +
-                                    "<div class='span1' id='" + id + "_Response" + "' style='width:30px;'></div>" +
-                                    "<div class='span1' id='" + id + "_Volume" + "' style='width:30px;'></div>" +
-                                    "</div>",
+                                content:this.getInnerHtml(id),
                                 title:input.applicationVO[i].applicationName + "/" + input.applicationVO[i].transactionGroups[j].transactions[k].name,
                                 toggleable:false
                             });
@@ -128,29 +184,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                 gridContainer.startup();
                 gridContainer.resize();
 
-                // remove padding
-                var innerPane = dojo.query(".dijitTitlePaneContentInner", gridContainer.domNode);
-                //console.log("inner len = " + innerPane.length);
-                for (var i = 0; i < innerPane.length; i++) {
-                    innerPane[i].style.padding = 0;
-                }
-
-                /*var textNode = dojo.query(".dijitTitlePaneTextNode", gridContainer.domNode);
-                 for (var i = 0; i < textNode.length; i++) {
-                 textNode[i].style.fontSize = "10px";
-                 }*/
-
-                var head = dojo.query(".dijitTitlePaneTitle", gridContainer.domNode)
-                for (var i = 0; i < head.length; i++) {
-                    head[i].style.padding = 0;
-                    head[i].style.minHeight = 0;
-                }
-
-                var headFocus = dojo.query(".dijitTitlePaneTitleFocus", gridContainer.domNode)
-                for (var i = 0; i < headFocus.length; i++) {
-                    headFocus[i].style.margin = 0;
-                    headFocus[i].style.padding = 0;
-                }
+                this.cleanupRendering(gridContainer);
 
                 // there would be some transactions that need App level refresh
                 // there would be some transactions that need group level refresh
