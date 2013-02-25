@@ -15,6 +15,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", 'dgrid/Grid'
                 for(var i=0;i<metrics.length;i++) {
                     var col = {};
                     col.field = metrics[i];
+                    col.label = i18nString[metrics[i]];
                     columnMeta.push(col);
                 }
 

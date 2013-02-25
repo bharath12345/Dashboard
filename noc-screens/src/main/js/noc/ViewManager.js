@@ -109,7 +109,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
             switch(data.subtype) {
                 case CONSTANTS.SUBTYPE.APPINCIDENTGRID:
                     require([CONSTANTS.getClassPath(CONSTANTS.CLASSNAME.WIDGETS.CONFIG.APPINCIDENTGRID)], function (AppIncidentGrid) {
-                        new AppIncidentGrid().applyConfig(input);
+                        AppIncidentGrid.setConfig(input);
                     });
                     break;
 

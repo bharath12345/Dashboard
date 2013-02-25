@@ -117,11 +117,11 @@ public class AlertInfoAction extends AbstractNocAction  {
 		applicationMetaVO = new ApplicationMetaVO();
 		
 		String [] metrics = new String[5];
-		metrics[0] = SUMMARY_CATEGORY.COMPONENT_ANALYTIC.name();
-		metrics[1] = SUMMARY_CATEGORY.COMPONENT_AVAILABILITY.name();
-		metrics[2] = SUMMARY_CATEGORY.COMPONENT_STATIC.name();
+		metrics[0] = SUMMARY_CATEGORY.COMPONENT_AVAILABILITY.name();
+		metrics[1] = SUMMARY_CATEGORY.COMPONENT_STATIC.name();
+		metrics[2] = SUMMARY_CATEGORY.TRANSACTION_ONLINE_ANALYTIC.name();
 		metrics[3] = SUMMARY_CATEGORY.TRANSACTION_BATCH_ANALYTIC.name();
-		metrics[4] = SUMMARY_CATEGORY.TRANSACTION_ONLINE_ANALYTIC.name();
+		metrics[4] = SUMMARY_CATEGORY.COMPONENT_ANALYTIC.name();
 		applicationMetaVO.setMetrics(metrics);
 		
 		AlertGridConfigManager agcm = AlertGridConfigManager.getInstance();

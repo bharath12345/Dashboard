@@ -1,6 +1,7 @@
-define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", 'dgrid/Grid', "noc/Logger", "noc/Constants", "noc/Utility"],
+define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", 'dgrid/Grid', "noc/Logger", "noc/Constants", "noc/Utility",
+            "noc/Widgets/Config/AppIncidentGrid"],
 
-    function (declare, i18n, i18nString, Grid, Logger, CONSTANTS, Utility) {
+    function (declare, i18n, i18nString, Grid, Logger, CONSTANTS, Utility, AppIncidentGrid) {
 
         var ApplicationData = declare(CONSTANTS.CLASSNAME.WIDGETS.INCIDENT.APPLICATIONDATA, null, {
 
@@ -22,7 +23,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", 'dgrid/Grid'
                         var highAlert = payload.count[0];
                         var mediumAlert = payload.count[1];
                         var lowAlert = payload.count[2];
-
 
                         if (parseInt(highAlert) > 0) {
                             var highSpan = dojo.create("span");
@@ -46,11 +46,10 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", 'dgrid/Grid'
                         lowSpan.style.width = "40";
                         node.appendChild(lowSpan);
 
-
                         break;
                     }
-
                 }
+                AppIncidentGrid.applyConfig();
             }
 
         });
