@@ -62,7 +62,7 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 	}
 
 	public AvailabilityDataClusterAction() {
-		setDummyData();
+		//setDummyData();
 	}
 
 	public ClusterVO[] getClusterVOs() {
@@ -184,7 +184,7 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 			clusterDataVO.setInstanceName(cluster.getName());
 		}
 
-		Random random = new Random();
+		//Random random = new Random();
 		Map<String, Map<String, boolean[]>> compKpiMap = new HashMap<String, Map<String, boolean[]>>();
 		for (ComponentData component : componentList) {
 			Map<String, boolean[]> kpiAvailMap = new HashMap<String, boolean[]>();
@@ -193,8 +193,7 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 			try {
 				// cache the availability kpi values
 
-				Map<String, NormalizedAvailabilityKpi> availSamples = componentDataService
-						.getNormalizedAvailabilityData(component.getId(),
+				Map<String, NormalizedAvailabilityKpi> availSamples = componentDataService.getNormalizedAvailabilityData(component.getId(),
 								sampleSize);
 				if (availSamples == null) {
 					continue;
@@ -207,15 +206,14 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 						availArray = new boolean[sampleSize];
 					}
 
-					NormalizedAvailabilityKpi samples = availSamples
-							.get(kpiName);
+					NormalizedAvailabilityKpi samples = availSamples.get(kpiName);
 					if (samples == null || samples.size() < 1) {
 						System.out.println("Samples null for component = "
 								+ component.getName()
 								+ " so using RANDOM DUMMY USELESS values");
-						for (int j = 0; j < samples.size(); j++) {
+						/*for (int j = 0; j < samples.size(); j++) {
 							availArray[j] = random.nextBoolean();
-						}
+						}*/
 					} else {
 						System.out.println("Samples NOT null for component = "
 								+ component.getName());

@@ -56,7 +56,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
             },
 
             getSpan2: function(id) {
-                return "<div class='span2' style='font-size: 12px;' id='" + id + "''></div>"
+                return "<div class='span2' style='font-size: 12px;' id='" + id + "'></div>"
             },
 
             getInnerHtml: function(id) {

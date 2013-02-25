@@ -32,7 +32,7 @@
        <property name="port" value="3306"/>
        <property name="username" value="root"/>
        <property name="password" value=""/>
-       <property name="db" value="apmcommon_HDFC"/>
+       <property name="db" value="apmcommon"/>
     </bean>
 
     <bean id="apmcommonJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">

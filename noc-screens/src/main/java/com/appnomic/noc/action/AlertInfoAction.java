@@ -216,10 +216,9 @@ public class AlertInfoAction extends AbstractNocAction  {
 		applicationDataVO.setApplicationName(applicationName);
 		
 		AlertCountSummary acs = null;
-		/*try {
+		try {
 			acs = alertDataService.getCountSummary(id, startEndTimes[0], startEndTimes[1]);
 		} catch (InvalidTimeIntervalException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		metricDataset[0] = getMetricData(acs, SUMMARY_CATEGORY.COMPONENT_ANALYTIC);
@@ -227,11 +226,10 @@ public class AlertInfoAction extends AbstractNocAction  {
 		metricDataset[2] = getMetricData(acs, SUMMARY_CATEGORY.COMPONENT_STATIC);
 		metricDataset[3] = getMetricData(acs, SUMMARY_CATEGORY.TRANSACTION_BATCH_ANALYTIC);
 		metricDataset[4] = getMetricData(acs, SUMMARY_CATEGORY.TRANSACTION_ONLINE_ANALYTIC);
-		*/
 		
 		if(acs == null) {
 			System.out.println("Actual alerts were NOT found. Displaying dummy data");
-			setDummyApplicationData(applicationName, applicationDataVO);
+			//setDummyApplicationData(applicationName, applicationDataVO);
 			return SUCCESS;
 		}
 		

@@ -228,10 +228,21 @@ public class TransactionAction extends AbstractNocAction  {
 		TransactionGridEntity tge = (TransactionGridEntity)cgcm.getConfig();
 		String [] txInterestedIn = tge.getTransactionNames().getUserSetting();
 		
+		if(txInterestedIn == null || txInterestedIn.length == 0) {
+			System.out.println("No transaction configured as interested for data");
+			appDataVO = null;
+			return SUCCESS;
+		}
+		
 		//String[] startEndTimes = TimeUtility.get5MinStartEnd();
 		String[] startEndTimes = TimeUtility.get30MinStartEnd();
 		Map<Integer, TransactionSummary> txSummary = transactionDataService.getTransactionSummaryForApp(id, startEndTimes[0], startEndTimes[1]);
-		
+		if(txSummary == null) {
+			System.out.println("complete txSummary is null");
+			appDataVO = null;
+			return SUCCESS;
+		}
+
 		List<Transaction> appTransactions = transactionDataService.getTransactionPerApplication(id);
 		Map<String, ArrayList<Transaction>> txGroupMap = new HashMap<String, ArrayList<Transaction>>();
 		for(Transaction appTx : appTransactions) {
@@ -254,12 +265,14 @@ public class TransactionAction extends AbstractNocAction  {
 			txList.add(appTx);
 		}
 		
+		System.out.println("transaction group map size = " + txGroupMap.size());
 		int j = 0;
 		TransactionGroupDataVO [] transactionGroups = new TransactionGroupDataVO[txGroupMap.size()];
 		appDataVO.setTxGroupVO(transactionGroups);
 		
 		Set<String> groupNames = txGroupMap.keySet();
 		for(String groupName:groupNames){
+			System.out.println("setting data for tx group = " + groupName);
 			transactionGroups[j] = new TransactionGroupDataVO();
 			transactionGroups[j].setGroupName(groupName);
 			transactionGroups[j].setId(0);
@@ -270,26 +283,60 @@ public class TransactionAction extends AbstractNocAction  {
 			
 			int k = 0;
 			for(Transaction tx: txList) {
+				System.out.println("setting tx summary for = " + tx.getName());
+
 				transactions[k] = new TransactionDataVO();
 				transactions[k].setTxId(tx.getId());
 				transactions[k].setTxName(tx.getName());
-				
-				if(txSummary != null) {
-					TransactionSummary summary = txSummary.get(tx.getId());
-					transactions[k].setAlertCount(summary.getAlertsCount());
-					transactions[k].setFailCount(summary.getFailedCount() + summary.getTimedOutCount() + summary.getUnknownCount());
-					transactions[k].setOkayCount(summary.getSuccessCount());
-					transactions[k].setSlowCount(summary.getSlowCount());
-					transactions[k].setResponse(summary.getAvgResponseTime().toString());
-					transactions[k].setVolume(summary.getVolume().toString());
+
+				Long alertCount = (long) 0, failCount = (long) 0, timedoutCount = (long) 0, 
+						unknownCount = (long) 0, okayCount = (long) 0, slowCount = (long) 0, volume=(long) 0;
+				Double responseTime = (double) 0;
+				TransactionSummary summary = txSummary.get(tx.getId());
+				if(summary == null) {
+					System.out.println("summary is null for " + tx.getName());
 				} else {
-					transactions[k].setVolume("2k");
+					alertCount = summary.getAlertsCount();
+					System.out.println("Values for tx = " + tx.getName() + " alert count = " + alertCount);
+					failCount = summary.getFailedCount();
+					System.out.println("Values for tx = " + tx.getName() + " fail count = " + failCount);
+					okayCount = summary.getSuccessCount();
+					System.out.println("Values for tx = " + tx.getName() + " okay count = " + okayCount);
+					timedoutCount = summary.getTimedOutCount();
+					System.out.println("Values for tx = " + tx.getName() + " timedout count = " + timedoutCount);
+					unknownCount = summary.getUnknownCount();
+					System.out.println("Values for tx = " + tx.getName() + " unknown count = " + unknownCount);
+					slowCount = summary.getSlowCount();
+					System.out.println("Values for tx = " + tx.getName() + " slow count = " + slowCount);
+					responseTime = summary.getAvgResponseTime();
+					System.out.println("Values for tx = " + tx.getName() + " response time count = " + responseTime);
+					volume = summary.getVolume();
+					System.out.println("Values for tx = " + tx.getName() + " volume count = " + volume);	
+				}
+				
+				if(alertCount == null) { alertCount = (long) 0;}
+				if(failCount == null) { failCount = (long) 0;}
+				if (timedoutCount == null) {timedoutCount = (long) 0;}
+				if(unknownCount == null) {unknownCount = (long) 0;}
+				if(okayCount == null) {okayCount = (long) 0;}
+				if(slowCount == null) {slowCount = (long) 0;}
+				if(responseTime == null) {responseTime = (Double) 0.0;}
+				if(volume == null) {volume = (long) 0;}
+				
+				transactions[k].setAlertCount(alertCount);
+				transactions[k].setFailCount(failCount + timedoutCount + unknownCount);
+				transactions[k].setOkayCount(okayCount);
+				transactions[k].setSlowCount(slowCount);
+				transactions[k].setResponse(responseTime.toString());
+				transactions[k].setVolume(volume.toString());
+				
+				/*transactions[k].setVolume("2k");
 					transactions[k].setResponse("0.1ms");
 					transactions[k].setAlertCount(100);
 					transactions[k].setFailCount(10);
 					transactions[k].setOkayCount(70);
-					transactions[k].setSlowCount(20);
-				}
+					transactions[k].setSlowCount(20);*/
+				
 				k++;
 			}
 			j++;
