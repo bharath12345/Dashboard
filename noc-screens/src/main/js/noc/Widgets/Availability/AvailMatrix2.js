@@ -114,10 +114,12 @@ define(['require', "dojo/_base/declare", "dojo/i18n",
                         })
                         .style("fill", function (d) {
                             //return color(d.value);
-                            if(d.value == 0) {
-                                return "orangered";
+                            if(d.value == 2) {
+                                return "grey"; // 2 is unknown
+                            } else if(d.value == 1) {
+                                return "orangered"; // 1 is not available
                             } else {
-                                return "yellowgreen";
+                                return "yellowgreen"; //0 is available
                             }
                         })
                         .style("stroke", '#555');

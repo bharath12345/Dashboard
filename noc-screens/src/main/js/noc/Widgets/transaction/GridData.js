@@ -41,7 +41,10 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Logger"
             fillText: function(id, text) {
                 console.log("id = " + id);
                 Utility.removeChildren(document.getElementById(id));
-                dojo.byId(id).innerHTML = text;
+                var node = dojo.byId(id);
+                node.innerHTML = text;
+                node.style.fontSize = "10";
+                node.style.fontWeight = "600";
             },
 
             fillSVG: function(id, color) {
@@ -58,14 +61,47 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Logger"
                 }
             },
 
+            roundNumber: function (rnum, rlength) {
+                // Arguments: number to round, number of decimal places
+                var newnumber = Math.round(rnum * Math.pow(10, rlength)) / Math.pow(10, rlength);
+                return newnumber;
+            },
+
+            convertToReadableString: function(count) {
+                if(count > 1000000) {
+                    count = count / 1000000;
+                    count = this.roundNumber(count, 2);
+                    count = count + "M";
+                } else if(count > 1000) {
+                    count = count / 1000;
+                    count = this.roundNumber(count, 2);
+                    count = count + "K";
+                } else {
+                    count = this.roundNumber(count, 2);
+                }
+                return count;
+            },
+
+            convertTime: function(count) {
+                if(count > 1000) {
+                    count = count / 1000;
+                    count = this.roundNumber(count, 2);
+                    count = count + "Sec";
+                } else {
+                    count = this.roundNumber(count, 2);
+                    count = count + "ms";
+                }
+                return count;
+            },
+
             fillData: function(id, payload) {
 
-                this.fillText(id + "_AlertText", payload.alertCount);
-                this.fillText(id + "_VolumeText", payload.volume);
-                this.fillText(id + "_ResponseText", payload.response);
-                this.fillText(id + "_OkCountText", payload.okayCount);
-                this.fillText(id + "_SlowCountText", payload.slowCount);
-                this.fillText(id + "_FailCountText", payload.failCount);
+                this.fillText(id + "_AlertText", this.convertToReadableString(parseInt(payload.alertCount)));
+                this.fillText(id + "_VolumeText", this.convertToReadableString(parseInt(payload.volume)));
+                this.fillText(id + "_ResponseText", this.convertTime(payload.response));
+                this.fillText(id + "_OkCountText", this.convertToReadableString(parseInt(payload.okayCount)));
+                this.fillText(id + "_SlowCountText", this.convertToReadableString(parseInt(payload.slowCount)));
+                this.fillText(id + "_FailCountText", this.convertToReadableString(parseInt(payload.failCount)));
 
                 ////
 

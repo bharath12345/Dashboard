@@ -208,15 +208,14 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 
 					NormalizedAvailabilityKpi samples = availSamples.get(kpiName);
 					if (samples == null || samples.size() < 1) {
-						System.out.println("Samples null for component = "
+						/*System.out.println("Samples null for component = "
 								+ component.getName()
 								+ " so using RANDOM DUMMY USELESS values");
-						/*for (int j = 0; j < samples.size(); j++) {
+						for (int j = 0; j < samples.size(); j++) {
 							availArray[j] = random.nextBoolean();
 						}*/
 					} else {
-						System.out.println("Samples NOT null for component = "
-								+ component.getName());
+						System.out.println("Samples NOT null for component = " + component.getName());
 						for (int j = 0; j < samples.size(); j++) {
 							availArray[j] = samples.get(j);
 						}
@@ -246,9 +245,14 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 
 			// pluck from the cache and check if cluster has to be set RED or
 			// GREEN
-			boolean foundOneViolated = false;
+			boolean foundOneViolated = true;
+			int unknownCount = 0;
 			for (String kpiName : kpiNames) {
 				boolean[] availArray = kpiAvailMap.get(kpiName);
+				if(availArray == null || availArray.length == 0) {
+					unknownCount++;
+				}
+				
 				for (boolean kpiAvail : availArray) {
 					// 0 is NOT Available and 1 is Available
 					if (kpiAvail == false) {
@@ -263,7 +267,13 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 
 			instanceDataPointList[i] = new CompInstanceDataPointVO();
 			instanceDataPointList[i].setName(compName);
-			instanceDataPointList[i].setValue(foundOneViolated ? 0 : 1);
+			if(unknownCount == kpiNames.size()) {
+				instanceDataPointList[i].setValue(2); // 2 for Unknown
+			} else if(foundOneViolated == true) {
+				instanceDataPointList[i].setValue(1); // 1 for NOT available
+			} else {
+				instanceDataPointList[i].setValue(0); // 0 for available
+			}
 
 			i++;
 		}

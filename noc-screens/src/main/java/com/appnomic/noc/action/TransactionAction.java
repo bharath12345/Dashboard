@@ -125,8 +125,8 @@ public class TransactionAction extends AbstractNocAction  {
 		txDataVO.setSlowCount(20);
 		txDataVO.setTxId(id);
 		txDataVO.setTxName(transactionName);
-		txDataVO.setVolume("2k");
-		txDataVO.setResponse("1ms");
+		txDataVO.setVolume(2000);
+		txDataVO.setResponse(1000);
 	}
 	
 	@Action(value="/transaction/Data", results = {
@@ -181,8 +181,8 @@ public class TransactionAction extends AbstractNocAction  {
 				txVO[j] = new TransactionDataVO();
 				txVO[j].setTxId(j);
 				txVO[j].setTxName("txName_"+j);
-				txVO[j].setVolume("2k");
-				txVO[j].setResponse("0.1ms");
+				txVO[j].setVolume(2000);
+				txVO[j].setResponse(1000);
 				
 				txVO[j].setAlertCount(100);
 				txVO[j].setFailCount(10);
@@ -291,10 +291,11 @@ public class TransactionAction extends AbstractNocAction  {
 
 				Long alertCount = (long) 0, failCount = (long) 0, timedoutCount = (long) 0, 
 						unknownCount = (long) 0, okayCount = (long) 0, slowCount = (long) 0, volume=(long) 0;
-				Double responseTime = (double) 0;
+				Long responseTime = (long) 0;
 				TransactionSummary summary = txSummary.get(tx.getId());
 				if(summary == null) {
 					System.out.println("summary is null for " + tx.getName());
+					//setDummyData(transactions[k]);
 				} else {
 					alertCount = summary.getAlertsCount();
 					System.out.println("Values for tx = " + tx.getName() + " alert count = " + alertCount);
@@ -308,7 +309,7 @@ public class TransactionAction extends AbstractNocAction  {
 					System.out.println("Values for tx = " + tx.getName() + " unknown count = " + unknownCount);
 					slowCount = summary.getSlowCount();
 					System.out.println("Values for tx = " + tx.getName() + " slow count = " + slowCount);
-					responseTime = summary.getAvgResponseTime();
+					responseTime = summary.getAvgResponseTime().longValue();
 					System.out.println("Values for tx = " + tx.getName() + " response time count = " + responseTime);
 					volume = summary.getVolume();
 					System.out.println("Values for tx = " + tx.getName() + " volume count = " + volume);	
@@ -320,28 +321,30 @@ public class TransactionAction extends AbstractNocAction  {
 				if(unknownCount == null) {unknownCount = (long) 0;}
 				if(okayCount == null) {okayCount = (long) 0;}
 				if(slowCount == null) {slowCount = (long) 0;}
-				if(responseTime == null) {responseTime = (Double) 0.0;}
+				if(responseTime == null) {responseTime = (long) 0;}
 				if(volume == null) {volume = (long) 0;}
 				
 				transactions[k].setAlertCount(alertCount);
 				transactions[k].setFailCount(failCount + timedoutCount + unknownCount);
 				transactions[k].setOkayCount(okayCount);
 				transactions[k].setSlowCount(slowCount);
-				transactions[k].setResponse(responseTime.toString());
-				transactions[k].setVolume(volume.toString());
-				
-				/*transactions[k].setVolume("2k");
-					transactions[k].setResponse("0.1ms");
-					transactions[k].setAlertCount(100);
-					transactions[k].setFailCount(10);
-					transactions[k].setOkayCount(70);
-					transactions[k].setSlowCount(20);*/
+				transactions[k].setResponse(responseTime);
+				transactions[k].setVolume(volume);
 				
 				k++;
 			}
 			j++;
 		}
 		return SUCCESS;
+	}
+	
+	private void setDummyData(TransactionDataVO transaction) {
+		transaction.setVolume(2000);
+		transaction.setResponse(1000);
+		transaction.setAlertCount(100);
+		transaction.setFailCount(10);
+		transaction.setOkayCount(70);
+		transaction.setSlowCount(20);
 	}
 	
 	public void setDummyMeta() {

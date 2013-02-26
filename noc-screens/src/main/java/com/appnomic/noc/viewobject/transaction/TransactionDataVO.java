@@ -4,8 +4,8 @@ public class TransactionDataVO {
 
 	String txName;
 	int txId;
-	String response;
-	String volume;
+	long response;
+	long volume;
 	
 	long alertCount;
 	long failCount;
@@ -24,16 +24,16 @@ public class TransactionDataVO {
 	public void setTxId(int txId) {
 		this.txId = txId;
 	}
-	public String getResponse() {
+	public long getResponse() {
 		return response;
 	}
-	public void setResponse(String response) {
+	public void setResponse(long response) {
 		this.response = response;
 	}
-	public String getVolume() {
+	public long getVolume() {
 		return volume;
 	}
-	public void setVolume(String volume) {
+	public void setVolume(long volume) {
 		this.volume = volume;
 	}
 	public long getAlertCount() {
