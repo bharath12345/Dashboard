@@ -17,9 +17,9 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
 
                 var startPageCounter = 0;
                 this.createIncidentSectionAndPage(startPageCounter++);
-                this.createClusterAvailabilitySectionAndPage(startPageCounter++);
+                //this.createClusterAvailabilitySectionAndPage(startPageCounter++);
                 this.createTxGridSectionAndPage(startPageCounter++);
-                this.createTopology(startPageCounter++);
+                //this.createTopology(startPageCounter++);
 
                 //for(var i=0;i<PageLoader.TotalPages;i++) {
                 //    this.createAvailabilitySectionAndPage(startPageCounter++);

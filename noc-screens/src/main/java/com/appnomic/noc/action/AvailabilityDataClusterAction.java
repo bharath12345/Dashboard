@@ -245,17 +245,19 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 
 			// pluck from the cache and check if cluster has to be set RED or
 			// GREEN
-			boolean foundOneViolated = true;
+			boolean foundOneViolated = false;
 			int unknownCount = 0;
 			for (String kpiName : kpiNames) {
 				boolean[] availArray = kpiAvailMap.get(kpiName);
 				if(availArray == null || availArray.length == 0) {
 					unknownCount++;
+					continue;
 				}
 				
 				for (boolean kpiAvail : availArray) {
-					// 0 is NOT Available and 1 is Available
+					// 0 is NOT Available and 1 is Available in A1 DB
 					if (kpiAvail == false) {
+						System.out.println("kpi " + kpiName + " is NOT-Available per A1");
 						foundOneViolated = true;
 						break;
 					}
