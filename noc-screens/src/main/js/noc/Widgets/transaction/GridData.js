@@ -53,9 +53,13 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Logger"
                 this.appendRectangle(id, 15, 15, color);
             },
 
-            maxOneRed: function(id, count) {
+            maxOneRed: function(id, count, type) {
                 if(count>0) {
-                    this.fillSVG(id,"orangered");
+                    if(type == true) {
+                        this.fillSVG(id,"orange");
+                    } else {
+                        this.fillSVG(id,"orangered");
+                    }
                 } else {
                     this.fillSVG(id,"yellowgreen");
                 }
@@ -105,14 +109,15 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Logger"
 
                 ////
 
-                this.maxOneRed(id + "_AlertRect", parseInt(payload.alertCount));
-                this.maxOneRed(id + "_FailCountRect", parseInt(payload.failCount));
-                this.maxOneRed(id + "_SlowCountRect", parseInt(payload.slowCount));
+                this.maxOneRed(id + "_AlertRect", parseInt(payload.alertCount), false);
+                this.maxOneRed(id + "_FailCountRect", parseInt(payload.failCount), false);
+                this.maxOneRed(id + "_SlowCountRect", parseInt(payload.slowCount), true);
             }
 
         });
 
         GridData.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.WIDGETS.TRANSACTION.GRIDDATA));
+
 
         return GridData;
     });

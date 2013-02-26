@@ -41,7 +41,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", 'dgrid/Grid'
                         }
 
                         var lowSpan = dojo.create("span");
-                        lowSpan.className = "label label-info";
+                        lowSpan.className = "label label-success";
                         lowSpan.innerHTML = lowAlert;
                         lowSpan.style.width = "40";
                         node.appendChild(lowSpan);
