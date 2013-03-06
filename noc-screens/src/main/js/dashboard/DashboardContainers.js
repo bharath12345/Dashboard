@@ -115,7 +115,7 @@ define(["../dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit
                 ///////
 
                 var actionMenu = new Menu({id: "actionMenu"});
-                fileMenu.addChild( new MenuItem({id: "someaction",label: "Some Action"}) );
+                actionMenu.addChild( new MenuItem({id: "someaction",label: "Some Action"}) );
                 menuBar.addChild( new PopupMenuBarItem({id: "action",label: "Action",popup: actionMenu}) );
 
                 ///////
