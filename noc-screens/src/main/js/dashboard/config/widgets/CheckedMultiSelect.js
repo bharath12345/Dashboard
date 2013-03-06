@@ -1,5 +1,5 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojox/form/CheckedMultiSelect", "dijit/form/Button", "dojo/_base/lang", "dojo/dom", "dojo/dom-style",
-    "noc/Logger", "dashboard/config/ConfigUtility", "dashboard/config/ConfigConstants", "dojo/i18n!config/nls/config"],
+    "noc/Logger", "dashboard/config/ConfigUtility", "dashboard/config/ConfigConstants", "dojo/i18n!dashboard/config/nls/config"],
 
     function (declare, i18n, DojoCheckedMultiSelect, Button, lang, dom, domStyle, Logger, ConfigUtility, CONFIGCONSTANTS, i18nString) {
 

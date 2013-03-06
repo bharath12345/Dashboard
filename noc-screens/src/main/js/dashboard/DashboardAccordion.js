@@ -36,7 +36,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
                     var viewMeta = {
                         id:paneList[i].id,
                         name:paneList[i].name,
-                        type:"",
+                        type:DBCONSTANTS.TYPE.ACCORDIONDATA,
                         custom:[]
                     };
                     DashboardUtility.xhrPostCentral(paneList[i].action, viewMeta);

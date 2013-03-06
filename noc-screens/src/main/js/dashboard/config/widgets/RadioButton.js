@@ -1,5 +1,5 @@
 define(["dojo/_base/declare", "dojo/i18n", "dijit/form/RadioButton", "noc/Logger",
-    "dashboard/config/ConfigUtility", "dashboard/config/ConfigConstants", "dojo/i18n!config/nls/config"],
+    "dashboard/config/ConfigUtility", "dashboard/config/ConfigConstants", "dojo/i18n!dashboard/config/nls/config"],
 
     function (declare, i18n, DojoRadioButton, Logger, ConfigUtility, CONFIGCONSTANTS, i18nString) {
 

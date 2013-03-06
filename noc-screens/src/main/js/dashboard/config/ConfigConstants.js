@@ -1,69 +1,67 @@
-define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!config/nls/config", "dashboard/Constants"],
+define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/config", "dashboard/DashboardConstants"],
 
-    function (require, declare, i18n, i18nString, CONSTANTS) {
+    function (require, declare, i18n, i18nString, DBCONSTANTS) {
 
         // this is a completely static class
-        var CONSTANTS = declare("dashboard.config.Constants", null, {});
+        var ConfigConstants = declare("dashboard.config.ConfigConstants", null, {});
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        CONSTANTS.CLASSNAME = {};
-        CONSTANTS.CLASSNAME.CONFIG = "dashboard.config.Config";
-        CONSTANTS.CLASSNAME.ACCORDION = CONSTANTS.ACCORDIONMAP["configuration"];
-        CONSTANTS.CLASSNAME.PAGEELEMENTS = "dashboard.config.ConfigPageElements";
-        CONSTANTS.CLASSNAME.RENDERATTRIBUTES = "dashboard.config.RenderAttributes";
-        CONSTANTS.CLASSNAME.UTILITY = "dashboard.config.Utility";
+        ConfigConstants.CLASSNAME = {};
+        ConfigConstants.CLASSNAME.ACCORDION = DBCONSTANTS.ACCORDIONMAP["configuration"];
+        ConfigConstants.CLASSNAME.RENDERATTRIBUTES = "dashboard.config.RenderAttributes";
+        ConfigConstants.CLASSNAME.UTILITY = "dashboard.config.ConfigUtility";
 
-        CONSTANTS.CLASSNAME.INCIDENTGRID = "dashboard.config.pages.IncidentGrid";
-        CONSTANTS.CLASSNAME.CLUSTERGRID = "dashboard.config.pages.ClusterGrid";
-        CONSTANTS.CLASSNAME.TRANSACTIONGRID = "dashboard.config.pages.TransactionGrid";
-        CONSTANTS.CLASSNAME.TOPOLOGY = "dashboard.config.pages.Topology";
-        CONSTANTS.CLASSNAME.GLOBAL = "dashboard.config.pages.Global";
+        ConfigConstants.CLASSNAME.INCIDENTGRID = "dashboard.config.pages.IncidentGrid";
+        ConfigConstants.CLASSNAME.CLUSTERGRID = "dashboard.config.pages.ClusterGrid";
+        ConfigConstants.CLASSNAME.TRANSACTIONGRID = "dashboard.config.pages.TransactionGrid";
+        ConfigConstants.CLASSNAME.TOPOLOGY = "dashboard.config.pages.Topology";
+        ConfigConstants.CLASSNAME.GLOBAL = "dashboard.config.pages.Global";
 
-        CONSTANTS.CLASSNAME.COMBOBOX = "dashboard.config.widgets.ComboBox";
-        CONSTANTS.CLASSNAME.NUMBERSPINNER = "dashboard.config.widgets.NumberSpinner";
-        CONSTANTS.CLASSNAME.RADIOBUTTON = "dashboard.config.widgets.RadioButton";
-        CONSTANTS.CLASSNAME.CHECKEDMULTISELECT = "dashboard.config.widgets.CheckedMultiSelect";
+        ConfigConstants.CLASSNAME.COMBOBOX = "dashboard.config.widgets.ComboBox";
+        ConfigConstants.CLASSNAME.NUMBERSPINNER = "dashboard.config.widgets.NumberSpinner";
+        ConfigConstants.CLASSNAME.RADIOBUTTON = "dashboard.config.widgets.RadioButton";
+        ConfigConstants.CLASSNAME.CHECKEDMULTISELECT = "dashboard.config.widgets.CheckedMultiSelect";
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        CONSTANTS.TYPE = {};
-        CONSTANTS.TYPE.ACCORDION = 1;
-        CONSTANTS.TYPE.PAGECONFIG = 2;
-        CONSTANTS.TYPE.SAVE = 3;
+        ConfigConstants.TYPE = {};
+        ConfigConstants.TYPE.ACCORDION = 1;
+        ConfigConstants.TYPE.PAGECONFIG = 2;
+        ConfigConstants.TYPE.SAVE = 3;
 
-        CONSTANTS.SAVE = {};
-        CONSTANTS.SAVE.INCIDENTGRID = 1;
-        CONSTANTS.SAVE.CLUSTERGRID = 2;
-        CONSTANTS.SAVE.TRANSACTIONGRID = 3;
-        CONSTANTS.SAVE.TOPOLOGY = 4;
-        CONSTANTS.SAVE.GLOBAL = 5;
-
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        CONSTANTS.ACTION = {};
-        CONSTANTS.ACTION.PAGESET = "config/pages.action";
-
-        CONSTANTS.ACTION.ALERTGRIDSAVE = "config/alertGridDetailsSave.action";
-        CONSTANTS.ACTION.CLUSTERGRIDSAVE = "config/clusterGridDetailsSave";
-        CONSTANTS.ACTION.TRANSACTIONGRIDSAVE = "config/transactionGridDetailsSave";
-        CONSTANTS.ACTION.TOPOLOGYSAVE = "config/topologyDetailsSave";
-        CONSTANTS.ACTION.GLOBALSAVE = "config/globalDetailsSave";
-
-        CONSTANTS.ACTION.ALERTGRIDATTRIBUTES = "config/alertGridDetailsRetrieve.action";
-        CONSTANTS.ACTION.CLUSTERGRIDATTRIBUTES = "config/clusterGridDetailsRetrieve.action";
-        CONSTANTS.ACTION.TRANSACTIONGRIDATTRIBUTES = "config/transactionGridDetailsRetrieve.action";
-        CONSTANTS.ACTION.TOPOLOGYATTRIBUTES = "config/topologyDetailsRetrieve.action";
-        CONSTANTS.ACTION.GLOBALATTRIBUTES = "config/globalDetailsRetrieve.action";
+        ConfigConstants.SAVE = {};
+        ConfigConstants.SAVE.INCIDENTGRID = 1;
+        ConfigConstants.SAVE.CLUSTERGRID = 2;
+        ConfigConstants.SAVE.TRANSACTIONGRID = 3;
+        ConfigConstants.SAVE.TOPOLOGY = 4;
+        ConfigConstants.SAVE.GLOBAL = 5;
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        CONSTANTS.DIVTYPE = {};
-        CONSTANTS.DIVTYPE.USER = "_user";
-        CONSTANTS.DIVTYPE.ADMIN = "_admin";
-        CONSTANTS.DIVTYPE.FACTORY = "_factory";
+        ConfigConstants.ACTION = {};
+        ConfigConstants.ACTION.PAGESET = "config/pages.action";
+
+        ConfigConstants.ACTION.ALERTGRIDSAVE = "config/alertGridDetailsSave.action";
+        ConfigConstants.ACTION.CLUSTERGRIDSAVE = "config/clusterGridDetailsSave";
+        ConfigConstants.ACTION.TRANSACTIONGRIDSAVE = "config/transactionGridDetailsSave";
+        ConfigConstants.ACTION.TOPOLOGYSAVE = "config/topologyDetailsSave";
+        ConfigConstants.ACTION.GLOBALSAVE = "config/globalDetailsSave";
+
+        ConfigConstants.ACTION.ALERTGRIDATTRIBUTES = "config/alertGridDetailsRetrieve.action";
+        ConfigConstants.ACTION.CLUSTERGRIDATTRIBUTES = "config/clusterGridDetailsRetrieve.action";
+        ConfigConstants.ACTION.TRANSACTIONGRIDATTRIBUTES = "config/transactionGridDetailsRetrieve.action";
+        ConfigConstants.ACTION.TOPOLOGYATTRIBUTES = "config/topologyDetailsRetrieve.action";
+        ConfigConstants.ACTION.GLOBALATTRIBUTES = "config/globalDetailsRetrieve.action";
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ConfigConstants.DIVTYPE = {};
+        ConfigConstants.DIVTYPE.USER = "_user";
+        ConfigConstants.DIVTYPE.ADMIN = "_admin";
+        ConfigConstants.DIVTYPE.FACTORY = "_factory";
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        CONSTANTS.getClassPath = function(name) {
+        ConfigConstants.getClassPath = function(name) {
             return name.replace(/\./g, "/");
         }
 
-        return CONSTANTS;
+        return ConfigConstants;
     });
