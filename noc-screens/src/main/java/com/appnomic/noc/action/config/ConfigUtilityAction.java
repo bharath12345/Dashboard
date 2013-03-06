@@ -17,6 +17,7 @@ import com.appnomic.noc.config.attribute.*;
 import com.appnomic.noc.config.entity.AlertGridEntity;
 import com.appnomic.noc.viewobject.config.AlertGridConfigVO;
 import com.appnomic.noc.viewobject.config.PageListVO;
+import com.appnomic.noc.viewobject.config.TabListVO;
 import com.appnomic.noc.viewobject.config.base.BooleanAttributeVO;
 import com.appnomic.noc.viewobject.config.base.IntegerAttributeVO;
 import com.appnomic.noc.viewobject.config.base.StringAttributeVO;
@@ -26,6 +27,7 @@ import com.appnomic.noc.viewobject.config.base.StringAttributeVO;
 public class ConfigUtilityAction extends AbstractNocAction {
 
 	private PageListVO [] pageListVO;
+	private TabListVO [] tabListVO;
 	private Map<String, String[]> param;
 	private Map<String, String> levelDbMap;
 	
@@ -51,6 +53,14 @@ public class ConfigUtilityAction extends AbstractNocAction {
 
 	public void setParam(Map<String, String[]> param) {
 		this.param = param;
+	}
+
+	public TabListVO[] getTabListVO() {
+		return tabListVO;
+	}
+
+	public void setTabListVO(TabListVO[] tabListVO) {
+		this.tabListVO = tabListVO;
 	}
 
 	@Action(value="/config/pages", results = {
@@ -101,7 +111,54 @@ public class ConfigUtilityAction extends AbstractNocAction {
 	}
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////
+
+	@Action(value="/dashboard/panes", results = {
+	        @Result(name="success", type="json", params = {
+	        		"excludeProperties",
+	                "parameters,session,SUCCESS,ERROR,agcVO,levelDbMap",
+	        		"enableGZIP", "true",
+	        		"encoding", "UTF-8",
+	                "noCache","true",
+	                "excludeNullProperties","true"
+	            })})
+	public String allconfig() {
+		param = getParameters();
 		
+		List<TabListVO> tabList = new ArrayList<TabListVO>();
+		
+		TabListVO tabListObj = new TabListVO();
+		tabListObj.setName("topoViews");
+		tabListObj.setLabel("Topology Views");
+		tabListObj.setId(0);
+		tabListObj.setAction("topology/action");
+		tabList.add(tabListObj);
+		
+		tabListObj = new TabListVO();
+		tabListObj.setName("commandScreens");
+		tabListObj.setLabel("Command Center Screens");
+		tabListObj.setId(1);
+		tabListObj.setAction("noc/action");
+		tabList.add(tabListObj);
+		
+		tabListObj = new TabListVO();
+		tabListObj.setName("alerts");
+		tabListObj.setLabel("Alerts");
+		tabListObj.setId(1);
+		tabListObj.setAction("dashboard/alerts");
+		tabList.add(tabListObj);
+		
+		tabListObj = new TabListVO();
+		tabListObj.setName("configuration");
+		tabListObj.setLabel("Configuration");
+		tabListObj.setId(2);
+		tabListObj.setAction("config/pages.action");
+		tabList.add(tabListObj);
+		
+		tabListVO = tabList.toArray(new TabListVO[tabList.size()]);
+		
+		return SUCCESS;
+	}
+	
 	public static Integer getInteger(String name, Map<String, String[]> parameters) {
 		Integer myint = null;
 		try {

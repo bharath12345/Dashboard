@@ -6,11 +6,11 @@
         <version>09.20.000.000</version> </parent -->
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>noc-screens</artifactId>
-    <groupId>com.appnomic.appsone.noc-screens</groupId>
+    <artifactId>dashboard</artifactId>
+    <groupId>com.appnomic.appsone.dashboard</groupId>
     <version>01.00.00</version>
-    <name>AppsOne NOC Screens</name>
-    <description>Build and packaging for the NOC UI screens of AppsOne</description>
+    <name>AppsOne Dashboard</name>
+    <description>Build and packaging for the AppsOne Dashboard</description>
 
     <repositories>
         <!--repository>
@@ -133,10 +133,10 @@
         <shrinksafe-dir>${basedir}/src/main/js/util/shrinksafe</shrinksafe-dir>
         <closure-dir>${basedir}/src/main/js/util/closureCompiler</closure-dir>
         <dojo-build-dir>${basedir}/src/main/js/util/buildscripts</dojo-build-dir>
-        <release-dir>${basedir}/target/noc-screens/js</release-dir>
+        <release-dir>${basedir}/target/dashboard/js</release-dir>
 
         <gui.target.location>${basedir}${file.separator}target</gui.target.location>
-        <gui.target.gui.location>${basedir}${file.separator}target${file.separator}noc-screens</gui.target.gui.location>
+        <gui.target.gui.location>${basedir}${file.separator}target${file.separator}dashboard</gui.target.gui.location>
         <js-dir>${basedir}/src/main/js</js-dir>
 
         <dojo.version>1.8.3</dojo.version>
@@ -166,7 +166,7 @@
                 </property>
             </activation>
             <build>
-                <finalName>noc-screens</finalName>
+                <finalName>dashboard</finalName>
                 <plugins>
                     <plugin>
                         <artifactId>maven-clean-plugin</artifactId>
@@ -205,7 +205,7 @@
                                     <excludeDefaultDirectories>true</excludeDefaultDirectories>
                                     <filesets>
                                         <fileset>
-                                            <directory>${release-dir}/noc</directory>
+                                            <directory>${release-dir}/dashboard</directory>
                                             <includes>
                                                 <include>**/*uncompressed.js</include>
                                             </includes>
@@ -376,7 +376,7 @@
                                                 <arg value="${js-dir}/dojo/dojo.js"/>
                                                 <arg value="baseUrl=${js-dir}/dojo"/>
                                                 <arg value="load=build"/>
-                                                <arg line="--profile ${basedir}/noc.profile.js"/>
+                                                <arg line="--profile ${basedir}/dashboard.profile.js"/>
                                                 <arg value="--release"/>
                                             </java>
                                         </parallel>
@@ -391,7 +391,7 @@
                                 <phase>compile</phase>
                                 <configuration>
                                     <tasks>
-                                        <concat destfile="${basedir}/target/noc-screens/css/noc.merged.css"
+                                        <concat destfile="${basedir}/target/dashboard/css/noc.merged.css"
                                                 eol="cr">
                                             <filelist dir="${basedir}/src/main/css"
                                                       files="treemap.css,noc.css"/>
@@ -404,9 +404,9 @@
                                             <arg value="--charset"/>
                                             <arg value="utf8"/>
                                             <arg value="-o"/>
-                                            <arg value="${basedir}/target/noc-screens/css/noc.merged.compressed.css"/>
+                                            <arg value="${basedir}/target/dashboard/css/noc.merged.compressed.css"/>
                                             <arg value="-v"/>
-                                            <arg value="${basedir}/target/noc-screens/css/noc.merged.css"/>
+                                            <arg value="${basedir}/target/dashboard/css/noc.merged.css"/>
                                         </exec>
                                         <exec executable="java">
                                             <arg value="-jar"/>
@@ -416,7 +416,7 @@
                                             <arg value="--charset"/>
                                             <arg value="utf8"/>
                                             <arg value="-o"/>
-                                            <arg value="${basedir}/target/noc-screens/css/login.compressed.css"/>
+                                            <arg value="${basedir}/target/dashboard/css/login.compressed.css"/>
                                             <arg value="-v"/>
                                             <arg value="${basedir}/src/main/css/login.css"/>
                                         </exec>
@@ -428,9 +428,9 @@
                                             <arg value="--charset"/>
                                             <arg value="utf8"/>
                                             <arg value="-o"/>
-                                            <arg value="${basedir}/target/noc-screens/css/config.compressed.css"/>
+                                            <arg value="${basedir}/target/dashboard/css/dashboard.compressed.css"/>
                                             <arg value="-v"/>
-                                            <arg value="${basedir}/src/main/css/config.css"/>
+                                            <arg value="${basedir}/src/main/css/dashboard.css"/>
                                         </exec>
                                     </tasks>
                                 </configuration>
@@ -563,7 +563,7 @@
                 </property>
             </activation>
             <build>
-                <finalName>noc-screens</finalName>
+                <finalName>dashboard</finalName>
                 <plugins>
                     <plugin>
                         <artifactId>maven-clean-plugin</artifactId>
@@ -579,7 +579,7 @@
                                     <excludeDefaultDirectories>true</excludeDefaultDirectories>
                                     <filesets>
                                         <fileset>
-                                            <directory>${release-dir}/noc</directory>
+                                            <directory>${release-dir}/dashboard</directory>
                                             <includes>
                                                 <include>**/*uncompressed.js</include>
                                             </includes>
@@ -670,7 +670,7 @@
                                                 <arg value="${js-dir}/dojo/dojo.js"/>
                                                 <arg value="baseUrl=${js-dir}/dojo"/>
                                                 <arg value="load=build"/>
-                                                <arg line="--profile ${basedir}/noc.profile.js"/>
+                                                <arg line="--profile ${basedir}/dashboard.profile.js"/>
                                                 <arg value="--release"/>
                                             </java>
                                         </parallel>
@@ -685,7 +685,7 @@
                                 <phase>compile</phase>
                                 <configuration>
                                     <tasks>
-                                        <concat destfile="${basedir}/target/noc-screens/css/noc.merged.css"
+                                        <concat destfile="${basedir}/target/dashboard/css/noc.merged.css"
                                                 eol="cr">
                                             <filelist dir="${basedir}/src/main/css"
                                                       files="treemap.css,noc.css"/>
@@ -698,9 +698,9 @@
                                             <arg value="--charset"/>
                                             <arg value="utf8"/>
                                             <arg value="-o"/>
-                                            <arg value="${basedir}/target/noc-screens/css/noc.merged.compressed.css"/>
+                                            <arg value="${basedir}/target/dashboard/css/noc.merged.compressed.css"/>
                                             <arg value="-v"/>
-                                            <arg value="${basedir}/target/noc-screens/css/noc.merged.css"/>
+                                            <arg value="${basedir}/target/dashboard/css/noc.merged.css"/>
                                         </exec>
                                         <exec executable="java">
                                             <arg value="-jar"/>
@@ -710,7 +710,7 @@
                                             <arg value="--charset"/>
                                             <arg value="utf8"/>
                                             <arg value="-o"/>
-                                            <arg value="${basedir}/target/noc-screens/css/login.compressed.css"/>
+                                            <arg value="${basedir}/target/dashboard/css/login.compressed.css"/>
                                             <arg value="-v"/>
                                             <arg value="${basedir}/src/main/css/login.css"/>
                                         </exec>
@@ -722,9 +722,9 @@
                                             <arg value="--charset"/>
                                             <arg value="utf8"/>
                                             <arg value="-o"/>
-                                            <arg value="${basedir}/target/noc-screens/css/config.compressed.css"/>
+                                            <arg value="${basedir}/target/dashboard/css/dashboard.compressed.css"/>
                                             <arg value="-v"/>
-                                            <arg value="${basedir}/src/main/css/config.css"/>
+                                            <arg value="${basedir}/src/main/css/dashboard.css"/>
                                         </exec>
                                     </tasks>
                                 </configuration>
