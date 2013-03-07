@@ -143,6 +143,16 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
                     }
                 });
                 toolbar.addChild(button);
+
+                button = new Button({
+                    showLabel: true,
+                    label: "Pop Out",
+                    iconClass:'dijitEditorIcon newViewWindowToolbarButton',
+                    onClick: function(){
+
+                    }
+                });
+                toolbar.addChild(button);
             }
         });
 
