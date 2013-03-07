@@ -35,8 +35,12 @@ define([ 'dojo/has', 'require' ], function (has, require) {
          * require just `dojo/domReady`, it would load that module just like any other module, without the special
          * plugin functionality.
          */
-        require(['dojox/widget/Standby','dashboard/DashboardContainers', 'dashboard/DashboardAccordion', 'dojo/domReady!' ],
-            function (Standby, DashboardContainers, DashboardAccordion) {
+        require(['dojox/widget/Standby','dashboard/DashboardContainers', 'dashboard/DashboardAccordion',
+            "dashboard/DashboardCallbacks", 'dojo/domReady!' ],
+
+            function (Standby, DashboardContainers, DashboardAccordion, DashboardCallbacks) {
+
+                DashboardCallbacks.initialize();
 
                 var dContainers = new DashboardContainers();
                 dContainers.createPageElements();

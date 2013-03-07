@@ -90,9 +90,9 @@ define(["dojo/_base/declare", "dojo/i18n", "noc/Utility", "noc/Constants", "noc/
             if(window.location.href.endsWith("index.jsp")) {
                 window.location.href = window.location.href;
             } else if(window.location.href.endsWith("signin.jsp")) {
-                window.location.href = window.document.location.host + "/noc-screens/index.jsp";
+                window.location.href = window.document.location.host + "/dashboard/index.jsp";
             } else {
-                window.location.href = window.document.location.host + "/noc-screens/error.jsp";
+                window.location.href = window.document.location.host + "/dashboard/error.jsp";
             }
 
         };

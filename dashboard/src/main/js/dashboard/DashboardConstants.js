@@ -13,9 +13,6 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/d
         DashboardConstants.CLASSNAME.DASHBOARD.UTILITY = "dashboard.DashboardUtility";
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        DashboardConstants.TYPE = {};
-        DashboardConstants.TYPE.ACCORDIONSET = 1;
-        DashboardConstants.TYPE.ACCORDIONDATA = 2;
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         DashboardConstants.ACTION = {};

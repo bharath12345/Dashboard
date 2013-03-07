@@ -1,9 +1,9 @@
-define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/GridContainer", "dojo/on", "dojo/_base/lang",
+define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", "dijit/TitlePane", "dojox/layout/GridContainer", "dojo/on", "dojo/_base/lang",
     "dijit/layout/AccordionContainer", "dijit/layout/ContentPane", "noc/Logger",
-    "dashboard/DashboardUtility", "dashboard/DashboardConstants", "dojo/i18n!dashboard/nls/dashboard"],
+    "dashboard/DashboardUtility", "dashboard/DashboardConstants", "dashboard/DashboardCallbacks"],
 
-    function (declare, i18n, TitlePane, GridContainer, on, lang, AccordionContainer, ContentPane, Logger,
-              DashboardUtility, DBCONSTANTS, i18nString) {
+    function (declare, i18n, i18nString, TitlePane, GridContainer, on, lang, AccordionContainer, ContentPane, Logger,
+              DashboardUtility, DBCONSTANTS, DashboardCallbacks) {
 
         var DashboardAccordion = declare(DBCONSTANTS.CLASSNAME.DASHBOARD.ACCORDION, null, {
 
@@ -11,7 +11,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
                 var viewMeta = {
                     id:"",
                     name:"",
-                    type:DBCONSTANTS.TYPE.ACCORDIONSET,
+                    type:DashboardCallbacks.responseHandler.ACCORDIONSET,
                     custom:[]
                 };
                 DashboardUtility.xhrPostCentral(DBCONSTANTS.ACTION.ACCORDIONSET, viewMeta);
@@ -36,7 +36,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
                     var viewMeta = {
                         id:paneList[i].id,
                         name:paneList[i].name,
-                        type:DBCONSTANTS.TYPE.ACCORDIONDATA,
+                        type:DashboardCallbacks.responseHandler.ACCORDIONDATA,
                         custom:[]
                     };
                     DashboardUtility.xhrPostCentral(paneList[i].action, viewMeta);

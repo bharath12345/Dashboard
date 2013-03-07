@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript" src="js/dojo/dojo.js" data-dojo-config="'parseOnLoad':true,'async':true"></script>
+    <script type="text/javascript">
+        require([
+            "dijit/dijit",
+            "dojo/parser",
+            "dojox/layout/ContentPane",
+            "dijit/form/Button"
+        ]);
+    </script>
+    <style>@import "themes/claro/document.css";@import "themes/claro/claro.css";;
+    </style>
+</head>
+<body>
+    <script type="text/javascript">
+        //requires
+        function doFunction(){
+            alert("hi");
+        }
+    </script>
+    <button dojoType="dijit.form.Button" type="button" onClick="doFunction()">Click me</button>
+</body>
+</html>
