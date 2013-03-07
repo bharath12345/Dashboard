@@ -391,10 +391,9 @@
                                 <phase>compile</phase>
                                 <configuration>
                                     <tasks>
-                                        <concat destfile="${basedir}/target/dashboard/css/noc.merged.css"
-                                                eol="cr">
+                                        <concat destfile="${basedir}/target/dashboard/css/dashboard.merged.css" eol="cr">
                                             <filelist dir="${basedir}/src/main/css"
-                                                      files="treemap.css,noc.css"/>
+                                                      files="treemap.css,noc.css,dashboard.css,toolbar.css"/>
                                         </concat>
                                         <exec executable="java">
                                             <arg value="-jar"/>
@@ -404,9 +403,9 @@
                                             <arg value="--charset"/>
                                             <arg value="utf8"/>
                                             <arg value="-o"/>
-                                            <arg value="${basedir}/target/dashboard/css/noc.merged.compressed.css"/>
+                                            <arg value="${basedir}/target/dashboard/css/dashboard.merged.compressed.css"/>
                                             <arg value="-v"/>
-                                            <arg value="${basedir}/target/dashboard/css/noc.merged.css"/>
+                                            <arg value="${basedir}/target/dashboard/css/dashboard.merged.css"/>
                                         </exec>
                                         <exec executable="java">
                                             <arg value="-jar"/>
@@ -420,20 +419,8 @@
                                             <arg value="-v"/>
                                             <arg value="${basedir}/src/main/css/login.css"/>
                                         </exec>
-                                        <exec executable="java">
-                                            <arg value="-jar"/>
-                                            <arg value="yuicompressor-2.4.2.jar"/>
-                                            <arg value="--type"/>
-                                            <arg value="css"/>
-                                            <arg value="--charset"/>
-                                            <arg value="utf8"/>
-                                            <arg value="-o"/>
-                                            <arg value="${basedir}/target/dashboard/css/dashboard.compressed.css"/>
-                                            <arg value="-v"/>
-                                            <arg value="${basedir}/src/main/css/dashboard.css"/>
-                                        </exec>
                                     </tasks>
-                                </configuration>
+                                 </configuration>
                                 <goals>
                                     <goal>run</goal>
                                 </goals>
@@ -685,10 +672,9 @@
                                 <phase>compile</phase>
                                 <configuration>
                                     <tasks>
-                                        <concat destfile="${basedir}/target/dashboard/css/noc.merged.css"
-                                                eol="cr">
+                                        <concat destfile="${basedir}/target/dashboard/css/dashboard.merged.css" eol="cr">
                                             <filelist dir="${basedir}/src/main/css"
-                                                      files="treemap.css,noc.css"/>
+                                                      files="treemap.css,noc.css,dashboard.css,toolbar.css"/>
                                         </concat>
                                         <exec executable="java">
                                             <arg value="-jar"/>
@@ -698,9 +684,9 @@
                                             <arg value="--charset"/>
                                             <arg value="utf8"/>
                                             <arg value="-o"/>
-                                            <arg value="${basedir}/target/dashboard/css/noc.merged.compressed.css"/>
+                                            <arg value="${basedir}/target/dashboard/css/dashboard.merged.compressed.css"/>
                                             <arg value="-v"/>
-                                            <arg value="${basedir}/target/dashboard/css/noc.merged.css"/>
+                                            <arg value="${basedir}/target/dashboard/css/dashboard.merged.css"/>
                                         </exec>
                                         <exec executable="java">
                                             <arg value="-jar"/>
@@ -713,18 +699,6 @@
                                             <arg value="${basedir}/target/dashboard/css/login.compressed.css"/>
                                             <arg value="-v"/>
                                             <arg value="${basedir}/src/main/css/login.css"/>
-                                        </exec>
-                                        <exec executable="java">
-                                            <arg value="-jar"/>
-                                            <arg value="yuicompressor-2.4.2.jar"/>
-                                            <arg value="--type"/>
-                                            <arg value="css"/>
-                                            <arg value="--charset"/>
-                                            <arg value="utf8"/>
-                                            <arg value="-o"/>
-                                            <arg value="${basedir}/target/dashboard/css/dashboard.compressed.css"/>
-                                            <arg value="-v"/>
-                                            <arg value="${basedir}/src/main/css/dashboard.css"/>
                                         </exec>
                                     </tasks>
                                 </configuration>

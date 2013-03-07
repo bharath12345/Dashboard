@@ -14,8 +14,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/on", "dojo/_base/lang", "noc/Lo
 
                 for(var i=0;i<this.data.length; i++) {
                     try {
-                        var a = this.getNewA(this.data[i].id);
-                        AbstractAccordion.LINKARRAY.push(a);
+                        var a = this.getNewA(this.data[i].id, this.data[i].name);
+                        AbstractAccordion.LINKMAP[this.data[i].id] = a;
                         on(a, "click", lang.hitch(this, "renderPageAttrib"));
 
                         if(this.data[i].type.toUpperCase() == "GRID") {
@@ -32,34 +32,24 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/on", "dojo/_base/lang", "noc/Lo
             },
 
             renderPageAttrib: function(event) {
-                //console.log("event in renderPageAttrib = " + event.target+ " type = " + typeof(event.target));
                 dashboard.STANDBY.show();
-                var pageId = this.getIdFromUrl(event.target);
-                this.setMarker(pageId);
-                this.showPageConfig(pageId); // this is a upwards call to inherting class
-            },
-
-            getIdFromUrl: function(ss) {
-                var splitArray = String(ss).split("/");
-                return parseInt(splitArray[splitArray.length-1]);
+                this.setMarker(event.target.id);
+                this.showPageConfig(event.target.id, event.target.name); // this is a upwards call to inherting class
             },
 
             setMarker: function(pageId) {
-                for(var i=0;i<AbstractAccordion.LINKARRAY.length;i++) {
-                    var hrefVal = this.getIdFromUrl(AbstractAccordion.LINKARRAY[i].href);
-                    //console.log("href = " + hrefVal + " compare = " + pageId);
-                    if(hrefVal == pageId) {
-                        AbstractAccordion.LINKARRAY[i].style.color = "rgb(0, 51, 102)";
-                    } else {
-                        AbstractAccordion.LINKARRAY[i].style.color = "rgb(0, 136, 204)";
-                    }
+                for(var key in AbstractAccordion.LINKMAP) {
+                    AbstractAccordion.LINKMAP[key].style.color = "rgb(0, 136, 204)";
                 }
+                AbstractAccordion.LINKMAP[pageId].style.color = "rgb(0, 51, 102)";
             },
 
-            getNewA:function (name) {
+            getNewA:function (id, name) {
                 var a = dojo.create("a");
                 a.className = "document";
                 a.href = name;
+                a.id = id;
+                a.name = name;
                 a.onclick = function () {return false;};
                 return a;
             },
@@ -74,7 +64,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/on", "dojo/_base/lang", "noc/Lo
 
         AbstractAccordion.LOG = Logger.addTimer(new Logger("dashboard.abstract.AbstractAccordion"));
         AbstractAccordion.IMAGE = "<img src=\".\/images\/Icon_ArrowRight_SW_16.gif\" border=\"0\" align=\"top\">";
-        AbstractAccordion.LINKARRAY = [];
+        AbstractAccordion.LINKMAP = {};
 
         return AbstractAccordion;
     });

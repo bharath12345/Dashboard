@@ -1,0 +1,241 @@
+/*
+    Document   : Toolbar
+    Created on : March 7, 2013, 4:19:17 PM
+    Author     : Bharadwaj
+    Description: Toolbar CSS.
+*/
+
+.claro #commandBar .dijitToolbar {
+    border-bottom: 0px;
+}
+
+.claro .dijitToolbar {
+    background-image: url('images/toolbar/toolbar-bg.gif');
+    padding: 0px;
+    border-bottom: 0px;
+}
+
+.deleteToolbarButton {
+    background-image: url('images/toolbar/delete.16.png'); /* editor icons sprite image */
+    background-repeat: no-repeat;
+    width: 19px;
+    height: 19px;
+}
+.refreshToolbarButton {
+    background-image: url(images/toolbar/refresh.16.png);
+    background-repeat: no-repeat;
+    width: 19px;
+    height: 19px;
+}
+.statusRefreshToolbarButton {
+    background-image: url('images/toolbar/refresh_status.16.png');
+    background-repeat: no-repeat;
+    width: 19px;
+    height: 19px;
+}
+.openInAnalysisPaneToolbarButton {
+    background-image: url('images/toolbar/open_in_analysis_pane.16.png');
+    background-repeat: no-repeat;
+    width: 19px;
+    height: 19px;
+}
+.openToolbarButton {
+    background-image: url('images/toolbar/open.16.png');
+    background-repeat: no-repeat;
+    width: 19px;
+    height: 19px;
+}
+.wizardToolbarButton {
+    background-image: url('images/toolbar/wizard3_16.png');
+    background-repeat: no-repeat;
+    width: 19px;
+    height: 19px;
+}
+.wizardPageToolbarButton {
+    background-image: url('images/toolbar/step_wizard.16.png');
+    background-repeat: no-repeat;
+    width: 19px;
+    height: 19px;
+}
+.newMappingToolbarButton {
+    background-image: url('images/toolbar/new_mapping.16.png');
+    background-repeat: no-repeat;
+    width: 19px;
+    height: 19px;
+}
+.newViewWindowToolbarButton {
+    background-image: url('images/toolbar/view_new_window.16.png');
+    background-repeat: no-repeat;
+    width: 19px;
+    height: 19px;
+}
+.fitToContentToolbarButton {
+    background-image: url('images/toolbar/fit_to_content.16.png');
+    background-repeat: no-repeat;
+    width: 19px;
+    height: 19px;
+}
+.oneToOneToolbarButton {
+    background-image: url('images/toolbar/one_to_one.16.png');
+    background-repeat: no-repeat;
+    width: 19px;
+    height: 19px;
+}
+.zoomOutToolbarButton {
+    background-image: url('images/toolbar/zoom_out.16.png');
+    background-repeat: no-repeat;
+    width: 19px;
+    height: 19px;
+}
+.zoomInToolbarButton {
+    background-image: url('images/toolbar/zoom_in.16.png');
+    background-repeat: no-repeat;
+    width: 19px;
+    height: 19px;
+}
+.stopRefreshToolbarButton {
+    background-image: url('images/toolbar/refresh_stop.16.png');
+    background-repeat: no-repeat;
+    width: 19px;
+    height: 19px;
+}
+.restoreDefaultToolbarButton {
+    background-image: url('images/toolbar/restore_default.16.png');
+    background-repeat: no-repeat;
+    width: 19px;
+    height: 19px;
+}
+.restoreFilterToolbarButton {
+    background-image: url('images/toolbar/restore_filter.16.png');
+    background-repeat: no-repeat;
+    width: 19px;
+    height: 19px;
+}
+.findToolbarButton {
+    background-image: url('images/toolbar/find.16.png');
+    background-repeat: no-repeat;
+    width: 19px;
+    height: 19px;
+}
+.openNodeGroupMapToolbarButton {
+    background-image: url('images/toolbar/open_node_group_map.16.png');
+    background-repeat: no-repeat;
+    width: 19px;
+    height: 19px;
+}
+.saveLayoutToolbarButton {
+    background-image: url('images/toolbar/save_layout.16.png');
+    background-repeat: no-repeat;
+    width: 19px;
+    height: 19px;
+}
+.swapPathNodesToolbarButton {
+    background-image: url('images/toolbar/swap_path_nodes.16.png');
+    background-repeat: no-repeat;
+    width: 19px;
+    height: 19px;
+}
+.computePathToolbarButton {
+    background-image: url('images/toolbar/active.16.png');
+    background-repeat: no-repeat;
+    width: 19px;
+    height: 19px;
+}
+.firstToolbarButton {
+    background-image: url('images/toolbar/first.16.png');
+    background-repeat: no-repeat;
+    width: 19px;
+    height: 19px;
+}
+.lastToolbarButton {
+    background-image: url('images/toolbar/last.16.png');
+    background-repeat: no-repeat;
+    width: 19px;
+    height: 19px;
+}
+.previousToolbarButton {
+    background-image: url('images/toolbar/previous.16.png');
+    background-repeat: no-repeat;
+    width: 19px;
+    height: 19px;
+}
+.nextToolbarButton {
+    background-image: url('images/toolbar/next.16.png');
+    background-repeat: no-repeat;
+    width: 19px;
+    height: 19px;
+}
+.closeToolbarButton {
+    background-image: url('images/toolbar/close.16.png');
+    background-repeat: no-repeat;
+    width: 19px;
+    height: 19px;
+}
+.saveToolbarButton {
+    background-image: url('images/toolbar/save.16.png');
+    background-repeat: no-repeat;
+    width: 19px;
+    height: 19px;
+}
+.saveAndCloseToolbarButton {
+    background-image: url('images/toolbar/save_close.16.png');
+    background-repeat: no-repeat;
+    width: 19px;
+    height: 19px;
+}
+.saveAndNewToolbarButton {
+    background-image: url('images/toolbar/save_new.16.png');
+    background-repeat: no-repeat;
+    width: 19px;
+    height: 19px;
+}
+.newToolbarButton {
+    background-image: url('images/toolbar/new.16.png');
+    background-repeat: no-repeat;
+    width: 19px;
+    height: 19px;
+}
+
+/* Toggle buttons. These are smaller so they fit correctly with other toolbar items */
+.toggleEmphasisToolbarButton {
+    background-image: url('images/toolbar/map_emphasis.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+.tooltipToggleToolbarButton {
+    background-image: url('images/toolbar/tooltip.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+.textWrapToggleToolbarButton {
+    background-image: url('images/toolbar/text_wrap.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+.findToggleToolbarButton {
+    background-image: url('images/toolbar/find.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+.indicateKeyIncidentsToolbarButton {
+    background-image: url('images/toolbar/indicate_key_incidents.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+.goToolbarButton {
+    background-image: url('images/toolbar/go.16.gif');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+.stopToolbarButton {
+    background-image: url('images/toolbar/stop.16.gif');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}

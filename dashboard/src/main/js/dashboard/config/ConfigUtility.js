@@ -28,14 +28,10 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/confi
                 });
         };
 
-        ConfigUtility.handleResponse = function(data) {
+        ConfigUtility.handleResponse = function (data) {
             var type = parseInt(data.param.type[0]);
             console.log("response type = " + type);
-            switch(type) {
-                case CONFIGCONSTANTS.TYPE.ACCORDION:
-                    ConfigUtility.handleAccordion(data);
-                    break;
-
+            switch (type) {
                 case CONFIGCONSTANTS.TYPE.PAGECONFIG:
                     ConfigUtility.handlePageConfig(data);
                     break;
@@ -50,10 +46,10 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/confi
             }
         };
 
-        ConfigUtility.handleSave = function(data) {
+        ConfigUtility.handleSave = function (data) {
             var saveType = parseInt(data.param.saveType[0]);
             var title = "Save Success", content;
-            switch(saveType) {
+            switch (saveType) {
                 case CONFIGCONSTANTS.SAVE.INCIDENTGRID:
                     content = "Save of Alert Grid Configuration Successful.";
                     break;
@@ -79,10 +75,10 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/confi
                     return;
             }
 
-            if(ConfigUtility.SAVE_DIALOG == null) {
+            if (ConfigUtility.SAVE_DIALOG == null) {
                 ConfigUtility.SAVE_DIALOG = new Dialog({
-                    title: title,
-                    content: content
+                    title:title,
+                    content:content
                 });
                 ConfigUtility.SAVE_DIALOG.show();
             } else {
@@ -90,67 +86,31 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/confi
                 ConfigUtility.SAVE_DIALOG.attr("title", title);
                 ConfigUtility.SAVE_DIALOG.show();
             }
-            setTimeout(function(){config.ConfigUtility.SAVE_DIALOG.hide();}, 4*1000);
+            setTimeout(function () {
+                config.ConfigUtility.SAVE_DIALOG.hide();
+            }, 4 * 1000);
         };
 
-        ConfigUtility.handleAccordion = function(data) {
-            console.log("classname = " + CONFIGCONSTANTS.getClassPath(CONFIGCONSTANTS.CLASSNAME.ACCORDION));;
-            require([CONFIGCONSTANTS.getClassPath(CONFIGCONSTANTS.CLASSNAME.ACCORDION)], function (ConfigAccordion) {
-                var ca = new ConfigAccordion();
-                ca.renderAccordion(data);
-            });
+        ConfigUtility.handlePageConfig = function (data) {
+            require([CONFIGCONSTANTS.getClassPath(CONFIGCONSTANTS.CLASSNAME.RENDERATTRIBUTES),
+                CONFIGCONSTANTS.getClassPath(CONFIGCONSTANTS.CLASSNAME.ACCORDION)],
+                function (RenderAttributes, ConfigAccordion) {
+
+                    var ra = new RenderAttributes();
+
+                    var id = parseInt(data.param.id[0]);
+                    var name = data.param.name[0];
+                    console.log("page config for id = " + id + " name = " + name);
+
+                    var configAcc = new ConfigAccordion();
+                    var handle = configAcc.responseHandles[name];
+                    handle(data, ra);
+                });
         };
 
-        ConfigUtility.handlePageConfig = function(data) {
-            require([CONFIGCONSTANTS.getClassPath(CONFIGCONSTANTS.CLASSNAME.RENDERATTRIBUTES)], function (RenderAttributes) {
-                var id = parseInt(data.param.id[0]);
-                var ra = new RenderAttributes();
-                switch(id) {
-                    case 0:
-                        require([CONFIGCONSTANTS.getClassPath(CONFIGCONSTANTS.CLASSNAME.INCIDENTGRID)], function(IncidentGrid) {
-                            var incidentGrid = new IncidentGrid();
-                            ra.renderConfigParameters(data, incidentGrid);
-                        });
-                        break;
-
-                    case 1:
-                        require([CONFIGCONSTANTS.getClassPath(CONFIGCONSTANTS.CLASSNAME.CLUSTERGRID)], function(ClusterGrid) {
-                            var clusterGrid = new ClusterGrid();
-                            ra.renderConfigParameters(data, clusterGrid);
-                        });
-                        break;
-
-                    case 2:
-                        require([CONFIGCONSTANTS.getClassPath(CONFIGCONSTANTS.CLASSNAME.TRANSACTIONGRID)], function(TransactionGrid) {
-                            var transactionGrid = new TransactionGrid();
-                            ra.renderConfigParameters(data, transactionGrid);
-                        });
-                        break;
-
-                    case 3:
-                        require([CONFIGCONSTANTS.getClassPath(CONFIGCONSTANTS.CLASSNAME.TOPOLOGY)], function(Topology) {
-                            var topology = new Topology();
-                            ra.renderConfigParameters(data, topology);
-                        });
-                        break;
-
-                    case 4:
-                        require([CONFIGCONSTANTS.getClassPath(CONFIGCONSTANTS.CLASSNAME.GLOBAL)], function(Global) {
-                            var global = new Global();
-                            ra.renderConfigParameters(data, global);
-                        });
-                        break;
-
-                    default:
-                        console.log("Unknown page id = " + id);
-                        return;
-                }
-            });
-        };
-
-        ConfigUtility.getConfigDiv = function(attribute, type) {
+        ConfigUtility.getConfigDiv = function (attribute, type) {
             var divToAdd = dojo.byId(attribute + type);
-            divToAdd.style.margin=1;
+            divToAdd.style.margin = 1;
             //divToAdd.style.paddingLeft=1;
 
             var node = dojo.create("div");

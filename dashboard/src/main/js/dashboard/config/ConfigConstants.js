@@ -24,7 +24,6 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/confi
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ConfigConstants.TYPE = {};
-        ConfigConstants.TYPE.ACCORDION = 1;
         ConfigConstants.TYPE.PAGECONFIG = 2;
         ConfigConstants.TYPE.SAVE = 3;
 

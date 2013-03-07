@@ -4,7 +4,7 @@ define(["dojo/_base/declare"],
 
         var AbstractView = declare("dashboard.abstract.AbstractView", null, {
 
-            renderView: function(uuid, borderContainer) {
+            renderView: function(uuid, container) {
 
             }
 

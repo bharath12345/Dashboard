@@ -11,13 +11,15 @@
         <meta http-equiv="Expires" content="0"/>
         <meta http-equiv="Pragma" content="no-cache"/>
 
-        <title>AppsOne NOC Screens</title>
+        <title>AppsOne Dashboards</title>
 
         <link rel="shortcut icon" href="./images/favicon.ico"/>
 
         <style type="text/css">
+            @import url("./css/dashboard.merged.compressed.css");
             @import url("./js/bootstrap/css/bootstrap.min.css");
-            @import url("./css/config.compressed.css");
+            @import url("./js/bootstrap/fontAwesome/css/font-awesome.min.css");
+            @import url("./js/dojox/form/resources/CheckedMultiSelect.css");
         </style>
 
     <!-- List of CSS -->
@@ -35,6 +37,6 @@
 
     </head>
     <body class="claro">
-        <script src="./js/noc/runMain.js"></script>
+    <script src="./js/dashboard/runDashboard.js"></script>
     </body>
 </html>
