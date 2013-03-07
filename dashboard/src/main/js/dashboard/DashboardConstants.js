@@ -20,10 +20,11 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/d
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         DashboardConstants.ACCORDIONMAP = [];
-        DashboardConstants.ACCORDIONMAP["topoViews"] = "dashboard.config.ConfigAccordion";
-        DashboardConstants.ACCORDIONMAP["commandScreens"] = "dashboard.config.ConfigAccordion";
-        DashboardConstants.ACCORDIONMAP["alerts"] = "dashboard.config.ConfigAccordion";
-        DashboardConstants.ACCORDIONMAP["configuration"] = "dashboard.config.ConfigAccordion";
+        DashboardConstants.ACCORDIONMAP["topology"] = "";
+        DashboardConstants.ACCORDIONMAP["noc"] = "dashboard.noc.NocAccordion";
+        DashboardConstants.ACCORDIONMAP["alerts"] = "";
+        DashboardConstants.ACCORDIONMAP["configurableDashboard"] = "";
+        DashboardConstants.ACCORDIONMAP["config"] = "dashboard.config.ConfigAccordion";
 
         DashboardConstants.getClassPath = function(name) {
             return name.replace(/\./g, "/");

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
-    <display-name>AppsOne NOC Screens</display-name>
+    <display-name>AppsOne Dashboard</display-name>
     
     <welcome-file-list>
         <welcome-file>signin.jsp</welcome-file>
@@ -16,7 +16,7 @@
         <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
     	<init-param>
         	<param-name>actionPackages</param-name>
-        	<param-value>com.appnomic.noc.action</param-value>
+        	<param-value>com.appnomic.appsone.dashboard.action</param-value>
         </init-param>
     </filter>
 
@@ -40,7 +40,7 @@
 
     <filter>
         <filter-name>http-context-filter</filter-name>
-        <filter-class>com.appnomic.noc.filter.HttpContextFilter</filter-class>
+        <filter-class>com.appnomic.appsone.dashboard.filter.HttpContextFilter</filter-class>
     </filter>
 
     <!-- The Struts 2 filter should be mapped to ALL requests coming into the

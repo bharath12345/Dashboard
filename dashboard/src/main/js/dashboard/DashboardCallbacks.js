@@ -24,7 +24,10 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
             },
 
             accordionDataHandle:function (data) {
-                require([DBCONSTANTS.getClassPath(DBCONSTANTS.ACCORDIONMAP[data.param.name])], function (AccordionLoader) {
+                console.log("callback class name = " + data.param.name[0]);
+                console.log("fetching class = " + DBCONSTANTS.getClassPath(DBCONSTANTS.ACCORDIONMAP[data.param.name[0]]));
+                require([DBCONSTANTS.getClassPath(DBCONSTANTS.ACCORDIONMAP[data.param.name[0]])], function (AccordionLoader) {
+                    // AccordionLoader is a prototype of ConfigAccordion in the case of Config and so on...
                     var al = new AccordionLoader();
                     al.renderAccordion(data);
                 });

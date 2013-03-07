@@ -7,7 +7,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/confi
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ConfigConstants.CLASSNAME = {};
-        ConfigConstants.CLASSNAME.ACCORDION = DBCONSTANTS.ACCORDIONMAP["configuration"];
+        ConfigConstants.CLASSNAME.ACCORDION = DBCONSTANTS.ACCORDIONMAP["config"];
         ConfigConstants.CLASSNAME.RENDERATTRIBUTES = "dashboard.config.RenderAttributes";
         ConfigConstants.CLASSNAME.UTILITY = "dashboard.config.ConfigUtility";
 

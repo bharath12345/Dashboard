@@ -1,70 +1,24 @@
-define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/GridContainer", "dojo/on", "dojo/_base/lang",
-    "noc/Logger",
-    "dashboard/config/ConfigUtility", "dashboard/config/ConfigConstants", "dojo/i18n!dashboard/config/nls/config"],
+define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/config", "noc/Logger",
+    "dashboard/config/ConfigUtility", "dashboard/config/ConfigConstants", "dashboard/abstract/AbstractAccordion"],
 
-    function (declare, i18n, TitlePane, GridContainer, on, lang, Logger, ConfigUtility, CONFIGCONSTANTS, i18nString) {
+    function (declare, i18n, i18nString, Logger, ConfigUtility, CONFIGCONSTANTS, AbstractAccordion) {
 
-        var ConfigAccordion = declare(CONFIGCONSTANTS.CLASSNAME.ACCORDION, null, {
+        var ConfigAccordion = declare(CONFIGCONSTANTS.CLASSNAME.ACCORDION, AbstractAccordion, {
 
             renderAccordion: function(data) {
-                console.log("in render accordion. data = " + dojo.toJson(data));
-                var pageList = data.pageListVO;
-                for(var i=0;i<pageList.length; i++) {
-                    try {
-                        //console.log("rendering = " + pageList[i].id);
-                        var a = this.getNewA(pageList[i].id);
-                        on(a, "click", lang.hitch(this, "renderPageAttrib"));
-                        a.innerHTML = ConfigAccordion.IMAGE + pageList[i].name;
-                        this.appendToAccDiv(a, dojo.byId(data.param.name[0]));
-                    } catch(e) {
-                        console.log("exception = " + e);
-                    }
-                }
-                ConfigAccordion.LINKARRAY[0].click();
-            },
+                // keep in mind that the superclass's method will be called after this method is finished due to the
+                // custom chain configuration
 
-            renderPageAttrib: function(event) {
-                //console.log("event in renderPageAttrib = " + event.target+ " type = " + typeof(event.target));
-                dashboard.STANDBY.show();
-                var pageId = this.getIdFromUrl(event.target);
-                this.setMarker(pageId);
-                this.showPageConfig(pageId);
-            },
+                console.log("in config render accordion. data = " + dojo.toJson(data));
 
-            getIdFromUrl: function(ss) {
-                var splitArray = String(ss).split("/");
-                return parseInt(splitArray[splitArray.length-1]);
-            },
+                this.data = data.pageListVO;
+                this.param = data.param;
 
-            setMarker: function(pageId) {
-                for(var i=0;i<ConfigAccordion.LINKARRAY.length;i++) {
-                    var hrefVal = this.getIdFromUrl(ConfigAccordion.LINKARRAY[i].href);
-                    //console.log("href = " + hrefVal + " compare = " + pageId);
-                    if(hrefVal == pageId) {
-                        ConfigAccordion.LINKARRAY[i].style.color = "rgb(0, 51, 102)";
-                    } else {
-                        ConfigAccordion.LINKARRAY[i].style.color = "rgb(0, 136, 204)";
-                    }
-                }
-            },
-
-            getNewA:function (name) {
-                var a = dojo.create("a");
-                a.className = "document";
-                a.href = name;
-                a.onclick = function () {return false;};
-                ConfigAccordion.LINKARRAY.push(a);
-                return a;
-            },
-
-            appendToAccDiv:function (a, aPane) {
-                var linkDiv = dojo.create("div");
-                linkDiv.className = "linkDiv";
-                aPane.appendChild(linkDiv);
-                linkDiv.appendChild(a);
+                this.inherited(arguments);
             },
 
             showPageConfig: function(id) {
+                console.log("show page config called with id = " + id);
                 var viewMeta = {
                     id:id,
                     type:CONFIGCONSTANTS.TYPE.PAGECONFIG,
@@ -101,8 +55,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
         });
 
         ConfigAccordion.LOG = Logger.addTimer(new Logger(CONFIGCONSTANTS.CLASSNAME.ACCORDION));
-        ConfigAccordion.IMAGE = "<img src=\".\/images\/Icon_ArrowRight_SW_16.gif\" border=\"0\" align=\"top\">";
-        ConfigAccordion.LINKARRAY = [];
 
         return ConfigAccordion;
     });
