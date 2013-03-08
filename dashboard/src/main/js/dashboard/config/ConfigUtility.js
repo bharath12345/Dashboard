@@ -1,20 +1,18 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/config", "dojo/request/xhr", "dijit/Dialog",
-    "dashboard/config/ConfigConstants", "noc/Logger"],
+    "dashboard/config/ConfigConstants", "noc/Logger", "dashboard/abstract/AbstractUtility"],
 
-    function (declare, i18n, i18nString, xhr, Dialog, CONFIGCONSTANTS, Logger) {
+    function (declare, i18n, i18nString, xhr, Dialog, CONFIGCONSTANTS, Logger, AbstractUtility) {
 
         var ConfigUtility = declare(CONFIGCONSTANTS.CLASSNAME.UTILITY, null, {});
 
         ConfigUtility.LOG = Logger.addTimer(new Logger(CONFIGCONSTANTS.CLASSNAME.UTILITY));
-
-        ConfigUtility.JSON_HEADER = { 'Content-Type':'application/json' };
 
         ConfigUtility.xhrPostCentral = function (url, options) {
             xhr(url, {
                 handleAs:"json",
                 method:"POST",
                 query:options,
-                headers:ConfigUtility.JSON_HEADER
+                headers:AbstractUtility.JSON_HEADER
             }).then(function (data) {
                     // Do something with the handled data
                     ConfigUtility.handleResponse(data);

@@ -10,36 +10,36 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
                 node.style.cssText = "width: 100%; height: 100%;";
                 docBody.appendChild(node);
 
-                AbstractContainer.TopBc = new BorderContainer({
+                dashboard.TopBc = new BorderContainer({
                     design:"headline",
                     liveSplitters:false,
                     persist:true,
                     style: "top:0;left:0;"
                 }, node);
 
-                AbstractContainer.CpMast = new ContentPane({
+                dashboard.CpMast = new ContentPane({
                     region:"top",
                     splitter:false,
                     style: "top:0;left:0;height:25px;"
                 });
 
-                AbstractContainer.CpTopCenter = new ContentPane({
+                dashboard.CpTopCenter = new ContentPane({
                     region:"center",
                     splitter:false,
                     style: "top:0;left:0;"
                 });
 
-                AbstractContainer.TopBc.addChild(AbstractContainer.CpMast);
-                AbstractContainer.TopBc.addChild(AbstractContainer.CpTopCenter);
-                AbstractContainer.TopBc.startup();
+                dashboard.TopBc.addChild(dashboard.CpMast);
+                dashboard.TopBc.addChild(dashboard.CpTopCenter);
+                dashboard.TopBc.startup();
 
-                AbstractContainer.CpMast.domNode.style.padding = "0";
-                this.removeBoderPadding(AbstractContainer.CpTopCenter.domNode);
-                AbstractContainer.TopBc.resize();
+                dashboard.CpMast.domNode.style.padding = "0";
+                this.removeBoderPadding(dashboard.CpTopCenter.domNode);
+                dashboard.TopBc.resize();
 
-                this.removeTopAndExpand5(AbstractContainer.CpMast.domNode);
-                this.removeLeftAndExpand5(AbstractContainer.CpMast.domNode);
-                AbstractContainer.TopBc.resize();
+                this.removeTopAndExpand5(dashboard.CpMast.domNode);
+                this.removeLeftAndExpand5(dashboard.CpMast.domNode);
+                dashboard.TopBc.resize();
             },
 
             removeBoderPadding: function (domNode) {
@@ -64,7 +64,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
                 var headerTrayDiv = dojo.create("div");
                 headerTrayDiv.id= "headerTray";
                 headerTrayDiv.className = "pageHeader";
-                AbstractContainer.CpMast.domNode.appendChild(headerTrayDiv);
+                dashboard.CpMast.domNode.appendChild(headerTrayDiv);
 
                 var headerTrayBody = dojo.create("div");
                 headerTrayBody.id = "headerTrayBody";

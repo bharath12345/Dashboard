@@ -1,7 +1,8 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", "noc/Logger",
+    "dijit/layout/ContentPane", "dijit/layout/BorderContainer",
     "dashboard/abstract/AbstractView", "dashboard/WindowManager", "dashboard/abstract/AbstractContainer"],
 
-    function (declare, i18n, i18nString, Logger, AbstractView, WindowManager, AbstractContainer) {
+    function (declare, i18n, i18nString, Logger, ContentPane, BorderContainer, AbstractView, WindowManager, AbstractContainer) {
 
         var ConfigView = declare("dashboard.config.ConfigView", [AbstractView, AbstractContainer], {
 
@@ -24,16 +25,16 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
             },
 
             getTopBorderContainer: function() {
-                return AbstractContainer.TopBc;
+                return dashboard.TopBc;
             },
 
             createNewWindowConfigDom: function() {
-                this.createTopContainers();
+                this.createTopContainers(document.body);
                 this.createMast();
 
                 var node = dojo.create("div");
                 node.style.cssText = "width: 100%; height: 100%;";
-                AbstractContainer.CpTopCenter.domNode.appendChild(node);
+                dashboard.CpTopCenter.domNode.appendChild(node);
 
                 dashboard.config.CenterBc = new BorderContainer({
                     design:"headline",
@@ -54,8 +55,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                     style: "top:0;left:0;"
                 });
 
-                dashboard.config.CenterBc.addChild(DashboardContainer.CpMenu);
-                dashboard.config.CenterBc.addChild(DashboardContainer.CpCenter);
+                dashboard.config.CenterBc.addChild(dashboard.config.CpMenu);
+                dashboard.config.CenterBc.addChild(dashboard.config.CpCenter);
                 dashboard.config.CenterBc.startup();
                 dashboard.config.CenterBc.resize();
 
@@ -66,7 +67,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                 this.removeBoderPadding(dashboard.config.CpCenter.domNode);
 
                 dashboard.config.CenterBc.resize();
-                AbstractContainer.TopBc.resize();
+                dashboard.TopBc.resize();
             }
         });
 

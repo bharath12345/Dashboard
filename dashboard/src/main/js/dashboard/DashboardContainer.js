@@ -19,7 +19,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
             createCenterContainers: function() {
                 var node = dojo.create("div");
                 node.style.cssText = "width: 100%; height: 100%;";
-                AbstractContainer.CpTopCenter.domNode.appendChild(node);
+                dashboard.CpTopCenter.domNode.appendChild(node);
 
                 DashboardContainer.CenterBc = new BorderContainer({
                     design:"headline",
@@ -60,7 +60,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                 this.removeBoderPadding(DashboardContainer.CpCenter.domNode);
 
                 DashboardContainer.CenterBc.resize();
-                AbstractContainer.TopBc.resize();
+                dashboard.TopBc.resize();
             },
 
             createMenu: function() {
@@ -95,7 +95,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                 helpMenu.startup();
 
                 DashboardContainer.CenterBc.resize();
-                AbstractContainer.TopBc.resize();
+                dashboard.TopBc.resize();
             },
 
             createCenterInnerContainers: function() {

@@ -1,20 +1,18 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", "noc/Logger", "dojo/request/xhr", "dijit/Dialog",
-    "dashboard/DashboardConstants", "dashboard/DashboardCallbacks"],
+    "dashboard/DashboardConstants", "dashboard/DashboardCallbacks", "dashboard/abstract/AbstractUtility"],
 
-    function (declare, i18n, i18nString, Logger, xhr, Dialog, DBCONSTANTS, DashboardCallbacks) {
+    function (declare, i18n, i18nString, Logger, xhr, Dialog, DBCONSTANTS, DashboardCallbacks, AbstractUtility) {
 
         var Utility = declare(DBCONSTANTS.CLASSNAME.DASHBOARD.UTILITY, null, {});
 
         Utility.LOG = Logger.addTimer(new Logger(DBCONSTANTS.CLASSNAME.DASHBOARD.UTILITY));
-
-        Utility.JSON_HEADER = { 'Content-Type':'application/json' };
 
         Utility.xhrPostCentral = function (url, options) {
             xhr(url, {
                 handleAs:"json",
                 method:"POST",
                 query:options,
-                headers:Utility.JSON_HEADER
+                headers:AbstractUtility.JSON_HEADER
             }).then(function (data) {
                     // Do something with the handled data
                     Utility.handleResponse(data);
