@@ -35,7 +35,7 @@ define([ 'dojo/has', 'require' ], function (has, require) {
          * require just `dojo/domReady`, it would load that module just like any other module, without the special
          * plugin functionality.
          */
-        require(['dashboard/noc/PageLoader', 'dashboard/noc/ViewManager', 'dashboard/logger/Logger', "dashboard/noc/Utility",
+        require(['dashboard/noc/PageLoader', 'dashboard/noc/ViewManager', 'dashboard/logger/Logger', "dashboard/noc/NocUtility",
             'dojo/domReady!' ],
 
             function (PageLoader, ViewManager, Logger, Utility) {
