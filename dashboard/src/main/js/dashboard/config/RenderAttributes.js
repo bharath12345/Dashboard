@@ -1,6 +1,6 @@
 define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/GridContainer",
     "dijit/layout/TabContainer", "dijit/layout/ContentPane", "dijit/form/Button", "dijit/Toolbar",
-    "noc/Logger", "dashboard.config.ConfigView",
+    "noc/Logger", "dashboard/config/ConfigView",
     "dashboard/config/ConfigUtility", "dashboard/config/ConfigConstants", "dojo/i18n!dashboard/config/nls/config"],
 
     function (declare, i18n, TitlePane, GridContainer, TabContainer, ContentPane, Button, Toolbar,
@@ -19,7 +19,11 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
                 RenderAttributes.ID = data.param.id[0]; // this is the UUID
                 RenderAttributes.NAME = data.param.name[0];
                 RenderAttributes.TYPE = data.param.type[0];
-                RenderAttributes.NEWWINDOW = new Boolean(data.param.newWindow[0]);
+                if(data.param.newWindow[0] == "false") {
+                    RenderAttributes.NEWWINDOW = false;
+                } else {
+                    RenderAttributes.NEWWINDOW = true;
+                }
 
                 var configView = new ConfigView(RenderAttributes.NEWWINDOW);
                 var menuPane = configView.getConfigMenuPane();
@@ -57,7 +61,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
                 centralPane.destroyDescendants(false);
 
                 var tc = new TabContainer({style: "height: 100%; width: 100%;"});
-                centralPane.CpCenterInner.addChild(tc);
+                centralPane.addChild(tc);
 
                 RenderAttributes.LOOKNFEELPANE = new ContentPane({title: "Look and Feel", style: "height: 100%; width: 100%;"});
                 tc.addChild(RenderAttributes.LOOKNFEELPANE);

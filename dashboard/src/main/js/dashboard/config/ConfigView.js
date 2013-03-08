@@ -11,20 +11,20 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
 
             getConfigMenuPane: function() {
                 if(!this.newWindow) {
-                    return dashboard.DashboardContainers.CpTopInner;
+                    return dashboard.DashboardContainer.CpTopInner;
                 }
                 return dashboard.config.CpMenu;
             },
 
             getConfigCentralPane: function() {
                 if(!this.newWindow) {
-                    return dashboard.DashboardContainers.CpCenterInner;
+                    return dashboard.DashboardContainer.CpCenterInner;
                 }
                 return dashboard.config.CpCenter;
             },
 
             getTopBorderContainer: function() {
-                return dashboard.AbstractContainer.TopBc;
+                return AbstractContainer.TopBc;
             },
 
             createNewWindowConfigDom: function() {

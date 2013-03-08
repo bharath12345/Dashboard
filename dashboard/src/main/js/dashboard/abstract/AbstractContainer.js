@@ -2,7 +2,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
 
     function (declare, i18n, ContentPane, BorderContainer, Logger) {
 
-        var AbstractContainer = declare(DBCONSTANTS.CLASSNAME.DASHBOARD.CONTAINER, null, {
+        var AbstractContainer = declare("dashboard.abstract.AbstractContainer", null, {
             // create an Accordion with multiple links like in NNMi
 
             createTopContainers: function(docBody) {
@@ -106,7 +106,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
 
         });
 
-        AbstractContainer.LOG = Logger.addTimer(new Logger(DBCONSTANTS.CLASSNAME.PAGEELEMENTS));
+        AbstractContainer.LOG = Logger.addTimer(new Logger("dashboard.abstract.AbstractContainer"));
 
         return AbstractContainer;
     });

@@ -38,7 +38,7 @@ public class LevelDBManager {
 	}
 
 	public void init() throws ExceptionInInitializerError {
-		String configDBFilePath = System.getProperty("catalina.base") + File.separator + DBPATH;
+		final String configDBFilePath = System.getProperty("catalina.base") + File.separator + DBPATH;
 		if (configDBFilePath == null) {
 			throw new ExceptionInInitializerError("Unbale to init Config DB Specified file is NULL; please specify the correct path");
 		}
@@ -60,6 +60,13 @@ public class LevelDBManager {
 		final Thread mainThread = Thread.currentThread();
 		Runtime.getRuntime().addShutdownHook(new Thread() {
 		    public void run() {
+		    	File file = new File(configDBFilePath + File.separator + "LOCK");
+		    	if(file.delete()){
+	    			System.out.println(file.getName() + " is deleted!");
+	    		}else{
+	    			System.out.println("Delete of " + file.getName() + " failed.");
+	    		}
+		    	
 		    	System.out.println("Shutting down the connection to LevelDB.");
 		    	shutdown();
 		    }

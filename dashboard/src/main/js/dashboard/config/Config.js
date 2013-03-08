@@ -21,7 +21,7 @@ define([ 'dojo/has', 'require' ], function (has, require) {
     if (has('host-browser')) {
 
         require(['dojox/widget/Standby', "dojo/io-query",
-            'dashboard/config/ConfigConstants', 'dashboard/config/ConfigAccordion', "dashboard.config.ConfigView",
+            'dashboard/config/ConfigConstants', 'dashboard/config/ConfigAccordion', "dashboard/config/ConfigView",
             'dojo/domReady!' ],
 
             function (Standby, ioQuery, CONFIGCONSTANTS, ConfigAccordion, ConfigView) {

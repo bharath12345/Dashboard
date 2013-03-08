@@ -10,7 +10,5 @@ define(["dojo/_base/declare"],
 
         });
 
-        AbstractView.LOG = Logger.addTimer(new Logger("dashboard.abstract.AbstractView"));
-
         return AbstractView;
     });

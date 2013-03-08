@@ -34,7 +34,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/on", "dojo/_base/lang", "noc/Lo
             renderPageAttrib: function(event) {
                 dashboard.STANDBY.show();
                 this.setMarker(event.target.id);
-                this.showPageConfig(event.target.id, event.target.name); // this is a upwards call to inherting class
+                this.showPageConfig(event.target.id, event.target.name, false); // this is a upwards call to inherting class
             },
 
             setMarker: function(pageId) {
