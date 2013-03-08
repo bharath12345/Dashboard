@@ -1,9 +1,9 @@
-define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Logger", "noc/Constants", "noc/Utility"],
+define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "dashboard/noc/Logger", "dashboard/noc/NocConstants", "dashboard/noc/NocUtility"],
 
-    function (require, declare, i18n, i18nString, Logger, CONSTANTS, Utility) {
+    function (require, declare, i18n, i18nString, Logger, NOCCONSTANTS, NocUtility) {
 
         // this is a completely static class
-        var Zones = declare(CONSTANTS.CLASSNAME.WIDGETS.COMPONENT.ZONES, null, {
+        var Zones = declare(NOCCONSTANTS.CLASSNAME.WIDGETS.COMPONENT.ZONES, null, {
 
             create:function (data) {
                 var paneWidth, paneHeight, nbZones;
@@ -58,7 +58,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
                 for(var i = 0; i<zoneNames.length;i++) {
                     var zoneName = zoneNames[i] + "Zone";
                     this.fetchMeta(zoneName,
-                        CONSTANTS.ACTION.COMPONENT.META + "?zoneName="+zoneName,
+                        NOCCONSTANTS.ACTION.COMPONENT.META + "?zoneName="+zoneName,
                         paneWidth, paneHeight, 40, 40);
                 }
             },
@@ -102,13 +102,13 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
                             // now fetch data for this component-name and kpi-name
                             var viewMeta = {
                                 id: "NA",
-                                type: CONSTANTS.TYPE.COMPONENT_DATA,
+                                type: NOCCONSTANTS.TYPE.COMPONENT_DATA,
                                 dimensions:[gridWidth,gridHeight],
                                 position: [0,0],
                                 custom: [componentName,kpiName]
                             };
-                            Utility.xhrPostCentral(
-                                CONSTANTS.ACTION.COMPONENT.DATA,
+                            NocUtility.xhrPostCentral(
+                                NOCCONSTANTS.ACTION.COMPONENT.DATA,
                                 dojo.toJson(viewMeta));
                         }
                     }
@@ -117,7 +117,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
 
         });
 
-        Zones.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.WIDGETS.COMPONENT.ZONES));
+        Zones.LOG = Logger.addTimer(new Logger(NOCCONSTANTS.CLASSNAME.WIDGETS.COMPONENT.ZONES));
 
         return Zones;
     });

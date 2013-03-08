@@ -1,12 +1,12 @@
 define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/GridContainer",
     "dojo/_base/lang",
     "dojo/i18n!noc/nls/noc", "noc/timeSeries/OnlineTxTimeSeries", "noc/timeSeries/BatchTxTimeSeries",
-    "noc/timeSeries/CompStaticTimeSeries", "noc/Constants", "noc/Utility", "noc/Logger"],
+    "noc/timeSeries/CompStaticTimeSeries", "dashboard/noc/NocConstants", "dashboard/noc/NocUtility", "dashboard/noc/Logger"],
 
     function (require, declare, i18n, TitlePane, GridContainer, lang, i18nString,
-              OnlineTxTimeSeries, BatchTxTimeSeries, CompStaticTimeSeries, CONSTANTS, Utility, Logger) {
+              OnlineTxTimeSeries, BatchTxTimeSeries, CompStaticTimeSeries, NOCCONSTANTS, NocUtility, Logger) {
 
-        var TxTimeSeriesPage = declare(CONSTANTS.CLASSNAME.PAGES.TXTIMESERIESPAGE, null, {
+        var TxTimeSeriesPage = declare(NOCCONSTANTS.CLASSNAME.PAGES.TXTIMESERIESPAGE, null, {
 
             loadPage:function () {
 
@@ -75,7 +75,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
         });
 
         // static variables of this class
-        TxTimeSeriesPage.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.PAGES.TXTIMESERIESPAGE));
+        TxTimeSeriesPage.LOG = Logger.addTimer(new Logger(NOCCONSTANTS.CLASSNAME.PAGES.TXTIMESERIESPAGE));
 
         TxTimeSeriesPage.CP = null;
 

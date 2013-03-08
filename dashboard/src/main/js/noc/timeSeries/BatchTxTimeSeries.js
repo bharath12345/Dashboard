@@ -1,8 +1,8 @@
-define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Constants", "noc/Utility", "noc/Logger"],
+define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "dashboard/noc/NocConstants", "dashboard/noc/NocUtility", "dashboard/noc/Logger"],
 
-    function (declare, i18n, i18nString, CONSTANTS, Utility, Logger) {
+    function (declare, i18n, i18nString, NOCCONSTANTS, NocUtility, Logger) {
 
-        var BatchTxTimeSeries = declare(CONSTANTS.CLASSNAME.TIMESERIES.BATCHTX, null, {
+        var BatchTxTimeSeries = declare(NOCCONSTANTS.CLASSNAME.TIMESERIES.BATCHTX, null, {
         
 		createTimeSeries: function(jsonStore, id, gridWidth, gridHeight, topLeftX, topLeftY) {				
 				d3.json(jsonStore, dojo.hitch (this, function(m) {
@@ -86,7 +86,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Constan
         
         });
 
-        BatchTxTimeSeries.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.TIMESERIES.BATCHTX));
+        BatchTxTimeSeries.LOG = Logger.addTimer(new Logger(NOCCONSTANTS.CLASSNAME.TIMESERIES.BATCHTX));
 
         return BatchTxTimeSeries;
 

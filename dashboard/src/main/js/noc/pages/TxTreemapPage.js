@@ -1,9 +1,9 @@
 define(['require', "dojo/_base/declare", "dojo/i18n", "dojox/layout/GridContainer", "dijit/TitlePane",
-    "dojo/i18n!noc/nls/noc", "noc/Constants", "noc/Utility", "noc/Logger"],
+    "dojo/i18n!noc/nls/noc", "dashboard/noc/NocConstants", "dashboard/noc/NocUtility", "dashboard/noc/Logger"],
 
-    function (require, declare, i18n, GridContainer, TitlePane, i18nString, CONSTANTS, Utility, Logger) {
+    function (require, declare, i18n, GridContainer, TitlePane, i18nString, NOCCONSTANTS, NocUtility, Logger) {
 
-        var TxTreemapPage = declare(CONSTANTS.CLASSNAME.PAGES.TXTREEMAPPAGE, null, {
+        var TxTreemapPage = declare(NOCCONSTANTS.CLASSNAME.PAGES.TXTREEMAPPAGE, null, {
 
             loadPage:function () {
                 TxTreemapPage.CP = noc.PageLoader.CpCenter[1];
@@ -110,7 +110,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojox/layout/GridContaine
         });
 
         // static variables of this class
-        TxTreemapPage.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.PAGES.TXTREEMAPPAGE));
+        TxTreemapPage.LOG = Logger.addTimer(new Logger(NOCCONSTANTS.CLASSNAME.PAGES.TXTREEMAPPAGE));
 
         TxTreemapPage.PageCounter = 0;
 

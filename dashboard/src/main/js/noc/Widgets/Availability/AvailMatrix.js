@@ -1,9 +1,9 @@
 define(['require', "dojo/_base/declare", "dojo/i18n",
-    "dojo/i18n!noc/nls/noc", "noc/Constants", "noc/Utility", "noc/Logger"],
+    "dojo/i18n!noc/nls/noc", "dashboard/noc/NocConstants", "dashboard/noc/NocUtility", "dashboard/noc/Logger"],
 
-    function (require, declare, i18n, i18nString, CONSTANTS, Utility, Logger) {
+    function (require, declare, i18n, i18nString, NOCCONSTANTS, NocUtility, Logger) {
 
-        var AvailMatrix = declare(CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILMATRIX, null, {
+        var AvailMatrix = declare(NOCCONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILMATRIX, null, {
 
             create:function (input, payload) {
                 AvailMatrix.LOG.log(Logger.SEVERITY.SEVERE, "in create avail matrix gridtype = " + input.subtype);
@@ -22,15 +22,15 @@ define(['require', "dojo/_base/declare", "dojo/i18n",
                         data[i] = new Array();
                         var columnSet;
                         switch (input.subtype) {
-                            case CONSTANTS.SUBTYPE.AVAILABILITY.COMPONENT:
+                            case NOCCONSTANTS.SUBTYPE.AVAILABILITY.COMPONENT:
                                 columnSet = sub[i].cluster;
                                 break;
 
-                            case CONSTANTS.SUBTYPE.AVAILABILITY.CLUSTER:
+                            case NOCCONSTANTS.SUBTYPE.AVAILABILITY.CLUSTER:
                                 columnSet = sub[i].instances;
                                 break;
 
-                            case CONSTANTS.SUBTYPE.AVAILABILITY.INSTANCE:
+                            case NOCCONSTANTS.SUBTYPE.AVAILABILITY.INSTANCE:
                                 columnSet = sub[i].kpi;
                                 break;
                         }
@@ -157,7 +157,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n",
                 }
             }
         });
-        AvailMatrix.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILMATRIX));
+        AvailMatrix.LOG = Logger.addTimer(new Logger(NOCCONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILMATRIX));
 
         return AvailMatrix;
 

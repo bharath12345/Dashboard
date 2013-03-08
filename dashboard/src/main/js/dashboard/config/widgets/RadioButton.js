@@ -1,4 +1,4 @@
-define(["dojo/_base/declare", "dojo/i18n", "dijit/form/RadioButton", "noc/Logger",
+define(["dojo/_base/declare", "dojo/i18n", "dijit/form/RadioButton", "dashboard/logger/Logger",
     "dashboard/config/ConfigUtility", "dashboard/config/ConfigConstants", "dojo/i18n!dashboard/config/nls/config"],
 
     function (declare, i18n, DojoRadioButton, Logger, ConfigUtility, CONFIGCONSTANTS, i18nString) {

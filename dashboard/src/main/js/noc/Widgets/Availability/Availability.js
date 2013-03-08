@@ -1,9 +1,9 @@
 define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/request/xhr", "dojo/_base/lang",
-    "dojo/i18n!noc/nls/noc", "noc/Utility", "noc/Constants", "noc/Logger"],
+    "dojo/i18n!noc/nls/noc", "dashboard/noc/NocUtility", "dashboard/noc/NocConstants", "dashboard/noc/Logger"],
 
-    function (require, declare, i18n, Grid, xhr, lang, i18nString, Utility, CONSTANTS, Logger) {
+    function (require, declare, i18n, Grid, xhr, lang, i18nString, NocUtility, NOCCONSTANTS, Logger) {
 
-        var Availability = declare(CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILABILITY, null, {
+        var Availability = declare(NOCCONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILABILITY, null, {
 
             renderGrid:function (gridMeta) {
                 // How to build the table - METHODOLOGY
@@ -31,9 +31,9 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
                 for (var i = 0; i < maxCol3; i++) {
                     var compDiv = dojo.create("div");
                     if(gridMeta.clusterName != "ALL") {
-                        compDiv.id = CONSTANTS.PREFIX.COMPONENT_GRID + gridMeta.componentName + "_" + gridMeta.clusterName;
+                        compDiv.id = NOCCONSTANTS.PREFIX.COMPONENT_GRID + gridMeta.componentName + "_" + gridMeta.clusterName;
                     } else {
-                        compDiv.id = CONSTANTS.PREFIX.COMPONENT_GRID + gridMeta.componentName;
+                        compDiv.id = NOCCONSTANTS.PREFIX.COMPONENT_GRID + gridMeta.componentName;
                     }
                     dojo.byId(gridMeta.pageName).appendChild(compDiv);
                     var compGridMeta = {};
@@ -140,7 +140,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
                 var dataPoint = new Object();
                 dataPoint.row0col3 = gridMeta.componentVO[0].componentName;
                 this.enrichWithIncidents(gridMeta.componentVO[0].componentName,
-                    gridMeta.componentVO[0].componentName, "row0col3", CONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY.COMPONENT);
+                    gridMeta.componentVO[0].componentName, "row0col3", NOCCONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY.COMPONENT);
                 var lastpoint = 0;
                 var clusters = gridMeta.componentVO[0].clusters;
                 for (var j = 0; j < clusters.length; j++) {
@@ -150,14 +150,14 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
                     var point2 = "row" + (2 * j) + "col2";
                     dataPoint[point2] = clusters[j].clusterName;
                     this.enrichWithIncidents(gridMeta.componentVO[0].componentName,
-                        clusters[j].clusterName, point2, CONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY.CLUSTER);
+                        clusters[j].clusterName, point2, NOCCONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY.CLUSTER);
 
                     for (var z = 0; z < clusters[j].instances.length; z++) {
                         var point1 = "row" + (lastpoint + (2 * z)) + "col1";
                         //Availability.LOG.log(Logger.SEVERITY.SEVERE, "point 1 = " + point1);
                         dataPoint[point1] = clusters[j].instances[z].instanceName;
                         this.enrichWithIncidents(gridMeta.componentVO[0].componentName,
-                            clusters[j].instances[z].instanceName, point1, CONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY.INSTANCE);
+                            clusters[j].instances[z].instanceName, point1, NOCCONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY.INSTANCE);
                         if (z == (clusters[j].instances.length - 1)) {
                             lastpoint = (2 * z) + 2;
                         }
@@ -178,8 +178,8 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
 
                 var i = 0;
                 dojo.query("#" + compName + " td.field-row1col3").forEach(function (node) {
-                    node.id = CONSTANTS.PREFIX.COMPONENT_CELL + gridMeta.componentVO[0].componentName;
-                    node.setAttribute(CONSTANTS.ATTRIBUTE.AVAILABILITY.COMPONENT, gridMeta.componentVO[0].id);
+                    node.id = NOCCONSTANTS.PREFIX.COMPONENT_CELL + gridMeta.componentVO[0].componentName;
+                    node.setAttribute(NOCCONSTANTS.ATTRIBUTE.AVAILABILITY.COMPONENT, gridMeta.componentVO[0].id);
                     //Availability.LOG.log(Logger.SEVERITY.SEVERE, "i = " + i + " comp id = " + gridMeta.componentVO[0].id + " this is the div in cell = " + node);
                     i++;
 
@@ -201,8 +201,8 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
                 for (var j = 0; j < maxCol1; j++) {
                     dojo.query("#" + compName + " td.field-row" + ((j * 2) + 1) + "col1").forEach(function (node) {
                         if (instanceNamesOfCluster[j] != null && instanceNamesOfCluster[j] != undefined) {
-                            node.id = CONSTANTS.PREFIX.INSTANCE_CELL + instanceNamesOfCluster[j];
-                            node.setAttribute(CONSTANTS.ATTRIBUTE.AVAILABILITY.INSTANCE, instanceIdsOfCluster[j]);
+                            node.id = NOCCONSTANTS.PREFIX.INSTANCE_CELL + instanceNamesOfCluster[j];
+                            node.setAttribute(NOCCONSTANTS.ATTRIBUTE.AVAILABILITY.INSTANCE, instanceIdsOfCluster[j]);
                             //Availability.LOG.log(Logger.SEVERITY.SEVERE, "j = " + instanceNamesOfCluster[j] + " div in cell = " + node.className);
                         }
                     });
@@ -213,16 +213,16 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
                 // Traverse the meta and fire queries for the correct instance, cluster, component
                 // Render them
 
-                this.renderSVG(CONSTANTS.PREFIX.COMPONENT_CELL + gridMeta.componentVO[0].componentName, gridMeta.componentVO[0].id, 30, CONSTANTS.SUBTYPE.AVAILABILITY.COMPONENT);
+                this.renderSVG(NOCCONSTANTS.PREFIX.COMPONENT_CELL + gridMeta.componentVO[0].componentName, gridMeta.componentVO[0].id, 30, NOCCONSTANTS.SUBTYPE.AVAILABILITY.COMPONENT);
                 var clusters = gridMeta.componentVO[0].clusters;
                 for (var j = 0; j < clusters.length; j++) {
                     if(clusters[j] == undefined) {
                         continue;
                     }
-                    this.renderSVG(CONSTANTS.PREFIX.CLUSTER_CELL + clusters[j].clusterName, clusters[j].id, 20, CONSTANTS.SUBTYPE.AVAILABILITY.CLUSTER);
+                    this.renderSVG(NOCCONSTANTS.PREFIX.CLUSTER_CELL + clusters[j].clusterName, clusters[j].id, 20, NOCCONSTANTS.SUBTYPE.AVAILABILITY.CLUSTER);
                     var instance = clusters[j].instances;
                     for (var z = 0; z < instance.length; z++) {
-                        this.renderSVG(CONSTANTS.PREFIX.INSTANCE_CELL + instance[z].instanceName, instance[z].id, 10, CONSTANTS.SUBTYPE.AVAILABILITY.INSTANCE);
+                        this.renderSVG(NOCCONSTANTS.PREFIX.INSTANCE_CELL + instance[z].instanceName, instance[z].id, 10, NOCCONSTANTS.SUBTYPE.AVAILABILITY.INSTANCE);
                     }
                 }
 
@@ -239,7 +239,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
                 var viewMeta = {
                     id:id,
                     name:objectName,
-                    type:CONSTANTS.TYPE.AVAILABILITY,
+                    type:NOCCONSTANTS.TYPE.AVAILABILITY,
                     subtype:gridType,
                     dimensions:[domNode.offsetWidth, domNode.offsetHeight],
                     position:[xpos, ypos],
@@ -247,20 +247,20 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
                 };
                 var url;
                 switch (gridType) {
-                    case CONSTANTS.SUBTYPE.AVAILABILITY.COMPONENT:
-                        url = CONSTANTS.ACTION.AVAILABILITY.COMPONENT;
+                    case NOCCONSTANTS.SUBTYPE.AVAILABILITY.COMPONENT:
+                        url = NOCCONSTANTS.ACTION.AVAILABILITY.COMPONENT;
                         break;
-                    case CONSTANTS.SUBTYPE.AVAILABILITY.CLUSTER:
-                        url = CONSTANTS.ACTION.AVAILABILITY.CLUSTER;
+                    case NOCCONSTANTS.SUBTYPE.AVAILABILITY.CLUSTER:
+                        url = NOCCONSTANTS.ACTION.AVAILABILITY.CLUSTER;
                         break;
-                    case CONSTANTS.SUBTYPE.AVAILABILITY.INSTANCE:
-                        url = CONSTANTS.ACTION.AVAILABILITY.INSTANCE;
+                    case NOCCONSTANTS.SUBTYPE.AVAILABILITY.INSTANCE:
+                        url = NOCCONSTANTS.ACTION.AVAILABILITY.INSTANCE;
                         break;
                     default:
                         Availability.LOG.log(Logger.SEVERITY.SEVERE, "unknown grid type = " + gridType);
                         return;
                 }
-                Utility.xhrPostCentral(url, viewMeta);
+                NocUtility.xhrPostCentral(url, viewMeta);
             },
 
             cacheClusterInstances:function (cluster, instanceNamesOfCluster, instanceIdsOfCluster) {
@@ -297,8 +297,8 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
                 var i = 0;
                 dojo.query("#" + compName + " td.field-row" + ((rowNum * 2) + 1) + "col2").forEach(function (node) {
                     if (clusterNameOfType[i] != null && clusterNameOfType[i] != undefined) {
-                        node.id = CONSTANTS.PREFIX.CLUSTER_CELL + clusterNameOfType[i];
-                        node.setAttribute(CONSTANTS.ATTRIBUTE.AVAILABILITY.CLUSTER, clusterIdOfType[i]);
+                        node.id = NOCCONSTANTS.PREFIX.CLUSTER_CELL + clusterNameOfType[i];
+                        node.setAttribute(NOCCONSTANTS.ATTRIBUTE.AVAILABILITY.CLUSTER, clusterIdOfType[i]);
                         //Availability.LOG.log(Logger.SEVERITY.SEVERE, "i = " + clusterNameOfType[i] + " div in cell = " + node.className);
                     }
                     i++;
@@ -317,7 +317,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
                 var viewMeta = {
                     id:1,
                     name:queryName,
-                    type:CONSTANTS.TYPE.INCIDENT,
+                    type:NOCCONSTANTS.TYPE.INCIDENT,
                     subtype:queryType,
                     dimensions:[0, 0],
                     position:[0, 0],
@@ -325,27 +325,27 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
                 };
                 var url;
                 switch (queryType) {
-                    case CONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY.COMPONENT:
+                    case NOCCONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY.COMPONENT:
                         Availability.LOG.log(Logger.SEVERITY.SEVERE, "component alert enrichment for " + tableName + " query name = " + queryName + " point name = " + pointName);
-                        url = CONSTANTS.ACTION.INCIDENT.COMPONENT;
+                        url = NOCCONSTANTS.ACTION.INCIDENT.COMPONENT;
                         break;
 
-                    case CONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY.CLUSTER:
+                    case NOCCONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY.CLUSTER:
                         Availability.LOG.log(Logger.SEVERITY.SEVERE, "cluster alert enrichment for " + tableName + " query name = " + queryName + " point name = " + pointName);
-                        url = CONSTANTS.ACTION.INCIDENT.CLUSTER;
+                        url = NOCCONSTANTS.ACTION.INCIDENT.CLUSTER;
                         break;
 
-                    case CONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY.INSTANCE:
+                    case NOCCONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY.INSTANCE:
                         Availability.LOG.log(Logger.SEVERITY.SEVERE, "instance alert enrichment for " + tableName + " query name = " + queryName + " point name = " + pointName);
-                        url = CONSTANTS.ACTION.INCIDENT.INSTANCE;
+                        url = NOCCONSTANTS.ACTION.INCIDENT.INSTANCE;
                         break;
                 }
-                Utility.xhrPostCentral(url, viewMeta);
+                NocUtility.xhrPostCentral(url, viewMeta);
             }
         });
 
         // static variables of this class
-        Availability.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILABILITY));
+        Availability.LOG = Logger.addTimer(new Logger(NOCCONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILABILITY));
 
         return Availability;
     });

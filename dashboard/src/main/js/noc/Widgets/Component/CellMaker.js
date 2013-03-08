@@ -1,9 +1,9 @@
-define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Logger", "noc/Constants", "noc/Utility"],
+define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "dashboard/noc/Logger", "dashboard/noc/NocConstants", "dashboard/noc/NocUtility"],
 
-    function (require, declare, i18n, i18nString, Logger, CONSTANTS, Utility) {
+    function (require, declare, i18n, i18nString, Logger, NOCCONSTANTS, NocUtility) {
 
         // this is a completely static class
-        var CellMaker = declare(CONSTANTS.CLASSNAME.WIDGETS.COMPONENT.CELLMAKER, null, {
+        var CellMaker = declare(NOCCONSTANTS.CLASSNAME.WIDGETS.COMPONENT.CELLMAKER, null, {
 
             create:function (data, id, width, height) {
                 // data has all 3 - component name, kpi name and value
@@ -77,7 +77,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "
 
         });
 
-        CellMaker.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.WIDGETS.COMPONENT.CELLMAKER));
+        CellMaker.LOG = Logger.addTimer(new Logger(NOCCONSTANTS.CLASSNAME.WIDGETS.COMPONENT.CELLMAKER));
 
         return CellMaker;
     });

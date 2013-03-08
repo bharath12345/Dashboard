@@ -1,10 +1,10 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc",
     "dijit/TitlePane", "dojox/layout/GridContainer",
-    "noc/Logger", "noc/Constants", "noc/Utility", "noc/data/Topology"],
+    "dashboard/noc/Logger", "dashboard/noc/NocConstants", "dashboard/noc/NocUtility", "noc/data/Topology"],
 
-    function (declare, i18n, i18nString, TitlePane, GridContainer, Logger, CONSTANTS, Utility, TOPOLOGY) {
+    function (declare, i18n, i18nString, TitlePane, GridContainer, Logger, NOCCONSTANTS, NocUtility, TOPOLOGY) {
 
-        var RenderNodes = declare(CONSTANTS.CLASSNAME.WIDGETS.TOPOLOGY.RENDERNODES, null, {
+        var RenderNodes = declare(NOCCONSTANTS.CLASSNAME.WIDGETS.TOPOLOGY.RENDERNODES, null, {
 
             getSvgIcon:function (src, width, height) {
                 var svgIcon = dojo.create("img");
@@ -200,13 +200,13 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc",
                             var viewMeta = {
                                 id:layer[j].name, // this will be something like WebServers
                                 name:layer[j].value[k], // this will be something like FLXRET_IHS1
-                                type:CONSTANTS.TYPE.TOPOLOGY,
-                                subtype:CONSTANTS.SUBTYPE.TOPOLOGY.CONNECTIVITY,
+                                type:NOCCONSTANTS.TYPE.TOPOLOGY,
+                                subtype:NOCCONSTANTS.SUBTYPE.TOPOLOGY.CONNECTIVITY,
                                 dimensions:[0, 0],
                                 position:[xpos, ypos],
                                 custom:[]
                             };
-                            Utility.xhrPostCentral(CONSTANTS.ACTION.TOPOLOGY.CONNECTIONS, viewMeta);
+                            NocUtility.xhrPostCentral(NOCCONSTANTS.ACTION.TOPOLOGY.CONNECTIONS, viewMeta);
                         }
                     }
 
@@ -219,13 +219,13 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc",
                      var viewMeta = {
                      id:layer[j].value[k], // this will be something like FLXRET_IHS1
                      name:layer[j].value[k], // this will be something like FLXRET_IHS1
-                     type:CONSTANTS.TYPE.TOPOLOGY,
-                     subtype:CONSTANTS.SUBTYPE.TOPOLOGY.NODESTATUS,
+                     type:NOCCONSTANTS.TYPE.TOPOLOGY,
+                     subtype:NOCCONSTANTS.SUBTYPE.TOPOLOGY.NODESTATUS,
                      dimensions:[0, 0],
                      position:[xpos, ypos],
                      custom:[]
                      };
-                     Utility.xhrPostCentral(CONSTANTS.ACTION.TOPOLOGY.NODESTATUS, viewMeta);
+                     NocUtility.xhrPostCentral(NOCCONSTANTS.ACTION.TOPOLOGY.NODESTATUS, viewMeta);
 
                      }
                      }*/
@@ -244,7 +244,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc",
             }
         });
 
-        RenderNodes.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.WIDGETS.TOPOLOGY.RENDERNODES));
+        RenderNodes.LOG = Logger.addTimer(new Logger(NOCCONSTANTS.CLASSNAME.WIDGETS.TOPOLOGY.RENDERNODES));
 
         RenderNodes.TYPE = {};
         RenderNodes.TYPE.WEBSERVER = "WebServers";

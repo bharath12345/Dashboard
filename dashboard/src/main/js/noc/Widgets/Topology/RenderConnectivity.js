@@ -1,9 +1,9 @@
-define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Logger", "noc/Constants", "noc/Utility",
+define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "dashboard/noc/Logger", "dashboard/noc/NocConstants", "dashboard/noc/NocUtility",
     "noc/data/Topology"],
 
-    function (declare, i18n, i18nString, Logger, CONSTANTS, Utility, TOPOLOGY) {
+    function (declare, i18n, i18nString, Logger, NOCCONSTANTS, NocUtility, TOPOLOGY) {
 
-        var RenderConnectivity = declare(CONSTANTS.CLASSNAME.WIDGETS.TOPOLOGY.RENDERCONNECTIVITY, null, {
+        var RenderConnectivity = declare(NOCCONSTANTS.CLASSNAME.WIDGETS.TOPOLOGY.RENDERCONNECTIVITY, null, {
 
             constructor: function() {
                 jsPlumb.importDefaults({
@@ -76,20 +76,20 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Logger"
                     var viewMeta = {
                         id:"", // uuid of the link?
                         name: "", // uuid of the link?
-                        type: CONSTANTS.TYPE.TOPOLOGY,
-                        subtype: CONSTANTS.SUBTYPE.TOPOLOGY.CONNECTIONSTATUS,
+                        type: NOCCONSTANTS.TYPE.TOPOLOGY,
+                        subtype: NOCCONSTANTS.SUBTYPE.TOPOLOGY.CONNECTIONSTATUS,
                         dimensions:[0, 0],
                         position:[xpos,ypos],
                         custom: []
                     };
-                    Utility.xhrPostCentral(CONSTANTS.ACTION.TOPOLOGY.CONNECTIONSTATUS, viewMeta);
+                    NocUtility.xhrPostCentral(NOCCONSTANTS.ACTION.TOPOLOGY.CONNECTIONSTATUS, viewMeta);
                 }
 
 
             }
         });
 
-        RenderConnectivity.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.WIDGETS.TOPOLOGY.RENDERCONNECTIVITY));
+        RenderConnectivity.LOG = Logger.addTimer(new Logger(NOCCONSTANTS.CLASSNAME.WIDGETS.TOPOLOGY.RENDERCONNECTIVITY));
         RenderConnectivity.FROM = "FROM_";
         RenderConnectivity.TO = "_TO_";
 

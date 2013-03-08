@@ -1,9 +1,9 @@
 define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/GridContainer",
-    "dojo/i18n!noc/nls/noc", "noc/Utility", "noc/Constants", "noc/Logger"],
+    "dojo/i18n!noc/nls/noc", "dashboard/noc/NocUtility", "dashboard/noc/NocConstants", "dashboard/noc/Logger"],
 
-    function (require, declare, i18n, TitlePane, GridContainer, i18nString, Utility, CONSTANTS, Logger) {
+    function (require, declare, i18n, TitlePane, GridContainer, i18nString, NocUtility, NOCCONSTANTS, Logger) {
 
-        var AvailabilityPage = declare(CONSTANTS.CLASSNAME.PAGES.AVAILABILITYPAGE, null, {
+        var AvailabilityPage = declare(NOCCONSTANTS.CLASSNAME.PAGES.AVAILABILITYPAGE, null, {
 
             loadPage:function (pageNumber, pageName, componentName, clusterName) {
 
@@ -35,20 +35,20 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                 var viewMeta = {
                     id:0,
                     name: pageName,
-                    type: CONSTANTS.TYPE.AVAILABILITY,
-                    subtype: CONSTANTS.SUBTYPE.AVAILABILITY.META,
+                    type: NOCCONSTANTS.TYPE.AVAILABILITY,
+                    subtype: NOCCONSTANTS.SUBTYPE.AVAILABILITY.META,
                     dimensions:[AvailabilityPage.CP[pageNumber].w, AvailabilityPage.CP[pageNumber].h],
                     position:[xpos,ypos],
                     custom: [componentName, clusterName]
                 };
 
-                Utility.xhrPostCentral(CONSTANTS.ACTION.REQUEST_HANDLER, viewMeta);
+                NocUtility.xhrPostCentral(NOCCONSTANTS.ACTION.REQUEST_HANDLER, viewMeta);
 
             }
         });
 
         // static variables of this class
-        AvailabilityPage.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.PAGES.AVAILABILITYPAGE));
+        AvailabilityPage.LOG = Logger.addTimer(new Logger(NOCCONSTANTS.CLASSNAME.PAGES.AVAILABILITYPAGE));
 
         AvailabilityPage.CP = [];
 

@@ -1,6 +1,6 @@
 define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/GridContainer",
     "dijit/layout/TabContainer", "dijit/layout/ContentPane", "dijit/form/Button", "dijit/Toolbar",
-    "noc/Logger", "dashboard/config/ConfigView",
+    "dashboard/logger/Logger", "dashboard/config/ConfigView",
     "dashboard/config/ConfigUtility", "dashboard/config/ConfigConstants", "dojo/i18n!dashboard/config/nls/config"],
 
     function (declare, i18n, TitlePane, GridContainer, TabContainer, ContentPane, Button, Toolbar,

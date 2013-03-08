@@ -1,9 +1,9 @@
 define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/GridContainer",
-    "dojo/i18n!noc/nls/noc", "noc/Utility", "noc/Constants", "noc/Logger"],
+    "dojo/i18n!noc/nls/noc", "dashboard/noc/NocUtility", "dashboard/noc/NocConstants", "dashboard/noc/Logger"],
 
-    function (require, declare, i18n, TitlePane, GridContainer, i18nString, Utility, CONSTANTS, Logger) {
+    function (require, declare, i18n, TitlePane, GridContainer, i18nString, NocUtility, NOCCONSTANTS, Logger) {
 
-        var GridMeta = declare(CONSTANTS.CLASSNAME.WIDGETS.TRANSACTION.GRIDMETA, null, {
+        var GridMeta = declare(NOCCONSTANTS.CLASSNAME.WIDGETS.TRANSACTION.GRIDMETA, null, {
 
             computeZones:function (count) {
                 // screen width is higher than length. Following are the configs -
@@ -192,8 +192,8 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                 // currently only app level refresh is coded to keep performance managable..
                 // rest need to be developed along with configuration
 
-                GridMeta.POSTSET.type = CONSTANTS.TYPE.TRANSACTION;
-                GridMeta.POSTSET.subType = CONSTANTS.SUBTYPE.TRANSACTION.APPDATA;
+                GridMeta.POSTSET.type = NOCCONSTANTS.TYPE.TRANSACTION;
+                GridMeta.POSTSET.subType = NOCCONSTANTS.SUBTYPE.TRANSACTION.APPDATA;
                 GridMeta.POSTSET.appdataset = [];
 
                 for (var i = 0; i < input.applicationVO.length; i++) {
@@ -252,7 +252,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                     position:[xpos, ypos],
                     custom:[]
                 };
-                Utility.xhrPostCentral(CONSTANTS.ACTION.TRANSACTION.APPDATA, viewMeta);
+                NocUtility.xhrPostCentral(NOCCONSTANTS.ACTION.TRANSACTION.APPDATA, viewMeta);
 
                 GridMeta.APP_COUNTER++;
                 if(GridMeta.APP_COUNTER > (GridMeta.POSTSET.appdataset.length-1)){
@@ -271,7 +271,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                  position:[xpos, ypos],
                  custom:[GridMeta.POSTSET.dataset[i].appName, GridMeta.POSTSET.dataset[i].groupName]
                  };
-                 Utility.xhrPostCentral(CONSTANTS.ACTION.TRANSACTION.DATA, viewMeta);
+                 NocUtility.xhrPostCentral(NOCCONSTANTS.ACTION.TRANSACTION.DATA, viewMeta);
                  }*/
             },
 
@@ -281,7 +281,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
         });
 
         // static variables of this class
-        GridMeta.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.WIDGETS.TRANSACTION.GRIDMETA));
+        GridMeta.LOG = Logger.addTimer(new Logger(NOCCONSTANTS.CLASSNAME.WIDGETS.TRANSACTION.GRIDMETA));
 
         GridMeta.POSTSET = {};
         GridMeta.APP_COUNTER = 0;

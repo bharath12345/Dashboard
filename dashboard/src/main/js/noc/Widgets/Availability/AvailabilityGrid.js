@@ -1,9 +1,9 @@
 define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/request/xhr", "dojo/_base/lang",
-    "dojo/i18n!noc/nls/noc", "noc/Utility", "noc/Constants", "noc/Logger"],
+    "dojo/i18n!noc/nls/noc", "dashboard/noc/NocUtility", "dashboard/noc/NocConstants", "dashboard/noc/Logger"],
 
-    function (require, declare, i18n, Grid, xhr, lang, i18nString, Utility, CONSTANTS, Logger) {
+    function (require, declare, i18n, Grid, xhr, lang, i18nString, NocUtility, NOCCONSTANTS, Logger) {
 
-        var AvailabilityGrid = declare(CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILABILITYGRID, null, {
+        var AvailabilityGrid = declare(NOCCONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILABILITYGRID, null, {
 
             create:function (data) {
                 AvailabilityGrid.LOG.log(Logger.SEVERITY.SEVERE, "triggering availability grid creation");
@@ -14,13 +14,13 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
                 options.componentName = data.custom[0];
                 options.clusterName = data.custom[1];
 
-                xhr(CONSTANTS.ACTION.AVAILABILITY.COMPONENTMETA, {
+                xhr(NOCCONSTANTS.ACTION.AVAILABILITY.COMPONENTMETA, {
                     handleAs:"json",
                     method:"POST",
                     query:options,
-                    headers:Utility.JSON_HEADER
+                    headers:NocUtility.JSON_HEADER
                 }).then(function (data) {
-                        require([CONSTANTS.getClassPath(CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILABILITY)], function (Availability) {
+                        require([NOCCONSTANTS.getClassPath(NOCCONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILABILITY)], function (Availability) {
                             new Availability().renderGrid(data);
                         });
                     }, function (err) {
@@ -33,7 +33,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/reques
         });
 
         // static variables of this class
-        AvailabilityGrid.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILABILITYGRID));
+        AvailabilityGrid.LOG = Logger.addTimer(new Logger(NOCCONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILABILITYGRID));
 
         AvailabilityGrid.PageCounter = 0;
         AvailabilityGrid.CP = null;

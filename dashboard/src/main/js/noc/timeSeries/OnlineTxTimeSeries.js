@@ -1,8 +1,8 @@
-define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Constants", "noc/Utility", "noc/Logger"],
+define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "dashboard/noc/NocConstants", "dashboard/noc/NocUtility", "dashboard/noc/Logger"],
 
-    function (declare, i18n, i18nString, CONSTANTS, Utility, Logger) {
+    function (declare, i18n, i18nString, NOCCONSTANTS, NocUtility, Logger) {
 
-        var OnlineTxTimeSeries = declare(CONSTANTS.CLASSNAME.TIMESERIES.ONLINETX, null, {
+        var OnlineTxTimeSeries = declare(NOCCONSTANTS.CLASSNAME.TIMESERIES.ONLINETX, null, {
 
             createTimeSeries: function(jsonStore, id, gridWidth, gridHeight, topLeftX, topLeftY) {
                 OnlineTxTimeSeries.LOG.log(Logger.SEVERITY.SEVERE, "grid width = " + gridWidth);
@@ -140,7 +140,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Constan
             }
         });
 
-        OnlineTxTimeSeries.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.TIMESERIES.ONLINETX));
+        OnlineTxTimeSeries.LOG = Logger.addTimer(new Logger(NOCCONSTANTS.CLASSNAME.TIMESERIES.ONLINETX));
 
         return OnlineTxTimeSeries;
 

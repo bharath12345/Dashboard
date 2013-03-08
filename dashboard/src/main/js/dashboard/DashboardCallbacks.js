@@ -1,4 +1,4 @@
-define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", "noc/Logger", "dojox/collections/Dictionary",
+define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", "dashboard/logger/Logger", "dojox/collections/Dictionary",
     "dashboard/DashboardConstants"],
 
     function (declare, i18n, i18nString, Logger, Dictionary, DBCONSTANTS) {

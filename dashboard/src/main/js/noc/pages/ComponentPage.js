@@ -1,9 +1,9 @@
 define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/GridContainer",
-    "dojo/_base/lang", "dojo/i18n!noc/nls/noc", "noc/Constants", "noc/Utility", "noc/Logger"],
+    "dojo/_base/lang", "dojo/i18n!noc/nls/noc", "dashboard/noc/NocConstants", "dashboard/noc/NocUtility", "dashboard/noc/Logger"],
 
-    function (require, declare, i18n, TitlePane, GridContainer, lang, i18nString, CONSTANTS, Utility, Logger) {
+    function (require, declare, i18n, TitlePane, GridContainer, lang, i18nString, NOCCONSTANTS, NocUtility, Logger) {
 
-        var ComponentPage = declare(CONSTANTS.CLASSNAME.PAGES.COMPONENTPAGE, null, {
+        var ComponentPage = declare(NOCCONSTANTS.CLASSNAME.PAGES.COMPONENTPAGE, null, {
 
             loadPage:function () {
 
@@ -17,13 +17,13 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                     width: ComponentPage.CP.w,
                     height: ComponentPage.CP.h
                 };
-                Utility.xhrPostCentral(CONSTANTS.ACTION.COMPONENT.ZONES, dojo.toJson(viewMeta));
+                NocUtility.xhrPostCentral(NOCCONSTANTS.ACTION.COMPONENT.ZONES, dojo.toJson(viewMeta));
             }
 
         });
 
         // static variables of this class
-        ComponentPage.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.PAGES.COMPONENTPAGE));
+        ComponentPage.LOG = Logger.addTimer(new Logger(NOCCONSTANTS.CLASSNAME.PAGES.COMPONENTPAGE));
 
         ComponentPage.CP = null;
 

@@ -1,4 +1,4 @@
-define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/layout/BorderContainer", "noc/Logger"],
+define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/layout/BorderContainer", "dashboard/logger/Logger"],
 
     function (declare, i18n, ContentPane, BorderContainer, Logger) {
 

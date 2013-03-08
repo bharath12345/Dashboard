@@ -1,4 +1,4 @@
-define(["dojo/_base/declare", "dojo/i18n", "dojo/on", "dojo/_base/lang", "noc/Logger"],
+define(["dojo/_base/declare", "dojo/i18n", "dojo/on", "dojo/_base/lang", "dashboard/logger/Logger"],
 
     function (declare, i18n, on, lang, Logger) {
 

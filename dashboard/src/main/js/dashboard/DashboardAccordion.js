@@ -1,5 +1,5 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", "dijit/TitlePane", "dojox/layout/GridContainer", "dojo/on", "dojo/_base/lang",
-    "dijit/layout/AccordionContainer", "dijit/layout/ContentPane", "noc/Logger",
+    "dijit/layout/AccordionContainer", "dijit/layout/ContentPane", "dashboard/logger/Logger",
     "dashboard/DashboardUtility", "dashboard/DashboardConstants", "dashboard/DashboardCallbacks"],
 
     function (declare, i18n, i18nString, TitlePane, GridContainer, on, lang, AccordionContainer, ContentPane, Logger,

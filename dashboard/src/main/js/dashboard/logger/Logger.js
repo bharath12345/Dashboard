@@ -1,6 +1,6 @@
-define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "dojo/request/xhr", "noc/Constants"],
+define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "dojo/request/xhr"],
 
-    function (declare, i18n, i18nString, xhr, CONSTANTS) {
+    function (declare, i18n, i18nString, xhr) {
 
         var Logger = declare("noc.Logger", null, {
 
@@ -55,7 +55,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "dojo/reques
         Logger.log = function(messages) {
 
             for(var i=0;i<messages.length;i++) {
-                xhr(CONSTANTS.ACTION.LOGGER, {
+                xhr("logger/Logger.action", {
                     handleAs:"json",
                     method:"POST",
                     query:dojo.toJson(messages[i]),

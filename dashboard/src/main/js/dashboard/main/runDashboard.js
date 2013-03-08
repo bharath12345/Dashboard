@@ -22,7 +22,6 @@ require({
         {name:'xstyle', location:'../xstyle'},
         {name:'put-selector', location:'../put-selector'},
         {name:'dbind', location:'../dbind'},
-        {name:'noc', location:'../noc'},
         {name:'Dashboard', location:'.', main:'Dashboard' }
     ]
 // Require `Dashboard`. This loads the main application module, `dashboard/Dashboard`, since we registered the `Dashboard` package above.

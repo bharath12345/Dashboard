@@ -1,9 +1,9 @@
 define(['require', "dojo/_base/declare", "dojo/i18n",
-    "dojo/i18n!noc/nls/noc", "noc/Constants", "noc/Utility", "noc/Logger"],
+    "dojo/i18n!noc/nls/noc", "dashboard/noc/NocConstants", "dashboard/noc/NocUtility", "dashboard/noc/Logger"],
 
-    function (require, declare, i18n, i18nString, CONSTANTS, Utility, Logger) {
+    function (require, declare, i18n, i18nString, NOCCONSTANTS, NocUtility, Logger) {
 
-        var AvailMatrix2 = declare(CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILMATRIX2, null, {
+        var AvailMatrix2 = declare(NOCCONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILMATRIX2, null, {
 
             create:function (input, payload) {
                 AvailMatrix2.LOG.log(Logger.SEVERITY.SEVERE, "in create avail matrix gridtype = " + input.subtype);
@@ -29,16 +29,16 @@ define(['require', "dojo/_base/declare", "dojo/i18n",
                         data[i] = new Array();
                         var columnSet;
                         switch (input.subtype) {
-                            case CONSTANTS.SUBTYPE.AVAILABILITY.COMPONENT:
+                            case NOCCONSTANTS.SUBTYPE.AVAILABILITY.COMPONENT:
                                 columnSet = sub[i].cluster;
                                 break;
 
-                            case CONSTANTS.SUBTYPE.AVAILABILITY.CLUSTER:
-                            case CONSTANTS.SUBTYPE.AVAILABILITY.CLUSTER2:
+                            case NOCCONSTANTS.SUBTYPE.AVAILABILITY.CLUSTER:
+                            case NOCCONSTANTS.SUBTYPE.AVAILABILITY.CLUSTER2:
                                 columnSet = sub[i].instances;
                                 break;
 
-                            case CONSTANTS.SUBTYPE.AVAILABILITY.INSTANCE:
+                            case NOCCONSTANTS.SUBTYPE.AVAILABILITY.INSTANCE:
                                 columnSet = sub[i].kpi;
                                 break;
                         }
@@ -66,7 +66,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n",
                     AvailMatrix2.LOG.log(Logger.SEVERITY.SEVERE, "going to render grid for = " + input.name + "dimensions w = " + input.dimensions.width + " h = " + input.dimensions.height);
                     AvailMatrix2.LOG.log(Logger.SEVERITY.SEVERE, "timedata = " + dojo.toJson(timedata));
 
-                    Utility.removeChildren(document.getElementById(input.name));
+                    NocUtility.removeChildren(document.getElementById(input.name));
                     this.renderGrid(data, timedata, input.name, input.dimensions.width, input.dimensions.height);
                 } catch (e) {
                     AvailMatrix2.LOG.log(Logger.SEVERITY.SEVERE, "exception " + e);
@@ -155,7 +155,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n",
                 }
             }
         });
-        AvailMatrix2.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILMATRIX2));
+        AvailMatrix2.LOG = Logger.addTimer(new Logger(NOCCONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILMATRIX2));
 
         return AvailMatrix2;
 

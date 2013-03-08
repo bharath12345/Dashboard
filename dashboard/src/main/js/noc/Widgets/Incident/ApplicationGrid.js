@@ -1,8 +1,8 @@
-define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", 'dgrid/Grid', "noc/Logger", "noc/Constants", "noc/Utility"],
+define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", 'dgrid/Grid', "dashboard/noc/Logger", "dashboard/noc/NocConstants", "dashboard/noc/NocUtility"],
 
-    function (declare, i18n, i18nString, Grid, Logger, CONSTANTS, Utility) {
+    function (declare, i18n, i18nString, Grid, Logger, NOCCONSTANTS, NocUtility) {
 
-        var ApplicationGrid = declare(CONSTANTS.CLASSNAME.WIDGETS.INCIDENT.APPLICATIONGRID, null, {
+        var ApplicationGrid = declare(NOCCONSTANTS.CLASSNAME.WIDGETS.INCIDENT.APPLICATIONGRID, null, {
 
             create: function(data, input) {
 
@@ -50,8 +50,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", 'dgrid/Grid'
                     }
                 }
 
-                ApplicationGrid.POSTSET.type = CONSTANTS.TYPE.INCIDENT;
-                ApplicationGrid.POSTSET.subtype = CONSTANTS.SUBTYPE.INCIDENT.DATA;
+                ApplicationGrid.POSTSET.type = NOCCONSTANTS.TYPE.INCIDENT;
+                ApplicationGrid.POSTSET.subtype = NOCCONSTANTS.SUBTYPE.INCIDENT.DATA;
                 ApplicationGrid.POSTSET.metricsJson = dojo.toJson(metrics);
                 ApplicationGrid.POSTSET.dataset = [];
 
@@ -94,13 +94,13 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", 'dgrid/Grid'
                 var viewMeta = {
                     id:appDataSet.id,
                     name:appDataSet.name,
-                    type:CONSTANTS.TYPE.INCIDENT,
-                    subtype:CONSTANTS.SUBTYPE.INCIDENT.DATA,
+                    type:NOCCONSTANTS.TYPE.INCIDENT,
+                    subtype:NOCCONSTANTS.SUBTYPE.INCIDENT.DATA,
                     dimensions:[0, 0],
                     position:[0, 0],
                     custom:[ApplicationGrid.POSTSET.metricsJson]
                 };
-                Utility.xhrPostCentral(CONSTANTS.ACTION.INCIDENT.APPLICATIONDATA, viewMeta);
+                NocUtility.xhrPostCentral(NOCCONSTANTS.ACTION.INCIDENT.APPLICATIONDATA, viewMeta);
 
                 ApplicationGrid.APP_COUNTER++;
                 if(ApplicationGrid.APP_COUNTER > (ApplicationGrid.POSTSET.dataset.length-1)){
@@ -112,18 +112,18 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", 'dgrid/Grid'
                 var viewMeta = {
                     id:"",
                     name:"",
-                    type:CONSTANTS.TYPE.CONFIG,
-                    subtype:CONSTANTS.SUBTYPE.APPINCIDENTGRID,
+                    type:NOCCONSTANTS.TYPE.CONFIG,
+                    subtype:NOCCONSTANTS.SUBTYPE.APPINCIDENTGRID,
                     dimensions:[0, 0],
                     position:[0, 0],
                     custom:[]
                 };
-                Utility.xhrPostCentral(CONSTANTS.ACTION.CONFIG.APPINCIDENTGRID, viewMeta);
+                NocUtility.xhrPostCentral(NOCCONSTANTS.ACTION.CONFIG.APPINCIDENTGRID, viewMeta);
             }
 
         });
 
-        ApplicationGrid.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.WIDGETS.INCIDENT.APPLICATIONGRID));
+        ApplicationGrid.LOG = Logger.addTimer(new Logger(NOCCONSTANTS.CLASSNAME.WIDGETS.INCIDENT.APPLICATIONGRID));
 
         ApplicationGrid.POSTSET = {};
         ApplicationGrid.APP_COUNTER = 0;

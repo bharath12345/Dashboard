@@ -1,5 +1,5 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/config", "dojo/request/xhr", "dijit/Dialog",
-    "dashboard/config/ConfigConstants", "noc/Logger", "dashboard/abstract/AbstractUtility"],
+    "dashboard/config/ConfigConstants", "dashboard/logger/Logger", "dashboard/abstract/AbstractUtility"],
 
     function (declare, i18n, i18nString, xhr, Dialog, CONFIGCONSTANTS, Logger, AbstractUtility) {
 

@@ -1,9 +1,9 @@
 define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/GridContainer",
-    "dojo/i18n!noc/nls/noc", "noc/Utility", "noc/Constants", "noc/Logger"],
+    "dojo/i18n!noc/nls/noc", "dashboard/noc/NocUtility", "dashboard/noc/NocConstants", "dashboard/noc/Logger"],
 
-    function (require, declare, i18n, TitlePane, GridContainer, i18nString, Utility, CONSTANTS, Logger) {
+    function (require, declare, i18n, TitlePane, GridContainer, i18nString, NocUtility, NOCCONSTANTS, Logger) {
 
-        var IncidentPage = declare(CONSTANTS.CLASSNAME.PAGES.INCIDENTPAGE, null, {
+        var IncidentPage = declare(NOCCONSTANTS.CLASSNAME.PAGES.INCIDENTPAGE, null, {
 
             loadPage:function (pageNumber, pageName) {
 
@@ -42,20 +42,20 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                 var viewMeta = {
                     id:pageName,
                     name: pageName,
-                    type: CONSTANTS.TYPE.INCIDENT,
-                    subtype: CONSTANTS.SUBTYPE.INCIDENT.META,
+                    type: NOCCONSTANTS.TYPE.INCIDENT,
+                    subtype: NOCCONSTANTS.SUBTYPE.INCIDENT.META,
                     dimensions:[IncidentPage.CP.w, IncidentPage.CP.h],
                     position:[xpos,ypos],
                     custom: []
                 };
 
-                Utility.xhrPostCentral(CONSTANTS.ACTION.INCIDENT.APPLICATIONMETA, viewMeta);
+                NocUtility.xhrPostCentral(NOCCONSTANTS.ACTION.INCIDENT.APPLICATIONMETA, viewMeta);
 
             }
         });
 
         // static variables of this class
-        IncidentPage.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.PAGES.AVAILABILITYPAGE));
+        IncidentPage.LOG = Logger.addTimer(new Logger(NOCCONSTANTS.CLASSNAME.PAGES.AVAILABILITYPAGE));
 
         IncidentPage.CP = null;
 

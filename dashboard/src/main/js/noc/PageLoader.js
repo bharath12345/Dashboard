@@ -1,15 +1,15 @@
 define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/layout/BorderContainer", "dojo/window",
-    "dojo/i18n!noc/nls/noc", "noc/pages/AvailabilityPage", "noc/pages/TxTreemapPage",
-    "noc/pages/ComponentPage", "noc/pages/TxTimeSeriesPage", "noc/pages/IncidentPage", "noc/pages/AllClusterAvailability",
-    "noc/pages/TransactionGrid", "noc/pages/TopologyPage",
-    "noc/Logger", "noc/Constants", "noc/Utility"],
+    "dojo/i18n!noc/nls/noc", "dashboard/dashboard/noc/pages/AvailabilityPage", "dashboard/noc/pages/TxTreemapPage",
+    "dashboard/noc/pages/ComponentPage", "dashboard/noc/pages/TxTimeSeriesPage", "dashboard/noc/pages/IncidentPage", "dashboard/noc/pages/AllClusterAvailability",
+    "dashboard/noc/pages/TransactionGrid", "dashboard/noc/pages/TopologyPage",
+    "dashboard/noc/Logger", "dashboard/noc/NocConstants", "dashboard/noc/NocUtility"],
 
     function (require, declare, i18n, ContentPane, BorderContainer, win, i18nString,
               AvailabilityPage, TxTreemapPage, ComponentPage, TxTimeSeriesPage, IncidentPage,
               AllClusterAvailability, TransactionGrid, TopologyPage,
-              Logger, CONSTANTS, Utility) {
+              Logger, NOCCONSTANTS, NocUtility) {
 
-        var PageLoader = declare(CONSTANTS.CLASSNAME.PAGELOADER, null, {
+        var PageLoader = declare(NOCCONSTANTS.CLASSNAME.PAGELOADER, null, {
 
             initMain:function () {
 
@@ -147,7 +147,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
 
         });
 
-        PageLoader.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.PAGELOADER));
+        PageLoader.LOG = Logger.addTimer(new Logger(NOCCONSTANTS.CLASSNAME.PAGELOADER));
 
         // static variables of this class
         PageLoader.SECTION = "section_";

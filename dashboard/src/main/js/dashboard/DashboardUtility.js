@@ -1,4 +1,4 @@
-define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", "noc/Logger", "dojo/request/xhr", "dijit/Dialog",
+define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", "dashboard/logger/Logger", "dojo/request/xhr", "dijit/Dialog",
     "dashboard/DashboardConstants", "dashboard/DashboardCallbacks", "dashboard/abstract/AbstractUtility"],
 
     function (declare, i18n, i18nString, Logger, xhr, Dialog, DBCONSTANTS, DashboardCallbacks, AbstractUtility) {

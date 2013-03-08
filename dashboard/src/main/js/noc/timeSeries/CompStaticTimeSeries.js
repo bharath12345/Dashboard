@@ -1,8 +1,8 @@
-define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Constants", "noc/Utility", "noc/Logger"],
+define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "dashboard/noc/NocConstants", "dashboard/noc/NocUtility", "dashboard/noc/Logger"],
 
-    function (declare, i18n, i18nString, CONSTANTS, Utility, Logger) {
+    function (declare, i18n, i18nString, NOCCONSTANTS, NocUtility, Logger) {
 
-        var CompStaticTimeSeries = declare(CONSTANTS.CLASSNAME.TIMESERIES.COMPSTATIC, null, {
+        var CompStaticTimeSeries = declare(NOCCONSTANTS.CLASSNAME.TIMESERIES.COMPSTATIC, null, {
 
             createTimeSeries: function(jsonStore, id, gridWidth, gridHeight, topLeftX, topLeftY) {
                 d3.json(jsonStore, dojo.hitch (this, function(m) {
@@ -93,7 +93,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Constan
 
         });
 
-        CompStaticTimeSeries.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.TIMESERIES.COMPSTATIC));
+        CompStaticTimeSeries.LOG = Logger.addTimer(new Logger(NOCCONSTANTS.CLASSNAME.TIMESERIES.COMPSTATIC));
 
         return CompStaticTimeSeries;
 

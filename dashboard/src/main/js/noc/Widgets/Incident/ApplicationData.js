@@ -1,9 +1,9 @@
-define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", 'dgrid/Grid', "noc/Logger", "noc/Constants", "noc/Utility",
+define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", 'dgrid/Grid', "dashboard/noc/Logger", "dashboard/noc/NocConstants", "dashboard/noc/NocUtility",
             "noc/Widgets/Config/AppIncidentGrid"],
 
-    function (declare, i18n, i18nString, Grid, Logger, CONSTANTS, Utility, AppIncidentGrid) {
+    function (declare, i18n, i18nString, Grid, Logger, NOCCONSTANTS, NocUtility, AppIncidentGrid) {
 
-        var ApplicationData = declare(CONSTANTS.CLASSNAME.WIDGETS.INCIDENT.APPLICATIONDATA, null, {
+        var ApplicationData = declare(NOCCONSTANTS.CLASSNAME.WIDGETS.INCIDENT.APPLICATIONDATA, null, {
 
             create:function (data, input) {
                 customMetrics = dojo.fromJson(data.custom[0]);
@@ -12,7 +12,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", 'dgrid/Grid'
                     var nodeId = data.name + "_" + data.id + "_" + metric;
                     console.log("node id = " + nodeId);
                     var node = dojo.byId(nodeId);
-                    Utility.removeChildren(document.getElementById(nodeId));
+                    NocUtility.removeChildren(document.getElementById(nodeId));
 
                     for (var j = 0; j < input.applicationDataVO.metrics.length; j++) {
                         var payload = input.applicationDataVO.metrics[j];
@@ -54,7 +54,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", 'dgrid/Grid'
 
         });
 
-        ApplicationData.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.WIDGETS.INCIDENT.APPLICATIONDATA));
+        ApplicationData.LOG = Logger.addTimer(new Logger(NOCCONSTANTS.CLASSNAME.WIDGETS.INCIDENT.APPLICATIONDATA));
 
         return ApplicationData;
     });

@@ -1,9 +1,9 @@
 define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/GridContainer",
-    "dojo/i18n!noc/nls/noc", "noc/Utility", "noc/Constants", "noc/Logger"],
+    "dojo/i18n!noc/nls/noc", "dashboard/noc/NocUtility", "dashboard/noc/NocConstants", "dashboard/noc/Logger"],
 
-    function (require, declare, i18n, TitlePane, GridContainer, i18nString, Utility, CONSTANTS, Logger) {
+    function (require, declare, i18n, TitlePane, GridContainer, i18nString, NocUtility, NOCCONSTANTS, Logger) {
 
-        var ClusterZones = declare(CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.CLUSTERZONES, null, {
+        var ClusterZones = declare(NOCCONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.CLUSTERZONES, null, {
 
             computeZones:function (count) {
                 // screen width is higher than length. Following are the configs -
@@ -156,13 +156,13 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                 var viewMeta = {
                     id:clusterDataSet.id,
                     name:clusterDataSet.name,
-                    type:CONSTANTS.TYPE.AVAILABILITY,
-                    subtype:CONSTANTS.SUBTYPE.AVAILABILITY.CLUSTER2,
+                    type:NOCCONSTANTS.TYPE.AVAILABILITY,
+                    subtype:NOCCONSTANTS.SUBTYPE.AVAILABILITY.CLUSTER2,
                     dimensions:[clusterDataSet.width, clusterDataSet.height],
                     position:[0, 0],
                     custom:[clusterDataSet.custom]
                 };
-                Utility.xhrPostCentral(CONSTANTS.ACTION.AVAILABILITY.CLUSTER, viewMeta);
+                NocUtility.xhrPostCentral(NOCCONSTANTS.ACTION.AVAILABILITY.CLUSTER, viewMeta);
 
                 ClusterZones.CLUSTER_COUNTER++;
                 if (ClusterZones.CLUSTER_COUNTER > (ClusterZones.POSTSET.dataset.length - 1)) {
@@ -172,7 +172,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
         });
 
         // static variables of this class
-        ClusterZones.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.CLUSTERZONES));
+        ClusterZones.LOG = Logger.addTimer(new Logger(NOCCONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.CLUSTERZONES));
 
         ClusterZones.POSTSET = {};
         ClusterZones.CLUSTER_COUNTER = 0;

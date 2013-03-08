@@ -1,8 +1,8 @@
-define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Logger", "noc/Constants", "noc/Utility"],
+define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "dashboard/noc/Logger", "dashboard/noc/NocConstants", "dashboard/noc/NocUtility"],
 
-    function (declare, i18n, i18nString, Logger, CONSTANTS, Utility) {
+    function (declare, i18n, i18nString, Logger, NOCCONSTANTS, NocUtility) {
 
-        var GridData = declare(CONSTANTS.CLASSNAME.WIDGETS.TRANSACTION.GRIDDATA, null, {
+        var GridData = declare(NOCCONSTANTS.CLASSNAME.WIDGETS.TRANSACTION.GRIDDATA, null, {
 
             create: function(data, input) {
                 // fill the 3 cells for Tx-Volume, Tx-Alerts, Tx-response-time
@@ -40,7 +40,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Logger"
 
             fillText: function(id, text) {
                 console.log("id = " + id);
-                Utility.removeChildren(document.getElementById(id));
+                NocUtility.removeChildren(document.getElementById(id));
                 var node = dojo.byId(id);
                 node.innerHTML = text;
                 node.style.fontSize = "10";
@@ -49,7 +49,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Logger"
 
             fillSVG: function(id, color) {
                 console.log("id = " + id);
-                Utility.removeChildren(document.getElementById(id));
+                NocUtility.removeChildren(document.getElementById(id));
                 this.appendRectangle(id, 15, 15, color);
             },
 
@@ -116,7 +116,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "noc/Logger"
 
         });
 
-        GridData.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.WIDGETS.TRANSACTION.GRIDDATA));
+        GridData.LOG = Logger.addTimer(new Logger(NOCCONSTANTS.CLASSNAME.WIDGETS.TRANSACTION.GRIDDATA));
 
 
         return GridData;

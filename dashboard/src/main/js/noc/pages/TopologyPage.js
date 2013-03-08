@@ -1,10 +1,10 @@
 define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/GridContainer",
     "dijit/layout/ContentPane",
-    "dojo/i18n!noc/nls/noc", "noc/Utility", "noc/Constants", "noc/Logger"],
+    "dojo/i18n!noc/nls/noc", "dashboard/noc/NocUtility", "dashboard/noc/NocConstants", "dashboard/noc/Logger"],
 
-    function (require, declare, i18n, TitlePane, GridContainer, ContentPane, i18nString, Utility, CONSTANTS, Logger) {
+    function (require, declare, i18n, TitlePane, GridContainer, ContentPane, i18nString, NocUtility, NOCCONSTANTS, Logger) {
 
-        var TopologyPage = declare(CONSTANTS.CLASSNAME.PAGES.TOPOLOGYPAGE, null, {
+        var TopologyPage = declare(NOCCONSTANTS.CLASSNAME.PAGES.TOPOLOGYPAGE, null, {
 
             loadPage:function (pageNumber, pageName) {
                 TopologyPage.CP = noc.PageLoader.CpCenter[pageNumber];
@@ -39,20 +39,20 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                 var viewMeta = {
                     id:pageName,
                     name:pageName,
-                    type:CONSTANTS.TYPE.TOPOLOGY,
-                    subtype:CONSTANTS.SUBTYPE.TOPOLOGY.NODES,
+                    type:NOCCONSTANTS.TYPE.TOPOLOGY,
+                    subtype:NOCCONSTANTS.SUBTYPE.TOPOLOGY.NODES,
                     dimensions:[paneWidth, paneHeight],
                     position:[xpos, ypos],
                     custom:[]
                 };
 
-                Utility.xhrPostCentral(CONSTANTS.ACTION.TOPOLOGY.NODES, viewMeta);
+                NocUtility.xhrPostCentral(NOCCONSTANTS.ACTION.TOPOLOGY.NODES, viewMeta);
 
             }
         });
 
         // static variables of this class
-        TopologyPage.LOG = Logger.addTimer(new Logger(CONSTANTS.CLASSNAME.PAGES.TOPOLOGYPAGE));
+        TopologyPage.LOG = Logger.addTimer(new Logger(NOCCONSTANTS.CLASSNAME.PAGES.TOPOLOGYPAGE));
 
         TopologyPage.CP = null;
         TopologyPage.TitlePane = null;
