@@ -1,30 +1,44 @@
 define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/GridContainer",
     "dijit/layout/TabContainer", "dijit/layout/ContentPane", "dijit/form/Button", "dijit/Toolbar",
-    "noc/Logger",
+    "noc/Logger", "dashboard.config.ConfigView",
     "dashboard/config/ConfigUtility", "dashboard/config/ConfigConstants", "dojo/i18n!dashboard/config/nls/config"],
 
     function (declare, i18n, TitlePane, GridContainer, TabContainer, ContentPane, Button, Toolbar,
-              Logger, ConfigUtility, CONFIGCONSTANTS, i18nString) {
+              Logger, ConfigView, ConfigUtility, CONFIGCONSTANTS, i18nString) {
+
+        /*
+                A New object of RenderAttributes is created on the click of any link in the Accordion.
+                RenderAttributes has a static variables for Id, Name and Type which holds the values for the
+                view being displayed
+         */
 
         var RenderAttributes = declare(CONFIGCONSTANTS.CLASSNAME.RENDERATTRIBUTES, null, {
 
             renderConfigParameters: function(data, pageObj) {
                 console.log("renderConfigParameters data = " + dojo.toJson(data));
+                RenderAttributes.ID = data.param.id[0]; // this is the UUID
+                RenderAttributes.NAME = data.param.name[0];
+                RenderAttributes.TYPE = data.param.type[0];
+                RenderAttributes.NEWWINDOW = new Boolean(data.param.newWindow[0]);
 
-                var tc = this.createTabs();
+                var configView = new ConfigView(RenderAttributes.NEWWINDOW);
+                var menuPane = configView.getConfigMenuPane();
+                var centralPane = configView.getConfigCentralPane();
+                var topBorderContainer = configView.getTopBorderContainer();
 
+                var tc = this.createTabs(centralPane);
                 this.createTitlePaneGrid(pageObj.getAttrib(data), pageObj.getAttribIgnoreList());
-                this.createToolbarButtons();
+                this.createToolbarButtons(menuPane);
 
                 // all the title panes have been rendered - now render the innards
                 RenderAttributes.PAGEOBJ = pageObj;
                 pageObj.renderAttributes(data);
 
-                this.cleanupRendering(tc);
+                this.cleanupRendering(menuPane, centralPane, topBorderContainer, tc);
                 dashboard.STANDBY.hide();
             },
 
-            cleanupRendering: function(tc) {
+            cleanupRendering: function(menuPane, centralPane, topBorderContainer, tc) {
                 // make the tab buttons larger
                 var innerPane = dojo.query(".dijitTabInner", tc.domNode);
                 for (var i = 0; i < innerPane.length; i++) {
@@ -32,18 +46,18 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
                 }
 
                 // remove the boundary and padding of inner center pane
-                dashboard.DashboardContainers.CpCenterInner.domNode.style.padding=0;
-                dashboard.DashboardContainers.CpCenterInner.domNode.style.border=0;
+                centralPane.domNode.style.padding=0;
+                centralPane.domNode.style.border=0;
 
-                dashboard.DashboardContainers.CpTopInner.domNode.style.padding=0;
-                dashboard.DashboardContainers.TopBc.resize();
+                menuPane.domNode.style.padding=0;
+                topBorderContainer.resize();
             },
 
-            createTabs: function() {
-                dashboard.DashboardContainers.CpCenterInner.destroyDescendants(false);
+            createTabs: function(centralPane) {
+                centralPane.destroyDescendants(false);
 
                 var tc = new TabContainer({style: "height: 100%; width: 100%;"});
-                dashboard.DashboardContainers.CpCenterInner.addChild(tc);
+                centralPane.CpCenterInner.addChild(tc);
 
                 RenderAttributes.LOOKNFEELPANE = new ContentPane({title: "Look and Feel", style: "height: 100%; width: 100%;"});
                 tc.addChild(RenderAttributes.LOOKNFEELPANE);
@@ -128,11 +142,11 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
                 return divString;
             },
 
-            createToolbarButtons: function() {
-                dashboard.DashboardContainers.CpTopInner.destroyDescendants(false);
+            createToolbarButtons: function(menuPane) {
+                menuPane.destroyDescendants(false);
 
                 var toolbar = new Toolbar({});
-                dashboard.DashboardContainers.CpTopInner.addChild(toolbar);
+                menuPane.addChild(toolbar);
 
                 var button = new Button({
                     showLabel: true,
@@ -149,7 +163,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
                     label: "Pop Out",
                     iconClass:'dijitEditorIcon newViewWindowToolbarButton',
                     onClick: function(){
-
+                        ConfigView.launchNewWindowConfigPane(RenderAttributes.ID, RenderAttributes.NAME, RenderAttributes.TYPE);
                     }
                 });
                 toolbar.addChild(button);
@@ -162,6 +176,10 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
         RenderAttributes.DATAPANE = null;
 
         RenderAttributes.PAGEOBJ = null;
+
+        RenderAttributes.ID = null;
+        RenderAttributes.NAME = null;
+        RenderAttributes.TYPE = null;
 
         return RenderAttributes;
     });

@@ -3,6 +3,7 @@ package com.appnomic.appsone.dashboard.action.config;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
@@ -88,31 +89,31 @@ public class ConfigUtilityAction extends AbstractNocAction {
 		
 		PageListVO pageListVO = new PageListVO();
 		pageListVO.setName("Alerts Grid");
-		pageListVO.setId(0);
+		pageListVO.setId(UUID.randomUUID().toString());
 		pageListVO.setType(ACCTYPE.GRID.name());
 		pageList.add(pageListVO);
 		
 		pageListVO = new PageListVO();
 		pageListVO.setName("Clusters Grid");
-		pageListVO.setId(1);
+		pageListVO.setId(UUID.randomUUID().toString());
 		pageListVO.setType(ACCTYPE.GRID.name());
 		pageList.add(pageListVO);
 		
 		pageListVO = new PageListVO();
 		pageListVO.setName("Transactions Grid");
-		pageListVO.setId(2);
+		pageListVO.setId(UUID.randomUUID().toString());
 		pageListVO.setType(ACCTYPE.GRID.name());
 		pageList.add(pageListVO);
 		
 		pageListVO = new PageListVO();
 		pageListVO.setName("Topology View");
-		pageListVO.setId(3);
+		pageListVO.setId(UUID.randomUUID().toString());
 		pageListVO.setType(ACCTYPE.GRID.name());
 		pageList.add(pageListVO);
 		
 		pageListVO = new PageListVO();
 		pageListVO.setName("Global Config");
-		pageListVO.setId(4);
+		pageListVO.setId(UUID.randomUUID().toString());
 		pageListVO.setType(ACCTYPE.GRID.name());
 		pageList.add(pageListVO);
 		

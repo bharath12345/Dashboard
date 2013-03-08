@@ -4,8 +4,8 @@ define(["dojo/_base/declare"],
 
         var AbstractView = declare("dashboard.abstract.AbstractView", null, {
 
-            renderView: function(uuid, container) {
-
+            launchInNewWindow: function() {
+                // all inherited classes should override this
             }
 
         });

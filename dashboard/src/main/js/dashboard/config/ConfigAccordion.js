@@ -14,19 +14,19 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/confi
             responseHandles:[],
 
             renderAccordion: function(data) {
-                // keep in mind that the superclass's method will be called after this method is finished due to the
-                // custom chain configuration
+                // the superclass's overridden method will be called after this method due to custom chain configuration
                 console.log("in config render accordion. data = " + dojo.toJson(data));
                 this.data = data.pageListVO;
                 this.param = data.param;
             },
 
-            showPageConfig: function(id, name) {
+            showPageConfig: function(id, name, newWindow) {
                 console.log("show page config called with id = " + id);
                 var viewMeta = {
                     id:id,
                     name: name,
                     type:CONFIGCONSTANTS.TYPE.PAGECONFIG,
+                    newWindow: newWindow,
                     custom:[]
                 };
                 var actionClass;
