@@ -1,11 +1,11 @@
 define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/GridContainer",
-    "dojo/i18n!noc/nls/noc", "dashboard/noc/NocUtility", "dashboard/noc/NocConstants", "dashboard/noc/Logger"],
+    "dojo/i18n!dashboard/noc/nls/noc", "dashboard/noc/NocUtility", "dashboard/noc/NocConstants", "dashboard/noc/Logger"],
 
     function (require, declare, i18n, TitlePane, GridContainer, i18nString, NocUtility, NOCCONSTANTS, Logger) {
 
         var IncidentPage = declare(NOCCONSTANTS.CLASSNAME.PAGES.INCIDENTPAGE, null, {
 
-            loadPage:function (pageNumber, pageName) {
+            loadPage:function (pageName) {
 
                 IncidentPage.CP = noc.PageLoader.CpCenter[pageNumber];
 

@@ -1,6 +1,6 @@
 define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/GridContainer",
     "dojo/_base/lang",
-    "dojo/i18n!noc/nls/noc", "noc/timeSeries/OnlineTxTimeSeries", "noc/timeSeries/BatchTxTimeSeries",
+    "dojo/i18n!dashboard/noc/nls/noc", "noc/timeSeries/OnlineTxTimeSeries", "noc/timeSeries/BatchTxTimeSeries",
     "noc/timeSeries/CompStaticTimeSeries", "dashboard/noc/NocConstants", "dashboard/noc/NocUtility", "dashboard/noc/Logger"],
 
     function (require, declare, i18n, TitlePane, GridContainer, lang, i18nString,

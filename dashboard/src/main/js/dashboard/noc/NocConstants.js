@@ -1,4 +1,4 @@
-define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/config", "dashboard/DashboardConstants"],
+define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "dashboard/DashboardConstants"],
 
     function (require, declare, i18n, i18nString, DBCONSTANTS) {
 

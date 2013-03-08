@@ -1,4 +1,4 @@
-define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "dojo/request/xhr", "dojo/keys", "dojo/on", "dijit/Dialog",
+define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "dojo/request/xhr", "dojo/keys", "dojo/on", "dijit/Dialog",
     "dashboard/noc/NocConstants", "dashboard/noc/Logger"],
 
     function (declare, i18n, i18nString, xhr, keys, on, Dialog, NOCCONSTANTS, Logger) {

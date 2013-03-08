@@ -4,8 +4,17 @@ define(["dojo/_base/declare"],
 
         var AbstractView = declare("dashboard.abstract.AbstractView", null, {
 
-            launchInNewWindow: function() {
-                // all inherited classes should override this
+            "-chains-":{
+                createNewWindowConfigDom:"after"
+            },
+
+            getTopBorderContainer:function () {
+                return dashboard.TopBc;
+            },
+
+            createNewWindowConfigDom:function () {
+                this.createTopContainers(document.body);
+                this.createMast();
             }
 
         });

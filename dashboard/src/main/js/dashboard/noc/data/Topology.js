@@ -1,4 +1,4 @@
-define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc"],
+define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc"],
 
     function (require, declare, i18n, i18nString) {
 

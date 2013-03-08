@@ -1,4 +1,4 @@
-define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", "dashboard/logger/Logger",
+define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/config", "dashboard/logger/Logger",
     "dijit/layout/ContentPane", "dijit/layout/BorderContainer",
     "dashboard/abstract/AbstractView", "dashboard/WindowManager", "dashboard/abstract/AbstractContainer"],
 
@@ -22,10 +22,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                     return dashboard.DashboardContainer.CpCenterInner;
                 }
                 return dashboard.config.CpCenter;
-            },
-
-            getTopBorderContainer: function() {
-                return dashboard.TopBc;
             },
 
             createNewWindowConfigDom: function() {

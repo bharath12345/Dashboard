@@ -1,5 +1,5 @@
 define(['require', "dojo/_base/declare", "dojo/i18n", 'dgrid/Grid', "dojo/request/xhr", "dojo/_base/lang",
-    "dojo/i18n!noc/nls/noc", "dashboard/noc/NocUtility", "dashboard/noc/NocConstants", "dashboard/noc/Logger"],
+    "dojo/i18n!dashboard/noc/nls/noc", "dashboard/noc/NocUtility", "dashboard/noc/NocConstants", "dashboard/noc/Logger"],
 
     function (require, declare, i18n, Grid, xhr, lang, i18nString, NocUtility, NOCCONSTANTS, Logger) {
 

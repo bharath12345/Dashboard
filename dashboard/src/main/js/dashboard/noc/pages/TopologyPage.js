@@ -1,6 +1,6 @@
 define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/GridContainer",
     "dijit/layout/ContentPane",
-    "dojo/i18n!noc/nls/noc", "dashboard/noc/NocUtility", "dashboard/noc/NocConstants", "dashboard/noc/Logger"],
+    "dojo/i18n!dashboard/noc/nls/noc", "dashboard/noc/NocUtility", "dashboard/noc/NocConstants", "dashboard/noc/Logger"],
 
     function (require, declare, i18n, TitlePane, GridContainer, ContentPane, i18nString, NocUtility, NOCCONSTANTS, Logger) {
 

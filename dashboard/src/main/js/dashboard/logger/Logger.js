@@ -1,6 +1,6 @@
-define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!noc/nls/noc", "dojo/request/xhr"],
+define(["dojo/_base/declare", "dojo/request/xhr"],
 
-    function (declare, i18n, i18nString, xhr) {
+    function (declare, xhr) {
 
         var Logger = declare("noc.Logger", null, {
 
