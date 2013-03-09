@@ -1,10 +1,10 @@
 define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/GridContainer",
-    "dijit/layout/TabContainer", "dijit/layout/ContentPane", "dijit/form/Button", "dijit/Toolbar",
+    "dijit/layout/TabContainer", "dijit/layout/ContentPane", "dijit/Toolbar", "dojo/on", "dojo/_base/lang",
     "dashboard/logger/Logger", "dashboard/config/ConfigView",
-    "dashboard/config/ConfigUtility", "dashboard/config/ConfigConstants", "dojo/i18n!dashboard/config/nls/config"],
+    "dashboard/config/ConfigConstants", "dojo/i18n!dashboard/config/nls/config", "dashboard/helper/ButtonHelper"],
 
-    function (declare, i18n, TitlePane, GridContainer, TabContainer, ContentPane, Button, Toolbar,
-              Logger, ConfigView, ConfigUtility, CONFIGCONSTANTS, i18nString) {
+    function (declare, i18n, TitlePane, GridContainer, TabContainer, ContentPane, Toolbar, on, lang,
+              Logger, ConfigView, CONFIGCONSTANTS, i18nString, ButtonHelper) {
 
         /*
                 A New object of RenderAttributes is created on the click of any link in the Accordion.
@@ -147,23 +147,15 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
                 var toolbar = new Toolbar({});
                 dashboard.CpMenu.addChild(toolbar);
 
-                var button = new Button({
-                    showLabel: true,
-                    label: "Save",
-                    iconClass:'dijitEditorIcon dijitEditorIconSave',
-                    onClick: function(){
-                        RenderAttributes.PAGEOBJ.saveValues();
-                    }
+                var button = ButtonHelper.getSave();
+                on(button, "click", function() {
+                    RenderAttributes.PAGEOBJ.saveValues();
                 });
                 toolbar.addChild(button);
 
-                button = new Button({
-                    showLabel: true,
-                    label: "Pop Out",
-                    iconClass:'dijitEditorIcon newViewWindowToolbarButton',
-                    onClick: function(){
-                        ConfigView.launchNewWindowConfigPane(RenderAttributes.ID, RenderAttributes.NAME, RenderAttributes.TYPE);
-                    }
+                button = ButtonHelper.getPopUpWindow();
+                on(button, "click", function() {
+                    ConfigView.launchNewWindowConfigPane(RenderAttributes.ID, RenderAttributes.NAME, RenderAttributes.TYPE);
                 });
                 toolbar.addChild(button);
             }

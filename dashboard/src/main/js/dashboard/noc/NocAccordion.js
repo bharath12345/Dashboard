@@ -19,8 +19,10 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
                 this.param = data.param;
             },
 
-            showPageConfig: function(id, name, newWindow) {
+            showPageConfig: function(id, name, type, newWindow) {
                 console.log("show page config called with id = " + id + " and name = " + name);
+                var nocView = new NocView();
+                nocView.loadMenu(id, name, type);
                 switch(name) {
                     case this.ALERTSGRID:
                         require(["dashboard/noc/pages/IncidentPage"], function (IncidentPage) {

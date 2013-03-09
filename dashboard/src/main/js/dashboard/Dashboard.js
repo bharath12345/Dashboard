@@ -36,10 +36,10 @@ define([ 'dojo/has', 'require' ], function (has, require) {
          * plugin functionality.
          */
         require(['dashboard/DashboardView', 'dashboard/DashboardAccordion',
-            "dashboard/DashboardCallbacks", "dashboard/abstract/AbstractUtility", 'dojo/domReady!' ],
+            "dashboard/DashboardCallbacks", "dashboard/helper/Helper", 'dojo/domReady!' ],
 
-            function (DashboardView, DashboardAccordion, DashboardCallbacks, AbstractUtility) {
-                AbstractUtility.showLoading();
+            function (DashboardView, DashboardAccordion, DashboardCallbacks, Helper) {
+                Helper.showLoading();
 
                 DashboardCallbacks.initialize();
 

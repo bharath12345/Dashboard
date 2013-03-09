@@ -20,22 +20,15 @@ define([ 'dojo/has', 'require' ], function (has, require) {
 
     if (has('host-browser')) {
 
-        require(["dojo/io-query",
-            'dashboard/config/ConfigAccordion', "dashboard/config/ConfigView", "dashboard/abstract/AbstractUtility",
+        require(['dashboard/config/ConfigAccordion', "dashboard/config/ConfigView", "dashboard/helper/Helper",
             'dojo/domReady!' ],
 
-            function (ioQuery, ConfigAccordion, ConfigView, AbstractUtility) {
-                AbstractUtility.showLoading();
+            function (ConfigAccordion, ConfigView, Helper) {
+                Helper.showLoading();
 
                 var configView = new ConfigView(true);
-                configView.createDom();
-
-                var uri = document.URL;
-                var query = uri.substring(uri.indexOf("?") + 1, uri.length);
-                var queryObject = ioQuery.queryToObject(query);
-
                 var configAccordion = new ConfigAccordion();
-                configAccordion.showPageConfig(queryObject.viewId, queryObject.viewName, true);
+                Helper.createDomAndShowPage(configView, configAccordion);
             });
     }
     else {

@@ -1,7 +1,7 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/config", "dojo/request/xhr", "dijit/Dialog",
-    "dashboard/config/ConfigConstants", "dashboard/logger/Logger", "dashboard/abstract/AbstractUtility"],
+    "dashboard/config/ConfigConstants", "dashboard/logger/Logger", "dashboard/helper/Helper"],
 
-    function (declare, i18n, i18nString, xhr, Dialog, CONFIGCONSTANTS, Logger, AbstractUtility) {
+    function (declare, i18n, i18nString, xhr, Dialog, CONFIGCONSTANTS, Logger, Helper) {
 
         var ConfigUtility = declare(CONFIGCONSTANTS.CLASSNAME.UTILITY, null, {});
 
@@ -12,7 +12,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/confi
                 handleAs:"json",
                 method:"POST",
                 query:options,
-                headers:AbstractUtility.JSON_HEADER
+                headers:Helper.JSON_HEADER
             }).then(function (data) {
                     // Do something with the handled data
                     ConfigUtility.handleResponse(data);

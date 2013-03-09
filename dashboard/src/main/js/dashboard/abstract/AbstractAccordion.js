@@ -14,7 +14,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/on", "dojo/_base/lang", "dashbo
 
                 for(var i=0;i<this.data.length; i++) {
                     try {
-                        var a = this.getNewA(this.data[i].id, this.data[i].name);
+                        var a = this.getNewA(this.data[i].id, this.data[i].name, this.data[i].type);
                         AbstractAccordion.LINKMAP[this.data[i].id] = a;
                         on(a, "click", lang.hitch(this, "renderPageAttrib"));
 
@@ -34,7 +34,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/on", "dojo/_base/lang", "dashbo
             renderPageAttrib: function(event) {
                 dashboard.STANDBY.show();
                 this.setMarker(event.target.id);
-                this.showPageConfig(event.target.id, event.target.name, false); // this is a upwards call to inherting class
+                this.showPageConfig(event.target.id, event.target.name, event.target.type, false); // this is a upwards call to inherting class
             },
 
             setMarker: function(pageId) {
@@ -44,12 +44,13 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/on", "dojo/_base/lang", "dashbo
                 AbstractAccordion.LINKMAP[pageId].style.color = "rgb(0, 51, 102)";
             },
 
-            getNewA:function (id, name) {
+            getNewA:function (id, name, type) {
                 var a = dojo.create("a");
                 a.className = "document";
                 a.href = name;
                 a.id = id;
                 a.name = name;
+                a.type = type;
                 a.onclick = function () {return false;};
                 return a;
             },

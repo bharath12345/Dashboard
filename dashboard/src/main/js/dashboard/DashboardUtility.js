@@ -1,7 +1,7 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", "dashboard/logger/Logger", "dojo/request/xhr", "dijit/Dialog",
-    "dashboard/DashboardConstants", "dashboard/DashboardCallbacks", "dashboard/abstract/AbstractUtility"],
+    "dashboard/DashboardConstants", "dashboard/DashboardCallbacks", "dashboard/helper/Helper"],
 
-    function (declare, i18n, i18nString, Logger, xhr, Dialog, DBCONSTANTS, DashboardCallbacks, AbstractUtility) {
+    function (declare, i18n, i18nString, Logger, xhr, Dialog, DBCONSTANTS, DashboardCallbacks, Helper) {
 
         var Utility = declare(DBCONSTANTS.CLASSNAME.DASHBOARD.UTILITY, null, {});
 
@@ -12,7 +12,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                 handleAs:"json",
                 method:"POST",
                 query:options,
-                headers:AbstractUtility.JSON_HEADER
+                headers:Helper.JSON_HEADER
             }).then(function (data) {
                     // Do something with the handled data
                     Utility.handleResponse(data);

@@ -20,7 +20,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/confi
                 this.param = data.param;
             },
 
-            showPageConfig: function(id, name, newWindow) {
+            showPageConfig: function(id, name, type, newWindow) {
                 console.log("show page config called with id = " + id);
                 var viewMeta = {
                     id:id,

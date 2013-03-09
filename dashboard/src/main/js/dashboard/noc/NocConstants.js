@@ -58,10 +58,6 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/n
         NocConstants.CLASSNAME.WIDGETS.CONFIG = {};
         NocConstants.CLASSNAME.WIDGETS.CONFIG.APPINCIDENTGRID = "dashboard.noc.Widgets.Config.AppIncidentGrid";
 
-        NocConstants.CLASSNAME.LOGIN = "login/Login";
-        NocConstants.CLASSNAME.UTILITY = "dashboard.noc.Utility";
-        NocConstants.CLASSNAME.VIEWMANAGER = "dashboard.noc.ViewManager";
-
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // VARIOUS TYPES FOR SWITCHING IN ViewManager
         NocConstants.TYPE = {};
