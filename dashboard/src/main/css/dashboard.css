@@ -1,4 +1,16 @@
 /* ----------------- Masthead -----------------*/
+.dijitToolbar {
+    border: 1px solid #B5BCC7 !important;
+}
+
+.dijitContentPane {
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0 !important;
+}
+
+/* ----------------- Masthead -----------------*/
 .masthead
 {
     background-color: #036;

@@ -31,8 +31,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
 
                 DashboardContainer.CpMenu = new ContentPane({
                     region:"top",
-                    splitter:false,
-                    style: "top:0;left:0;height:35px;"
+                    splitter:false
                 });
 
                 DashboardContainer.CpLeft = new ContentPane({
@@ -52,13 +51,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                 DashboardContainer.CenterBc.addChild(DashboardContainer.CpCenter);
                 DashboardContainer.CenterBc.startup();
                 DashboardContainer.CenterBc.resize();
-
-                DashboardContainer.CpMenu.domNode.style.top = 0;
-                DashboardContainer.CpMenu.domNode.style.left = 0;
-
-                this.removeBoderPadding(DashboardContainer.CpMenu.domNode);
-                this.removeBoderPadding(DashboardContainer.CpLeft.domNode);
-                this.removeBoderPadding(DashboardContainer.CpCenter.domNode);
 
                 DashboardContainer.CenterBc.resize();
                 dashboard.TopBc.resize();

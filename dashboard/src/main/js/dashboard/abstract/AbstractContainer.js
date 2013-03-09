@@ -34,28 +34,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
                 dashboard.TopBc.addChild(dashboard.CpTopCenter);
                 dashboard.TopBc.startup();
 
-                dashboard.CpMast.domNode.style.padding = "0";
-                this.removeBoderPadding(dashboard.CpTopCenter.domNode);
                 dashboard.TopBc.resize();
-
-                this.removeTopAndExpand5(dashboard.CpMast.domNode);
-                this.removeLeftAndExpand5(dashboard.CpMast.domNode);
-                dashboard.TopBc.resize();
-            },
-
-            removeBoderPadding: function (domNode) {
-                domNode.style.borderStyle = "none";
-                domNode.style.padding = "0";
-            },
-
-            removeTopAndExpand5: function(domNode) {
-                domNode.style.top = "0";
-                domNode.style.height+=5;
-            },
-
-            removeLeftAndExpand5: function(domNode) {
-                domNode.style.left = "0";
-                domNode.style.width+=5;
             },
 
             createMast: function() {
