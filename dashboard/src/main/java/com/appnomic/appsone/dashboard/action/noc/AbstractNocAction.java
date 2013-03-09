@@ -1,4 +1,4 @@
-package com.appnomic.appsone.dashboard.action;
+package com.appnomic.appsone.dashboard.action.noc;
 
 import java.util.Map;
 

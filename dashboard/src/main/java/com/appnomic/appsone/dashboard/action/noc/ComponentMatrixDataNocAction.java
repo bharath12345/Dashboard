@@ -1,4 +1,4 @@
-package com.appnomic.appsone.dashboard.action;
+package com.appnomic.appsone.dashboard.action.noc;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,11 +24,11 @@ import com.appnomic.service.ComponentDataService;
 
 @ParentPackage("json-default")
 @Namespace("/component")
-public class ComponentMatrixDataAction extends AbstractNocAction {
+public class ComponentMatrixDataNocAction extends AbstractNocAction {
 	
 	ComponentDataVO componentDataVO;
 	
-	public ComponentMatrixDataAction() {
+	public ComponentMatrixDataNocAction() {
 		setDummyData();
 	}
 	

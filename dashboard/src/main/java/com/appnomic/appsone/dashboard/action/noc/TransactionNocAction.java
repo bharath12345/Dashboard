@@ -1,4 +1,4 @@
-package com.appnomic.appsone.dashboard.action;
+package com.appnomic.appsone.dashboard.action.noc;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,6 +12,7 @@ import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 
+import com.appnomic.appsone.dashboard.action.TimeUtility;
 import com.appnomic.appsone.dashboard.config.TransactionGridConfigManager;
 import com.appnomic.appsone.dashboard.config.entity.TransactionGridEntity;
 import com.appnomic.appsone.dashboard.viewobject.availability.ClusterVO;
@@ -46,7 +47,7 @@ import com.appnomic.service.TransactionDataService;
 @SuppressWarnings("serial")
 @ParentPackage("json-default")
 @Namespace("/transaction")
-public class TransactionAction extends AbstractNocAction  {
+public class TransactionNocAction extends AbstractNocAction  {
 
 	private ApplicationDataService applicationDataService;
 	private TransactionDataService transactionDataService;
@@ -102,7 +103,7 @@ public class TransactionAction extends AbstractNocAction  {
 		this.applicationVO = applicationVO;
 	}
 
-	public TransactionAction() {
+	public TransactionNocAction() {
 	}
 	
 	public Map<String, String[]> getParam() {

@@ -1,4 +1,4 @@
-package com.appnomic.appsone.dashboard.action;
+package com.appnomic.appsone.dashboard.action.noc;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -13,6 +13,7 @@ import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Action;
 
+import com.appnomic.appsone.dashboard.action.TimeUtility;
 import com.appnomic.appsone.dashboard.config.AlertGridConfigManager;
 import com.appnomic.appsone.dashboard.config.entity.AlertGridEntity;
 import com.appnomic.appsone.dashboard.viewobject.alert.ApplicationDataVO;
@@ -32,7 +33,7 @@ import com.appnomic.service.AlertDataService;
 
 @ParentPackage("json-default")
 @Namespace("/alert")
-public class AlertInfoAction extends AbstractNocAction  {
+public class AlertInfoNocAction extends AbstractNocAction  {
 	
 	private Map<String, String[]> param;
 	
@@ -87,7 +88,7 @@ public class AlertInfoAction extends AbstractNocAction  {
 		this.applicationDataVO = applicationDataVO;
 	}
 
-	public AlertInfoAction() {
+	public AlertInfoNocAction() {
 	}
 	
 	public String nocAction() {		

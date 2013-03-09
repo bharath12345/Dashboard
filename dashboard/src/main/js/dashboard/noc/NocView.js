@@ -1,8 +1,8 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", "dashboard/logger/Logger",
     "dijit/layout/ContentPane", "dijit/layout/BorderContainer",
-    "dashboard/abstract/AbstractView", "dashboard/WindowManager"],
+    "dashboard/abstract/AbstractView", "dashboard/WindowManager", "dashboard/main/loader"],
 
-    function (declare, i18n, i18nString, Logger, ContentPane, BorderContainer, AbstractView, WindowManager) {
+    function (declare, i18n, i18nString, Logger, ContentPane, BorderContainer, AbstractView, WindowManager, loader) {
 
         var NocView = declare("dashboard.noc.NocView", AbstractView, {
 
@@ -51,7 +51,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
         NocView.launchNewWindowConfigPane = function(id, name, type) {
             // launch the child window
             var wm = new WindowManager();
-            wm.getNewWindow(id, name, type);
+            wm.getNewWindow(id, name, type, pageTypes.NOC);
         };
 
         return NocView;

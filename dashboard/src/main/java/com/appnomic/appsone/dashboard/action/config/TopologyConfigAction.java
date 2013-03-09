@@ -7,7 +7,7 @@ import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 
-import com.appnomic.appsone.dashboard.action.AbstractNocAction;
+import com.appnomic.appsone.dashboard.action.noc.AbstractNocAction;
 
 
 @ParentPackage("json-default")

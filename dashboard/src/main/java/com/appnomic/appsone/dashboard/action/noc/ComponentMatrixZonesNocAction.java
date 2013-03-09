@@ -1,4 +1,4 @@
-package com.appnomic.appsone.dashboard.action;
+package com.appnomic.appsone.dashboard.action.noc;
 
 import java.util.HashSet;
 import java.util.List;
@@ -17,7 +17,7 @@ import com.google.gson.Gson;
 
 @ParentPackage("json-default")
 @Namespace("/component")
-public class ComponentMatrixZones extends AbstractNocAction {
+public class ComponentMatrixZonesNocAction extends AbstractNocAction {
 
 	private ComponentMatrixZonesVO componentMatrixZonesVO = null;
 	
@@ -31,7 +31,7 @@ public class ComponentMatrixZones extends AbstractNocAction {
 		this.componentDataService = componentDataService;
 	}
 
-	public ComponentMatrixZones() {
+	public ComponentMatrixZonesNocAction() {
 		setDummyData();
 	}
 	

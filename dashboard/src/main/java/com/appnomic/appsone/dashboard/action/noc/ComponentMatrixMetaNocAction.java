@@ -1,4 +1,4 @@
-package com.appnomic.appsone.dashboard.action;
+package com.appnomic.appsone.dashboard.action.noc;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -20,9 +20,9 @@ import com.appnomic.service.ComponentDataService;
 
 @ParentPackage("json-default")
 @Namespace("/component")
-public class ComponentMatrixMetaAction extends AbstractNocAction {
+public class ComponentMatrixMetaNocAction extends AbstractNocAction {
 	
-	public ComponentMatrixMetaAction() {
+	public ComponentMatrixMetaNocAction() {
 		setDummyData();
 	}
 	

@@ -7,6 +7,8 @@ import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Action;
 
+import com.appnomic.appsone.dashboard.action.noc.AbstractNocAction;
+
 @ParentPackage("json-default")
 @Namespace("/noc")
 public class RequestHandlerAction extends AbstractNocAction  {

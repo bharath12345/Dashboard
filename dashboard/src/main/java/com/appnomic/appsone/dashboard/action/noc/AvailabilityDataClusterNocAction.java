@@ -1,4 +1,4 @@
-package com.appnomic.appsone.dashboard.action;
+package com.appnomic.appsone.dashboard.action.noc;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,7 +35,7 @@ import com.google.gson.Gson;
 
 @ParentPackage("json-default")
 @Namespace("/availability")
-public class AvailabilityDataClusterAction extends AbstractNocAction {
+public class AvailabilityDataClusterNocAction extends AbstractNocAction {
 
 	private ClusterDataService clusterDataService;
 	private ComponentDataService componentDataService;
@@ -61,7 +61,7 @@ public class AvailabilityDataClusterAction extends AbstractNocAction {
 		this.clusterDataVO = clusterDataVO;
 	}
 
-	public AvailabilityDataClusterAction() {
+	public AvailabilityDataClusterNocAction() {
 		//setDummyData();
 	}
 

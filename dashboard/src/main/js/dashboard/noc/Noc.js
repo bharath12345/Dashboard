@@ -35,10 +35,18 @@ define([ 'dojo/has', 'require' ], function (has, require) {
          * require just `dojo/domReady`, it would load that module just like any other module, without the special
          * plugin functionality.
          */
-        require(['dashboard/noc/PageLoader', 'dashboard/noc/ViewManager', 'dashboard/logger/Logger', "dashboard/noc/NocUtility",
+        require(["dojo/io-query", "dashboard/noc/NocView", 'dashboard/noc/PageLoader', 'dashboard/noc/ViewManager', 'dashboard/logger/Logger', "dashboard/noc/NocUtility",
             'dojo/domReady!' ],
 
-            function (PageLoader, ViewManager, Logger, Utility) {
+            function (ioQuery, NocView, PageLoader, ViewManager, Logger, Utility) {
+                var nocView = new NocView();
+                nocView.createDom();
+
+                var uri = document.URL;
+                var query = uri.substring(uri.indexOf("?") + 1, uri.length);
+                var queryObject = ioQuery.queryToObject(query);
+
+
                 Logger.initialize();
                 new ViewManager();
                 Utility.InitKeyControls();

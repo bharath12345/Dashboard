@@ -20,11 +20,11 @@ define([ 'dojo/has', 'require' ], function (has, require) {
 
     if (has('host-browser')) {
 
-        require(['dojox/widget/Standby', "dojo/io-query",
-            'dashboard/config/ConfigConstants', 'dashboard/config/ConfigAccordion', "dashboard/config/ConfigView", "dashboard/abstract/AbstractUtility",
+        require(["dojo/io-query",
+            'dashboard/config/ConfigAccordion', "dashboard/config/ConfigView", "dashboard/abstract/AbstractUtility",
             'dojo/domReady!' ],
 
-            function (Standby, ioQuery, CONFIGCONSTANTS, ConfigAccordion, ConfigView, AbstractUtility) {
+            function (ioQuery, ConfigAccordion, ConfigView, AbstractUtility) {
                 AbstractUtility.showLoading();
 
                 var configView = new ConfigView(true);

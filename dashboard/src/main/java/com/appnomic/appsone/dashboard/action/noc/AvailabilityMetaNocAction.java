@@ -1,4 +1,4 @@
-package com.appnomic.appsone.dashboard.action;
+package com.appnomic.appsone.dashboard.action.noc;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,7 +31,7 @@ import com.appnomic.service.ComponentDataService;
  */
 @ParentPackage("json-default")
 @Namespace("/availability")
-public class AvailabilityMetaAction extends AbstractNocAction  {
+public class AvailabilityMetaNocAction extends AbstractNocAction  {
 
 	private ComponentDataService componentDataService;
 	private ClusterDataService clusterDataService;
@@ -85,7 +85,7 @@ public class AvailabilityMetaAction extends AbstractNocAction  {
 	// Best - Dont modify this variable name unless it is necessary
 	private ComponentVO [] componentVO = null;
 	
-	public AvailabilityMetaAction() {
+	public AvailabilityMetaNocAction() {
 		//setDummyData();
 	}
 	

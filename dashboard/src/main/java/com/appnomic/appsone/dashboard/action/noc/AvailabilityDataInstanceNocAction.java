@@ -1,4 +1,4 @@
-package com.appnomic.appsone.dashboard.action;
+package com.appnomic.appsone.dashboard.action.noc;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +28,7 @@ import com.google.gson.Gson;
 
 @ParentPackage("json-default")
 @Namespace("/availability")
-public class AvailabilityDataInstanceAction extends AbstractNocAction  {
+public class AvailabilityDataInstanceNocAction extends AbstractNocAction  {
 	
 	private CompInstanceDataVO compInstanceDataVO;
 	private Map<String, String[]> param;
@@ -50,7 +50,7 @@ public class AvailabilityDataInstanceAction extends AbstractNocAction  {
 		this.compInstanceDataVO = compInstanceDataVO;
 	}
 
-	public AvailabilityDataInstanceAction() {
+	public AvailabilityDataInstanceNocAction() {
 		setDummyData();
 	}
 		
