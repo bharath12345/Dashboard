@@ -8,10 +8,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
                 createDom:"after"
             },
 
-            getTopBorderContainer:function () {
-                return dashboard.TopBc;
-            },
-
             createDom:function () {
                 this.createTopContainers(document.body);
                 this.createMast();

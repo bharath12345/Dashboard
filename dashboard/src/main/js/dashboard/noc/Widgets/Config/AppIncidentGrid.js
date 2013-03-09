@@ -25,7 +25,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
                 value = 18;
             }
             console.log("font size retrived = " + value);
-            var cell = dojo.query(".dgrid-cell, .label", IncidentPage.CP.domNode);
+            var cell = dojo.query(".dgrid-cell, .label", dashboard.CpCenterInner.domNode);
             for (var i = 0; i < cell.length; i++) {
                 cell[i].style.fontSize = value;
                 cell[i].style.verticalAlign = "middle";

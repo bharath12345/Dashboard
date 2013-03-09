@@ -25,9 +25,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
                     RenderAttributes.NEWWINDOW = true;
                 }
 
-                var configView = new ConfigView(RenderAttributes.NEWWINDOW);
-                var topBorderContainer = configView.getTopBorderContainer();
-
                 var tc = this.createTabs();
                 this.createTitlePaneGrid(pageObj.getAttrib(data), pageObj.getAttribIgnoreList());
                 this.createToolbarButtons();
@@ -36,11 +33,11 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
                 RenderAttributes.PAGEOBJ = pageObj;
                 pageObj.renderAttributes(data);
 
-                this.cleanupRendering(topBorderContainer, tc);
+                this.cleanupRendering(tc);
                 dashboard.STANDBY.hide();
             },
 
-            cleanupRendering: function(topBorderContainer, tc) {
+            cleanupRendering: function(tc) {
                 // make the tab buttons larger
                 var innerPane = dojo.query(".dijitTabInner", tc.domNode);
                 for (var i = 0; i < innerPane.length; i++) {
@@ -52,7 +49,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
                 dashboard.CpCenterInner.domNode.style.border=0;
 
                 dashboard.CpMenu.domNode.style.padding=0;
-                topBorderContainer.resize();
+                dashboard.TopBc.resize();
             },
 
             createTabs: function() {

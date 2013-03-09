@@ -5,12 +5,10 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
 
         var IncidentPage = declare(NOCCONSTANTS.CLASSNAME.PAGES.INCIDENTPAGE, null, {
 
-            loadPage:function (pageName, viewObject) {
+            loadPage:function (pageName) {
 
-                IncidentPage.CP = dashboard.CpCenterInner;
-
-                var paneWidth = IncidentPage.CP.w;
-                var paneHeight = IncidentPage.CP.h;
+                var paneWidth = dashboard.CpCenterInner.w;
+                var paneHeight = dashboard.CpCenterInner.h;
                 var styleString = "width: " + paneWidth + "; height: " + paneHeight + ";"
 
                 var titlePane = new TitlePane({
@@ -23,7 +21,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
 
                 var gridContainer = new GridContainer({nbZones:1, isAutoOrganized:true,
                     style:"width: 100%; height: 100%;"});
-                IncidentPage.CP.addChild(gridContainer);
+                dashboard.CpCenterInner.addChild(gridContainer);
                 gridContainer.disableDnd();
 
                 gridContainer.addChild(titlePane, 0);
@@ -38,13 +36,12 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                 }
 
                 var xpos=0, ypos=0;
-
                 var viewMeta = {
                     id:pageName,
                     name: pageName,
                     type: NOCCONSTANTS.TYPE.INCIDENT,
                     subtype: NOCCONSTANTS.SUBTYPE.INCIDENT.META,
-                    dimensions:[IncidentPage.CP.w, IncidentPage.CP.h],
+                    dimensions:[dashboard.CpCenterInner.w, dashboard.CpCenterInner.h],
                     position:[xpos,ypos],
                     custom: []
                 };
@@ -56,8 +53,6 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
 
         // static variables of this class
         IncidentPage.LOG = Logger.addTimer(new Logger(NOCCONSTANTS.CLASSNAME.PAGES.AVAILABILITYPAGE));
-
-        IncidentPage.CP = null;
 
         return IncidentPage;
     });

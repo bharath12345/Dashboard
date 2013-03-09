@@ -116,7 +116,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                 console.log("input = " + dojo.toJson(input));
 
                 if(input.applicationVO == null || input.applicationVO.length == 0) {
-                    noc.pages.TransactionGrid.CP.domNode.innerHTML="No Applications and Transactions configured for display on the dashboard";
+                    dashboard.CpCenterInner.domNode.innerHTML="No Applications and Transactions configured for display on the dashboard";
                     return;
                 }
 
@@ -172,7 +172,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
 
                 var gridContainer = new GridContainer({nbZones:nbZ, isAutoOrganized:true,
                     style:"width: 100%; height: 100%;"});
-                noc.pages.TransactionGrid.CP.addChild(gridContainer);
+                dashboard.CpCenterInner.addChild(gridContainer);
                 gridContainer.disableDnd();
 
                 var j = 0, k = 0;

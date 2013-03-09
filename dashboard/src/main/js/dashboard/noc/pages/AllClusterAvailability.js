@@ -5,18 +5,15 @@ define(['require', "dojo/_base/declare", "dojo/i18n",
 
         var AllClusterAvailability = declare(NOCCONSTANTS.CLASSNAME.PAGES.ALLCLUSTERAVAILABILITY, null, {
 
-            loadPage:function (pageNumber, pageName) {
-
-                AllClusterAvailability.CP = noc.PageLoader.CpCenter[pageNumber];
+            loadPage:function (pageName) {
 
                 var xpos=0, ypos=0;
-
                 var viewMeta = {
                     id:0,
                     name: pageName,
                     type: NOCCONSTANTS.TYPE.AVAILABILITY,
                     subtype: NOCCONSTANTS.SUBTYPE.AVAILABILITY.ALLCLUSTER,
-                    dimensions:[AllClusterAvailability.CP.w, AllClusterAvailability.CP.h],
+                    dimensions:[dashboard.CpCenterInner.w, dashboard.CpCenterInner.h],
                     position:[xpos,ypos],
                     custom: []
                 };
@@ -28,8 +25,6 @@ define(['require', "dojo/_base/declare", "dojo/i18n",
 
         // static variables of this class
         AllClusterAvailability.LOG = Logger.addTimer(new Logger(NOCCONSTANTS.CLASSNAME.PAGES.ALLCLUSTERAVAILABILITY));
-
-        AllClusterAvailability.CP = null;
 
         return AllClusterAvailability;
     });

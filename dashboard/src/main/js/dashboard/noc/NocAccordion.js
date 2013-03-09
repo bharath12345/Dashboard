@@ -21,23 +21,22 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
 
             showPageConfig: function(id, name, newWindow) {
                 console.log("show page config called with id = " + id + " and name = " + name);
-                var nocView = new NocView(newWindow);
                 switch(name) {
                     case this.ALERTSGRID:
                         require(["dashboard/noc/pages/IncidentPage"], function (IncidentPage) {
-                            new IncidentPage().loadPage("IncidentGrid", nocView);
+                            new IncidentPage().loadPage("IncidentGrid");
                         });
                         break;
 
                     case this.CLUSTERSGRID:
                         require(["dashboard/noc/pages/AllClusterAvailability"], function (AllClusterAvailability) {
-                            new AllClusterAvailability().loadPage("AllClusterAvailability", nocView);
+                            new AllClusterAvailability().loadPage("AllClusterAvailability");
                         });
                         break;
 
                     case this.TRANSACTIONSGRID:
                         require(["dashboard/noc/pages/TransactionGrid"], function (TransactionGrid) {
-                            new TransactionGrid().loadPage(pageNum, "TransactionGrid", nocView);
+                            new TransactionGrid().loadPage("TransactionGrid");
                         });
                         break;
 
