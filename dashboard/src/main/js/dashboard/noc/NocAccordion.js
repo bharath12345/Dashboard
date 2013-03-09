@@ -1,14 +1,13 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "dashboard/logger/Logger",
-    "dashboard/noc/NocUtility", "dashboard/noc/NocConstants", "dashboard/abstract/AbstractAccordion"],
+    "dashboard/noc/NocUtility", "dashboard/noc/NocConstants", "dashboard/abstract/AbstractAccordion", "dashboard/noc/NocView"],
 
-    function (declare, i18n, i18nString, Logger, NocUtility, NOCCONSTANTS, AbstractAccordion) {
+    function (declare, i18n, i18nString, Logger, NocUtility, NOCCONSTANTS, AbstractAccordion, NocView) {
 
         var NocAccordion = declare(NOCCONSTANTS.CLASSNAME.ACCORDION, AbstractAccordion, {
 
             ALERTSGRID: "Alerts Grid",
             CLUSTERSGRID: "Clusters Grid",
             TRANSACTIONSGRID: "Transactions Grid",
-            TOPOLOGYVIEW: "Topology View",
 
             responseHandles:[],
 
@@ -21,31 +20,37 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
             },
 
             showPageConfig: function(id, name, newWindow) {
-                console.log("show page config called with id = " + id);
+                console.log("show page config called with id = " + id + " and name = " + name);
+                var nocView = new NocView(newWindow);
+                switch(name) {
+                    case this.ALERTSGRID:
+                        require(["dashboard/noc/pages/IncidentPage"], function (IncidentPage) {
+                            new IncidentPage().loadPage("IncidentGrid", nocView);
+                        });
+                        break;
 
+                    case this.CLUSTERSGRID:
+                        require(["dashboard/noc/pages/AllClusterAvailability"], function (AllClusterAvailability) {
+                            new AllClusterAvailability().loadPage("AllClusterAvailability", nocView);
+                        });
+                        break;
+
+                    case this.TRANSACTIONSGRID:
+                        require(["dashboard/noc/pages/TransactionGrid"], function (TransactionGrid) {
+                            new TransactionGrid().loadPage(pageNum, "TransactionGrid", nocView);
+                        });
+                        break;
+
+                    default:
+                        console.log("Unknown page id = " + id);
+                        return;
+                }
             },
 
             constructor:function () {
                 this.responseHandles[this.ALERTSGRID] =  this.alertGridHandle;
                 this.responseHandles[this.CLUSTERSGRID] = this.clustersGridHandle;
                 this.responseHandles[this.TRANSACTIONSGRID] = this.transactionsGridHandle;
-                this.responseHandles[this.TOPOLOGYVIEW] = this.topologyViewHandle;
-            },
-
-            alertGridHandle:function (data, ra) {
-                new IncidentPage().loadPage("IncidentGrid");
-            },
-
-            clustersGridHandle: function(data, ra) {
-                new AllClusterAvailability().loadPage("AllClusterAvailability");
-            },
-
-            transactionsGridHandle: function(data, ra) {
-                new TransactionGrid().loadPage(pageNum, "TransactionGrid");
-            },
-
-            topologyViewHandle: function(data, ra) {
-                new TopologyPage().loadPage(pageNum, "NetBankingTopology");
             }
 
         });

@@ -41,9 +41,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
                 var dstType = input.netBankingConnectivityVO.dstType;
                 var connections = input.netBankingConnectivityVO.connections;
 
-                var lhsDivName = data.id + "_" + data.name + noc.Widgets.Topology.RenderNodes.ENDPOINT_SUFFIX;
+                var lhsDivName = data.id + "_" + data.name + dashboard.noc.Widgets.Topology.RenderNodes.ENDPOINT_SUFFIX;
                 for (var i = 0; i < connections.length; i++) {
-                    var rhsDivName = dstType + "_" + connections[i] + noc.Widgets.Topology.RenderNodes.ENDPOINT_SUFFIX;
+                    var rhsDivName = dstType + "_" + connections[i] + dashboard.noc.Widgets.Topology.RenderNodes.ENDPOINT_SUFFIX;
                     console.log("lhs div name = " + lhsDivName + " rhs div name = " + rhsDivName);
 
                     // create Endpoint on LHS and RHS node

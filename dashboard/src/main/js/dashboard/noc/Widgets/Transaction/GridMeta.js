@@ -232,7 +232,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
             },
 
             periodicApp:function () {
-                var timer = setInterval(noc.Widgets.Transaction.GridMeta.prototype.periodicAppPost,
+                var timer = setInterval(dashboard.noc.Widgets.Transaction.GridMeta.prototype.periodicAppPost,
                     GridMeta.POSTSET.appdataset.length * GridMeta.APP_STAGGER_PERIOD * 1000);
                 GridMeta.TIMERS.push(timer);
             },

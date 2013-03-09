@@ -5,9 +5,9 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
 
         var IncidentPage = declare(NOCCONSTANTS.CLASSNAME.PAGES.INCIDENTPAGE, null, {
 
-            loadPage:function (pageName) {
+            loadPage:function (pageName, viewObject) {
 
-                IncidentPage.CP = noc.PageLoader.CpCenter[pageNumber];
+                IncidentPage.CP = viewObject.getConfigCentralPane();
 
                 var paneWidth = IncidentPage.CP.w;
                 var paneHeight = IncidentPage.CP.h;

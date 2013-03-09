@@ -81,7 +81,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", 'd
             },
 
             periodicApp:function () {
-                var timer = setInterval(noc.Widgets.Incident.ApplicationGrid.prototype.periodicAppPost,
+                var timer = setInterval(dashboard.noc.Widgets.Incident.ApplicationGrid.prototype.periodicAppPost,
                     ApplicationGrid.POSTSET.dataset.length * ApplicationGrid.APP_STAGGER_PERIOD * 1000);
                 ApplicationGrid.TIMERS.push(timer);
             },
