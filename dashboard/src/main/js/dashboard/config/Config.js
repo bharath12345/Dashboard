@@ -28,7 +28,7 @@ define([ 'dojo/has', 'require' ], function (has, require) {
                 AbstractUtility.showLoading();
 
                 var configView = new ConfigView(true);
-                configView.createNewWindowConfigDom();
+                configView.createDom();
 
                 var uri = document.URL;
                 var query = uri.substring(uri.indexOf("?") + 1, uri.length);

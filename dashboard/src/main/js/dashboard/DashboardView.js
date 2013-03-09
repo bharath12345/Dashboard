@@ -1,19 +1,18 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", "dijit/layout/ContentPane", "dijit/layout/BorderContainer",
     "dijit/MenuBar", "dijit/MenuBarItem", "dijit/Menu", "dijit/MenuItem", "dijit/PopupMenuItem", "dijit/PopupMenuBarItem", "dashboard/logger/Logger",
-    "dashboard/DashboardUtility", "dashboard/DashboardConstants", "dashboard/abstract/AbstractContainer"],
+    "dashboard/DashboardUtility", "dashboard/DashboardConstants", "dashboard/abstract/AbstractView"],
 
-    function (declare, i18n, i18nString, ContentPane, BorderContainer, MenuBar, MenuBarItem, Menu, MenuItem, PopupMenuItem, PopupMenuBarItem,
-              Logger, DashboardUtility, DBCONSTANTS, AbstractContainer) {
+    function (declare, i18n, i18nString, ContentPane, BorderContainer, MenuBar, MenuBarItem, Menu, MenuItem,
+              PopupMenuItem, PopupMenuBarItem,
+              Logger, DashboardUtility, DBCONSTANTS, AbstractView) {
 
-        var DashboardContainer = declare(DBCONSTANTS.CLASSNAME.DASHBOARD.CONTAINER, AbstractContainer, {
+        var DashboardView = declare(DBCONSTANTS.CLASSNAME.DASHBOARD.VIEW, AbstractView, {
             // create an Accordion with multiple links like in NNMi
 
-            createPageElements: function() {
-                this.createTopContainers(document.body); // call to the base class
+            createDom: function() {
                 this.createCenterContainers();
                 this.createMenu();
                 this.createCenterInnerContainers();
-                this.createMast(); // call to the base class
             },
 
             createCenterContainers: function() {
@@ -21,7 +20,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                 node.style.cssText = "width: 100%; height: 100%;";
                 dashboard.CpTopCenter.domNode.appendChild(node);
 
-                DashboardContainer.CenterBc = new BorderContainer({
+                DashboardView.CenterBc = new BorderContainer({
                     design:"headline",
                     liveSplitters:false,
                     persist:true,
@@ -29,37 +28,37 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                     gutters: false
                 }, node);
 
-                DashboardContainer.CpMenu = new ContentPane({
+                DashboardView.CpMenu = new ContentPane({
                     region:"top",
                     splitter:false
                 });
 
-                DashboardContainer.CpLeft = new ContentPane({
+                DashboardView.CpLeft = new ContentPane({
                     region:"left",
                     splitter:true,
                     style: "width:20%;top:0;left:0;"
                 });
 
-                DashboardContainer.CpCenter = new ContentPane({
+                DashboardView.CpCenter = new ContentPane({
                     region:"center",
                     splitter:false,
                     style: "top:0;left:0;"
                 });
 
-                DashboardContainer.CenterBc.addChild(DashboardContainer.CpMenu);
-                DashboardContainer.CenterBc.addChild(DashboardContainer.CpLeft);
-                DashboardContainer.CenterBc.addChild(DashboardContainer.CpCenter);
-                DashboardContainer.CenterBc.startup();
-                DashboardContainer.CenterBc.resize();
+                DashboardView.CenterBc.addChild(DashboardView.CpMenu);
+                DashboardView.CenterBc.addChild(DashboardView.CpLeft);
+                DashboardView.CenterBc.addChild(DashboardView.CpCenter);
+                DashboardView.CenterBc.startup();
+                DashboardView.CenterBc.resize();
 
-                DashboardContainer.CenterBc.resize();
+                DashboardView.CenterBc.resize();
                 dashboard.TopBc.resize();
             },
 
             createMenu: function() {
                 var node = dojo.create("div");
                 node.style.cssText = "width: 100%; height: 100%;";
-                DashboardContainer.CpMenu.domNode.appendChild(node);
+                DashboardView.CpMenu.domNode.appendChild(node);
 
                 var menuBar = new MenuBar({}, node);
 
@@ -87,16 +86,16 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                 actionMenu.startup();
                 helpMenu.startup();
 
-                DashboardContainer.CenterBc.resize();
+                DashboardView.CenterBc.resize();
                 dashboard.TopBc.resize();
             },
 
             createCenterInnerContainers: function() {
                 var node = dojo.create("div");
                 node.style.cssText = "width: 100%; height: 100%;";
-                DashboardContainer.CpCenter.domNode.appendChild(node);
+                DashboardView.CpCenter.domNode.appendChild(node);
 
-                DashboardContainer.InnerBc = new BorderContainer({
+                DashboardView.InnerBc = new BorderContainer({
                     design:"headline",
                     liveSplitters:false,
                     persist:true,
@@ -104,27 +103,27 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                     gutters: false
                 }, node);
 
-                DashboardContainer.CpTopInner = new ContentPane({
+                DashboardView.CpTopInner = new ContentPane({
                     region:"top",
                     splitter:false,
                     style: "top:0;left:0;"
                 });
 
-                DashboardContainer.CpCenterInner = new ContentPane({
+                DashboardView.CpCenterInner = new ContentPane({
                     region:"center",
                     splitter:false,
                     style: "top:0;left:0;"
                 });
 
-                DashboardContainer.InnerBc.addChild(DashboardContainer.CpTopInner);
-                DashboardContainer.InnerBc.addChild(DashboardContainer.CpCenterInner);
-                DashboardContainer.InnerBc.startup();
-                DashboardContainer.InnerBc.resize();
+                DashboardView.InnerBc.addChild(DashboardView.CpTopInner);
+                DashboardView.InnerBc.addChild(DashboardView.CpCenterInner);
+                DashboardView.InnerBc.startup();
+                DashboardView.InnerBc.resize();
             }
 
         });
 
-        DashboardContainer.LOG = Logger.addTimer(new Logger(DBCONSTANTS.CLASSNAME.PAGEELEMENTS));
+        DashboardView.LOG = Logger.addTimer(new Logger(DBCONSTANTS.CLASSNAME.DASHBOARD.VIEW));
 
-        return DashboardContainer;
+        return DashboardView;
     });

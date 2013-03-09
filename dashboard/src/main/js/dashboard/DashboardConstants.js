@@ -9,7 +9,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/d
         DashboardConstants.CLASSNAME = {};
         DashboardConstants.CLASSNAME.DASHBOARD = {};
         DashboardConstants.CLASSNAME.DASHBOARD.ACCORDION = "dashboard.DashboardAccordion";
-        DashboardConstants.CLASSNAME.DASHBOARD.CONTAINER = "dashboard.DashboardContainer";
+        DashboardConstants.CLASSNAME.DASHBOARD.VIEW = "dashboard.DashboardView";
         DashboardConstants.CLASSNAME.DASHBOARD.UTILITY = "dashboard.DashboardUtility";
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////

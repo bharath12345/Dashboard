@@ -1,10 +1,10 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", "dashboard/logger/Logger",
     "dijit/layout/ContentPane", "dijit/layout/BorderContainer",
-    "dashboard/abstract/AbstractView", "dashboard/WindowManager", "dashboard/abstract/AbstractContainer"],
+    "dashboard/abstract/AbstractView", "dashboard/WindowManager"],
 
-    function (declare, i18n, i18nString, Logger, ContentPane, BorderContainer, AbstractView, WindowManager, AbstractContainer) {
+    function (declare, i18n, i18nString, Logger, ContentPane, BorderContainer, AbstractView, WindowManager) {
 
-        var NocView = declare("dashboard.noc.NocView", [AbstractView, AbstractContainer], {
+        var NocView = declare("dashboard.noc.NocView", AbstractView, {
 
             constructor: function(newWindow) {
                 this.newWindow = newWindow;
@@ -12,12 +12,12 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
 
             getConfigCentralPane: function() {
                 if(!this.newWindow) {
-                    return dashboard.DashboardContainer.CpCenterInner;
+                    return dashboard.DashboardView.CpCenterInner;
                 }
                 return dashboard.noc.CpCenter;
             },
 
-            createNewWindowConfigDom: function() {
+            createDom: function() {
                 this.createTopContainers(document.body);
                 this.createMast();
 

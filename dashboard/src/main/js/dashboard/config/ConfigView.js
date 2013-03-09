@@ -1,10 +1,10 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/config", "dashboard/logger/Logger",
     "dijit/layout/ContentPane", "dijit/layout/BorderContainer",
-    "dashboard/abstract/AbstractView", "dashboard/WindowManager", "dashboard/abstract/AbstractContainer"],
+    "dashboard/abstract/AbstractView", "dashboard/WindowManager"],
 
-    function (declare, i18n, i18nString, Logger, ContentPane, BorderContainer, AbstractView, WindowManager, AbstractContainer) {
+    function (declare, i18n, i18nString, Logger, ContentPane, BorderContainer, AbstractView, WindowManager) {
 
-        var ConfigView = declare("dashboard.config.ConfigView", [AbstractView, AbstractContainer], {
+        var ConfigView = declare("dashboard.config.ConfigView", AbstractView, {
 
             constructor: function(newWindow) {
                 this.newWindow = newWindow;
@@ -12,22 +12,19 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/confi
 
             getConfigMenuPane: function() {
                 if(!this.newWindow) {
-                    return dashboard.DashboardContainer.CpTopInner;
+                    return dashboard.DashboardView.CpTopInner;
                 }
                 return dashboard.config.CpMenu;
             },
 
             getConfigCentralPane: function() {
                 if(!this.newWindow) {
-                    return dashboard.DashboardContainer.CpCenterInner;
+                    return dashboard.DashboardView.CpCenterInner;
                 }
                 return dashboard.config.CpCenter;
             },
 
-            createNewWindowConfigDom: function() {
-                this.createTopContainers(document.body);
-                this.createMast();
-
+            createDom: function() {
                 var node = dojo.create("div");
                 node.style.cssText = "width: 100%; height: 100%;";
                 dashboard.CpTopCenter.domNode.appendChild(node);
@@ -55,12 +52,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/confi
                 dashboard.config.CenterBc.addChild(dashboard.config.CpCenter);
                 dashboard.config.CenterBc.startup();
                 dashboard.config.CenterBc.resize();
-
-                dashboard.config.CpMenu.domNode.style.top = 0;
-                dashboard.config.CpMenu.domNode.style.left = 0;
-
-                this.removeBoderPadding(dashboard.config.CpMenu.domNode);
-                this.removeBoderPadding(dashboard.config.CpCenter.domNode);
 
                 dashboard.config.CenterBc.resize();
                 dashboard.TopBc.resize();

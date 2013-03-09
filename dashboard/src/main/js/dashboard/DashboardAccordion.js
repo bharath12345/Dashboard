@@ -20,7 +20,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
             createAccordion: function(data) {
                 var node = dojo.create("div");
                 node.style.cssText = "width: 100%; height: 100%;";
-                dashboard.DashboardContainer.CpLeft.domNode.appendChild(node);
+                dashboard.DashboardView.CpLeft.domNode.appendChild(node);
 
                 DashboardAccordion.AccContainer = new AccordionContainer({
                 									style: "top:0;left:0;",
@@ -46,7 +46,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
 
                 DashboardAccordion.AccContainer.startup();
                 DashboardAccordion.AccContainer.resize();
-                dashboard.DashboardContainer.TopBc.resize();
+                dashboard.DashboardView.TopBc.resize();
             }
 
         });
