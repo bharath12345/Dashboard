@@ -18,7 +18,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
             default_width:975,
             default_height:710,
 
-            getNewWindow:function (viewId, viewName, viewType) {
+            getNewWindow:function (viewId, viewName, viewType, viewCategory) {
 
                 if(viewId == null || viewId == undefined || viewId.length == 0) {
                     viewId = generateRandomUuid();
@@ -29,7 +29,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                 var query = {
                     viewId: viewId,
                     viewName: viewName,
-                    viewType: viewType
+                    viewType: viewType,
+                    viewCategory:viewCategory
                 };
                 // Assemble the new uri with its query string attached.
                 var queryStr = ioQuery.objectToQuery(query);

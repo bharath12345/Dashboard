@@ -34,8 +34,6 @@ define([ 'dojo/has', 'require' ], function (has, require) {
                 var query = uri.substring(uri.indexOf("?") + 1, uri.length);
                 var queryObject = ioQuery.queryToObject(query);
 
-                console.log("Query object = " + dojo.toJson(queryObject));
-
                 var configAccordion = new ConfigAccordion();
                 configAccordion.showPageConfig(queryObject.viewId, queryObject.viewName, true);
             });

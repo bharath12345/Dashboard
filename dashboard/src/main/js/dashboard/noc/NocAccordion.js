@@ -37,7 +37,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
             },
 
             clustersGridHandle: function(data, ra) {
-                new AllClusterAvailability().loadPage(pageNum, "AllClusterAvailability");
+                new AllClusterAvailability().loadPage("AllClusterAvailability");
             },
 
             transactionsGridHandle: function(data, ra) {
