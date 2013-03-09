@@ -2,7 +2,7 @@ define(["dojo/_base/declare", "dojo/request/xhr"],
 
     function (declare, xhr) {
 
-        var Logger = declare("noc.Logger", null, {
+        var Logger = declare("dashboard.logger.Logger", null, {
 
             messages: [],
 

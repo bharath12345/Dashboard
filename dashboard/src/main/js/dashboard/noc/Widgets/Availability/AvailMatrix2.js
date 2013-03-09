@@ -1,5 +1,5 @@
 define(['require', "dojo/_base/declare", "dojo/i18n",
-    "dojo/i18n!dashboard/noc/nls/noc", "dashboard/noc/NocConstants", "dashboard/noc/NocUtility", "dashboard/noc/Logger"],
+    "dojo/i18n!dashboard/noc/nls/noc", "dashboard/noc/NocConstants", "dashboard/noc/NocUtility", "dashboard/logger/Logger"],
 
     function (require, declare, i18n, i18nString, NOCCONSTANTS, NocUtility, Logger) {
 

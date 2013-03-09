@@ -2,7 +2,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
     "dojo/i18n!dashboard/noc/nls/noc", "dashboard/dashboard/noc/pages/AvailabilityPage", "dashboard/noc/pages/TxTreemapPage",
     "dashboard/noc/pages/ComponentPage", "dashboard/noc/pages/TxTimeSeriesPage", "dashboard/noc/pages/IncidentPage", "dashboard/noc/pages/AllClusterAvailability",
     "dashboard/noc/pages/TransactionGrid", "dashboard/noc/pages/TopologyPage",
-    "dashboard/noc/Logger", "dashboard/noc/NocConstants", "dashboard/noc/NocUtility"],
+    "dashboard/logger/Logger", "dashboard/noc/NocConstants", "dashboard/noc/NocUtility"],
 
     function (require, declare, i18n, ContentPane, BorderContainer, win, i18nString,
               AvailabilityPage, TxTreemapPage, ComponentPage, TxTimeSeriesPage, IncidentPage,

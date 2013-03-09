@@ -1,5 +1,5 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "dojo/request/xhr", "dojo/keys", "dojo/on", "dijit/Dialog",
-    "dashboard/noc/NocConstants", "dashboard/noc/Logger"],
+    "dashboard/noc/NocConstants", "dashboard/logger/Logger"],
 
     function (declare, i18n, i18nString, xhr, keys, on, Dialog, NOCCONSTANTS, Logger) {
 
@@ -19,7 +19,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
                     // Do something with the handled data
 
                     //NocUtility.LOG.log(Logger.SEVERITY.SEVERE, "xhr data = " + data);
-                    require(["../../../../../target/dashboard/js/noc/ViewManager"], function (ViewManager) {
+                    require(["dashboard/noc/ViewManager"], function (ViewManager) {
                         ViewManager.manageView(data);
                     });
 
@@ -48,7 +48,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
                     case keys.ESCAPE:
                         // stop all timers and stop scrolling on first keypress
                         // on second keypress restart all
-                        require(["../../../../../target/dashboard/js/noc/PageLoader"], function (PageLoader) {
+                        require(["dashboard/noc/PageLoader"], function (PageLoader) {
                             if (NocUtility.ESCAPE_HIT == false) {
                                 NocUtility.ESCAPE_HIT = true;
                                 clearInterval(PageLoader.SCROLL_TIMER);
@@ -83,7 +83,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
                         // stop scrolling but NOT timers on first keypress
                         // restart scroll on second keypress
 
-                        require(["../../../../../target/dashboard/js/noc/PageLoader"], function (PageLoader) {
+                        require(["dashboard/noc/PageLoader"], function (PageLoader) {
                             if (NocUtility.SPACE_HIT == false) {
                                 NocUtility.SPACE_HIT = true;
                                 clearInterval(PageLoader.SCROLL_TIMER);
