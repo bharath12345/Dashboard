@@ -7,7 +7,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
 
             loadPage:function (pageName, viewObject) {
 
-                IncidentPage.CP = viewObject.getConfigCentralPane();
+                IncidentPage.CP = dashboard.CpCenterInner;
 
                 var paneWidth = IncidentPage.CP.w;
                 var paneHeight = IncidentPage.CP.h;

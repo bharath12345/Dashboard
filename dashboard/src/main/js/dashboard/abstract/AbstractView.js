@@ -26,20 +26,18 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
                     design:"headline",
                     liveSplitters:false,
                     persist:true,
-                    style:"top:0;left:0;",
                     gutters:false
                 }, node);
 
                 dashboard.CpMast = new ContentPane({
                     region:"top",
                     splitter:false,
-                    style:"top:0;left:0;height:25px;"
+                    style:"height:25px;"
                 });
 
                 dashboard.CpTopCenter = new ContentPane({
                     region:"center",
-                    splitter:false,
-                    style:"top:0;left:0;"
+                    splitter:false
                 });
 
                 dashboard.TopBc.addChild(dashboard.CpMast);
@@ -76,6 +74,37 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
 
                 mastDiv.appendChild(mastTitle);
                 mastTitle.appendChild(image);
+            },
+
+            createInnerMenuAndPanes: function(paneDom) {
+                var node = dojo.create("div");
+                node.style.cssText = "width: 100%; height: 100%;";
+                paneDom.appendChild(node);
+
+                dashboard.InnerBc = new BorderContainer({
+                    design:"headline",
+                    liveSplitters:false,
+                    persist:true
+                }, node);
+
+                dashboard.CpMenu = new ContentPane({
+                    region:"top",
+                    splitter:false,
+                    style: "height:25px;"
+                });
+
+                dashboard.CpCenterInner = new ContentPane({
+                    region:"center",
+                    splitter:false
+                });
+
+                dashboard.InnerBc.addChild(dashboard.CpMenu);
+                dashboard.InnerBc.addChild(dashboard.CpCenterInner);
+                dashboard.InnerBc.startup();
+                dashboard.InnerBc.resize();
+
+                dashboard.InnerBc.resize();
+                dashboard.TopBc.resize();
             }
 
         });

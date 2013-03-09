@@ -26,23 +26,21 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
                 }
 
                 var configView = new ConfigView(RenderAttributes.NEWWINDOW);
-                var menuPane = configView.getConfigMenuPane();
-                var centralPane = configView.getConfigCentralPane();
                 var topBorderContainer = configView.getTopBorderContainer();
 
-                var tc = this.createTabs(centralPane);
+                var tc = this.createTabs();
                 this.createTitlePaneGrid(pageObj.getAttrib(data), pageObj.getAttribIgnoreList());
-                this.createToolbarButtons(menuPane);
+                this.createToolbarButtons();
 
                 // all the title panes have been rendered - now render the innards
                 RenderAttributes.PAGEOBJ = pageObj;
                 pageObj.renderAttributes(data);
 
-                this.cleanupRendering(menuPane, centralPane, topBorderContainer, tc);
+                this.cleanupRendering(topBorderContainer, tc);
                 dashboard.STANDBY.hide();
             },
 
-            cleanupRendering: function(menuPane, centralPane, topBorderContainer, tc) {
+            cleanupRendering: function(topBorderContainer, tc) {
                 // make the tab buttons larger
                 var innerPane = dojo.query(".dijitTabInner", tc.domNode);
                 for (var i = 0; i < innerPane.length; i++) {
@@ -50,18 +48,18 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
                 }
 
                 // remove the boundary and padding of inner center pane
-                centralPane.domNode.style.padding=0;
-                centralPane.domNode.style.border=0;
+                dashboard.CpCenterInner.domNode.style.padding=0;
+                dashboard.CpCenterInner.domNode.style.border=0;
 
-                menuPane.domNode.style.padding=0;
+                dashboard.CpMenu.domNode.style.padding=0;
                 topBorderContainer.resize();
             },
 
-            createTabs: function(centralPane) {
-                centralPane.destroyDescendants(false);
+            createTabs: function() {
+                dashboard.CpCenterInner.destroyDescendants(false);
 
                 var tc = new TabContainer({style: "height: 100%; width: 100%;"});
-                centralPane.addChild(tc);
+                dashboard.CpCenterInner.addChild(tc);
 
                 RenderAttributes.LOOKNFEELPANE = new ContentPane({title: "Look and Feel", style: "height: 100%; width: 100%;"});
                 tc.addChild(RenderAttributes.LOOKNFEELPANE);
@@ -146,11 +144,11 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
                 return divString;
             },
 
-            createToolbarButtons: function(menuPane) {
-                menuPane.destroyDescendants(false);
+            createToolbarButtons: function() {
+                dashboard.CpMenu.destroyDescendants(false);
 
                 var toolbar = new Toolbar({});
-                menuPane.addChild(toolbar);
+                dashboard.CpMenu.addChild(toolbar);
 
                 var button = new Button({
                     showLabel: true,
