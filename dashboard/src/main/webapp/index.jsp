@@ -17,7 +17,7 @@
 
         <style type="text/css">
             @import url("./css/dashboard.merged.compressed.css");
-            @import url("./js/bootstrap/css/bootstrap.min.css");
+            @import url("./js/bootstrap/bootstrap/css/bootstrap.min.css");
             @import url("./js/bootstrap/fontAwesome/css/font-awesome.min.css");
             @import url("./js/dojox/form/resources/CheckedMultiSelect.css");
         </style>

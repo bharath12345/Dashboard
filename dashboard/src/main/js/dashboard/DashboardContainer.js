@@ -25,7 +25,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                     design:"headline",
                     liveSplitters:false,
                     persist:true,
-                    style: "top:0;left:0;"
+                    style: "top:0;left:0;",
+                    gutters: false
                 }, node);
 
                 DashboardContainer.CpMenu = new ContentPane({
@@ -107,7 +108,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                     design:"headline",
                     liveSplitters:false,
                     persist:true,
-                    style: "top:0;left:0;"
+                    style: "top:0;left:0;",
+                    gutters: false
                 }, node);
 
                 DashboardContainer.CpTopInner = new ContentPane({

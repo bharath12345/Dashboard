@@ -1,5 +1,5 @@
 /* ----------------- Masthead -----------------*/
-table.masthead
+.masthead
 {
     background-color: #036;
     background-image: url("../images/masthead_grad.png");
@@ -7,29 +7,26 @@ table.masthead
     background-position: right;
     width: 100%;
     height: 25px;
-}
-table.masthead td
-{
+
     color: #fff;
     font-size: 11px;
     font-family: Arial, Helvetica, sans-serif, Verdana;
     line-height: 11px;
     vertical-align: middle;
 }
-table.masthead td.logo
+table.masthead td
+{
+
+}
+span.logo
 {
     width: 30px;
-    padding-top: 4px;
-    padding-left: 10px;
-    padding-bottom: 4px;
 }
 table.masthead td.role_field
 {
     text-align: right;
     vertical-align: middle;
     width: 10%;
-    padding-right: 10px;
-    padding-left: 10px;
     white-space: nowrap;
 }
 table.masthead td.user_field
@@ -37,43 +34,9 @@ table.masthead td.user_field
     text-align: right;
     vertical-align: middle;
     width: 20%;
-    padding-left: 10px;
     white-space: nowrap;
 }
-table.masthead td.logout
-{
-    text-align: right;
-    width: 5%;
-    padding-top: 4px;
-    padding-right: 5px;
-    padding-left: 12px;
-}
-table.masthead a.button
-{
-    color: #fff;
-    display: block;
-    font: 10px Arial, sans-serif;
-    background-color: transparent;
-    background-image: url("../images/bg_button_masthead_a.png");
-    background-repeat: no-repeat;
-    background-position: right top;
-    height: 18px;
-    padding-right: 13px; /* sliding doors padding */
-    text-decoration: none;
-    float: right;
-    white-space: nowrap;
-    border: none;
-}
-table.masthead a.button span
-{
-    display: block;
-    line-height: 14px;
-    background-color: transparent;
-    background-image: url("../images/bg_button_masthead_span.png");
-    background-repeat: no-repeat;
-    background-position: left top;    padding: 0 0 4px 13px;
-}
-table.masthead td.mastheadTitle
+span.mastheadTitle
 {
     padding-left:         10px;
     text-align:           left;
@@ -83,5 +46,90 @@ table.masthead td.mastheadTitle
 /* ----------------- Accordion -----------------*/
 a.document {
     font-weight: 500;
-    font-size: 14px;
+    font-size: 11px;
 }
+
+/* ----------------- NOC Screens Related -----------------*/
+.rowtext {
+    font-size: 10px;
+    font-family:Helvetica Neue;
+}
+
+.onlineTxRowOdd {
+    background-color:#F2F7E8
+}
+
+.timegroup{
+    position:relative;
+    top:2px; left:2px;
+}
+
+.chart {
+    position:relative;
+    top:2px; left:2px;
+}
+
+.dgrid-scroller{
+    overflow:hidden!important;
+}
+
+.dgrid-cell {
+    text-align:center!important;
+}
+
+.topoIconContainer {
+    border:1px solid #346789;
+    box-shadow: 2px 2px 19px #aaa;
+    -o-box-shadow: 2px 2px 19px #aaa;
+    -webkit-box-shadow: 2px 2px 19px #aaa;
+    -moz-box-shadow: 2px 2px 19px #aaa;
+    -moz-border-radius:0.5em;
+    border-radius:0.5em;
+    opacity:0.8;
+    filter:alpha(opacity=80);
+    width:5em; height:5em;
+    line-height:5em;
+    text-align:center;
+    z-index:20;
+    position:relative;
+    background-color:#eeeeef;
+    color:black;
+    font-family:helvetica;
+    padding:0.5em;
+    font-size:0.9em;
+}
+
+.topoIconContainer:hover {
+    box-shadow: 2px 2px 19px #444;
+    -o-box-shadow: 2px 2px 19px #444;
+    -webkit-box-shadow: 2px 2px 19px #444;
+    -moz-box-shadow: 2px 2px 19px #444;
+    opacity:0.6;
+    filter:alpha(opacity=60);
+}
+
+.aLabel {
+    background-color:white;
+    padding:0.4em;
+    font:12px sans-serif;
+    color:#444;
+    z-index:21;
+    border:1px dotted gray;
+    opacity:0.8;
+    filter:alpha(opacity=80);
+}
+
+.active {
+    border:1px dotted green;
+}
+.hover {
+    border:1px dotted red;
+}
+
+._jsPlumb_connector { z-index:4; }
+._jsPlumb_endpoint, .endpointTargetLabel, .endpointSourceLabel{ z-index:21;cursor:pointer; }
+.hl { border:3px solid red; }
+#debug { position:absolute; background-color:black; color:red; z-index:5000 }
+
+
+

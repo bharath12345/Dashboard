@@ -14,7 +14,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
                     design:"headline",
                     liveSplitters:false,
                     persist:true,
-                    style: "top:0;left:0;"
+                    style: "top:0;left:0;",
+                    gutters: false
                 }, node);
 
                 dashboard.CpMast = new ContentPane({
@@ -61,47 +62,29 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
                 var mastheadA1Logo = "./images/25pix-appnomic_logo-2.png";
                 var mastheadAppName = "./images/mast_a1.png";
 
-                var headerTrayDiv = dojo.create("div");
-                headerTrayDiv.id= "headerTray";
-                headerTrayDiv.className = "pageHeader";
-                dashboard.CpMast.domNode.appendChild(headerTrayDiv);
+                var mastDiv = dojo.create("div");
+                mastDiv.className = "masthead";
+                dashboard.CpMast.domNode.appendChild(mastDiv);
 
-                var headerTrayBody = dojo.create("div");
-                headerTrayBody.id = "headerTrayBody";
-                headerTrayDiv.appendChild(headerTrayBody);
-
-                var mastTable = dojo.create("table");
-                mastTable.className = "masthead";
-                mastTable.setAttribute("cellspacing", "0");
-                mastTable.setAttribute("cellpadding", "0");
-                mastTable.setAttribute("border", "0");
-                headerTrayDiv.appendChild(mastTable);
-
-                var mastBody = dojo.create("tbody");
-                mastTable.appendChild(mastBody);
-
-                var mastRow = dojo.create("tr");
-                mastBody.appendChild(mastRow);
-
-                var mastCol = dojo.create("td");
-                mastCol.className = "logo";
+                var mastLogo = dojo.create("span");
+                mastLogo.className = "logo";
 
                 var image = dojo.create("img");
                 image.setAttribute("alt", "Appnomic");
                 image.setAttribute("src", mastheadA1Logo);
 
-                mastRow.appendChild(mastCol);
-                mastCol.appendChild(image);
+                mastDiv.appendChild(mastLogo);
+                mastLogo.appendChild(image);
 
-                mastCol = dojo.create("td");
-                mastCol.className = "mastheadTitle";
+                var mastTitle = dojo.create("span");
+                mastTitle.className = "mastheadTitle";
 
                 image = dojo.create("img");
                 image.setAttribute("alt", "AppsOne");
                 image.setAttribute("src", mastheadAppName);
 
-                mastRow.appendChild(mastCol);
-                mastCol.appendChild(image);
+                mastDiv.appendChild(mastTitle);
+                mastTitle.appendChild(image);
             }
 
         });
