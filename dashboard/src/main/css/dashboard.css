@@ -61,6 +61,14 @@ a.document {
     font-size: 11px;
 }
 
+/* ----------------- The Blue Heading In Central Pane -----------------*/
+div.heading {
+    padding-top:0;
+    border:1px solid;
+    height:5px;
+    border-radius:0;
+}
+
 /* ----------------- NOC Screens Related -----------------*/
 .rowtext {
     font-size: 10px;

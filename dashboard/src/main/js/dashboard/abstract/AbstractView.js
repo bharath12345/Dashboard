@@ -88,7 +88,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
                 dashboard.CpMenu = new ContentPane({
                     region:"top",
                     splitter:false,
-                    style: "height: 35px"
+                    style: "height: 40px"
                 });
 
                 dashboard.CpCenterInner = new ContentPane({
@@ -114,18 +114,18 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
                     gutters: false
                 });
 
-                dashboard.leftMenuPane = new ContentPane({
-                    region: "left",
+                dashboard.topMenuPane = new ContentPane({
+                    region: "top",
                     splitter:false,
-                    style: "width: 80%"
+                    style: "height: 15px;"
                 });
                 dashboard.MenuBc.addChild(dashboard.leftMenuPane);
 
-                dashboard.rightMenuPane = new ContentPane({
+                dashboard.bottomMenuPane = new ContentPane({
                     region: "center",
                     splitter:false
                 });
-                dashboard.MenuBc.addChild(dashboard.rightMenuPane);
+                dashboard.MenuBc.addChild(dashboard.bottomMenuPane);
 
                 dashboard.MenuBc.placeAt(dashboard.CpMenu);
                 dashboard.MenuBc.startup();
@@ -140,7 +140,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
 
                 dashboard.toolbar.addChild(ButtonHelper.getRefresh());
 
-                dashboard.toolbar.placeAt(dashboard.leftMenuPane);
+                dashboard.toolbar.placeAt(dashboard.bottomMenuPane);
                 dashboard.toolbar.startup();
                 dashboard.TopBc.resize();
             }

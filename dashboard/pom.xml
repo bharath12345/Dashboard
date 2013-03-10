@@ -274,6 +274,13 @@
                                             </includes>
                                             <followSymlinks>true</followSymlinks>
                                         </fileset>
+                                        <fileset>
+                                            <directory>${release-dir}/../css</directory>
+                                            <includes>
+                                                <include>**/*merged.css</include>
+                                            </includes>
+                                            <followSymlinks>true</followSymlinks>
+                                        </fileset>
                                     </filesets>
                                 </configuration>
                             </execution>
@@ -632,6 +639,13 @@
                                             <directory>${release-dir}/dojox</directory>
                                             <includes>
                                                 <include>**/*uncompressed.js</include>
+                                            </includes>
+                                            <followSymlinks>true</followSymlinks>
+                                        </fileset>
+                                        <fileset>
+                                            <directory>${release-dir}/../css</directory>
+                                            <includes>
+                                                <include>**/*merged.css</include>
                                             </includes>
                                             <followSymlinks>true</followSymlinks>
                                         </fileset>
