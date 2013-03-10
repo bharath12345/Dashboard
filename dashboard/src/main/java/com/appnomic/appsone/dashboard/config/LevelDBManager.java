@@ -42,6 +42,8 @@ public class LevelDBManager {
 		if (configDBFilePath == null) {
 			throw new ExceptionInInitializerError("Unbale to init Config DB Specified file is NULL; please specify the correct path");
 		}
+		
+		deleteLock(configDBFilePath);
 
 		Options options = new Options();
 		options.createIfMissing(true);
@@ -60,17 +62,23 @@ public class LevelDBManager {
 		final Thread mainThread = Thread.currentThread();
 		Runtime.getRuntime().addShutdownHook(new Thread() {
 		    public void run() {
-		    	File file = new File(configDBFilePath + File.separator + "LOCK");
-		    	if(file.delete()){
-	    			System.out.println(file.getName() + " is deleted!");
-	    		}else{
-	    			System.out.println("Delete of " + file.getName() + " failed.");
-	    		}
-		    	
+		    	deleteLock(configDBFilePath);
 		    	System.out.println("Shutting down the connection to LevelDB.");
 		    	shutdown();
 		    }
 		});
+	}
+	
+	private void deleteLock(String configDBFilePath) {
+		File file = new File(configDBFilePath + File.separator + "LOCK");
+		if(!file.exists()) {
+			System.out.println(file.getName() + " doesnt exist!");
+		}
+    	if(file.delete()){
+			System.out.println(file.getName() + " is deleted!");
+		}else{
+			System.out.println("Delete of " + file.getName() + " failed.");
+		}
 	}
 
 	public void shutdown() {

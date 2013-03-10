@@ -15,16 +15,13 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
             },
 
             createTopContainers:function (docBody) {
-                var node = dojo.create("div");
-                node.style.cssText = "width: 100%; height: 100%;";
-                docBody.appendChild(node);
-
                 dashboard.TopBc = new BorderContainer({
                     design:"headline",
                     liveSplitters:false,
                     persist:true,
-                    gutters:false
-                }, node);
+                    gutters:false,
+                    style: "width: 100%; height: 100%;"
+                });
 
                 dashboard.CpMast = new ContentPane({
                     region:"top",
@@ -39,6 +36,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
 
                 dashboard.TopBc.addChild(dashboard.CpMast);
                 dashboard.TopBc.addChild(dashboard.CpTopCenter);
+                dashboard.TopBc.placeAt(docBody);
                 dashboard.TopBc.startup();
 
                 dashboard.TopBc.resize();
@@ -74,16 +72,13 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
             },
 
             createInnerMenuAndPanes: function(paneDom) {
-                var node = dojo.create("div");
-                node.style.cssText = "width: 100%; height: 100%;";
-                paneDom.appendChild(node);
-
                 dashboard.InnerBc = new BorderContainer({
                     design:"headline",
                     liveSplitters:false,
                     persist:true,
-                    gutters: false
-                }, node);
+                    gutters: false,
+                    style: "width: 100%; height: 100%;"
+                });
 
                 dashboard.CpMenu = new ContentPane({
                     region:"top",
@@ -98,6 +93,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
 
                 dashboard.InnerBc.addChild(dashboard.CpMenu);
                 dashboard.InnerBc.addChild(dashboard.CpCenterInner);
+                dashboard.InnerBc.placeAt(paneDom);
                 dashboard.InnerBc.startup();
                 dashboard.InnerBc.resize();
 
@@ -119,7 +115,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
                     splitter:false,
                     style: "height: 15px;"
                 });
-                dashboard.MenuBc.addChild(dashboard.leftMenuPane);
+                dashboard.MenuBc.addChild(dashboard.topMenuPane);
 
                 dashboard.bottomMenuPane = new ContentPane({
                     region: "center",

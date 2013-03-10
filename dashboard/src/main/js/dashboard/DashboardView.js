@@ -16,16 +16,12 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
             },
 
             createCenterContainers: function() {
-                var node = dojo.create("div");
-                node.style.cssText = "width: 100%; height: 100%;";
-                dashboard.CpTopCenter.domNode.appendChild(node);
-
                 dashboard.CenterBc = new BorderContainer({
                     design:"headline",
                     liveSplitters:false,
                     persist:true,
                     gutters: false
-                }, node);
+                });
 
                 dashboard.CpMenuTop = new ContentPane({
                     region:"top",
@@ -46,6 +42,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                 dashboard.CenterBc.addChild(dashboard.CpMenuTop);
                 dashboard.CenterBc.addChild(dashboard.CpLeft);
                 dashboard.CenterBc.addChild(dashboard.CpCenter);
+                dashboard.CenterBc.placeAt(dashboard.CpTopCenter);
                 dashboard.CenterBc.startup();
                 dashboard.CenterBc.resize();
 
@@ -54,11 +51,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
             },
 
             createMenu: function() {
-                var node = dojo.create("div");
-                node.style.cssText = "width: 100%; height: 100%;";
-                dashboard.CpMenuTop.domNode.appendChild(node);
-
-                var menuBar = new MenuBar({}, node);
+                var menuBar = new MenuBar({});
 
                 //////////
                 var fileMenu = new Menu({id: "fileMenu"});
@@ -79,6 +72,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
 
                 ////////
 
+                menuBar.placeAt(dashboard.CpMenuTop);
                 menuBar.startup();
                 fileMenu.startup();
                 actionMenu.startup();
