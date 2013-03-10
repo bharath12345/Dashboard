@@ -1,7 +1,7 @@
-define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/GridContainer",
+define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dojox/layout/GridContainer",
     "dojo/i18n!dashboard/noc/nls/noc", "dashboard/noc/NocUtility", "dashboard/noc/NocConstants", "dashboard/logger/Logger"],
 
-    function (require, declare, i18n, TitlePane, GridContainer, i18nString, NocUtility, NOCCONSTANTS, Logger) {
+    function (require, declare, i18n, ContentPane, GridContainer, i18nString, NocUtility, NOCCONSTANTS, Logger) {
 
         var IncidentPage = declare(NOCCONSTANTS.CLASSNAME.PAGES.INCIDENTPAGE, null, {
 
@@ -11,12 +11,12 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                 var paneHeight = dashboard.CpCenterInner.h;
                 var styleString = "width: " + paneWidth + "; height: " + paneHeight + ";"
 
-                var titlePane = new TitlePane({
+                dashboard.rightMenuPane.domNode.innerHTML = "<div style='text-align:right'>Alerts Grid</div>";
+
+                var titlePane = new ContentPane({
                     splitter:false,
                     style:styleString,
-                    content:"<div id='"+pageName+"' style='width: 100%; height: 100%;'></div>",
-                    title:"Alerts Grid",
-                    toggleable:false
+                    content:"<div id='"+pageName+"' style='width: 100%; height: 100%;'></div>"
                 });
 
                 var gridContainer = new GridContainer({nbZones:1, isAutoOrganized:true,
@@ -27,13 +27,6 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                 gridContainer.addChild(titlePane, 0);
                 gridContainer.startup();
                 gridContainer.resize();
-
-                dojo.query(".dijitTitlePaneContentInner")[0].style.padding = "0px";
-
-                var textNode = dojo.query(".dijitTitlePaneTextNode", gridContainer.domNode);
-                for (var i = 0; i < textNode.length; i++) {
-                    textNode[i].style.fontSize = "16px";
-                }
 
                 var xpos=0, ypos=0;
                 var viewMeta = {

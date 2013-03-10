@@ -1,8 +1,8 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard",
-    "dijit/Toolbar", "dojo/on", "dojo/_base/lang",
+    "dojo/on", "dojo/_base/lang",
     "dashboard/abstract/AbstractView", "dashboard/WindowManager", "dashboard/main/loader", "dashboard/helper/ButtonHelper"],
 
-    function (declare, i18n, i18nString, Toolbar, on, lang, AbstractView, WindowManager, loader, ButtonHelper) {
+    function (declare, i18n, i18nString, on, lang, AbstractView, WindowManager, loader, ButtonHelper) {
 
         var NocView = declare("dashboard.noc.NocView", AbstractView, {
 
@@ -19,20 +19,18 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard",
                 NocView.NAME = name;
                 NocView.TYPE = type;
 
-                dashboard.CpMenu.destroyDescendants(false);
-                var toolbar = new Toolbar({});
-                dashboard.CpMenu.addChild(toolbar);
+                dashboard.toolbar.destroyDescendants(false);
 
                 var button = ButtonHelper.getRefresh();
                 on(button, "click", function() {
                 });
-                toolbar.addChild(button);
+                dashboard.toolbar.addChild(button);
 
                 button = ButtonHelper.getPopUpWindow();
                 on(button, "click", function() {
                     NocView.launchNewWindowConfigPane();
                 });
-                toolbar.addChild(button);
+                dashboard.toolbar.addChild(button);
             }
         });
 

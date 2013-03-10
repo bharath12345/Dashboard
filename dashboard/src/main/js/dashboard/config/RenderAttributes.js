@@ -1,9 +1,9 @@
 define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/GridContainer",
-    "dijit/layout/TabContainer", "dijit/layout/ContentPane", "dijit/Toolbar", "dojo/on", "dojo/_base/lang",
+    "dijit/layout/TabContainer", "dijit/layout/ContentPane", "dojo/on", "dojo/_base/lang",
     "dashboard/logger/Logger", "dashboard/config/ConfigView",
     "dashboard/config/ConfigConstants", "dojo/i18n!dashboard/config/nls/config", "dashboard/helper/ButtonHelper"],
 
-    function (declare, i18n, TitlePane, GridContainer, TabContainer, ContentPane, Toolbar, on, lang,
+    function (declare, i18n, TitlePane, GridContainer, TabContainer, ContentPane, on, lang,
               Logger, ConfigView, CONFIGCONSTANTS, i18nString, ButtonHelper) {
 
         /*
@@ -43,13 +43,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
                 for (var i = 0; i < innerPane.length; i++) {
                     innerPane[i].style.width = 300;
                 }
-
-                // remove the boundary and padding of inner center pane
-                dashboard.CpCenterInner.domNode.style.padding=0;
-                dashboard.CpCenterInner.domNode.style.border=0;
-
-                dashboard.CpMenu.domNode.style.padding=0;
-                dashboard.TopBc.resize();
             },
 
             createTabs: function() {
@@ -142,22 +135,19 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
             },
 
             createToolbarButtons: function() {
-                dashboard.CpMenu.destroyDescendants(false);
-
-                var toolbar = new Toolbar({});
-                dashboard.CpMenu.addChild(toolbar);
+                dashboard.toolbar.destroyDescendants(false);
 
                 var button = ButtonHelper.getSave();
                 on(button, "click", function() {
                     RenderAttributes.PAGEOBJ.saveValues();
                 });
-                toolbar.addChild(button);
+                dashboard.toolbar.addChild(button);
 
                 button = ButtonHelper.getPopUpWindow();
                 on(button, "click", function() {
                     ConfigView.launchNewWindowConfigPane(RenderAttributes.ID, RenderAttributes.NAME, RenderAttributes.TYPE);
                 });
-                toolbar.addChild(button);
+                dashboard.toolbar.addChild(button);
             }
         });
 

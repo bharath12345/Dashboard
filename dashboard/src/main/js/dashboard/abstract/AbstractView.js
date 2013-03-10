@@ -1,6 +1,7 @@
-define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/layout/BorderContainer"],
+define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/layout/BorderContainer", "dijit/Toolbar",
+    "dashboard/helper/ButtonHelper"],
 
-    function (declare, i18n, ContentPane, BorderContainer) {
+    function (declare, i18n, ContentPane, BorderContainer, Toolbar, ButtonHelper) {
 
         var AbstractView = declare("dashboard.abstract.AbstractView", null, {
 
@@ -87,7 +88,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
                 dashboard.CpMenu = new ContentPane({
                     region:"top",
                     splitter:false,
-                    style: "height:25px;"
+                    style: "height: 35px"
                 });
 
                 dashboard.CpCenterInner = new ContentPane({
@@ -101,6 +102,46 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
                 dashboard.InnerBc.resize();
 
                 dashboard.InnerBc.resize();
+                dashboard.TopBc.resize();
+
+                this.createMenuRegions();
+            },
+
+            createMenuRegions: function() {
+                dashboard.MenuBc = new BorderContainer({
+                    liveSplitters:false,
+                    persist:true,
+                    gutters: false
+                });
+
+                dashboard.leftMenuPane = new ContentPane({
+                    region: "left",
+                    splitter:false,
+                    style: "width: 80%"
+                });
+                dashboard.MenuBc.addChild(dashboard.leftMenuPane);
+
+                dashboard.rightMenuPane = new ContentPane({
+                    region: "center",
+                    splitter:false
+                });
+                dashboard.MenuBc.addChild(dashboard.rightMenuPane);
+
+                dashboard.MenuBc.placeAt(dashboard.CpMenu);
+                dashboard.MenuBc.startup();
+                dashboard.MenuBc.resize();
+                dashboard.TopBc.resize();
+
+                this.addToolbar();
+            },
+
+            addToolbar: function() {
+                dashboard.toolbar = new Toolbar({});
+
+                dashboard.toolbar.addChild(ButtonHelper.getRefresh());
+
+                dashboard.toolbar.placeAt(dashboard.leftMenuPane);
+                dashboard.toolbar.startup();
                 dashboard.TopBc.resize();
             }
 
