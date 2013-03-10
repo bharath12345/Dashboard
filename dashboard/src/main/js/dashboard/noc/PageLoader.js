@@ -101,7 +101,8 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
                 PageLoader.TopBc[pageCounter] = new BorderContainer({
                     design:"headline",
                     liveSplitters:false,
-                    persist:true
+                    persist:true,
+                    gutters: false
                     //style: this.getViewPortDimensions()
                 }, node);
 

@@ -80,7 +80,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
                 dashboard.InnerBc = new BorderContainer({
                     design:"headline",
                     liveSplitters:false,
-                    persist:true
+                    persist:true,
+                    gutters: false
                 }, node);
 
                 dashboard.CpMenu = new ContentPane({
