@@ -9,6 +9,11 @@ var pageTypes = {
 require(["dojo/io-query", "dojo/dom-construct", "dojo/_base/window", 'dojo/domReady!' ],
 
     function (ioQuery, domConstruct, win) {
+        if(document.getElementById("loader") != null) {
+            console.log("disallowing second loader");
+            return;
+        }
+
         var uri = document.URL;
         var node = domConstruct.create("script");
         var srcScript;
@@ -57,6 +62,7 @@ require(["dojo/io-query", "dojo/dom-construct", "dojo/_base/window", 'dojo/domRe
         domConstruct.create(node,
             {
                 type:'text/javascript',
+                id: "loader",
                 src: srcScript
             }, win.body(), "first");
     }

@@ -21,11 +21,11 @@ define([ 'dojo/has', 'require' ], function (has, require) {
     if (has('host-browser')) {
 
         require(["dashboard/noc/NocView", 'dashboard/logger/Logger',
-            "dashboard/noc/NocUtility", "dashboard/noc/NocAccordion",
+            "dashboard/noc/NocUtility", "dashboard/noc/NocAccordion", "dashboard/helper/Helper",
             'dojo/domReady!' ],
 
-            function (NocView, PageLoader, ViewManager, Logger, NocUtility, NocAccordion) {
-                //Logger.initialize();
+            function (NocView, Logger, NocUtility, NocAccordion, Helper) {
+                Logger.initialize();
                 NocUtility.InitKeyControls();
 
                 var nocView = new NocView(true);
