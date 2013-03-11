@@ -112,6 +112,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
                 this.maxOneRed(id + "_AlertRect", parseInt(payload.alertCount), false);
                 this.maxOneRed(id + "_FailCountRect", parseInt(payload.failCount), false);
                 this.maxOneRed(id + "_SlowCountRect", parseInt(payload.slowCount), true);
+
+                dashboard.STANDBY.hide();
             }
 
         });

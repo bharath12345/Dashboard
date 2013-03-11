@@ -36,18 +36,23 @@ define([ 'dojo/has', 'require' ], function (has, require) {
          * plugin functionality.
          */
         require(['dashboard/DashboardView', 'dashboard/DashboardAccordion',
-            "dashboard/DashboardCallbacks", "dashboard/helper/Helper", 'dojo/domReady!' ],
+            "dashboard/DashboardCallbacks", "dashboard/helper/Helper", "dashboard/noc/NocAccordion",'dojo/domReady!' ],
 
-            function (DashboardView, DashboardAccordion, DashboardCallbacks, Helper) {
-                Helper.showLoading();
+            function (DashboardView, DashboardAccordion, DashboardCallbacks, Helper, NocAccordion) {
 
                 DashboardCallbacks.initialize();
 
                 var dView = new DashboardView();
                 dView.createDom();
 
+                Helper.showLoading();
+
                 var ca = new DashboardAccordion();
                 ca.loadAccordion();
+
+                // the default view is the "All Applications Alerts Grid"
+                var nocA = NocAccordion();
+                nocA.showPageConfig("", "Alerts Grid", "", false);
 
             });
     }

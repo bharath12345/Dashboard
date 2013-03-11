@@ -85,7 +85,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/confi
                 ConfigUtility.SAVE_DIALOG.show();
             }
             setTimeout(function () {
-                config.ConfigUtility.SAVE_DIALOG.hide();
+                dashboard.config.ConfigUtility.SAVE_DIALOG.hide();
             }, 4 * 1000);
         };
 

@@ -7,21 +7,15 @@ define(["dojo/_base/declare", 'dojox/widget/Standby', "dojo/io-query"],
         Helper.JSON_HEADER = { 'Content-Type':'application/json' };
 
         Helper.showLoading = function() {
-            var node = dojo.create("div");
-            document.body.appendChild(node);
-
-            dashboard.STANDBY = new Standby({target:node});
+            dashboard.STANDBY = new Standby({target:dashboard.TopBc.domNode});
             document.body.appendChild(dashboard.STANDBY.domNode);
             dashboard.STANDBY.startup();
             dashboard.STANDBY.show();
         };
 
-        Helper.hideLoading = function() {
-            dashboard.STANDBY.hide();
-        };
-
         Helper.createDomAndShowPage = function(viewObject, accordionObject) {
             viewObject.createDom();
+            Helper.showLoading();
 
             var uri = document.URL;
             var query = uri.substring(uri.indexOf("?") + 1, uri.length);

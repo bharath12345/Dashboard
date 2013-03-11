@@ -76,7 +76,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
                                     console.log("somehow escape dialog not initialized");
                                 }
                             }
-                            setTimeout(function(){noc.NocUtility.ESCAPE_DIALOG.hide();}, 2*1000);
+                            setTimeout(function(){dashboard.noc.NocUtility.ESCAPE_DIALOG.hide();}, 2*1000);
                         });
                         break;
                     case keys.SPACE:
@@ -111,7 +111,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
                                     console.log("Somehow space hit but dialog not initialized");
                                 }
                             }
-                            setTimeout(function(){noc.NocUtility.SPACE_DIALOG.hide();}, 2*1000);
+                            setTimeout(function(){dashboard.noc.NocUtility.SPACE_DIALOG.hide();}, 2*1000);
                         });
                         break;
                 }
