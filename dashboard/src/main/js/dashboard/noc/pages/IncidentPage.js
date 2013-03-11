@@ -11,7 +11,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
                 var paneHeight = dashboard.CpCenterInner.h;
                 var styleString = "width: " + paneWidth + "; height: " + paneHeight + ";"
 
-                dashboard.topMenuPane.domNode.innerHTML = "<div class='text-center alert alert-info heading'><strong>Alerts Grid</strong></div>";
+                dashboard.topMenuPane.domNode.innerHTML = "<div class='text-center alert alert-info heading'>Alerts Grid</div>";
 
                 var titlePane = new ContentPane({
                     splitter:false,

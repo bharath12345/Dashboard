@@ -26,11 +26,14 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard",
                 });
                 dashboard.toolbar.addChild(button);
 
-                button = ButtonHelper.getPopUpWindow();
+                button = ButtonHelper.getNewWindow();
                 on(button, "click", function() {
                     NocView.launchNewWindowConfigPane();
                 });
                 dashboard.toolbar.addChild(button);
+
+                dashboard.bottomMenuPane.resize();
+                dashboard.TopBc.resize();
             }
         });
 

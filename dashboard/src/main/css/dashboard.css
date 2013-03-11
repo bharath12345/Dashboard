@@ -62,11 +62,13 @@ a.document {
 }
 
 /* ----------------- The Blue Heading In Central Pane -----------------*/
-div.heading {
+div.heading{
     padding-top:0;
-    border:1px solid;
+    /*border:1px solid;*/
     height:5px;
     border-radius:0;
+    background-color:#4B6F93;
+    color:white;
 }
 
 /* ----------------- NOC Screens Related -----------------*/
