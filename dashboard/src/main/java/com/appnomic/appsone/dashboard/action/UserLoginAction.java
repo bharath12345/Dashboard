@@ -33,7 +33,7 @@ public class UserLoginAction extends AbstractNocAction {
 	                "noCache","true",
 	                "excludeNullProperties","true"
 	            })})
-	public String nocAction() {
+	public String userAction() {
 		
 		System.out.println("parameters from sessionaware = " + getParameters());
 		LoginInput userlocal = new LoginInput();

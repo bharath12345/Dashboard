@@ -214,6 +214,10 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                     GridMeta.POSTSET.appdataset.push(dataset);
                 }
 
+                this.startStaggeredDatabasePolling();
+            },
+
+            startStaggeredDatabasePolling: function() {
                 // collect the tx data at app level
                 // stagger the collection of each application by 10 seconds duration to keep the load on db managable
 

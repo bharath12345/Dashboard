@@ -63,6 +63,12 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", 'd
                     ApplicationGrid.POSTSET.dataset.push(datum);
                 }
 
+                this.startStaggeredDatabasePolling();
+
+                setInterval(this.applyConfig, ApplicationGrid.CONFIG_PERIOD * 1000);
+            },
+
+            startStaggeredDatabasePolling: function() {
                 var period = 1;
                 for (var i = 0; i < ApplicationGrid.POSTSET.dataset.length; i++) {
                     // first one launches after one second
@@ -76,8 +82,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", 'd
                 for(var i=0;i < ApplicationGrid.POSTSET.dataset.length; i++) {
                     this.periodicAppPost();
                 }
-
-                setInterval(this.applyConfig, ApplicationGrid.CONFIG_PERIOD * 1000);
             },
 
             periodicApp:function () {

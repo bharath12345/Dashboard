@@ -46,7 +46,35 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
                 }
             },
 
-            constructor:function () {
+            startStopRefresh: function(name, state) {
+                var timers = [];
+                var classToLoad;
+                switch(name) {
+                    case this.ALERTSGRID:
+                        timers = dashboard.noc.Widgets.Incident.ApplicationGrid.TIMERS;
+                        classToLoad = NOCCONSTANTS.CLASSNAME.WIDGETS.INCIDENT.APPLICATIONGRID;
+                        break;
+
+                    case this.CLUSTERSGRID:
+                        break;
+
+                    case this.TRANSACTIONSGRID:
+                        timers = dashboard.noc.Widgets.Transaction.GridMeta.TIMERS;
+                        classToLoad = NOCCONSTANTS.CLASSNAME.WIDGETS.TRANSACTION.GRIDMETA;
+                        break;
+                }
+
+                if(state == false) {
+                    for(var i=0;i<timers.length;i++) {
+                        clearInterval(timers[i]);
+                    }
+                    timers = [];
+                } else {
+                    require([NOCCONSTANTS.getClassPath(classToLoad)], function (NocDataClass) {
+                        var nocDataClass = new NocDataClass();
+                        nocDataClass.startStaggeredDatabasePolling();
+                    });
+                }
             }
 
         });

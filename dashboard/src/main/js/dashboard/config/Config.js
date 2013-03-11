@@ -24,8 +24,6 @@ define([ 'dojo/has', 'require' ], function (has, require) {
             'dojo/domReady!' ],
 
             function (ConfigAccordion, ConfigView, Helper) {
-                Helper.showLoading();
-
                 var configView = new ConfigView(true);
                 var configAccordion = new ConfigAccordion();
                 Helper.createDomAndShowPage(configView, configAccordion);
