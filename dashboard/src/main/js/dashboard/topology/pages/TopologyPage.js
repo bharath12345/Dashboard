@@ -1,10 +1,11 @@
 define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/GridContainer",
     "dijit/layout/ContentPane",
-    "dojo/i18n!dashboard/noc/nls/noc", "dashboard/noc/NocUtility", "dashboard/noc/NocConstants", "dashboard/logger/Logger"],
+    "dojo/i18n!dashboard/topology/nls/topology", "dashboard/logger/Logger",
+    "dashboard/topology/TopologyConstants", "dashboard/topology/TopologyUtility"],
 
-    function (require, declare, i18n, TitlePane, GridContainer, ContentPane, i18nString, NocUtility, NOCCONSTANTS, Logger) {
+    function (require, declare, i18n, TitlePane, GridContainer, ContentPane, i18nString, Logger, TOPOLOGYCONSTANTS, TopologyUtility) {
 
-        var TopologyPage = declare(NOCCONSTANTS.CLASSNAME.PAGES.TOPOLOGYPAGE, null, {
+        var TopologyPage = declare(TOPOLOGYCONSTANTS.CLASSNAME.PAGES.TOPOLOGYPAGE, null, {
 
             loadPage:function (pageNumber, pageName) {
                 TopologyPage.CP = noc.PageLoader.CpCenter[pageNumber];
@@ -39,20 +40,20 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                 var viewMeta = {
                     id:pageName,
                     name:pageName,
-                    type:NOCCONSTANTS.TYPE.TOPOLOGY,
-                    subtype:NOCCONSTANTS.SUBTYPE.TOPOLOGY.NODES,
+                    type:TOPOLOGYCONSTANTS.TYPE.TOPOLOGY,
+                    subtype:TOPOLOGYCONSTANTS.SUBTYPE.TOPOLOGY.NODES,
                     dimensions:[paneWidth, paneHeight],
                     position:[xpos, ypos],
                     custom:[]
                 };
 
-                NocUtility.xhrPostCentral(NOCCONSTANTS.ACTION.TOPOLOGY.NODES, viewMeta);
+                TopologyUtility.xhrPostCentral(TOPOLOGYCONSTANTS.ACTION.TOPOLOGY.NODES, viewMeta);
 
             }
         });
 
         // static variables of this class
-        TopologyPage.LOG = Logger.addTimer(new Logger(NOCCONSTANTS.CLASSNAME.PAGES.TOPOLOGYPAGE));
+        TopologyPage.LOG = Logger.addTimer(new Logger(TOPOLOGYCONSTANTS.CLASSNAME.PAGES.TOPOLOGYPAGE));
 
         TopologyPage.CP = null;
         TopologyPage.TitlePane = null;

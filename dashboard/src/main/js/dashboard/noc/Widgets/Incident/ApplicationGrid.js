@@ -66,8 +66,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", 'd
 
                 Scheduler.POLLER = this;
                 this.startStaggeredDatabasePolling();
-
-                setInterval(this.applyConfig, ApplicationGrid.CONFIG_PERIOD * 1000);
             },
 
             startStaggeredDatabasePolling: function() {
@@ -87,7 +85,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", 'd
             },
 
             periodicApp:function () {
-                var timer = setInterval(dashboard.noc.Widgets.Incident.ApplicationGrid.prototype.periodicAppPost,
+                var timer = setInterval(dashboard.noc.widgets.incident.ApplicationGrid.prototype.periodicAppPost,
                     ApplicationGrid.POSTSET.dataset.length * ApplicationGrid.APP_STAGGER_PERIOD * 1000);
                 Scheduler.TIMERS.push(timer);
             },
@@ -112,19 +110,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", 'd
                 if(ApplicationGrid.APP_COUNTER > (ApplicationGrid.POSTSET.dataset.length-1)){
                     ApplicationGrid.APP_COUNTER = 0;
                 }
-            },
-
-            applyConfig: function() {
-                var viewMeta = {
-                    id:"",
-                    name:"",
-                    type:NOCCONSTANTS.TYPE.CONFIG,
-                    subtype:NOCCONSTANTS.SUBTYPE.APPINCIDENTGRID,
-                    dimensions:[0, 0],
-                    position:[0, 0],
-                    custom:[]
-                };
-                NocUtility.xhrPostCentral(NOCCONSTANTS.ACTION.CONFIG.APPINCIDENTGRID, viewMeta);
             }
 
         });

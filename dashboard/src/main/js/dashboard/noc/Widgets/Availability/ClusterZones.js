@@ -143,7 +143,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
             },
 
             periodicCluster:function () {
-                var timer = setInterval(dashboard.noc.Widgets.Availability.ClusterZones.prototype.periodicClusterPost,
+                var timer = setInterval(dashboard.noc.widgets.availability.ClusterZones.prototype.periodicClusterPost,
                     ClusterZones.POSTSET.dataset.length * ClusterZones.CLUSTER_STAGGER_PERIOD * 1000);
                 ClusterZones.TIMERS.push(timer);
             },

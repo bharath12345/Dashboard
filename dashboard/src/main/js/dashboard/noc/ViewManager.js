@@ -107,7 +107,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/n
         ViewManager.manageConfig = function(data, input) {
             switch(data.subtype) {
                 case NOCCONSTANTS.SUBTYPE.APPINCIDENTGRID:
-                    require([NOCCONSTANTS.getClassPath(NOCCONSTANTS.CLASSNAME.WIDGETS.CONFIG.APPINCIDENTGRID)], function (AppIncidentGrid) {
+                    require([NOCCONSTANTS.getClassPath(NOCCONSTANTS.CLASSNAME.WIDGETS.INCIDENT.APPINCIDENTGRID)], function (AppIncidentGrid) {
                         AppIncidentGrid.setConfig(input);
                     });
                     break;

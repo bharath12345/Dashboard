@@ -11,7 +11,6 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/n
         NocConstants.CLASSNAME.UTILITY = "dashboard.noc.NocUtility";
         NocConstants.CLASSNAME.PAGELOADER = "dashboard.noc.PageLoader";
         NocConstants.CLASSNAME.VIEWMANAGER = "dashboard.noc.ViewManager";
-        NocConstants.CLASSNAME.CONFIG = "dashboard.noc.Config";
 
         NocConstants.CLASSNAME.PAGES = {};
         NocConstants.CLASSNAME.PAGES.AVAILABILITYPAGE = "dashboard.noc.pages.AvailabilityPage";
@@ -21,7 +20,6 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/n
         NocConstants.CLASSNAME.PAGES.INCIDENTPAGE = "dashboard.noc.pages.IncidentPage";
         NocConstants.CLASSNAME.PAGES.ALLCLUSTERAVAILABILITY = "dashboard.noc.pages.AllClusterAvailability";
         NocConstants.CLASSNAME.PAGES.TRANSACTIONGRID = "dashboard.noc.pages.TransactionGrid";
-        NocConstants.CLASSNAME.PAGES.TOPOLOGYPAGE = "dashboard.noc.pages.TopologyPage";
 
         NocConstants.CLASSNAME.TIMESERIES = {};
         NocConstants.CLASSNAME.TIMESERIES.BATCHTX = "dashboard.noc.timeseries.BatchTxTimeSeries";
@@ -30,33 +28,26 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/n
 
         NocConstants.CLASSNAME.WIDGETS = {};
         NocConstants.CLASSNAME.WIDGETS.AVAILABILITY = {};
-        NocConstants.CLASSNAME.WIDGETS.AVAILABILITY.AVAILABILITY = "dashboard.noc.Widgets.Availability.Availability";
-        NocConstants.CLASSNAME.WIDGETS.AVAILABILITY.AVAILABILITYGRID = "dashboard.noc.Widgets.Availability.AvailabilityGrid";
-        NocConstants.CLASSNAME.WIDGETS.AVAILABILITY.AVAILMATRIX = "dashboard.noc.Widgets.Availability.AvailMatrix";
-        NocConstants.CLASSNAME.WIDGETS.AVAILABILITY.AVAILMATRIX2 = "dashboard.noc.Widgets.Availability.AvailMatrix2";
-        NocConstants.CLASSNAME.WIDGETS.AVAILABILITY.CLUSTERZONES = "dashboard.noc.Widgets.Availability.ClusterZones";
+        NocConstants.CLASSNAME.WIDGETS.AVAILABILITY.AVAILABILITY = "dashboard.noc.widgets.availability.Availability";
+        NocConstants.CLASSNAME.WIDGETS.AVAILABILITY.AVAILABILITYGRID = "dashboard.noc.widgets.availability.AvailabilityGrid";
+        NocConstants.CLASSNAME.WIDGETS.AVAILABILITY.AVAILMATRIX = "dashboard.noc.widgets.availability.AvailMatrix";
+        NocConstants.CLASSNAME.WIDGETS.AVAILABILITY.AVAILMATRIX2 = "dashboard.noc.widgets.availability.AvailMatrix2";
+        NocConstants.CLASSNAME.WIDGETS.AVAILABILITY.CLUSTERZONES = "dashboard.noc.widgets.availability.ClusterZones";
 
         NocConstants.CLASSNAME.WIDGETS.COMPONENT = {};
-        NocConstants.CLASSNAME.WIDGETS.COMPONENT.CELLMAKER = "dashboard.noc.Component.CellMaker";
-        NocConstants.CLASSNAME.WIDGETS.COMPONENT.ZONES = "dashboard.noc.Component.Zones";
+        NocConstants.CLASSNAME.WIDGETS.COMPONENT.CELLMAKER = "dashboard.noc.widgets.component.CellMaker";
+        NocConstants.CLASSNAME.WIDGETS.COMPONENT.ZONES = "dashboard.noc.widgets.component.Zones";
 
         NocConstants.CLASSNAME.WIDGETS.INCIDENT = {};
-        NocConstants.CLASSNAME.WIDGETS.INCIDENT.INCIDENTAVAILABILITYGRID = "dashboard.noc.Widgets.Incident.IncidentAvailabilityGrid";
-        NocConstants.CLASSNAME.WIDGETS.INCIDENT.APPLICATIONGRID = "dashboard.noc.Widgets.Incident.ApplicationGrid";
-        NocConstants.CLASSNAME.WIDGETS.INCIDENT.APPLICATIONDATA = "dashboard.noc.Widgets.Incident.ApplicationData";
+        NocConstants.CLASSNAME.WIDGETS.INCIDENT.INCIDENTAVAILABILITYGRID = "dashboard.noc.widgets.incident.IncidentAvailabilityGrid";
+        NocConstants.CLASSNAME.WIDGETS.INCIDENT.APPLICATIONGRID = "dashboard.noc.widgets.incident.ApplicationGrid";
+        NocConstants.CLASSNAME.WIDGETS.INCIDENT.APPLICATIONDATA = "dashboard.noc.widgets.incident.ApplicationData";
+        NocConstants.CLASSNAME.WIDGETS.INCIDENT.APPINCIDENTGRID = "dashboard.noc.widgets.incident.AppIncidentGrid";
 
         NocConstants.CLASSNAME.WIDGETS.TRANSACTION = {};
-        NocConstants.CLASSNAME.WIDGETS.TRANSACTION.GRIDMETA = "dashboard.noc.Widgets.Transaction.GridMeta";
-        NocConstants.CLASSNAME.WIDGETS.TRANSACTION.GRIDDATA = "dashboard.noc.Widgets.Transaction.GridData";
+        NocConstants.CLASSNAME.WIDGETS.TRANSACTION.GRIDMETA = "dashboard.noc.widgets.transaction.GridMeta";
+        NocConstants.CLASSNAME.WIDGETS.TRANSACTION.GRIDDATA = "dashboard.noc.widgets.transaction.GridData";
 
-        NocConstants.CLASSNAME.WIDGETS.TOPOLOGY = {};
-        NocConstants.CLASSNAME.WIDGETS.TOPOLOGY.RENDERNODES = "dashboard.noc.Widgets.Topology.RenderNodes";
-        NocConstants.CLASSNAME.WIDGETS.TOPOLOGY.RENDERCONNECTIVITY = "dashboard.noc.Widgets.Topology.RenderConnectivity";
-        NocConstants.CLASSNAME.WIDGETS.TOPOLOGY.NODESTATUS = "dashboard.noc.Widgets.Topology.NodeStatus";
-        NocConstants.CLASSNAME.WIDGETS.TOPOLOGY.CONNECTIONSTATUS = "dashboard.noc.Widgets.Topology.ConnectionStatus";
-
-        NocConstants.CLASSNAME.WIDGETS.CONFIG = {};
-        NocConstants.CLASSNAME.WIDGETS.CONFIG.APPINCIDENTGRID = "dashboard.noc.Widgets.Config.AppIncidentGrid";
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // VARIOUS TYPES FOR SWITCHING IN ViewManager
@@ -69,8 +60,6 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/n
         NocConstants.TYPE.COMPONENT = 2;
         NocConstants.TYPE.INCIDENT = 3;
         NocConstants.TYPE.TRANSACTION = 4;
-        NocConstants.TYPE.TOPOLOGY = 5;
-        NocConstants.TYPE.CONFIG = 6;
 
         NocConstants.SUBTYPE.AVAILABILITY = {};
         NocConstants.SUBTYPE.AVAILABILITY.COMPONENT = 1;
@@ -97,15 +86,6 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/n
         NocConstants.SUBTYPE.TRANSACTION.META = 1;
         NocConstants.SUBTYPE.TRANSACTION.DATA = 2;
         NocConstants.SUBTYPE.TRANSACTION.APPDATA = 3;
-
-        NocConstants.SUBTYPE.TOPOLOGY = {};
-        NocConstants.SUBTYPE.TOPOLOGY.NODES = 1;
-        NocConstants.SUBTYPE.TOPOLOGY.CONNECTIVITY = 2;
-        NocConstants.SUBTYPE.TOPOLOGY.NODESTATUS = 3;
-        NocConstants.SUBTYPE.TOPOLOGY.CONNECTIONSTATUS = 4;
-
-        NocConstants.SUBTYPE.CONFIG = {};
-        NocConstants.SUBTYPE.APPINCIDENTGRID = 1;
 
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -138,15 +118,6 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/n
         NocConstants.ACTION.TRANSACTION.META = "transaction/Meta.action";
         NocConstants.ACTION.TRANSACTION.DATA = "transaction/Data.action";
         NocConstants.ACTION.TRANSACTION.APPDATA = "transaction/AppData.action";
-
-        NocConstants.ACTION.TOPOLOGY = {};
-        NocConstants.ACTION.TOPOLOGY.NODES = "topology/Nodes.action";
-        NocConstants.ACTION.TOPOLOGY.CONNECTIONS = "topology/Connections.action";
-        NocConstants.ACTION.TOPOLOGY.NODESTATUS = "topology/NodeStatus.action";
-        NocConstants.ACTION.TOPOLOGY.CONNECTIONSTATUS = "topology/ConnectionStatus.action";
-
-        NocConstants.ACTION.CONFIG = {};
-        NocConstants.ACTION.CONFIG.APPINCIDENTGRID = "config/applicableAlertGridDetailsRetrieve.action";
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

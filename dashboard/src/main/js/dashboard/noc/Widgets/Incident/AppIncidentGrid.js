@@ -1,9 +1,9 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "dashboard/logger/Logger", "dashboard/noc/NocConstants", "dashboard/noc/NocUtility",
-    "dashboard/noc/pages/IncidentPage", "dashboard/noc/Widgets/Incident/ApplicationGrid"],
+    "dashboard/noc/pages/IncidentPage", "dashboard/noc/widgets/incident/ApplicationGrid"],
 
     function (declare, i18n, i18nString, Logger, NOCCONSTANTS, NocUtility, IncidentPage, ApplicationGrid) {
 
-        var AppAlertGrid = declare(NOCCONSTANTS.CLASSNAME.WIDGETS.CONFIG.APPINCIDENTGRID, null, {});
+        var AppAlertGrid = declare(NOCCONSTANTS.CLASSNAME.WIDGETS.INCIDENT.APPINCIDENTGRID, null, {});
 
         AppAlertGrid.applyConfig = function () {
             if(AppAlertGrid.CONFIG == null) {
@@ -44,7 +44,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
         };
 
 
-        AppAlertGrid.LOG = Logger.addTimer(new Logger(NOCCONSTANTS.CLASSNAME.WIDGETS.CONFIG.APPINCIDENTGRID));
+        AppAlertGrid.LOG = Logger.addTimer(new Logger(NOCCONSTANTS.CLASSNAME.WIDGETS.INCIDENT.APPINCIDENTGRID));
         AppAlertGrid.CONFIG = null;
 
         return AppAlertGrid;

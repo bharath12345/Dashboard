@@ -23,7 +23,7 @@ define([ 'dojo/has', 'require' ], function (has, require) {
         require(['dashboard/config/ConfigAccordion', "dashboard/helper/Helper",
             'dojo/domReady!' ],
 
-            function (ConfigAccordion, ConfigView, Helper) {
+            function (ConfigAccordion, Helper) {
                 var configAccordion = new ConfigAccordion();
                 Helper.createDomAndShowPage(configAccordion);
             });

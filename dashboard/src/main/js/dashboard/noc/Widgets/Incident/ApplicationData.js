@@ -1,5 +1,5 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", 'dgrid/Grid', "dashboard/logger/Logger", "dashboard/noc/NocConstants", "dashboard/noc/NocUtility",
-            "dashboard/noc/Widgets/Config/AppIncidentGrid"],
+            "dashboard/noc/widgets/incident/AppIncidentGrid"],
 
     function (declare, i18n, i18nString, Grid, Logger, NOCCONSTANTS, NocUtility, AppIncidentGrid) {
 

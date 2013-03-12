@@ -1,9 +1,11 @@
-define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "dashboard/logger/Logger", "dashboard/noc/NocConstants", "dashboard/noc/NocUtility",
+define(["dojo/_base/declare", "dojo/i18n",
+    "dojo/i18n!dashboard/topology/nls/topology", "dashboard/logger/Logger",
+    "dashboard/topology/TopologyConstants", "dashboard/topology/TopologyUtility",
     "noc/data/Topology"],
 
-    function (declare, i18n, i18nString, Logger, NOCCONSTANTS, NocUtility, TOPOLOGY) {
+    function (declare, i18n, i18nString, Logger, TOPOLOGYCONSTANTS, TopologyUtility, TOPOLOGY) {
 
-        var RenderConnectivity = declare(NOCCONSTANTS.CLASSNAME.WIDGETS.TOPOLOGY.RENDERCONNECTIVITY, null, {
+        var RenderConnectivity = declare(TOPOLOGYCONSTANTS.CLASSNAME.WIDGETS.RENDERCONNECTIVITY, null, {
 
             constructor: function() {
                 jsPlumb.importDefaults({
@@ -41,9 +43,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
                 var dstType = input.netBankingConnectivityVO.dstType;
                 var connections = input.netBankingConnectivityVO.connections;
 
-                var lhsDivName = data.id + "_" + data.name + dashboard.noc.Widgets.Topology.RenderNodes.ENDPOINT_SUFFIX;
+                var lhsDivName = data.id + "_" + data.name + dashboard.topology.widgets.RenderNodes.ENDPOINT_SUFFIX;
                 for (var i = 0; i < connections.length; i++) {
-                    var rhsDivName = dstType + "_" + connections[i] + dashboard.noc.Widgets.Topology.RenderNodes.ENDPOINT_SUFFIX;
+                    var rhsDivName = dstType + "_" + connections[i] + dashboard.topology.widgets.RenderNodes.ENDPOINT_SUFFIX;
                     console.log("lhs div name = " + lhsDivName + " rhs div name = " + rhsDivName);
 
                     // create Endpoint on LHS and RHS node
@@ -76,20 +78,20 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
                     var viewMeta = {
                         id:"", // uuid of the link?
                         name: "", // uuid of the link?
-                        type: NOCCONSTANTS.TYPE.TOPOLOGY,
-                        subtype: NOCCONSTANTS.SUBTYPE.TOPOLOGY.CONNECTIONSTATUS,
+                        type: TOPOLOGYCONSTANTS.TYPE.TOPOLOGY,
+                        subtype: TOPOLOGYCONSTANTS.SUBTYPE.TOPOLOGY.CONNECTIONSTATUS,
                         dimensions:[0, 0],
                         position:[xpos,ypos],
                         custom: []
                     };
-                    NocUtility.xhrPostCentral(NOCCONSTANTS.ACTION.TOPOLOGY.CONNECTIONSTATUS, viewMeta);
+                    TopologyUtility.xhrPostCentral(TOPOLOGYCONSTANTS.ACTION.TOPOLOGY.CONNECTIONSTATUS, viewMeta);
                 }
 
 
             }
         });
 
-        RenderConnectivity.LOG = Logger.addTimer(new Logger(NOCCONSTANTS.CLASSNAME.WIDGETS.TOPOLOGY.RENDERCONNECTIVITY));
+        RenderConnectivity.LOG = Logger.addTimer(new Logger(TOPOLOGYCONSTANTS.CLASSNAME.WIDGETS.TOPOLOGY.RENDERCONNECTIVITY));
         RenderConnectivity.FROM = "FROM_";
         RenderConnectivity.TO = "_TO_";
 
