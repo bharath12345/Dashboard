@@ -1,9 +1,8 @@
 define(["dojo/_base/declare", "dojo/i18n",
     "dojo/i18n!dashboard/topology/nls/topology", "dashboard/logger/Logger",
-    "dashboard/topology/TopologyConstants", "dashboard/topology/TopologyUtility",
-    "noc/data/Topology"],
+    "dashboard/topology/TopologyConstants", "dashboard/topology/TopologyUtility"],
 
-    function (declare, i18n, i18nString, Logger, TOPOLOGYCONSTANTS, TopologyUtility, TOPOLOGY) {
+    function (declare, i18n, i18nString, Logger, TOPOLOGYCONSTANTS, TopologyUtility) {
 
         var RenderConnectivity = declare(TOPOLOGYCONSTANTS.CLASSNAME.WIDGETS.RENDERCONNECTIVITY, null, {
 
@@ -57,7 +56,7 @@ define(["dojo/_base/declare", "dojo/i18n",
                         RenderConnectivity.sourceEndpoint,
                         {
                             uuid:srcUuid,
-                            container:noc.pages.TopologyPage.TitlePane.domNode,
+                            container:dashboard.topology.pages.TopologyPage.TitlePane.domNode,
                             anchor:"RightMiddle"
                         });
 
@@ -66,12 +65,12 @@ define(["dojo/_base/declare", "dojo/i18n",
                         RenderConnectivity.targetEndpoint,
                         {
                             uuid:dstUuid,
-                            container:noc.pages.TopologyPage.TitlePane.domNode,
+                            container:dashboard.topology.pages.TopologyPage.TitlePane.domNode,
                             anchor:"LeftMiddle"
                         });
 
                     // create connection link
-                    jsPlumb.connect({ source:sourceEP, target:dstEP, container:noc.pages.TopologyPage.TitlePane.domNode });
+                    jsPlumb.connect({ source:sourceEP, target:dstEP, container:dashboard.topology.pages.TopologyPage.TitlePane.domNode });
 
                     // get and set the status of the connection link
                     var xpos=0, ypos=0;

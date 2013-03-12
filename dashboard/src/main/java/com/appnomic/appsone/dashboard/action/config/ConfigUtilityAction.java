@@ -80,11 +80,11 @@ public class ConfigUtilityAction extends AbstractNocAction {
 		pageListVO.setType(ActionConstants.ACCTYPE.GRID.name());
 		pageList.add(pageListVO);
 		
-		pageListVO = new PageListVO();
+		/*pageListVO = new PageListVO();
 		pageListVO.setName("Clusters Grid");
 		pageListVO.setId(UUID.randomUUID().toString());
 		pageListVO.setType(ActionConstants.ACCTYPE.GRID.name());
-		pageList.add(pageListVO);
+		pageList.add(pageListVO);*/
 		
 		pageListVO = new PageListVO();
 		pageListVO.setName("Transactions Grid");

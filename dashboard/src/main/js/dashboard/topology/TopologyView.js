@@ -1,11 +1,11 @@
-define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc",
+define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/topology/nls/topology",
     "dojo/on", "dojo/_base/lang",
     "dashboard/abstract/AbstractView", "dashboard/WindowManager", "dashboard/main/loader", "dashboard/helper/ButtonHelper",
     "dashboard/helper/Scheduler"],
 
     function (declare, i18n, i18nString, on, lang, AbstractView, WindowManager, loader, ButtonHelper, Scheduler) {
 
-        var NocView = declare("dashboard.noc.NocView", AbstractView, {
+        var TopologyView = declare("dashboard.topology.TopologyView", AbstractView, {
 
             newWindow: false,
 
@@ -18,14 +18,14 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc",
             },
 
             refreshView: function() {
-                var nocAccordion = NocView.ACCORDION;
-                nocAccordion.createView(NocView.ID, NocView.NAME, NocView.TYPE, this.newWindow);
+                var topologyAccordion = TopologyView.ACCORDION;
+                topologyAccordion.createView(TopologyView.ID, TopologyView.NAME, TopologyView.TYPE, this.newWindow);
             },
 
             loadMenu: function(id, name, type) {
-                NocView.ID = id;
-                NocView.NAME = name;
-                NocView.TYPE = type;
+                TopologyView.ID = id;
+                TopologyView.NAME = name;
+                TopologyView.TYPE = type;
 
                 dashboard.toolbar.destroyDescendants(false);
 
@@ -35,7 +35,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc",
 
                 button = ButtonHelper.getNewWindow();
                 on(button, "click", function() {
-                    NocView.launchNewWindowConfigPane();
+                    TopologyView.launchNewWindowConfigPane();
                 });
                 dashboard.toolbar.addChild(button);
 
@@ -56,17 +56,17 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc",
             },
 
             setAccordion: function(nocAccordion) {
-                NocView.ACCORDION = nocAccordion;
+                TopologyView.ACCORDION = nocAccordion;
             }
         });
 
-        NocView.launchNewWindowConfigPane = function(id, name, type) {
+        TopologyView.launchNewWindowConfigPane = function(id, name, type) {
             // launch the child window
             var wm = new WindowManager();
-            wm.getNewWindow(NocView.ID, NocView.NAME, NocView.TYPE, pageTypes.NOC);
+            wm.getNewWindow(TopologyView.ID, TopologyView.NAME, TopologyView.TYPE, pageTypes.TOPOLOGY);
         };
 
-        NocView.ACCORDION = null;
+        TopologyView.ACCORDION = null;
 
-        return NocView;
+        return TopologyView;
     });

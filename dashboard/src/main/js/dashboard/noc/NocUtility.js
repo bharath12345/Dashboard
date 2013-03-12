@@ -5,8 +5,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
 
         var NocUtility = declare(NOCCONSTANTS.CLASSNAME.UTILITY, null, {});
 
-        NocUtility.LOG = Logger.addTimer(new Logger(NOCCONSTANTS.CLASSNAME.LOGIN));
-
         NocUtility.JSON_HEADER = { 'Content-Type':'application/json' };
 
         NocUtility.xhrPostCentral = function (url, options) {

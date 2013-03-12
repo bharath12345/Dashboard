@@ -1,10 +1,11 @@
-define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc",
+define(["dojo/_base/declare", "dojo/i18n", 
     "dijit/TitlePane", "dojox/layout/GridContainer",
-    "dashboard/logger/Logger", "dashboard/noc/NocConstants", "dashboard/noc/NocUtility", "noc/data/Topology"],
+    "dojo/i18n!dashboard/topology/nls/topology", "dashboard/logger/Logger",
+    "dashboard/topology/TopologyConstants", "dashboard/topology/TopologyUtility"],
 
-    function (declare, i18n, i18nString, TitlePane, GridContainer, Logger, NOCCONSTANTS, NocUtility, TOPOLOGY) {
+    function (declare, i18n, TitlePane, GridContainer, i18nString, Logger, TOPOLOGYCONSTANTS, TopologyUtility) {
 
-        var RenderNodes = declare(NOCCONSTANTS.CLASSNAME.WIDGETS.TOPOLOGY.RENDERNODES, null, {
+        var RenderNodes = declare(TOPOLOGYCONSTANTS.CLASSNAME.WIDGETS.RENDERNODES, null, {
 
             getSvgIcon:function (src, width, height) {
                 var svgIcon = dojo.create("img");
@@ -83,7 +84,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc",
 
                     var gridContainer = new GridContainer({nbZones:names.length, isAutoOrganized:true,
                         style:"width: 100%; height: 100%;"});
-                    noc.pages.TopologyPage.TitlePane.addChild(gridContainer);
+                    dashboard.topology.pages.TopologyPage.TitlePane.addChild(gridContainer);
                     gridContainer.disableDnd();
 
                     var j = 0, k = 0;
@@ -200,13 +201,13 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc",
                             var viewMeta = {
                                 id:layer[j].name, // this will be something like WebServers
                                 name:layer[j].value[k], // this will be something like FLXRET_IHS1
-                                type:NOCCONSTANTS.TYPE.TOPOLOGY,
-                                subtype:NOCCONSTANTS.SUBTYPE.TOPOLOGY.CONNECTIVITY,
+                                type:TOPOLOGYCONSTANTS.TYPE.TOPOLOGY,
+                                subtype:TOPOLOGYCONSTANTS.SUBTYPE.TOPOLOGY.CONNECTIVITY,
                                 dimensions:[0, 0],
                                 position:[xpos, ypos],
                                 custom:[]
                             };
-                            NocUtility.xhrPostCentral(NOCCONSTANTS.ACTION.TOPOLOGY.CONNECTIONS, viewMeta);
+                            TopologyUtility.xhrPostCentral(TOPOLOGYCONSTANTS.ACTION.TOPOLOGY.CONNECTIONS, viewMeta);
                         }
                     }
 
@@ -219,24 +220,24 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc",
                      var viewMeta = {
                      id:layer[j].value[k], // this will be something like FLXRET_IHS1
                      name:layer[j].value[k], // this will be something like FLXRET_IHS1
-                     type:NOCCONSTANTS.TYPE.TOPOLOGY,
-                     subtype:NOCCONSTANTS.SUBTYPE.TOPOLOGY.NODESTATUS,
+                     type:TOPOLOGYCONSTANTS.TYPE.TOPOLOGY,
+                     subtype:TOPOLOGYCONSTANTS.SUBTYPE.TOPOLOGY.NODESTATUS,
                      dimensions:[0, 0],
                      position:[xpos, ypos],
                      custom:[]
                      };
-                     NocUtility.xhrPostCentral(NOCCONSTANTS.ACTION.TOPOLOGY.NODESTATUS, viewMeta);
+                     TopologyUtility.xhrPostCentral(TOPOLOGYCONSTANTS.ACTION.TOPOLOGY.NODESTATUS, viewMeta);
 
                      }
                      }*/
                 }
 
-                var innerPane = dojo.query(".dijitTitlePaneContentOuter", noc.pages.TopologyPage.CP.domNode);
+                var innerPane = dojo.query(".dijitTitlePaneContentOuter", dashboard.topology.pages.TopologyPage.CP.domNode);
                 for (var i = 0; i < innerPane.length; i++) {
                     innerPane[i].style.border = 0;
                 }
 
-                var gridText = dojo.query(".dijitTitlePaneTextNode", noc.pages.TopologyPage.CP.domNode);
+                var gridText = dojo.query(".dijitTitlePaneTextNode", dashboard.topology.pages.TopologyPage.CP.domNode);
                 for (var i = 0; i < gridText.length; i++) {
                     gridText[i].style.display = "block";
                     gridText[i].style.textAlign = "center";
@@ -244,7 +245,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc",
             }
         });
 
-        RenderNodes.LOG = Logger.addTimer(new Logger(NOCCONSTANTS.CLASSNAME.WIDGETS.TOPOLOGY.RENDERNODES));
+        RenderNodes.LOG = Logger.addTimer(new Logger(TOPOLOGYCONSTANTS.CLASSNAME.WIDGETS.TOPOLOGY.RENDERNODES));
 
         RenderNodes.TYPE = {};
         RenderNodes.TYPE.WEBSERVER = "WebServers";

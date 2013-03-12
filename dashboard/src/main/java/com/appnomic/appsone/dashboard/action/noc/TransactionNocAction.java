@@ -296,7 +296,7 @@ public class TransactionNocAction extends AbstractNocAction  {
 				TransactionSummary summary = txSummary.get(tx.getId());
 				if(summary == null) {
 					System.out.println("summary is null for " + tx.getName());
-					//setDummyData(transactions[k]);
+					setDummyData(transactions[k]);
 				} else {
 					alertCount = summary.getAlertsCount();
 					System.out.println("Values for tx = " + tx.getName() + " alert count = " + alertCount);

@@ -87,10 +87,6 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/n
                         ViewManager.manageTransactionSubView(data, input);
                         break;
 
-                    case NOCCONSTANTS.TYPE.TOPOLOGY:
-                        ViewManager.manageTopologySubView(data, input);
-                        break;
-
                     case NOCCONSTANTS.TYPE.CONFIG:
                         ViewManager.manageConfig(data, input);
                         break;
@@ -115,38 +111,6 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/n
                 default:
                     Logger.log("ViewManager","unknown config data sub type = " + data.subtype);
                     break;
-            }
-        };
-
-        ViewManager.manageTopologySubView = function(data, input) {
-            switch(data.subtype) {
-                case NOCCONSTANTS.SUBTYPE.TOPOLOGY.NODES:
-                    require([NOCCONSTANTS.getClassPath(NOCCONSTANTS.CLASSNAME.WIDGETS.TOPOLOGY.RENDERNODES)], function (RenderNodes) {
-                        new RenderNodes().create(data, input);
-                    });
-                break;
-
-                case NOCCONSTANTS.SUBTYPE.TOPOLOGY.CONNECTIVITY:
-                    require([NOCCONSTANTS.getClassPath(NOCCONSTANTS.CLASSNAME.WIDGETS.TOPOLOGY.RENDERCONNECTIVITY)], function (RenderConnectivity) {
-                        new RenderConnectivity().create(data, input);
-                    });
-                break;
-
-                case NOCCONSTANTS.SUBTYPE.TOPOLOGY.NODESTATUS:
-                    require([NOCCONSTANTS.getClassPath(NOCCONSTANTS.CLASSNAME.WIDGETS.TOPOLOGY.NODESTATUS)], function (NodeStatus) {
-                        new NodeStatus().create(data, input);
-                    });
-                break;
-
-                case NOCCONSTANTS.SUBTYPE.TOPOLOGY.CONNECTIONSTATUS:
-                    require([NOCCONSTANTS.getClassPath(NOCCONSTANTS.CLASSNAME.WIDGETS.TOPOLOGY.CONNECTIONSTATUS)], function (ConnectionStatus) {
-                        new ConnectionStatus().create(data, input);
-                    });
-                break;
-
-                default:
-                    Logger.log("ViewManager","unknown topology data sub type = " + data.subtype);
-                break;
             }
         };
 

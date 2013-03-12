@@ -1,4 +1,4 @@
-package com.appnomic.appsone.dashboard.action.noc;
+package com.appnomic.appsone.dashboard.action.topology;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +25,8 @@ import com.appnomic.appsone.dashboard.viewobject.config.base.IntegerAttributeVO;
 import com.appnomic.appsone.dashboard.viewobject.config.base.StringAttributeVO;
 
 @ParentPackage("json-default")
-@Namespace("/noc")
-public class NocUtilityAction extends AbstractNocAction {
+@Namespace("/topology")
+public class TopologyUtilityAction extends AbstractNocAction {
 
 	private PageListVO [] pageListVO;
 	private Map<String, String[]> param;
@@ -47,7 +47,7 @@ public class NocUtilityAction extends AbstractNocAction {
 		this.param = param;
 	}
 
-	@Action(value="/noc/pages", results = {
+	@Action(value="/topology/pages", results = {
 	        @Result(name="success", type="json", params = {
 	        		"excludeProperties",
 	                "parameters,session,SUCCESS,ERROR,agcVO,levelDbMap",
@@ -66,19 +66,7 @@ public class NocUtilityAction extends AbstractNocAction {
 		List<PageListVO> pageList = new ArrayList<PageListVO>();
 		
 		PageListVO pageListVO = new PageListVO();
-		pageListVO.setName("Alerts Grid");
-		pageListVO.setId(UUID.randomUUID().toString());
-		pageListVO.setType(ActionConstants.ACCTYPE.GRID.name());
-		pageList.add(pageListVO);
-		
-		/*pageListVO = new PageListVO();
-		pageListVO.setName("Clusters Grid");
-		pageListVO.setId(UUID.randomUUID().toString());
-		pageListVO.setType(ActionConstants.ACCTYPE.GRID.name());
-		pageList.add(pageListVO);*/
-		
-		pageListVO = new PageListVO();
-		pageListVO.setName("Transactions Grid");
+		pageListVO.setName("Sample Topology");
 		pageListVO.setId(UUID.randomUUID().toString());
 		pageListVO.setType(ActionConstants.ACCTYPE.GRID.name());
 		pageList.add(pageListVO);
