@@ -1,7 +1,8 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/config", "dashboard/logger/Logger",
-    "dashboard/config/ConfigUtility", "dashboard/config/ConfigConstants", "dashboard/abstract/AbstractAccordion"],
+    "dashboard/config/ConfigUtility", "dashboard/config/ConfigConstants", "dashboard/abstract/AbstractAccordion",
+    "dashboard/config/ConfigView"],
 
-    function (declare, i18n, i18nString, Logger, ConfigUtility, CONFIGCONSTANTS, AbstractAccordion) {
+    function (declare, i18n, i18nString, Logger, ConfigUtility, CONFIGCONSTANTS, AbstractAccordion, ConfigView) {
 
         var ConfigAccordion = declare(CONFIGCONSTANTS.CLASSNAME.ACCORDION, AbstractAccordion, {
 
@@ -20,7 +21,10 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/confi
                 this.param = data.param;
             },
 
-            showPageConfig: function(id, name, type, newWindow) {
+            showView: function(id, name, type, newWindow) {
+                configView = this.getView(name);
+                configView.setAccordion(this);
+
                 console.log("show page config called with id = " + id);
                 var viewMeta = {
                     id:id,
@@ -99,10 +103,26 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/confi
                     var global = new Global();
                     ra.renderConfigParameters(data, global);
                 });
+            },
+
+            getLinkMap: function() {
+                return ConfigAccordion.LINKMAP;
+            },
+
+            getView: function(name) {
+                var configView = ConfigAccordion.VIEWMAP[name];
+                if(configView == null) {
+                    configView = new ConfigView();
+                    ConfigAccordion.VIEWMAP[name] = configView; // there should be only one view per name (filtered views are for later)
+                }
+                return configView;
             }
         });
 
         ConfigAccordion.LOG = Logger.addTimer(new Logger(CONFIGCONSTANTS.CLASSNAME.ACCORDION));
+
+        ConfigAccordion.LINKMAP = {};
+        ConfigAccordion.VIEWMAP = {};
 
         return ConfigAccordion;
     });

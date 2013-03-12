@@ -1,6 +1,6 @@
-define(["dojo/_base/declare", "dojo/i18n", "dojo/on", "dojo/_base/lang", "dashboard/logger/Logger"],
+define(["dojo/_base/declare", "dojo/i18n", "dojo/on", "dojo/_base/lang", "dashboard/logger/Logger", "dashboard/helper/Scheduler"],
 
-    function (declare, i18n, on, lang, Logger) {
+    function (declare, i18n, on, lang, Logger, Scheduler) {
 
         var AbstractAccordion = declare("dashboard.abstract.AbstractAccordion", null, {
 
@@ -15,8 +15,10 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/on", "dojo/_base/lang", "dashbo
                 for(var i=0;i<this.data.length; i++) {
                     try {
                         var a = this.getNewA(this.data[i].id, this.data[i].name, this.data[i].type);
-                        AbstractAccordion.LINKMAP[this.data[i].id] = a;
-                        on(a, "click", lang.hitch(this, "renderPageAttrib"));
+
+                        var linkMap = this.getLinkMap(); // this is a call to the superclass
+                        linkMap[this.data[i].id] = a;
+                        on(a, "click", lang.hitch(this, "renderView"));
 
                         if(this.data[i].type.toUpperCase() == "GRID") {
                             a.innerHTML = AbstractAccordion.IMAGE + this.data[i].name;
@@ -31,17 +33,33 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/on", "dojo/_base/lang", "dashbo
                 }
             },
 
-            renderPageAttrib: function(event) {
+            renderView: function(event) {
+                this.createView(event.target.id, event.target.name, event.target.type, false);
+            },
+
+            createView: function(id, name, type, newWindow) {
+                // show the loading spinner
                 dashboard.STANDBY.show();
-                this.setMarker(event.target.id);
-                this.showPageConfig(event.target.id, event.target.name, event.target.type, false); // this is a upwards call to inherting class
+
+                // cancel all timers on previous page
+                Scheduler.cancelAllTimers();
+
+                // destroy everything in the inner most central pane
+                dashboard.CpCenterInner.destroyDescendants(false);
+
+                // set a dark marker on the accordion
+                this.setMarker(id);
+
+                // now, show the page - NOTE: this is a upwards call to inherting class
+                this.showView(id, name, type, newWindow);
             },
 
             setMarker: function(pageId) {
-                for(var key in AbstractAccordion.LINKMAP) {
-                    AbstractAccordion.LINKMAP[key].style.color = "rgb(0, 136, 204)";
+                var linkMap = this.getLinkMap(); // this is a call to the superclass
+                for(var key in linkMap) {
+                    linkMap[key].style.color = "rgb(0, 136, 204)";
                 }
-                AbstractAccordion.LINKMAP[pageId].style.color = "rgb(0, 51, 102)";
+                linkMap[pageId].style.color = "rgb(0, 51, 102)";
             },
 
             getNewA:function (id, name, type) {
@@ -65,7 +83,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/on", "dojo/_base/lang", "dashbo
 
         AbstractAccordion.LOG = Logger.addTimer(new Logger("dashboard.abstract.AbstractAccordion"));
         AbstractAccordion.IMAGE = "<img src=\".\/images\/Icon_ArrowRight_SW_16.gif\" border=\"0\" align=\"top\">";
-        AbstractAccordion.LINKMAP = {};
 
         return AbstractAccordion;
     });

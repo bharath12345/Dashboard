@@ -1,10 +1,13 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard",
     "dojo/on", "dojo/_base/lang",
-    "dashboard/abstract/AbstractView", "dashboard/WindowManager", "dashboard/main/loader", "dashboard/helper/ButtonHelper"],
+    "dashboard/abstract/AbstractView", "dashboard/WindowManager", "dashboard/main/loader", "dashboard/helper/ButtonHelper",
+    "dashboard/helper/Scheduler"],
 
-    function (declare, i18n, i18nString, on, lang, AbstractView, WindowManager, loader, ButtonHelper) {
+    function (declare, i18n, i18nString, on, lang, AbstractView, WindowManager, loader, ButtonHelper, Scheduler) {
 
         var NocView = declare("dashboard.noc.NocView", AbstractView, {
+
+            newWindow: false,
 
             constructor: function(newWindow) {
                 this.newWindow = newWindow;
@@ -12,6 +15,11 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard",
 
             createDom: function() {
                 this.createInnerMenuAndPanes(dashboard.CpTopCenter.domNode);
+            },
+
+            refreshView: function() {
+                var nocAccordion = NocView.ACCORDION;
+                nocAccordion.createView(NocView.ID, NocView.NAME, NocView.TYPE, this.newWindow);
             },
 
             loadMenu: function(id, name, type) {
@@ -22,8 +30,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard",
                 dashboard.toolbar.destroyDescendants(false);
 
                 var button = ButtonHelper.getRefresh();
-                on(button, "click", function() {
-                });
+                on(button, "click", lang.hitch(this, "refreshView"));
                 dashboard.toolbar.addChild(button);
 
                 button = ButtonHelper.getNewWindow();
@@ -34,22 +41,22 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard",
 
                 button = ButtonHelper.getStatusRefresh();
                 on(button, "click", function() {
-                    require(["dashboard/noc/NocAccordion"], function (NocAccordion) {
-                        new NocAccordion().startStopRefresh(NocView.NAME, true);
-                    });
+                    Scheduler.startStopRefresh(true);
                 });
                 dashboard.toolbar.addChild(button);
 
                 button = ButtonHelper.getStopRefresh();
                 on(button, "click", function() {
-                    require(["dashboard/noc/NocAccordion"], function (NocAccordion) {
-                        new NocAccordion().startStopRefresh(NocView.NAME, false);
-                    });
+                    Scheduler.startStopRefresh(false);
                 });
                 dashboard.toolbar.addChild(button);
 
                 dashboard.bottomMenuPane.resize();
                 dashboard.TopBc.resize();
+            },
+
+            setAccordion: function(nocAccordion) {
+                NocView.ACCORDION = nocAccordion;
             }
         });
 
@@ -58,6 +65,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard",
             var wm = new WindowManager();
             wm.getNewWindow(NocView.ID, NocView.NAME, NocView.TYPE, pageTypes.NOC);
         };
+
+        NocView.ACCORDION = null;
 
         return NocView;
     });

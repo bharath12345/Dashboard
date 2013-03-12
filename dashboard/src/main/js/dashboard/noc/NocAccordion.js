@@ -1,7 +1,7 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "dashboard/logger/Logger",
-    "dashboard/noc/NocUtility", "dashboard/noc/NocConstants", "dashboard/abstract/AbstractAccordion", "dashboard/noc/NocView"],
+    "dashboard/noc/NocUtility", "dashboard/noc/NocConstants", "dashboard/abstract/AbstractAccordion", "dashboard/noc/NocView", "dashboard/helper/Scheduler"],
 
-    function (declare, i18n, i18nString, Logger, NocUtility, NOCCONSTANTS, AbstractAccordion, NocView) {
+    function (declare, i18n, i18nString, Logger, NocUtility, NOCCONSTANTS, AbstractAccordion, NocView, Scheduler) {
 
         var NocAccordion = declare(NOCCONSTANTS.CLASSNAME.ACCORDION, AbstractAccordion, {
 
@@ -17,10 +17,13 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
                 this.param = data.param;
             },
 
-            showPageConfig: function(id, name, type, newWindow) {
+            showView: function(id, name, type, newWindow) {
                 console.log("show page config called with id = " + id + " and name = " + name);
-                var nocView = new NocView();
+
+                nocView = this.getView(name);
+                nocView.setAccordion(this);
                 nocView.loadMenu(id, name, type);
+
                 switch(name) {
                     case this.ALERTSGRID:
                         require(["dashboard/noc/pages/IncidentPage"], function (IncidentPage) {
@@ -46,40 +49,24 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
                 }
             },
 
-            startStopRefresh: function(name, state) {
-                var timers = [];
-                var classToLoad;
-                switch(name) {
-                    case this.ALERTSGRID:
-                        timers = dashboard.noc.Widgets.Incident.ApplicationGrid.TIMERS;
-                        classToLoad = NOCCONSTANTS.CLASSNAME.WIDGETS.INCIDENT.APPLICATIONGRID;
-                        break;
+            getLinkMap: function() {
+                return NocAccordion.LINKMAP;
+            },
 
-                    case this.CLUSTERSGRID:
-                        break;
-
-                    case this.TRANSACTIONSGRID:
-                        timers = dashboard.noc.Widgets.Transaction.GridMeta.TIMERS;
-                        classToLoad = NOCCONSTANTS.CLASSNAME.WIDGETS.TRANSACTION.GRIDMETA;
-                        break;
+            getView: function(name, newWindow) {
+                var nocView = NocAccordion.VIEWMAP[name];
+                if(nocView == null) {
+                    nocView = new NocView(newWindow);
+                    NocAccordion.VIEWMAP[name] = nocView; // there should be only one view per name (filtered views are for later)
                 }
-
-                if(state == false) {
-                    for(var i=0;i<timers.length;i++) {
-                        clearInterval(timers[i]);
-                    }
-                    timers = [];
-                } else {
-                    require([NOCCONSTANTS.getClassPath(classToLoad)], function (NocDataClass) {
-                        var nocDataClass = new NocDataClass();
-                        nocDataClass.startStaggeredDatabasePolling();
-                    });
-                }
+                return nocView;
             }
-
         });
 
         NocAccordion.LOG = Logger.addTimer(new Logger(NOCCONSTANTS.CLASSNAME.ACCORDION));
+
+        NocAccordion.LINKMAP = {};
+        NocAccordion.VIEWMAP = {};
 
         return NocAccordion;
     });

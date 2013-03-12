@@ -11,6 +11,10 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/confi
 
             createDom: function() {
                 this.createInnerMenuAndPanes(dashboard.CpTopCenter.domNode);
+            },
+
+            setAccordion: function(configAccordion) {
+                ConfigView.ACCORDION = configAccordion;
             }
         });
 
@@ -19,6 +23,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/confi
             var wm = new WindowManager();
             wm.getNewWindow(id, name, type, pageTypes.CONFIG);
         };
+
+        ConfigView.ACCORDION = null;
 
         return ConfigView;
     });

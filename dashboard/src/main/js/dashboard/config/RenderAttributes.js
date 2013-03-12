@@ -45,7 +45,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
             },
 
             createTabs:function () {
-                dashboard.CpCenterInner.destroyDescendants(false);
 
                 var tc = new TabContainer({style:"height: 100%; width: 100%;"});
                 dashboard.CpCenterInner.addChild(tc);

@@ -1,6 +1,7 @@
-define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", 'dgrid/Grid', "dashboard/logger/Logger", "dashboard/noc/NocConstants", "dashboard/noc/NocUtility"],
+define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", 'dgrid/Grid', "dashboard/logger/Logger",
+    "dashboard/noc/NocConstants", "dashboard/noc/NocUtility", "dashboard/helper/Scheduler"],
 
-    function (declare, i18n, i18nString, Grid, Logger, NOCCONSTANTS, NocUtility) {
+    function (declare, i18n, i18nString, Grid, Logger, NOCCONSTANTS, NocUtility, Scheduler) {
 
         var ApplicationGrid = declare(NOCCONSTANTS.CLASSNAME.WIDGETS.INCIDENT.APPLICATIONGRID, null, {
 
@@ -63,6 +64,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", 'd
                     ApplicationGrid.POSTSET.dataset.push(datum);
                 }
 
+                Scheduler.POLLER = this;
                 this.startStaggeredDatabasePolling();
 
                 setInterval(this.applyConfig, ApplicationGrid.CONFIG_PERIOD * 1000);
@@ -75,7 +77,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", 'd
                     // 2nd one at 4 sec, 3rd one at 7 sec and so on till --> 1 + (3*20) = 61 seconds
                     var timer = setTimeout(this.periodicApp, period * 1000);
                     period += ApplicationGrid.APP_STAGGER_PERIOD;
-                    ApplicationGrid.TIMERS.push(timer);
+                    Scheduler.TIMERS.push(timer);
                 }
 
                 // do the first time population immediately
@@ -87,7 +89,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", 'd
             periodicApp:function () {
                 var timer = setInterval(dashboard.noc.Widgets.Incident.ApplicationGrid.prototype.periodicAppPost,
                     ApplicationGrid.POSTSET.dataset.length * ApplicationGrid.APP_STAGGER_PERIOD * 1000);
-                ApplicationGrid.TIMERS.push(timer);
+                Scheduler.TIMERS.push(timer);
             },
 
             periodicAppPost: function() {
@@ -134,8 +136,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", 'd
         ApplicationGrid.APP_STAGGER_PERIOD = 3;
         ApplicationGrid.CONFIG_PERIOD = 5;
         ApplicationGrid.Grid = null;
-
-        ApplicationGrid.TIMERS = [];
 
         return ApplicationGrid;
     });

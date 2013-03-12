@@ -1,7 +1,7 @@
 define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/GridContainer",
-    "dojo/i18n!dashboard/noc/nls/noc", "dashboard/noc/NocUtility", "dashboard/noc/NocConstants", "dashboard/logger/Logger"],
+    "dojo/i18n!dashboard/noc/nls/noc", "dashboard/noc/NocUtility", "dashboard/noc/NocConstants", "dashboard/logger/Logger", "dashboard/helper/Scheduler"],
 
-    function (require, declare, i18n, TitlePane, GridContainer, i18nString, NocUtility, NOCCONSTANTS, Logger) {
+    function (require, declare, i18n, TitlePane, GridContainer, i18nString, NocUtility, NOCCONSTANTS, Logger, Scheduler) {
 
         var GridMeta = declare(NOCCONSTANTS.CLASSNAME.WIDGETS.TRANSACTION.GRIDMETA, null, {
 
@@ -214,6 +214,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                     GridMeta.POSTSET.appdataset.push(dataset);
                 }
 
+                Scheduler.POLLER = this;
                 this.startStaggeredDatabasePolling();
             },
 
@@ -227,7 +228,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                     // 2nd one at 11 sec, 3rd one at 21 sec and so on
                     var timer = setTimeout(this.periodicApp, period * 1000);
                     period += GridMeta.APP_STAGGER_PERIOD;
-                    GridMeta.TIMERS.push(timer);
+                    Scheduler.TIMERS.push(timer);
                 }
 
                 for (var i = 0; i < GridMeta.POSTSET.appdataset.length; i++) {
@@ -238,7 +239,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
             periodicApp:function () {
                 var timer = setInterval(dashboard.noc.Widgets.Transaction.GridMeta.prototype.periodicAppPost,
                     GridMeta.POSTSET.appdataset.length * GridMeta.APP_STAGGER_PERIOD * 1000);
-                GridMeta.TIMERS.push(timer);
+                Scheduler.TIMERS.push(timer);
             },
 
             periodicAppPost:function () {
@@ -291,8 +292,6 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
         GridMeta.APP_COUNTER = 0;
 
         GridMeta.APP_STAGGER_PERIOD = 10;
-
-        GridMeta.TIMERS = [];
 
         return GridMeta;
     });

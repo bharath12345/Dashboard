@@ -13,15 +13,18 @@ define(["dojo/_base/declare", 'dojox/widget/Standby', "dojo/io-query"],
             dashboard.STANDBY.show();
         };
 
-        Helper.createDomAndShowPage = function(viewObject, accordionObject) {
-            viewObject.createDom();
-            Helper.showLoading();
-
+        Helper.createDomAndShowPage = function(accordionObject) {
             var uri = document.URL;
             var query = uri.substring(uri.indexOf("?") + 1, uri.length);
             var queryObject = ioQuery.queryToObject(query);
 
-            accordionObject.showPageConfig(queryObject.viewId, queryObject.viewName, queryObject.viewType, true);
+            viewObject = accordionObject.getView(queryObject.viewName, true);
+
+            viewObject.createDom();
+
+            Helper.showLoading();
+
+            accordionObject.showView(queryObject.viewId, queryObject.viewName, queryObject.viewType, true);
         };
 
         return Helper;

@@ -20,13 +20,12 @@ define([ 'dojo/has', 'require' ], function (has, require) {
 
     if (has('host-browser')) {
 
-        require(['dashboard/config/ConfigAccordion', "dashboard/config/ConfigView", "dashboard/helper/Helper",
+        require(['dashboard/config/ConfigAccordion', "dashboard/helper/Helper",
             'dojo/domReady!' ],
 
             function (ConfigAccordion, ConfigView, Helper) {
-                var configView = new ConfigView(true);
                 var configAccordion = new ConfigAccordion();
-                Helper.createDomAndShowPage(configView, configAccordion);
+                Helper.createDomAndShowPage(configAccordion);
             });
     }
     else {
