@@ -3,7 +3,9 @@ define(['require', "dojo/_base/declare", "dojo/i18n",
 
     function (require, declare, i18n, i18nString, NocUtility, NOCCONSTANTS, Logger) {
 
-        var TransactionGrid = declare(NOCCONSTANTS.CLASSNAME.PAGES.TRANSACTIONGRID, null, {
+        dashboard.classnames.TransactionGrid = "dashboard.noc.pages.TransactionGrid";
+
+        var TransactionGrid = declare(dashboard.classnames.TransactionGrid, null, {
 
             loadPage:function (pageName) {
                 var xpos=0, ypos=0;
@@ -22,7 +24,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n",
         });
 
         // static variables of this class
-        TransactionGrid.LOG = Logger.addTimer(new Logger(NOCCONSTANTS.CLASSNAME.PAGES.TRANSACTIONGRID));
+        TransactionGrid.LOG = Logger.addTimer(new Logger(dashboard.classnames.TransactionGrid));
 
         return TransactionGrid;
     });

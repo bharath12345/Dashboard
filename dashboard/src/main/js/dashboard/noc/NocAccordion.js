@@ -3,7 +3,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
 
     function (declare, i18n, i18nString, Logger, NocUtility, NOCCONSTANTS, AbstractAccordion, NocView, Scheduler) {
 
-        var NocAccordion = declare(NOCCONSTANTS.CLASSNAME.ACCORDION, AbstractAccordion, {
+        dashboard.classnames.NocAccordion = "dashboard.noc.NocAccordion";
+
+        var NocAccordion = declare(dashboard.classnames.NocAccordion, AbstractAccordion, {
 
             ALERTSGRID: "Alerts Grid",
             CLUSTERSGRID: "Clusters Grid",
@@ -63,7 +65,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
             }
         });
 
-        NocAccordion.LOG = Logger.addTimer(new Logger(NOCCONSTANTS.CLASSNAME.ACCORDION));
+        NocAccordion.LOG = Logger.addTimer(new Logger(dashboard.classnames.NocAccordion));
 
         NocAccordion.LINKMAP = {};
         NocAccordion.VIEWMAP = {};

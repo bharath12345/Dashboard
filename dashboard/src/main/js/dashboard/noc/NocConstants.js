@@ -1,52 +1,11 @@
-define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "dashboard/DashboardConstants"],
+define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc"],
 
-    function (require, declare, i18n, i18nString, DBCONSTANTS) {
+    function (require, declare, i18n, i18nString) {
+
+        dashboard.classnames.NocConstants = "dashboard.noc.NocConstants";
 
         // this is a completely static class
         var NocConstants = declare("dashboard.noc.NocConstants", null, {});
-
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        NocConstants.CLASSNAME = {};
-        NocConstants.CLASSNAME.ACCORDION = DBCONSTANTS.ACCORDIONMAP["noc"];
-        NocConstants.CLASSNAME.UTILITY = "dashboard.noc.NocUtility";
-        NocConstants.CLASSNAME.PAGELOADER = "dashboard.noc.PageLoader";
-
-        NocConstants.CLASSNAME.PAGES = {};
-        NocConstants.CLASSNAME.PAGES.AVAILABILITYPAGE = "dashboard.noc.pages.AvailabilityPage";
-        NocConstants.CLASSNAME.PAGES.COMPONENTPAGE = "dashboard.noc.pages.ComponentPage";
-        NocConstants.CLASSNAME.PAGES.TXTIMESERIESPAGE = "dashboard.noc.pages.TxTimeSeriesPage";
-        NocConstants.CLASSNAME.PAGES.TXTREEMAPPAGE = "dashboard.noc.pages.TxTreemapPage";
-        NocConstants.CLASSNAME.PAGES.INCIDENTPAGE = "dashboard.noc.pages.IncidentPage";
-        NocConstants.CLASSNAME.PAGES.ALLCLUSTERAVAILABILITY = "dashboard.noc.pages.AllClusterAvailability";
-        NocConstants.CLASSNAME.PAGES.TRANSACTIONGRID = "dashboard.noc.pages.TransactionGrid";
-
-        NocConstants.CLASSNAME.TIMESERIES = {};
-        NocConstants.CLASSNAME.TIMESERIES.BATCHTX = "dashboard.noc.timeseries.BatchTxTimeSeries";
-        NocConstants.CLASSNAME.TIMESERIES.COMPSTATIC = "dashboard.noc.timeseries.CompStaticTimeSeries";
-        NocConstants.CLASSNAME.TIMESERIES.ONLINETX = "dashboard.noc.timeseries.OnlineTxTimeSeries";
-
-        NocConstants.CLASSNAME.WIDGETS = {};
-        NocConstants.CLASSNAME.WIDGETS.AVAILABILITY = {};
-        NocConstants.CLASSNAME.WIDGETS.AVAILABILITY.AVAILABILITY = "dashboard.noc.widgets.availability.Availability";
-        NocConstants.CLASSNAME.WIDGETS.AVAILABILITY.AVAILABILITYGRID = "dashboard.noc.widgets.availability.AvailabilityGrid";
-        NocConstants.CLASSNAME.WIDGETS.AVAILABILITY.AVAILMATRIX = "dashboard.noc.widgets.availability.AvailMatrix";
-        NocConstants.CLASSNAME.WIDGETS.AVAILABILITY.AVAILMATRIX2 = "dashboard.noc.widgets.availability.AvailMatrix2";
-        NocConstants.CLASSNAME.WIDGETS.AVAILABILITY.CLUSTERZONES = "dashboard.noc.widgets.availability.ClusterZones";
-
-        NocConstants.CLASSNAME.WIDGETS.COMPONENT = {};
-        NocConstants.CLASSNAME.WIDGETS.COMPONENT.CELLMAKER = "dashboard.noc.widgets.component.CellMaker";
-        NocConstants.CLASSNAME.WIDGETS.COMPONENT.ZONES = "dashboard.noc.widgets.component.Zones";
-
-        NocConstants.CLASSNAME.WIDGETS.INCIDENT = {};
-        NocConstants.CLASSNAME.WIDGETS.INCIDENT.INCIDENTAVAILABILITYGRID = "dashboard.noc.widgets.incident.IncidentAvailabilityGrid";
-        NocConstants.CLASSNAME.WIDGETS.INCIDENT.APPLICATIONGRID = "dashboard.noc.widgets.incident.ApplicationGrid";
-        NocConstants.CLASSNAME.WIDGETS.INCIDENT.APPLICATIONDATA = "dashboard.noc.widgets.incident.ApplicationData";
-        NocConstants.CLASSNAME.WIDGETS.INCIDENT.APPINCIDENTGRID = "dashboard.noc.widgets.incident.AppIncidentGrid";
-
-        NocConstants.CLASSNAME.WIDGETS.TRANSACTION = {};
-        NocConstants.CLASSNAME.WIDGETS.TRANSACTION.GRIDMETA = "dashboard.noc.widgets.transaction.GridMeta";
-        NocConstants.CLASSNAME.WIDGETS.TRANSACTION.GRIDDATA = "dashboard.noc.widgets.transaction.GridData";
-
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // VARIOUS TYPES FOR SWITCHING VIEWS

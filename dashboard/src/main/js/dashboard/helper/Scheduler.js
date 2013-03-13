@@ -2,7 +2,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
 
     function (declare, i18n, i18nString, Logger) {
 
-        var Scheduler = declare("dashboard.abstract.Scheduler", null, {});
+        var Scheduler = declare("dashboard.helper.Scheduler", null, {});
 
         Scheduler.cancelAllTimers = function() {
             for(var i=0;i<Scheduler.TIMERS.length;i++) {

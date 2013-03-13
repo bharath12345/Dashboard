@@ -2,7 +2,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
 
     function (declare, i18n, i18nString, Logger, NOCCONSTANTS, NocUtility) {
 
-        var IncidentAvailabilityGrid = declare(NOCCONSTANTS.CLASSNAME.WIDGETS.INCIDENT.INCIDENTAVAILABILITYGRID, null, {
+        dashboard.classnames.IncidentAvailabilityGrid = "dashboard.noc.widgets.incident.IncidentAvailabilityGrid";
+
+        var IncidentAvailabilityGrid = declare(dashboard.classnames.IncidentAvailabilityGrid, null, {
 
             createComponentString: function(data, input) {
                 dojo.query("#" + data.custom[0] + " " + data.custom[1]).forEach(function (node) {
@@ -24,7 +26,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
 
         });
 
-        IncidentAvailabilityGrid.LOG = Logger.addTimer(new Logger(NOCCONSTANTS.CLASSNAME.WIDGETS.INCIDENT.INCIDENTAVAILABILITYGRID));
+        IncidentAvailabilityGrid.LOG = Logger.addTimer(new Logger(dashboard.classnames.IncidentAvailabilityGrid));
 
         return IncidentAvailabilityGrid;
     });

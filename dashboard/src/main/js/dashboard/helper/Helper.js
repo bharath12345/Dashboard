@@ -2,7 +2,7 @@ define(["dojo/_base/declare", 'dojox/widget/Standby', "dojo/io-query"],
 
     function (declare, Standby, ioQuery) {
 
-        var Helper = declare("dashboard.abstract.Helper", null, {});
+        var Helper = declare("dashboard.helper.Helper", null, {});
 
         Helper.JSON_HEADER = { 'Content-Type':'application/json' };
 

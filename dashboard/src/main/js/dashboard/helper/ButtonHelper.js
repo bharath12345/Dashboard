@@ -2,7 +2,7 @@ define(["dojo/_base/declare", "dijit/form/Button", "dijit/Tooltip", "dojo/i18n",
 
     function (declare, Button, Tooltip, i18n, i18nString) {
 
-        var ButtonHelper = declare("dashboard.abstract.ButtonHelper", null, {});
+        var ButtonHelper = declare("dashboard.helper.ButtonHelper", null, {});
 
         //ToDo: Add a tooltip to all the buttons
 

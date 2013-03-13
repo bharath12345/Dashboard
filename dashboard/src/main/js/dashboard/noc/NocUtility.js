@@ -3,7 +3,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
 
     function (declare, i18n, i18nString, xhr, keys, on, Dialog, NOCCONSTANTS, Logger) {
 
-        var NocUtility = declare(NOCCONSTANTS.CLASSNAME.UTILITY, null, {});
+        dashboard.classnames.NocUtility = "dashboard.noc.NocUtility";
+
+        var NocUtility = declare(dashboard.classnames.NocUtility, null, {});
 
         NocUtility.JSON_HEADER = { 'Content-Type':'application/json' };
 
@@ -291,7 +293,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
 
         NocUtility.views = [];
 
-        NocUtility.LOG = new Logger(NOCCONSTANTS.CLASSNAME.UTILITY);
+        NocUtility.LOG = new Logger(dashboard.classnames.NocUtility);
 
         NocUtility.SPACE_HIT = false;
         NocUtility.ESCAPE_HIT = false;

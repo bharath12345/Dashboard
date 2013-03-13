@@ -1,13 +1,12 @@
-define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/config", "dashboard/DashboardConstants"],
+define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/config"],
 
-    function (require, declare, i18n, i18nString, DBCONSTANTS) {
+    function (require, declare, i18n, i18nString) {
 
         // this is a completely static class
         var ConfigConstants = declare("dashboard.config.ConfigConstants", null, {});
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ConfigConstants.CLASSNAME = {};
-        ConfigConstants.CLASSNAME.ACCORDION = DBCONSTANTS.ACCORDIONMAP["config"];
         ConfigConstants.CLASSNAME.RENDERATTRIBUTES = "dashboard.config.RenderAttributes";
         ConfigConstants.CLASSNAME.UTILITY = "dashboard.config.ConfigUtility";
 

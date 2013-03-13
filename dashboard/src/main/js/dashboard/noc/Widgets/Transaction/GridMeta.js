@@ -3,7 +3,9 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
 
     function (require, declare, i18n, TitlePane, GridContainer, i18nString, NocUtility, NOCCONSTANTS, Logger, Scheduler) {
 
-        var GridMeta = declare(NOCCONSTANTS.CLASSNAME.WIDGETS.TRANSACTION.GRIDMETA, null, {
+        dashboard.classnames.GridMeta = "dashboard.noc.widgets.transaction.GridMeta";
+
+        var GridMeta = declare(dashboard.classnames.GridMeta, null, {
 
             computeZones:function (count) {
                 // screen width is higher than length. Following are the configs -
@@ -276,7 +278,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
         });
 
         // static variables of this class
-        GridMeta.LOG = Logger.addTimer(new Logger(NOCCONSTANTS.CLASSNAME.WIDGETS.TRANSACTION.GRIDMETA));
+        GridMeta.LOG = Logger.addTimer(new Logger(dashboard.classnames.GridMeta));
 
         GridMeta.POSTSET = {};
         GridMeta.APP_COUNTER = 0;

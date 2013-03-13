@@ -6,7 +6,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
               PopupMenuItem, PopupMenuBarItem,
               Logger, AbstractView) {
 
-        var DashboardView = declare("dashboard.DashboardView", AbstractView, {
+        dashboard.classnames.DashboardView = "dashboard.DashboardView";
+
+        var DashboardView = declare(dashboard.classnames.DashboardView, AbstractView, {
             // create an Accordion with multiple links like in NNMi
 
             createDom: function() {
@@ -84,7 +86,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
 
         });
 
-        DashboardView.LOG = Logger.addTimer(new Logger("dashboard.DashboardView"));
+        DashboardView.LOG = Logger.addTimer(new Logger(dashboard.classnames.DashboardView));
 
         return DashboardView;
     });

@@ -1,6 +1,6 @@
-define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/topology/nls/topology", "dashboard/DashboardConstants"],
+define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/topology/nls/topology"],
 
-    function (require, declare, i18n, i18nString, DBCONSTANTS) {
+    function (require, declare, i18n, i18nString) {
 
         // this is a completely static class
         var TopologyConstants = declare("dashboard.topology.TopologyConstants", null, {});

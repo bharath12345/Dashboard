@@ -3,7 +3,9 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
 
     function (require, declare, i18n, ContentPane, GridContainer, i18nString, NocUtility, NOCCONSTANTS, Logger) {
 
-        var IncidentPage = declare(NOCCONSTANTS.CLASSNAME.PAGES.INCIDENTPAGE, null, {
+        dashboard.classnames.IncidentPage = "dashboard.noc.pages.IncidentPage";
+
+        var IncidentPage = declare(dashboard.classnames.IncidentPage, null, {
 
             loadPage:function (pageName) {
 
@@ -45,7 +47,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane"
         });
 
         // static variables of this class
-        IncidentPage.LOG = Logger.addTimer(new Logger(NOCCONSTANTS.CLASSNAME.PAGES.AVAILABILITYPAGE));
+        IncidentPage.LOG = Logger.addTimer(new Logger(dashboard.classnames.IncidentPage));
 
         return IncidentPage;
     });

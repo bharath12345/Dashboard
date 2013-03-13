@@ -3,7 +3,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", 'd
 
     function (declare, i18n, i18nString, Grid, Logger, NOCCONSTANTS, NocUtility, Scheduler) {
 
-        var ApplicationGrid = declare(NOCCONSTANTS.CLASSNAME.WIDGETS.INCIDENT.APPLICATIONGRID, null, {
+        dashboard.classnames.ApplicationGrid = "dashboard.noc.widgets.incident.ApplicationGrid";
+
+        var ApplicationGrid = declare(dashboard.classnames.ApplicationGrid, null, {
 
             create: function(data, input) {
 
@@ -114,7 +116,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", 'd
 
         });
 
-        ApplicationGrid.LOG = Logger.addTimer(new Logger(NOCCONSTANTS.CLASSNAME.WIDGETS.INCIDENT.APPLICATIONGRID));
+        ApplicationGrid.LOG = Logger.addTimer(new Logger(dashboard.classnames.ApplicationGrid));
 
         ApplicationGrid.POSTSET = {};
         ApplicationGrid.APP_COUNTER = 0;

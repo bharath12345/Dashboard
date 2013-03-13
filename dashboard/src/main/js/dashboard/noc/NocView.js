@@ -5,6 +5,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc",
 
     function (declare, i18n, i18nString, on, lang, AbstractView, WindowManager, loader, ButtonHelper, Scheduler) {
 
+        dashboard.classnames.NocView = "dashboard.noc.NocView";
+
         var NocView = declare("dashboard.noc.NocView", AbstractView, {
 
             newWindow: false,

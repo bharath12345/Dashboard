@@ -3,7 +3,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", 'd
 
     function (declare, i18n, i18nString, Grid, Logger, NOCCONSTANTS, NocUtility, AppIncidentGrid) {
 
-        var ApplicationData = declare(NOCCONSTANTS.CLASSNAME.WIDGETS.INCIDENT.APPLICATIONDATA, null, {
+        dashboard.classnames.ApplicationData = "dashboard.noc.widgets.incident.ApplicationData";
+
+        var ApplicationData = declare(dashboard.classnames.ApplicationData, null, {
 
             create:function (data, input) {
                 customMetrics = dojo.fromJson(data.custom[0]);
@@ -55,7 +57,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", 'd
 
         });
 
-        ApplicationData.LOG = Logger.addTimer(new Logger(NOCCONSTANTS.CLASSNAME.WIDGETS.INCIDENT.APPLICATIONDATA));
+        ApplicationData.LOG = Logger.addTimer(new Logger(dashboard.classnames.ApplicationData));
 
         return ApplicationData;
     });

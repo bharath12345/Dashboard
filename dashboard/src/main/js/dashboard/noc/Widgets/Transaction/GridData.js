@@ -2,7 +2,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
 
     function (declare, i18n, i18nString, Logger, NOCCONSTANTS, NocUtility) {
 
-        var GridData = declare(NOCCONSTANTS.CLASSNAME.WIDGETS.TRANSACTION.GRIDDATA, null, {
+        dashboard.classnames.GridData = "dashboard.noc.widgets.transaction.GridData";
+
+        var GridData = declare(dashboard.classnames.GridData, null, {
 
             create: function(data, input) {
                 var id = input.param.custom[0]+"_"+input.param.custom[1]+"_"+input.param.name;
@@ -100,7 +102,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
 
         });
 
-        GridData.LOG = Logger.addTimer(new Logger(NOCCONSTANTS.CLASSNAME.WIDGETS.TRANSACTION.GRIDDATA));
+        GridData.LOG = Logger.addTimer(new Logger(dashboard.classnames.GridData));
 
 
         return GridData;

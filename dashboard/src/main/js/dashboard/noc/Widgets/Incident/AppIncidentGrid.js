@@ -3,10 +3,12 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
 
     function (declare, i18n, i18nString, Logger, NOCCONSTANTS, NocUtility, IncidentPage, ApplicationGrid) {
 
-        var AppAlertGrid = declare(NOCCONSTANTS.CLASSNAME.WIDGETS.INCIDENT.APPINCIDENTGRID, null, {});
+        dashboard.classnames.AppIncidentGrid = "dashboard.noc.widgets.incident.AppIncidentGrid";
+        
+        var AppIncidentGrid = declare(dashboard.classnames.AppIncidentGrid, null, {});
 
-        AppAlertGrid.applyConfig = function () {
-            if(AppAlertGrid.CONFIG == null) {
+        AppIncidentGrid.applyConfig = function () {
+            if(AppIncidentGrid.CONFIG == null) {
                 console.log("no config received yet to apply");
                 return;
             } else {
@@ -14,13 +16,13 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
             }
 
             var applicationRefreshTime = "applicationRefreshTime";
-            var value = AppAlertGrid.CONFIG.agcVO[applicationRefreshTime].value;
+            var value = AppIncidentGrid.CONFIG.agcVO[applicationRefreshTime].value;
 
             var fontName = "fontName";
-            var fontValue = AppAlertGrid.CONFIG.agcVO[fontName].value;
+            var fontValue = AppIncidentGrid.CONFIG.agcVO[fontName].value;
 
             var fontSize = "fontSize";
-            value = parseInt(AppAlertGrid.CONFIG.agcVO[fontSize].value);
+            value = parseInt(AppIncidentGrid.CONFIG.agcVO[fontSize].value);
             if (value < 6) {
                 value = 18;
             }
@@ -33,19 +35,19 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
             }
 
             var showAllGreenApplications = "showAllGreenApplications";
-            value = AppAlertGrid.CONFIG.agcVO[showAllGreenApplications].value;
+            value = AppIncidentGrid.CONFIG.agcVO[showAllGreenApplications].value;
 
             ApplicationGrid.Grid.resize();
         };
 
-        AppAlertGrid.setConfig = function (data) {
+        AppIncidentGrid.setConfig = function (data) {
             console.log("config set");
-            AppAlertGrid.CONFIG = data;
+            AppIncidentGrid.CONFIG = data;
         };
 
 
-        AppAlertGrid.LOG = Logger.addTimer(new Logger(NOCCONSTANTS.CLASSNAME.WIDGETS.INCIDENT.APPINCIDENTGRID));
-        AppAlertGrid.CONFIG = null;
+        AppIncidentGrid.LOG = Logger.addTimer(new Logger(dashboard.classnames.AppIncidentGrid));
+        AppIncidentGrid.CONFIG = null;
 
-        return AppAlertGrid;
+        return AppIncidentGrid;
     });
