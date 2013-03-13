@@ -4,7 +4,9 @@ define(["dojo/_base/declare", "dojo/i18n",
 
     function (declare, i18n, i18nString, Logger, TOPOLOGYCONSTANTS, TopologyUtility) {
 
-        var RenderConnectivity = declare(TOPOLOGYCONSTANTS.CLASSNAME.WIDGETS.RENDERCONNECTIVITY, null, {
+        dashboard.classnames.RenderConnectivity = "dashboard.topology.widgets.RenderConnectivity";
+
+        var RenderConnectivity = declare(dashboard.classnames.RenderConnectivity, null, {
 
             constructor: function() {
                 jsPlumb.importDefaults({
@@ -90,7 +92,7 @@ define(["dojo/_base/declare", "dojo/i18n",
             }
         });
 
-        RenderConnectivity.LOG = Logger.addTimer(new Logger(TOPOLOGYCONSTANTS.CLASSNAME.WIDGETS.TOPOLOGY.RENDERCONNECTIVITY));
+        RenderConnectivity.LOG = Logger.addTimer(new Logger(dashboard.classnames.RenderConnectivity));
         RenderConnectivity.FROM = "FROM_";
         RenderConnectivity.TO = "_TO_";
 

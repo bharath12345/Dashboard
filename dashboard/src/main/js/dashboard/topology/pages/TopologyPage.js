@@ -5,7 +5,9 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
 
     function (require, declare, i18n, TitlePane, GridContainer, ContentPane, i18nString, Logger, TOPOLOGYCONSTANTS, TopologyUtility) {
 
-        var TopologyPage = declare(TOPOLOGYCONSTANTS.CLASSNAME.PAGES.TOPOLOGYPAGE, null, {
+        dashboard.classnames.TopologyPage = "dashboard.topology.page.TopologyPage";
+
+        var TopologyPage = declare(dashboard.classnames.TopologyPage, null, {
 
             loadPage:function (pageNumber, pageName) {
                 TopologyPage.CP = noc.PageLoader.CpCenter[pageNumber];
@@ -53,7 +55,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
         });
 
         // static variables of this class
-        TopologyPage.LOG = Logger.addTimer(new Logger(TOPOLOGYCONSTANTS.CLASSNAME.PAGES.TOPOLOGYPAGE));
+        TopologyPage.LOG = Logger.addTimer(new Logger(dashboard.classnames.TopologyPage));
 
         TopologyPage.CP = null;
         TopologyPage.TitlePane = null;

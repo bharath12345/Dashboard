@@ -4,7 +4,10 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/store/Memory", "dijit/form/Comb
 
     function (declare, i18n, Memory, DojoComboBox, Logger, ConfigUtility, CONFIGCONSTANTS, i18nString) {
 
-        var ComboBox = declare(CONFIGCONSTANTS.CLASSNAME.COMBOBOX, null, {
+        dashboard.classnames.ComboBox = "dashboard.config.widgets.ComboBox";
+
+        var ComboBox = declare(dashboard.classnames.ComboBox, null, {
+
             renderComboBox: function(userData, attribute, values) {
 
                 var comboBoxStore = new Memory();
@@ -43,7 +46,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/store/Memory", "dijit/form/Comb
             }
         });
 
-        ComboBox.LOG = Logger.addTimer(new Logger(CONFIGCONSTANTS.CLASSNAME.COMBOBOX));
+        ComboBox.LOG = Logger.addTimer(new Logger(dashboard.classnames.ComboBox));
         ComboBox.POSTFIX = "_combobox";
 
         return ComboBox;

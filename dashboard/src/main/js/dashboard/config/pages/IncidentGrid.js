@@ -4,7 +4,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dashboard/logger/Logger",
 
     function (declare, i18n, Logger, ConfigUtility, CONFIGCONSTANTS, i18nString, NumberSpinner, ComboBox, RadioButton, CheckedMultiSelect) {
 
-        var IncidentGrid = declare(CONFIGCONSTANTS.CLASSNAME.INCIDENTGRID, null, {
+        dashboard.classnames.IncidentGrid = "dashboard.config.pages.IncidentGrid";
+
+        var IncidentGrid = declare(dashboard.classnames.IncidentGrid, null, {
             getAttrib: function(data) {
                 return data.age;
             },
@@ -99,7 +101,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dashboard/logger/Logger",
             }
         });
 
-        IncidentGrid.LOG = Logger.addTimer(new Logger(CONFIGCONSTANTS.CLASSNAME.INCIDENTGRID));
+        IncidentGrid.LOG = Logger.addTimer(new Logger(dashboard.classnames.IncidentGrid));
 
         IncidentGrid.APPLICATIONREFRESHTIME = null;
         IncidentGrid.FONTNAME = null;

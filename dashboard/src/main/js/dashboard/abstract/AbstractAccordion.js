@@ -9,6 +9,11 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/on", "dojo/_base/lang", "dashbo
             },
 
             renderAccordion: function(args) {
+                if(this.data == null || this.data == undefined || this.param == null || this.param == undefined) {
+                    console.log("blank accordion");
+                    return;
+                }
+
                 console.log("in abstract render accordion. data = " + dojo.toJson(this.data));
                 console.log("in abstract render accordion. param = " + dojo.toJson(this.param));
 

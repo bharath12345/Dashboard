@@ -134,7 +134,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
             addToolbar: function() {
                 dashboard.toolbar = new Toolbar({});
 
-                dashboard.toolbar.addChild(ButtonHelper.getRefresh());
+                var buttonHelper = new ButtonHelper();
+                dashboard.toolbar.addChild(buttonHelper.getRefresh());
 
                 dashboard.toolbar.placeAt(dashboard.bottomMenuPane);
                 dashboard.toolbar.startup();

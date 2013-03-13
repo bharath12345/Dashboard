@@ -3,7 +3,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/topology/nls/top
 
     function (declare, i18n, i18nString, xhr, keys, on, Dialog, TOPOLOGYCONSTANTS, Logger, Helper) {
 
-        var TopologyUtility = declare(TOPOLOGYCONSTANTS.CLASSNAME.UTILITY, null, {});
+        dashboard.classnames.TopologyUtility = "dashboard.topology.TopologyUtility";
+
+        var TopologyUtility = declare(dashboard.classnames.TopologyUtility, null, {});
 
         TopologyUtility.JSON_HEADER = { 'Content-Type':'application/json' };
 
@@ -49,25 +51,25 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/topology/nls/top
         TopologyUtility.manageTopologySubView = function(data, input) {
             switch(data.subtype) {
                 case TOPOLOGYCONSTANTS.SUBTYPE.TOPOLOGY.NODES:
-                    require([TOPOLOGYCONSTANTS.getClassPath(TOPOLOGYCONSTANTS.CLASSNAME.WIDGETS.TOPOLOGY.RENDERNODES)], function (RenderNodes) {
+                    require([TOPOLOGYCONSTANTS.getClassPath(dashboard.classnames.RenderNodes)], function (RenderNodes) {
                         new RenderNodes().create(data, input);
                     });
                     break;
 
                 case TOPOLOGYCONSTANTS.SUBTYPE.TOPOLOGY.CONNECTIVITY:
-                    require([TOPOLOGYCONSTANTS.getClassPath(TOPOLOGYCONSTANTS.CLASSNAME.WIDGETS.TOPOLOGY.RENDERCONNECTIVITY)], function (RenderConnectivity) {
+                    require([TOPOLOGYCONSTANTS.getClassPath(dashboard.classnames.RenderConnectivity)], function (RenderConnectivity) {
                         new RenderConnectivity().create(data, input);
                     });
                     break;
 
                 case TOPOLOGYCONSTANTS.SUBTYPE.TOPOLOGY.NODESTATUS:
-                    require([TOPOLOGYCONSTANTS.getClassPath(TOPOLOGYCONSTANTS.CLASSNAME.WIDGETS.TOPOLOGY.NODESTATUS)], function (NodeStatus) {
+                    require([TOPOLOGYCONSTANTS.getClassPath(dashboard.classnames.NodeStatus)], function (NodeStatus) {
                         new NodeStatus().create(data, input);
                     });
                     break;
 
                 case TOPOLOGYCONSTANTS.SUBTYPE.TOPOLOGY.CONNECTIONSTATUS:
-                    require([TOPOLOGYCONSTANTS.getClassPath(TOPOLOGYCONSTANTS.CLASSNAME.WIDGETS.TOPOLOGY.CONNECTIONSTATUS)], function (ConnectionStatus) {
+                    require([TOPOLOGYCONSTANTS.getClassPath(dashboard.classnames.ConnectionStatus)], function (ConnectionStatus) {
                         new ConnectionStatus().create(data, input);
                     });
                     break;
@@ -79,7 +81,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/topology/nls/top
         };
 
 
-        TopologyUtility.LOG = new Logger(TOPOLOGYCONSTANTS.CLASSNAME.UTILITY);
+        TopologyUtility.LOG = new Logger(dashboard.classnames.TopologyUtility);
 
         return TopologyUtility;
     });

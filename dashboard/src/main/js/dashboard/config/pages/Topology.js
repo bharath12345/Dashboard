@@ -4,7 +4,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dashboard/logger/Logger",
 
     function (declare, i18n, Logger, ConfigUtility, CONFIGCONSTANTS, i18nString, NumberSpinner, ComboBox, RadioButton) {
 
-        var Topology = declare(CONFIGCONSTANTS.CLASSNAME.TOPOLOGY, null, {
+        dashboard.classnames.Topology = "dashboard.config.pages.Topology";
+
+        var Topology = declare(dashboard.classnames.Topology, null, {
             getAttrib: function(data) {
                 return null;
             },
@@ -23,7 +25,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dashboard/logger/Logger",
             }
         });
 
-        Topology.LOG = Logger.addTimer(new Logger(CONFIGCONSTANTS.CLASSNAME.TOPOLOGY));
+        Topology.LOG = Logger.addTimer(new Logger(dashboard.classnames.Topology));
 
         return Topology;
     });

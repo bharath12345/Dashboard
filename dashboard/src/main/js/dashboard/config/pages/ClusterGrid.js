@@ -4,7 +4,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dashboard/logger/Logger",
 
     function (declare, i18n, Logger, ConfigUtility, CONFIGCONSTANTS, i18nString, NumberSpinner, ComboBox, RadioButton, CheckedMultiSelect) {
 
-        var ClusterGrid = declare(CONFIGCONSTANTS.CLASSNAME.CLUSTERGRID, null, {
+        dashboard.classnames.ClusterGrid = "dashboard.config.pages.ClusterGrid";
+
+        var ClusterGrid = declare(dashboard.classnames.ClusterGrid, null, {
             getAttrib: function(data) {
                 return data.cge;
             },
@@ -65,7 +67,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dashboard/logger/Logger",
             }
         });
 
-        ClusterGrid.LOG = Logger.addTimer(new Logger(CONFIGCONSTANTS.CLASSNAME.CLUSTERGRID));
+        ClusterGrid.LOG = Logger.addTimer(new Logger(dashboard.classnames.ClusterGrid));
         ClusterGrid.CLUSTERREFRESHTIME = null;
         ClusterGrid.CLUSTERS = null;
 

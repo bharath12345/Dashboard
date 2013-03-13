@@ -4,7 +4,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dashboard/logger/Logger",
 
     function (declare, i18n, Logger, ConfigUtility, CONFIGCONSTANTS, i18nString, NumberSpinner, ComboBox, RadioButton) {
 
-        var Global = declare(CONFIGCONSTANTS.CLASSNAME.GLOBAL, null, {
+        dashboard.classnames.Global = "dashboard.config.pages.Global";
+
+        var Global = declare(dashboard.classnames.Global, null, {
             getAttrib: function(data) {
                 return null;
             },
@@ -23,7 +25,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dashboard/logger/Logger",
             }
         });
 
-        Global.LOG = Logger.addTimer(new Logger(CONFIGCONSTANTS.CLASSNAME.GLOBAL));
+        Global.LOG = Logger.addTimer(new Logger(dashboard.classnames.Global));
 
         return Global;
     });

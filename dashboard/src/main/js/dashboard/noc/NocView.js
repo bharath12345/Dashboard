@@ -31,23 +31,24 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc",
 
                 dashboard.toolbar.destroyDescendants(false);
 
-                var button = ButtonHelper.getRefresh();
+                var buttonHelper = new ButtonHelper();
+                var button = buttonHelper.getRefresh();
                 on(button, "click", lang.hitch(this, "refreshView"));
                 dashboard.toolbar.addChild(button);
 
-                button = ButtonHelper.getNewWindow();
+                button = buttonHelper.getNewWindow();
                 on(button, "click", function() {
                     NocView.launchNewWindowConfigPane();
                 });
                 dashboard.toolbar.addChild(button);
 
-                button = ButtonHelper.getStatusRefresh();
+                button = buttonHelper.getStatusRefresh();
                 on(button, "click", function() {
                     Scheduler.startStopRefresh(true);
                 });
                 dashboard.toolbar.addChild(button);
 
-                button = ButtonHelper.getStopRefresh();
+                button = buttonHelper.getStopRefresh();
                 on(button, "click", function() {
                     Scheduler.startStopRefresh(false);
                 });

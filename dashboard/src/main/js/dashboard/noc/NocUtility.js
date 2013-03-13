@@ -1,7 +1,7 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "dojo/request/xhr", "dojo/keys", "dojo/on", "dijit/Dialog",
-    "dashboard/noc/NocConstants", "dashboard/logger/Logger"],
+    "dashboard/noc/NocConstants", "dashboard/logger/Logger", "dashboard/helper/Helper"],
 
-    function (declare, i18n, i18nString, xhr, keys, on, Dialog, NOCCONSTANTS, Logger) {
+    function (declare, i18n, i18nString, xhr, keys, on, Dialog, NOCCONSTANTS, Logger, Helper) {
 
         dashboard.classnames.NocUtility = "dashboard.noc.NocUtility";
 
@@ -128,12 +128,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
                 //NocUtility.addView(data);
 
                 switch(data.type) {
-                    case NOCCONSTANTS.TYPE.LOGIN:
-                        require([NOCCONSTANTS.getClassPath(NOCCONSTANTS.CLASSNAME.LOGIN)], function (Login) {
-                            Login.successPostProcess(data);
-                        });
-                        break;
-
                     case NOCCONSTANTS.TYPE.AVAILABILITY:
                         NocUtility.manageAvailabilitySubView(data, input);
                         break;
@@ -143,13 +137,13 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
                         break;
 
                     case NOCCONSTANTS.TYPE.COMPONENT_ZONES:
-                        require([NOCCONSTANTS.getClassPath(NOCCONSTANTS.CLASSNAME.WIDGETS.COMPONENT.ZONES)], function (Zones) {
+                        require([NOCCONSTANTS.getClassPath(dashboard.classnames.Zones)], function (Zones) {
                             new Zones().create(input);
                         });
                         break;
 
                     case NOCCONSTANTS.TYPE.COMPONENT_DATA:
-                        require([NOCCONSTANTS.getClassPath(NOCCONSTANTS.CLASSNAME.WIDGETS.COMPONENT.CELLMAKER)], function (CellMaker) {
+                        require([NOCCONSTANTS.getClassPath(dashboard.classnames.CellMaker)], function (CellMaker) {
                             new CellMaker().create(input);
                         });
                         break;
@@ -174,7 +168,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
         NocUtility.manageConfig = function(data, input) {
             switch(data.subtype) {
                 case NOCCONSTANTS.SUBTYPE.APPINCIDENTGRID:
-                    require([NOCCONSTANTS.getClassPath(NOCCONSTANTS.CLASSNAME.WIDGETS.INCIDENT.APPINCIDENTGRID)], function (AppIncidentGrid) {
+                    require([NOCCONSTANTS.getClassPath(dashboard.classnames.AppIncidentGrid)], function (AppIncidentGrid) {
                         AppIncidentGrid.setConfig(input);
                     });
                     break;
@@ -188,19 +182,19 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
         NocUtility.manageTransactionSubView = function(data, input){
             switch(data.subtype) {
                 case NOCCONSTANTS.SUBTYPE.TRANSACTION.META:
-                    require([NOCCONSTANTS.getClassPath(NOCCONSTANTS.CLASSNAME.WIDGETS.TRANSACTION.GRIDMETA)], function (GridMeta) {
+                    require([NOCCONSTANTS.getClassPath(dashboard.classnames.GridMeta)], function (GridMeta) {
                         new GridMeta().create(data, input);
                     });
                     break;
 
                 case NOCCONSTANTS.SUBTYPE.TRANSACTION.DATA:
-                    require([NOCCONSTANTS.getClassPath(NOCCONSTANTS.CLASSNAME.WIDGETS.TRANSACTION.GRIDDATA)], function (GridData) {
+                    require([NOCCONSTANTS.getClassPath(dashboard.classnames.GridData)], function (GridData) {
                         new GridData().create(data, input);
                     });
                     break;
 
                 case NOCCONSTANTS.SUBTYPE.TRANSACTION.APPDATA:
-                    require([NOCCONSTANTS.getClassPath(NOCCONSTANTS.CLASSNAME.WIDGETS.TRANSACTION.GRIDDATA)], function (GridData) {
+                    require([NOCCONSTANTS.getClassPath(dashboard.classnames.GridData)], function (GridData) {
                         new GridData().createUsingApp(data, input);
                     });
                     break;
@@ -211,39 +205,39 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
             switch(data.subtype) {
                 case NOCCONSTANTS.SUBTYPE.AVAILABILITY.COMPONENT:
                     //NocUtility.LOG.log(Logger.SEVERITY.SEVERE, "component grid data received");
-                    require([NOCCONSTANTS.getClassPath(NOCCONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILMATRIX)], function (AvailMatrix) {
+                    require([NOCCONSTANTS.getClassPath(dashboard.classnames.AvailMatrix)], function (AvailMatrix) {
                         new AvailMatrix().create(data, input.componentDataVO);
                     });
                     break;
 
                 case NOCCONSTANTS.SUBTYPE.AVAILABILITY.CLUSTER:
                     //NocUtility.LOG.log(Logger.SEVERITY.SEVERE, "cluster grid data received");
-                    require([NOCCONSTANTS.getClassPath(NOCCONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILMATRIX)], function (AvailMatrix) {
+                    require([NOCCONSTANTS.getClassPath(dashboard.classnames.AvailMatrix)], function (AvailMatrix) {
                         new AvailMatrix().create(data, input.clusterDataVO);
                     });
                     break;
 
                 case NOCCONSTANTS.SUBTYPE.AVAILABILITY.INSTANCE:
                     //NocUtility.LOG.log(Logger.SEVERITY.SEVERE, "instance grid data received");
-                    require([NOCCONSTANTS.getClassPath(NOCCONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILMATRIX)], function (AvailMatrix) {
+                    require([NOCCONSTANTS.getClassPath(dashboard.classnames.AvailMatrix)], function (AvailMatrix) {
                         new AvailMatrix().create(data, input.compInstanceDataVO);
                     });
                     break;
 
                 case NOCCONSTANTS.SUBTYPE.AVAILABILITY.META:
-                    require([NOCCONSTANTS.getClassPath(NOCCONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILABILITYGRID)], function (AvailabilityGrid) {
+                    require([NOCCONSTANTS.getClassPath(dashboard.classnames.AvailabilityGrid)], function (AvailabilityGrid) {
                         new AvailabilityGrid().create(data);
                     });
                     break;
 
                 case NOCCONSTANTS.SUBTYPE.AVAILABILITY.ALLCLUSTER:
-                    require([NOCCONSTANTS.getClassPath(NOCCONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.CLUSTERZONES)], function (ClusterZones) {
+                    require([NOCCONSTANTS.getClassPath(dashboard.classnames.ClusterZones)], function (ClusterZones) {
                         new ClusterZones().create(data, input);
                     });
                     break;
 
                 case NOCCONSTANTS.SUBTYPE.AVAILABILITY.CLUSTER2:
-                    require([NOCCONSTANTS.getClassPath(NOCCONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILMATRIX2)], function (AvailMatrix2) {
+                    require([NOCCONSTANTS.getClassPath(dashboard.classnames.AvailMatrix2)], function (AvailMatrix2) {
                         new AvailMatrix2().create(data, input.clusterDataVO);
                     });
                     break;
@@ -260,31 +254,32 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
         NocUtility.manageIncidentSubView = function(data, input) {
             switch(data.subtype) {
                 case NOCCONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY.COMPONENT:
-                    require([NOCCONSTANTS.getClassPath(NOCCONSTANTS.CLASSNAME.WIDGETS.INCIDENT.INCIDENTAVAILABILITYGRID)], function (IncidentAvailabilityGrid) {
+                    require([NOCCONSTANTS.getClassPath(dashboard.classnames.IncidentAvailabilityGrid)], function (IncidentAvailabilityGrid) {
                         new IncidentAvailabilityGrid().createComponentString(data, input);
                     });
                     break;
 
                 case NOCCONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY.CLUSTER:
-                    require([NOCCONSTANTS.getClassPath(NOCCONSTANTS.CLASSNAME.WIDGETS.INCIDENT.INCIDENTAVAILABILITYGRID)], function (IncidentAvailabilityGrid) {
+                    require([NOCCONSTANTS.getClassPath(dashboard.classnames.IncidentAvailabilityGrid)], function (IncidentAvailabilityGrid) {
                         new IncidentAvailabilityGrid().createClusterString(data, input);
                     });
                     break;
 
                 case NOCCONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY.INSTANCE:
-                    require([NOCCONSTANTS.getClassPath(NOCCONSTANTS.CLASSNAME.WIDGETS.INCIDENT.INCIDENTAVAILABILITYGRID)], function (IncidentAvailabilityGrid) {
+                    require([NOCCONSTANTS.getClassPath(dashboard.classnames.IncidentAvailabilityGrid)], function (IncidentAvailabilityGrid) {
                         new IncidentAvailabilityGrid().createIncidentString(data, input);
                     });
                     break;
 
                 case NOCCONSTANTS.SUBTYPE.INCIDENT.META:
-                    require([NOCCONSTANTS.getClassPath(NOCCONSTANTS.CLASSNAME.WIDGETS.INCIDENT.APPLICATIONGRID)], function (ApplicationGrid) {
+
+                    require([NOCCONSTANTS.getClassPath("dashboard.noc.widgets.incident.ApplicationGrid")], function (ApplicationGrid) {
                         new ApplicationGrid().create(data, input);
                     });
                     break;
 
                 case NOCCONSTANTS.SUBTYPE.INCIDENT.DATA:
-                    require([NOCCONSTANTS.getClassPath(NOCCONSTANTS.CLASSNAME.WIDGETS.INCIDENT.APPLICATIONDATA)], function (ApplicationData) {
+                    require([NOCCONSTANTS.getClassPath("dashboard.noc.widgets.incident.ApplicationData")], function (ApplicationData) {
                         new ApplicationData().create(data, input);
                     });
                     break;

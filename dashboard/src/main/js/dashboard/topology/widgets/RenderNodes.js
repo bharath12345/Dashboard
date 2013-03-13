@@ -1,11 +1,13 @@
-define(["dojo/_base/declare", "dojo/i18n", 
+define(["dojo/_base/declare", "dojo/i18n",
     "dijit/TitlePane", "dojox/layout/GridContainer",
     "dojo/i18n!dashboard/topology/nls/topology", "dashboard/logger/Logger",
     "dashboard/topology/TopologyConstants", "dashboard/topology/TopologyUtility"],
 
     function (declare, i18n, TitlePane, GridContainer, i18nString, Logger, TOPOLOGYCONSTANTS, TopologyUtility) {
 
-        var RenderNodes = declare(TOPOLOGYCONSTANTS.CLASSNAME.WIDGETS.RENDERNODES, null, {
+        dashboard.classnames.RenderNodes = "dashboard.topology.widgets.RenderNodes";
+
+        var RenderNodes = declare(dashboard.classnames.RenderNodes, null, {
 
             getSvgIcon:function (src, width, height) {
                 var svgIcon = dojo.create("img");
@@ -245,7 +247,7 @@ define(["dojo/_base/declare", "dojo/i18n",
             }
         });
 
-        RenderNodes.LOG = Logger.addTimer(new Logger(TOPOLOGYCONSTANTS.CLASSNAME.WIDGETS.TOPOLOGY.RENDERNODES));
+        RenderNodes.LOG = Logger.addTimer(new Logger(dashboard.classnames.RenderNodes));
 
         RenderNodes.TYPE = {};
         RenderNodes.TYPE.WEBSERVER = "WebServers";

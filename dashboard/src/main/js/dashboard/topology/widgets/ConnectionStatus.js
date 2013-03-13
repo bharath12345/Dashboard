@@ -3,14 +3,16 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/topology/nls/top
 
     function (declare, i18n, i18nString, Logger, TOPOLOGYCONSTANTS, TopologyUtility) {
 
-        var NodeStatus = declare(TOPOLOGYCONSTANTS.CLASSNAME.WIDGETS.NODESTATUS, null, {
+        dashboard.classnames.ConnectionStatus = "dashboard.topology.widgets.ConnectionStatus";
+
+        var ConnectionStatus = declare(dashboard.classnames.ConnectionStatus, null, {
 
             create: function(data, input) {
 
             }
         });
 
-        NodeStatus.LOG = Logger.addTimer(new Logger(TOPOLOGYCONSTANTS.CLASSNAME.WIDGETS.NODESTATUS));
+        ConnectionStatus.LOG = Logger.addTimer(new Logger(dashboard.classnames.ConnectionStatus));
 
-        return NodeStatus;
+        return ConnectionStatus;
     });

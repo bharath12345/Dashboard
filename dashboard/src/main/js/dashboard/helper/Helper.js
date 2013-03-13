@@ -2,7 +2,9 @@ define(["dojo/_base/declare", 'dojox/widget/Standby', "dojo/io-query"],
 
     function (declare, Standby, ioQuery) {
 
-        var Helper = declare("dashboard.helper.Helper", null, {});
+        dashboard.classnames.Helper = "dashboard.helper.Helper";
+
+        var Helper = declare(dashboard.classnames.Helper, null, {});
 
         Helper.JSON_HEADER = { 'Content-Type':'application/json' };
 
@@ -57,16 +59,15 @@ define(["dojo/_base/declare", 'dojox/widget/Standby', "dojo/io-query"],
                     data.custom = input.param.custom;
                 }
                 if(input.param.name != undefined) {
-                    data.name = input.param.name;
+                    data.name = input.param.name[0];
                 }
-                console.log("data type = " + data.type + " sub type = " + data.subtype);
             } else {
                 console.log("input param is undefind");
             }
             if(input.login != undefined && input.login.type != undefined) {
                 data.type = parseInt(input.login.type);
-                console.log("login data type = " + data.type);
             }
+            console.log("converted data = " + dojo.toJson(data));
             return data;
         };
 

@@ -63,6 +63,10 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
 
         DashboardAccordion.LOG = Logger.addTimer(new Logger(dashboard.classnames.DashboardAccordion));
 
+        /*
+        * ToDo: Do NOT keep this map - force the programmers to conform to 'A' classname pattern
+        */
+
         DashboardAccordion.ACCORDIONMAP = [];
         DashboardAccordion.ACCORDIONMAP["topology"] = "dashboard.topology.TopologyAccordion";
         DashboardAccordion.ACCORDIONMAP["noc"] = "dashboard.noc.NocAccordion";

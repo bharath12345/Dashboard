@@ -2,7 +2,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
 
     function (declare, i18n, i18nString, Logger) {
 
-        var Scheduler = declare("dashboard.helper.Scheduler", null, {});
+        dashboard.classnames.Scheduler = "dashboard.helper.Scheduler";
+
+        var Scheduler = declare(dashboard.classnames.Scheduler, null, {});
 
         Scheduler.cancelAllTimers = function() {
             for(var i=0;i<Scheduler.TIMERS.length;i++) {
@@ -23,7 +25,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
 
         Scheduler.POLLER = null;
 
-        Scheduler.LOG = Logger.addTimer(new Logger("dashboard.abstract.Scheduler"));
+        Scheduler.LOG = Logger.addTimer(new Logger(dashboard.classnames.Scheduler));
 
         return Scheduler;
     });

@@ -4,7 +4,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/form/NumberSpinner",
 
     function (declare, i18n, DojoNumberSpinner, Logger, ConfigUtility, CONFIGCONSTANTS, i18nString) {
 
-        var NumberSpinner = declare(CONFIGCONSTANTS.CLASSNAME.NUMBERSPINNER, null, {
+        dashboard.classnames.NumberSpinner = "dashboard.config.widgets.NumberSpinner";
+
+        var NumberSpinner = declare(dashboard.classnames.NumberSpinner, null, {
 
             renderNumberSpinner: function(userData, attribute, min, max, delta) {
                 console.log("creating number spinner in attrib = " + attribute);
@@ -38,7 +40,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/form/NumberSpinner",
             }
         });
 
-        NumberSpinner.LOG = Logger.addTimer(new Logger(CONFIGCONSTANTS.CLASSNAME.NUMBERSPINNER));
+        NumberSpinner.LOG = Logger.addTimer(new Logger(dashboard.classnames.NumberSpinner));
         NumberSpinner.POSTFIX = "_numberspinner";
 
         return NumberSpinner;

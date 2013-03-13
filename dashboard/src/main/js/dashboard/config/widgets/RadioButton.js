@@ -3,7 +3,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/form/RadioButton", "dashboard/
 
     function (declare, i18n, DojoRadioButton, Logger, ConfigUtility, CONFIGCONSTANTS, i18nString) {
 
-        var RadioButton = declare(CONFIGCONSTANTS.CLASSNAME.RADIOBUTTON, null, {
+        dashboard.classnames.RadioButton = "dashboard.config.widgets.RadioButton";
+
+        var RadioButton = declare(dashboard.classnames.RadioButton, null, {
 
             renderRadioButton: function(attribData, attribute, values) {
 
@@ -40,7 +42,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/form/RadioButton", "dashboard/
             }
         });
 
-        RadioButton.LOG = Logger.addTimer(new Logger(CONFIGCONSTANTS.CLASSNAME.RADIOBUTTON));
+        RadioButton.LOG = Logger.addTimer(new Logger(dashboard.classnames.RadioButton));
         RadioButton.POSTFIX = "_radiobutton_";
 
         return RadioButton;

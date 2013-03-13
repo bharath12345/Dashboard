@@ -4,7 +4,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dashboard/logger/Logger",
 
     function (declare, i18n, Logger, ConfigUtility, CONFIGCONSTANTS, i18nString, NumberSpinner, ComboBox, RadioButton, CheckedMultiSelect) {
 
-        var TransactionGrid = declare(CONFIGCONSTANTS.CLASSNAME.TRANSACTIONGRID, null, {
+        dashboard.classnames.TransactionGrid = "dashboard.config.pages.TransactionGrid";
+
+        var TransactionGrid = declare(dashboard.classnames.TransactionGrid, null, {
             getAttrib: function(data) {
                 return data.tge;
             },
@@ -87,7 +89,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dashboard/logger/Logger",
         TransactionGrid.TRANSACTIONS = null;
         TransactionGrid.APPLICATIONS = null;
 
-        TransactionGrid.LOG = Logger.addTimer(new Logger(CONFIGCONSTANTS.CLASSNAME.TRANSACTIONGRID));
+        TransactionGrid.LOG = Logger.addTimer(new Logger(dashboard.classnames.TransactionGrid));
 
         return TransactionGrid;
     });

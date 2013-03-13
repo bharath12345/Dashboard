@@ -11,7 +11,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
          view being displayed
          */
 
-        var RenderAttributes = declare(CONFIGCONSTANTS.CLASSNAME.RENDERATTRIBUTES, null, {
+        dashboard.classnames.RenderAttributes = "dashboard.config.RenderAttributes";
+
+        var RenderAttributes = declare(dashboard.classnames.RenderAttributes, null, {
 
             renderConfigParameters:function (data, pageObj) {
                 console.log("renderConfigParameters data = " + dojo.toJson(data));
@@ -138,53 +140,55 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
             createToolbarButtons:function () {
                 dashboard.toolbar.destroyDescendants(false);
 
-                var button = ButtonHelper.getSave();
+                var buttonHelper = new ButtonHelper();
+
+                var button = buttonHelper.getSave();
                 on(button, "click", function () {
                     RenderAttributes.PAGEOBJ.saveValues();
                 });
                 dashboard.toolbar.addChild(button);
 
-                button = ButtonHelper.getNewWindow();
+                button = buttonHelper.getNewWindow();
                 on(button, "click", function () {
                     ConfigView.launchNewWindowConfigPane(RenderAttributes.ID, RenderAttributes.NAME, RenderAttributes.TYPE);
                 });
                 dashboard.toolbar.addChild(button);
 
-                dashboard.toolbar.addChild(ButtonHelper.getDelete());
-                dashboard.toolbar.addChild(ButtonHelper.getRefresh());
-                dashboard.toolbar.addChild(ButtonHelper.getStatusRefresh());
-                dashboard.toolbar.addChild(ButtonHelper.getAnalysisPane());
-                dashboard.toolbar.addChild(ButtonHelper.getOpen());
-                dashboard.toolbar.addChild(ButtonHelper.getWizard());
-                dashboard.toolbar.addChild(ButtonHelper.getWizardPage());
-                dashboard.toolbar.addChild(ButtonHelper.getMapping());
-                dashboard.toolbar.addChild(ButtonHelper.getFitToContent());
-                dashboard.toolbar.addChild(ButtonHelper.getOneToOne());
-                dashboard.toolbar.addChild(ButtonHelper.getZoomOut());
-                dashboard.toolbar.addChild(ButtonHelper.getZoomIn());
-                dashboard.toolbar.addChild(ButtonHelper.getStopRefresh());
-                dashboard.toolbar.addChild(ButtonHelper.getRestoreDefault());
-                dashboard.toolbar.addChild(ButtonHelper.getRestoreFilter());
-                dashboard.toolbar.addChild(ButtonHelper.getFind());
-                dashboard.toolbar.addChild(ButtonHelper.getOpenNodeGroupMap());
-                dashboard.toolbar.addChild(ButtonHelper.getSaveLayout());
-                dashboard.toolbar.addChild(ButtonHelper.getSwapPath());
-                dashboard.toolbar.addChild(ButtonHelper.getComputePath());
-                dashboard.toolbar.addChild(ButtonHelper.getFirst());
-                dashboard.toolbar.addChild(ButtonHelper.getLast());
-                dashboard.toolbar.addChild(ButtonHelper.getPrevious());
-                dashboard.toolbar.addChild(ButtonHelper.getNext());
-                dashboard.toolbar.addChild(ButtonHelper.getClose());
-                dashboard.toolbar.addChild(ButtonHelper.getSaveAndClose());
-                dashboard.toolbar.addChild(ButtonHelper.getSaveAndNew());
-                dashboard.toolbar.addChild(ButtonHelper.getNew());
-                dashboard.toolbar.addChild(ButtonHelper.getToggleEmphasis());
-                dashboard.toolbar.addChild(ButtonHelper.getTooltipToggle());
-                dashboard.toolbar.addChild(ButtonHelper.getTextWrapToggle());
-                dashboard.toolbar.addChild(ButtonHelper.getFindToggle());
-                dashboard.toolbar.addChild(ButtonHelper.getIndicateKeyIncidents());
-                dashboard.toolbar.addChild(ButtonHelper.getGo());
-                dashboard.toolbar.addChild(ButtonHelper.getStop());
+                dashboard.toolbar.addChild(buttonHelper.getDelete());
+                dashboard.toolbar.addChild(buttonHelper.getRefresh());
+                dashboard.toolbar.addChild(buttonHelper.getStatusRefresh());
+                dashboard.toolbar.addChild(buttonHelper.getAnalysisPane());
+                dashboard.toolbar.addChild(buttonHelper.getOpen());
+                dashboard.toolbar.addChild(buttonHelper.getWizard());
+                dashboard.toolbar.addChild(buttonHelper.getWizardPage());
+                dashboard.toolbar.addChild(buttonHelper.getMapping());
+                dashboard.toolbar.addChild(buttonHelper.getFitToContent());
+                dashboard.toolbar.addChild(buttonHelper.getOneToOne());
+                dashboard.toolbar.addChild(buttonHelper.getZoomOut());
+                dashboard.toolbar.addChild(buttonHelper.getZoomIn());
+                dashboard.toolbar.addChild(buttonHelper.getStopRefresh());
+                dashboard.toolbar.addChild(buttonHelper.getRestoreDefault());
+                dashboard.toolbar.addChild(buttonHelper.getRestoreFilter());
+                dashboard.toolbar.addChild(buttonHelper.getFind());
+                dashboard.toolbar.addChild(buttonHelper.getOpenNodeGroupMap());
+                dashboard.toolbar.addChild(buttonHelper.getSaveLayout());
+                dashboard.toolbar.addChild(buttonHelper.getSwapPath());
+                dashboard.toolbar.addChild(buttonHelper.getComputePath());
+                dashboard.toolbar.addChild(buttonHelper.getFirst());
+                dashboard.toolbar.addChild(buttonHelper.getLast());
+                dashboard.toolbar.addChild(buttonHelper.getPrevious());
+                dashboard.toolbar.addChild(buttonHelper.getNext());
+                dashboard.toolbar.addChild(buttonHelper.getClose());
+                dashboard.toolbar.addChild(buttonHelper.getSaveAndClose());
+                dashboard.toolbar.addChild(buttonHelper.getSaveAndNew());
+                dashboard.toolbar.addChild(buttonHelper.getNew());
+                dashboard.toolbar.addChild(buttonHelper.getToggleEmphasis());
+                dashboard.toolbar.addChild(buttonHelper.getTooltipToggle());
+                dashboard.toolbar.addChild(buttonHelper.getTextWrapToggle());
+                dashboard.toolbar.addChild(buttonHelper.getFindToggle());
+                dashboard.toolbar.addChild(buttonHelper.getIndicateKeyIncidents());
+                dashboard.toolbar.addChild(buttonHelper.getGo());
+                dashboard.toolbar.addChild(buttonHelper.getStop());
 
 
                 dashboard.bottomMenuPane.resize();
@@ -193,7 +197,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
             }
         });
 
-        RenderAttributes.LOG = Logger.addTimer(new Logger(CONFIGCONSTANTS.CLASSNAME.RENDERATTRIBUTES));
+        RenderAttributes.LOG = Logger.addTimer(new Logger(dashboard.classnames.RenderAttributes));
 
         RenderAttributes.LOOKNFEELPANE = null;
         RenderAttributes.DATAPANE = null;

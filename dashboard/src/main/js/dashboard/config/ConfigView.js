@@ -3,7 +3,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/confi
 
     function (declare, i18n, i18nString, AbstractView, WindowManager, loader) {
 
-        var ConfigView = declare("dashboard.config.ConfigView", AbstractView, {
+        dashboard.classnames.ConfigView = "dashboard.config.ConfigView";
+
+        var ConfigView = declare(dashboard.classnames.ConfigView, AbstractView, {
 
             constructor: function(newWindow) {
                 this.newWindow = newWindow;

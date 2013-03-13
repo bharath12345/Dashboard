@@ -3,7 +3,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dojox/form/CheckedMultiSelect", "dij
 
     function (declare, i18n, DojoCheckedMultiSelect, Button, lang, dom, domStyle, Logger, ConfigUtility, CONFIGCONSTANTS, i18nString) {
 
-        var CheckedMultiSelect = declare(CONFIGCONSTANTS.CLASSNAME.CHECKEDMULTISELECT, null, {
+        dashboard.classnames.CheckedMultiSelect = "dashboard.config.widgets.CheckedMultiSelect";
+
+        var CheckedMultiSelect = declare(dashboard.classnames.CheckedMultiSelect, null, {
 
             renderCheckedMultiSelect: function(selectedValues, attribute, restValues) {
 
@@ -253,7 +255,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojox/form/CheckedMultiSelect", "dij
 
         });
 
-        CheckedMultiSelect.LOG = Logger.addTimer(new Logger(CONFIGCONSTANTS.CLASSNAME.CHECKEDMULTISELECT));
+        CheckedMultiSelect.LOG = Logger.addTimer(new Logger(dashboard.classnames.CheckedMultiSelect));
         CheckedMultiSelect.POSTFIX = "_CheckedMultiSelect";
         CheckedMultiSelect.BUTTONPOSTFIX = CheckedMultiSelect.POSTFIX + "Button";
         CheckedMultiSelect.checkedMSList = [];

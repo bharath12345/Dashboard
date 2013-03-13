@@ -3,9 +3,13 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/confi
 
     function (declare, i18n, i18nString, xhr, Dialog, CONFIGCONSTANTS, Logger, Helper) {
 
-        var ConfigUtility = declare(CONFIGCONSTANTS.CLASSNAME.UTILITY, null, {});
+        dashboard.classnames.ConfigUtility = "dashboard.config.ConfigUtility";
 
-        ConfigUtility.LOG = Logger.addTimer(new Logger(CONFIGCONSTANTS.CLASSNAME.UTILITY));
+        var ConfigUtility = declare(dashboard.classnames.ConfigUtility, null, {
+
+        });
+
+        ConfigUtility.LOG = Logger.addTimer(new Logger(dashboard.classnames.ConfigUtility));
 
         ConfigUtility.xhrPostCentral = function (url, options) {
             xhr(url, {
@@ -90,8 +94,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/confi
         };
 
         ConfigUtility.handlePageConfig = function (data) {
-            require([CONFIGCONSTANTS.getClassPath(CONFIGCONSTANTS.CLASSNAME.RENDERATTRIBUTES),
-                CONFIGCONSTANTS.getClassPath(CONFIGCONSTANTS.CLASSNAME.ACCORDION)],
+            require([CONFIGCONSTANTS.getClassPath(dashboard.classnames.RenderAttributes),
+                CONFIGCONSTANTS.getClassPath(dashboard.classnames.ConfigAccordion)],
                 function (RenderAttributes, ConfigAccordion) {
 
                     var ra = new RenderAttributes();

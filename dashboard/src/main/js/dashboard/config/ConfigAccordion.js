@@ -4,7 +4,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/confi
 
     function (declare, i18n, i18nString, Logger, ConfigUtility, CONFIGCONSTANTS, AbstractAccordion, ConfigView) {
 
-        var ConfigAccordion = declare(CONFIGCONSTANTS.CLASSNAME.ACCORDION, AbstractAccordion, {
+        dashboard.classnames.ConfigAccordion = "dashboard.config.ConfigAccordion";
+
+        var ConfigAccordion = declare(dashboard.classnames.ConfigAccordion, AbstractAccordion, {
 
             ALERTSGRID: "Alerts Grid",
             CLUSTERSGRID: "Clusters Grid",
@@ -71,35 +73,35 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/confi
             },
 
             alertGridHandle:function (data, ra) {
-                require([CONFIGCONSTANTS.getClassPath(CONFIGCONSTANTS.CLASSNAME.INCIDENTGRID)], function(IncidentGrid) {
+                require([CONFIGCONSTANTS.getClassPath(dashboard.classnames.IncidentGrid)], function(IncidentGrid) {
                     var incidentGrid = new IncidentGrid();
                     ra.renderConfigParameters(data, incidentGrid);
                 });
             },
 
             clustersGridHandle: function(data, ra) {
-                require([CONFIGCONSTANTS.getClassPath(CONFIGCONSTANTS.CLASSNAME.CLUSTERGRID)], function(ClusterGrid) {
+                require([CONFIGCONSTANTS.getClassPath(dashboard.classnames.ClusterGrid)], function(ClusterGrid) {
                     var clusterGrid = new ClusterGrid();
                     ra.renderConfigParameters(data, clusterGrid);
                 });
             },
 
             transactionsGridHandle: function(data, ra) {
-                require([CONFIGCONSTANTS.getClassPath(CONFIGCONSTANTS.CLASSNAME.TRANSACTIONGRID)], function(TransactionGrid) {
+                require([CONFIGCONSTANTS.getClassPath(dashboard.classnames.TransactionGrid)], function(TransactionGrid) {
                     var transactionGrid = new TransactionGrid();
                     ra.renderConfigParameters(data, transactionGrid);
                 });
             },
 
             topologyViewHandle: function(data, ra) {
-                require([CONFIGCONSTANTS.getClassPath(CONFIGCONSTANTS.CLASSNAME.TOPOLOGY)], function(Topology) {
+                require([CONFIGCONSTANTS.getClassPath(dashboard.classnames.Topology)], function(Topology) {
                     var topology = new Topology();
                     ra.renderConfigParameters(data, topology);
                 });
             },
 
             globalConfigHandle: function(data, ra) {
-                require([CONFIGCONSTANTS.getClassPath(CONFIGCONSTANTS.CLASSNAME.GLOBAL)], function(Global) {
+                require([CONFIGCONSTANTS.getClassPath(dashboard.classnames.Global)], function(Global) {
                     var global = new Global();
                     ra.renderConfigParameters(data, global);
                 });
@@ -119,7 +121,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/confi
             }
         });
 
-        ConfigAccordion.LOG = Logger.addTimer(new Logger(CONFIGCONSTANTS.CLASSNAME.ACCORDION));
+        ConfigAccordion.LOG = Logger.addTimer(new Logger(dashboard.classnames.ConfigAccordion));
 
         ConfigAccordion.LINKMAP = {};
         ConfigAccordion.VIEWMAP = {};

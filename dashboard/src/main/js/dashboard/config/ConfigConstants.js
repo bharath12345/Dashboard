@@ -2,24 +2,10 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/confi
 
     function (require, declare, i18n, i18nString) {
 
+        dashboard.classnames.ConfigConstants = "dashboard.config.ConfigConstants";
+
         // this is a completely static class
-        var ConfigConstants = declare("dashboard.config.ConfigConstants", null, {});
-
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ConfigConstants.CLASSNAME = {};
-        ConfigConstants.CLASSNAME.RENDERATTRIBUTES = "dashboard.config.RenderAttributes";
-        ConfigConstants.CLASSNAME.UTILITY = "dashboard.config.ConfigUtility";
-
-        ConfigConstants.CLASSNAME.INCIDENTGRID = "dashboard.config.pages.IncidentGrid";
-        ConfigConstants.CLASSNAME.CLUSTERGRID = "dashboard.config.pages.ClusterGrid";
-        ConfigConstants.CLASSNAME.TRANSACTIONGRID = "dashboard.config.pages.TransactionGrid";
-        ConfigConstants.CLASSNAME.TOPOLOGY = "dashboard.config.pages.Topology";
-        ConfigConstants.CLASSNAME.GLOBAL = "dashboard.config.pages.Global";
-
-        ConfigConstants.CLASSNAME.COMBOBOX = "dashboard.config.widgets.ComboBox";
-        ConfigConstants.CLASSNAME.NUMBERSPINNER = "dashboard.config.widgets.NumberSpinner";
-        ConfigConstants.CLASSNAME.RADIOBUTTON = "dashboard.config.widgets.RadioButton";
-        ConfigConstants.CLASSNAME.CHECKEDMULTISELECT = "dashboard.config.widgets.CheckedMultiSelect";
+        var ConfigConstants = declare(dashboard.classnames.ConfigConstants, null, {});
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ConfigConstants.TYPE = {};

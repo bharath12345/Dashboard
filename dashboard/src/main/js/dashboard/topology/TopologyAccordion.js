@@ -3,7 +3,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/topology/nls/top
 
     function (declare, i18n, i18nString, Logger, TopologyUtility, NOCCONSTANTS, AbstractAccordion, NocView, Scheduler) {
 
-        var TopologyAccordion = declare(NOCCONSTANTS.CLASSNAME.ACCORDION, AbstractAccordion, {
+        dashboard.classnames.TopologyAccordion = "dashboard.topology.TopologyAccordion";
+
+        var TopologyAccordion = declare(dashboard.classnames.TopologyAccordion, AbstractAccordion, {
 
             SAMPLE: "Sample Topology",
 
@@ -47,7 +49,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/topology/nls/top
             }
         });
 
-        TopologyAccordion.LOG = Logger.addTimer(new Logger(NOCCONSTANTS.CLASSNAME.ACCORDION));
+        TopologyAccordion.LOG = Logger.addTimer(new Logger(dashboard.classnames.TopologyAccordion));
 
         TopologyAccordion.LINKMAP = {};
         TopologyAccordion.VIEWMAP = {};
