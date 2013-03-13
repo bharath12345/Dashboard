@@ -5,22 +5,10 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
         var GridData = declare(NOCCONSTANTS.CLASSNAME.WIDGETS.TRANSACTION.GRIDDATA, null, {
 
             create: function(data, input) {
-                // fill the 3 cells for Tx-Volume, Tx-Alerts, Tx-response-time
-
                 var id = input.param.custom[0]+"_"+input.param.custom[1]+"_"+input.param.name;
                 //console.log("grid data id = " + id);
 
                 this.fillData(id, input.appDataVO);
-            },
-
-            appendRectangle: function(cellId, width, height, color) {
-                d3.select("#" + cellId)
-                    .append("svg")
-                    .append("svg:rect")
-                    .attr("class", "cell")
-                    .attr("width", width)
-                    .attr("height", height)
-                    .style("fill", color);
             },
 
             createUsingApp: function(data, input) {
@@ -38,31 +26,14 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
                 }
             },
 
-            fillText: function(id, text) {
+            fillText: function(id, text, number, bgColor) {
                 console.log("id = " + id);
                 NocUtility.removeChildren(document.getElementById(id));
                 var node = dojo.byId(id);
                 node.innerHTML = text;
                 node.style.fontSize = "10";
                 node.style.fontWeight = "600";
-            },
-
-            fillSVG: function(id, color) {
-                console.log("id = " + id);
-                NocUtility.removeChildren(document.getElementById(id));
-                this.appendRectangle(id, 15, 15, color);
-            },
-
-            maxOneRed: function(id, count, type) {
-                if(count>0) {
-                    if(type == true) {
-                        this.fillSVG(id,"orange");
-                    } else {
-                        this.fillSVG(id,"orangered");
-                    }
-                } else {
-                    this.fillSVG(id,"yellowgreen");
-                }
+                node.style.backgroundColor = bgColor;
             },
 
             roundNumber: function (rnum, rlength) {
@@ -100,18 +71,29 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
 
             fillData: function(id, payload) {
 
-                this.fillText(id + "_AlertText", this.convertToReadableString(parseInt(payload.alertCount)));
-                this.fillText(id + "_VolumeText", this.convertToReadableString(parseInt(payload.volume)));
-                this.fillText(id + "_ResponseText", this.convertTime(payload.response));
-                this.fillText(id + "_OkCountText", this.convertToReadableString(parseInt(payload.okayCount)));
-                this.fillText(id + "_SlowCountText", this.convertToReadableString(parseInt(payload.slowCount)));
-                this.fillText(id + "_FailCountText", this.convertToReadableString(parseInt(payload.failCount)));
+                this.fillText(id + "_AlertText",
+                    this.convertToReadableString(parseInt(payload.alertCount)),
+                    parseInt(payload.alertCount), "orangered");
 
-                ////
+                this.fillText(id + "_VolumeText",
+                    this.convertToReadableString(parseInt(payload.volume)),
+                    parseInt(payload.volume), "white");
 
-                this.maxOneRed(id + "_AlertRect", parseInt(payload.alertCount), false);
-                this.maxOneRed(id + "_FailCountRect", parseInt(payload.failCount), false);
-                this.maxOneRed(id + "_SlowCountRect", parseInt(payload.slowCount), true);
+                this.fillText(id + "_ResponseText",
+                    this.convertTime(parseInt(payload.response)),
+                    parseInt(payload.response), "white");
+
+                this.fillText(id + "_OkCountText",
+                    this.convertToReadableString(parseInt(payload.okayCount)),
+                    parseInt(payload.okayCount), "white");
+
+                this.fillText(id + "_SlowCountText",
+                    this.convertToReadableString(parseInt(payload.slowCount)),
+                    parseInt(payload.slowCount), "orange");
+
+                this.fillText(id + "_FailCountText",
+                    this.convertToReadableString(parseInt(payload.failCount)),
+                    parseInt(payload.failCount), "orangered");
 
                 dashboard.STANDBY.hide();
             }

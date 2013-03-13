@@ -3,7 +3,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
 
     function (declare, i18n, i18nString, Logger, generateRandomUuid, ioQuery) {
 
-        var WindowManager = declare("dashboard.WindowManager", null, {
+        var WindowManager = declare("dashboard.helper.WindowManager", null, {
 
             // Variables to make new windows come up tiled
             newWindowTopOffset:200,
@@ -69,7 +69,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
 
         WindowManager.STACK = {};
 
-        WindowManager.LOG = Logger.addTimer(new Logger("dashboard.WindowManager"));
+        WindowManager.LOG = Logger.addTimer(new Logger("dashboard.helper.WindowManager"));
 
         return WindowManager;
     });

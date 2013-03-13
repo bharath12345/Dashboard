@@ -1,6 +1,6 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/topology/nls/topology",
     "dojo/on", "dojo/_base/lang",
-    "dashboard/abstract/AbstractView", "dashboard/WindowManager", "dashboard/main/loader", "dashboard/helper/ButtonHelper",
+    "dashboard/abstract/AbstractView", "dashboard/helper/WindowManager", "dashboard/main/loader", "dashboard/helper/ButtonHelper",
     "dashboard/helper/Scheduler"],
 
     function (declare, i18n, i18nString, on, lang, AbstractView, WindowManager, loader, ButtonHelper, Scheduler) {

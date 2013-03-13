@@ -219,7 +219,10 @@ public class TransactionNocAction extends AbstractNocAction  {
 		int id = Integer.parseInt(parameters.get("id")[0]);
 		System.out.println("transaction app data being assembled for app = " + appName);
 		
-		//setDummyAppData(id, appName);
+		boolean makeDummy = true;
+		if(makeDummy == true) {
+			System.out.println("Dummy flag ON");
+		}
 		
 		appDataVO = new TransactionAppDataVO();
 		appDataVO.setAppName(appName);
@@ -232,13 +235,16 @@ public class TransactionNocAction extends AbstractNocAction  {
 		if(txInterestedIn == null || txInterestedIn.length == 0) {
 			System.out.println("No transaction configured as interested for data");
 			appDataVO = null;
+			if(makeDummy == true) {
+				setDummyAppData(id, appName);
+			}
 			return SUCCESS;
 		}
 		
 		//String[] startEndTimes = TimeUtility.get5MinStartEnd();
 		String[] startEndTimes = TimeUtility.get30MinStartEnd();
 		Map<Integer, TransactionSummary> txSummary = transactionDataService.getTransactionSummaryForApp(id, startEndTimes[0], startEndTimes[1]);
-		if(txSummary == null) {
+		if(txSummary == null && makeDummy == false) {
 			System.out.println("complete txSummary is null");
 			appDataVO = null;
 			return SUCCESS;
@@ -294,9 +300,11 @@ public class TransactionNocAction extends AbstractNocAction  {
 						unknownCount = (long) 0, okayCount = (long) 0, slowCount = (long) 0, volume=(long) 0;
 				Long responseTime = (long) 0;
 				TransactionSummary summary = txSummary.get(tx.getId());
-				if(summary == null) {
+				if(summary == null && makeDummy == true) {
 					System.out.println("summary is null for " + tx.getName());
 					setDummyData(transactions[k]);
+					k++;
+					continue;
 				} else {
 					alertCount = summary.getAlertsCount();
 					System.out.println("Values for tx = " + tx.getName() + " alert count = " + alertCount);

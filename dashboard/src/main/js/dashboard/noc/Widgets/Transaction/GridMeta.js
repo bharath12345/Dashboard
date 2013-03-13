@@ -71,16 +71,6 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                                             this.getSpan2(id + "_FailCountRect") +
                                         "</div>" +
                                     "</div>" +
-                                    "<div class='span12'>" +
-                                        "<div class='row-fluid' style='padding:2px'>" +
-                                            this.getSpan2(id + "_AlertText") +
-                                            this.getSpan2(id + "_VolumeText") +
-                                            this.getSpan2(id + "_ResponseText") +
-                                            this.getSpan2(id + "_OkCountText") +
-                                            this.getSpan2(id + "_SlowCountText") +
-                                            this.getSpan2(id + "_FailCountText") +
-                                        "</div>" +
-                                    "</div>" +
                                 "</div>";
                 return divString;
             },
@@ -93,10 +83,10 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/
                     innerPane[i].style.padding = 0;
                 }
 
-                /*var textNode = dojo.query(".dijitTitlePaneTextNode", gridContainer.domNode);
+                var textNode = dojo.query(".dijitTitlePaneTextNode", gridContainer.domNode);
                  for (var i = 0; i < textNode.length; i++) {
                  textNode[i].style.fontSize = "10px";
-                 }*/
+                 }
 
                 var head = dojo.query(".dijitTitlePaneTitle", gridContainer.domNode)
                 for (var i = 0; i < head.length; i++) {

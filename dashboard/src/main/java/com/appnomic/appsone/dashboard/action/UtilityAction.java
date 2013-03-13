@@ -67,7 +67,7 @@ public class UtilityAction extends AbstractNocAction {
 		tabListObj.setName("topology");
 		tabListObj.setLabel("Topology Views");
 		tabListObj.setId(0);
-		tabListObj.setAction("topology/topology.action");
+		tabListObj.setAction("topology/pages.action");
 		tabList.add(tabListObj);
 		
 		tabListObj = new TabListVO();
@@ -81,14 +81,14 @@ public class UtilityAction extends AbstractNocAction {
 		tabListObj.setName("alerts");
 		tabListObj.setLabel("Alerts");
 		tabListObj.setId(2);
-		tabListObj.setAction("dashboard/alerts.action");
+		tabListObj.setAction("alerts/pages.action");
 		tabList.add(tabListObj);
 		
 		tabListObj = new TabListVO();
-		tabListObj.setName("configurableDashboard");
-		tabListObj.setLabel("Configurable Dashboards");
+		tabListObj.setName("custom");
+		tabListObj.setLabel("Customized Layouts");
 		tabListObj.setId(3);
-		tabListObj.setAction("dashboard/configurableDashboard.action");
+		tabListObj.setAction("custom/pages.action");
 		tabList.add(tabListObj);
 		
 		tabListObj = new TabListVO();

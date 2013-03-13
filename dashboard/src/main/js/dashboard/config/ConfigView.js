@@ -1,5 +1,5 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/config",
-    "dashboard/abstract/AbstractView", "dashboard/WindowManager", "dashboard/main/loader"],
+    "dashboard/abstract/AbstractView", "dashboard/helper/WindowManager", "dashboard/main/loader"],
 
     function (declare, i18n, i18nString, AbstractView, WindowManager, loader) {
 

@@ -1,4 +1,4 @@
-define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/layout/BorderContainer", "dojo/window",
+define(['require', "../../dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/layout/BorderContainer", "dojo/window",
     "dojo/i18n!dashboard/noc/nls/noc", "dashboard/dashboard/noc/pages/AvailabilityPage", "dashboard/noc/pages/TxTreemapPage",
     "dashboard/noc/pages/ComponentPage", "dashboard/noc/pages/TxTimeSeriesPage", "dashboard/noc/pages/IncidentPage", "dashboard/noc/pages/AllClusterAvailability",
     "dashboard/noc/pages/TransactionGrid", "dashboard/noc/pages/TopologyPage",

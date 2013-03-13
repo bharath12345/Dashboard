@@ -10,7 +10,6 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/n
         NocConstants.CLASSNAME.ACCORDION = DBCONSTANTS.ACCORDIONMAP["noc"];
         NocConstants.CLASSNAME.UTILITY = "dashboard.noc.NocUtility";
         NocConstants.CLASSNAME.PAGELOADER = "dashboard.noc.PageLoader";
-        NocConstants.CLASSNAME.VIEWMANAGER = "dashboard.noc.ViewManager";
 
         NocConstants.CLASSNAME.PAGES = {};
         NocConstants.CLASSNAME.PAGES.AVAILABILITYPAGE = "dashboard.noc.pages.AvailabilityPage";
@@ -50,7 +49,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/n
 
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // VARIOUS TYPES FOR SWITCHING IN ViewManager
+        // VARIOUS TYPES FOR SWITCHING VIEWS
         NocConstants.TYPE = {};
         NocConstants.SUBTYPE = {};
 

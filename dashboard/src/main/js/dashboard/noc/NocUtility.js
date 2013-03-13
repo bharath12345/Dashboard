@@ -15,12 +15,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
                 headers:NocUtility.JSON_HEADER
             }).then(function (data) {
                     // Do something with the handled data
-
                     //NocUtility.LOG.log(Logger.SEVERITY.SEVERE, "xhr data = " + data);
-                    require(["dashboard/noc/ViewManager"], function (ViewManager) {
-                        ViewManager.manageView(data);
-                    });
-
+                    NocUtility.manageView(data);
                 }, function (err) {
                     // Handle the error condition
                     NocUtility.LOG.log(Logger.SEVERITY.SEVERE, "xhr error = " + err);
@@ -28,7 +24,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
                     // Handle a progress event from the request if the
                     // browser supports XHR2
                     //NocUtility.LOG.log(Logger.SEVERITY.SEVERE, "xhr event = " + evt);
-                    //noc.ViewManager.manageView(evt);
+                    //noc.NocUtility.manageView(evt);
                 });
         };
 
@@ -115,6 +111,185 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
                 }
             })
         };
+
+        NocUtility.addView = function (data) {
+            var viewData = {};
+            viewData.viewId = data.viewId;
+            viewData.data = data;
+            NocUtility.views.push(viewData);
+        };
+
+        NocUtility.manageView = function(input) {
+            try {
+                var data = Helper.parseInput(input);
+
+                //NocUtility.addView(data);
+
+                switch(data.type) {
+                    case NOCCONSTANTS.TYPE.LOGIN:
+                        require([NOCCONSTANTS.getClassPath(NOCCONSTANTS.CLASSNAME.LOGIN)], function (Login) {
+                            Login.successPostProcess(data);
+                        });
+                        break;
+
+                    case NOCCONSTANTS.TYPE.AVAILABILITY:
+                        NocUtility.manageAvailabilitySubView(data, input);
+                        break;
+
+                    case NOCCONSTANTS.TYPE.INCIDENT:
+                        NocUtility.manageIncidentSubView(data, input);
+                        break;
+
+                    case NOCCONSTANTS.TYPE.COMPONENT_ZONES:
+                        require([NOCCONSTANTS.getClassPath(NOCCONSTANTS.CLASSNAME.WIDGETS.COMPONENT.ZONES)], function (Zones) {
+                            new Zones().create(input);
+                        });
+                        break;
+
+                    case NOCCONSTANTS.TYPE.COMPONENT_DATA:
+                        require([NOCCONSTANTS.getClassPath(NOCCONSTANTS.CLASSNAME.WIDGETS.COMPONENT.CELLMAKER)], function (CellMaker) {
+                            new CellMaker().create(input);
+                        });
+                        break;
+
+                    case NOCCONSTANTS.TYPE.TRANSACTION:
+                        NocUtility.manageTransactionSubView(data, input);
+                        break;
+
+                    case NOCCONSTANTS.TYPE.CONFIG:
+                        NocUtility.manageConfig(data, input);
+                        break;
+
+                    default:
+                        Logger.log("NocUtility","unknown data type = " + data.type);
+                        break;
+                }
+            } catch ( e) {
+                NocUtility.LOG.log(Logger.SEVERITY.SEVERE, "exception e = " + e);
+            }
+        };
+
+        NocUtility.manageConfig = function(data, input) {
+            switch(data.subtype) {
+                case NOCCONSTANTS.SUBTYPE.APPINCIDENTGRID:
+                    require([NOCCONSTANTS.getClassPath(NOCCONSTANTS.CLASSNAME.WIDGETS.INCIDENT.APPINCIDENTGRID)], function (AppIncidentGrid) {
+                        AppIncidentGrid.setConfig(input);
+                    });
+                    break;
+
+                default:
+                    Logger.log("NocUtility","unknown config data sub type = " + data.subtype);
+                    break;
+            }
+        };
+
+        NocUtility.manageTransactionSubView = function(data, input){
+            switch(data.subtype) {
+                case NOCCONSTANTS.SUBTYPE.TRANSACTION.META:
+                    require([NOCCONSTANTS.getClassPath(NOCCONSTANTS.CLASSNAME.WIDGETS.TRANSACTION.GRIDMETA)], function (GridMeta) {
+                        new GridMeta().create(data, input);
+                    });
+                    break;
+
+                case NOCCONSTANTS.SUBTYPE.TRANSACTION.DATA:
+                    require([NOCCONSTANTS.getClassPath(NOCCONSTANTS.CLASSNAME.WIDGETS.TRANSACTION.GRIDDATA)], function (GridData) {
+                        new GridData().create(data, input);
+                    });
+                    break;
+
+                case NOCCONSTANTS.SUBTYPE.TRANSACTION.APPDATA:
+                    require([NOCCONSTANTS.getClassPath(NOCCONSTANTS.CLASSNAME.WIDGETS.TRANSACTION.GRIDDATA)], function (GridData) {
+                        new GridData().createUsingApp(data, input);
+                    });
+                    break;
+            }
+        };
+
+        NocUtility.manageAvailabilitySubView = function(data, input) {
+            switch(data.subtype) {
+                case NOCCONSTANTS.SUBTYPE.AVAILABILITY.COMPONENT:
+                    //NocUtility.LOG.log(Logger.SEVERITY.SEVERE, "component grid data received");
+                    require([NOCCONSTANTS.getClassPath(NOCCONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILMATRIX)], function (AvailMatrix) {
+                        new AvailMatrix().create(data, input.componentDataVO);
+                    });
+                    break;
+
+                case NOCCONSTANTS.SUBTYPE.AVAILABILITY.CLUSTER:
+                    //NocUtility.LOG.log(Logger.SEVERITY.SEVERE, "cluster grid data received");
+                    require([NOCCONSTANTS.getClassPath(NOCCONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILMATRIX)], function (AvailMatrix) {
+                        new AvailMatrix().create(data, input.clusterDataVO);
+                    });
+                    break;
+
+                case NOCCONSTANTS.SUBTYPE.AVAILABILITY.INSTANCE:
+                    //NocUtility.LOG.log(Logger.SEVERITY.SEVERE, "instance grid data received");
+                    require([NOCCONSTANTS.getClassPath(NOCCONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILMATRIX)], function (AvailMatrix) {
+                        new AvailMatrix().create(data, input.compInstanceDataVO);
+                    });
+                    break;
+
+                case NOCCONSTANTS.SUBTYPE.AVAILABILITY.META:
+                    require([NOCCONSTANTS.getClassPath(NOCCONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILABILITYGRID)], function (AvailabilityGrid) {
+                        new AvailabilityGrid().create(data);
+                    });
+                    break;
+
+                case NOCCONSTANTS.SUBTYPE.AVAILABILITY.ALLCLUSTER:
+                    require([NOCCONSTANTS.getClassPath(NOCCONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.CLUSTERZONES)], function (ClusterZones) {
+                        new ClusterZones().create(data, input);
+                    });
+                    break;
+
+                case NOCCONSTANTS.SUBTYPE.AVAILABILITY.CLUSTER2:
+                    require([NOCCONSTANTS.getClassPath(NOCCONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILMATRIX2)], function (AvailMatrix2) {
+                        new AvailMatrix2().create(data, input.clusterDataVO);
+                    });
+                    break;
+
+                default:
+                    NocUtility.LOG.log(Logger.SEVERITY.SEVERE, "unknown availability type = " + data.subtype);
+            }
+        };
+
+        NocUtility.manageComponentSubView = function(data, input) {
+
+        };
+
+        NocUtility.manageIncidentSubView = function(data, input) {
+            switch(data.subtype) {
+                case NOCCONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY.COMPONENT:
+                    require([NOCCONSTANTS.getClassPath(NOCCONSTANTS.CLASSNAME.WIDGETS.INCIDENT.INCIDENTAVAILABILITYGRID)], function (IncidentAvailabilityGrid) {
+                        new IncidentAvailabilityGrid().createComponentString(data, input);
+                    });
+                    break;
+
+                case NOCCONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY.CLUSTER:
+                    require([NOCCONSTANTS.getClassPath(NOCCONSTANTS.CLASSNAME.WIDGETS.INCIDENT.INCIDENTAVAILABILITYGRID)], function (IncidentAvailabilityGrid) {
+                        new IncidentAvailabilityGrid().createClusterString(data, input);
+                    });
+                    break;
+
+                case NOCCONSTANTS.SUBTYPE.INCIDENT.AVAILABILITY.INSTANCE:
+                    require([NOCCONSTANTS.getClassPath(NOCCONSTANTS.CLASSNAME.WIDGETS.INCIDENT.INCIDENTAVAILABILITYGRID)], function (IncidentAvailabilityGrid) {
+                        new IncidentAvailabilityGrid().createIncidentString(data, input);
+                    });
+                    break;
+
+                case NOCCONSTANTS.SUBTYPE.INCIDENT.META:
+                    require([NOCCONSTANTS.getClassPath(NOCCONSTANTS.CLASSNAME.WIDGETS.INCIDENT.APPLICATIONGRID)], function (ApplicationGrid) {
+                        new ApplicationGrid().create(data, input);
+                    });
+                    break;
+
+                case NOCCONSTANTS.SUBTYPE.INCIDENT.DATA:
+                    require([NOCCONSTANTS.getClassPath(NOCCONSTANTS.CLASSNAME.WIDGETS.INCIDENT.APPLICATIONDATA)], function (ApplicationData) {
+                        new ApplicationData().create(data, input);
+                    });
+                    break;
+            }
+        };
+
+        NocUtility.views = [];
 
         NocUtility.LOG = new Logger(NOCCONSTANTS.CLASSNAME.UTILITY);
 
