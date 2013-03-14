@@ -1,7 +1,7 @@
 define({
     root:({
 
-        alertsGrid: "Alerts Grid",
+        alertsGrid: "Applicaiton Alerts Dashboard",
         transactionGrid: "Transactions Grid",
         
         COMPONENT_AVAILABILITY: "Component",

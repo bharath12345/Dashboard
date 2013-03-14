@@ -66,7 +66,7 @@ public class NocUtilityAction extends AbstractNocAction {
 		List<PageListVO> pageList = new ArrayList<PageListVO>();
 		
 		PageListVO pageListVO = new PageListVO();
-		pageListVO.setName("Alerts Grid");
+		pageListVO.setName("Application Alerts Dashboard");
 		pageListVO.setId(UUID.randomUUID().toString());
 		pageListVO.setType(ActionConstants.ACCTYPE.GRID.name());
 		pageList.add(pageListVO);

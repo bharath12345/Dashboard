@@ -1,7 +1,7 @@
 define({
     root:({
 
-        alertsGrid: "Alerts Grid",
+        alertsGrid: "Application Alerts Dashboard",
         transactionGrid: "Transactions Grid",
 
         appLayers: "Application Layers",
