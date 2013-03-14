@@ -1,7 +1,7 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "dashboard/logger/Logger",
-    "dashboard/noc/NocUtility", "dashboard/noc/NocConstants", "dashboard/abstract/AbstractAccordion", "dashboard/noc/NocView", "dashboard/helper/Scheduler"],
+    "dashboard/abstract/AbstractAccordion", "dashboard/noc/NocView", "dashboard/helper/Scheduler"],
 
-    function (declare, i18n, i18nString, Logger, NocUtility, NOCCONSTANTS, AbstractAccordion, NocView, Scheduler) {
+    function (declare, i18n, i18nString, Logger, AbstractAccordion, NocView, Scheduler) {
 
         dashboard.classnames.NocAccordion = "dashboard.noc.NocAccordion";
 

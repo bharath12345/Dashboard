@@ -1,75 +1,28 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/config", "dojo/request/xhr", "dijit/Dialog",
-    "dashboard/config/ConfigConstants", "dashboard/logger/Logger", "dashboard/helper/Helper"],
+    "dashboard/logger/Logger", "dashboard/helper/Helper"],
 
-    function (declare, i18n, i18nString, xhr, Dialog, CONFIGCONSTANTS, Logger, Helper) {
+    function (declare, i18n, i18nString, xhr, Dialog, Logger, Helper) {
 
         dashboard.classnames.ConfigUtility = "dashboard.config.ConfigUtility";
 
-        var ConfigUtility = declare(dashboard.classnames.ConfigUtility, null, {
-
-        });
+        var ConfigUtility = declare(dashboard.classnames.ConfigUtility, null, {});
 
         ConfigUtility.LOG = Logger.addTimer(new Logger(dashboard.classnames.ConfigUtility));
 
-        ConfigUtility.xhrPostCentral = function (url, options) {
-            xhr(url, {
-                handleAs:"json",
-                method:"POST",
-                query:options,
-                headers:Helper.JSON_HEADER
-            }).then(function (data) {
-                    // Do something with the handled data
-                    ConfigUtility.handleResponse(data);
-                }, function (err) {
-                    // Handle the error condition
-                    ConfigUtility.LOG.log(Logger.SEVERITY.SEVERE, "xhr error = " + err);
-                }, function (evt) {
-                    // Handle a progress event from the request if the
-                    // browser supports XHR2
-                    //ConfigUtility.LOG.log(Logger.SEVERITY.SEVERE, "xhr event = " + evt);
-                });
-        };
-
-        ConfigUtility.handleResponse = function (data) {
-            var type = parseInt(data.param.type[0]);
-            console.log("response type = " + type);
-            switch (type) {
-                case CONFIGCONSTANTS.TYPE.PAGECONFIG:
-                    ConfigUtility.handlePageConfig(data);
-                    break;
-
-                case CONFIGCONSTANTS.TYPE.SAVE:
-                    ConfigUtility.handleSave(data);
-                    break;
-
-                default:
-                    console.log("unknown response type = " + type);
-                    return;
-            }
-        };
+        ConfigUtility.USER = "_user";
+        ConfigUtility.ADMIN = "_admin";
+        ConfigUtility.FACTORY = "_factory";
 
         ConfigUtility.handleSave = function (data) {
             var saveType = parseInt(data.param.saveType[0]);
             var title = "Save Success", content;
             switch (saveType) {
-                case CONFIGCONSTANTS.SAVE.INCIDENTGRID:
+                case 1:
                     content = "Save of Alert Grid Configuration Successful.";
                     break;
 
-                case CONFIGCONSTANTS.SAVE.CLUSTERGRID:
-                    content = "Save of Cluster Grid Configuration Successful.";
-                    break;
-
-                case CONFIGCONSTANTS.SAVE.TRANSACTIONGRID:
+                case 2:
                     content = "Save of Transaction Grid Configuration Successful.";
-                    break;
-
-                case CONFIGCONSTANTS.SAVE.TOPOLOGY:
-                    content = "Save of Topology Configuration Successful.";
-                    break;
-
-                case CONFIGCONSTANTS.SAVE.GLOBAL:
-                    content = "Save of Global Configuration Successful.";
                     break;
 
                 default:
@@ -91,23 +44,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/confi
             setTimeout(function () {
                 dashboard.config.ConfigUtility.SAVE_DIALOG.hide();
             }, 4 * 1000);
-        };
-
-        ConfigUtility.handlePageConfig = function (data) {
-            require([CONFIGCONSTANTS.getClassPath(dashboard.classnames.RenderAttributes),
-                CONFIGCONSTANTS.getClassPath(dashboard.classnames.ConfigAccordion)],
-                function (RenderAttributes, ConfigAccordion) {
-
-                    var ra = new RenderAttributes();
-
-                    var id = parseInt(data.param.id[0]);
-                    var name = data.param.name[0];
-                    console.log("page config for id = " + id + " name = " + name);
-
-                    var configAcc = new ConfigAccordion();
-                    var handle = configAcc.responseHandles[name];
-                    handle(data, ra);
-                });
         };
 
         ConfigUtility.getConfigDiv = function (attribute, type) {

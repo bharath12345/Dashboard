@@ -1,7 +1,7 @@
 define(["dojo/_base/declare", "dojo/i18n", "dijit/form/RadioButton", "dashboard/logger/Logger",
-    "dashboard/config/ConfigUtility", "dashboard/config/ConfigConstants", "dojo/i18n!dashboard/config/nls/config"],
+    "dashboard/config/ConfigUtility", "dojo/i18n!dashboard/config/nls/config"],
 
-    function (declare, i18n, DojoRadioButton, Logger, ConfigUtility, CONFIGCONSTANTS, i18nString) {
+    function (declare, i18n, DojoRadioButton, Logger, ConfigUtility, i18nString) {
 
         dashboard.classnames.ConfigWidgetRadioButton = "dashboard.config.widgets.ConfigWidgetRadioButton";
 
@@ -10,9 +10,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/form/RadioButton", "dashboard/
             renderRadioButton: function(attribData, attribute, values) {
 
                 var radioButtonList = [];
-                this.makeGroup(attribute, CONFIGCONSTANTS.DIVTYPE.USER, values, radioButtonList);
-                this.makeGroup(attribute, CONFIGCONSTANTS.DIVTYPE.ADMIN, values, radioButtonList);
-                this.makeGroup(attribute, CONFIGCONSTANTS.DIVTYPE.FACTORY, values, radioButtonList);
+                this.makeGroup(attribute, ConfigUtility.USER, values, radioButtonList);
+                this.makeGroup(attribute, ConfigUtility.ADMIN, values, radioButtonList);
+                this.makeGroup(attribute, ConfigUtility.FACTORY, values, radioButtonList);
                 return radioButtonList;
             },
 
@@ -34,7 +34,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/form/RadioButton", "dashboard/
                         value: values[i]
                     }, innerDiv);
 
-                    if(type != CONFIGCONSTANTS.DIVTYPE.USER) {
+                    if(type != ConfigUtility.USER) {
                         radioButton.set('disabled','disabled');
                     }
                     radioButtonList[type][values[i]] = radioButton;

@@ -1,20 +1,15 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/config", "dashboard/logger/Logger",
-    "dashboard/config/ConfigUtility", "dashboard/config/ConfigConstants", "dashboard/abstract/AbstractAccordion",
-    "dashboard/config/ConfigView"],
+    "dojo/request/xhr", "dojo/_base/lang", "dashboard/helper/Helper",
+    "dashboard/abstract/AbstractAccordion", "dashboard/config/ConfigView", "dashboard/config/RenderAttributes"],
 
-    function (declare, i18n, i18nString, Logger, ConfigUtility, CONFIGCONSTANTS, AbstractAccordion, ConfigView) {
+    function (declare, i18n, i18nString, Logger, xhr, lang, Helper, AbstractAccordion, ConfigView, RenderAttributes) {
 
         dashboard.classnames.ConfigAccordion = "dashboard.config.ConfigAccordion";
 
         var ConfigAccordion = declare(dashboard.classnames.ConfigAccordion, AbstractAccordion, {
 
             ALERTSGRID: "Alerts Grid",
-            CLUSTERSGRID: "Clusters Grid",
             TRANSACTIONSGRID: "Transactions Grid",
-            TOPOLOGYVIEW: "Topology View",
-            GLOBALCONFIG: "Global Config",
-
-            responseHandles:[],
 
             renderAccordion: function(data) {
                 // the superclass's overridden method will be called after this method due to custom chain configuration
@@ -27,83 +22,53 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/confi
                 configView = this.getView(name);
                 configView.setAccordion(this);
 
-                console.log("show page config called with id = " + id);
+                console.log("show page config called with id = " + id + " name = " + name);
                 var viewMeta = {
                     id:id,
                     name: name,
-                    type:CONFIGCONSTANTS.TYPE.PAGECONFIG,
+                    type: 0,
                     newWindow: newWindow,
                     custom:[]
                 };
-                var actionClass;
+
                 switch(name) {
                     case this.ALERTSGRID:
-                        actionClass = CONFIGCONSTANTS.ACTION.ALERTGRIDATTRIBUTES;
-                        break;
-
-                    case this.CLUSTERSGRID:
-                        actionClass = CONFIGCONSTANTS.ACTION.CLUSTERGRIDATTRIBUTES;
+                        xhr("config/alertGridDetailsRetrieve.action", {
+                            handleAs:"json",
+                            method:"POST",
+                            query:viewMeta,
+                            headers:Helper.JSON_HEADER
+                        }).then(lang.hitch(this, this.alertGridHandle));
                         break;
 
                     case this.TRANSACTIONSGRID:
-                        actionClass = CONFIGCONSTANTS.ACTION.TRANSACTIONGRIDATTRIBUTES;
-                        break;
-
-                    case this.TOPOLOGYVIEW:
-                        actionClass = CONFIGCONSTANTS.ACTION.TOPOLOGYATTRIBUTES;
-                        break;
-
-                    case this.GLOBALCONFIG:
-                        actionClass = CONFIGCONSTANTS.ACTION.GLOBALATTRIBUTES;
+                        xhr("config/transactionGridDetailsRetrieve.action", {
+                            handleAs:"json",
+                            method:"POST",
+                            query:viewMeta,
+                            headers:Helper.JSON_HEADER
+                        }).then(lang.hitch(this, this.transactionsGridHandle));
                         break;
 
                     default:
                         console.log("Unknown page id = " + id);
                         return;
                 }
-                ConfigUtility.xhrPostCentral(actionClass, viewMeta);
             },
 
-            constructor:function () {
-                this.responseHandles[this.ALERTSGRID] =  this.alertGridHandle;
-                this.responseHandles[this.CLUSTERSGRID] = this.clustersGridHandle;
-                this.responseHandles[this.TRANSACTIONSGRID] = this.transactionsGridHandle;
-                this.responseHandles[this.TOPOLOGYVIEW] = this.topologyViewHandle;
-                this.responseHandles[this.GLOBALCONFIG] = this.globalConfigHandle;
-            },
-
-            alertGridHandle:function (data, ra) {
-                require([CONFIGCONSTANTS.getClassPath(dashboard.classnames.ConfigViewIncidentGrid)], function(ConfigViewIncidentGrid) {
+            alertGridHandle:function (data) {
+                require(["dashboard/config/views/ConfigViewIncidentGrid"], function(ConfigViewIncidentGrid) {
+                    var ra = new RenderAttributes();
                     var configViewIncidentGrid = new ConfigViewIncidentGrid();
                     ra.renderConfigParameters(data, configViewIncidentGrid);
                 });
             },
 
-            clustersGridHandle: function(data, ra) {
-                require([CONFIGCONSTANTS.getClassPath(dashboard.classnames.ConfigViewClusterGrid)], function(ConfigViewClusterGrid) {
-                    var clusterGrid = new ConfigViewClusterGrid();
-                    ra.renderConfigParameters(data, clusterGrid);
-                });
-            },
-
-            transactionsGridHandle: function(data, ra) {
-                require([CONFIGCONSTANTS.getClassPath(dashboard.classnames.ConfigViewTransactionGrid)], function(ConfigViewTransactionGrid) {
+            transactionsGridHandle: function(data) {
+                require(["dashboard/config/views/ConfigViewTransactionGrid"], function(ConfigViewTransactionGrid) {
+                    var ra = new RenderAttributes();
                     var transactionGrid = new ConfigViewTransactionGrid();
                     ra.renderConfigParameters(data, transactionGrid);
-                });
-            },
-
-            topologyViewHandle: function(data, ra) {
-                require([CONFIGCONSTANTS.getClassPath(dashboard.classnames.Topology)], function(Topology) {
-                    var topology = new Topology();
-                    ra.renderConfigParameters(data, topology);
-                });
-            },
-
-            globalConfigHandle: function(data, ra) {
-                require([CONFIGCONSTANTS.getClassPath(dashboard.classnames.ConfigViewGlobal)], function(ConfigViewGlobal) {
-                    var global = new ConfigViewGlobal();
-                    ra.renderConfigParameters(data, global);
                 });
             },
 

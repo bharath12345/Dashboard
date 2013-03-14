@@ -1,4 +1,4 @@
-define(['require', "../../../dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/GridContainer",
+define(['require', "../../../dojo/_base/declare", "../dashboard/src/main/js/dojo/i18n", "dijit/TitlePane", "dojox/layout/GridContainer",
     "dojo/_base/lang",
     "dojo/i18n!dashboard/noc/nls/noc", "noc/timeseries/OnlineTxTimeSeries", "noc/timeseries/BatchTxTimeSeries",
     "noc/timeseries/CompStaticTimeSeries", "dashboard/noc/NocConstants", "dashboard/noc/NocUtility", "dashboard/logger/Logger"],

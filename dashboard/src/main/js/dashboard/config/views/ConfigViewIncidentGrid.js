@@ -1,12 +1,15 @@
-define(["dojo/_base/declare", "dojo/i18n", "dashboard/logger/Logger",
-    "dashboard/config/ConfigUtility", "dashboard/config/ConfigConstants", "dojo/i18n!dashboard/config/nls/config",
-    "dashboard/config/widgets/ConfigWidgetNumberSpinner", "dashboard/config/widgets/ConfigWidgetComboBox", "dashboard/config/widgets/ConfigWidgetRadioButton", "dashboard/config/widgets/ConfigWidgetCheckedMultiSelect" ],
+define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/config", "dashboard/logger/Logger",
+    "dojo/request/xhr", "dojo/_base/lang", "dashboard/helper/Helper",
+    "dashboard/config/ConfigUtility", "dashboard/config/widgets/ConfigWidgetNumberSpinner",
+    "dashboard/config/widgets/ConfigWidgetComboBox", "dashboard/config/widgets/ConfigWidgetRadioButton", "dashboard/config/widgets/ConfigWidgetCheckedMultiSelect" ],
 
-    function (declare, i18n, Logger, ConfigUtility, CONFIGCONSTANTS, i18nString, ConfigWidgetNumberSpinner, ConfigWidgetComboBox, ConfigWidgetRadioButton, ConfigWidgetCheckedMultiSelect) {
+    function (declare, i18n, i18nString, Logger, xhr, lang, Helper,
+              ConfigUtility, ConfigWidgetNumberSpinner, ConfigWidgetComboBox, ConfigWidgetRadioButton, ConfigWidgetCheckedMultiSelect) {
 
         dashboard.classnames.ConfigViewIncidentGrid = "dashboard.config.views.ConfigViewIncidentGrid";
 
         var ConfigViewIncidentGrid = declare(dashboard.classnames.ConfigViewIncidentGrid, null, {
+
             getAttrib: function(data) {
                 return data.age;
             },
@@ -67,20 +70,20 @@ define(["dojo/_base/declare", "dojo/i18n", "dashboard/logger/Logger",
             saveValues: function() {
                 var refreshTime, fontName, fontSize, showGreenApp, applications = [];
                 if(ConfigViewIncidentGrid.APPLICATIONREFRESHTIME != null) {
-                    refreshTime = ConfigViewIncidentGrid.APPLICATIONREFRESHTIME[CONFIGCONSTANTS.DIVTYPE.USER].get('value');
+                    refreshTime = ConfigViewIncidentGrid.APPLICATIONREFRESHTIME[ConfigUtility.USER].get('value');
                 }
                 if(ConfigViewIncidentGrid.FONTNAME != null) {
-                    fontName = ConfigViewIncidentGrid.FONTNAME[CONFIGCONSTANTS.DIVTYPE.USER].domNode.childNodes[2].childNodes[0].value;
+                    fontName = ConfigViewIncidentGrid.FONTNAME[ConfigUtility.USER].domNode.childNodes[2].childNodes[0].value;
                 }
                 if(ConfigViewIncidentGrid.FONTSIZE != null) {
-                    fontSize = ConfigViewIncidentGrid.FONTSIZE[CONFIGCONSTANTS.DIVTYPE.USER].get('value');
+                    fontSize = ConfigViewIncidentGrid.FONTSIZE[ConfigUtility.USER].get('value');
                 }
                 if(ConfigViewIncidentGrid.SHOWALLGREEN != null) {
-                    showGreenApp = ConfigViewIncidentGrid.SHOWALLGREEN[CONFIGCONSTANTS.DIVTYPE.USER].domNode.childNodes[2].childNodes[0].value;;
+                    showGreenApp = ConfigViewIncidentGrid.SHOWALLGREEN[ConfigUtility.USER].domNode.childNodes[2].childNodes[0].value;;
                 }
                 var applicationNames = "applicationNames";
                 if(ConfigViewIncidentGrid.APPLICATIONS != null) {
-                    var rhsCMS = ConfigWidgetCheckedMultiSelect.checkedMSList[applicationNames + CONFIGCONSTANTS.DIVTYPE.USER][1];
+                    var rhsCMS = ConfigWidgetCheckedMultiSelect.checkedMSList[applicationNames + ConfigUtility.USER][1];
                     var msRhsOptions = rhsCMS.getOptions();
                     for (var j = 0; j < msRhsOptions.length; j++) {
                         applications[j] = msRhsOptions[j].value;
@@ -88,16 +91,26 @@ define(["dojo/_base/declare", "dojo/i18n", "dashboard/logger/Logger",
                 }
 
                 var saveData = {
-                    type: CONFIGCONSTANTS.TYPE.SAVE,
-                    saveType: CONFIGCONSTANTS.SAVE.ConfigViewIncidentGrid,
+                    saveType: 1,
                     refreshTime:refreshTime,
                     fontName:fontName,
                     fontSize:fontSize,
                     showGreenApp:showGreenApp,
                     applications:applications
                 };
-                ConfigUtility.xhrPostCentral(CONFIGCONSTANTS.ACTION.ALERTGRIDSAVE, saveData);
+
+                xhr("config/alertGridDetailsSave.action", {
+                    handleAs:"json",
+                    method:"POST",
+                    query:viewMeta,
+                    headers:Helper.JSON_HEADER
+                }).then(lang.hitch(this, this.alertGridSave));
+
                 console.log("refreshTime = " + refreshTime + " fontName = " + fontName + " fontSize = " + fontSize + " showGreen = " + showGreenApp);
+            },
+
+            alertGridSave: function(data) {
+                ConfigUtility.handleSave(data);
             }
         });
 

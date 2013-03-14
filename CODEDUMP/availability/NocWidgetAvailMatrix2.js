@@ -1,24 +1,31 @@
-define(['require', "../../../../dojo/_base/declare", "dojo/i18n",
+define(['require', "../../../../dojo/_base/declare", "../../dashboard/src/main/js/dojo/i18n",
     "dojo/i18n!dashboard/noc/nls/noc", "dashboard/noc/NocConstants", "dashboard/noc/NocUtility", "dashboard/logger/Logger"],
 
     function (require, declare, i18n, i18nString, NOCCONSTANTS, NocUtility, Logger) {
 
-        var NocWidgetAvailMatrix = declare(NOCCONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILMATRIX, null, {
+        var NocWidgetAvailMatrix2 = declare(NOCCONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILMATRIX2, null, {
 
             create:function (input, payload) {
-                NocWidgetAvailMatrix.LOG.log(Logger.SEVERITY.SEVERE, "in create avail matrix gridtype = " + input.subtype);
+                NocWidgetAvailMatrix2.LOG.log(Logger.SEVERITY.SEVERE, "in create avail matrix gridtype = " + input.subtype);
                 try {
                     var data = new Array(); var timedata = new Array();
-                    var gridItemWidth = parseInt(input.custom[0]);
+                    var gridItemWidth = 15;//parseInt(input.custom[0]);
                     var gridItemHeight = gridItemWidth; // for square boxes
 
                     var length = payload.times.length;
-                    NocWidgetAvailMatrix.LOG.log(Logger.SEVERITY.SEVERE, "payload len = " + length + " gridtype = " + input.subtype);
+                    NocWidgetAvailMatrix2.LOG.log(Logger.SEVERITY.SEVERE, "payload len = " + length + " gridtype = " + input.subtype);
                     var sub = payload.times;
 
-                    var xpos = 0;
+                    //var ypos = document.getElementById(input.name).offsetTop+gridItemHeight;
+                    //var xpos = document.getElementById(input.name).offsetParent.offsetLeft+gridItemWidth;
+
+                    var ypos = 0;
+                    var xpos = gridItemWidth;
+
+                    console.log("name = " + input.name + "xpos = " + xpos + "ypos = " + ypos);
+
                     for (var i = 0; i < length; i++) {
-                        xpos += gridItemWidth;
+                        ypos += gridItemHeight;
                         data[i] = new Array();
                         var columnSet;
                         switch (input.subtype) {
@@ -27,6 +34,7 @@ define(['require', "../../../../dojo/_base/declare", "dojo/i18n",
                                 break;
 
                             case NOCCONSTANTS.SUBTYPE.AVAILABILITY.CLUSTER:
+                            case NOCCONSTANTS.SUBTYPE.AVAILABILITY.CLUSTER2:
                                 columnSet = sub[i].instances;
                                 break;
 
@@ -38,10 +46,10 @@ define(['require', "../../../../dojo/_base/declare", "dojo/i18n",
                         timedata[i] = {
                             time: sub[i].time,
                             x: xpos,
-                            y: input.position.ypos
+                            y: ypos
                         };
 
-                        NocWidgetAvailMatrix.LOG.log(Logger.SEVERITY.SEVERE, "column set len = " + columnSet.length + " gridtype = " + input.subtype);
+                        NocWidgetAvailMatrix2.LOG.log(Logger.SEVERITY.SEVERE, "column set len = " + columnSet.length + " gridtype = " + input.subtype);
 
                         for (var j = 0; j < columnSet.length; j++) {
                             data[i][j] = {
@@ -50,62 +58,48 @@ define(['require', "../../../../dojo/_base/declare", "dojo/i18n",
                                 width:gridItemWidth,
                                 height:gridItemHeight,
                                 x:xpos,
-                                y:input.position.ypos
+                                y:ypos
                             };
-                            xpos += gridItemWidth;
+                            ypos += gridItemHeight;
                         }
                     }
-                    NocWidgetAvailMatrix.LOG.log(Logger.SEVERITY.SEVERE, "going to render grid for = " + input.name + "dimensions w = " + input.dimensions.width + " h = " + input.dimensions.height);
-                    NocWidgetAvailMatrix.LOG.log(Logger.SEVERITY.SEVERE, "timedata = " + dojo.toJson(timedata));
+                    NocWidgetAvailMatrix2.LOG.log(Logger.SEVERITY.SEVERE, "going to render grid for = " + input.name + "dimensions w = " + input.dimensions.width + " h = " + input.dimensions.height);
+                    NocWidgetAvailMatrix2.LOG.log(Logger.SEVERITY.SEVERE, "timedata = " + dojo.toJson(timedata));
 
+                    NocUtility.removeChildren(document.getElementById(input.name));
                     this.renderGrid(data, timedata, input.name, input.dimensions.width, input.dimensions.height);
                 } catch (e) {
-                    NocWidgetAvailMatrix.LOG.log(Logger.SEVERITY.SEVERE, "exception " + e);
+                    NocWidgetAvailMatrix2.LOG.log(Logger.SEVERITY.SEVERE, "exception " + e);
                 }
             },
 
             renderGrid:function (data, timedata, id, width, height) {
 
                 try {
-                    NocWidgetAvailMatrix.LOG.log(Logger.SEVERITY.SEVERE, "render id = " + id + " grid data = "+dojo.toJson(data));
+                    NocWidgetAvailMatrix2.LOG.log(Logger.SEVERITY.SEVERE, "render id = " + id + " grid data = "+dojo.toJson(data));
 
-                    var rowhead = d3.select("#" + id).append("svg")
-                        .attr("class", "timegroup");
-
-                    rowhead.selectAll(".timehead")
-                        .data(timedata).enter()
-                        .append("text")
-                        .text(function(d) {
-                            NocWidgetAvailMatrix.LOG.log(Logger.SEVERITY.SEVERE, "time fragment = " + d.time);
-                            return d.time;
-                        })
-                        .attr("x", function (d) {
-                            return d.x;
-                        })
-                        .attr("y", function (d) {
-                            return d.y;
-                        });
+                    var obj = document.getElementById(id);
+                    var w = obj.offsetWidth;
+                    var h = obj.offsetHeight;
 
                     var grid = d3.select("#" + id).append("svg")
-                        .attr("width", width)
-                        //.attr("height", height)
-                        .attr("class", "chart")
-                        .attr("top", "10")
-                        .attr("left", "10");
+                        //.attr("left",document.getElementById(id).offsetParent.offsetLeft)
+                        //.attr("top",document.getElementById(id).offsetTop)
+                        .attr("viewBox", "0 0 " + w + " " + h);
 
-                    var row = grid.selectAll(".row")
+                    var svgrow = grid.selectAll(".svgrow")
                         .data(data)
                         .enter().append("svg:g")
-                        .attr("class", "row");
+                        .attr("class", "svgrow");
 
                     var color = d3.scale.category20c();
 
-                    var col = row.selectAll(".cell")
+                    var col = svgrow.selectAll(".svgcell")
                         .data(function (d) {
                             return d;
                         })
                         .enter().append("svg:rect")
-                        .attr("class", "cell")
+                        //.attr("class", "cell")
                         .attr("x", function (d) {
                             return d.x;
                         })
@@ -120,24 +114,26 @@ define(['require', "../../../../dojo/_base/declare", "dojo/i18n",
                         })
                         .style("fill", function (d) {
                             //return color(d.value);
-                            if(d.value == 0) {
-                                return "orangered";
+                            if(d.value == 2) {
+                                return "grey"; // 2 is unknown
+                            } else if(d.value == 1) {
+                                return "orangered"; // 1 is not available
                             } else {
-                                return "yellowgreen";
+                                return "yellowgreen"; //0 is available
                             }
                         })
                         .style("stroke", '#555');
 
-                    row.selectAll(".rowtext")
+                    svgrow.selectAll(".svgrowtext")
                         .data(function (d) {
                             return d;
                         })
                         .enter().append("text")
                         .attr("x", function (d) {
-                            return d.x;
+                            return 3*d.x;
                         })
                         .attr("y", function (d) {
-                            return d.y;
+                            return d.y+14;
                         })
                         .attr("width", function (d) {
                             return d.width;
@@ -148,17 +144,19 @@ define(['require', "../../../../dojo/_base/declare", "dojo/i18n",
                         .text(function(d) {
                             return d.name;
                         })
-                        .attr("transform",function (d) {
-                            return "rotate(90," + (d.x-d.width) + "," + d.height + ")";
-                        });
+                        //.style("font-weight", 100)
+                        .style("font-size", "13")
+                        //.attr("transform",function (d) {
+                        //    return "rotate(90," + (d.x-d.width) + "," + d.height + ")";
+                        //});
 
                 } catch(e) {
-                    NocWidgetAvailMatrix.LOG.log(Logger.SEVERITY.SEVERE, "render exception = " + e);
+                    NocWidgetAvailMatrix2.LOG.log(Logger.SEVERITY.SEVERE, "render exception = " + e);
                 }
             }
         });
-        NocWidgetAvailMatrix.LOG = Logger.addTimer(new Logger(NOCCONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILMATRIX));
+        NocWidgetAvailMatrix2.LOG = Logger.addTimer(new Logger(NOCCONSTANTS.CLASSNAME.WIDGETS.AVAILABILITY.AVAILMATRIX2));
 
-        return NocWidgetAvailMatrix;
+        return NocWidgetAvailMatrix2;
 
     });

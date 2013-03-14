@@ -1,8 +1,8 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/store/Memory", "dijit/form/ComboBox",
     "dashboard/logger/Logger",
-    "dashboard/config/ConfigUtility", "dashboard/config/ConfigConstants", "dojo/i18n!dashboard/config/nls/config"],
+    "dashboard/config/ConfigUtility", "dojo/i18n!dashboard/config/nls/config"],
 
-    function (declare, i18n, Memory, DojoComboBox, Logger, ConfigUtility, CONFIGCONSTANTS, i18nString) {
+    function (declare, i18n, Memory, DojoComboBox, Logger, ConfigUtility, i18nString) {
 
         dashboard.classnames.ConfigWidgetComboBox = "dashboard.config.widgets.ConfigWidgetComboBox";
 
@@ -18,14 +18,14 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/store/Memory", "dijit/form/Comb
 
                 var comboBoxList = [];
 
-                var type = CONFIGCONSTANTS.DIVTYPE.USER;
-                comboBoxList[CONFIGCONSTANTS.DIVTYPE.USER] = this.getComboBox(attribute, type, comboBoxStore, userData);
+                var type = ConfigUtility.USER;
+                comboBoxList[ConfigUtility.USER] = this.getComboBox(attribute, type, comboBoxStore, userData);
 
-                type = CONFIGCONSTANTS.DIVTYPE.ADMIN;
-                comboBoxList[CONFIGCONSTANTS.DIVTYPE.ADMIN] = this.getComboBox(attribute, type, comboBoxStore, "");
+                type = ConfigUtility.ADMIN;
+                comboBoxList[ConfigUtility.ADMIN] = this.getComboBox(attribute, type, comboBoxStore, "");
 
-                type = CONFIGCONSTANTS.DIVTYPE.FACTORY;
-                comboBoxList[CONFIGCONSTANTS.DIVTYPE.FACTORY] = this.getComboBox(attribute, type, comboBoxStore, "");
+                type = ConfigUtility.FACTORY;
+                comboBoxList[ConfigUtility.FACTORY] = this.getComboBox(attribute, type, comboBoxStore, "");
 
                 return comboBoxList;
             },
@@ -39,7 +39,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/store/Memory", "dijit/form/Comb
                     store: comboBoxStore,
                     searchAttr: "name"
                 }, node);
-                if(type != CONFIGCONSTANTS.DIVTYPE.USER) {
+                if(type != ConfigUtility.USER) {
                     comboBox.set('disabled','disabled');
                 }
                 return comboBox;

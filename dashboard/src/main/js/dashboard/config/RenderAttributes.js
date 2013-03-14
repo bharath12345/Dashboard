@@ -1,9 +1,9 @@
 define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/GridContainer",
     "dijit/layout/TabContainer", "dijit/layout/ContentPane", "dojo/on", "dojo/_base/lang",
-    "dashboard/logger/Logger", "dashboard/config/ConfigView",
-    "dashboard/config/ConfigConstants", "dojo/i18n!dashboard/config/nls/config", "dashboard/helper/ButtonHelper"],
+    "dashboard/logger/Logger", "dashboard/config/ConfigView", "dashboard/config/ConfigUtility",
+    "dojo/i18n!dashboard/config/nls/config", "dashboard/helper/ButtonHelper"],
 
-    function (declare, i18n, TitlePane, GridContainer, TabContainer, ContentPane, on, lang, Logger, ConfigView, CONFIGCONSTANTS, i18nString, ButtonHelper) {
+    function (declare, i18n, TitlePane, GridContainer, TabContainer, ContentPane, on, lang, Logger, ConfigView, ConfigUtility, i18nString, ButtonHelper) {
 
         /*
          A New object of RenderAttributes is created on the click of any link in the Accordion.
@@ -98,13 +98,13 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
                 for (var i = 0; i < 3; i++) {
                     switch (i) {
                         case 0:
-                            divString += "<li class='active'><a href='#" + attribute + CONFIGCONSTANTS.DIVTYPE.USER + "' data-toggle='tab'>User Config</a></li>";
+                            divString += "<li class='active'><a href='#" + attribute + ConfigUtility.USER + "' data-toggle='tab'>User Config</a></li>";
                             break;
                         case 1:
-                            divString += "<li><a href='#" + attribute + CONFIGCONSTANTS.DIVTYPE.ADMIN + "' data-toggle='tab'>Admin Config</a></li>";
+                            divString += "<li><a href='#" + attribute + ConfigUtility.ADMIN + "' data-toggle='tab'>Admin Config</a></li>";
                             break;
                         case 2:
-                            divString += "<li><a href='#" + attribute + CONFIGCONSTANTS.DIVTYPE.FACTORY + "' data-toggle='tab'>Factory Config</a></li>";
+                            divString += "<li><a href='#" + attribute + ConfigUtility.FACTORY + "' data-toggle='tab'>Factory Config</a></li>";
                             break;
                     }
                 }
@@ -115,17 +115,17 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
                     divString += attribute;
                     switch (i) {
                         case 0:
-                            divString += CONFIGCONSTANTS.DIVTYPE.USER;
+                            divString += ConfigUtility.USER;
                             divString += "' class='tab-pane active'"; // this is coming from bootstrap
                             break;
 
                         case 1:
-                            divString += CONFIGCONSTANTS.DIVTYPE.ADMIN;
+                            divString += ConfigUtility.ADMIN;
                             divString += "' class='tab-pane fade'";
                             break;
 
                         case 2:
-                            divString += CONFIGCONSTANTS.DIVTYPE.FACTORY;
+                            divString += ConfigUtility.FACTORY;
                             divString += "' class='tab-pane fade'";
                             break;
                     }

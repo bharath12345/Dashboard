@@ -1,13 +1,7 @@
 define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/layout/BorderContainer", "dojo/window",
-    "dojo/i18n!dashboard/noc/nls/noc", "dashboard/dashboard/noc/views/NocViewAvailability", "dashboard/noc/views/NocViewTxTreemapPage",
-    "dashboard/noc/views/NocViewComponent", "dashboard/noc/views/NocViewTxTimeSeries", "dashboard/noc/views/NocViewIncident", "dashboard/noc/views/NocViewAllClusterAvailability",
-    "dashboard/noc/views/NocViewTransactionGrid", "dashboard/noc/views/TopologyView",
-    "dashboard/logger/Logger", "dashboard/noc/NocConstants", "dashboard/noc/NocUtility"],
+    "dojo/i18n!dashboard/noc/nls/noc"],
 
-    function (require, declare, i18n, ContentPane, BorderContainer, win, i18nString,
-              NocViewAvailability, NocViewTxTreemapPage, NocViewComponent, NocViewTxTimeSeries, NocViewIncident,
-              NocViewAllClusterAvailability, NocViewTransactionGrid, TopologyView,
-              Logger, NOCCONSTANTS, NocUtility) {
+    function (require, declare, i18n, ContentPane, BorderContainer, win, i18nString) {
 
         var PageLoader = declare(NOCCONSTANTS.CLASSNAME.PAGELOADER, null, {
 

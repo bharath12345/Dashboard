@@ -1,8 +1,8 @@
 define(["dojo/_base/declare", "dojo/i18n", "dijit/form/NumberSpinner",
     "dashboard/logger/Logger",
-    "dashboard/config/ConfigUtility", "dashboard/config/ConfigConstants", "dojo/i18n!dashboard/config/nls/config"],
+    "dashboard/config/ConfigUtility", "dojo/i18n!dashboard/config/nls/config"],
 
-    function (declare, i18n, DojoNumberSpinner, Logger, ConfigUtility, CONFIGCONSTANTS, i18nString) {
+    function (declare, i18n, DojoNumberSpinner, Logger, ConfigUtility, i18nString) {
 
         dashboard.classnames.ConfigWidgetNumberSpinner = "dashboard.config.widgets.ConfigWidgetNumberSpinner";
 
@@ -13,14 +13,14 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/form/NumberSpinner",
 
                 var numberSpinnerList = [];
 
-                var type = CONFIGCONSTANTS.DIVTYPE.USER;
-                numberSpinnerList[CONFIGCONSTANTS.DIVTYPE.USER] = this.getNumberSpinner(attribute, type, min, max, delta, userData);
+                var type = ConfigUtility.USER;
+                numberSpinnerList[ConfigUtility.USER] = this.getNumberSpinner(attribute, type, min, max, delta, userData);
 
-                type = CONFIGCONSTANTS.DIVTYPE.ADMIN;
-                numberSpinnerList[CONFIGCONSTANTS.DIVTYPE.ADMIN] = this.getNumberSpinner(attribute, type, min, max, delta, "");
+                type = ConfigUtility.ADMIN;
+                numberSpinnerList[ConfigUtility.ADMIN] = this.getNumberSpinner(attribute, type, min, max, delta, "");
 
-                type = CONFIGCONSTANTS.DIVTYPE.FACTORY;
-                numberSpinnerList[CONFIGCONSTANTS.DIVTYPE.FACTORY] = this.getNumberSpinner(attribute, type, min, max, delta, "");
+                type = ConfigUtility.FACTORY;
+                numberSpinnerList[ConfigUtility.FACTORY] = this.getNumberSpinner(attribute, type, min, max, delta, "");
 
                 return numberSpinnerList;
             },
@@ -33,7 +33,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/form/NumberSpinner",
                     value: data,
                     constraints: { min:min, max:max, places:0 }
                 }, node);
-                if(type != CONFIGCONSTANTS.DIVTYPE.USER) {
+                if(type != ConfigUtility.USER) {
                     numberSpinner.set('disabled','disabled');
                 }
                 return numberSpinner;

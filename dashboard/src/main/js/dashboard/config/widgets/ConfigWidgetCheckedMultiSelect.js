@@ -1,7 +1,7 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojox/form/CheckedMultiSelect", "dijit/form/Button", "dojo/_base/lang", "dojo/dom", "dojo/dom-style",
-    "dashboard/logger/Logger", "dashboard/config/ConfigUtility", "dashboard/config/ConfigConstants", "dojo/i18n!dashboard/config/nls/config"],
+    "dashboard/logger/Logger", "dashboard/config/ConfigUtility", "dojo/i18n!dashboard/config/nls/config"],
 
-    function (declare, i18n, DojoCheckedMultiSelect, Button, lang, dom, domStyle, Logger, ConfigUtility, CONFIGCONSTANTS, i18nString) {
+    function (declare, i18n, DojoCheckedMultiSelect, Button, lang, dom, domStyle, Logger, ConfigUtility, i18nString) {
 
         dashboard.classnames.ConfigWidgetCheckedMultiSelect = "dashboard.config.widgets.ConfigWidgetCheckedMultiSelect";
 
@@ -9,14 +9,14 @@ define(["dojo/_base/declare", "dojo/i18n", "dojox/form/CheckedMultiSelect", "dij
 
             renderCheckedMultiSelect: function(selectedValues, attribute, restValues) {
 
-                var type = CONFIGCONSTANTS.DIVTYPE.USER;
-                ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + CONFIGCONSTANTS.DIVTYPE.USER] = this.getCMSL(attribute, type, selectedValues, restValues);
+                var type = ConfigUtility.USER;
+                ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + ConfigUtility.USER] = this.getCMSL(attribute, type, selectedValues, restValues);
 
-                /*type = CONFIGCONSTANTS.DIVTYPE.ADMIN;
-                 ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + CONFIGCONSTANTS.DIVTYPE.ADMIN] = this.getCMSL(attribute, type, "");
+                /*type = ConfigUtility.ADMIN;
+                 ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + ConfigUtility.ADMIN] = this.getCMSL(attribute, type, "");
 
-                 type = CONFIGCONSTANTS.DIVTYPE.FACTORY;
-                 ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + CONFIGCONSTANTS.DIVTYPE.FACTORY] = this.getCMSL(attribute, type, "");
+                 type = ConfigUtility.FACTORY;
+                 ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + ConfigUtility.FACTORY] = this.getCMSL(attribute, type, "");
                  */
 
                 return ConfigWidgetCheckedMultiSelect.checkedMSList;
@@ -30,7 +30,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojox/form/CheckedMultiSelect", "dij
                 cmsl[0] = this.makeCMS(restValues, "lhsSelect"+type+attribute);
                 cmsl[1] = this.makeCMS(selectedValue, "rhsSelect"+type+attribute);
 
-                if(type != CONFIGCONSTANTS.DIVTYPE.USER) {
+                if(type != ConfigUtility.USER) {
                     cmsl[0].set('disabled','disabled');
                     cmsl[1].set('disabled','disabled');
                 }
@@ -131,7 +131,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojox/form/CheckedMultiSelect", "dij
                 this.setButtonWidth(selectAllRightButtonObj);
                 this.setButtonWidth(unselectAllRightButtonObj);
 
-                if(type == CONFIGCONSTANTS.DIVTYPE.USER) {
+                if(type == ConfigUtility.USER) {
                     dojo.connect(addButtonObj, "onClick", lang.hitch(this, "moveUserLhsToRhs"));
                     dojo.connect(removeButtonObj, "onClick", lang.hitch(this, "moveUserRhsToLhs"));
 
@@ -141,10 +141,10 @@ define(["dojo/_base/declare", "dojo/i18n", "dojox/form/CheckedMultiSelect", "dij
                     dojo.connect(selectAllRightButtonObj, "onClick", lang.hitch(this, "selectAllRightUser"));
                     dojo.connect(unselectAllRightButtonObj, "onClick", lang.hitch(this, "unselectAllRightUser"));
 
-                } else if(type == CONFIGCONSTANTS.DIVTYPE.ADMIN) {
+                } else if(type == ConfigUtility.ADMIN) {
                     dojo.connect(addButtonObj, "onClick", lang.hitch(this, "moveAdminLhsToRhs"));
                     dojo.connect(removeButtonObj, "onClick", lang.hitch(this, "moveAdminRhsToLhs"));
-                } else if(type == CONFIGCONSTANTS.DIVTYPE.FACTORY) {
+                } else if(type == ConfigUtility.FACTORY) {
                     dojo.connect(addButtonObj, "onClick", lang.hitch(this, "moveFactoryLhsToRhs"));
                     dojo.connect(removeButtonObj, "onClick", lang.hitch(this, "moveFactoryRhsToLhs"));
                 } else {
@@ -159,44 +159,44 @@ define(["dojo/_base/declare", "dojo/i18n", "dojox/form/CheckedMultiSelect", "dij
 
             moveUserLhsToRhs: function(event) {
                 var attribute = this.getAttribute(event.target.id);
-                this.moveLhsToRhs(ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + CONFIGCONSTANTS.DIVTYPE.USER][0], ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + CONFIGCONSTANTS.DIVTYPE.USER][1]);
+                this.moveLhsToRhs(ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + ConfigUtility.USER][0], ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + ConfigUtility.USER][1]);
             },
             moveUserRhsToLhs: function(event) {
                 var attribute = this.getAttribute(event.target.id);
-                this.moveRhsToLhs(ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + CONFIGCONSTANTS.DIVTYPE.USER][1]);
+                this.moveRhsToLhs(ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + ConfigUtility.USER][1]);
             },
             moveAdminLhsToRhs: function(event) {
                 var attribute = this.getAttribute(event.target.id);
-                this.moveLhsToRhs(ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + CONFIGCONSTANTS.DIVTYPE.ADMIN][0], ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + CONFIGCONSTANTS.DIVTYPE.ADMIN][1]);
+                this.moveLhsToRhs(ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + ConfigUtility.ADMIN][0], ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + ConfigUtility.ADMIN][1]);
             },
             moveAdminRhsToLhs: function(event) {
                 var attribute = this.getAttribute(event.target.id);
-                this.moveRhsToLhs(ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + CONFIGCONSTANTS.DIVTYPE.ADMIN][1]);
+                this.moveRhsToLhs(ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + ConfigUtility.ADMIN][1]);
             },
             moveFactoryLhsToRhs: function(event) {
                 var attribute = this.getAttribute(event.target.id);
-                this.moveLhsToRhs(ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + CONFIGCONSTANTS.DIVTYPE.FACTORY][0], ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + CONFIGCONSTANTS.DIVTYPE.FACTORY][1]);
+                this.moveLhsToRhs(ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + ConfigUtility.FACTORY][0], ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + ConfigUtility.FACTORY][1]);
             },
             moveFactoryRhsToLhs: function(event) {
                 var attribute = this.getAttribute(event.target.id);
-                this.moveRhsToLhs(ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + CONFIGCONSTANTS.DIVTYPE.FACTORY][1]);
+                this.moveRhsToLhs(ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + ConfigUtility.FACTORY][1]);
             },
 
             selectAllLeftUser: function(event) {
                 var attribute = this.getAttribute(event.target.id);
-                this.selectAllCMS(ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + CONFIGCONSTANTS.DIVTYPE.USER][0]);
+                this.selectAllCMS(ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + ConfigUtility.USER][0]);
             },
             unselectAllLeftUser: function(event) {
                 var attribute = this.getAttribute(event.target.id);
-                this.unselectAllCMS(ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + CONFIGCONSTANTS.DIVTYPE.USER][0]);
+                this.unselectAllCMS(ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + ConfigUtility.USER][0]);
             },
             selectAllRightUser: function(event) {
                 var attribute = this.getAttribute(event.target.id);
-                this.selectAllCMS(ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + CONFIGCONSTANTS.DIVTYPE.USER][1]);
+                this.selectAllCMS(ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + ConfigUtility.USER][1]);
             },
             unselectAllRightUser: function(event) {
                 var attribute = this.getAttribute(event.target.id);
-                this.unselectAllCMS(ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + CONFIGCONSTANTS.DIVTYPE.USER][1]);
+                this.unselectAllCMS(ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + ConfigUtility.USER][1]);
             },
 
             moveLhsToRhs: function(lhsCMS, rhsCMS) {

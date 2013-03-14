@@ -1,4 +1,4 @@
-define(["dojo/_base/declare", "dojo/i18n", "dashboard/logger/Logger",
+define(["../dashboard/src/main/js/dojo/_base/declare", "dojo/i18n", "dashboard/logger/Logger",
     "dashboard/config/ConfigUtility", "dashboard/config/ConfigConstants", "dojo/i18n!dashboard/config/nls/config",
     "dashboard/config/widgets/ConfigWidgetNumberSpinner", "dashboard/config/widgets/ConfigWidgetComboBox", "dashboard/config/widgets/ConfigWidgetRadioButton", "dashboard/config/widgets/ConfigWidgetCheckedMultiSelect" ],
 

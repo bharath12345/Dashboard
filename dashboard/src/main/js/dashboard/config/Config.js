@@ -23,8 +23,7 @@ define([ 'dojo/has', 'require' ], function (has, require) {
         dashboard = {};
         dashboard.classnames = {};
 
-        require(['dashboard/config/ConfigAccordion', "dashboard/helper/Helper",
-            'dojo/domReady!' ],
+        require(['dashboard/config/ConfigAccordion', "dashboard/helper/Helper", 'dojo/domReady!' ],
 
             function (ConfigAccordion, Helper) {
                 var configAccordion = new ConfigAccordion();

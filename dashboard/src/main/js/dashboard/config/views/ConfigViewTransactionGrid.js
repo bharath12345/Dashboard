@@ -1,12 +1,15 @@
-define(["dojo/_base/declare", "dojo/i18n", "dashboard/logger/Logger",
-    "dashboard/config/ConfigUtility", "dashboard/config/ConfigConstants", "dojo/i18n!dashboard/config/nls/config",
-    "dashboard/config/widgets/ConfigWidgetNumberSpinner", "dashboard/config/widgets/ConfigWidgetComboBox", "dashboard/config/widgets/ConfigWidgetRadioButton", "dashboard/config/widgets/ConfigWidgetCheckedMultiSelect" ],
+define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/config", "dashboard/logger/Logger",
+    "dojo/request/xhr", "dojo/_base/lang", "dashboard/helper/Helper",
+    "dashboard/config/ConfigUtility", "dashboard/config/widgets/ConfigWidgetNumberSpinner",
+    "dashboard/config/widgets/ConfigWidgetComboBox", "dashboard/config/widgets/ConfigWidgetRadioButton", "dashboard/config/widgets/ConfigWidgetCheckedMultiSelect" ],
 
-    function (declare, i18n, Logger, ConfigUtility, CONFIGCONSTANTS, i18nString, ConfigWidgetNumberSpinner, ConfigWidgetComboBox, ConfigWidgetRadioButton, ConfigWidgetCheckedMultiSelect) {
+    function (declare, i18n, i18nString, Logger, xhr, lang, Helper,
+              ConfigUtility, ConfigWidgetNumberSpinner, ConfigWidgetComboBox, ConfigWidgetRadioButton, ConfigWidgetCheckedMultiSelect) {
 
         dashboard.classnames.ConfigViewTransactionGrid = "dashboard.config.views.ConfigViewTransactionGrid";
 
         var ConfigViewTransactionGrid = declare(dashboard.classnames.ConfigViewTransactionGrid, null, {
+
             getAttrib: function(data) {
                 return data.tge;
             },
@@ -52,12 +55,12 @@ define(["dojo/_base/declare", "dojo/i18n", "dashboard/logger/Logger",
             saveValues: function() {
                 var refreshTime, transactions = [], applications = [];
                 if(ConfigViewTransactionGrid.TRANSACTIONREFRESHTIME != null) {
-                    refreshTime = ConfigViewTransactionGrid.TRANSACTIONREFRESHTIME[CONFIGCONSTANTS.DIVTYPE.USER].get('value');
+                    refreshTime = ConfigViewTransactionGrid.TRANSACTIONREFRESHTIME[ConfigUtility.USER].get('value');
                 }
 
                 var transactionNames = "transactionNames";
                 if(ConfigViewTransactionGrid.TRANSACTIONS != null) {
-                    var rhsCMS = ConfigWidgetCheckedMultiSelect.checkedMSList[transactionNames + CONFIGCONSTANTS.DIVTYPE.USER][1];
+                    var rhsCMS = ConfigWidgetCheckedMultiSelect.checkedMSList[transactionNames + ConfigUtility.USER][1];
                     var msRhsOptions = rhsCMS.getOptions();
                     for (var j = 0; j < msRhsOptions.length; j++) {
                         transactions[j] = msRhsOptions[j].value;
@@ -66,7 +69,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dashboard/logger/Logger",
 
                 var applicationNames = "applicationNames";
                 if(ConfigViewTransactionGrid.APPLICATIONS != null) {
-                    var rhsCMS = ConfigWidgetCheckedMultiSelect.checkedMSList[applicationNames + CONFIGCONSTANTS.DIVTYPE.USER][1];
+                    var rhsCMS = ConfigWidgetCheckedMultiSelect.checkedMSList[applicationNames + ConfigUtility.USER][1];
                     var msRhsOptions = rhsCMS.getOptions();
                     for (var j = 0; j < msRhsOptions.length; j++) {
                         applications[j] = msRhsOptions[j].value;
@@ -74,14 +77,25 @@ define(["dojo/_base/declare", "dojo/i18n", "dashboard/logger/Logger",
                 }
 
                 var saveData = {
-                    type: CONFIGCONSTANTS.TYPE.SAVE,
-                    saveType: CONFIGCONSTANTS.SAVE.ConfigViewTransactionGrid,
+                    saveType: 2,
                     refreshTime:refreshTime,
                     transactions:transactions,
                     applications:applications
                 };
+
+                xhr("config/transactionGridDetailsSave.action", {
+                    handleAs:"json",
+                    method:"POST",
+                    query:viewMeta,
+                    headers:Helper.JSON_HEADER
+                }).then(lang.hitch(this, this.transactionGridSave));
+
                 ConfigUtility.xhrPostCentral(CONFIGCONSTANTS.ACTION.ConfigViewTransactionGridSAVE, saveData);
                 console.log("transaction grid save refreshTime = " + refreshTime);
+            },
+
+            transactionGridSave: function(data) {
+                ConfigUtility.handleSave(data);
             }
         });
 
