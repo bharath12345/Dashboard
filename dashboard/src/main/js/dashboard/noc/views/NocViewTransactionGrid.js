@@ -99,7 +99,7 @@ define(["dojo/_base/declare", "dojo/i18n","dojo/i18n!dashboard/noc/nls/noc", "da
                     this.convertToReadableString(parseInt(payload.failCount)),
                     parseInt(payload.failCount), "orangered");
 
-                dashboard.STANDBY.hide();
+                dashboard.dom.STANDBY.hide();
             }
 
         });
@@ -216,7 +216,7 @@ define(["dojo/_base/declare", "dojo/i18n","dojo/i18n!dashboard/noc/nls/noc", "da
                 console.log("input = " + dojo.toJson(input));
 
                 if(input.applicationVO == null || input.applicationVO.length == 0) {
-                    dashboard.CpCenterInner.domNode.innerHTML="No Applications and Transactions configured for display on the dashboard";
+                    dashboard.dom.CpCenterInner.domNode.innerHTML="No Applications and Transactions configured for display on the dashboard";
                     return;
                 }
 
@@ -274,7 +274,7 @@ define(["dojo/_base/declare", "dojo/i18n","dojo/i18n!dashboard/noc/nls/noc", "da
 
                 var gridContainer = new GridContainer({nbZones:nbZ, isAutoOrganized:true,
                     style:"width: 100%; height: 100%;"});
-                dashboard.CpCenterInner.addChild(gridContainer);
+                dashboard.dom.CpCenterInner.addChild(gridContainer);
                 gridContainer.disableDnd();
 
                 var j = 0, k = 0;
@@ -419,7 +419,7 @@ define(["dojo/_base/declare", "dojo/i18n","dojo/i18n!dashboard/noc/nls/noc", "da
                 var viewMeta = {
                     id:0,
                     name: pageName,
-                    dimensions:[dashboard.CpCenterInner.w, dashboard.CpCenterInner.h],
+                    dimensions:[dashboard.dom.CpCenterInner.w, dashboard.dom.CpCenterInner.h],
                     position:[xpos,ypos],
                     custom: []
                 };

@@ -16,7 +16,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc",
             },
 
             createDom: function() {
-                this.createInnerMenuAndPanes(dashboard.CpTopCenter.domNode);
+                this.createInnerMenuAndPanes(dashboard.dom.CpTopCenter.domNode);
             },
 
             refreshView: function() {
@@ -29,33 +29,33 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc",
                 NocView.NAME = name;
                 NocView.TYPE = type;
 
-                dashboard.toolbar.destroyDescendants(false);
+                dashboard.dom.toolbar.destroyDescendants(false);
 
                 var buttonHelper = new ButtonHelper();
                 var button = buttonHelper.getRefresh();
                 on(button, "click", lang.hitch(this, "refreshView"));
-                dashboard.toolbar.addChild(button);
+                dashboard.dom.toolbar.addChild(button);
 
                 button = buttonHelper.getNewWindow();
                 on(button, "click", function() {
                     NocView.launchNewWindowConfigPane();
                 });
-                dashboard.toolbar.addChild(button);
+                dashboard.dom.toolbar.addChild(button);
 
                 button = buttonHelper.getStatusRefresh();
                 on(button, "click", function() {
                     Scheduler.startStopRefresh(true);
                 });
-                dashboard.toolbar.addChild(button);
+                dashboard.dom.toolbar.addChild(button);
 
                 button = buttonHelper.getStopRefresh();
                 on(button, "click", function() {
                     Scheduler.startStopRefresh(false);
                 });
-                dashboard.toolbar.addChild(button);
+                dashboard.dom.toolbar.addChild(button);
 
-                dashboard.bottomMenuPane.resize();
-                dashboard.TopBc.resize();
+                dashboard.dom.bottomMenuPane.resize();
+                dashboard.dom.TopBc.resize();
             },
 
             setAccordion: function(nocAccordion) {

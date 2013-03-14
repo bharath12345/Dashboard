@@ -6,6 +6,10 @@ var pageTypes = {
     ALERT:4
 };
 
+dashboard = {};
+dashboard.classnames = {};
+dashboard.dom = {};
+
 require(["dojo/io-query", "dojo/dom-construct", "dojo/_base/window", 'dojo/domReady!' ],
 
     function (ioQuery, domConstruct, win) {

@@ -44,10 +44,10 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                         headers:Helper.JSON_HEADER
                     }).then(lang.hitch(this, this.createAccordionPanes));
 
-                    DashboardAccordion.AccContainer.placeAt(dashboard.CpLeft);
+                    DashboardAccordion.AccContainer.placeAt(dashboard.dom.CpLeft);
                     DashboardAccordion.AccContainer.startup();
                     DashboardAccordion.AccContainer.resize();
-                    dashboard.TopBc.resize();
+                    dashboard.dom.TopBc.resize();
                 }
             },
 

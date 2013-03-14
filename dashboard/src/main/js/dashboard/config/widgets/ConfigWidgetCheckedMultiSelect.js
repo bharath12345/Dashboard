@@ -200,7 +200,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojox/form/CheckedMultiSelect", "dij
             },
 
             moveLhsToRhs: function(lhsCMS, rhsCMS) {
-                dashboard.STANDBY.show();
+                dashboard.dom.STANDBY.show();
                 var msLhsOptions = lhsCMS.getOptions();
                 var msRhsOptions = rhsCMS.getOptions();
                 for (var i = 0; i < msLhsOptions.length; i++) {
@@ -220,11 +220,11 @@ define(["dojo/_base/declare", "dojo/i18n", "dojox/form/CheckedMultiSelect", "dij
                         rhsCMS.addOption(newRhsOption);
                     }
                 }
-                dashboard.STANDBY.hide();
+                dashboard.dom.STANDBY.hide();
             },
 
             moveRhsToLhs: function(rhsCMS) {
-                dashboard.STANDBY.show();
+                dashboard.dom.STANDBY.show();
                 var msRhsOptions = rhsCMS.getOptions();
                 for (var i = 0; i < msRhsOptions.length; i++) {
                     if (msRhsOptions[i].selected == true) {
@@ -232,7 +232,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojox/form/CheckedMultiSelect", "dij
                         rhsCMS.removeOption(msRhsOptions[i]);
                     }
                 }
-                dashboard.STANDBY.hide();
+                dashboard.dom.STANDBY.hide();
             },
 
             selectAllCMS: function(cms) {
@@ -244,13 +244,13 @@ define(["dojo/_base/declare", "dojo/i18n", "dojox/form/CheckedMultiSelect", "dij
             },
 
             cmsUpdate: function(bool, cms) {
-                dashboard.STANDBY.show();
+                dashboard.dom.STANDBY.show();
                 var cmsOptions = cms.getOptions();
                 for (var i = 0; i < cmsOptions.length; i++) {
                     cmsOptions[i].selected = bool;
                 }
                 cms.updateOption(cmsOptions);
-                dashboard.STANDBY.hide();
+                dashboard.dom.STANDBY.hide();
             }
 
         });

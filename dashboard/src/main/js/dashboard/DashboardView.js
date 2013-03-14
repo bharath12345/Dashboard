@@ -14,42 +14,42 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
             createDom: function() {
                 this.createCenterContainers();
                 this.createMenu();
-                this.createInnerMenuAndPanes(dashboard.CpCenter.domNode);
+                this.createInnerMenuAndPanes(dashboard.dom.CpCenter.domNode);
             },
 
             createCenterContainers: function() {
-                dashboard.CenterBc = new BorderContainer({
+                dashboard.dom.CenterBc = new BorderContainer({
                     design:"headline",
                     liveSplitters:false,
                     persist:true,
                     gutters: false
                 });
 
-                dashboard.CpMenuTop = new ContentPane({
+                dashboard.dom.CpMenuTop = new ContentPane({
                     region:"top",
                     splitter:false
                 });
 
-                dashboard.CpLeft = new ContentPane({
+                dashboard.dom.CpLeft = new ContentPane({
                     region:"left",
                     splitter:true,
                     style: "width:20%;"
                 });
 
-                dashboard.CpCenter = new ContentPane({
+                dashboard.dom.CpCenter = new ContentPane({
                     region:"center",
                     splitter:false
                 });
 
-                dashboard.CenterBc.addChild(dashboard.CpMenuTop);
-                dashboard.CenterBc.addChild(dashboard.CpLeft);
-                dashboard.CenterBc.addChild(dashboard.CpCenter);
-                dashboard.CenterBc.placeAt(dashboard.CpTopCenter);
-                dashboard.CenterBc.startup();
-                dashboard.CenterBc.resize();
+                dashboard.dom.CenterBc.addChild(dashboard.dom.CpMenuTop);
+                dashboard.dom.CenterBc.addChild(dashboard.dom.CpLeft);
+                dashboard.dom.CenterBc.addChild(dashboard.dom.CpCenter);
+                dashboard.dom.CenterBc.placeAt(dashboard.dom.CpTopCenter);
+                dashboard.dom.CenterBc.startup();
+                dashboard.dom.CenterBc.resize();
 
-                dashboard.CenterBc.resize();
-                dashboard.TopBc.resize();
+                dashboard.dom.CenterBc.resize();
+                dashboard.dom.TopBc.resize();
             },
 
             createMenu: function() {
@@ -74,14 +74,14 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
 
                 ////////
 
-                menuBar.placeAt(dashboard.CpMenuTop);
+                menuBar.placeAt(dashboard.dom.CpMenuTop);
                 menuBar.startup();
                 fileMenu.startup();
                 actionMenu.startup();
                 helpMenu.startup();
 
-                dashboard.CenterBc.resize();
-                dashboard.TopBc.resize();
+                dashboard.dom.CenterBc.resize();
+                dashboard.dom.TopBc.resize();
             }
 
         });

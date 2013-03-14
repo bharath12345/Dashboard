@@ -9,10 +9,10 @@ define(["dojo/_base/declare", 'dojox/widget/Standby', "dojo/io-query", "dojo/_ba
         Helper.JSON_HEADER = { 'Content-Type':'application/json' };
 
         Helper.showLoading = function() {
-            dashboard.STANDBY = new Standby({target:dashboard.TopBc.domNode});
-            document.body.appendChild(dashboard.STANDBY.domNode);
-            dashboard.STANDBY.startup();
-            dashboard.STANDBY.show();
+            dashboard.dom.STANDBY = new Standby({target:dashboard.dom.TopBc.domNode});
+            document.body.appendChild(dashboard.dom.STANDBY.domNode);
+            dashboard.dom.STANDBY.startup();
+            dashboard.dom.STANDBY.show();
         };
 
         Helper.getClassPath = function(name) {

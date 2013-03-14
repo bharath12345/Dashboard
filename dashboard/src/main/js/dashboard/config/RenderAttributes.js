@@ -35,7 +35,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
                 pageObj.renderAttributes(data);
 
                 this.cleanupRendering(tc);
-                dashboard.STANDBY.hide();
+                dashboard.dom.STANDBY.hide();
             },
 
             cleanupRendering:function (tc) {
@@ -49,7 +49,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
             createTabs:function () {
 
                 var tc = new TabContainer({style:"height: 100%; width: 100%;"});
-                dashboard.CpCenterInner.addChild(tc);
+                dashboard.dom.CpCenterInner.addChild(tc);
 
                 RenderAttributes.LOOKNFEELPANE = new ContentPane({title:"Look and Feel", style:"height: 100%; width: 100%;"});
                 tc.addChild(RenderAttributes.LOOKNFEELPANE);
@@ -138,7 +138,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
             },
 
             createToolbarButtons:function () {
-                dashboard.toolbar.destroyDescendants(false);
+                dashboard.dom.toolbar.destroyDescendants(false);
 
                 var buttonHelper = new ButtonHelper();
 
@@ -146,53 +146,53 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
                 on(button, "click", function () {
                     RenderAttributes.PAGEOBJ.saveValues();
                 });
-                dashboard.toolbar.addChild(button);
+                dashboard.dom.toolbar.addChild(button);
 
                 button = buttonHelper.getNewWindow();
                 on(button, "click", function () {
                     ConfigView.launchNewWindowConfigPane(RenderAttributes.ID, RenderAttributes.NAME, RenderAttributes.TYPE);
                 });
-                dashboard.toolbar.addChild(button);
+                dashboard.dom.toolbar.addChild(button);
 
-                dashboard.toolbar.addChild(buttonHelper.getDelete());
-                dashboard.toolbar.addChild(buttonHelper.getRefresh());
-                dashboard.toolbar.addChild(buttonHelper.getStatusRefresh());
-                dashboard.toolbar.addChild(buttonHelper.getAnalysisPane());
-                dashboard.toolbar.addChild(buttonHelper.getOpen());
-                dashboard.toolbar.addChild(buttonHelper.getWizard());
-                dashboard.toolbar.addChild(buttonHelper.getWizardPage());
-                dashboard.toolbar.addChild(buttonHelper.getMapping());
-                dashboard.toolbar.addChild(buttonHelper.getFitToContent());
-                dashboard.toolbar.addChild(buttonHelper.getOneToOne());
-                dashboard.toolbar.addChild(buttonHelper.getZoomOut());
-                dashboard.toolbar.addChild(buttonHelper.getZoomIn());
-                dashboard.toolbar.addChild(buttonHelper.getStopRefresh());
-                dashboard.toolbar.addChild(buttonHelper.getRestoreDefault());
-                dashboard.toolbar.addChild(buttonHelper.getRestoreFilter());
-                dashboard.toolbar.addChild(buttonHelper.getFind());
-                dashboard.toolbar.addChild(buttonHelper.getOpenNodeGroupMap());
-                dashboard.toolbar.addChild(buttonHelper.getSaveLayout());
-                dashboard.toolbar.addChild(buttonHelper.getSwapPath());
-                dashboard.toolbar.addChild(buttonHelper.getComputePath());
-                dashboard.toolbar.addChild(buttonHelper.getFirst());
-                dashboard.toolbar.addChild(buttonHelper.getLast());
-                dashboard.toolbar.addChild(buttonHelper.getPrevious());
-                dashboard.toolbar.addChild(buttonHelper.getNext());
-                dashboard.toolbar.addChild(buttonHelper.getClose());
-                dashboard.toolbar.addChild(buttonHelper.getSaveAndClose());
-                dashboard.toolbar.addChild(buttonHelper.getSaveAndNew());
-                dashboard.toolbar.addChild(buttonHelper.getNew());
-                dashboard.toolbar.addChild(buttonHelper.getToggleEmphasis());
-                dashboard.toolbar.addChild(buttonHelper.getTooltipToggle());
-                dashboard.toolbar.addChild(buttonHelper.getTextWrapToggle());
-                dashboard.toolbar.addChild(buttonHelper.getFindToggle());
-                dashboard.toolbar.addChild(buttonHelper.getIndicateKeyIncidents());
-                dashboard.toolbar.addChild(buttonHelper.getGo());
-                dashboard.toolbar.addChild(buttonHelper.getStop());
+                dashboard.dom.toolbar.addChild(buttonHelper.getDelete());
+                dashboard.dom.toolbar.addChild(buttonHelper.getRefresh());
+                dashboard.dom.toolbar.addChild(buttonHelper.getStatusRefresh());
+                dashboard.dom.toolbar.addChild(buttonHelper.getAnalysisPane());
+                dashboard.dom.toolbar.addChild(buttonHelper.getOpen());
+                dashboard.dom.toolbar.addChild(buttonHelper.getWizard());
+                dashboard.dom.toolbar.addChild(buttonHelper.getWizardPage());
+                dashboard.dom.toolbar.addChild(buttonHelper.getMapping());
+                dashboard.dom.toolbar.addChild(buttonHelper.getFitToContent());
+                dashboard.dom.toolbar.addChild(buttonHelper.getOneToOne());
+                dashboard.dom.toolbar.addChild(buttonHelper.getZoomOut());
+                dashboard.dom.toolbar.addChild(buttonHelper.getZoomIn());
+                dashboard.dom.toolbar.addChild(buttonHelper.getStopRefresh());
+                dashboard.dom.toolbar.addChild(buttonHelper.getRestoreDefault());
+                dashboard.dom.toolbar.addChild(buttonHelper.getRestoreFilter());
+                dashboard.dom.toolbar.addChild(buttonHelper.getFind());
+                dashboard.dom.toolbar.addChild(buttonHelper.getOpenNodeGroupMap());
+                dashboard.dom.toolbar.addChild(buttonHelper.getSaveLayout());
+                dashboard.dom.toolbar.addChild(buttonHelper.getSwapPath());
+                dashboard.dom.toolbar.addChild(buttonHelper.getComputePath());
+                dashboard.dom.toolbar.addChild(buttonHelper.getFirst());
+                dashboard.dom.toolbar.addChild(buttonHelper.getLast());
+                dashboard.dom.toolbar.addChild(buttonHelper.getPrevious());
+                dashboard.dom.toolbar.addChild(buttonHelper.getNext());
+                dashboard.dom.toolbar.addChild(buttonHelper.getClose());
+                dashboard.dom.toolbar.addChild(buttonHelper.getSaveAndClose());
+                dashboard.dom.toolbar.addChild(buttonHelper.getSaveAndNew());
+                dashboard.dom.toolbar.addChild(buttonHelper.getNew());
+                dashboard.dom.toolbar.addChild(buttonHelper.getToggleEmphasis());
+                dashboard.dom.toolbar.addChild(buttonHelper.getTooltipToggle());
+                dashboard.dom.toolbar.addChild(buttonHelper.getTextWrapToggle());
+                dashboard.dom.toolbar.addChild(buttonHelper.getFindToggle());
+                dashboard.dom.toolbar.addChild(buttonHelper.getIndicateKeyIncidents());
+                dashboard.dom.toolbar.addChild(buttonHelper.getGo());
+                dashboard.dom.toolbar.addChild(buttonHelper.getStop());
 
 
-                dashboard.bottomMenuPane.resize();
-                dashboard.TopBc.resize();
+                dashboard.dom.bottomMenuPane.resize();
+                dashboard.dom.TopBc.resize();
 
             }
         });

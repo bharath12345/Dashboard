@@ -473,8 +473,8 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/topol
 
             loadPage:function (pageName) {
 
-                var paneWidth = dashboard.CpCenterInner.w;
-                var paneHeight = dashboard.CpCenterInner.h;
+                var paneWidth = dashboard.dom.CpCenterInner.w;
+                var paneHeight = dashboard.dom.CpCenterInner.h;
                 var styleString = "width: " + paneWidth + "; height: " + paneHeight + ";"
 
                 SampleTopologyView.TopPane = new ContentPane({
@@ -484,7 +484,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/topol
 
                 var gridContainer = new GridContainer({nbZones:1, isAutoOrganized:true,
                     style:"width: 100%; height: 100%;"});
-                dashboard.CpCenterInner.addChild(gridContainer);
+                dashboard.dom.CpCenterInner.addChild(gridContainer);
                 gridContainer.disableDnd();
 
                 gridContainer.addChild(SampleTopologyView.TopPane, 0);
@@ -508,7 +508,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/topol
                 }).then(lang.hitch(this, this.createNodeLayout));
 
 
-                dashboard.STANDBY.hide();
+                dashboard.dom.STANDBY.hide();
             },
 
             createNodeLayout:function (input) {

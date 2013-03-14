@@ -47,13 +47,13 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/on", "dojo/_base/lang", "dashbo
 
             createView: function(id, name, type, newWindow) {
                 // show the loading spinner
-                dashboard.STANDBY.show();
+                dashboard.dom.STANDBY.show();
 
                 // cancel all timers on previous page
                 Scheduler.cancelAllTimers();
 
                 // destroy everything in the inner most central pane
-                dashboard.CpCenterInner.destroyDescendants(false);
+                dashboard.dom.CpCenterInner.destroyDescendants(false);
 
                 // set a dark marker on the accordion
                 this.setMarker(id);

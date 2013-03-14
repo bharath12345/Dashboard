@@ -15,7 +15,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
             },
 
             createTopContainers:function (docBody) {
-                dashboard.TopBc = new BorderContainer({
+                dashboard.dom.TopBc = new BorderContainer({
                     design:"headline",
                     liveSplitters:false,
                     persist:true,
@@ -23,23 +23,23 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
                     style: "width: 100%; height: 100%;"
                 });
 
-                dashboard.CpMast = new ContentPane({
+                dashboard.dom.CpMast = new ContentPane({
                     region:"top",
                     splitter:false,
                     style:"height:25px;"
                 });
 
-                dashboard.CpTopCenter = new ContentPane({
+                dashboard.dom.CpTopCenter = new ContentPane({
                     region:"center",
                     splitter:false
                 });
 
-                dashboard.TopBc.addChild(dashboard.CpMast);
-                dashboard.TopBc.addChild(dashboard.CpTopCenter);
-                dashboard.TopBc.placeAt(docBody);
-                dashboard.TopBc.startup();
+                dashboard.dom.TopBc.addChild(dashboard.dom.CpMast);
+                dashboard.dom.TopBc.addChild(dashboard.dom.CpTopCenter);
+                dashboard.dom.TopBc.placeAt(docBody);
+                dashboard.dom.TopBc.startup();
 
-                dashboard.TopBc.resize();
+                dashboard.dom.TopBc.resize();
             },
 
             createMast:function () {
@@ -48,7 +48,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
 
                 var mastDiv = dojo.create("div");
                 mastDiv.className = "masthead";
-                dashboard.CpMast.domNode.appendChild(mastDiv);
+                dashboard.dom.CpMast.domNode.appendChild(mastDiv);
 
                 var mastLogo = dojo.create("span");
                 mastLogo.className = "logo";
@@ -72,7 +72,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
             },
 
             createInnerMenuAndPanes: function(paneDom) {
-                dashboard.InnerBc = new BorderContainer({
+                dashboard.dom.InnerBc = new BorderContainer({
                     design:"headline",
                     liveSplitters:false,
                     persist:true,
@@ -80,66 +80,66 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
                     style: "width: 100%; height: 100%;"
                 });
 
-                dashboard.CpMenu = new ContentPane({
+                dashboard.dom.CpMenu = new ContentPane({
                     region:"top",
                     splitter:false,
                     style: "height: 40px"
                 });
 
-                dashboard.CpCenterInner = new ContentPane({
+                dashboard.dom.CpCenterInner = new ContentPane({
                     region:"center",
                     splitter:false
                 });
 
-                dashboard.InnerBc.addChild(dashboard.CpMenu);
-                dashboard.InnerBc.addChild(dashboard.CpCenterInner);
-                dashboard.InnerBc.placeAt(paneDom);
-                dashboard.InnerBc.startup();
-                dashboard.InnerBc.resize();
+                dashboard.dom.InnerBc.addChild(dashboard.dom.CpMenu);
+                dashboard.dom.InnerBc.addChild(dashboard.dom.CpCenterInner);
+                dashboard.dom.InnerBc.placeAt(paneDom);
+                dashboard.dom.InnerBc.startup();
+                dashboard.dom.InnerBc.resize();
 
-                dashboard.InnerBc.resize();
-                dashboard.TopBc.resize();
+                dashboard.dom.InnerBc.resize();
+                dashboard.dom.TopBc.resize();
 
                 this.createMenuRegions();
             },
 
             createMenuRegions: function() {
-                dashboard.MenuBc = new BorderContainer({
+                dashboard.dom.MenuBc = new BorderContainer({
                     liveSplitters:false,
                     persist:true,
                     gutters: false
                 });
 
-                dashboard.topMenuPane = new ContentPane({
+                dashboard.dom.topMenuPane = new ContentPane({
                     region: "top",
                     splitter:false,
                     style: "height: 15px;"
                 });
-                dashboard.MenuBc.addChild(dashboard.topMenuPane);
+                dashboard.dom.MenuBc.addChild(dashboard.dom.topMenuPane);
 
-                dashboard.bottomMenuPane = new ContentPane({
+                dashboard.dom.bottomMenuPane = new ContentPane({
                     region: "center",
                     splitter:false
                 });
-                dashboard.MenuBc.addChild(dashboard.bottomMenuPane);
+                dashboard.dom.MenuBc.addChild(dashboard.dom.bottomMenuPane);
 
-                dashboard.MenuBc.placeAt(dashboard.CpMenu);
-                dashboard.MenuBc.startup();
-                dashboard.MenuBc.resize();
-                dashboard.TopBc.resize();
+                dashboard.dom.MenuBc.placeAt(dashboard.dom.CpMenu);
+                dashboard.dom.MenuBc.startup();
+                dashboard.dom.MenuBc.resize();
+                dashboard.dom.TopBc.resize();
 
                 this.addToolbar();
             },
 
             addToolbar: function() {
-                dashboard.toolbar = new Toolbar({});
+                dashboard.dom.toolbar = new Toolbar({});
 
                 var buttonHelper = new ButtonHelper();
-                dashboard.toolbar.addChild(buttonHelper.getRefresh());
+                dashboard.dom.toolbar.addChild(buttonHelper.getRefresh());
 
-                dashboard.toolbar.placeAt(dashboard.bottomMenuPane);
-                dashboard.toolbar.startup();
-                dashboard.TopBc.resize();
+                dashboard.dom.toolbar.placeAt(dashboard.dom.bottomMenuPane);
+                dashboard.dom.toolbar.startup();
+                dashboard.dom.TopBc.resize();
             }
 
         });

@@ -36,8 +36,6 @@ define([ 'dojo/has', 'require' ], function (has, require) {
          * plugin functionality.
          */
 
-        dashboard = {};
-        dashboard.classnames = {};
 
         require(['dashboard/DashboardView', 'dashboard/DashboardAccordion',
             "dashboard/helper/Helper", "dashboard/noc/NocAccordion", 'dojo/domReady!' ],

@@ -29,7 +29,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc",
                     value = 18;
                 }
                 console.log("font size retrived = " + value);
-                var cell = dojo.query(".dgrid-cell, .label", dashboard.CpCenterInner.domNode);
+                var cell = dojo.query(".dgrid-cell, .label", dashboard.dom.CpCenterInner.domNode);
                 for (var i = 0; i < cell.length; i++) {
                     cell[i].style.fontSize = value;
                     cell[i].style.verticalAlign = "middle";
@@ -111,7 +111,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc",
 
                 var nwigc = new IncidentGridConfig();
                 nwigc.applyConfig();
-                dashboard.STANDBY.hide();
+                dashboard.dom.STANDBY.hide();
             }
 
         });
@@ -264,11 +264,11 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc",
 
             loadPage:function (pageName) {
 
-                var paneWidth = dashboard.CpCenterInner.w;
-                var paneHeight = dashboard.CpCenterInner.h;
+                var paneWidth = dashboard.dom.CpCenterInner.w;
+                var paneHeight = dashboard.dom.CpCenterInner.h;
                 var styleString = "width: " + paneWidth + "; height: " + paneHeight + ";"
 
-                dashboard.topMenuPane.domNode.innerHTML = "<div class='text-center alert alert-info heading'>Alerts Grid</div>";
+                dashboard.dom.topMenuPane.domNode.innerHTML = "<div class='text-center alert alert-info heading'>Alerts Grid</div>";
 
                 var titlePane = new ContentPane({
                     splitter:false,
@@ -278,7 +278,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc",
 
                 var gridContainer = new GridContainer({nbZones:1, isAutoOrganized:true,
                     style:"width: 100%; height: 100%;"});
-                dashboard.CpCenterInner.addChild(gridContainer);
+                dashboard.dom.CpCenterInner.addChild(gridContainer);
                 gridContainer.disableDnd();
 
                 gridContainer.addChild(titlePane, 0);
@@ -289,7 +289,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc",
                 var viewMeta = {
                     id:pageName,
                     name:pageName,
-                    dimensions:[dashboard.CpCenterInner.w, dashboard.CpCenterInner.h],
+                    dimensions:[dashboard.dom.CpCenterInner.w, dashboard.dom.CpCenterInner.h],
                     position:[xpos, ypos],
                     custom:[]
                 };
