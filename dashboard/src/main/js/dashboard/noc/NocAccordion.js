@@ -7,27 +7,21 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
 
         var NocAccordion = declare(dashboard.classnames.NocAccordion, AbstractAccordion, {
 
-            ALERTSGRID: "Alerts Grid",
-            CLUSTERSGRID: "Clusters Grid",
-            TRANSACTIONSGRID: "Transactions Grid",
+            ALERTSGRID: i18nString.alertsGrid,
+            TRANSACTIONSGRID: i18nString.transactionGrid,
 
             showView: function(id, name, type, newWindow) {
                 console.log("show page config called with id = " + id + " and name = " + name);
 
-                nocView = this.getView(name);
+                var nocView = this.getView(name);
                 nocView.setAccordion(this);
                 nocView.loadMenu(id, name, type);
 
+                // ToDo: Change this switch away from Name to some ID
                 switch(name) {
                     case this.ALERTSGRID:
                         require(["dashboard/noc/views/NocViewIncident"], function (NocViewIncident) {
                             new NocViewIncident().loadPage("IncidentGrid");
-                        });
-                        break;
-
-                    case this.CLUSTERSGRID:
-                        require(["dashboard/noc/views/NocViewAllClusterAvailability"], function (NocViewAllClusterAvailability) {
-                            new NocViewAllClusterAvailability().loadPage("NocViewAllClusterAvailability");
                         });
                         break;
 
@@ -43,10 +37,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
                 }
             },
 
-            getLinkMap: function() {
-                return NocAccordion.LINKMAP;
-            },
-
             getView: function(name, newWindow) {
                 var nocView = NocAccordion.VIEWMAP[name];
                 if(nocView == null) {
@@ -59,7 +49,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
 
         NocAccordion.LOG = Logger.addTimer(new Logger(dashboard.classnames.NocAccordion));
 
-        NocAccordion.LINKMAP = {};
         NocAccordion.VIEWMAP = {};
 
         return NocAccordion;

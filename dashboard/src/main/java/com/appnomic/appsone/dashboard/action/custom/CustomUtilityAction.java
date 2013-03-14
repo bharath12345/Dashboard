@@ -66,9 +66,15 @@ public class CustomUtilityAction extends AbstractNocAction {
 		List<PageListVO> pageList = new ArrayList<PageListVO>();
 		
 		PageListVO pageListVO = new PageListVO();
-		pageListVO.setName("Sample Custom Layouts");
+		pageListVO.setName("Custom Layouts");
 		pageListVO.setId(UUID.randomUUID().toString());
-		pageListVO.setType(ActionConstants.ACCTYPE.GRID.name());
+		pageListVO.setType(ActionConstants.ACCTYPE.DIRECTORY.name());
+		pageList.add(pageListVO);
+		
+		pageListVO = new PageListVO();
+		pageListVO.setName("Custom Views");
+		pageListVO.setId(UUID.randomUUID().toString());
+		pageListVO.setType(ActionConstants.ACCTYPE.DIRECTORY.name());
 		pageList.add(pageListVO);
 		
 		PageListVO [] pageArray = pageList.toArray(new PageListVO[pageList.size()]);

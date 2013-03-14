@@ -67,44 +67,77 @@ public class ConfigUtilityAction extends AbstractNocAction {
 	            })})
 	public String pagesAction() {
 		param = getParameters();
-		pageListVO = getDummyList();
+		pageListVO = getList();
 		return SUCCESS;
 	}
 	
-	private PageListVO[] getDummyList() {
+	private PageListVO[] getList() {
 		List<PageListVO> pageList = new ArrayList<PageListVO>();
 		
-		PageListVO pageListVO = new PageListVO();
-		pageListVO.setName("Alerts Grid");
-		pageListVO.setId(UUID.randomUUID().toString());
-		pageListVO.setType(ActionConstants.ACCTYPE.GRID.name());
-		pageList.add(pageListVO);
+		//// Dashboard list
+		List<PageListVO> dashboardList = new ArrayList<PageListVO>();
+		PageListVO dashboardPageListVO = new PageListVO();
+		dashboardPageListVO = new PageListVO();
+		dashboardPageListVO.setName("Dashboard Configuration");
+		dashboardPageListVO.setId(UUID.randomUUID().toString());
+		dashboardPageListVO.setType(ActionConstants.ACCTYPE.DIRECTORY.name());
+		pageList.add(dashboardPageListVO);
 		
-		/*pageListVO = new PageListVO();
-		pageListVO.setName("Clusters Grid");
+		PageListVO pageListVO = new PageListVO();
+		pageListVO.setName("Application Alerts Dashboard");
 		pageListVO.setId(UUID.randomUUID().toString());
-		pageListVO.setType(ActionConstants.ACCTYPE.GRID.name());
-		pageList.add(pageListVO);*/
+		pageListVO.setType(ActionConstants.ACCTYPE.CONFIGURATION.name()); // this is for the ICON to show
+		dashboardList.add(pageListVO);
 		
 		pageListVO = new PageListVO();
 		pageListVO.setName("Transactions Grid");
 		pageListVO.setId(UUID.randomUUID().toString());
-		pageListVO.setType(ActionConstants.ACCTYPE.GRID.name());
-		pageList.add(pageListVO);
+		pageListVO.setType(ActionConstants.ACCTYPE.CONFIGURATION.name());
+		dashboardList.add(pageListVO);
 		
-		/*pageListVO = new PageListVO();
-		pageListVO.setName("Topology View");
-		pageListVO.setId(UUID.randomUUID().toString());
-		pageListVO.setType(ActionConstants.ACCTYPE.GRID.name());
-		pageList.add(pageListVO);
+		PageListVO [] pageArray = dashboardList.toArray(new PageListVO[dashboardList.size()]);
+		dashboardPageListVO.setPageList(pageArray);
+		
+		//// Topology List
+		
+		List<PageListVO> topoList = new ArrayList<PageListVO>();
+		PageListVO topoListVO = new PageListVO();
+		topoListVO = new PageListVO();
+		topoListVO.setName("Topology Configuration");
+		topoListVO.setId(UUID.randomUUID().toString());
+		topoListVO.setType(ActionConstants.ACCTYPE.DIRECTORY.name());
+		pageList.add(topoListVO);
 		
 		pageListVO = new PageListVO();
-		pageListVO.setName("Global Config");
+		pageListVO.setName("Application Layers");
 		pageListVO.setId(UUID.randomUUID().toString());
-		pageListVO.setType(ActionConstants.ACCTYPE.GRID.name());*/
-		pageList.add(pageListVO);
+		pageListVO.setType(ActionConstants.ACCTYPE.CONFIGURATION.name());
+		topoList.add(pageListVO);
 		
-		PageListVO [] pageArray = pageList.toArray(new PageListVO[pageList.size()]);
+		pageListVO = new PageListVO();
+		pageListVO.setName("Application Groups and Topology");
+		pageListVO.setId(UUID.randomUUID().toString());
+		pageListVO.setType(ActionConstants.ACCTYPE.CONFIGURATION.name());
+		topoList.add(pageListVO);
+		
+		pageListVO = new PageListVO();
+		pageListVO.setName("Application Topology");
+		pageListVO.setId(UUID.randomUUID().toString());
+		pageListVO.setType(ActionConstants.ACCTYPE.CONFIGURATION.name());
+		topoList.add(pageListVO);
+		
+		pageListVO = new PageListVO();
+		pageListVO.setName("Component Topology");
+		pageListVO.setId(UUID.randomUUID().toString());
+		pageListVO.setType(ActionConstants.ACCTYPE.CONFIGURATION.name());
+		topoList.add(pageListVO);
+		
+		pageArray = topoList.toArray(new PageListVO[topoList.size()]);
+		topoListVO.setPageList(pageArray);
+		
+		/////////
+		
+		pageArray = pageList.toArray(new PageListVO[pageList.size()]);
 		return pageArray;
 	}
 	

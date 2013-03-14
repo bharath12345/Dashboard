@@ -1,7 +1,7 @@
 define({
     root:({
 
-        title:"AppsOne Topology Screen"
+        sampleTopoology:"Sample Topology"
 
     }),
 

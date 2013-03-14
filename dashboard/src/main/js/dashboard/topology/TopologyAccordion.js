@@ -7,7 +7,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/topology/nls/top
 
         var TopologyAccordion = declare(dashboard.classnames.TopologyAccordion, AbstractAccordion, {
 
-            SAMPLE: "Sample Topology",
+            SAMPLE: i18nString.sampleTopoology,
 
             showView: function(id, name, type, newWindow) {
                 console.log("show page config called with id = " + id + " and name = " + name);
@@ -29,10 +29,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/topology/nls/top
                 }
             },
 
-            getLinkMap: function() {
-                return TopologyAccordion.LINKMAP;
-            },
-
             getView: function(name, newWindow) {
                 var topologyView = TopologyAccordion.VIEWMAP[name];
                 if(topologyView == null) {
@@ -45,7 +41,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/topology/nls/top
 
         TopologyAccordion.LOG = Logger.addTimer(new Logger(dashboard.classnames.TopologyAccordion));
 
-        TopologyAccordion.LINKMAP = {};
         TopologyAccordion.VIEWMAP = {};
 
         return TopologyAccordion;

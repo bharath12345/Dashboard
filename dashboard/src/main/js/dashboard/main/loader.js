@@ -2,7 +2,7 @@ var pageTypes = {
     CONFIG:0,
     NOC:1,
     TOPOLOGY:2,
-    CONFIGDASHBOARD:3,
+    CUSTOM:3,
     ALERT:4
 };
 

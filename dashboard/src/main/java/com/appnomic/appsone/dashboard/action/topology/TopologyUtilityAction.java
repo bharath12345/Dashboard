@@ -68,7 +68,7 @@ public class TopologyUtilityAction extends AbstractNocAction {
 		PageListVO pageListVO = new PageListVO();
 		pageListVO.setName("Sample Topology");
 		pageListVO.setId(UUID.randomUUID().toString());
-		pageListVO.setType(ActionConstants.ACCTYPE.GRID.name());
+		pageListVO.setType(ActionConstants.ACCTYPE.TOPOLOGY.name());
 		pageList.add(pageListVO);
 		
 		PageListVO [] pageArray = pageList.toArray(new PageListVO[pageList.size()]);

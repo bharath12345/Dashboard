@@ -1,9 +1,8 @@
 define({
     root:({
 
-        title:"AppsOne NOC Screen",
-        help:"Help",
-        signout:"Sign out",
+        alertsGrid: "Alerts Grid",
+        transactionGrid: "Transactions Grid",
         
         COMPONENT_AVAILABILITY: "Component",
         COMPONENT_STATIC: "Component Static",

@@ -239,3 +239,31 @@
     width: 16px;
     height: 16px;
 }
+
+/*
+
+Accordion Icons
+Bharath, March 16th 2013
+
+*/
+
+.tableTreeLeaf {
+    background-image: url('../images/toolbar/new/TableHorizontal.16.gif');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.configurationTreeLeaf {
+    background-image: url('../images/toolbar/configuration.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.topologyTreeLeaf {
+    background-image: url('../images/toolbar/topology.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}

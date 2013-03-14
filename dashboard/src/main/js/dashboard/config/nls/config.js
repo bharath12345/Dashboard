@@ -1,9 +1,13 @@
 define({
     root:({
 
-        title:"AppsOne NOC Screen",
-        help:"Help",
-        signout:"Sign out",
+        alertsGrid: "Alerts Grid",
+        transactionGrid: "Transactions Grid",
+
+        appLayers: "Application Layers",
+        appGroupsTopo: "Application Groups and Topology",
+        appTopology: "Application Topology",
+        compTopology: "Component Topology",
 
         applicationRefreshTime: "Application Refresh Time",
         fontName: "Font Name",

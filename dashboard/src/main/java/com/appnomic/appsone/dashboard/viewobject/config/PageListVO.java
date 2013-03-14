@@ -5,6 +5,15 @@ public class PageListVO {
 	String name;
 	String type;
 	String id;
+	PageListVO [] pageList;
+
+	public PageListVO[] getPageList() {
+		return pageList;
+	}
+
+	public void setPageList(PageListVO[] pageList) {
+		this.pageList = pageList;
+	}
 
 	public String getId() {
 		return id;

@@ -8,11 +8,16 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/confi
 
         var ConfigAccordion = declare(dashboard.classnames.ConfigAccordion, AbstractAccordion, {
 
-            ALERTSGRID: "Alerts Grid",
-            TRANSACTIONSGRID: "Transactions Grid",
+            ALERTSGRID: i18nString.alertsGrid,
+            TRANSACTIONSGRID: i18nString.transactionGrid,
+
+            APPLAYERS: i18nString.appLayers,
+            APPGROUPSTOPO: i18nString.appGroupsTopo,
+            APPTOPO: i18nString.appTopology,
+            COMPTOPO: i18nString.compTopology,
 
             showView: function(id, name, type, newWindow) {
-                configView = this.getView(name);
+                var configView = this.getView(name);
                 configView.setAccordion(this);
 
                 console.log("show page config called with id = " + id + " name = " + name);
@@ -24,6 +29,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/confi
                     custom:[]
                 };
 
+                // ToDo: Change this switch away from Name to some ID
                 switch(name) {
                     case this.ALERTSGRID:
                         xhr("config/alertGridDetailsRetrieve.action", {
@@ -65,10 +71,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/confi
                 });
             },
 
-            getLinkMap: function() {
-                return ConfigAccordion.LINKMAP;
-            },
-
             getView: function(name) {
                 var configView = ConfigAccordion.VIEWMAP[name];
                 if(configView == null) {
@@ -81,7 +83,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/confi
 
         ConfigAccordion.LOG = Logger.addTimer(new Logger(dashboard.classnames.ConfigAccordion));
 
-        ConfigAccordion.LINKMAP = {};
         ConfigAccordion.VIEWMAP = {};
 
         return ConfigAccordion;

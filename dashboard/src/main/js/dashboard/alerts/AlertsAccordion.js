@@ -12,7 +12,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/topology/nls/top
 
         AlertsAccordion.LOG = Logger.addTimer(new Logger(dashboard.classnames.AlertsAccordion));
 
-        AlertsAccordion.LINKMAP = {};
         AlertsAccordion.VIEWMAP = {};
 
         return AlertsAccordion;
