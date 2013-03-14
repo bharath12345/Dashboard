@@ -20,9 +20,10 @@ define([ 'dojo/has', 'require' ], function (has, require) {
 
     if (has('host-browser')) {
 
-        require(['dashboard/logger/Logger',
-            "dashboard/noc/TopologyAccordion", "dashboard/helper/Helper",
-            'dojo/domReady!' ],
+        dashboard = {};
+        dashboard.classnames = {};
+
+        require(['dashboard/logger/Logger', "dashboard/topology/TopologyAccordion", "dashboard/helper/Helper", 'dojo/domReady!' ],
 
             function (Logger, TopologyAccordion, Helper) {
                 Logger.initialize();
