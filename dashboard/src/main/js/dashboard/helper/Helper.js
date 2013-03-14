@@ -77,7 +77,7 @@ define(["dojo/_base/declare", 'dojox/widget/Standby', "dojo/io-query", "dojo/_ba
             if(input.login != undefined && input.login.type != undefined) {
                 data.type = parseInt(input.login.type);
             }
-            console.log("converted data = " + dojo.toJson(data));
+            //console.log("converted data = " + dojo.toJson(data));
             return data;
         };
 

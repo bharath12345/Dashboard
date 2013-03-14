@@ -11,7 +11,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/on", "dojo/_base/lang", "dashbo
             renderAccordion: function(data) {
                 var param = data.param;
                 var data = data.pageListVO;
-                
+
                 if(data == null || data == undefined || param == null || param == undefined) {
                     console.log("blank accordion");
                     return;
