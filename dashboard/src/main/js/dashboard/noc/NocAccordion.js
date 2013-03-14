@@ -11,14 +11,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
             CLUSTERSGRID: "Clusters Grid",
             TRANSACTIONSGRID: "Transactions Grid",
 
-            renderAccordion: function(data) {
-                // keep in mind that the superclass's method will be called after this method is finished due to the
-                // custom chain configuration
-                console.log("in NOC render accordion. data = " + dojo.toJson(data));
-                this.data = data.pageListVO;
-                this.param = data.param;
-            },
-
             showView: function(id, name, type, newWindow) {
                 console.log("show page config called with id = " + id + " and name = " + name);
 

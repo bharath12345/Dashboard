@@ -11,13 +11,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/confi
             ALERTSGRID: "Alerts Grid",
             TRANSACTIONSGRID: "Transactions Grid",
 
-            renderAccordion: function(data) {
-                // the superclass's overridden method will be called after this method due to custom chain configuration
-                console.log("in config render accordion. data = " + dojo.toJson(data));
-                this.data = data.pageListVO;
-                this.param = data.param;
-            },
-
             showView: function(id, name, type, newWindow) {
                 configView = this.getView(name);
                 configView.setAccordion(this);

@@ -8,30 +8,33 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/on", "dojo/_base/lang", "dashbo
                 renderAccordion: "before"
             },
 
-            renderAccordion: function(args) {
-                if(this.data == null || this.data == undefined || this.param == null || this.param == undefined) {
+            renderAccordion: function(data) {
+                var param = data.param;
+                var data = data.pageListVO;
+                
+                if(data == null || data == undefined || param == null || param == undefined) {
                     console.log("blank accordion");
                     return;
                 }
 
-                console.log("in abstract render accordion. data = " + dojo.toJson(this.data));
-                console.log("in abstract render accordion. param = " + dojo.toJson(this.param));
+                console.log("in abstract render accordion. data = " + dojo.toJson(data));
+                console.log("in abstract render accordion. param = " + dojo.toJson(param));
 
-                for(var i=0;i<this.data.length; i++) {
+                for(var i=0;i<data.length; i++) {
                     try {
-                        var a = this.getNewA(this.data[i].id, this.data[i].name, this.data[i].type);
+                        var a = this.getNewA(data[i].id, data[i].name, data[i].type);
 
                         var linkMap = this.getLinkMap(); // this is a call to the superclass
-                        linkMap[this.data[i].id] = a;
+                        linkMap[data[i].id] = a;
                         on(a, "click", lang.hitch(this, "renderView"));
 
-                        if(this.data[i].type.toUpperCase() == "GRID") {
-                            a.innerHTML = AbstractAccordion.IMAGE + this.data[i].name;
+                        if(data[i].type.toUpperCase() == "GRID") {
+                            a.innerHTML = AbstractAccordion.IMAGE + data[i].name;
                         } else {
-                            a.innerHTML = this.data[i].name;
+                            a.innerHTML = data[i].name;
                         }
 
-                        this.appendToAccDiv(a, dojo.byId(this.param.name[0]));
+                        this.appendToAccDiv(a, dojo.byId(param.name[0]));
                     } catch(e) {
                         console.log("exception = " + e);
                     }

@@ -92,7 +92,7 @@ public class ConfigUtilityAction extends AbstractNocAction {
 		pageListVO.setType(ActionConstants.ACCTYPE.GRID.name());
 		pageList.add(pageListVO);
 		
-		pageListVO = new PageListVO();
+		/*pageListVO = new PageListVO();
 		pageListVO.setName("Topology View");
 		pageListVO.setId(UUID.randomUUID().toString());
 		pageListVO.setType(ActionConstants.ACCTYPE.GRID.name());
@@ -101,7 +101,7 @@ public class ConfigUtilityAction extends AbstractNocAction {
 		pageListVO = new PageListVO();
 		pageListVO.setName("Global Config");
 		pageListVO.setId(UUID.randomUUID().toString());
-		pageListVO.setType(ActionConstants.ACCTYPE.GRID.name());
+		pageListVO.setType(ActionConstants.ACCTYPE.GRID.name());*/
 		pageList.add(pageListVO);
 		
 		PageListVO [] pageArray = pageList.toArray(new PageListVO[pageList.size()]);
