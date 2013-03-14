@@ -299,7 +299,16 @@ public class TransactionNocAction extends AbstractNocAction  {
 				Long alertCount = (long) 0, failCount = (long) 0, timedoutCount = (long) 0, 
 						unknownCount = (long) 0, okayCount = (long) 0, slowCount = (long) 0, volume=(long) 0;
 				Long responseTime = (long) 0;
+				
+				if(txSummary == null && makeDummy == true) {
+					System.out.println("summary is null for all including " + tx.getName());
+					setDummyData(transactions[k]);
+					k++;
+					continue;
+				}
+				
 				TransactionSummary summary = txSummary.get(tx.getId());
+				
 				if(summary == null && makeDummy == true) {
 					System.out.println("summary is null for " + tx.getName());
 					setDummyData(transactions[k]);

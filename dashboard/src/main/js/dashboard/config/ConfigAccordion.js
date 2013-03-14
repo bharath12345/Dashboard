@@ -73,22 +73,22 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/confi
             },
 
             alertGridHandle:function (data, ra) {
-                require([CONFIGCONSTANTS.getClassPath(dashboard.classnames.IncidentGrid)], function(IncidentGrid) {
-                    var incidentGrid = new IncidentGrid();
-                    ra.renderConfigParameters(data, incidentGrid);
+                require([CONFIGCONSTANTS.getClassPath(dashboard.classnames.ConfigViewIncidentGrid)], function(ConfigViewIncidentGrid) {
+                    var configViewIncidentGrid = new ConfigViewIncidentGrid();
+                    ra.renderConfigParameters(data, configViewIncidentGrid);
                 });
             },
 
             clustersGridHandle: function(data, ra) {
-                require([CONFIGCONSTANTS.getClassPath(dashboard.classnames.ClusterGrid)], function(ClusterGrid) {
-                    var clusterGrid = new ClusterGrid();
+                require([CONFIGCONSTANTS.getClassPath(dashboard.classnames.ConfigViewClusterGrid)], function(ConfigViewClusterGrid) {
+                    var clusterGrid = new ConfigViewClusterGrid();
                     ra.renderConfigParameters(data, clusterGrid);
                 });
             },
 
             transactionsGridHandle: function(data, ra) {
-                require([CONFIGCONSTANTS.getClassPath(dashboard.classnames.TransactionGrid)], function(TransactionGrid) {
-                    var transactionGrid = new TransactionGrid();
+                require([CONFIGCONSTANTS.getClassPath(dashboard.classnames.ConfigViewTransactionGrid)], function(ConfigViewTransactionGrid) {
+                    var transactionGrid = new ConfigViewTransactionGrid();
                     ra.renderConfigParameters(data, transactionGrid);
                 });
             },
@@ -101,8 +101,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/confi
             },
 
             globalConfigHandle: function(data, ra) {
-                require([CONFIGCONSTANTS.getClassPath(dashboard.classnames.Global)], function(Global) {
-                    var global = new Global();
+                require([CONFIGCONSTANTS.getClassPath(dashboard.classnames.ConfigViewGlobal)], function(ConfigViewGlobal) {
+                    var global = new ConfigViewGlobal();
                     ra.renderConfigParameters(data, global);
                 });
             },

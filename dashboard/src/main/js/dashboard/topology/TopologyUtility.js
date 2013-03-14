@@ -51,26 +51,26 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/topology/nls/top
         TopologyUtility.manageTopologySubView = function(data, input) {
             switch(data.subtype) {
                 case TOPOLOGYCONSTANTS.SUBTYPE.TOPOLOGY.NODES:
-                    require([TOPOLOGYCONSTANTS.getClassPath(dashboard.classnames.RenderNodes)], function (RenderNodes) {
-                        new RenderNodes().create(data, input);
+                    require([TOPOLOGYCONSTANTS.getClassPath(dashboard.classnames.TopoWidgetRenderNodes)], function (TopoWidgetRenderNodes) {
+                        new TopoWidgetRenderNodes().create(data, input);
                     });
                     break;
 
                 case TOPOLOGYCONSTANTS.SUBTYPE.TOPOLOGY.CONNECTIVITY:
-                    require([TOPOLOGYCONSTANTS.getClassPath(dashboard.classnames.RenderConnectivity)], function (RenderConnectivity) {
-                        new RenderConnectivity().create(data, input);
+                    require([TOPOLOGYCONSTANTS.getClassPath(dashboard.classnames.TopoWidgetRenderConnectivity)], function (TopoWidgetRenderConnectivity) {
+                        new TopoWidgetRenderConnectivity().create(data, input);
                     });
                     break;
 
                 case TOPOLOGYCONSTANTS.SUBTYPE.TOPOLOGY.NODESTATUS:
-                    require([TOPOLOGYCONSTANTS.getClassPath(dashboard.classnames.NodeStatus)], function (NodeStatus) {
-                        new NodeStatus().create(data, input);
+                    require([TOPOLOGYCONSTANTS.getClassPath(dashboard.classnames.TopoWidgetNodeStatus)], function (TopoWidgetNodeStatus) {
+                        new TopoWidgetNodeStatus().create(data, input);
                     });
                     break;
 
                 case TOPOLOGYCONSTANTS.SUBTYPE.TOPOLOGY.CONNECTIONSTATUS:
-                    require([TOPOLOGYCONSTANTS.getClassPath(dashboard.classnames.ConnectionStatus)], function (ConnectionStatus) {
-                        new ConnectionStatus().create(data, input);
+                    require([TOPOLOGYCONSTANTS.getClassPath(dashboard.classnames.TopoWidgetConnectionStatus)], function (TopoWidgetConnectionStatus) {
+                        new TopoWidgetConnectionStatus().create(data, input);
                     });
                     break;
 

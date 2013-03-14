@@ -5,7 +5,14 @@ public class ApplicationMetaVO {
 
 	String [] metrics;
 	ApplicationVO [] applications;
+	String dataActionClass;
 	
+	public String getDataActionClass() {
+		return dataActionClass;
+	}
+	public void setDataActionClass(String dataActionClass) {
+		this.dataActionClass = dataActionClass;
+	}
 	public String[] getMetrics() {
 		return metrics;
 	}

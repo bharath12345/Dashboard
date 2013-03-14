@@ -1,6 +1,6 @@
-define(["dojo/_base/declare", 'dojox/widget/Standby', "dojo/io-query"],
+define(["dojo/_base/declare", 'dojox/widget/Standby', "dojo/io-query", "dojo/_base/xhr", "dojo/_base/lang"],
 
-    function (declare, Standby, ioQuery) {
+    function (declare, Standby, ioQuery, xhr, lang) {
 
         dashboard.classnames.Helper = "dashboard.helper.Helper";
 
@@ -17,6 +17,16 @@ define(["dojo/_base/declare", 'dojox/widget/Standby', "dojo/io-query"],
 
         Helper.getClassPath = function(name) {
             return name.replace(/\./g, "/");
+        };
+
+        Helper.removeChildren = function (elem) {
+            if(elem == null || elem == undefined) {
+                return;
+            }
+            while (elem.hasChildNodes()) {
+                Helper.removeChildren(elem.lastChild)
+                elem.removeChild(elem.lastChild);
+            }
         };
 
         Helper.createDomAndShowPage = function(accordionObject) {

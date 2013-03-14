@@ -117,6 +117,8 @@ public class AlertInfoNocAction extends AbstractNocAction  {
 		
 		applicationMetaVO = new ApplicationMetaVO();
 		
+		applicationMetaVO.setDataActionClass("alert/ApplicationData.action");
+		
 		String [] metrics = new String[5];
 		metrics[0] = SUMMARY_CATEGORY.COMPONENT_AVAILABILITY.name();
 		metrics[1] = SUMMARY_CATEGORY.COMPONENT_STATIC.name();

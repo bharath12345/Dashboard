@@ -5,7 +5,7 @@ define({
         help:"Help",
         signout:"Sign out",
         
-        COMPONENT_AVAILABILITY: "Component Availability",
+        COMPONENT_AVAILABILITY: "Component",
         COMPONENT_STATIC: "Component Static",
         TRANSACTION_ONLINE_ANALYTIC: "Transaction Online",
         TRANSACTION_BATCH_ANALYTIC: "Transaction Batch",

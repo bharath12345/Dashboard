@@ -20,6 +20,9 @@ define([ 'dojo/has', 'require' ], function (has, require) {
 
     if (has('host-browser')) {
 
+        dashboard = {};
+        dashboard.classnames = {};
+
         require(['dashboard/config/ConfigAccordion', "dashboard/helper/Helper",
             'dojo/domReady!' ],
 

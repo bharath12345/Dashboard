@@ -1,12 +1,12 @@
-define(['require', "../../dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/layout/BorderContainer", "dojo/window",
-    "dojo/i18n!dashboard/noc/nls/noc", "dashboard/dashboard/noc/pages/AvailabilityPage", "dashboard/noc/pages/TxTreemapPage",
-    "dashboard/noc/pages/ComponentPage", "dashboard/noc/pages/TxTimeSeriesPage", "dashboard/noc/pages/IncidentPage", "dashboard/noc/pages/AllClusterAvailability",
-    "dashboard/noc/pages/TransactionGrid", "dashboard/noc/pages/TopologyPage",
+define(['require', "dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/layout/BorderContainer", "dojo/window",
+    "dojo/i18n!dashboard/noc/nls/noc", "dashboard/dashboard/noc/views/NocViewAvailability", "dashboard/noc/views/NocViewTxTreemapPage",
+    "dashboard/noc/views/NocViewComponent", "dashboard/noc/views/NocViewTxTimeSeries", "dashboard/noc/views/NocViewIncident", "dashboard/noc/views/NocViewAllClusterAvailability",
+    "dashboard/noc/views/NocViewTransactionGrid", "dashboard/noc/views/TopologyView",
     "dashboard/logger/Logger", "dashboard/noc/NocConstants", "dashboard/noc/NocUtility"],
 
     function (require, declare, i18n, ContentPane, BorderContainer, win, i18nString,
-              AvailabilityPage, TxTreemapPage, ComponentPage, TxTimeSeriesPage, IncidentPage,
-              AllClusterAvailability, TransactionGrid, TopologyPage,
+              NocViewAvailability, NocViewTxTreemapPage, NocViewComponent, NocViewTxTimeSeries, NocViewIncident,
+              NocViewAllClusterAvailability, NocViewTransactionGrid, TopologyView,
               Logger, NOCCONSTANTS, NocUtility) {
 
         var PageLoader = declare(NOCCONSTANTS.CLASSNAME.PAGELOADER, null, {
@@ -25,9 +25,9 @@ define(['require', "../../dojo/_base/declare", "dojo/i18n", "dijit/layout/Conten
                 //    this.createAvailabilitySectionAndPage(startPageCounter++);
                 //}
 
-                //setTimeout(function(){new TxTimeSeriesPage().loadPage()}, 10*1000);
-                //setTimeout(function(){new ComponentPage().loadPage()}, 20*1000);
-                //setTimeout(function(){new TxTreemapPage().loadPage()}, 30*1000);
+                //setTimeout(function(){new NocViewTxTimeSeries().loadPage()}, 10*1000);
+                //setTimeout(function(){new NocViewComponent().loadPage()}, 20*1000);
+                //setTimeout(function(){new NocViewTxTreemapPage().loadPage()}, 30*1000);
                 //setTimeout(function(){new TxServiceLevelPage().loadPage()}, 40*1000);
 
                 PageLoader.SCROLL_TIMER = setInterval(this.pageScroll, PageLoader.SCROLL_PERIOD);
@@ -35,7 +35,7 @@ define(['require', "../../dojo/_base/declare", "dojo/i18n", "dijit/layout/Conten
 
             pageScroll:function (pageCount) {
                 if(PageLoader.PageStack.length < 2) {
-                    console.log("less than 2 pages in stack. nothing to scroll");
+                    console.log("less than 2 views in stack. nothing to scroll");
                     return;
                 }
                 PageLoader.PageStack[PageLoader.PageCounter].scrollIntoView();
@@ -47,27 +47,27 @@ define(['require', "../../dojo/_base/declare", "dojo/i18n", "dijit/layout/Conten
 
             createTopology: function(pageNum) {
                 this.createBorderContainer(this.getSection(pageNum), pageNum);
-                new TopologyPage().loadPage(pageNum, "NetBankingTopology");
+                new TopologyView().loadPage(pageNum, "NetBankingTopology");
             },
 
             createIncidentSectionAndPage:function (pageNum) {
                 this.createBorderContainer(this.getSection(pageNum), pageNum);
-                new IncidentPage().loadPage(pageNum, "IncidentGrid");
+                new NocViewIncident().loadPage(pageNum, "IncidentGrid");
             },
 
             createClusterAvailabilitySectionAndPage:function (pageNum) {
                 this.createBorderContainer(this.getSection(pageNum), pageNum);
-                new AllClusterAvailability().loadPage(pageNum, "AllClusterAvailability");
+                new NocViewAllClusterAvailability().loadPage(pageNum, "NocViewAllClusterAvailability");
             },
 
             createTxGridSectionAndPage:function (pageNum) {
                 this.createBorderContainer(this.getSection(pageNum), pageNum);
-                new TransactionGrid().loadPage(pageNum, "TransactionGrid");
+                new NocViewTransactionGrid().loadPage(pageNum, "NocViewTransactionGrid");
             },
 
             createAvailabilitySectionAndPage:function (pageNum) {
                 this.createBorderContainer(this.getSection(pageNum), pageNum);
-                new AvailabilityPage().loadPage(pageNum, "availabilityPage_" + (pageNum), PageLoader.Pages[pageNum].componentName, PageLoader.Pages[pageNum].clusterName);
+                new NocViewAvailability().loadPage(pageNum, "availabilityPage_" + (pageNum), PageLoader.Pages[pageNum].componentName, PageLoader.Pages[pageNum].clusterName);
             },
 
             getViewPortDimensions:function () {

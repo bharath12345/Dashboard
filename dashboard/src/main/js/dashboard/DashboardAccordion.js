@@ -9,12 +9,15 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
 
             loadAccordion:function () {
                 var viewMeta = {};
-                xhr("dashboard/panes.action", {
+
+                var url = "dashboard/panes.action";
+                xhr(url, {
                     handleAs:"json",
                     method:"POST",
                     query:viewMeta,
                     headers:Helper.JSON_HEADER
                 }).then(lang.hitch(this, this.createAccordion));
+
             },
 
             createAccordion:function (data) {
@@ -34,7 +37,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                         id:paneList[i].id,
                         name:paneList[i].name
                     };
-
                     xhr(paneList[i].action, {
                         handleAs:"json",
                         method:"POST",
@@ -64,8 +66,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
         DashboardAccordion.LOG = Logger.addTimer(new Logger(dashboard.classnames.DashboardAccordion));
 
         /*
-        * ToDo: Do NOT keep this map - force the programmers to conform to 'A' classname pattern
-        */
+         * ToDo: Do NOT keep this map - force the programmers to conform to 'A' classname pattern
+         */
 
         DashboardAccordion.ACCORDIONMAP = [];
         DashboardAccordion.ACCORDIONMAP["topology"] = "dashboard.topology.TopologyAccordion";

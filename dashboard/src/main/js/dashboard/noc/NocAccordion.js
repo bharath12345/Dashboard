@@ -28,20 +28,20 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
 
                 switch(name) {
                     case this.ALERTSGRID:
-                        require(["dashboard/noc/pages/IncidentPage"], function (IncidentPage) {
-                            new IncidentPage().loadPage("IncidentGrid");
+                        require(["dashboard/noc/views/NocViewIncident"], function (NocViewIncident) {
+                            new NocViewIncident().loadPage("IncidentGrid");
                         });
                         break;
 
                     case this.CLUSTERSGRID:
-                        require(["dashboard/noc/pages/AllClusterAvailability"], function (AllClusterAvailability) {
-                            new AllClusterAvailability().loadPage("AllClusterAvailability");
+                        require(["dashboard/noc/views/NocViewAllClusterAvailability"], function (NocViewAllClusterAvailability) {
+                            new NocViewAllClusterAvailability().loadPage("NocViewAllClusterAvailability");
                         });
                         break;
 
                     case this.TRANSACTIONSGRID:
-                        require(["dashboard/noc/pages/TransactionGrid"], function (TransactionGrid) {
-                            new TransactionGrid().loadPage("TransactionGrid");
+                        require(["dashboard/noc/views/NocViewTransactionGrid"], function (NocViewTransactionGrid) {
+                            new NocViewTransactionGrid().loadPage("NocViewTransactionGrid");
                         });
                         break;
 

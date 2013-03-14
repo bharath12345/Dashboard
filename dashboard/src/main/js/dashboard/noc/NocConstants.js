@@ -58,7 +58,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/n
         NocConstants.ACTION.AVAILABILITY.COMPONENT = "availability/ComponentData.action";
         NocConstants.ACTION.AVAILABILITY.CLUSTER = "availability/ClusterData.action";
         NocConstants.ACTION.AVAILABILITY.INSTANCE = "availability/InstanceData.action";
-        NocConstants.ACTION.AVAILABILITY.CLUSTERZONES = "availability/ClusterZones.action";
+        NocConstants.ACTION.AVAILABILITY.CLUSTERZONES = "availability/NocWidgetClusterZones.action";
 
         NocConstants.ACTION.COMPONENT = {};
         NocConstants.ACTION.COMPONENT.ZONES = "component/zones.action";
@@ -70,7 +70,7 @@ define(['require', "dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/n
         NocConstants.ACTION.INCIDENT.CLUSTER = "alert/Cluster.action";
         NocConstants.ACTION.INCIDENT.INSTANCE = "alert/Instance.action";
         NocConstants.ACTION.INCIDENT.APPLICATIONMETA = "alert/ApplicationMeta.action";
-        NocConstants.ACTION.INCIDENT.APPLICATIONDATA = "alert/ApplicationData.action";
+        NocConstants.ACTION.INCIDENT.APPLICATIONDATA = "alert/NocWidgetIncidentData.action";
 
         NocConstants.ACTION.TRANSACTION = {};
         NocConstants.ACTION.TRANSACTION.META = "transaction/Meta.action";
