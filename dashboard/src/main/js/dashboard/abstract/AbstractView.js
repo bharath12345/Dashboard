@@ -8,7 +8,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
         var AbstractView = declare(dashboard.classnames.AbstractView, null, {
 
             "-chains-":{
-                createDom:"after"
+                createDom:"after" //method is called after its superclass’ method
             },
 
             createDom:function () {
@@ -73,7 +73,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
                 mastTitle.appendChild(image);
             },
 
-            createInnerMenuAndPanes: function(paneDom) {
+            createInnerMenuAndPanes: function(paneDom, analysisPaneRequired) {
                 dashboard.dom.InnerBc = new BorderContainer({
                     design:"headline",
                     liveSplitters:false,
@@ -103,6 +103,10 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
                 dashboard.dom.TopBc.resize();
 
                 this.createMenuRegions();
+
+                if(analysisPaneRequired) {
+                    this.createSplitCenterPanes();
+                }
             },
 
             createMenuRegions: function() {
@@ -138,6 +142,42 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
                 dashboard.dom.toolbar.placeAt(dashboard.dom.bottomMenuPane);
                 dashboard.dom.toolbar.startup();
                 dashboard.dom.TopBc.resize();
+            },
+
+            createSplitCenterPanes: function() {
+                dashboard.dom.InnerBcSplit = new BorderContainer({
+                    design:"headline",
+                    liveSplitters:false,
+                    persist:true,
+                    gutters: false,
+                    style: "width: 100%; height: 100%;"
+                });
+
+                dashboard.dom.CpCenterInnerTop = new ContentPane({
+                    region:"center",
+                    splitter:true,
+                    style: "height: 100%"
+                });
+
+                dashboard.dom.CpCenterInnerBottom = new ContentPane({
+                    region:"bottom",
+                    splitter:true
+                });
+
+                dashboard.dom.InnerBcSplit.addChild(dashboard.dom.CpCenterInnerTop);
+                dashboard.dom.InnerBcSplit.addChild(dashboard.dom.CpCenterInnerBottom);
+                dashboard.dom.InnerBcSplit.placeAt(dashboard.dom.CpCenterInner);
+                dashboard.dom.InnerBcSplit.startup();
+                dashboard.dom.InnerBcSplit.resize();
+
+                dashboard.dom.InnerBc.resize();
+                dashboard.dom.TopBc.resize();
+
+                this.createAnalysisTabContainer();
+            },
+
+            createAnalysisTabContainer: function() {
+
             }
 
         });

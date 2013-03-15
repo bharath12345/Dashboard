@@ -9,7 +9,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/on", "dojo/_base/lang",
         var AbstractAccordion = declare(dashboard.classnames.AbstractAccordion, null, {
 
             "-chains-":{
-                renderAccordion:"before"
+                renderAccordion:"before" //method is called before calling its superclass method
             },
 
             getTreeData:function (data, rootId) {

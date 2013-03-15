@@ -29,7 +29,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc",
                     value = 18;
                 }
                 console.log("font size retrived = " + value);
-                var cell = dojo.query(".dgrid-cell, .label", dashboard.dom.CpCenterInner.domNode);
+                var cell = dojo.query(".dgrid-cell, .label", dashboard.dom.CpCenterInnerTop.domNode);
                 for (var i = 0; i < cell.length; i++) {
                     cell[i].style.fontSize = value;
                     cell[i].style.verticalAlign = "middle";
@@ -300,26 +300,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc",
 
             loadPage:function (pageName) {
 
-                var paneWidth = dashboard.dom.CpCenterInner.w;
-                var paneHeight = dashboard.dom.CpCenterInner.h;
-                var styleString = "width: " + paneWidth + "; height: " + paneHeight + ";"
-
                 dashboard.dom.topMenuPane.domNode.innerHTML = "<div class='text-center alert alert-info heading'>Alerts Grid</div>";
 
-                var titlePane = new ContentPane({
-                    splitter:false,
-                    style:styleString,
-                    content:"<div id='" + pageName + "' style='width: 100%; height: 100%;'></div>"
-                });
-
-                var gridContainer = new GridContainer({nbZones:1, isAutoOrganized:true,
-                    style:"width: 100%; height: 100%;"});
-                dashboard.dom.CpCenterInner.addChild(gridContainer);
-                gridContainer.disableDnd();
-
-                gridContainer.addChild(titlePane, 0);
-                gridContainer.startup();
-                gridContainer.resize();
+                dashboard.dom.CpCenterInner.attr('content', dojo.create('div', {'id':pageName, style:'width: 100%; height: 100%;'}));
 
                 var xpos = 0, ypos = 0;
                 var viewMeta = {
