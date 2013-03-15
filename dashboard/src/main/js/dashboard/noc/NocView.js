@@ -36,7 +36,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc",
                 on(button, "click", lang.hitch(this, "refreshView"));
                 dashboard.dom.toolbar.addChild(button);
 
-                button = buttonHelper.getNewWindow();
+                button = buttonHelper.getViewNewWindow();
                 on(button, "click", function() {
                     NocView.launchNewWindowConfigPane();
                 });
@@ -48,11 +48,30 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc",
                 });
                 dashboard.dom.toolbar.addChild(button);
 
-                button = buttonHelper.getStopRefresh();
+                button = buttonHelper.getRefreshStop();
                 on(button, "click", function() {
                     Scheduler.startStopRefresh(false);
                 });
                 dashboard.dom.toolbar.addChild(button);
+
+                dashboard.dom.toolbar.addChild(buttonHelper.getActive());
+                dashboard.dom.toolbar.addChild(buttonHelper.getArrowDown());
+                dashboard.dom.toolbar.addChild(buttonHelper.getArrowLeft());
+                dashboard.dom.toolbar.addChild(buttonHelper.getArrowRight());
+                dashboard.dom.toolbar.addChild(buttonHelper.getArrowUp());
+                dashboard.dom.toolbar.addChild(buttonHelper.getBackToPreviousNodeGroupMap());
+                dashboard.dom.toolbar.addChild(buttonHelper.getClose());
+                dashboard.dom.toolbar.addChild(buttonHelper.getConfiguration());
+                dashboard.dom.toolbar.addChild(buttonHelper.getDelete());
+                dashboard.dom.toolbar.addChild(buttonHelper.getEdit());
+                dashboard.dom.toolbar.addChild(buttonHelper.getExtension());
+                dashboard.dom.toolbar.addChild(buttonHelper.getFastForwardToEnd());
+                dashboard.dom.toolbar.addChild(buttonHelper.getFilterUndo());
+                dashboard.dom.toolbar.addChild(buttonHelper.getFind());
+                dashboard.dom.toolbar.addChild(buttonHelper.getFirst());
+                dashboard.dom.toolbar.addChild(buttonHelper.getFitToContent());
+                dashboard.dom.toolbar.addChild(buttonHelper.getGo());
+
 
                 dashboard.dom.bottomMenuPane.resize();
                 dashboard.dom.TopBc.resize();

@@ -15,229 +15,639 @@
     border-bottom: 0px;
 }
 
-.deleteToolbarButton {
-    background-image: url('../images/toolbar/delete.16.png'); /* editor icons sprite image */
+/*
+
+Icon Definitions
+
+*/
+
+.ActiveToolbarButton {
+    background-image: url('../images/toolbar/Active.16.png');
     background-repeat: no-repeat;
-    width: 19px;
-    height: 19px;
-}
-.refreshToolbarButton {
-    background-image: url(../images/toolbar/refresh.16.png);
-    background-repeat: no-repeat;
-    width: 19px;
-    height: 19px;
-}
-.statusRefreshToolbarButton {
-    background-image: url('../images/toolbar/refresh_status.16.png');
-    background-repeat: no-repeat;
-    width: 19px;
-    height: 19px;
-}
-.openInAnalysisPaneToolbarButton {
-    background-image: url('../images/toolbar/open_in_analysis_pane.16.png');
-    background-repeat: no-repeat;
-    width: 19px;
-    height: 19px;
-}
-.openToolbarButton {
-    background-image: url('../images/toolbar/open.16.png');
-    background-repeat: no-repeat;
-    width: 19px;
-    height: 19px;
-}
-.wizardToolbarButton {
-    background-image: url('../images/toolbar/wizard3_16.png');
-    background-repeat: no-repeat;
-    width: 19px;
-    height: 19px;
-}
-.wizardPageToolbarButton {
-    background-image: url('../images/toolbar/step_wizard.16.png');
-    background-repeat: no-repeat;
-    width: 19px;
-    height: 19px;
-}
-.newMappingToolbarButton {
-    background-image: url('../images/toolbar/new_mapping.16.png');
-    background-repeat: no-repeat;
-    width: 19px;
-    height: 19px;
-}
-.newViewWindowToolbarButton {
-    background-image: url('../images/toolbar/view_new_window.16.png');
-    background-repeat: no-repeat;
-    width: 19px;
-    height: 19px;
-}
-.fitToContentToolbarButton {
-    background-image: url('../images/toolbar/fit_to_content.16.png');
-    background-repeat: no-repeat;
-    width: 19px;
-    height: 19px;
-}
-.oneToOneToolbarButton {
-    background-image: url('../images/toolbar/one_to_one.16.png');
-    background-repeat: no-repeat;
-    width: 19px;
-    height: 19px;
-}
-.zoomOutToolbarButton {
-    background-image: url('../images/toolbar/zoom_out.16.png');
-    background-repeat: no-repeat;
-    width: 19px;
-    height: 19px;
-}
-.zoomInToolbarButton {
-    background-image: url('../images/toolbar/zoom_in.16.png');
-    background-repeat: no-repeat;
-    width: 19px;
-    height: 19px;
-}
-.stopRefreshToolbarButton {
-    background-image: url('../images/toolbar/refresh_stop.16.png');
-    background-repeat: no-repeat;
-    width: 19px;
-    height: 19px;
-}
-.restoreDefaultToolbarButton {
-    background-image: url('../images/toolbar/restore_default.16.png');
-    background-repeat: no-repeat;
-    width: 19px;
-    height: 19px;
-}
-.restoreFilterToolbarButton {
-    background-image: url('../images/toolbar/restore_filter.16.png');
-    background-repeat: no-repeat;
-    width: 19px;
-    height: 19px;
-}
-.findToolbarButton {
-    background-image: url('../images/toolbar/find.16.png');
-    background-repeat: no-repeat;
-    width: 19px;
-    height: 19px;
-}
-.openNodeGroupMapToolbarButton {
-    background-image: url('../images/toolbar/open_node_group_map.16.png');
-    background-repeat: no-repeat;
-    width: 19px;
-    height: 19px;
-}
-.saveLayoutToolbarButton {
-    background-image: url('../images/toolbar/save_layout.16.png');
-    background-repeat: no-repeat;
-    width: 19px;
-    height: 19px;
-}
-.swapPathNodesToolbarButton {
-    background-image: url('../images/toolbar/swap_path_nodes.16.png');
-    background-repeat: no-repeat;
-    width: 19px;
-    height: 19px;
-}
-.computePathToolbarButton {
-    background-image: url('../images/toolbar/active.16.png');
-    background-repeat: no-repeat;
-    width: 19px;
-    height: 19px;
-}
-.firstToolbarButton {
-    background-image: url('../images/toolbar/first.16.png');
-    background-repeat: no-repeat;
-    width: 19px;
-    height: 19px;
-}
-.lastToolbarButton {
-    background-image: url('../images/toolbar/last.16.png');
-    background-repeat: no-repeat;
-    width: 19px;
-    height: 19px;
-}
-.previousToolbarButton {
-    background-image: url('../images/toolbar/previous.16.png');
-    background-repeat: no-repeat;
-    width: 19px;
-    height: 19px;
-}
-.nextToolbarButton {
-    background-image: url('../images/toolbar/next.16.png');
-    background-repeat: no-repeat;
-    width: 19px;
-    height: 19px;
-}
-.closeToolbarButton {
-    background-image: url('../images/toolbar/close.16.png');
-    background-repeat: no-repeat;
-    width: 19px;
-    height: 19px;
-}
-.saveToolbarButton {
-    background-image: url('../images/toolbar/save.16.png');
-    background-repeat: no-repeat;
-    width: 19px;
-    height: 19px;
-}
-.saveAndCloseToolbarButton {
-    background-image: url('../images/toolbar/save_close.16.png');
-    background-repeat: no-repeat;
-    width: 19px;
-    height: 19px;
-}
-.saveAndNewToolbarButton {
-    background-image: url('../images/toolbar/save_new.16.png');
-    background-repeat: no-repeat;
-    width: 19px;
-    height: 19px;
-}
-.newToolbarButton {
-    background-image: url('../images/toolbar/new.16.png');
-    background-repeat: no-repeat;
-    width: 19px;
-    height: 19px;
+    width: 16px;
+    height: 16px;
 }
 
-/* Toggle buttons. These are smaller so they fit correctly with other toolbar items */
-.toggleEmphasisToolbarButton {
-    background-image: url('../images/toolbar/map_emphasis.16.png');
+.ArrowDownToolbarButton {
+    background-image: url('../images/toolbar/ArrowDown.16.png');
     background-repeat: no-repeat;
     width: 16px;
     height: 16px;
 }
-.tooltipToggleToolbarButton {
-    background-image: url('../images/toolbar/tooltip.16.png');
+
+.ArrowLeftToolbarButton {
+    background-image: url('../images/toolbar/ArrowLeft.16.gif');
     background-repeat: no-repeat;
     width: 16px;
     height: 16px;
 }
-.textWrapToggleToolbarButton {
-    background-image: url('../images/toolbar/text_wrap.16.png');
+
+.ArrowRightToolbarButton {
+    background-image: url('../images/toolbar/ArrowRight.16.gif');
     background-repeat: no-repeat;
     width: 16px;
     height: 16px;
 }
-.findToggleToolbarButton {
-    background-image: url('../images/toolbar/find.16.png');
+
+.ArrowUpToolbarButton {
+    background-image: url('../images/toolbar/ArrowUp.16.png');
     background-repeat: no-repeat;
     width: 16px;
     height: 16px;
 }
-.indicateKeyIncidentsToolbarButton {
-    background-image: url('../images/toolbar/indicate_key_incidents.16.png');
+
+.BackToPreviousNodeGroupMapToolbarButton {
+    background-image: url('../images/toolbar/BackToPreviousNodeGroupMap.16.gif');
     background-repeat: no-repeat;
     width: 16px;
     height: 16px;
 }
-.goToolbarButton {
-    background-image: url('../images/toolbar/go.16.gif');
+
+.CloseToolbarButton {
+    background-image: url('../images/toolbar/Close.16.png');
     background-repeat: no-repeat;
     width: 16px;
     height: 16px;
 }
-.stopToolbarButton {
-    background-image: url('../images/toolbar/stop.16.gif');
+
+.ConfigurationToolbarButton {
+    background-image: url('../images/toolbar/Configuration.16.png');
     background-repeat: no-repeat;
     width: 16px;
     height: 16px;
+}
+
+.DeleteToolbarButton {
+    background-image: url('../images/toolbar/Delete.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.EditToolbarButton {
+    background-image: url('../images/toolbar/Edit.16.gif');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.ExtensionToolbarButton {
+    background-image: url('../images/toolbar/Extension.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.FastForwardToEndToolbarButton {
+    background-image: url('../images/toolbar/FastForwardToEnd.16.gif');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.FilterUndoToolbarButton {
+    background-image: url('../images/toolbar/FilterUndo.16.gif');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.FindToolbarButton {
+    background-image: url('../images/toolbar/Find.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.FirstToolbarButton {
+    background-image: url('../images/toolbar/First.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.FitToContentToolbarButton {
+    background-image: url('../images/toolbar/FitToContent.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.GoToolbarButton {
+    background-image: url('../images/toolbar/Go.16.gif');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.GraphsToolbarButton {
+    background-image: url('../images/toolbar/Graphs.16.gif');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.IncidentBrowsingToolbarButton {
+    background-image: url('../images/toolbar/IncidentBrowsing.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.IncidentManagementToolbarButton {
+    background-image: url('../images/toolbar/IncidentManagement.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.IndicateKeyIncidentsToolbarButton {
+    background-image: url('../images/toolbar/IndicateKeyIncidents.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.InformationalToolbarButton {
+    background-image: url('../images/toolbar/Informational.16.gif');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.IntegrationModuleToolbarButton {
+    background-image: url('../images/toolbar/IntegrationModule.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.InventoryToolbarButton {
+    background-image: url('../images/toolbar/Inventory.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.LastToolbarButton {
+    background-image: url('../images/toolbar/Last.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.LogoutToolbarButton {
+    background-image: url('../images/toolbar/Logout.16.gif');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.ManageToolbarButton {
+    background-image: url('../images/toolbar/Manage.16.gif');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.ManagementModeToolbarButton {
+    background-image: url('../images/toolbar/ManagementMode.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.MapToolbarButton {
+    background-image: url('../images/toolbar/Map.16.gif');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.MapEmphasisToolbarButton {
+    background-image: url('../images/toolbar/MapEmphasis.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.MibBrowserToolbarButton {
+    background-image: url('../images/toolbar/MibBrowser.16.gif');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.MonitoringToolbarButton {
+    background-image: url('../images/toolbar/Monitoring.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.NewToolbarButton {
+    background-image: url('../images/toolbar/New.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.NewMappingToolbarButton {
+    background-image: url('../images/toolbar/NewMapping.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.NewdocumentToolbarButton {
+    background-image: url('../images/toolbar/Newdocument.16.gif');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.NextToolbarButton {
+    background-image: url('../images/toolbar/Next.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.NotToolbarButton {
+    background-image: url('../images/toolbar/Not.16.gif');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.OneToOneToolbarButton {
+    background-image: url('../images/toolbar/OneToOne.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.OpenToolbarButton {
+    background-image: url('../images/toolbar/Open.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.OpenInAnalysisPaneToolbarButton {
+    background-image: url('../images/toolbar/OpenInAnalysisPane.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.OpenIncidentConfigToolbarButton {
+    background-image: url('../images/toolbar/OpenIncidentConfig.16.gif');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.OpenNodeGroupMapToolbarButton {
+    background-image: url('../images/toolbar/OpenNodeGroupMap.16.gif');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.OpenNodeGroupMapToolbarButton {
+    background-image: url('../images/toolbar/OpenNodeGroupMap.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.OwnIncidentToolbarButton {
+    background-image: url('../images/toolbar/OwnIncident.16.gif');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.PinToolbarButton {
+    background-image: url('../images/toolbar/Pin.16.gif');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.PreviousToolbarButton {
+    background-image: url('../images/toolbar/Previous.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.QuickFindToolbarButton {
+    background-image: url('../images/toolbar/QuickFind.16.gif');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.QuickViewToolbarButton {
+    background-image: url('../images/toolbar/QuickView.16.gif');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.RefreshToolbarButton {
+    background-image: url('../images/toolbar/Refresh.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.RefreshStatusToolbarButton {
+    background-image: url('../images/toolbar/RefreshStatus.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.RefreshStopToolbarButton {
+    background-image: url('../images/toolbar/RefreshStop.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.RestoreDefaultToolbarButton {
+    background-image: url('../images/toolbar/RestoreDefault.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.RestoreFilterToolbarButton {
+    background-image: url('../images/toolbar/RestoreFilter.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.RewindToBeginningToolbarButton {
+    background-image: url('../images/toolbar/RewindToBeginning.16.gif');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.SaveToolbarButton {
+    background-image: url('../images/toolbar/Save.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.SaveCloseToolbarButton {
+    background-image: url('../images/toolbar/SaveClose.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.SaveLayoutToolbarButton {
+    background-image: url('../images/toolbar/SaveLayout.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.SaveNewToolbarButton {
+    background-image: url('../images/toolbar/SaveNew.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.SignedInUsersToolbarButton {
+    background-image: url('../images/toolbar/SignedInUsers.16.gif');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.SmartActionToolbarButton {
+    background-image: url('../images/toolbar/SmartAction.16.gif');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.StatusRefreshToolbarButton {
+    background-image: url('../images/toolbar/StatusRefresh.16.gif');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.StepWizardToolbarButton {
+    background-image: url('../images/toolbar/StepWizard.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.StopToolbarButton {
+    background-image: url('../images/toolbar/Stop.16.gif');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.SupportToolbarButton {
+    background-image: url('../images/toolbar/Support.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.SwapPathNodesToolbarButton {
+    background-image: url('../images/toolbar/SwapPathNodes.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.TableHorizontalToolbarButton {
+    background-image: url('../images/toolbar/TableHorizontal.16.gif');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.TestGraphToolbarButton {
+    background-image: url('../images/toolbar/TestGraph.16.gif');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.TextWrapToolbarButton {
+    background-image: url('../images/toolbar/TextWrap.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.TooltipToolbarButton {
+    background-image: url('../images/toolbar/Tooltip.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.TopologyToolbarButton {
+    background-image: url('../images/toolbar/Topology.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.TreeToolbarButton {
+    background-image: url('../images/toolbar/Tree.16.gif');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.TroubleshootingToolbarButton {
+    background-image: url('../images/toolbar/Troubleshooting.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.UndoToolbarButton {
+    background-image: url('../images/toolbar/Undo.16.gif');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.ViewToolbarButton {
+    background-image: url('../images/toolbar/View.16.gif');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.ViewActionToolbarButton {
+    background-image: url('../images/toolbar/ViewAction.16.gif');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.ViewNewWindowToolbarButton {
+    background-image: url('../images/toolbar/ViewNewWindow.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.WarningToolbarButton {
+    background-image: url('../images/toolbar/Warning.16.gif');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.WindowCloseToolbarButton {
+    background-image: url('../images/toolbar/WindowClose.16.gif');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.WindowMaximizeToolbarButton {
+    background-image: url('../images/toolbar/WindowMaximize.16.gif');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.WindowMinimizeToolbarButton {
+    background-image: url('../images/toolbar/WindowMinimize.16.gif');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.WindowRestoreToolbarButton {
+    background-image: url('../images/toolbar/WindowRestore.16.gif');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.Wizard3ToolbarButton {
+    background-image: url('../images/toolbar/Wizard3.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.ZoomInToolbarButton {
+    background-image: url('../images/toolbar/ZoomIn.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.ZoomOutToolbarButton {
+    background-image: url('../images/toolbar/ZoomOut.16.png');
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+/*
+
+Smaller 11px Icons
+
+*/
+
+.CollapseToolbarButton {
+    background-image: url('../images/toolbar/Collapse.11.png');
+    background-repeat: no-repeat;
+    width: 11px;
+    height: 11px;
+}
+
+.ExpandToolbarButton {
+    background-image: url('../images/toolbar/Expand.11.png');
+    background-repeat: no-repeat;
+    width: 11px;
+    height: 11px;
+}
+
+.RefreshSmallerToolbarButton {
+    background-image: url('../images/toolbar/RefreshSmaller.12.gif');
+    background-repeat: no-repeat;
+    width: 12px;
+    height: 12px;
+    }
+
+.TreeCollapseToolbarButton {
+    background-image: url('../images/toolbar/TreeCollapse.11.gif');
+    background-repeat: no-repeat;
+    width: 11px;
+    height: 11px;
+}
+
+.TreeExpandToolbarButton {
+    background-image: url('../images/toolbar/TreeExpand.11.gif');
+    background-repeat: no-repeat;
+    width: 11px;
+    height: 11px;
 }
 
 /*
@@ -248,21 +658,21 @@ Bharath, March 16th 2013
 */
 
 .tableTreeLeaf {
-    background-image: url('../images/toolbar/new/TableHorizontal.16.gif');
+    background-image: url('../images/toolbar/TableHorizontal.16.gif');
     background-repeat: no-repeat;
     width: 16px;
     height: 16px;
 }
 
 .configurationTreeLeaf {
-    background-image: url('../images/toolbar/configuration.16.png');
+    background-image: url('../images/toolbar/Configuration.16.png');
     background-repeat: no-repeat;
     width: 16px;
     height: 16px;
 }
 
 .topologyTreeLeaf {
-    background-image: url('../images/toolbar/topology.16.png');
+    background-image: url('../images/toolbar/Topology.16.png');
     background-repeat: no-repeat;
     width: 16px;
     height: 16px;

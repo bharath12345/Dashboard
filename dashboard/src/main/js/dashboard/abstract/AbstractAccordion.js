@@ -93,13 +93,15 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/on", "dojo/_base/lang",
                 // destroy everything in the inner most central pane
                 dashboard.dom.CpCenterInner.destroyDescendants(false);
 
+                //destroy the view specific toolbar
+                dashboard.dom.toolbar.destroyDescendants(false);
+
                 // now, show the page - NOTE: this is a upwards call to inherting class
                 this.showView(id, name, type, newWindow);
             }
         });
 
         AbstractAccordion.LOG = Logger.addTimer(new Logger("dashboard.abstract.AbstractAccordion"));
-        AbstractAccordion.IMAGE = "<img src=\".\/images\/Icon_ArrowRight_SW_16.gif\" border=\"0\" align=\"top\">";
 
         return AbstractAccordion;
     });

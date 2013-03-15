@@ -47,19 +47,19 @@ define(["dojo/_base/declare", "dojo/i18n", "noc/Utility", "noc/Constants", "noc/
 
         Login.loadImages = function() {
             var login_top_right = document.createElement("globalimg");
-            login_top_right.src="images/dot_trans.gif";
+            login_top_right.src="images/login/dot_trans.gif";
             login_top_right.setAttribute("border","0");
             login_top_right.setAttribute("height","20");
             login_top_right.setAttribute("width","20");
             document.getElementById("login_top_right").appendChild(login_top_right);
 
             var sending = document.createElement("globalimg");
-            sending.src="images/progress_bar_small.gif";
+            sending.src="images/login/progress_bar_small.gif";
             sending.setAttribute("alt","Progress Bar");
             document.getElementById("sending").appendChild(sending);
 
             var login_bot_left = document.createElement("globalimg");
-            login_bot_left.src="images/JavaLogo.gif";
+            login_bot_left.src="images/login/JavaLogo.gif";
             login_bot_left.setAttribute("alt","Image of Java Logo");
             document.getElementById("login_bot_left").appendChild(login_bot_left);
         };

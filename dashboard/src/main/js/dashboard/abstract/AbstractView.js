@@ -43,8 +43,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
             },
 
             createMast:function () {
-                var mastheadA1Logo = "./images/25pix-appnomic_logo-2.png";
-                var mastheadAppName = "./images/mast_a1.png";
+                var mastheadA1Logo = "./images/masthead/25pix-appnomic_logo-2.png";
+                var mastheadAppName = "./images/masthead/mast_a1.png";
 
                 var mastDiv = dojo.create("div");
                 mastDiv.className = "masthead";
@@ -133,10 +133,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
 
             addToolbar: function() {
                 dashboard.dom.toolbar = new Toolbar({});
-
-                var buttonHelper = new ButtonHelper();
-                dashboard.dom.toolbar.addChild(buttonHelper.getRefresh());
-
                 dashboard.dom.toolbar.placeAt(dashboard.dom.bottomMenuPane);
                 dashboard.dom.toolbar.startup();
                 dashboard.dom.TopBc.resize();

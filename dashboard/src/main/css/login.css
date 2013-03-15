@@ -19,7 +19,7 @@ table.full_H
 td.login_top_left
 {
     background-color: #135DAB;
-    background-image: url("../images/1px-bluegreen-gradient.png");
+    background-image: url("../images/login/1px-bluegreen-gradient.png");
     background-repeat: repeat-y;
     background-position: right;
     vertical-align: top;
@@ -31,7 +31,7 @@ td.login_top_left
 td.login_top_right
 {
     background-color: #fff;
-    background-image: url("../images/login_pict_bac.png");
+    background-image: url("../images/login/login_pict_bac.png");
     background-repeat: no-repeat;
     background-position:center;
     vertical-align: top;
@@ -43,7 +43,7 @@ td.login_top_right
 td.login_mid_right
 {
     background-color: #eee;
-    background-image: url("../images/gray_bg.png");
+    background-image: url("../images/login/gray_bg.png");
     background-repeat: repeat-x;
     text-align: left;
     vertical-align: top;
@@ -53,7 +53,7 @@ td.login_mid_right
 td.login_mid_center
 {
     background-color: #eee;
-    background-image: url("../images/gray_bg.png");
+    background-image: url("../images/login/gray_bg.png");
     background-repeat: repeat-x;
     text-align:right;
     padding-top: 32px;
@@ -63,7 +63,7 @@ td.login_mid_center
 td.login_mid_left
 {
     background-color: #eee;
-    background-image: url("../images/gray_bg.png");
+    background-image: url("../images/login/gray_bg.png");
     background-repeat: repeat-x;
     text-align: left;
     padding-top: 32px;
@@ -162,7 +162,7 @@ td.login_button_field
     font-family: Arial, Verdana, Helvetica, sans-serif;
     font-weight: bold;
     background-color: #c8cbd0;
-    background-image: url("../images/bu_bg.png");
+    background-image: url("../images/login/bu_bg.png");
     background-repeat: repeat-x;
     cursor: pointer;
     height: 23px;
@@ -211,7 +211,7 @@ td.login_button_field .login_button
     display: block;
     font: 12px Arial, sans-serif;
     background-color: transparent;
-    background-image: url("../images/bg_button_a.png");
+    background-image: url("../images/login/bg_button_a.png");
     background-repeat: no-repeat;
     background-attachment: scroll;
     background-position: right top;
@@ -229,7 +229,7 @@ td.login_button_field .login_button span
 {
     display: block;
     line-height: 14px;
-    background-image: url("../images/bg_button_span.png");
+    background-image: url("../images/login/bg_button_span.png");
     background-repeat: no-repeat;
     background-attachment: scroll;
     background-position: 0 0;
