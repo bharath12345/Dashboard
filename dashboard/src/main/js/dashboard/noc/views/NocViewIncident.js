@@ -159,13 +159,13 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc",
                 }
                 IncidentGrid.Grid = new Grid({columns:columnMeta}, data.name);
                 IncidentGrid.Grid.renderArray(gridata);
+                IncidentGrid.Grid.on(".dgrid-row:click", lang.hitch(this, this.handleRowClick));
 
                 var textNode = dojo.query(".dgrid-cell", IncidentGrid.Grid.domNode);
                 console.log("count of dgrid cells = " + textNode.length);
                 for (var i = 0; i < textNode.length; i++) {
                     textNode[i].style.fontSize = "12px";
                 }
-
 
                 // assign ids to nodes
                 for (var i = 0; i < input.applicationVO.applications.length; i++) {
@@ -195,6 +195,17 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc",
 
                 Scheduler.POLLER = this;
                 this.startStaggeredDatabasePolling();
+            },
+
+            handleRowClick: function(evt) {
+                var row = IncidentGrid.Grid.row(evt);
+                // row.element == the element with the dgrid-row class
+                // row.id == the identity of the item represented by the row
+                // row.data == the item represented by the row
+
+                console.log("row element = " + dojo.toJson(row.element));
+                console.log("row id = " + dojo.toJson(row.id));
+                console.log("row data = " + dojo.toJson(row.data));
             },
 
             startStaggeredDatabasePolling:function () {
