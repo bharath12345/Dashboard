@@ -1,9 +1,9 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc",
-    "dijit/layout/ContentPane", "dojox/layout/GridContainer", 'dashboard/widgets/AoneDgrid', "dojo/request/xhr", "dojo/_base/lang",
-    "dashboard/logger/Logger", "dashboard/helper/Scheduler", "dashboard/helper/Helper"],
+    "dijit/layout/ContentPane", "dojox/layout/GridContainer", 'dashboard/widgets/AoneDgrid', "dojo/request/xhr", "dojo/_base/lang", "dojo/store/Memory",
+    "dashboard/logger/Logger", "dashboard/helper/Scheduler", "dashboard/helper/Helper", "dashboard/noc/analysistab/ApplicationAnalysisPane"],
 
-    function (declare, i18n, i18nString, ContentPane, GridContainer, Grid, xhr, lang,
-              Logger, Scheduler, Helper) {
+    function (declare, i18n, i18nString, ContentPane, GridContainer, Grid, xhr, lang, Memory,
+              Logger, Scheduler, Helper, ApplicationAnalysisPane) {
 
         dashboard.classnames.IncidentGridConfig = "dashboard.noc.views.NocViewIncident.IncidentGridConfig";
 
@@ -132,7 +132,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc",
                 var columnMeta = [
                     {
                         field:"appName",
-                        label:"Application Name"
+                        label:"Application Name",
+                        resizable: true
                     },
                     {
                         field: "id",
@@ -149,6 +150,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc",
                     var col = {};
                     col.field = metrics[i];
                     col.label = i18nString[metrics[i]];
+                    col.reorderable = true;
+                    col.resizable = true;
                     columnMeta.push(col);
                 }
 
@@ -164,8 +167,17 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc",
                     }
                     gridata.push(row);
                 }
-                IncidentGrid.Grid = new Grid({columns:columnMeta}, data.name);
-                IncidentGrid.Grid.renderArray(gridata);
+
+                var gridDataStore = new Memory({data:gridata});
+                IncidentGrid.Grid = new Grid({
+                    store: gridDataStore,
+                    columns:columnMeta,
+                    rowsPerPage: 25,
+                    pagingLinks: 1,
+                    pagingTextBox: true,
+                    firstLastArrows: true,
+                    pageSizeOptions: [15, 20, 25, 30]
+                }, data.name);
                 IncidentGrid.Grid.on(".dgrid-row:click", lang.hitch(this, this.handleRowClick));
 
                 var textNode = dojo.query(".dgrid-cell", IncidentGrid.Grid.domNode);
@@ -214,7 +226,11 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc",
                 console.log("row id = " + dojo.toJson(row.id));
                 console.log("row data = " + dojo.toJson(row.data));
 
+                var appName = row.data.appName;
+                var appId = row.data.id;
 
+                var analysisPane = new ApplicationAnalysisPane();
+                analysisPane.launch(appName, appId);
             },
 
             startStaggeredDatabasePolling:function () {

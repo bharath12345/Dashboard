@@ -3,7 +3,8 @@ var pageTypes = {
     NOC:1,
     TOPOLOGY:2,
     CUSTOM:3,
-    ALERT:4
+    ALERT:4,
+    ANALYSISTAB: 5
 };
 
 dashboard = {};
@@ -47,7 +48,7 @@ require(["dojo/io-query", "dojo/dom-construct", "dojo/_base/window", 'dojo/domRe
                     srcScript = "./js/dashboard/main/runTopology.js";
                     break;
 
-                case pageTypes.CONFIGDASHBOARD:
+                case pageTypes.CUSTOM:
                     console.log("Launching Appsone Configurable Dashboards View...");
                     srcScript = "./js/dashboard/main/runConfigurableDashboard.js";
                     break;
@@ -55,6 +56,9 @@ require(["dojo/io-query", "dojo/dom-construct", "dojo/_base/window", 'dojo/domRe
                 case pageTypes.ALERT:
                     console.log("Launching Appsone Alerts View...");
                     srcScript = "./js/dashboard/main/runAlert.js";
+                    break;
+
+                case pageTypes.ANALYSISTAB:
                     break;
 
                 default:

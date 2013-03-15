@@ -6,7 +6,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
 
         var AnalysisPane = declare(dashboard.classnames.AnalysisPane, null, {
 
+            launch: function(appName, appId) {
 
+            }
         });
 
         AnalysisPane.LOG = Logger.addTimer(new Logger(dashboard.classnames.AnalysisPane));
