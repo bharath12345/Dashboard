@@ -3,7 +3,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
 
     function (declare, i18n, ContentPane, BorderContainer, Toolbar, ButtonHelper) {
 
-        var AbstractView = declare("dashboard.abstract.AbstractView", null, {
+        dashboard.classnames.AbstractView = "dashboard.abstract.AbstractView";
+
+        var AbstractView = declare(dashboard.classnames.AbstractView, null, {
 
             "-chains-":{
                 createDom:"after"

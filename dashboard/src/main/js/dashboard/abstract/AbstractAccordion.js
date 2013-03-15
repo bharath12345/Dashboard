@@ -4,7 +4,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/on", "dojo/_base/lang",
 
     function (declare, i18n, on, lang, Memory, ObjectStoreModel, Tree, Logger, Scheduler) {
 
-        var AbstractAccordion = declare("dashboard.abstract.AbstractAccordion", null, {
+        dashboard.classnames.AbstractAccordion = "dashboard.abstract.AbstractAccordion";
+
+        var AbstractAccordion = declare(dashboard.classnames.AbstractAccordion, null, {
 
             "-chains-":{
                 renderAccordion:"before"
@@ -101,7 +103,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/on", "dojo/_base/lang",
             }
         });
 
-        AbstractAccordion.LOG = Logger.addTimer(new Logger("dashboard.abstract.AbstractAccordion"));
+        AbstractAccordion.LOG = Logger.addTimer(new Logger(dashboard.classnames.AbstractAccordion));
 
         return AbstractAccordion;
     });

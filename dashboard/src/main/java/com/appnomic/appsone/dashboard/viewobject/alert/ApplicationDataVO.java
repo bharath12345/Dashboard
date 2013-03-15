@@ -4,7 +4,15 @@ package com.appnomic.appsone.dashboard.viewobject.alert;
 public class ApplicationDataVO {
 	
 	String applicationName;
+	int applicaitonId;
 	MetricData [] metrics;
+	
+	public int getApplicaitonId() {
+		return applicaitonId;
+	}
+	public void setApplicaitonId(int applicaitonId) {
+		this.applicaitonId = applicaitonId;
+	}
 	
 	public String getApplicationName() {
 		return applicationName;

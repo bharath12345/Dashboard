@@ -206,7 +206,7 @@ public class AlertInfoNocAction extends AbstractNocAction  {
 		
 		String applicationName = (parameters.get("name")[0]);
 		int id = Integer.parseInt(parameters.get("id")[0]);
-		System.out.println("application being assembled = " + applicationName);
+		System.out.println("application being assembled = " + applicationName + "id = " + id);
 		
 		applicationDataVO = new ApplicationDataVO();
 		
@@ -217,6 +217,7 @@ public class AlertInfoNocAction extends AbstractNocAction  {
 		MetricData [] metricDataset = new MetricData[5];
 		applicationDataVO.setMetrics(metricDataset);
 		applicationDataVO.setApplicationName(applicationName);
+		applicationDataVO.setApplicaitonId(id);
 		
 		AlertCountSummary acs = null;
 		try {

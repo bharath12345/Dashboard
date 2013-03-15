@@ -1,5 +1,5 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc",
-    "dijit/layout/ContentPane", "dojox/layout/GridContainer", 'dgrid/Grid', "dojo/request/xhr", "dojo/_base/lang",
+    "dijit/layout/ContentPane", "dojox/layout/GridContainer", 'dashboard/widgets/AoneDgrid', "dojo/request/xhr", "dojo/_base/lang",
     "dashboard/logger/Logger", "dashboard/helper/Scheduler", "dashboard/helper/Helper"],
 
     function (declare, i18n, i18nString, ContentPane, GridContainer, Grid, xhr, lang,
@@ -133,6 +133,12 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc",
                     {
                         field:"appName",
                         label:"Application Name"
+                    },
+                    {
+                        field: "id",
+                        label: "id",
+                        unhidable: true,
+                        hidden: true
                     }
                 ];
 
@@ -152,6 +158,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc",
                     var row = {};
                     var apps = input.applicationVO.applications;
                     row.appName = apps[i].name;
+                    row.id = apps[i].id;
                     for (var j = 0; j < metrics.length; j++) {
                         row[metrics[j]] = "";
                     }
@@ -206,6 +213,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc",
                 console.log("row element = " + dojo.toJson(row.element));
                 console.log("row id = " + dojo.toJson(row.id));
                 console.log("row data = " + dojo.toJson(row.data));
+
+
             },
 
             startStaggeredDatabasePolling:function () {
