@@ -53,7 +53,7 @@ define([ 'dojo/has', 'require' ], function (has, require) {
 
                 // the default view is the "All Applications Alerts Grid"
                 var nocA = NocAccordion();
-                nocA.showView("", "Alerts Grid", "", false);
+                nocA.showView("", "Application Alerts Dashboard", "", false);
 
             });
     }

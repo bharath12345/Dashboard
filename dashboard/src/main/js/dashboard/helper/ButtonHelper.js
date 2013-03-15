@@ -1,13 +1,14 @@
-define(["dojo/_base/declare", "dijit/form/Button", "dijit/Tooltip", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard"],
+define(["dojo/_base/declare", "dijit/form/Button", "dijit/Tooltip", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard",
+    "dojox/uuid/generateRandomUuid"],
 
-    function (declare, Button, Tooltip, i18n, i18nString) {
+    function (declare, Button, Tooltip, i18n, i18nString, generateRandomUuid) {
 
         dashboard.classnames.ButtonHelper = "dashboard.helper.ButtonHelper";
 
         var ButtonHelper = declare(dashboard.classnames.ButtonHelper, null, {
 
             getButton:function (label, className) {
-                var id = this.getId(label, className);
+                var id = generateRandomUuid();
                 var button = new Button({
                     id:id,
                     showLabel:false,
@@ -19,10 +20,6 @@ define(["dojo/_base/declare", "dijit/form/Button", "dijit/Tooltip", "dojo/i18n",
                     label:label
                 });
                 return button;
-            },
-
-            getId:function (label, className) {
-                return label + "_" + className;
             },
 
             //ToDo : Tooltip Labels are Horrible. I have named them to icon names themselves. Correct this
