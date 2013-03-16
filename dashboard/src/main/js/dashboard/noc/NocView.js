@@ -16,7 +16,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc",
             },
 
             createDom: function() {
-                this.createInnerMenuAndPanes(dashboard.dom.CpTopCenter.domNode);
+                this.createInnerMenuAndPanes(dashboard.dom.CpTopCenter.domNode, true);
             },
 
             refreshView: function() {

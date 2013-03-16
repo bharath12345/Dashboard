@@ -1,7 +1,7 @@
-define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/layout/BorderContainer", "dijit/Toolbar",
+define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/layout/BorderContainer", "dijit/Toolbar", "dijit/layout/TabContainer",
     "dashboard/helper/ButtonHelper"],
 
-    function (declare, i18n, ContentPane, BorderContainer, Toolbar, ButtonHelper) {
+    function (declare, i18n, ContentPane, BorderContainer, Toolbar, TabContainer, ButtonHelper) {
 
         dashboard.classnames.AbstractView = "dashboard.abstract.AbstractView";
 
@@ -161,7 +161,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
 
                 dashboard.dom.CpCenterInnerBottom = new ContentPane({
                     region:"bottom",
-                    splitter:true
+                    splitter:true,
+                    style: "height: 20px"
                 });
 
                 dashboard.dom.InnerBcSplit.addChild(dashboard.dom.CpCenterInnerTop);
@@ -177,6 +178,54 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
             },
 
             createAnalysisTabContainer: function() {
+                dashboard.dom.AnalysisPaneBc = new BorderContainer({
+                    design:"headline",
+                    liveSplitters:false,
+                    persist:true,
+                    gutters: false,
+                    style: "width: 100%; height: 100%;"
+                });
+
+                dashboard.dom.CpAnalysisPaneTop = new ContentPane({
+                    region:"top",
+                    splitter:false,
+                    style: "height: 20px"
+                });
+
+                dashboard.dom.CpAnalysisPaneCenter = new ContentPane({
+                    region:"center",
+                    splitter:false,
+                    style: "height: 100%"
+                });
+
+                dashboard.dom.AnalysisPaneBc.addChild(dashboard.dom.CpAnalysisPaneTop);
+                dashboard.dom.AnalysisPaneBc.addChild(dashboard.dom.CpAnalysisPaneCenter);
+                dashboard.dom.AnalysisPaneBc.placeAt(dashboard.dom.CpCenterInnerBottom);
+                dashboard.dom.AnalysisPaneBc.startup();
+                dashboard.dom.AnalysisPaneBc.resize();
+                dashboard.dom.InnerBc.resize();
+                dashboard.dom.TopBc.resize();
+
+                ///
+
+                dashboard.dom.AnalysisPaneTC = new TabContainer({style: "height: 100%; width: 100%;"});
+                dashboard.dom.AnalysisPaneTC.placeAt(dashboard.dom.CpAnalysisPaneCenter);
+                dashboard.dom.AnalysisPaneTC.startup();
+
+                //
+
+                dashboard.dom.AnalysisPaneContolBar = new Toolbar({});
+                dashboard.dom.AnalysisPaneContolBar.placeAt(dashboard.dom.CpAnalysisPaneTop);
+                dashboard.dom.AnalysisPaneContolBar.startup();
+                dashboard.dom.AnalysisPaneBc.resize();
+
+                var buttonHelper = new ButtonHelper();
+                var button = buttonHelper.getWindowMinimize();
+                dashboard.dom.AnalysisPaneContolBar.addChild(button);
+                button = buttonHelper.getWindowRestore();
+                dashboard.dom.AnalysisPaneContolBar.addChild(button);
+                button = buttonHelper.getWindowMaximize();
+                dashboard.dom.AnalysisPaneContolBar.addChild(button);
 
             }
 

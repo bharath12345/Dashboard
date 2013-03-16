@@ -32,6 +32,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/confi
                 // ToDo: Change this switch away from Name to some ID
                 switch(name) {
                     case this.ALERTSGRID:
+                        dashboard.dom.topMenuPane.domNode.innerHTML = "<div class='text-center alert alert-info heading'>Alerts Grid Configuration</div>";
                         xhr("config/alertGridDetailsRetrieve.action", {
                             handleAs:"json",
                             method:"POST",
@@ -41,6 +42,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/confi
                         break;
 
                     case this.TRANSACTIONSGRID:
+                        dashboard.dom.topMenuPane.domNode.innerHTML = "<div class='text-center alert alert-info heading'>Transactions Grid Configuration</div>";
                         xhr("config/transactionGridDetailsRetrieve.action", {
                             handleAs:"json",
                             method:"POST",

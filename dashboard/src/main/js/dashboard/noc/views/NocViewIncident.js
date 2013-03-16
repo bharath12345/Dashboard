@@ -1,6 +1,6 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc",
     "dijit/layout/ContentPane", "dojox/layout/GridContainer", 'dashboard/widgets/AoneDgrid', "dojo/request/xhr", "dojo/_base/lang", "dojo/store/Memory",
-    "dashboard/logger/Logger", "dashboard/helper/Scheduler", "dashboard/helper/Helper", "dashboard/noc/analysistab/ApplicationAnalysisPane"],
+    "dashboard/logger/Logger", "dashboard/helper/Scheduler", "dashboard/helper/Helper", "dashboard/tab/application/ApplicationAnalysisPane"],
 
     function (declare, i18n, i18nString, ContentPane, GridContainer, Grid, xhr, lang, Memory,
               Logger, Scheduler, Helper, ApplicationAnalysisPane) {
@@ -300,15 +300,15 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc",
 
             loadPage:function (pageName) {
 
-                dashboard.dom.topMenuPane.domNode.innerHTML = "<div class='text-center alert alert-info heading'>Alerts Grid</div>";
+                dashboard.dom.topMenuPane.domNode.innerHTML = "<div class='text-center alert alert-info heading'>Applications Alerts Dashboard</div>";
 
-                dashboard.dom.CpCenterInner.attr('content', dojo.create('div', {'id':pageName, style:'width: 100%; height: 100%;'}));
+                dashboard.dom.CpCenterInnerTop.attr('content', dojo.create('div', {'id':pageName, style:'width: 100%; height: 100%;'}));
 
                 var xpos = 0, ypos = 0;
                 var viewMeta = {
                     id:pageName,
                     name:pageName,
-                    dimensions:[dashboard.dom.CpCenterInner.w, dashboard.dom.CpCenterInner.h],
+                    dimensions:[dashboard.dom.CpCenterInnerTop.w, dashboard.dom.CpCenterInnerTop.h],
                     position:[xpos, ypos],
                     custom:[]
                 };

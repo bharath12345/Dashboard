@@ -1,9 +1,9 @@
-<%@page pageEncoding="UTF-8" %>
-<%@page contentType="text/html;charset=UTF-8" %>
-<%@ page import="java.util.*" %>
+    <%@page pageEncoding="UTF-8" %>
+        <%@page contentType="text/html;charset=UTF-8" %>
+        <%@ page import="java.util.*" %>
 
-<html>
-    <head>
+        <html>
+        <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta http-equiv="Cache-Control" content="no-cache"/>
         <meta http-equiv="Cache-Control" content="no-store"/>
@@ -16,13 +16,13 @@
         <link rel="shortcut icon" href="./images/favicon.ico"/>
 
         <style type="text/css">
-            @import url("./css/dashboard.merged.compressed.css");
-            @import url("./js/bootstrap/bootstrap/css/bootstrap.min.css");
-            @import url("./js/bootstrap/fontAwesome/css/font-awesome.min.css");
-            @import url("./js/dojox/form/resources/CheckedMultiSelect.css");
+        @import url("./css/dashboard.merged.compressed.css");
+        @import url("./js/bootstrap/bootstrap/css/bootstrap.min.css");
+        @import url("./js/bootstrap/fontAwesome/css/font-awesome.min.css");
+        @import url("./js/dojox/form/resources/CheckedMultiSelect.css");
         </style>
 
-    <!-- List of CSS -->
+        <!-- List of CSS -->
         <link rel="stylesheet" type="text/css" href="./js/dijit/themes/claro/claro.css"/>
         <link rel="stylesheet" type="test/css" href="./js/dgrid/css/dgrid.css"/>
         <link rel="stylesheet" type="test/css" href="./js/dgrid/css/skins/claro.css"/>
@@ -34,9 +34,9 @@
         <script type="text/javascript" src="./js/jQuery/jquery-1.9.1.min.js"></script>
         <script type="text/javascript" src="./js/jQuery/jquery-ui-1.10.0.custom.min.js"></script>
         <script type="text/javascript" src="./js/jQuery/plugins/jsPlumb/jquery.jsPlumb-1.3.16-all-min.js"></script>
-        <script type="text/javascript" src="./js/dashboard/main/loader.js"></script>
 
-    </head>
-    <body class="claro">
-    </body>
-</html>
+        </head>
+        <body class="claro">
+        <script type="text/javascript" src="./js/dashboard/main/runDashboard.js"></script>
+        </body>
+        </html>

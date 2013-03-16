@@ -7,7 +7,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
 
         var NocAccordion = declare(dashboard.classnames.NocAccordion, AbstractAccordion, {
 
-            ALERTSGRID: i18nString.alertsGrid,
+            ALERTSGRID: "Application",
             TRANSACTIONSGRID: i18nString.transactionGrid,
 
             showView: function(id, name, type, newWindow) {

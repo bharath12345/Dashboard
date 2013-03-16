@@ -14,7 +14,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/topology/nls/top
             },
 
             createDom: function() {
-                this.createInnerMenuAndPanes(dashboard.dom.CpTopCenter.domNode);
+                this.createInnerMenuAndPanes(dashboard.dom.CpTopCenter.domNode, true);
             },
 
             refreshView: function() {

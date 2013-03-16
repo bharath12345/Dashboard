@@ -1,6 +1,6 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", "dashboard/logger/Logger",
-    "dashboard/abstract/AnalysisPane", "dashboard.noc.tab.application.TabA", "dashboard.noc.tab.application.TabB",
-    "dashboard.noc.tab.application.TabC"],
+    "dashboard/abstract/AnalysisPane", "dashboard/tab/application/TabA", "dashboard/tab/application/TabB",
+    "dashboard/tab/application/TabC"],
 
     function (declare, i18n, i18nString, Logger, AnalysisPane, TabA, TabB, TabC) {
 

@@ -21,20 +21,14 @@ define([ 'dojo/has', 'require' ], function (has, require) {
      * This is an increasingly common pattern when dealing with applications that run in different environments that
      * require different functionality (i.e. client/server or desktop/tablet/phone).
      */
-    if (has('host-browser')) {
-        /*
-         * This require call's first dependency, `./PageLoader`, uses a relative module identifier; you should use this
-         * type of notation for dependencies *within* a package in order to ensure the package is fully portable. It
-         * works like a path, where `./` refers to the current directory and `../` refers to the parent directory. If
-         * you are referring to a module in a *different* package (like `dojo` or `dijit`), you should *not* use a
-         * relative module identifier.
-         *
-         * The second dependency is a plugin dependency; in this case, it is a dependency on the special functionality
-         * of the `dojo/domReady` plugin, which simply waits until the DOM is ready before resolving.
-         * The `!` after the module name indicates you want to use special plugin functionality; if you were to
-         * require just `dojo/domReady`, it would load that module just like any other module, without the special
-         * plugin functionality.
-         */
+
+    dashboard = {};
+    dashboard.classnames = {};
+    dashboard.dom = {};
+    dashboard.routes = {};
+
+    var uri = document.URL;
+    if (uri.indexOf("#") == -1) {
 
         require(['dashboard/DashboardView', 'dashboard/DashboardAccordion',
             "dashboard/helper/Helper", "dashboard/noc/NocAccordion", 'dojo/domReady!' ],
@@ -58,8 +52,48 @@ define([ 'dojo/has', 'require' ], function (has, require) {
             });
     }
     else {
-        // Eventually, will actually have a useful server implementation here :)
-        console.log('AppsOne JavaScript server side code (if and when it is developed) will go here!');
+        require(['crossroads'], function(crossroads){
+            var hashString = uri.substring(uri.indexOf("#")+1, uri.length);
+            console.log("hash string = " + hashString);
+
+            crossroads.routed.add(console.log, console); //log all routes
+            console.log("getting into routing area");
+
+            var r = crossroads.addRoute('/noc/:name:/:type:/:uuid:', function nocMatch(name, type, uuid) {
+                console.log("Name = " + name + " type = " + type + " uuid = " + uuid);
+
+                require(['dashboard/logger/Logger',
+                    "dashboard/noc/NocUtility", "dashboard/noc/NocAccordion", "dashboard/helper/Helper",
+                    'dojo/domReady!' ],
+
+                    function (Logger, NocUtility, NocAccordion, Helper) {
+                        Logger.initialize();
+                        NocUtility.InitKeyControls();
+
+                        var nocAccordion = new NocAccordion();
+                        var viewObject = nocAccordion.getView(name, true);
+
+                        viewObject.createDom();
+
+                        Helper.showLoading();
+
+                        nocAccordion.showView(uuid, name, type, true);
+
+                    });
+            });
+
+            var route1 = crossroads.addRoute('/news/:id:', function(id){
+                console.log(id);
+            });
+
+            //crossroads.parse('/noc/test/test/test');
+            //crossroads.parse('/news/123');
+            crossroads.parse(hashString);
+
+
+
+        });
+
     }
 
 });

@@ -216,7 +216,7 @@ define(["dojo/_base/declare", "dojo/i18n","dojo/i18n!dashboard/noc/nls/noc", "da
                 console.log("input = " + dojo.toJson(input));
 
                 if(input.applicationVO == null || input.applicationVO.length == 0) {
-                    dashboard.dom.CpCenterInner.domNode.innerHTML="No Applications and Transactions configured for display on the dashboard";
+                    dashboard.dom.CpCenterInnerTop.domNode.innerHTML="No Applications and Transactions configured for display on the dashboard";
                     return;
                 }
 
@@ -274,7 +274,7 @@ define(["dojo/_base/declare", "dojo/i18n","dojo/i18n!dashboard/noc/nls/noc", "da
 
                 var gridContainer = new GridContainer({nbZones:nbZ, isAutoOrganized:true,
                     style:"width: 100%; height: 100%;"});
-                dashboard.dom.CpCenterInner.addChild(gridContainer);
+                dashboard.dom.CpCenterInnerTop.addChild(gridContainer);
                 gridContainer.disableDnd();
 
                 var j = 0, k = 0;
@@ -415,11 +415,13 @@ define(["dojo/_base/declare", "dojo/i18n","dojo/i18n!dashboard/noc/nls/noc", "da
         var NocViewTransactionGrid = declare(dashboard.classnames.NocViewTransactionGrid, null, {
 
             loadPage:function (pageName) {
+                dashboard.dom.topMenuPane.domNode.innerHTML = "<div class='text-center alert alert-info heading'>Transactions Grid</div>";
+
                 var xpos=0, ypos=0;
                 var viewMeta = {
                     id:0,
                     name: pageName,
-                    dimensions:[dashboard.dom.CpCenterInner.w, dashboard.dom.CpCenterInner.h],
+                    dimensions:[dashboard.dom.CpCenterInnerTop.w, dashboard.dom.CpCenterInnerTop.h],
                     position:[xpos,ypos],
                     custom: []
                 };

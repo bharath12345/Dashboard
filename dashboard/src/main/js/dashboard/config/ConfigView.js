@@ -12,7 +12,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/confi
             },
 
             createDom: function() {
-                this.createInnerMenuAndPanes(dashboard.dom.CpTopCenter.domNode);
+                this.createInnerMenuAndPanes(dashboard.dom.CpTopCenter.domNode, false);
             },
 
             setAccordion: function(configAccordion) {
