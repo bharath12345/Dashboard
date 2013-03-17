@@ -7,6 +7,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
 
         var TabB = declare(dashboard.classnames.TabB, AbstractAnalysisTab, {
 
+            title: "Tab B",
+            content: "Graphs shortly"
+
         });
 
         TabB.LOG = Logger.addTimer(new Logger(dashboard.classnames.TabB));

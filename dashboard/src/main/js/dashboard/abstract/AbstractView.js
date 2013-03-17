@@ -147,6 +147,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
                 dashboard.dom.AnalysisPaneToolbar.addChild(button);
                 button = buttonHelper.getWindowMaximize();
                 dashboard.dom.AnalysisPaneToolbar.addChild(button);
+                button = buttonHelper.getWindowClose();
+                dashboard.dom.AnalysisPaneToolbar.addChild(button);
 
             }
 
