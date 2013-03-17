@@ -29,20 +29,6 @@ define(["dojo/_base/declare", 'dojox/widget/Standby', "dojo/io-query", "dojo/_ba
             }
         };
 
-        Helper.createDomAndShowPage = function(accordionObject) {
-            var uri = document.URL;
-            var query = uri.substring(uri.indexOf("?") + 1, uri.length);
-            var queryObject = ioQuery.queryToObject(query);
-
-            viewObject = accordionObject.getView(queryObject.viewName, true);
-
-            viewObject.createDom();
-
-            Helper.showLoading();
-
-            accordionObject.showView(queryObject.viewId, queryObject.viewName, queryObject.viewType, true);
-        };
-
         Helper.parseInput = function(input) {
             var data = {};
             if(input.param != undefined) {

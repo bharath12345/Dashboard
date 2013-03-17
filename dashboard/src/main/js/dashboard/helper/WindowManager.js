@@ -20,23 +20,21 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
             default_width:975,
             default_height:710,
 
-            getNewWindow:function (viewId, viewName, viewType, viewCategory) {
+            getNewWindow:function (params) {
+                // Assemble the new uri
+                var uri = "index.jsp#/";
+                for(var i=0;i<params.length; i++) {
+                    uri += params[i];
+                    if(i != (params.length-1)){
+                        uri += "/";
+                    }
+                }
 
+                var viewId = params[1]; // the second param should always be UUID
                 if(viewId == null || viewId == undefined || viewId.length == 0) {
                     viewId = generateRandomUuid();
                     console.log("generated uuid = " + viewId);
                 }
-
-                var uri = "index.jsp";
-                var query = {
-                    viewId: viewId,
-                    viewName: viewName,
-                    viewType: viewType,
-                    viewCategory:viewCategory
-                };
-                // Assemble the new uri with its query string attached.
-                var queryStr = ioQuery.objectToQuery(query);
-                uri = uri + "?" + queryStr;
 
                 var winName = this.getTargetWindowName(viewId);
 

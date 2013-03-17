@@ -1,9 +1,9 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/topology/nls/topology",
     "dojo/on", "dojo/_base/lang",
-    "dashboard/abstract/AbstractView", "dashboard/helper/WindowManager", "dashboard/main/loader", "dashboard/helper/ButtonHelper",
+    "dashboard/abstract/AbstractView", "dashboard/helper/WindowManager", "dashboard/helper/ButtonHelper",
     "dashboard/helper/Scheduler"],
 
-    function (declare, i18n, i18nString, on, lang, AbstractView, WindowManager, loader, ButtonHelper, Scheduler) {
+    function (declare, i18n, i18nString, on, lang, AbstractView, WindowManager, ButtonHelper, Scheduler) {
 
         var TopologyView = declare("dashboard.topology.TopologyView", AbstractView, {
 
@@ -22,6 +22,17 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/topology/nls/top
                 topologyAccordion.createView(TopologyView.ID, TopologyView.NAME, TopologyView.TYPE, this.newWindow);
             },
 
+            launchNewWindow: function() {
+                // launch the child window
+                var wm = new WindowManager();
+                var queryParams = [];
+                queryParams.push("topology");
+                queryParams.push(TopologyView.ID);
+                queryParams.push(TopologyView.NAME);
+                queryParams.push(TopologyView.TYPE);
+                wm.getNewWindow(queryParams);
+            },
+
             loadMenu: function(id, name, type) {
                 TopologyView.ID = id;
                 TopologyView.NAME = name;
@@ -35,9 +46,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/topology/nls/top
                 dashboard.dom.toolbar.addChild(button);
 
                 button = buttonHelper.getViewNewWindow();
-                on(button, "click", function() {
-                    TopologyView.launchNewWindowConfigPane();
-                });
+                on(button, "click", lang.hitch(this, this.launchNewWindow));
                 dashboard.dom.toolbar.addChild(button);
 
                 button = buttonHelper.getStatusRefresh();
@@ -103,12 +112,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/topology/nls/top
                 TopologyView.ACCORDION = nocAccordion;
             }
         });
-
-        TopologyView.launchNewWindowConfigPane = function(id, name, type) {
-            // launch the child window
-            var wm = new WindowManager();
-            wm.getNewWindow(TopologyView.ID, TopologyView.NAME, TopologyView.TYPE, pageTypes.TOPOLOGY);
-        };
 
         TopologyView.ACCORDION = null;
 

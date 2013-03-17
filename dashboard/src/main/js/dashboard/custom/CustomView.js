@@ -1,9 +1,9 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/custom/nls/custom",
     "dojo/on", "dojo/_base/lang",
-    "dashboard/abstract/AbstractView", "dashboard/helper/WindowManager", "dashboard/main/loader", "dashboard/helper/ButtonHelper",
+    "dashboard/abstract/AbstractView", "dashboard/helper/WindowManager", "dashboard/helper/ButtonHelper",
     "dashboard/helper/Scheduler"],
 
-    function (declare, i18n, i18nString, on, lang, AbstractView, WindowManager, loader, ButtonHelper, Scheduler) {
+    function (declare, i18n, i18nString, on, lang, AbstractView, WindowManager, ButtonHelper, Scheduler) {
 
         dashboard.classnames.CustomView = "dashboard.custom.CustomView";
 
@@ -38,12 +38,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/custom/nls/custo
                 CustomView.ACCORDION = customAccordion;
             }
         });
-
-        CustomView.launchNewWindowConfigPane = function(id, name, type) {
-            // launch the child window
-            var wm = new WindowManager();
-            wm.getNewWindow(CustomView.ID, CustomView.NAME, CustomView.TYPE, pageTypes.CUSTOM);
-        };
 
         CustomView.ACCORDION = null;
 

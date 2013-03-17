@@ -1,7 +1,7 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/config",
-    "dashboard/abstract/AbstractView", "dashboard/helper/WindowManager", "dashboard/main/loader"],
+    "dashboard/abstract/AbstractView", "dashboard/helper/WindowManager"],
 
-    function (declare, i18n, i18nString, AbstractView, WindowManager, loader) {
+    function (declare, i18n, i18nString, AbstractView, WindowManager) {
 
         dashboard.classnames.ConfigView = "dashboard.config.ConfigView";
 
@@ -23,7 +23,12 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/confi
         ConfigView.launchNewWindowConfigPane = function(id, name, type) {
             // launch the child window
             var wm = new WindowManager();
-            wm.getNewWindow(id, name, type, pageTypes.CONFIG);
+            var queryParams = [];
+            queryParams.push("config");
+            queryParams.push(id);
+            queryParams.push(name);
+            queryParams.push(type);
+            wm.getNewWindow(queryParams);
         };
 
         ConfigView.ACCORDION = null;

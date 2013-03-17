@@ -14,86 +14,35 @@
  * More information about everything described about the loader throughout this file can be found at
  * <http://dojotoolkit.org/reference-guide/loader/amd.html>.
  */
-define([ 'dojo/has', 'require' ], function (has, require) {
 
-    /**
-     * This Dashboard.js file conditionally executes different code depending upon the host environment it is loaded in.
-     * This is an increasingly common pattern when dealing with applications that run in different environments that
-     * require different functionality (i.e. client/server or desktop/tablet/phone).
-     */
+
+define([ 'dojo/has', 'require' ], function (has, require) {
 
     dashboard = {};
     dashboard.classnames = {};
     dashboard.dom = {};
-    dashboard.routes = {};
+    dashboard.routes = [];
 
-    var uri = document.URL;
-    if (uri.indexOf("#") == -1) {
+    if (has('host-browser')) {
 
-        require(['dashboard/DashboardView', 'dashboard/DashboardAccordion',
-            "dashboard/helper/Helper", "dashboard/noc/NocAccordion", 'dojo/domReady!' ],
+        require(['./DashboardRoutes', 'dashboard/logger/Logger', 'dojo/domReady!'],
+            function (DashboardRoutes, Logger) {
 
-            function (DashboardView, DashboardAccordion, Helper, NocAccordion) {
+                Logger.initialize();
+                var dashboardRoutes = new DashboardRoutes();
 
-                console.log("Staring A1 Dashboard");
-
-                var dView = new DashboardView();
-                dView.createDom();
-
-                Helper.showLoading();
-
-                var ca = new DashboardAccordion();
-                ca.loadAccordion();
-
-                // the default view is the "All Applications Alerts Grid"
-                var nocA = NocAccordion();
-                nocA.showView("", "Application Alerts Dashboard", "", false);
+                if (document.URL.indexOf("#") == -1) {
+                    dashboardRoutes.loadMainPage();
+                }
+                else {
+                    dashboardRoutes.loadCrossRoadRoutes();
+                }
 
             });
     }
     else {
-        require(['crossroads'], function(crossroads){
-            var hashString = uri.substring(uri.indexOf("#")+1, uri.length);
-            console.log("hash string = " + hashString);
-
-            crossroads.routed.add(console.log, console); //log all routes
-            console.log("getting into routing area");
-
-            var r = crossroads.addRoute('/noc/:name:/:type:/:uuid:', function nocMatch(name, type, uuid) {
-                console.log("Name = " + name + " type = " + type + " uuid = " + uuid);
-
-                require(['dashboard/logger/Logger',
-                    "dashboard/noc/NocUtility", "dashboard/noc/NocAccordion", "dashboard/helper/Helper",
-                    'dojo/domReady!' ],
-
-                    function (Logger, NocUtility, NocAccordion, Helper) {
-                        Logger.initialize();
-                        NocUtility.InitKeyControls();
-
-                        var nocAccordion = new NocAccordion();
-                        var viewObject = nocAccordion.getView(name, true);
-
-                        viewObject.createDom();
-
-                        Helper.showLoading();
-
-                        nocAccordion.showView(uuid, name, type, true);
-
-                    });
-            });
-
-            var route1 = crossroads.addRoute('/news/:id:', function(id){
-                console.log(id);
-            });
-
-            //crossroads.parse('/noc/test/test/test');
-            //crossroads.parse('/news/123');
-            crossroads.parse(hashString);
-
-
-
-        });
-
+        // Eventually, will actually have a useful server implementation here :)
+        console.log('AppsOne JavaScript server side code (if and when it is developed) will go here!');
     }
 
 });
