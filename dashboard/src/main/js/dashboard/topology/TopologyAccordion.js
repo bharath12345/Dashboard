@@ -13,8 +13,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/topology/nls/top
                 console.log("show page config called with id = " + id + " and name = " + name);
 
                 topologyView = this.getView(name, newWindow);
-                topologyView.setAccordion(this);
                 topologyView.loadMenu(id, name, type);
+                topologyView.createSplitCenterPanes();
 
                 switch(name) {
                     case this.SAMPLE:
@@ -33,6 +33,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/topology/nls/top
                 var topologyView = TopologyAccordion.VIEWMAP[name];
                 if(topologyView == null) {
                     topologyView = new TopologyView(newWindow);
+                    topologyView.setAccordion(this);
                     TopologyAccordion.VIEWMAP[name] = topologyView; // there should be only one view per name (filtered views are for later)
                 }
                 return topologyView;

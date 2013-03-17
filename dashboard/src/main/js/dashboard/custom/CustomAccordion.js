@@ -14,8 +14,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/topology/nls/top
                 console.log("show custom dashboards called with id = " + id + " and name = " + name);
 
                 var customView = this.getView(name);
-                customView.setAccordion(this);
                 customView.loadMenu(id, name, type);
+                customView.createSplitCenterPanes();
 
                 switch(name) {
                     case this.LAYOUTS:
@@ -34,6 +34,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/topology/nls/top
                 var customView = CustomAccordion.VIEWMAP[name];
                 if(customView == null) {
                     customView = new CustomView(newWindow);
+                    customView.setAccordion(this);
                     CustomAccordion.VIEWMAP[name] = customView; // there should be only one view per name (filtered views are for later)
                 }
                 return customView;

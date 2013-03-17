@@ -168,4 +168,5 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
         });
 
         return AbstractView;
-    });
+    }
+);

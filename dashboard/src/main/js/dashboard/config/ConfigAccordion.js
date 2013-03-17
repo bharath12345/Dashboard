@@ -18,7 +18,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/confi
 
             showView: function(id, name, type, newWindow) {
                 var configView = this.getView(name);
-                configView.setAccordion(this);
 
                 console.log("show page config called with id = " + id + " name = " + name);
                 var viewMeta = {
@@ -77,6 +76,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/confi
                 var configView = ConfigAccordion.VIEWMAP[name];
                 if(configView == null) {
                     configView = new ConfigView();
+                    configView.setAccordion(this);
                     ConfigAccordion.VIEWMAP[name] = configView; // there should be only one view per name (filtered views are for later)
                 }
                 return configView;

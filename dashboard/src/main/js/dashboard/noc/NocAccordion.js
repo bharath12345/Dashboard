@@ -14,8 +14,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
                 console.log("show page config called with id = " + id + " and name = " + name);
 
                 var nocView = this.getView(name);
-                nocView.setAccordion(this);
                 nocView.loadMenu(id, name, type);
+                nocView.createSplitCenterPanes();
 
                 // ToDo: Change this switch away from Name to some ID
                 switch(name) {
@@ -41,6 +41,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
                 var nocView = NocAccordion.VIEWMAP[name];
                 if(nocView == null) {
                     nocView = new NocView(newWindow);
+                    nocView.setAccordion(this);
                     NocAccordion.VIEWMAP[name] = nocView; // there should be only one view per name (filtered views are for later)
                 }
                 return nocView;
