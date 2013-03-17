@@ -16,32 +16,46 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
                 this.createMast();
             },
 
-            createTopContainers:function (docBody) {
-                dashboard.dom.TopBc = new BorderContainer({
+            getContentPane: function(region, splitter, style) {
+                return new ContentPane({
+                    region:region,
+                    splitter:splitter,
+                    style: style
+                });
+            },
+
+            getBorderContainer: function() {
+                return new BorderContainer({
                     design:"headline",
                     liveSplitters:false,
                     persist:true,
                     gutters:false,
                     style: "width: 100%; height: 100%;"
                 });
+            },
 
-                dashboard.dom.CpMast = new ContentPane({
-                    region:"top",
-                    splitter:false,
-                    style:"height:25px;"
-                });
+            getToolbar: function(paneToPlace) {
+                var toolbar = new Toolbar({});
+                toolbar.placeAt(paneToPlace);
+                toolbar.startup();
+                return toolbar;
+            },
 
-                dashboard.dom.CpTopCenter = new ContentPane({
-                    region:"center",
-                    splitter:false
-                });
-
-                dashboard.dom.TopBc.addChild(dashboard.dom.CpMast);
-                dashboard.dom.TopBc.addChild(dashboard.dom.CpTopCenter);
-                dashboard.dom.TopBc.placeAt(docBody);
-                dashboard.dom.TopBc.startup();
-
+            addCPstartBC: function(bc, cpList, paneToPlace) {
+                for(var i=0; i< cpList.length; i++) {
+                    bc.addChild(cpList[i]);
+                }
+                bc.placeAt(paneToPlace);
+                bc.startup();
                 dashboard.dom.TopBc.resize();
+            },
+
+            createTopContainers:function (docBody) {
+                dashboard.dom.TopBc = this.getBorderContainer();
+                var cpList = [];
+                cpList.push(dashboard.dom.CpMast = this.getContentPane("top",false,"height:25px;"));
+                cpList.push(dashboard.dom.CpTopCenter = this.getContentPane("center",false, ""));
+                this.addCPstartBC(dashboard.dom.TopBc, cpList, docBody);
             },
 
             createMast:function () {
@@ -74,33 +88,11 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
             },
 
             createInnerMenuAndPanes: function(paneDom, analysisPaneRequired) {
-                dashboard.dom.InnerBc = new BorderContainer({
-                    design:"headline",
-                    liveSplitters:false,
-                    persist:true,
-                    gutters: false,
-                    style: "width: 100%; height: 100%;"
-                });
-
-                dashboard.dom.CpMenu = new ContentPane({
-                    region:"top",
-                    splitter:false,
-                    style: "height: 40px"
-                });
-
-                dashboard.dom.CpCenterInner = new ContentPane({
-                    region:"center",
-                    splitter:false
-                });
-
-                dashboard.dom.InnerBc.addChild(dashboard.dom.CpMenu);
-                dashboard.dom.InnerBc.addChild(dashboard.dom.CpCenterInner);
-                dashboard.dom.InnerBc.placeAt(paneDom);
-                dashboard.dom.InnerBc.startup();
-                dashboard.dom.InnerBc.resize();
-
-                dashboard.dom.InnerBc.resize();
-                dashboard.dom.TopBc.resize();
+                dashboard.dom.InnerBc = this.getBorderContainer();
+                var cpList = [];
+                cpList.push(dashboard.dom.CpMenu = this.getContentPane("top",false,"height: 40px"));
+                cpList.push(dashboard.dom.CpCenterInner = this.getContentPane("center",false, ""));
+                this.addCPstartBC(dashboard.dom.InnerBc, cpList, paneDom);
 
                 this.createMenuRegions();
 
@@ -110,101 +102,32 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
             },
 
             createMenuRegions: function() {
-                dashboard.dom.MenuBc = new BorderContainer({
-                    liveSplitters:false,
-                    persist:true,
-                    gutters: false
-                });
+                dashboard.dom.MenuBc = this.getBorderContainer();
+                var cpList = [];
+                cpList.push(dashboard.dom.topMenuPane = this.getContentPane("top",false,"height: 15px;"));
+                cpList.push(dashboard.dom.bottomMenuPane = this.getContentPane("center",false,"overflow: hidden;"));
+                this.addCPstartBC(dashboard.dom.MenuBc, cpList, dashboard.dom.CpMenu);
 
-                dashboard.dom.topMenuPane = new ContentPane({
-                    region: "top",
-                    splitter:false,
-                    style: "height: 15px;"
-                });
-                dashboard.dom.MenuBc.addChild(dashboard.dom.topMenuPane);
-
-                dashboard.dom.bottomMenuPane = new ContentPane({
-                    region: "center",
-                    splitter:false
-                });
-                dashboard.dom.MenuBc.addChild(dashboard.dom.bottomMenuPane);
-
-                dashboard.dom.MenuBc.placeAt(dashboard.dom.CpMenu);
-                dashboard.dom.MenuBc.startup();
-                dashboard.dom.MenuBc.resize();
-                dashboard.dom.TopBc.resize();
-
-                this.addToolbar();
-            },
-
-            addToolbar: function() {
-                dashboard.dom.toolbar = new Toolbar({});
-                dashboard.dom.toolbar.placeAt(dashboard.dom.bottomMenuPane);
-                dashboard.dom.toolbar.startup();
+                dashboard.dom.toolbar = this.getToolbar(dashboard.dom.bottomMenuPane);
                 dashboard.dom.TopBc.resize();
             },
 
             createSplitCenterPanes: function() {
-                dashboard.dom.InnerBcSplit = new BorderContainer({
-                    design:"headline",
-                    liveSplitters:false,
-                    persist:true,
-                    gutters: false,
-                    style: "width: 100%; height: 100%;"
-                });
-
-                dashboard.dom.CpCenterInnerTop = new ContentPane({
-                    region:"center",
-                    splitter:true,
-                    style: "height: 100%"
-                });
-
-                dashboard.dom.CpCenterInnerBottom = new ContentPane({
-                    region:"bottom",
-                    splitter:true,
-                    style: "height: 20px"
-                });
-
-                dashboard.dom.InnerBcSplit.addChild(dashboard.dom.CpCenterInnerTop);
-                dashboard.dom.InnerBcSplit.addChild(dashboard.dom.CpCenterInnerBottom);
-                dashboard.dom.InnerBcSplit.placeAt(dashboard.dom.CpCenterInner);
-                dashboard.dom.InnerBcSplit.startup();
-                dashboard.dom.InnerBcSplit.resize();
-
-                dashboard.dom.InnerBc.resize();
-                dashboard.dom.TopBc.resize();
+                dashboard.dom.InnerBcSplit = this.getBorderContainer();
+                var cpList = [];
+                cpList.push(dashboard.dom.CpCenterInnerTop = this.getContentPane("center",true,"height: 100%"));
+                cpList.push(dashboard.dom.CpCenterInnerBottom = this.getContentPane("bottom",true,"display: none;"));
+                this.addCPstartBC(dashboard.dom.InnerBcSplit, cpList, dashboard.dom.CpCenterInner);
 
                 this.createAnalysisTabContainer();
             },
 
             createAnalysisTabContainer: function() {
-                dashboard.dom.AnalysisPaneBc = new BorderContainer({
-                    design:"headline",
-                    liveSplitters:false,
-                    persist:true,
-                    gutters: false,
-                    style: "width: 100%; height: 100%;"
-                });
-
-                dashboard.dom.CpAnalysisPaneTop = new ContentPane({
-                    region:"top",
-                    splitter:false,
-                    style: "height: 20px"
-                });
-
-                dashboard.dom.CpAnalysisPaneCenter = new ContentPane({
-                    region:"center",
-                    splitter:false,
-                    style: "height: 100%"
-                });
-
-                dashboard.dom.AnalysisPaneBc.addChild(dashboard.dom.CpAnalysisPaneTop);
-                dashboard.dom.AnalysisPaneBc.addChild(dashboard.dom.CpAnalysisPaneCenter);
-                dashboard.dom.AnalysisPaneBc.placeAt(dashboard.dom.CpCenterInnerBottom);
-                dashboard.dom.AnalysisPaneBc.startup();
-                dashboard.dom.AnalysisPaneBc.resize();
-                dashboard.dom.InnerBc.resize();
-                dashboard.dom.TopBc.resize();
+                dashboard.dom.AnalysisPaneBc = this.getBorderContainer();
+                var cpList = [];
+                cpList.push(dashboard.dom.CpAnalysisPaneTop = this.getContentPane("top",false,"height: 20px; overflow: hidden;"));
+                cpList.push(dashboard.dom.CpAnalysisPaneCenter = this.getContentPane("center",false,"height: 100%"));
+                this.addCPstartBC(dashboard.dom.AnalysisPaneBc, cpList, dashboard.dom.CpCenterInnerBottom);
 
                 ///
 
@@ -214,18 +137,16 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
 
                 //
 
-                dashboard.dom.AnalysisPaneContolBar = new Toolbar({});
-                dashboard.dom.AnalysisPaneContolBar.placeAt(dashboard.dom.CpAnalysisPaneTop);
-                dashboard.dom.AnalysisPaneContolBar.startup();
+                dashboard.dom.AnalysisPaneToolbar = this.getToolbar(dashboard.dom.CpAnalysisPaneTop);
                 dashboard.dom.AnalysisPaneBc.resize();
 
                 var buttonHelper = new ButtonHelper();
                 var button = buttonHelper.getWindowMinimize();
-                dashboard.dom.AnalysisPaneContolBar.addChild(button);
+                dashboard.dom.AnalysisPaneToolbar.addChild(button);
                 button = buttonHelper.getWindowRestore();
-                dashboard.dom.AnalysisPaneContolBar.addChild(button);
+                dashboard.dom.AnalysisPaneToolbar.addChild(button);
                 button = buttonHelper.getWindowMaximize();
-                dashboard.dom.AnalysisPaneContolBar.addChild(button);
+                dashboard.dom.AnalysisPaneToolbar.addChild(button);
 
             }
 
