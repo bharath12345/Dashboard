@@ -15,8 +15,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/custom/nls/custo
                 this.newWindow = newWindow;
             },
 
+            // the method is called only in a NEW Window. Never in the 'central' dashboard
             createDom: function() {
-                this.createInnerMenuAndPanes(dashboard.dom.CpTopCenter.domNode, false);
+                this.createInnerMenuAndPanes(dashboard.dom.CpTopCenter.domNode, false, dashboard.pageTypes.CUSTOM);
             },
 
             refreshView: function() {
@@ -29,9 +30,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/custom/nls/custo
                 CustomView.NAME = name;
                 CustomView.TYPE = type;
 
-                dashboard.dom.toolbar.destroyDescendants(false);
-
-
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].destroyDescendants(false);
             },
 
             setAccordion: function(customAccordion) {

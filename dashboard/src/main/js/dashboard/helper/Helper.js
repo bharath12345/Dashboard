@@ -67,5 +67,9 @@ define(["dojo/_base/declare", 'dojox/widget/Standby', "dojo/io-query", "dojo/_ba
             return data;
         };
 
+        Helper.getHeading = function(stringObject) {
+            return "<div class='text-center alert alert-info heading'>" + stringObject + "</div>";
+        }
+
         return Helper;
     });

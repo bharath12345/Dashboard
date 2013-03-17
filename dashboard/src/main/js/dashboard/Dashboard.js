@@ -23,6 +23,17 @@ define([ 'dojo/has', 'require' ], function (has, require) {
     dashboard.dom = {};
     dashboard.routes = [];
 
+    dashboard.dom.CpCenterInner = {};
+    dashboard.dom.TopMenuPane = {};
+    dashboard.dom.Toolbar = {};
+
+    dashboard.pageTypes = {};
+    dashboard.pageTypes.dashboard = "dashboard";
+    dashboard.pageTypes.NOC = "noc";
+    dashboard.pageTypes.CONFIG = "config";
+    dashboard.pageTypes.TOPOLOGY = "topology";
+    dashboard.pageTypes.CUSTOM = "custom";
+
     if (has('host-browser')) {
 
         require(['./DashboardRoutes', 'dashboard/logger/Logger', 'dojo/domReady!'],

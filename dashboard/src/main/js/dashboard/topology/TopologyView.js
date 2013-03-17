@@ -13,8 +13,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/topology/nls/top
                 this.newWindow = newWindow;
             },
 
+            // the method is called only in a NEW Window. Never in the 'central' dashboard
             createDom: function() {
-                this.createInnerMenuAndPanes(dashboard.dom.CpTopCenter.domNode, true);
+                this.createInnerMenuAndPanes(dashboard.dom.CpTopCenter.domNode, true, dashboard.pageTypes.TOPOLOGY);
             },
 
             refreshView: function() {
@@ -38,73 +39,71 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/topology/nls/top
                 TopologyView.NAME = name;
                 TopologyView.TYPE = type;
 
-                dashboard.dom.toolbar.destroyDescendants(false);
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].destroyDescendants(false);
 
                 var buttonHelper = new ButtonHelper();
                 var button = buttonHelper.getRefresh();
                 on(button, "click", lang.hitch(this, "refreshView"));
-                dashboard.dom.toolbar.addChild(button);
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(button);
 
                 button = buttonHelper.getViewNewWindow();
                 on(button, "click", lang.hitch(this, this.launchNewWindow));
-                dashboard.dom.toolbar.addChild(button);
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(button);
 
                 button = buttonHelper.getStatusRefresh();
                 on(button, "click", function() {
                     Scheduler.startStopRefresh(true);
                 });
-                dashboard.dom.toolbar.addChild(button);
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(button);
 
                 button = buttonHelper.getRefreshStop();
                 on(button, "click", function() {
                     Scheduler.startStopRefresh(false);
                 });
-                dashboard.dom.toolbar.addChild(button);
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(button);
 
-                dashboard.dom.toolbar.addChild(buttonHelper.getPin());
-                dashboard.dom.toolbar.addChild(buttonHelper.getPrevious());
-                dashboard.dom.toolbar.addChild(buttonHelper.getQuickFind());
-                dashboard.dom.toolbar.addChild(buttonHelper.getQuickView());
-                dashboard.dom.toolbar.addChild(buttonHelper.getRefreshStatus());
-                dashboard.dom.toolbar.addChild(buttonHelper.getRestoreDefault());
-                dashboard.dom.toolbar.addChild(buttonHelper.getRestoreFilter());
-                dashboard.dom.toolbar.addChild(buttonHelper.getRewindToBeginning());
-                dashboard.dom.toolbar.addChild(buttonHelper.getSave());
-                dashboard.dom.toolbar.addChild(buttonHelper.getSaveClose());
-                dashboard.dom.toolbar.addChild(buttonHelper.getSaveLayout());
-                dashboard.dom.toolbar.addChild(buttonHelper.getSaveNew());
-                dashboard.dom.toolbar.addChild(buttonHelper.getSignedInUsers());
-                dashboard.dom.toolbar.addChild(buttonHelper.getSmartAction());
-                dashboard.dom.toolbar.addChild(buttonHelper.getStepWizard());
-                dashboard.dom.toolbar.addChild(buttonHelper.getStop());
-                dashboard.dom.toolbar.addChild(buttonHelper.getSupport());
-                dashboard.dom.toolbar.addChild(buttonHelper.getSwapPathNodes());
-                dashboard.dom.toolbar.addChild(buttonHelper.getTableHorizontal());
-                dashboard.dom.toolbar.addChild(buttonHelper.getTestGraph());
-                dashboard.dom.toolbar.addChild(buttonHelper.getTextWrap());
-                dashboard.dom.toolbar.addChild(buttonHelper.getTooltip());
-                dashboard.dom.toolbar.addChild(buttonHelper.getTopology());
-                dashboard.dom.toolbar.addChild(buttonHelper.getTree());
-                dashboard.dom.toolbar.addChild(buttonHelper.getTroubleshooting());
-                dashboard.dom.toolbar.addChild(buttonHelper.getUndo());
-                dashboard.dom.toolbar.addChild(buttonHelper.getView());
-                dashboard.dom.toolbar.addChild(buttonHelper.getViewAction());
-                dashboard.dom.toolbar.addChild(buttonHelper.getWarning());
-                dashboard.dom.toolbar.addChild(buttonHelper.getWindowClose());
-                dashboard.dom.toolbar.addChild(buttonHelper.getWindowMaximize());
-                dashboard.dom.toolbar.addChild(buttonHelper.getWindowMinimize());
-                dashboard.dom.toolbar.addChild(buttonHelper.getWindowRestore());
-                dashboard.dom.toolbar.addChild(buttonHelper.getWizard3());
-                dashboard.dom.toolbar.addChild(buttonHelper.getZoomIn());
-                dashboard.dom.toolbar.addChild(buttonHelper.getZoomOut());
-                dashboard.dom.toolbar.addChild(buttonHelper.getCollapse());
-                dashboard.dom.toolbar.addChild(buttonHelper.getExpand());
-                dashboard.dom.toolbar.addChild(buttonHelper.getRefreshSmaller());
-                dashboard.dom.toolbar.addChild(buttonHelper.getTreeCollapse());
-                dashboard.dom.toolbar.addChild(buttonHelper.getTreeExpand());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getPin());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getPrevious());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getQuickFind());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getQuickView());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getRefreshStatus());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getRestoreDefault());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getRestoreFilter());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getRewindToBeginning());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getSave());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getSaveClose());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getSaveLayout());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getSaveNew());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getSignedInUsers());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getSmartAction());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getStepWizard());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getStop());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getSupport());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getSwapPathNodes());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getTableHorizontal());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getTestGraph());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getTextWrap());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getTooltip());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getTopology());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getTree());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getTroubleshooting());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getUndo());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getView());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getViewAction());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getWarning());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getWindowClose());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getWindowMaximize());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getWindowMinimize());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getWindowRestore());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getWizard3());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getZoomIn());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getZoomOut());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getCollapse());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getExpand());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getRefreshSmaller());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getTreeCollapse());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getTreeExpand());
 
-
-                dashboard.dom.bottomMenuPane.resize();
                 dashboard.dom.TopBc.resize();
             },
 

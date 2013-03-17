@@ -88,37 +88,55 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
                 mastTitle.appendChild(image);
             },
 
-            createInnerMenuAndPanes: function(paneDom, analysisPaneRequired) {
-                dashboard.dom.InnerBc = this.getBorderContainer();
-                var cpList = [];
-                cpList.push(dashboard.dom.CpMenu = this.getContentPane("top",false,"height: 40px"));
-                cpList.push(dashboard.dom.CpCenterInner = this.getContentPane("center",false, ""));
-                this.addCPstartBC(dashboard.dom.InnerBc, cpList, paneDom);
+            /*
+            * This creates
+            *   a) Menu area which holds heading and toolbar buttons
+            *   b) Central area which holds the real content
+            *   c) if 'analysisPaneRequired' flag is set to true then the vertically split panes for AnalysisPane is
+            *       created - otherwise, not.
+             */
+            createInnerMenuAndPanes: function(paneDom, analysisPaneRequired, viewName) {
+                var innerBc = this.getBorderContainer();
 
-                this.createMenuRegions();
+                var cpList = [];
+                var cpMenu = this.getContentPane("top",false,"height: 40px");
+                cpList.push(cpMenu);
+
+                dashboard.dom.CpCenterInner[viewName] = this.getContentPane("center",false, "");
+                cpList.push(dashboard.dom.CpCenterInner[viewName]);
+                this.addCPstartBC(innerBc, cpList, paneDom);
+
+                this.createMenuRegions(viewName, cpMenu);
 
                 if(analysisPaneRequired) {
-                    this.createSplitCenterPanes();
+                    this.createSplitCenterPanes(dashboard.dom.CpCenterInner[viewName]);
                 }
             },
 
-            createMenuRegions: function() {
-                dashboard.dom.MenuBc = this.getBorderContainer();
+            createMenuRegions: function(viewName, cpMenu) {
+                var menuBc = this.getBorderContainer();
                 var cpList = [];
-                cpList.push(dashboard.dom.topMenuPane = this.getContentPane("top",false,"height: 15px;"));
-                cpList.push(dashboard.dom.bottomMenuPane = this.getContentPane("center",false,"overflow: hidden;"));
-                this.addCPstartBC(dashboard.dom.MenuBc, cpList, dashboard.dom.CpMenu);
+                cpList.push(dashboard.dom.TopMenuPane[viewName] = this.getContentPane("top",false,"height: 15px;"));
 
-                dashboard.dom.toolbar = this.getToolbar(dashboard.dom.bottomMenuPane);
+                var bottomMenuPane = this.getContentPane("center",false,"overflow: hidden;");
+                cpList.push(bottomMenuPane);
+                this.addCPstartBC(menuBc, cpList, cpMenu);
+
+                dashboard.dom.Toolbar[viewName] = this.getToolbar(bottomMenuPane);
                 dashboard.dom.TopBc.resize();
             },
 
-            createSplitCenterPanes: function() {
+            /*
+            *   The split screens - top and bottom - for content and analysis'panes - this holds only for the 'main'
+            *   dashboard. This is never permitted within the tab of any analyis pane. So - CpCenterInnerTop &
+            *   CpCenterInnerBottom do NOT have to be arrays
+             */
+            createSplitCenterPanes: function(cpCenterInner) {
                 dashboard.dom.InnerBcSplit = this.getBorderContainer();
                 var cpList = [];
                 cpList.push(dashboard.dom.CpCenterInnerTop = this.getContentPane("center",true,"height: 100%"));
                 cpList.push(dashboard.dom.CpCenterInnerBottom = this.getContentPane("bottom",true,"display: none;"));
-                this.addCPstartBC(dashboard.dom.InnerBcSplit, cpList, dashboard.dom.CpCenterInner);
+                this.addCPstartBC(dashboard.dom.InnerBcSplit, cpList, cpCenterInner);
 
                 this.createAnalysisTabContainer();
             },

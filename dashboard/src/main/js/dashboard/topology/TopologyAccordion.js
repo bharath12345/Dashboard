@@ -14,7 +14,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/topology/nls/top
 
                 topologyView = this.getView(name, newWindow);
                 topologyView.loadMenu(id, name, type);
-                topologyView.createSplitCenterPanes();
+                topologyView.createSplitCenterPanes(dashboard.dom.CpCenterInner[dashboard.pageTypes.dashboard]);
 
                 switch(name) {
                     case this.SAMPLE:

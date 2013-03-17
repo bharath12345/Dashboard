@@ -49,7 +49,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
             createTabs:function () {
 
                 var tc = new TabContainer({style:"height: 100%; width: 100%;"});
-                dashboard.dom.CpCenterInner.addChild(tc);
+                dashboard.dom.CpCenterInner[dashboard.pageTypes.dashboard].addChild(tc);
 
                 RenderAttributes.LOOKNFEELPANE = new ContentPane({title:"Look and Feel", style:"height: 100%; width: 100%;"});
                 tc.addChild(RenderAttributes.LOOKNFEELPANE);
@@ -138,7 +138,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
             },
 
             createToolbarButtons:function () {
-                dashboard.dom.toolbar.destroyDescendants(false);
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard][dashboard.pageTypes.dashboard].destroyDescendants(false);
 
                 var buttonHelper = new ButtonHelper();
 
@@ -146,44 +146,42 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
                 on(button, "click", function () {
                     RenderAttributes.PAGEOBJ.saveValues();
                 });
-                dashboard.dom.toolbar.addChild(button);
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard][dashboard.pageTypes.dashboard].addChild(button);
 
                 button = buttonHelper.getViewNewWindow();
                 on(button, "click", function () {
                     ConfigView.launchNewWindowConfigPane(RenderAttributes.ID, RenderAttributes.NAME, RenderAttributes.TYPE);
                 });
-                dashboard.dom.toolbar.addChild(button);
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(button);
 
-                dashboard.dom.toolbar.addChild(buttonHelper.getGraphs());
-                dashboard.dom.toolbar.addChild(buttonHelper.getIncidentBrowsing());
-                dashboard.dom.toolbar.addChild(buttonHelper.getIncidentManagement());
-                dashboard.dom.toolbar.addChild(buttonHelper.getIndicateKeyIncidents());
-                dashboard.dom.toolbar.addChild(buttonHelper.getInformational());
-                dashboard.dom.toolbar.addChild(buttonHelper.getIntegrationModule());
-                dashboard.dom.toolbar.addChild(buttonHelper.getInventory());
-                dashboard.dom.toolbar.addChild(buttonHelper.getLast());
-                dashboard.dom.toolbar.addChild(buttonHelper.getLogout());
-                dashboard.dom.toolbar.addChild(buttonHelper.getManage());
-                dashboard.dom.toolbar.addChild(buttonHelper.getManagementMode());
-                dashboard.dom.toolbar.addChild(buttonHelper.getMap());
-                dashboard.dom.toolbar.addChild(buttonHelper.getMapEmphasis());
-                dashboard.dom.toolbar.addChild(buttonHelper.getMibBrowser());
-                dashboard.dom.toolbar.addChild(buttonHelper.getMonitoring());
-                dashboard.dom.toolbar.addChild(buttonHelper.getNew());
-                dashboard.dom.toolbar.addChild(buttonHelper.getNewMapping());
-                dashboard.dom.toolbar.addChild(buttonHelper.getNewdocument());
-                dashboard.dom.toolbar.addChild(buttonHelper.getNext());
-                dashboard.dom.toolbar.addChild(buttonHelper.getNot());
-                dashboard.dom.toolbar.addChild(buttonHelper.getOneToOne());
-                dashboard.dom.toolbar.addChild(buttonHelper.getOpen());
-                dashboard.dom.toolbar.addChild(buttonHelper.getOpenInAnalysisPane());
-                dashboard.dom.toolbar.addChild(buttonHelper.getOpenIncidentConfig());
-                dashboard.dom.toolbar.addChild(buttonHelper.getOpenNodeGroupMap());
-                dashboard.dom.toolbar.addChild(buttonHelper.getOpenNodeGroupMap());
-                dashboard.dom.toolbar.addChild(buttonHelper.getOwnIncident());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getGraphs());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getIncidentBrowsing());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getIncidentManagement());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getIndicateKeyIncidents());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getInformational());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getIntegrationModule());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getInventory());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getLast());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getLogout());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getManage());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getManagementMode());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getMap());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getMapEmphasis());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getMibBrowser());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getMonitoring());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getNew());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getNewMapping());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getNewdocument());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getNext());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getNot());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getOneToOne());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getOpen());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getOpenInAnalysisPane());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getOpenIncidentConfig());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getOpenNodeGroupMap());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getOpenNodeGroupMap());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getOwnIncident());
 
-
-                dashboard.dom.bottomMenuPane.resize();
                 dashboard.dom.TopBc.resize();
 
             }

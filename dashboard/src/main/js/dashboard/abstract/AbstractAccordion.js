@@ -93,10 +93,10 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/on", "dojo/_base/lang",
                 Scheduler.cancelAllTimers();
 
                 // destroy everything in the inner most central pane
-                dashboard.dom.CpCenterInner.destroyDescendants(false);
+                dashboard.dom.CpCenterInner[dashboard.pageTypes.dashboard].destroyDescendants(false);
 
                 //destroy the view specific toolbar
-                dashboard.dom.toolbar.destroyDescendants(false);
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].destroyDescendants(false);
 
                 // now, show the page - NOTE: this is a upwards call to inherting class
                 this.showView(id, name, type, newWindow);

@@ -17,7 +17,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc",
 
             // the method is called only in a NEW Window. Never in the 'central' dashboard
             createDom: function() {
-                this.createInnerMenuAndPanes(dashboard.dom.CpTopCenter.domNode, true);
+                this.createInnerMenuAndPanes(dashboard.dom.CpTopCenter.domNode, true, dashboard.pageTypes.NOC);
             },
 
             refreshView: function() {
@@ -41,48 +41,47 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc",
                 NocView.NAME = name;
                 NocView.TYPE = type;
 
-                dashboard.dom.toolbar.destroyDescendants(false);
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].destroyDescendants(false);
 
                 var buttonHelper = new ButtonHelper();
                 var button = buttonHelper.getRefresh();
                 on(button, "click", lang.hitch(this, this.refreshView));
-                dashboard.dom.toolbar.addChild(button);
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(button);
 
                 button = buttonHelper.getViewNewWindow();
                 on(button, "click", lang.hitch(this, this.launchNewWindow));
-                dashboard.dom.toolbar.addChild(button);
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(button);
 
                 button = buttonHelper.getStatusRefresh();
                 on(button, "click", function() {
                     Scheduler.startStopRefresh(true);
                 });
-                dashboard.dom.toolbar.addChild(button);
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(button);
 
                 button = buttonHelper.getRefreshStop();
                 on(button, "click", function() {
                     Scheduler.startStopRefresh(false);
                 });
-                dashboard.dom.toolbar.addChild(button);
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(button);
 
-                dashboard.dom.toolbar.addChild(buttonHelper.getActive());
-                dashboard.dom.toolbar.addChild(buttonHelper.getArrowDown());
-                dashboard.dom.toolbar.addChild(buttonHelper.getArrowLeft());
-                dashboard.dom.toolbar.addChild(buttonHelper.getArrowRight());
-                dashboard.dom.toolbar.addChild(buttonHelper.getArrowUp());
-                dashboard.dom.toolbar.addChild(buttonHelper.getBackToPreviousNodeGroupMap());
-                dashboard.dom.toolbar.addChild(buttonHelper.getClose());
-                dashboard.dom.toolbar.addChild(buttonHelper.getConfiguration());
-                dashboard.dom.toolbar.addChild(buttonHelper.getDelete());
-                dashboard.dom.toolbar.addChild(buttonHelper.getEdit());
-                dashboard.dom.toolbar.addChild(buttonHelper.getExtension());
-                dashboard.dom.toolbar.addChild(buttonHelper.getFastForwardToEnd());
-                dashboard.dom.toolbar.addChild(buttonHelper.getFilterUndo());
-                dashboard.dom.toolbar.addChild(buttonHelper.getFind());
-                dashboard.dom.toolbar.addChild(buttonHelper.getFirst());
-                dashboard.dom.toolbar.addChild(buttonHelper.getFitToContent());
-                dashboard.dom.toolbar.addChild(buttonHelper.getGo());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getActive());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getArrowDown());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getArrowLeft());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getArrowRight());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getArrowUp());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getBackToPreviousNodeGroupMap());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getClose());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getConfiguration());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getDelete());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getEdit());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getExtension());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getFastForwardToEnd());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getFilterUndo());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getFind());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getFirst());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getFitToContent());
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(buttonHelper.getGo());
 
-                dashboard.dom.bottomMenuPane.resize();
                 dashboard.dom.TopBc.resize();
             },
 

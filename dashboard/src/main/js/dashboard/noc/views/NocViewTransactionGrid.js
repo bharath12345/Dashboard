@@ -415,7 +415,7 @@ define(["dojo/_base/declare", "dojo/i18n","dojo/i18n!dashboard/noc/nls/noc", "da
         var NocViewTransactionGrid = declare(dashboard.classnames.NocViewTransactionGrid, null, {
 
             loadPage:function (pageName) {
-                dashboard.dom.topMenuPane.domNode.innerHTML = "<div class='text-center alert alert-info heading'>Transactions Grid</div>";
+                dashboard.dom.TopMenuPane[dashboard.pageTypes.dashboard].domNode.innerHTML = Helper.getHeading("Transactions Grid");
 
                 var xpos=0, ypos=0;
                 var viewMeta = {

@@ -15,7 +15,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
 
                 var nocView = this.getView(name);
                 nocView.loadMenu(id, name, type);
-                nocView.createSplitCenterPanes();
+                nocView.createSplitCenterPanes(dashboard.dom.CpCenterInner[dashboard.pageTypes.dashboard]);
 
                 // ToDo: Change this switch away from Name to some ID
                 switch(name) {

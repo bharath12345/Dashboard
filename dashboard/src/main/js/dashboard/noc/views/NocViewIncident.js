@@ -300,7 +300,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc",
 
             loadPage:function (pageName) {
 
-                dashboard.dom.topMenuPane.domNode.innerHTML = "<div class='text-center alert alert-info heading'>Applications Alerts Dashboard</div>";
+                dashboard.dom.TopMenuPane[dashboard.pageTypes.dashboard].domNode.innerHTML = Helper.getHeading("Applications Alerts Dashboard");
 
                 dashboard.dom.CpCenterInnerTop.attr('content', dojo.create('div', {'id':pageName, style:'width: 100%; height: 100%;'}));
 
