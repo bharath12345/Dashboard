@@ -8,18 +8,11 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
 
         var ApplicationAnalysisPane = declare(dashboard.classnames.ApplicationAnalysisPane, AnalysisPane, {
 
-            tabList: [],
-
             launch: function(name, id) {
 
-                dojo.style(dashboard.dom.CpCenterInnerBottom.domNode, "display", "block");
-                dojo.style(dashboard.dom.CpCenterInnerBottom.domNode, "height", (dashboard.dom.CpCenterInner.h/2)+"px");
-                dashboard.dom.InnerBcSplit.resize();
-
-                dashboard.dom.AnalysisPaneTC.destroyDescendants(false);
-                dashboard.dom.AnalysisPaneTC.addChild(new TabA());
-                dashboard.dom.AnalysisPaneTC.addChild(new TabB());
-                dashboard.dom.AnalysisPaneTC.addChild(new TabC());
+                this.tabList.push(new TabA());
+                this.tabList.push(new TabB());
+                this.tabList.push(new TabC());
 
             }
 

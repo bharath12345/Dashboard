@@ -1,7 +1,8 @@
-define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/layout/BorderContainer", "dijit/Toolbar", "dijit/layout/TabContainer",
+define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/layout/BorderContainer", "dijit/Toolbar",
+    "dijit/layout/TabContainer", "dojo/on", "dojo/_base/lang",
     "dashboard/helper/ButtonHelper"],
 
-    function (declare, i18n, ContentPane, BorderContainer, Toolbar, TabContainer, ButtonHelper) {
+    function (declare, i18n, ContentPane, BorderContainer, Toolbar, TabContainer, on, lang, ButtonHelper) {
 
         dashboard.classnames.AbstractView = "dashboard.abstract.AbstractView";
 
@@ -142,14 +143,26 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
 
                 var buttonHelper = new ButtonHelper();
                 var button = buttonHelper.getWindowMinimize();
-                dashboard.dom.AnalysisPaneToolbar.addChild(button);
-                button = buttonHelper.getWindowRestore();
-                dashboard.dom.AnalysisPaneToolbar.addChild(button);
-                button = buttonHelper.getWindowMaximize();
-                dashboard.dom.AnalysisPaneToolbar.addChild(button);
-                button = buttonHelper.getWindowClose();
+                on(button, "click", lang.hitch(this, this.minAnalysisPane));
                 dashboard.dom.AnalysisPaneToolbar.addChild(button);
 
+                button = buttonHelper.getWindowRestore();
+                on(button, "click", lang.hitch(this, this.minAnalysisPane));
+                dashboard.dom.AnalysisPaneToolbar.addChild(button);
+
+                button = buttonHelper.getWindowMaximize();
+                on(button, "click", lang.hitch(this, this.minAnalysisPane));
+                dashboard.dom.AnalysisPaneToolbar.addChild(button);
+
+                button = buttonHelper.getWindowClose();
+                on(button, "click", lang.hitch(this, this.minAnalysisPane));
+                dashboard.dom.AnalysisPaneToolbar.addChild(button);
+
+            },
+
+            minAnalysisPane: function() {
+                dojo.style(dashboard.dom.CpCenterInnerBottom.domNode, "display", "none");
+                dashboard.dom.InnerBcSplit.resize();
             }
 
         });

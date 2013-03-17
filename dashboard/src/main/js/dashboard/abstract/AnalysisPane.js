@@ -6,7 +6,23 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
 
         var AnalysisPane = declare(dashboard.classnames.AnalysisPane, null, {
 
-            launch: function(appName, appId) {
+            "-chains-":{
+                launch:"before" //method is called before calling its superclass method
+            },
+
+            tabList: [],
+
+            launch: function() {
+
+                dojo.style(dashboard.dom.CpCenterInnerBottom.domNode, "display", "block");
+                dojo.style(dashboard.dom.CpCenterInnerBottom.domNode, "height", (dashboard.dom.CpCenterInner.h/2)+"px");
+                dashboard.dom.InnerBcSplit.resize();
+
+                dashboard.dom.AnalysisPaneTC.destroyDescendants(false);
+
+                for(var i=0; i<this.tabList.length; i++) {
+                    dashboard.dom.AnalysisPaneTC.addChild(this.tabList[i]);
+                }
 
             }
         });
