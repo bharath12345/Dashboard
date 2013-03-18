@@ -28,7 +28,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                 dashboard.dom.AnalysisPaneTC.startup();
 
                 for(var i=0; i<this.tabList.length; i++) {
-                    this.createInnerMenuAndPanes(this.tabList[i].domNode, true, this.tabList[i].title);
+                    this.createInnerMenuAndPanes(this.tabList[i].domNode, false, this.tabList[i].title);
                     this.tabList[i].createHeading();
                     this.tabList[i].createMenuButtons();
                 }

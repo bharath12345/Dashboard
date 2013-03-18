@@ -89,11 +89,11 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
             },
 
             /*
-            * This creates
-            *   a) Menu area which holds heading and toolbar buttons
-            *   b) Central area which holds the real content
-            *   c) if 'analysisPaneRequired' flag is set to true then the vertically split panes for AnalysisPane is
-            *       created - otherwise, not.
+             * This creates
+             *   a) Menu area which holds heading and toolbar buttons
+             *   b) Central area which holds the real content
+             *   c) if 'analysisPaneRequired' flag is set to true then the vertically split panes for AnalysisPane is
+             *       created - otherwise, not.
              */
             createInnerMenuAndPanes: function(paneDom, analysisPaneRequired, viewName) {
                 var innerBc = this.getBorderContainer();
@@ -127,9 +127,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
             },
 
             /*
-            *   The split screens - top and bottom - for content and analysis'panes - this holds only for the 'main'
-            *   dashboard. This is never permitted within the tab of any analyis pane. So - CpCenterInnerTop &
-            *   CpCenterInnerBottom do NOT have to be arrays
+             *   The split screens - top and bottom - for content and analysis'panes - this holds only for the 'main'
+             *   dashboard. This is never permitted within the tab of any analyis pane. So - CpCenterInnerTop &
+             *   CpCenterInnerBottom do NOT have to be arrays
              */
             createSplitCenterPanes: function(cpCenterInner) {
                 dashboard.dom.InnerBcSplit = this.getBorderContainer();
@@ -144,7 +144,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
             createAnalysisTabContainer: function() {
                 dashboard.dom.AnalysisPaneBc = this.getBorderContainer();
                 var cpList = [];
-                cpList.push(dashboard.dom.CpAnalysisPaneTop = this.getContentPane("top",false,"height: 20px; overflow: hidden;"));
                 cpList.push(dashboard.dom.CpAnalysisPaneCenter = this.getContentPane("center",false,"height: 100%"));
                 this.addCPstartBC(dashboard.dom.AnalysisPaneBc, cpList, dashboard.dom.CpCenterInnerBottom);
 
@@ -156,31 +155,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
 
                 //
 
-                dashboard.dom.AnalysisPaneToolbar = this.getToolbar(dashboard.dom.CpAnalysisPaneTop);
                 dashboard.dom.AnalysisPaneBc.resize();
-
-                var buttonHelper = new ButtonHelper();
-                var button = buttonHelper.getWindowMinimize();
-                on(button, "click", lang.hitch(this, this.minAnalysisPane));
-                dashboard.dom.AnalysisPaneToolbar.addChild(button);
-
-                button = buttonHelper.getWindowRestore();
-                on(button, "click", lang.hitch(this, this.minAnalysisPane));
-                dashboard.dom.AnalysisPaneToolbar.addChild(button);
-
-                button = buttonHelper.getWindowMaximize();
-                on(button, "click", lang.hitch(this, this.minAnalysisPane));
-                dashboard.dom.AnalysisPaneToolbar.addChild(button);
-
-                button = buttonHelper.getWindowClose();
-                on(button, "click", lang.hitch(this, this.minAnalysisPane));
-                dashboard.dom.AnalysisPaneToolbar.addChild(button);
-
-            },
-
-            minAnalysisPane: function() {
-                dojo.style(dashboard.dom.CpCenterInnerBottom.domNode, "display", "none");
-                dashboard.dom.InnerBcSplit.resize();
             }
 
         });

@@ -1,4 +1,4 @@
-/* ----------------- Masthead -----------------*/
+/* ----------------- Dojo Overrides -----------------*/
 .dijitToolbar {
     border: 1px solid #B5BCC7 !important;
 }
@@ -154,5 +154,9 @@ div.heading{
 .hl { border:3px solid red; }
 #debug { position:absolute; background-color:black; color:red; z-index:5000 }
 
+/* ----------------- For the minimize, close buttons in Analysis Pane -----------------*/
+.floatRight {
+    float:right;
+}
 
 
