@@ -12,14 +12,15 @@ import org.apache.struts2.convention.annotation.Result;
 
 import com.appnomic.appsone.dashboard.action.ActionConstants;
 import com.appnomic.appsone.dashboard.action.noc.AbstractNocAction;
+import com.appnomic.appsone.dashboard.config.AccordionTabConfigManager;
 import com.appnomic.appsone.dashboard.config.AlertGridConfigManager;
 import com.appnomic.appsone.dashboard.config.ConfigType;
 import com.appnomic.appsone.dashboard.config.LevelDBManager;
 import com.appnomic.appsone.dashboard.config.attribute.*;
 import com.appnomic.appsone.dashboard.config.entity.AlertGridEntity;
+import com.appnomic.appsone.dashboard.config.entity.PageListEntity;
+import com.appnomic.appsone.dashboard.config.entity.TabListEntity;
 import com.appnomic.appsone.dashboard.viewobject.config.AlertGridConfigVO;
-import com.appnomic.appsone.dashboard.viewobject.config.PageListVO;
-import com.appnomic.appsone.dashboard.viewobject.config.TabListVO;
 import com.appnomic.appsone.dashboard.viewobject.config.base.BooleanAttributeVO;
 import com.appnomic.appsone.dashboard.viewobject.config.base.IntegerAttributeVO;
 import com.appnomic.appsone.dashboard.viewobject.config.base.StringAttributeVO;
@@ -28,7 +29,7 @@ import com.appnomic.appsone.dashboard.viewobject.config.base.StringAttributeVO;
 @Namespace("/utility")
 public class UtilityAction extends AbstractNocAction {
 
-	private TabListVO [] tabListVO;
+	private TabListEntity.TabEntity [] tabListVO;
 	private Map<String, String[]> param;
 	
 	public Map<String, String[]> getParam() {
@@ -39,11 +40,11 @@ public class UtilityAction extends AbstractNocAction {
 		this.param = param;
 	}
 
-	public TabListVO[] getTabListVO() {
+	public TabListEntity.TabEntity[] getTabListVO() {
 		return tabListVO;
 	}
 
-	public void setTabListVO(TabListVO[] tabListVO) {
+	public void setTabListVO(TabListEntity.TabEntity[] tabListVO) {
 		this.tabListVO = tabListVO;
 	}
 
@@ -61,44 +62,12 @@ public class UtilityAction extends AbstractNocAction {
 	public String allconfig() {
 		param = getParameters();
 		
-		List<TabListVO> tabList = new ArrayList<TabListVO>();
+		AccordionTabConfigManager atcm = AccordionTabConfigManager.getInstance();
 		
-		TabListVO tabListObj = new TabListVO();
-		tabListObj.setName("topology");
-		tabListObj.setLabel("Topology Views");
-		tabListObj.setId(0);
-		tabListObj.setAction("topology/pages.action");
-		tabList.add(tabListObj);
+		TabListEntity tle = atcm.getConfig();
 		
-		tabListObj = new TabListVO();
-		tabListObj.setName("noc");
-		tabListObj.setLabel("Command Center Screens");
-		tabListObj.setId(1);
-		tabListObj.setAction("noc/pages.action");
-		tabList.add(tabListObj);
-		
-		tabListObj = new TabListVO();
-		tabListObj.setName("alerts");
-		tabListObj.setLabel("Alerts");
-		tabListObj.setId(2);
-		tabListObj.setAction("alerts/pages.action");
-		tabList.add(tabListObj);
-		
-		tabListObj = new TabListVO();
-		tabListObj.setName("custom");
-		tabListObj.setLabel("Customized Layouts");
-		tabListObj.setId(3);
-		tabListObj.setAction("custom/pages.action");
-		tabList.add(tabListObj);
-		
-		tabListObj = new TabListVO();
-		tabListObj.setName("config");
-		tabListObj.setLabel("Configuration");
-		tabListObj.setId(4);
-		tabListObj.setAction("config/pages.action");
-		tabList.add(tabListObj);
-		
-		tabListVO = tabList.toArray(new TabListVO[tabList.size()]);
+		tabListVO = tle.getTabList();
+		//tabListVO = tabList.toArray(new TabListEntity[tabList.size()]);
 		
 		return SUCCESS;
 	}

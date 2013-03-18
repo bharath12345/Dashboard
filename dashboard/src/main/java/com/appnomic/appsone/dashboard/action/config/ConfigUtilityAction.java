@@ -12,14 +12,16 @@ import org.apache.struts2.convention.annotation.Result;
 
 import com.appnomic.appsone.dashboard.action.ActionConstants;
 import com.appnomic.appsone.dashboard.action.noc.AbstractNocAction;
+import com.appnomic.appsone.dashboard.config.AccordionPageConfigManager;
 import com.appnomic.appsone.dashboard.config.AlertGridConfigManager;
 import com.appnomic.appsone.dashboard.config.ConfigType;
 import com.appnomic.appsone.dashboard.config.LevelDBManager;
 import com.appnomic.appsone.dashboard.config.attribute.*;
 import com.appnomic.appsone.dashboard.config.entity.AlertGridEntity;
+import com.appnomic.appsone.dashboard.config.entity.ConfigPageListEntity;
+import com.appnomic.appsone.dashboard.config.entity.PageListEntity;
+import com.appnomic.appsone.dashboard.config.entity.TabListEntity;
 import com.appnomic.appsone.dashboard.viewobject.config.AlertGridConfigVO;
-import com.appnomic.appsone.dashboard.viewobject.config.PageListVO;
-import com.appnomic.appsone.dashboard.viewobject.config.TabListVO;
 import com.appnomic.appsone.dashboard.viewobject.config.base.BooleanAttributeVO;
 import com.appnomic.appsone.dashboard.viewobject.config.base.IntegerAttributeVO;
 import com.appnomic.appsone.dashboard.viewobject.config.base.StringAttributeVO;
@@ -28,7 +30,7 @@ import com.appnomic.appsone.dashboard.viewobject.config.base.StringAttributeVO;
 @Namespace("/config")
 public class ConfigUtilityAction extends AbstractNocAction {
 
-	private PageListVO [] pageListVO;
+	private PageListEntity.PageEntity [] pageListVO;
 	private Map<String, String[]> param;
 	private Map<String, String> levelDbMap;
 	
@@ -40,11 +42,11 @@ public class ConfigUtilityAction extends AbstractNocAction {
 		this.levelDbMap = levelDbMap;
 	}
 
-	public PageListVO[] getPageListVO() {
+	public PageListEntity.PageEntity[] getPageListVO() {
 		return pageListVO;
 	}
 
-	public void setPageListVO(PageListVO[] pageListVO) {
+	public void setPageListVO(PageListEntity.PageEntity[] pageListVO) {
 		this.pageListVO = pageListVO;
 	}
 
@@ -67,79 +69,12 @@ public class ConfigUtilityAction extends AbstractNocAction {
 	            })})
 	public String pagesAction() {
 		param = getParameters();
-		pageListVO = getList();
+		AccordionPageConfigManager accordionPageConfigManager = AccordionPageConfigManager.getInstance();
+		ConfigPageListEntity cple = accordionPageConfigManager.getConfigPageListEntity();
+		pageListVO = cple.getPageEntity();
 		return SUCCESS;
 	}
 	
-	private PageListVO[] getList() {
-		List<PageListVO> pageList = new ArrayList<PageListVO>();
-		
-		//// Dashboard list
-		List<PageListVO> dashboardList = new ArrayList<PageListVO>();
-		PageListVO dashboardPageListVO = new PageListVO();
-		dashboardPageListVO = new PageListVO();
-		dashboardPageListVO.setName("Dashboard Configuration");
-		dashboardPageListVO.setId(UUID.randomUUID().toString());
-		dashboardPageListVO.setType(ActionConstants.ACCTYPE.DIRECTORY.name());
-		pageList.add(dashboardPageListVO);
-		
-		PageListVO pageListVO = new PageListVO();
-		pageListVO.setName("Application Alerts Dashboard");
-		pageListVO.setId(UUID.randomUUID().toString());
-		pageListVO.setType(ActionConstants.ACCTYPE.CONFIGURATION.name()); // this is for the ICON to show
-		dashboardList.add(pageListVO);
-		
-		pageListVO = new PageListVO();
-		pageListVO.setName("Transactions Grid");
-		pageListVO.setId(UUID.randomUUID().toString());
-		pageListVO.setType(ActionConstants.ACCTYPE.CONFIGURATION.name());
-		dashboardList.add(pageListVO);
-		
-		PageListVO [] pageArray = dashboardList.toArray(new PageListVO[dashboardList.size()]);
-		dashboardPageListVO.setPageList(pageArray);
-		
-		//// Topology List
-		
-		List<PageListVO> topoList = new ArrayList<PageListVO>();
-		PageListVO topoListVO = new PageListVO();
-		topoListVO = new PageListVO();
-		topoListVO.setName("Topology Configuration");
-		topoListVO.setId(UUID.randomUUID().toString());
-		topoListVO.setType(ActionConstants.ACCTYPE.DIRECTORY.name());
-		pageList.add(topoListVO);
-		
-		pageListVO = new PageListVO();
-		pageListVO.setName("Application Layers");
-		pageListVO.setId(UUID.randomUUID().toString());
-		pageListVO.setType(ActionConstants.ACCTYPE.CONFIGURATION.name());
-		topoList.add(pageListVO);
-		
-		pageListVO = new PageListVO();
-		pageListVO.setName("Application Groups and Topology");
-		pageListVO.setId(UUID.randomUUID().toString());
-		pageListVO.setType(ActionConstants.ACCTYPE.CONFIGURATION.name());
-		topoList.add(pageListVO);
-		
-		pageListVO = new PageListVO();
-		pageListVO.setName("Application Topology");
-		pageListVO.setId(UUID.randomUUID().toString());
-		pageListVO.setType(ActionConstants.ACCTYPE.CONFIGURATION.name());
-		topoList.add(pageListVO);
-		
-		pageListVO = new PageListVO();
-		pageListVO.setName("Component Topology");
-		pageListVO.setId(UUID.randomUUID().toString());
-		pageListVO.setType(ActionConstants.ACCTYPE.CONFIGURATION.name());
-		topoList.add(pageListVO);
-		
-		pageArray = topoList.toArray(new PageListVO[topoList.size()]);
-		topoListVO.setPageList(pageArray);
-		
-		/////////
-		
-		pageArray = pageList.toArray(new PageListVO[pageList.size()]);
-		return pageArray;
-	}
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////
 

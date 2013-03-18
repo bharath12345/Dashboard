@@ -12,14 +12,16 @@ import org.apache.struts2.convention.annotation.Result;
 
 import com.appnomic.appsone.dashboard.action.ActionConstants;
 import com.appnomic.appsone.dashboard.action.noc.AbstractNocAction;
+import com.appnomic.appsone.dashboard.config.AccordionPageConfigManager;
 import com.appnomic.appsone.dashboard.config.AlertGridConfigManager;
 import com.appnomic.appsone.dashboard.config.ConfigType;
 import com.appnomic.appsone.dashboard.config.LevelDBManager;
 import com.appnomic.appsone.dashboard.config.attribute.*;
 import com.appnomic.appsone.dashboard.config.entity.AlertGridEntity;
+import com.appnomic.appsone.dashboard.config.entity.CustomPageListEntity;
+import com.appnomic.appsone.dashboard.config.entity.PageListEntity;
+import com.appnomic.appsone.dashboard.config.entity.TabListEntity;
 import com.appnomic.appsone.dashboard.viewobject.config.AlertGridConfigVO;
-import com.appnomic.appsone.dashboard.viewobject.config.PageListVO;
-import com.appnomic.appsone.dashboard.viewobject.config.TabListVO;
 import com.appnomic.appsone.dashboard.viewobject.config.base.BooleanAttributeVO;
 import com.appnomic.appsone.dashboard.viewobject.config.base.IntegerAttributeVO;
 import com.appnomic.appsone.dashboard.viewobject.config.base.StringAttributeVO;
@@ -28,14 +30,14 @@ import com.appnomic.appsone.dashboard.viewobject.config.base.StringAttributeVO;
 @Namespace("/custom")
 public class CustomUtilityAction extends AbstractNocAction {
 
-	private PageListVO [] pageListVO;
+	private PageListEntity.PageEntity [] pageListVO;
 	private Map<String, String[]> param;
 	
-	public PageListVO[] getPageListVO() {
+	public PageListEntity.PageEntity[] getPageListVO() {
 		return pageListVO;
 	}
 
-	public void setPageListVO(PageListVO[] pageListVO) {
+	public void setPageListVO(PageListEntity.PageEntity[] pageListVO) {
 		this.pageListVO = pageListVO;
 	}
 
@@ -58,26 +60,10 @@ public class CustomUtilityAction extends AbstractNocAction {
 	            })})
 	public String pagesAction() {
 		param = getParameters();
-		pageListVO = getDummyList();
+		AccordionPageConfigManager accordionPageConfigManager = AccordionPageConfigManager.getInstance();
+		CustomPageListEntity cple = accordionPageConfigManager.getCustomPageListEntity();
+		pageListVO = cple.getPageEntity();
 		return SUCCESS;
 	}
 	
-	private PageListVO[] getDummyList() {
-		List<PageListVO> pageList = new ArrayList<PageListVO>();
-		
-		PageListVO pageListVO = new PageListVO();
-		pageListVO.setName("Custom Layouts");
-		pageListVO.setId(UUID.randomUUID().toString());
-		pageListVO.setType(ActionConstants.ACCTYPE.DIRECTORY.name());
-		pageList.add(pageListVO);
-		
-		pageListVO = new PageListVO();
-		pageListVO.setName("Custom Views");
-		pageListVO.setId(UUID.randomUUID().toString());
-		pageListVO.setType(ActionConstants.ACCTYPE.DIRECTORY.name());
-		pageList.add(pageListVO);
-		
-		PageListVO [] pageArray = pageList.toArray(new PageListVO[pageList.size()]);
-		return pageArray;
-	}
 }
