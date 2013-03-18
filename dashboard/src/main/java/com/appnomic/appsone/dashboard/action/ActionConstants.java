@@ -15,22 +15,21 @@ public interface ActionConstants {
 		NOC,
 		ALERTS,
 		CUSTOM,
-		CONFIG,
-		CONFIG_NOC,
-		CONFIG_TOPOLOGY
+		CONFIG
 	}
 	
 	public enum CONFIG {
-		NOC,
-		TOPOLOGY
-	}
-	
-	public enum CONFIG_NOC {
+		// First the Groups
+		CONFIG_NOC,
+		CONFIG_TOPOLOGY,
+		
+		// Now the group members
+		
+		//group 1
 		APPLICATION_ALERTS,
-		TRANSACTION_GRID
-	}
-	
-	public enum CONFIG_TOPOLOGY {
+		TRANSACTION_GRID,
+		
+		//group 2
 		APPLICATION_LAYERS,
 		APPLICATION_GROUPS,
 		APPLICATION_TOPOLOGY,

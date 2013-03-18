@@ -23,7 +23,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/on", "dojo/_base/lang",
 
                 for(var i=0;i<data.length; i++) {
                     if(data[i].pageList != null) {
-                        treeObject = treeObject.concat(this.getTreeLeafForParent(data[i].pageList, data[i].id));
+                        treeObject = treeObject.concat(this.getTreeLeafForParent(data[i].pageList, data[i].enumId));
                     }
                 }
                 return treeObject;
@@ -33,7 +33,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/on", "dojo/_base/lang",
                 var leafList = [];
                 for(var i=0;i<pageList.length; i++) {
                     var leaf = {};
-                    leaf.id = pageList[i].id;
+                    leaf.id = pageList[i].enumId;
+                    lead.uuid = pageList[i].uuid;
                     leaf.name = pageList[i].name;
                     leaf.type = pageList[i].type;
                     leaf.parent = parentId;
@@ -82,10 +83,10 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/on", "dojo/_base/lang",
                 //console.log("Event", evt); // This gives you the event object
                 //console.log('identifier: ' + tree_obj.getLabel(item));
 
-                this.createView(item.id, item.name, item.type, false);
+                this.createView(item.id, item.uuid, item.name, item.type, false);
             },
 
-            createView:function (id, name, type, newWindow) {
+            createView:function (id, uuid, name, type, newWindow) {
                 // show the loading spinner
                 dashboard.dom.STANDBY.show();
 
@@ -99,7 +100,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/on", "dojo/_base/lang",
                 dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].destroyDescendants(false);
 
                 // now, show the page - NOTE: this is a upwards call to inherting class
-                this.showView(id, name, type, newWindow);
+                this.showView(id, uuid, name, type, newWindow);
             }
         });
 

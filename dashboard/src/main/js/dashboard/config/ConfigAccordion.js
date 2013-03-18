@@ -8,15 +8,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/confi
 
         var ConfigAccordion = declare(dashboard.classnames.ConfigAccordion, AbstractAccordion, {
 
-            ALERTSGRID: i18nString.alertsGrid,
-            TRANSACTIONSGRID: i18nString.transactionGrid,
-
-            APPLAYERS: i18nString.appLayers,
-            APPGROUPSTOPO: i18nString.appGroupsTopo,
-            APPTOPO: i18nString.appTopology,
-            COMPTOPO: i18nString.compTopology,
-
-            showView: function(id, name, type, newWindow) {
+            showView: function(enumId, uuid, name, type, newWindow) {
                 var configView = this.getView(name);
 
                 console.log("show page config called with id = " + id + " name = " + name);
@@ -28,10 +20,11 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/confi
                     custom:[]
                 };
 
+                dashboard.dom.TopMenuPane[dashboard.pageTypes.dashboard].domNode.innerHTML = Helper.getHeading(i18nString[name]);
+
                 // ToDo: Change this switch away from Name to some ID
-                switch(name) {
-                    case this.ALERTSGRID:
-                        dashboard.dom.TopMenuPane[dashboard.pageTypes.dashboard].domNode.innerHTML = Helper.getHeading("Alerts Grid Configuration");
+                switch(parseInt(enumId)) {
+                    case dashboard.enumMap.CONFIG.APPLICATION_ALERTS:
                         xhr("config/alertGridDetailsRetrieve.action", {
                             handleAs:"json",
                             method:"POST",
@@ -40,14 +33,25 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/confi
                         }).then(lang.hitch(this, this.alertGridHandle));
                         break;
 
-                    case this.TRANSACTIONSGRID:
-                        dashboard.dom.TopMenuPane[dashboard.pageTypes.dashboard].domNode.innerHTML = Helper.getHeading("Transactions Grid Configuration");
+                    case dashboard.enumMap.CONFIG.TRANSACTION_GRID:
                         xhr("config/transactionGridDetailsRetrieve.action", {
                             handleAs:"json",
                             method:"POST",
                             query:viewMeta,
                             headers:Helper.JSON_HEADER
                         }).then(lang.hitch(this, this.transactionsGridHandle));
+                        break;
+
+                    case dashboard.enumMap.CONFIG.APPLICATION_LAYERS:
+                        break;
+
+                    case dashboard.enumMap.CONFIG.APPLICATION_GROUPS:
+                        break;
+
+                    case dashboard.enumMap.CONFIG.APPLICATION_TOPOLOGY:
+                        break;
+
+                    case dashboard.enumMap.CONFIG.COMPONENT_TOPOLOGY:
                         break;
 
                     default:

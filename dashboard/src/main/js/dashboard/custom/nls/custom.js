@@ -1,7 +1,8 @@
 define({
     root:({
 
-        title:"AppsOne NOC Screen"
+        CUSTOM_LAYOUTS:"Custom Layouts",
+        CUSTOM_VIEWS: "Custom Views"
 
     }),
 

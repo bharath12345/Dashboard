@@ -1,27 +1,26 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/topology/nls/topology", "dashboard/logger/Logger",
-    "dashboard/abstract/AbstractAccordion", "dashboard/helper/Scheduler", "dashboard/custom/CustomView"],
+    "dashboard/abstract/AbstractAccordion", "dashboard/helper/Scheduler", "dashboard/custom/CustomView", "dashboard/helper/Helper"],
 
-    function (declare, i18n, i18nString, Logger, AbstractAccordion, Scheduler, CustomView) {
+    function (declare, i18n, i18nString, Logger, AbstractAccordion, Scheduler, CustomView, Helper) {
 
         dashboard.classnames.CustomAccordion = "dashboard.custom.CustomAccordion";
 
         var CustomAccordion = declare(dashboard.classnames.CustomAccordion, AbstractAccordion, {
 
-            LAYOUTS: "Custom Layouts",
-            VIEWS: "Custom Views",
-
-            showView: function(id, name, type, newWindow) {
+            showView: function(enumId, uuid, name, type, newWindow) {
                 console.log("show custom dashboards called with id = " + id + " and name = " + name);
 
                 var customView = this.getView(name);
                 customView.loadMenu(id, name, type);
                 customView.createSplitCenterPanes(dashboard.dom.CpCenterInner[dashboard.pageTypes.dashboard]);
 
-                switch(name) {
-                    case this.LAYOUTS:
+                dashboard.dom.TopMenuPane[dashboard.pageTypes.dashboard].domNode.innerHTML = Helper.getHeading(i18nString[name]);
+
+                switch(parseInt(enumId)) {
+                    case dashboard.enumMap.CUSTOM.CUSTOM_LAYOUTS:
                         break;
 
-                    case this.VIEWS:
+                    case this.dashboard.enumMap.CUSTOM.CUSTOM_VIEWS:
                         break;
 
                     default:

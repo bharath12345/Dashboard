@@ -1,31 +1,30 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "dashboard/logger/Logger",
-    "dashboard/abstract/AbstractAccordion", "dashboard/noc/NocView", "dashboard/helper/Scheduler"],
+    "dashboard/abstract/AbstractAccordion", "dashboard/noc/NocView", "dashboard/helper/Scheduler", "dashboard/helper/Helper"],
 
-    function (declare, i18n, i18nString, Logger, AbstractAccordion, NocView, Scheduler) {
+    function (declare, i18n, i18nString, Logger, AbstractAccordion, NocView, Scheduler, Helper) {
 
         dashboard.classnames.NocAccordion = "dashboard.noc.NocAccordion";
 
         var NocAccordion = declare(dashboard.classnames.NocAccordion, AbstractAccordion, {
 
-            ALERTSGRID: "Application",
-            TRANSACTIONSGRID: i18nString.transactionGrid,
-
-            showView: function(id, name, type, newWindow) {
+            showView: function(enumId, uid, name, type, newWindow) {
                 console.log("show page config called with id = " + id + " and name = " + name);
 
                 var nocView = this.getView(name);
                 nocView.loadMenu(id, name, type);
                 nocView.createSplitCenterPanes(dashboard.dom.CpCenterInner[dashboard.pageTypes.dashboard]);
 
+                dashboard.dom.TopMenuPane[dashboard.pageTypes.dashboard].domNode.innerHTML = Helper.getHeading(i18nString[name]);
+
                 // ToDo: Change this switch away from Name to some ID
-                switch(name) {
-                    case this.ALERTSGRID:
+                switch(parseInt(enumId)) {
+                    case dashboard.enumMap.NOC.APPLICATION_ALERTS:
                         require(["dashboard/noc/views/NocViewIncident"], function (NocViewIncident) {
                             new NocViewIncident().loadPage("IncidentGrid");
                         });
                         break;
 
-                    case this.TRANSACTIONSGRID:
+                    case dashboard.enumMap.NOC.TRANSACTION_GRID:
                         require(["dashboard/noc/views/NocViewTransactionGrid"], function (NocViewTransactionGrid) {
                             new NocViewTransactionGrid().loadPage("NocViewTransactionGrid");
                         });

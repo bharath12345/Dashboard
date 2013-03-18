@@ -10,6 +10,20 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
             loadAccordion:function () {
                 var viewMeta = {};
 
+                var url = "dashboard/enums.action";
+                xhr(url, {
+                    handleAs:"json",
+                    method:"POST",
+                    query:viewMeta,
+                    headers:Helper.JSON_HEADER
+                }).then(lang.hitch(this, this.loadPanes));
+
+            },
+
+            loadPanes: function(data) {
+                dashboard.enumMap = data.enumMap;
+
+                var viewMeta = {};
                 var url = "dashboard/panes.action";
                 xhr(url, {
                     handleAs:"json",
@@ -17,7 +31,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                     query:viewMeta,
                     headers:Helper.JSON_HEADER
                 }).then(lang.hitch(this, this.createAccordion));
-
             },
 
             createAccordion:function (data) {

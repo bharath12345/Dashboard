@@ -1,7 +1,7 @@
 define({
     root:({
 
-        sampleTopoology:"Sample Topology"
+        SAMPLE_TOPOLOGY:"Sample Topology"
 
     }),
 

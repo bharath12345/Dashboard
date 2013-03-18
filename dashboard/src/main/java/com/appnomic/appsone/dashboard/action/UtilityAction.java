@@ -33,7 +33,7 @@ public class UtilityAction extends AbstractNocAction {
 
 	private TabListEntity.TabEntity [] tabListVO;
 	private Map<String, String[]> param;
-	Map<String, HashMap<Integer, String>> enumMap = new HashMap<String, HashMap<Integer, String>>();
+	Map<String, HashMap<String, Integer>> enumMap = new HashMap<String, HashMap<String, Integer>>();
 	
 	
 	public Map<String, String[]> getParam() {
@@ -52,11 +52,11 @@ public class UtilityAction extends AbstractNocAction {
 		this.tabListVO = tabListVO;
 	}
 
-	public Map<String, HashMap<Integer, String>> getEnumMap() {
+	public Map<String, HashMap<String, Integer>> getEnumMap() {
 		return enumMap;
 	}
 
-	public void setEnumMap(Map<String, HashMap<Integer, String>> enumMap) {
+	public void setEnumMap(Map<String, HashMap<String, Integer>> enumMap) {
 		this.enumMap = enumMap;
 	}
 	
@@ -97,57 +97,41 @@ public class UtilityAction extends AbstractNocAction {
 		param = getParameters();
 		
 		
-		HashMap<Integer, String> configMap = new HashMap<Integer, String>();
+		HashMap<String, Integer> configMap = new HashMap<String, Integer>();
 		for(ActionConstants.CONFIG config: ActionConstants.CONFIG.values()) {
-			configMap.put(config.ordinal(), config.name());
+			configMap.put(config.name(), config.ordinal());
 		}
 		enumMap.put(ACCORDION.CONFIG.name(), configMap);
 		
 		////
 	
-		HashMap<Integer, String> configNocMap = new HashMap<Integer, String>();
-		for(ActionConstants.CONFIG_NOC config: ActionConstants.CONFIG_NOC.values()) {
-			configNocMap.put(config.ordinal(), config.name());
-		}
-		enumMap.put(ACCORDION.CONFIG_NOC.name(), configNocMap);
-		
-		////
-	
-		HashMap<Integer, String> configTopologyMap = new HashMap<Integer, String>();
-		for(ActionConstants.CONFIG_TOPOLOGY config: ActionConstants.CONFIG_TOPOLOGY.values()) {
-			configTopologyMap.put(config.ordinal(), config.name());
-		}
-		enumMap.put(ACCORDION.CONFIG_TOPOLOGY.name(), configTopologyMap);
-		
-		////
-		
-		HashMap<Integer, String> alertsMap = new HashMap<Integer, String>();
+		HashMap<String, Integer> alertsMap = new HashMap<String, Integer>();
 		for(ActionConstants.ALERTS config: ActionConstants.ALERTS.values()) {
-			alertsMap.put(config.ordinal(), config.name());
+			alertsMap.put(config.name(), config.ordinal());
 		}
 		enumMap.put(ACCORDION.ALERTS.name(), alertsMap);
 		
 		////
 		
-		HashMap<Integer, String> customMap = new HashMap<Integer, String>();
+		HashMap<String, Integer> customMap = new HashMap<String, Integer>();
 		for(ActionConstants.CUSTOM config: ActionConstants.CUSTOM.values()) {
-			customMap.put(config.ordinal(), config.name());
+			customMap.put(config.name(), config.ordinal());
 		}
 		enumMap.put(ACCORDION.CUSTOM.name(), customMap);
 		
 		////
 		
-		HashMap<Integer, String> topologyMap = new HashMap<Integer, String>();
+		HashMap<String, Integer> topologyMap = new HashMap<String, Integer>();
 		for(ActionConstants.TOPOLOGY config: ActionConstants.TOPOLOGY.values()) {
-			topologyMap.put(config.ordinal(), config.name());
+			topologyMap.put(config.name(), config.ordinal());
 		}
 		enumMap.put(ACCORDION.TOPOLOGY.name(), topologyMap);
 		
 		////
 		
-		HashMap<Integer, String> nocMap = new HashMap<Integer, String>();
+		HashMap<String, Integer> nocMap = new HashMap<String, Integer>();
 		for(ActionConstants.NOC config: ActionConstants.NOC.values()) {
-			nocMap.put(config.ordinal(), config.name());
+			nocMap.put(config.name(), config.ordinal());
 		}
 		enumMap.put(ACCORDION.NOC.name(), nocMap);
 		

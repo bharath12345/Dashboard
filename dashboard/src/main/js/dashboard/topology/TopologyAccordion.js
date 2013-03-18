@@ -1,23 +1,23 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/topology/nls/topology", "dashboard/logger/Logger",
-    "dashboard/abstract/AbstractAccordion", "dashboard/topology/TopologyView", "dashboard/helper/Scheduler"],
+    "dashboard/abstract/AbstractAccordion", "dashboard/topology/TopologyView", "dashboard/helper/Scheduler", "dashboard/helper/Helper"],
 
-    function (declare, i18n, i18nString, Logger, AbstractAccordion, TopologyView, Scheduler) {
+    function (declare, i18n, i18nString, Logger, AbstractAccordion, TopologyView, Scheduler, Helper) {
 
         dashboard.classnames.TopologyAccordion = "dashboard.topology.TopologyAccordion";
 
         var TopologyAccordion = declare(dashboard.classnames.TopologyAccordion, AbstractAccordion, {
 
-            SAMPLE: i18nString.sampleTopoology,
-
-            showView: function(id, name, type, newWindow) {
+            showView: function(enumId, uuid, name, type, newWindow) {
                 console.log("show page config called with id = " + id + " and name = " + name);
 
                 topologyView = this.getView(name, newWindow);
                 topologyView.loadMenu(id, name, type);
                 topologyView.createSplitCenterPanes(dashboard.dom.CpCenterInner[dashboard.pageTypes.dashboard]);
 
-                switch(name) {
-                    case this.SAMPLE:
+                dashboard.dom.TopMenuPane[dashboard.pageTypes.dashboard].domNode.innerHTML = Helper.getHeading(i18nString[name]);
+
+                switch(parseInt(enumId)) {
+                    case dashboard.enumMap.TOPOLOGY.SAMPLE_TOPOLOGY:
                         require(["dashboard/topology/views/SampleTopologyView"], function (SampleTopologyView) {
                             new SampleTopologyView().loadPage(this.SAMPLE);
                         });

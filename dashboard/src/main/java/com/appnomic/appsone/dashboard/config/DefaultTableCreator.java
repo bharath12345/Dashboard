@@ -141,24 +141,24 @@ public class DefaultTableCreator {
 		
 		List<ConfigPageListEntity.PageEntity> dashboardList = new ArrayList<ConfigPageListEntity.PageEntity>();
 		ConfigPageListEntity.PageEntity dashboardPageVO = cple.new PageEntity();
-		dashboardPageVO.setName(ActionConstants.CONFIG.NOC.name());
+		dashboardPageVO.setName(ActionConstants.CONFIG.CONFIG_NOC.name());
 		dashboardPageVO.setUuid(UUID.randomUUID().toString());
-		dashboardPageVO.setEnumId(ActionConstants.CONFIG.NOC.ordinal());
+		dashboardPageVO.setEnumId(ActionConstants.CONFIG.CONFIG_NOC.ordinal());
 		dashboardPageVO.setType(ActionConstants.ACCTYPE.DIRECTORY.name());
 		pageList.add(dashboardPageVO);
 
 		ConfigPageListEntity.PageEntity pageListVO = cple.new PageEntity();
-		pageListVO.setName(ActionConstants.CONFIG_NOC.APPLICATION_ALERTS.name());
+		pageListVO.setName(ActionConstants.CONFIG.APPLICATION_ALERTS.name());
 		pageListVO.setUuid(UUID.randomUUID().toString());
-		pageListVO.setEnumId(ActionConstants.CONFIG_NOC.APPLICATION_ALERTS.ordinal());
+		pageListVO.setEnumId(ActionConstants.CONFIG.APPLICATION_ALERTS.ordinal());
 		pageListVO.setType(ActionConstants.ACCTYPE.CONFIGURATION.name()); 
 		dashboardList.add(pageListVO);
 
 		pageListVO = cple.new PageEntity();
-		pageListVO.setName(ActionConstants.CONFIG_NOC.TRANSACTION_GRID.name());
+		pageListVO.setName(ActionConstants.CONFIG.TRANSACTION_GRID.name());
 		pageListVO.setUuid(UUID.randomUUID().toString());
 		pageListVO.setType(ActionConstants.ACCTYPE.CONFIGURATION.name());
-		pageListVO.setEnumId(ActionConstants.CONFIG_NOC.TRANSACTION_GRID.ordinal());
+		pageListVO.setEnumId(ActionConstants.CONFIG.TRANSACTION_GRID.ordinal());
 		dashboardList.add(pageListVO);
 
 		ConfigPageListEntity.PageEntity[] pageEntityList = dashboardList.toArray(new ConfigPageListEntity.PageEntity[dashboardList.size()]);
@@ -168,37 +168,37 @@ public class DefaultTableCreator {
 
 		List<ConfigPageListEntity.PageEntity> topoList = new ArrayList<ConfigPageListEntity.PageEntity>();
 		ConfigPageListEntity.PageEntity topoListVO = cple.new PageEntity();
-		topoListVO.setName(ActionConstants.CONFIG.TOPOLOGY.name());
+		topoListVO.setName(ActionConstants.CONFIG.CONFIG_TOPOLOGY.name());
 		topoListVO.setUuid(UUID.randomUUID().toString());
-		topoListVO.setEnumId(ActionConstants.CONFIG.TOPOLOGY.ordinal());
+		topoListVO.setEnumId(ActionConstants.CONFIG.CONFIG_TOPOLOGY.ordinal());
 		topoListVO.setType(ActionConstants.ACCTYPE.DIRECTORY.name());
 		pageList.add(topoListVO);
 
 		pageListVO = cple.new PageEntity();
-		pageListVO.setName(ActionConstants.CONFIG_TOPOLOGY.APPLICATION_LAYERS.name());
+		pageListVO.setName(ActionConstants.CONFIG.APPLICATION_LAYERS.name());
 		pageListVO.setUuid(UUID.randomUUID().toString());
-		pageListVO.setEnumId(ActionConstants.CONFIG_TOPOLOGY.APPLICATION_LAYERS.ordinal());
+		pageListVO.setEnumId(ActionConstants.CONFIG.APPLICATION_LAYERS.ordinal());
 		pageListVO.setType(ActionConstants.ACCTYPE.CONFIGURATION.name());
 		topoList.add(pageListVO);
 
 		pageListVO = cple.new PageEntity();
-		pageListVO.setName(ActionConstants.CONFIG_TOPOLOGY.APPLICATION_TOPOLOGY.name());
+		pageListVO.setName(ActionConstants.CONFIG.APPLICATION_TOPOLOGY.name());
 		pageListVO.setUuid(UUID.randomUUID().toString());
-		pageListVO.setEnumId(ActionConstants.CONFIG_TOPOLOGY.APPLICATION_TOPOLOGY.ordinal());
+		pageListVO.setEnumId(ActionConstants.CONFIG.APPLICATION_TOPOLOGY.ordinal());
 		pageListVO.setType(ActionConstants.ACCTYPE.CONFIGURATION.name());
 		topoList.add(pageListVO);
 
 		pageListVO = cple.new PageEntity();
-		pageListVO.setName(ActionConstants.CONFIG_TOPOLOGY.APPLICATION_GROUPS.name());
+		pageListVO.setName(ActionConstants.CONFIG.APPLICATION_GROUPS.name());
 		pageListVO.setUuid(UUID.randomUUID().toString());
-		pageListVO.setEnumId(ActionConstants.CONFIG_TOPOLOGY.APPLICATION_GROUPS.ordinal());
+		pageListVO.setEnumId(ActionConstants.CONFIG.APPLICATION_GROUPS.ordinal());
 		pageListVO.setType(ActionConstants.ACCTYPE.CONFIGURATION.name());
 		topoList.add(pageListVO);
 
 		pageListVO = cple.new PageEntity();
-		pageListVO.setName(ActionConstants.CONFIG_TOPOLOGY.COMPONENT_TOPOLOGY.name());
+		pageListVO.setName(ActionConstants.CONFIG.COMPONENT_TOPOLOGY.name());
 		pageListVO.setUuid(UUID.randomUUID().toString());
-		pageListVO.setEnumId(ActionConstants.CONFIG_TOPOLOGY.COMPONENT_TOPOLOGY.ordinal());
+		pageListVO.setEnumId(ActionConstants.CONFIG.COMPONENT_TOPOLOGY.ordinal());
 		pageListVO.setType(ActionConstants.ACCTYPE.CONFIGURATION.name());
 		topoList.add(pageListVO);
 
