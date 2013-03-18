@@ -78,44 +78,42 @@ public class DefaultTableCreator {
 		TabListEntity tle = new TabListEntity();
 
 		TabListEntity.TabEntity tabListObj = tle.new TabEntity();
-		tabListObj.setName("topology");
-		tabListObj.setLabel("Topology Views");
+		tabListObj.setName(ActionConstants.ACCORDION.TOPOLOGY.name());
 		tabListObj.setUuid(UUID.randomUUID().toString());
+		tabListObj.setEnumId(ActionConstants.ACCORDION.TOPOLOGY.ordinal());
 		tabListObj.setAction("topology/pages.action");
 		tabList.add(tabListObj);
 
 		tabListObj = tle.new TabEntity();
-		tabListObj.setName("noc");
-		tabListObj.setLabel("Command Center Screens");
+		tabListObj.setName(ActionConstants.ACCORDION.NOC.name());
 		tabListObj.setUuid(UUID.randomUUID().toString());
+		tabListObj.setEnumId(ActionConstants.ACCORDION.NOC.ordinal());
 		tabListObj.setAction("noc/pages.action");
 		tabList.add(tabListObj);
 
 		tabListObj = tle.new TabEntity();
-		tabListObj.setName("alerts");
-		tabListObj.setLabel("Alerts");
+		tabListObj.setName(ActionConstants.ACCORDION.ALERTS.name());
 		tabListObj.setUuid(UUID.randomUUID().toString());
+		tabListObj.setEnumId(ActionConstants.ACCORDION.ALERTS.ordinal());
 		tabListObj.setAction("alerts/pages.action");
 		tabList.add(tabListObj);
 
 		tabListObj = tle.new TabEntity();
-		tabListObj.setName("custom");
-		tabListObj.setLabel("Customized Layouts");
+		tabListObj.setName(ActionConstants.ACCORDION.CUSTOM.name());
 		tabListObj.setUuid(UUID.randomUUID().toString());
+		tabListObj.setEnumId(ActionConstants.ACCORDION.CUSTOM.ordinal());
 		tabListObj.setAction("custom/pages.action");
 		tabList.add(tabListObj);
 
 		tabListObj = tle.new TabEntity();
-		tabListObj.setName("config");
-		tabListObj.setLabel("Configuration");
+		tabListObj.setName(ActionConstants.ACCORDION.CONFIG.name());
 		tabListObj.setUuid(UUID.randomUUID().toString());
+		tabListObj.setEnumId(ActionConstants.ACCORDION.CONFIG.ordinal());
 		tabListObj.setAction("config/pages.action");
 		tabList.add(tabListObj);
 
-		tle.setTabList(tabList.toArray(new TabListEntity.TabEntity[tabList
-				.size()]));
-		AccordionTabConfigManager atcm = AccordionTabConfigManager
-				.getInstance();
+		tle.setTabList(tabList.toArray(new TabListEntity.TabEntity[tabList.size()]));
+		AccordionTabConfigManager atcm = AccordionTabConfigManager.getInstance();
 		atcm.saveConfig(tle);
 
 	}
@@ -125,8 +123,9 @@ public class DefaultTableCreator {
 		List<AlertsPageListEntity.PageEntity> pageList = new ArrayList<AlertsPageListEntity.PageEntity>();
 
 		AlertsPageListEntity.PageEntity pageEntity = aple.new PageEntity();
-		pageEntity.setName("Sample Alerts");
-		pageEntity.setId(UUID.randomUUID().toString());
+		pageEntity.setName(ActionConstants.ALERTS.SAMPLE_ALERTS.name());
+		pageEntity.setUuid(UUID.randomUUID().toString());
+		pageEntity.setEnumId( ActionConstants.ALERTS.SAMPLE_ALERTS.ordinal());
 		pageEntity.setType(ActionConstants.ACCTYPE.GRID.name());
 		pageList.add(pageEntity);
 
@@ -142,21 +141,24 @@ public class DefaultTableCreator {
 		
 		List<ConfigPageListEntity.PageEntity> dashboardList = new ArrayList<ConfigPageListEntity.PageEntity>();
 		ConfigPageListEntity.PageEntity dashboardPageVO = cple.new PageEntity();
-		dashboardPageVO.setName("Command Center Screens Configuration");
-		dashboardPageVO.setId(UUID.randomUUID().toString());
+		dashboardPageVO.setName(ActionConstants.CONFIG.NOC.name());
+		dashboardPageVO.setUuid(UUID.randomUUID().toString());
+		dashboardPageVO.setEnumId(ActionConstants.CONFIG.NOC.ordinal());
 		dashboardPageVO.setType(ActionConstants.ACCTYPE.DIRECTORY.name());
 		pageList.add(dashboardPageVO);
 
 		ConfigPageListEntity.PageEntity pageListVO = cple.new PageEntity();
-		pageListVO.setName("Application Alerts Dashboard");
-		pageListVO.setId(UUID.randomUUID().toString());
+		pageListVO.setName(ActionConstants.CONFIG_NOC.APPLICATION_ALERTS.name());
+		pageListVO.setUuid(UUID.randomUUID().toString());
+		pageListVO.setEnumId(ActionConstants.CONFIG_NOC.APPLICATION_ALERTS.ordinal());
 		pageListVO.setType(ActionConstants.ACCTYPE.CONFIGURATION.name()); 
 		dashboardList.add(pageListVO);
 
 		pageListVO = cple.new PageEntity();
-		pageListVO.setName("Transactions Grid");
-		pageListVO.setId(UUID.randomUUID().toString());
+		pageListVO.setName(ActionConstants.CONFIG_NOC.TRANSACTION_GRID.name());
+		pageListVO.setUuid(UUID.randomUUID().toString());
 		pageListVO.setType(ActionConstants.ACCTYPE.CONFIGURATION.name());
+		pageListVO.setEnumId(ActionConstants.CONFIG_NOC.TRANSACTION_GRID.ordinal());
 		dashboardList.add(pageListVO);
 
 		ConfigPageListEntity.PageEntity[] pageEntityList = dashboardList.toArray(new ConfigPageListEntity.PageEntity[dashboardList.size()]);
@@ -166,32 +168,37 @@ public class DefaultTableCreator {
 
 		List<ConfigPageListEntity.PageEntity> topoList = new ArrayList<ConfigPageListEntity.PageEntity>();
 		ConfigPageListEntity.PageEntity topoListVO = cple.new PageEntity();
-		topoListVO.setName("Topology Configuration");
-		topoListVO.setId(UUID.randomUUID().toString());
+		topoListVO.setName(ActionConstants.CONFIG.TOPOLOGY.name());
+		topoListVO.setUuid(UUID.randomUUID().toString());
+		topoListVO.setEnumId(ActionConstants.CONFIG.TOPOLOGY.ordinal());
 		topoListVO.setType(ActionConstants.ACCTYPE.DIRECTORY.name());
 		pageList.add(topoListVO);
 
 		pageListVO = cple.new PageEntity();
-		pageListVO.setName("Application Layers");
-		pageListVO.setId(UUID.randomUUID().toString());
+		pageListVO.setName(ActionConstants.CONFIG_TOPOLOGY.APPLICATION_LAYERS.name());
+		pageListVO.setUuid(UUID.randomUUID().toString());
+		pageListVO.setEnumId(ActionConstants.CONFIG_TOPOLOGY.APPLICATION_LAYERS.ordinal());
 		pageListVO.setType(ActionConstants.ACCTYPE.CONFIGURATION.name());
 		topoList.add(pageListVO);
 
 		pageListVO = cple.new PageEntity();
-		pageListVO.setName("Application Groups and Topology");
-		pageListVO.setId(UUID.randomUUID().toString());
+		pageListVO.setName(ActionConstants.CONFIG_TOPOLOGY.APPLICATION_TOPOLOGY.name());
+		pageListVO.setUuid(UUID.randomUUID().toString());
+		pageListVO.setEnumId(ActionConstants.CONFIG_TOPOLOGY.APPLICATION_TOPOLOGY.ordinal());
 		pageListVO.setType(ActionConstants.ACCTYPE.CONFIGURATION.name());
 		topoList.add(pageListVO);
 
 		pageListVO = cple.new PageEntity();
-		pageListVO.setName("Application Topology");
-		pageListVO.setId(UUID.randomUUID().toString());
+		pageListVO.setName(ActionConstants.CONFIG_TOPOLOGY.APPLICATION_GROUPS.name());
+		pageListVO.setUuid(UUID.randomUUID().toString());
+		pageListVO.setEnumId(ActionConstants.CONFIG_TOPOLOGY.APPLICATION_GROUPS.ordinal());
 		pageListVO.setType(ActionConstants.ACCTYPE.CONFIGURATION.name());
 		topoList.add(pageListVO);
 
 		pageListVO = cple.new PageEntity();
-		pageListVO.setName("Component Topology");
-		pageListVO.setId(UUID.randomUUID().toString());
+		pageListVO.setName(ActionConstants.CONFIG_TOPOLOGY.COMPONENT_TOPOLOGY.name());
+		pageListVO.setUuid(UUID.randomUUID().toString());
+		pageListVO.setEnumId(ActionConstants.CONFIG_TOPOLOGY.COMPONENT_TOPOLOGY.ordinal());
 		pageListVO.setType(ActionConstants.ACCTYPE.CONFIGURATION.name());
 		topoList.add(pageListVO);
 
@@ -211,8 +218,9 @@ public class DefaultTableCreator {
 		List<TopologyPageListEntity.PageEntity> pageList = new ArrayList<TopologyPageListEntity.PageEntity>();
 
 		TopologyPageListEntity.PageEntity pageEntity = tple.new PageEntity();
-		pageEntity.setName("Sample Topology");
-		pageEntity.setId(UUID.randomUUID().toString());
+		pageEntity.setName(ActionConstants.TOPOLOGY.SAMPLE_TOPOLOGY.name());
+		pageEntity.setUuid(UUID.randomUUID().toString());
+		pageEntity.setEnumId(ActionConstants.TOPOLOGY.SAMPLE_TOPOLOGY.ordinal());
 		pageEntity.setType(ActionConstants.ACCTYPE.TOPOLOGY.name());
 		pageList.add(pageEntity);
 
@@ -226,14 +234,16 @@ public class DefaultTableCreator {
 		List<CustomPageListEntity.PageEntity> pageList = new ArrayList<CustomPageListEntity.PageEntity>();
 
 		CustomPageListEntity.PageEntity pageEntity = tple.new PageEntity();
-		pageEntity.setName("Custom Layouts");
-		pageEntity.setId(UUID.randomUUID().toString());
+		pageEntity.setName(ActionConstants.CUSTOM.CUSTOM_LAYOUTS.name());
+		pageEntity.setUuid(UUID.randomUUID().toString());
+		pageEntity.setEnumId(ActionConstants.CUSTOM.CUSTOM_LAYOUTS.ordinal());
 		pageEntity.setType(ActionConstants.ACCTYPE.DIRECTORY.name());
 		pageList.add(pageEntity);
 		
 		pageEntity = tple.new PageEntity();
-		pageEntity.setName("Custom Views");
-		pageEntity.setId(UUID.randomUUID().toString());
+		pageEntity.setName(ActionConstants.CUSTOM.CUSTOM_VIEWS.name());
+		pageEntity.setUuid(UUID.randomUUID().toString());
+		pageEntity.setEnumId(ActionConstants.CUSTOM.CUSTOM_VIEWS.ordinal());
 		pageEntity.setType(ActionConstants.ACCTYPE.DIRECTORY.name());
 		pageList.add(pageEntity);
 		
@@ -248,14 +258,16 @@ public class DefaultTableCreator {
 		List<NocPageListEntity.PageEntity> pageList = new ArrayList<NocPageListEntity.PageEntity>();
 
 		NocPageListEntity.PageEntity pageEntity = tple.new PageEntity();
-		pageEntity.setName("Application Alerts Dashboard");
-		pageEntity.setId(UUID.randomUUID().toString());
+		pageEntity.setName(ActionConstants.NOC.APPLICATION_ALERTS.name());
+		pageEntity.setUuid(UUID.randomUUID().toString());
+		pageEntity.setEnumId(ActionConstants.NOC.APPLICATION_ALERTS.ordinal());
 		pageEntity.setType(ActionConstants.ACCTYPE.GRID.name());
 		pageList.add(pageEntity);
 		
 		pageEntity = tple.new PageEntity();
-		pageEntity.setName("Transactions Grid");
-		pageEntity.setId(UUID.randomUUID().toString());
+		pageEntity.setName(ActionConstants.NOC.TRANSACTION_GRID.name());
+		pageEntity.setUuid(UUID.randomUUID().toString());
+		pageEntity.setEnumId(ActionConstants.NOC.TRANSACTION_GRID.ordinal());
 		pageEntity.setType(ActionConstants.ACCTYPE.GRID.name());
 		pageList.add(pageEntity);
 

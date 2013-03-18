@@ -16,7 +16,9 @@ public class PageListEntity extends ConfigEntity {
 
 		String name;
 		String type;
-		String id;
+		int enumId;
+		String uuid;
+		
 		PageEntity[] pageList;
 
 		public PageEntity[] getPageList() {
@@ -27,12 +29,20 @@ public class PageListEntity extends ConfigEntity {
 			this.pageList = pageList;
 		}
 
-		public String getId() {
-			return id;
+		public int getEnumId() {
+			return enumId;
 		}
 
-		public void setId(String id) {
-			this.id = id;
+		public void setEnumId(int enumId) {
+			this.enumId = enumId;
+		}
+
+		public String getUuid() {
+			return uuid;
+		}
+
+		public void setUuid(String uuid) {
+			this.uuid = uuid;
 		}
 
 		public String getType() {

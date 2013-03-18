@@ -14,10 +14,16 @@ public class TabListEntity extends ConfigEntity{
 
 	public class TabEntity {
 		String name;
-		String label;
 		String uuid;
 		String action;
+		int enumId;
 		
+		public int getEnumId() {
+			return enumId;
+		}
+		public void setEnumId(int enumId) {
+			this.enumId = enumId;
+		}
 		public String getUuid() {
 			return uuid;
 		}
@@ -29,12 +35,6 @@ public class TabListEntity extends ConfigEntity{
 		}
 		public void setName(String name) {
 			this.name = name;
-		}
-		public String getLabel() {
-			return label;
-		}
-		public void setLabel(String label) {
-			this.label = label;
 		}
 		public String getAction() {
 			return action;
