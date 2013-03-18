@@ -501,6 +501,21 @@
                                 </configuration>
                             </execution>
                             <execution>
+                                <id>copy-crossroads</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${gui.target.gui.location}/js/crossroads</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>${js-dir}/crossroads</directory>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                            <execution>
                                 <id>copy-example-data</id>
                                 <phase>process-resources</phase>
                                 <goals>
@@ -783,6 +798,21 @@
                                     <resources>
                                         <resource>
                                             <directory>${js-dir}/bootstrap</directory>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>copy-crossroads</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${gui.target.gui.location}/js/crossroads</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>${js-dir}/crossroads</directory>
                                         </resource>
                                     </resources>
                                 </configuration>
