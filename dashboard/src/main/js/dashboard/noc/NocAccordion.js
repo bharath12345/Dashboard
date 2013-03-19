@@ -7,11 +7,11 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
 
         var NocAccordion = declare(dashboard.classnames.NocAccordion, AbstractAccordion, {
 
-            showView: function(enumId, uid, name, type, newWindow) {
-                console.log("show page config called with id = " + id + " and name = " + name);
+            showView: function(enumId, uuid, name, type, newWindow) {
+                console.log("view id = " + enumId + " name = " + name + " uuid = " + uuid + " type = " + type);
 
                 var nocView = this.getView(name);
-                nocView.loadMenu(id, name, type);
+                nocView.loadMenu(uuid, name, type);
                 nocView.createSplitCenterPanes(dashboard.dom.CpCenterInner[dashboard.pageTypes.dashboard]);
 
                 dashboard.dom.TopMenuPane[dashboard.pageTypes.dashboard].domNode.innerHTML = Helper.getHeading(i18nString[name]);
@@ -31,7 +31,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc", "d
                         break;
 
                     default:
-                        console.log("Unknown page id = " + id + " name = " + name);
+                        console.log("Unknown page id = " + enumId + " name = " + name);
                         return;
                 }
             },

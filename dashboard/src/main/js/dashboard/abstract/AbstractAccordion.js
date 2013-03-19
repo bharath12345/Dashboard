@@ -1,8 +1,8 @@
-define(["dojo/_base/declare", "dojo/i18n", "dojo/on", "dojo/_base/lang",
+define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", "dojo/on", "dojo/_base/lang",
     "dojo/store/Memory", "dashboard/widgets/AccordionTreeObjectStoreModel", "dashboard/widgets/AccordionTree",
-    "dashboard/logger/Logger", "dashboard/helper/Scheduler"],
+    "dashboard/logger/Logger", "dashboard/helper/Scheduler", "dojo/Deferred"],
 
-    function (declare, i18n, on, lang, Memory, ObjectStoreModel, Tree, Logger, Scheduler) {
+    function (declare, i18n, i18nString, on, lang, Memory, ObjectStoreModel, Tree, Logger, Scheduler, Deferred) {
 
         dashboard.classnames.AbstractAccordion = "dashboard.abstract.AbstractAccordion";
 
@@ -11,6 +11,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/on", "dojo/_base/lang",
             "-chains-":{
                 renderAccordion:"before" //method is called before calling its superclass method
             },
+
+            deferred: new Deferred(),
 
             getTreeData:function (data, rootId) {
                 var rootNode = {};
@@ -34,8 +36,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/on", "dojo/_base/lang",
                 for(var i=0;i<pageList.length; i++) {
                     var leaf = {};
                     leaf.id = pageList[i].enumId;
-                    lead.uuid = pageList[i].uuid;
-                    leaf.name = pageList[i].name;
+                    leaf.uuid = pageList[i].uuid;
+                    leaf.name = i18nString[pageList[i].name];
                     leaf.type = pageList[i].type;
                     leaf.parent = parentId;
                     leafList.push(leaf);
@@ -73,12 +75,16 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/on", "dojo/_base/lang",
 
                 on(tree, "click", lang.hitch(this, this.renderView));
 
+                if(param.name[0] == "NOC") {
+
+                }
+
             },
 
             renderView:function (item, node, evt){
                 //Important Note: The below print statements are a Good Reference. Do NOT delete them.
 
-                //console.log("Item", item); // This gives you the object in your store
+                console.log("Item", item); // This gives you the object in your store
                 //console.log("Node", node); // This gives you the dijit widget object (UI)
                 //console.log("Event", evt); // This gives you the event object
                 //console.log('identifier: ' + tree_obj.getLabel(item));

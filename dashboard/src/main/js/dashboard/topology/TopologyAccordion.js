@@ -8,10 +8,10 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/topology/nls/top
         var TopologyAccordion = declare(dashboard.classnames.TopologyAccordion, AbstractAccordion, {
 
             showView: function(enumId, uuid, name, type, newWindow) {
-                console.log("show page config called with id = " + id + " and name = " + name);
+                console.log("view id = " + enumId + " name = " + name + " uuid = " + uuid + " type = " + type);
 
                 topologyView = this.getView(name, newWindow);
-                topologyView.loadMenu(id, name, type);
+                topologyView.loadMenu(uuid, name, type);
                 topologyView.createSplitCenterPanes(dashboard.dom.CpCenterInner[dashboard.pageTypes.dashboard]);
 
                 dashboard.dom.TopMenuPane[dashboard.pageTypes.dashboard].domNode.innerHTML = Helper.getHeading(i18nString[name]);
@@ -24,7 +24,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/topology/nls/top
                         break;
 
                     default:
-                        console.log("Unknown page id = " + id);
+                        console.log("Unknown page id = " + enumId);
                         return;
                 }
             },

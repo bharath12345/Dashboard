@@ -21,9 +21,7 @@ define(["dojo/_base/declare", "dojo/_base/lang", 'crossroads', 'dashboard/logger
                         var ca = new DashboardAccordion();
                         ca.loadAccordion();
 
-                        // the default view is the "All Applications Alerts Grid"
-                        var nocA = NocAccordion();
-                        nocA.showView("", "Application", "", false);
+
                     }
                 );
             },

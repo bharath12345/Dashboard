@@ -1,8 +1,7 @@
 define({
     root:({
 
-        CUSTOM_LAYOUTS:"Custom Layouts",
-        CUSTOM_VIEWS: "Custom Views"
+
 
     }),
 

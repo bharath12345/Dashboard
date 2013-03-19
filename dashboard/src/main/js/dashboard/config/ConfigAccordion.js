@@ -11,9 +11,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/confi
             showView: function(enumId, uuid, name, type, newWindow) {
                 var configView = this.getView(name);
 
-                console.log("show page config called with id = " + id + " name = " + name);
+                console.log("view id = " + enumId + " name = " + name + " uuid = " + uuid + " type = " + type);
                 var viewMeta = {
-                    id:id,
+                    id:uuid,
                     name: name,
                     type: 0,
                     newWindow: newWindow,
@@ -55,7 +55,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/confi
                         break;
 
                     default:
-                        console.log("Unknown page id = " + id);
+                        console.log("Unknown page id = " + enumId);
                         return;
                 }
             },

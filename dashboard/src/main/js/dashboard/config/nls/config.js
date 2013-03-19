@@ -1,14 +1,6 @@
 define({
     root:({
 
-        APPLICATION_ALERTS: "Application Alerts Dashboard",
-        TRANSACTION_GRID: "Transactions Grid",
-
-        APPLICATION_LAYERS: "Application Layers",
-        APPLICATION_GROUPS: "Application Groups and Topology",
-        APPLICATION_TOPOLOGY: "Application Topology",
-        COMPONENT_TOPOLOGY: "Component Topology",
-
         applicationRefreshTime: "Application Refresh Time",
         fontName: "Font Name",
         fontSize: "Font Size",

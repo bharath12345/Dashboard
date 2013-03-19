@@ -20,8 +20,44 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
 
             },
 
+            initAccMap: function() {
+                /*
+                 * ToDo: Do NOT keep this map - force the programmers to conform to 'A' classname pattern
+                 */
+
+                this.ACCORDIONMAP = [];
+                for(var key in dashboard.enumMap) {
+                    switch(key) {
+                        case "TOPOLOGY":
+                            this.ACCORDIONMAP[key] = "dashboard.topology.TopologyAccordion";
+                            break;
+
+                        case "CONFIG":
+                            this.ACCORDIONMAP[key] = "dashboard.config.ConfigAccordion";
+                            break;
+
+                        case "NOC":
+                            this.ACCORDIONMAP[key] = "dashboard.noc.NocAccordion";
+                            break;
+
+                        case "CUSTOM":
+                            this.ACCORDIONMAP[key] = "dashboard.custom.CustomAccordion";
+                            break;
+
+                        case "ALERTS":
+                            this.ACCORDIONMAP[key] = "dashboard.alerts.AlertsAccordion";
+                            break;
+
+                        default:
+                            console.log("unknown key = " + key);
+                            break;
+                    }
+                }
+            },
+
             loadPanes: function(data) {
                 dashboard.enumMap = data.enumMap;
+                this.initAccMap();
 
                 var viewMeta = {};
                 var url = "dashboard/panes.action";
@@ -41,7 +77,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                 for (var i = 0; i < paneList.length; i++) {
                     DashboardAccordion.AccPane[paneList[i].name] = new ContentPane({
                         region:"center",
-                        title:paneList[i].label,
+                        title:i18nString[paneList[i].name],
                         content:"<div id='" + paneList[i].name + "' ></div>"
                     });
                     DashboardAccordion.AccContainer.addChild(DashboardAccordion.AccPane[paneList[i].name]);
@@ -65,7 +101,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
             },
 
             createAccordionPanes:function (data) {
-                var accClassPath = Helper.getClassPath(DashboardAccordion.ACCORDIONMAP[data.param.name[0]]);
+                var accClassPath = Helper.getClassPath(this.ACCORDIONMAP[data.param.name[0]]);
                 console.log("fetching callback class = " + accClassPath);
                 require([accClassPath], function (AccordionLoader) {
                     // AccordionLoader is a prototype of ConfigAccordion in the case of Config and so on...
@@ -77,18 +113,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
         });
 
         DashboardAccordion.LOG = Logger.addTimer(new Logger(dashboard.classnames.DashboardAccordion));
-
-        /*
-         * ToDo: Do NOT keep this map - force the programmers to conform to 'A' classname pattern
-         */
-
-        DashboardAccordion.ACCORDIONMAP = [];
-        DashboardAccordion.ACCORDIONMAP["topology"] = "dashboard.topology.TopologyAccordion";
-        DashboardAccordion.ACCORDIONMAP["noc"] = "dashboard.noc.NocAccordion";
-        DashboardAccordion.ACCORDIONMAP["alerts"] = "dashboard.alerts.AlertsAccordion";
-        DashboardAccordion.ACCORDIONMAP["custom"] = "dashboard.custom.CustomAccordion";
-        DashboardAccordion.ACCORDIONMAP["config"] = "dashboard.config.ConfigAccordion";
-
 
         return DashboardAccordion;
     });
