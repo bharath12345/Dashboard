@@ -1,7 +1,7 @@
-define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/topology/nls/topology", "dashboard/logger/Logger",
+define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/topology/nls/topology", "dojo/i18n!dashboard/nls/dashboard", "dashboard/logger/Logger",
     "dashboard/abstract/AbstractAccordion", "dashboard/topology/TopologyView", "dashboard/helper/Scheduler", "dashboard/helper/Helper"],
 
-    function (declare, i18n, i18nString, Logger, AbstractAccordion, TopologyView, Scheduler, Helper) {
+    function (declare, i18n, i18nString, dashboardI18nString, Logger, AbstractAccordion, TopologyView, Scheduler, Helper) {
 
         dashboard.classnames.TopologyAccordion = "dashboard.topology.TopologyAccordion";
 
@@ -14,7 +14,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/topology/nls/top
                 topologyView.loadMenu(uuid, name, type);
                 topologyView.createSplitCenterPanes(dashboard.dom.CpCenterInner[dashboard.pageTypes.dashboard]);
 
-                dashboard.dom.TopMenuPane[dashboard.pageTypes.dashboard].domNode.innerHTML = Helper.getHeading(i18nString[name]);
+                dashboard.dom.TopMenuPane[dashboard.pageTypes.dashboard].domNode.innerHTML = Helper.getHeading(dashboardI18nString[name]);
 
                 switch(parseInt(enumId)) {
                     case dashboard.enumMap.TOPOLOGY.SAMPLE_TOPOLOGY:

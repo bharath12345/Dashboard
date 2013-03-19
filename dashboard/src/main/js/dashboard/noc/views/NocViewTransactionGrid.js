@@ -215,11 +215,6 @@ define(["dojo/_base/declare", "dojo/i18n","dojo/i18n!dashboard/noc/nls/noc", "da
                 console.log("data = " + dojo.toJson(data));
                 console.log("input = " + dojo.toJson(input));
 
-                if(input.applicationVO == null || input.applicationVO.length == 0) {
-                    dashboard.dom.CpCenterInnerTop.domNode.innerHTML="No Applications and Transactions configured for display on the dashboard";
-                    return;
-                }
-
                 TxGridMeta.DATACLASS = "transaction/AppData.action";//input.applicationVO.dataActionClass;
 
                 var txCount = this.getTxCount(input);
@@ -435,6 +430,11 @@ define(["dojo/_base/declare", "dojo/i18n","dojo/i18n!dashboard/noc/nls/noc", "da
             },
             
             createTxGrid: function(input) {
+                if(input.applicationVO == null || input.applicationVO == undefined || input.applicationVO.length == 0) {
+                    dashboard.dom.CpCenterInnerTop.domNode.innerHTML="No Applications and Transactions configured for display on the dashboard";
+                    dashboard.dom.STANDBY.hide();
+                    return;
+                }
                 var data = Helper.parseInput(input);
                 var txGridMeta = new TxGridMeta();
                 txGridMeta.create(data, input);

@@ -138,7 +138,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
             },
 
             createToolbarButtons:function () {
-                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard][dashboard.pageTypes.dashboard].destroyDescendants(false);
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].destroyDescendants(false);
 
                 var buttonHelper = new ButtonHelper();
 
@@ -146,7 +146,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/TitlePane", "dojox/layout/Grid
                 on(button, "click", function () {
                     RenderAttributes.PAGEOBJ.saveValues();
                 });
-                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard][dashboard.pageTypes.dashboard].addChild(button);
+                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].addChild(button);
 
                 button = buttonHelper.getViewNewWindow();
                 on(button, "click", function () {

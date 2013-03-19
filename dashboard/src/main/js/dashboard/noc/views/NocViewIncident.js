@@ -300,8 +300,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc",
 
             loadPage:function (pageName) {
 
-                dashboard.dom.TopMenuPane[dashboard.pageTypes.dashboard].domNode.innerHTML = Helper.getHeading("Applications Alerts Dashboard");
-
                 dashboard.dom.CpCenterInnerTop.attr('content', dojo.create('div', {'id':pageName, style:'width: 100%; height: 100%;'}));
 
                 var xpos = 0, ypos = 0;
@@ -321,6 +319,11 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/noc/nls/noc",
             },
 
             createIncidentGridMeta:function (input) {
+                if(input.applicationVO == null || input.applicationVO == undefined || input.applicationVO.applications.length == 0) {
+                    dashboard.dom.CpCenterInnerTop.domNode.innerHTML="No Applications configured to display on the dashboard";
+                    dashboard.dom.STANDBY.hide();
+                    return;
+                }
                 var data = Helper.parseInput(input);
                 new IncidentGrid().create(data, input);
             }

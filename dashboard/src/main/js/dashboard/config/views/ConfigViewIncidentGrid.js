@@ -102,7 +102,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/confi
                 xhr("config/alertGridDetailsSave.action", {
                     handleAs:"json",
                     method:"POST",
-                    query:viewMeta,
+                    query:saveData,
                     headers:Helper.JSON_HEADER
                 }).then(lang.hitch(this, this.alertGridSave));
 

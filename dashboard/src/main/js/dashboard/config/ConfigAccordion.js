@@ -1,8 +1,8 @@
-define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/config", "dashboard/logger/Logger",
+define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/config", "dojo/i18n!dashboard/nls/dashboard", "dashboard/logger/Logger",
     "dojo/request/xhr", "dojo/_base/lang", "dashboard/helper/Helper",
     "dashboard/abstract/AbstractAccordion", "dashboard/config/ConfigView", "dashboard/config/RenderAttributes"],
 
-    function (declare, i18n, i18nString, Logger, xhr, lang, Helper, AbstractAccordion, ConfigView, RenderAttributes) {
+    function (declare, i18n, i18nString, dashboardI18nString, Logger, xhr, lang, Helper, AbstractAccordion, ConfigView, RenderAttributes) {
 
         dashboard.classnames.ConfigAccordion = "dashboard.config.ConfigAccordion";
 
@@ -20,7 +20,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/config/nls/confi
                     custom:[]
                 };
 
-                dashboard.dom.TopMenuPane[dashboard.pageTypes.dashboard].domNode.innerHTML = Helper.getHeading(i18nString[name]);
+                dashboard.dom.TopMenuPane[dashboard.pageTypes.dashboard].domNode.innerHTML = Helper.getHeading(dashboardI18nString[name]);
 
                 // ToDo: Change this switch away from Name to some ID
                 switch(parseInt(enumId)) {

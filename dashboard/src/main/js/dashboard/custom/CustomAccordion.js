@@ -1,7 +1,7 @@
-define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/topology/nls/topology", "dashboard/logger/Logger",
+define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/topology/nls/topology", "dojo/i18n!dashboard/nls/dashboard", "dashboard/logger/Logger",
     "dashboard/abstract/AbstractAccordion", "dashboard/helper/Scheduler", "dashboard/custom/CustomView", "dashboard/helper/Helper"],
 
-    function (declare, i18n, i18nString, Logger, AbstractAccordion, Scheduler, CustomView, Helper) {
+    function (declare, i18n, i18nString, dashboardI18nString, Logger, AbstractAccordion, Scheduler, CustomView, Helper) {
 
         dashboard.classnames.CustomAccordion = "dashboard.custom.CustomAccordion";
 
@@ -14,7 +14,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/topology/nls/top
                 customView.loadMenu(uuid, name, type);
                 customView.createSplitCenterPanes(dashboard.dom.CpCenterInner[dashboard.pageTypes.dashboard]);
 
-                dashboard.dom.TopMenuPane[dashboard.pageTypes.dashboard].domNode.innerHTML = Helper.getHeading(i18nString[name]);
+                dashboard.dom.TopMenuPane[dashboard.pageTypes.dashboard].domNode.innerHTML = Helper.getHeading(dashboardI18nString[name]);
 
                 switch(parseInt(enumId)) {
                     case dashboard.enumMap.CUSTOM.CUSTOM_LAYOUTS:

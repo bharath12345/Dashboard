@@ -25,7 +25,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
 
                 for(var i=0;i<data.length; i++) {
                     if(data[i].pageList != null) {
-                        treeObject = treeObject.concat(this.getTreeLeafForParent(data[i].pageList, data[i].enumId));
+                        treeObject = treeObject.concat(this.getTreeLeafForParent(data[i].pageList, data[i].uuid));
                     }
                 }
                 return treeObject;
@@ -35,8 +35,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                 var leafList = [];
                 for(var i=0;i<pageList.length; i++) {
                     var leaf = {};
-                    leaf.id = pageList[i].enumId;
-                    leaf.uuid = pageList[i].uuid;
+                    leaf.id = pageList[i].uuid; // its not a good idea to set any of the dom id's as EnumId
+                    leaf.enumId = pageList[i].enumId;
                     leaf.name = i18nString[pageList[i].name];
                     leaf.type = pageList[i].type;
                     leaf.parent = parentId;
@@ -54,8 +54,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                     return;
                 }
 
-                console.log("in abstract render accordion. data = " + dojo.toJson(data));
-                console.log("in abstract render accordion. param = " + dojo.toJson(param));
+                //console.log("in abstract render accordion. data = " + dojo.toJson(data));
+                //console.log("in abstract render accordion. param = " + dojo.toJson(param));
 
                 var rootId = param.name[0] + "_treeRoot";
                 var myStore = new Memory({
@@ -76,7 +76,13 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                 on(tree, "click", lang.hitch(this, this.renderView));
 
                 if(param.name[0] == "NOC") {
-
+                    //tree.set('paths', [rootId, data[0].uuid]); // tried to click the tree node, but it did not work :-(
+                    var localItem = {};
+                    localItem.enumId = data[0].enumId;
+                    localItem.id = data[0].uuid;
+                    localItem.name = data[0].name;
+                    localItem.type = data[0].type;
+                    this.renderView(localItem, null, null);
                 }
 
             },
@@ -89,7 +95,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                 //console.log("Event", evt); // This gives you the event object
                 //console.log('identifier: ' + tree_obj.getLabel(item));
 
-                this.createView(item.id, item.uuid, item.name, item.type, false);
+                this.createView(item.enumId, item.id, item.name, item.type, false);
             },
 
             createView:function (id, uuid, name, type, newWindow) {
