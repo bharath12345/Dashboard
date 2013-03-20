@@ -1,8 +1,8 @@
 define(["dojo/_base/declare", "dojo/i18n","dojo/i18n!dashboard/views/noc/nls/noc", "dashboard/logger/Logger",
     "dijit/TitlePane", "dojox/layout/GridContainer", "dojo/request/xhr", "dojo/_base/lang",
-    "dashboard/helper/Scheduler", "dashboard/helper/Helper"],
+    "dashboard/helper/Scheduler", "dashboard/helper/Helper", "dashboard/abstract/AbstractForm"],
 
-    function (declare, i18n, i18nString, Logger, TitlePane, GridContainer, xhr, lang, Scheduler, Helper) {
+    function (declare, i18n, i18nString, Logger, TitlePane, GridContainer, xhr, lang, Scheduler, Helper, AbstractForm) {
 
         dashboard.classnames.TxGridData = "dashboard.noc.forms.NocTransactionGridForm.TxGridData";
 
@@ -407,15 +407,15 @@ define(["dojo/_base/declare", "dojo/i18n","dojo/i18n!dashboard/views/noc/nls/noc
         
         dashboard.classnames.NocTransactionGridForm = "dashboard.noc.forms.NocTransactionGridForm";
 
-        var NocTransactionGridForm = declare(dashboard.classnames.NocTransactionGridForm, null, {
+        var NocTransactionGridForm = declare(dashboard.classnames.NocTransactionGridForm, AbstractForm, {
 
-            loadPage:function (pageName) {
-                dashboard.dom.TopMenuPane[dashboard.pageTypes.dashboard].domNode.innerHTML = Helper.getHeading("Transactions Grid");
+            startup:function () {
+                this.inherited(arguments);
 
                 var xpos=0, ypos=0;
                 var viewMeta = {
                     id:0,
-                    name: pageName,
+                    name: "",
                     dimensions:[dashboard.dom.CpCenterInnerTop.w, dashboard.dom.CpCenterInnerTop.h],
                     position:[xpos,ypos],
                     custom: []
@@ -431,7 +431,7 @@ define(["dojo/_base/declare", "dojo/i18n","dojo/i18n!dashboard/views/noc/nls/noc
             
             createTxGrid: function(input) {
                 if(input.applicationVO == null || input.applicationVO == undefined || input.applicationVO.length == 0) {
-                    dashboard.dom.CpCenterInnerTop.domNode.innerHTML="No Applications and Transactions configured for display on the dashboard";
+                    this.attr('content',"No Applications and Transactions configured for display on the dashboard");
                     dashboard.dom.STANDBY.hide();
                     return;
                 }

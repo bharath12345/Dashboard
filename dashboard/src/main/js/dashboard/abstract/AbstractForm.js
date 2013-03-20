@@ -7,6 +7,10 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
 
         var AbstractForm = declare(dashboard.classnames.AbstractForm, ContentPane, {
 
+            region: "center",
+            splitter: true,
+            style: "height: 100%",
+
             "-chains-":{
                 createMenuButtons:"after" //method is called after its superclass’ method
             },

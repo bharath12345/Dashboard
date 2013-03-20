@@ -37,6 +37,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                     var leaf = {};
                     leaf.id = pageList[i].uuid; // its not a good idea to set any of the dom id's as EnumId
                     leaf.enumId = pageList[i].enumId;
+                    leaf.enumName = pageList[i].name;
                     leaf.name = i18nString[pageList[i].name];
                     leaf.type = pageList[i].type;
                     leaf.parent = parentId;
@@ -75,10 +76,12 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
 
                 on(tree, "click", lang.hitch(this, this.renderView));
 
+                // Launch the NOC Screens Application Incident Grid as the default first view
                 if(param.name[0] == "NOC") {
                     //tree.set('paths', [rootId, data[0].uuid]); // tried to click the tree node, but it did not work :-(
                     var localItem = {};
                     localItem.enumId = data[0].enumId;
+                    localItem.enumName = data[0].name;
                     localItem.id = data[0].uuid;
                     localItem.name = data[0].name;
                     localItem.type = data[0].type;
@@ -95,7 +98,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                 //console.log("Event", evt); // This gives you the event object
                 //console.log('identifier: ' + tree_obj.getLabel(item));
 
-                this.createView(item.enumId, item.id, item.name, item.type, false);
+                this.createView(item.enumId, item.id, item.enumName, item.type, false);
             },
 
             createView:function (id, uuid, name, type, newWindow) {

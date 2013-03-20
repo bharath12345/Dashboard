@@ -1,9 +1,10 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/noc/nls/noc",
     "dijit/layout/ContentPane", "dojox/layout/GridContainer", 'dashboard/widgets/AoneDgrid', "dojo/request/xhr", "dojo/_base/lang", "dojo/store/Memory",
-    "dashboard/logger/Logger", "dashboard/helper/Scheduler", "dashboard/helper/Helper", "dashboard/analysis/ApplicationAnalysisPane"],
+    "dashboard/logger/Logger", "dashboard/helper/Scheduler", "dashboard/helper/Helper", "dashboard/analysis/ApplicationAnalysisPane",
+    "dashboard/abstract/AbstractForm"],
 
     function (declare, i18n, i18nString, ContentPane, GridContainer, Grid, xhr, lang, Memory,
-              Logger, Scheduler, Helper, ApplicationAnalysisPane) {
+              Logger, Scheduler, Helper, ApplicationAnalysisPane, AbstractForm) {
 
         dashboard.classnames.IncidentGridConfig = "dashboard.noc.forms.NocApplicationIncidentForm.IncidentGridConfig";
 
@@ -190,7 +191,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/noc/nls/no
                 for (var i = 0; i < input.applicationVO.applications.length; i++) {
                     var apps = input.applicationVO.applications;
                     for (var j = 0; j < metrics.length; j++) {
-                        dojo.query("#IncidentGrid-row-" + i + " td.field-" + metrics[j]).forEach(function (node) {
+                        dojo.query("#"+NocApplicationIncidentForm.PAGENAME+"-row-" + i + " td.field-" + metrics[j]).forEach(function (node) {
                             node.id = apps[i].name + "_" + apps[i].id + "_" + metrics[j];
                         });
                     }
@@ -296,17 +297,17 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/noc/nls/no
 
         dashboard.classnames.NocApplicationIncidentForm = "dashboard.noc.forms.NocApplicationIncidentForm";
 
-        var NocApplicationIncidentForm = declare(dashboard.classnames.NocApplicationIncidentForm, null, {
+        var NocApplicationIncidentForm = declare(dashboard.classnames.NocApplicationIncidentForm, AbstractForm, {
 
-            loadPage:function (pageName) {
+            startup:function () {
+                this.inherited(arguments);
 
-                dashboard.dom.CpCenterInnerTop.attr('content', dojo.create('div', {'id':pageName, style:'width: 100%; height: 100%;'}));
+                this.attr('content', dojo.create('div', {'id':NocApplicationIncidentForm.PAGENAME, style:'width: 100%; height: 100%;'}));
 
                 var xpos = 0, ypos = 0;
                 var viewMeta = {
-                    id:pageName,
-                    name:pageName,
-                    dimensions:[dashboard.dom.CpCenterInnerTop.w, dashboard.dom.CpCenterInnerTop.h],
+                    id:NocApplicationIncidentForm.PAGENAME,
+                    name:NocApplicationIncidentForm.PAGENAME,
                     position:[xpos, ypos],
                     custom:[]
                 };
@@ -320,7 +321,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/noc/nls/no
 
             createIncidentGridMeta:function (input) {
                 if(input.applicationVO == null || input.applicationVO == undefined || input.applicationVO.applications.length == 0) {
-                    dashboard.dom.CpCenterInnerTop.domNode.innerHTML="No Applications configured to display on the dashboard";
+                    this.attr('content',"No Applications configured to display on the dashboard");
                     dashboard.dom.STANDBY.hide();
                     return;
                 }
@@ -329,6 +330,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/noc/nls/no
             }
         });
 
+        NocApplicationIncidentForm.PAGENAME = "NocApplicationIncidentForm";
         // static variables of this class
         NocApplicationIncidentForm.LOG = Logger.addTimer(new Logger(dashboard.classnames.NocApplicationIncidentForm));
 

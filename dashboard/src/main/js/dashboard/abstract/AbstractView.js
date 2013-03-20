@@ -95,7 +95,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
              *   c) if 'analysisPaneRequired' flag is set to true then the vertically split panes for AbstractAnalysisPane is
              *       created - otherwise, not.
              */
-            createInnerMenuAndPanes: function(paneDom, analysisPaneRequired, viewName) {
+            createInnerMenuAndPanes: function(paneDom, viewName) {
                 var innerBc = this.getBorderContainer();
 
                 var cpList = [];
@@ -107,10 +107,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
                 this.addCPstartBC(innerBc, cpList, paneDom);
 
                 this.createMenuRegions(viewName, cpMenu);
-
-                if(analysisPaneRequired) {
-                    this.createSplitCenterPanes(dashboard.dom.CpCenterInner[viewName]);
-                }
             },
 
             createMenuRegions: function(viewName, cpMenu) {
@@ -131,13 +127,12 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
              *   dashboard. This is never permitted within the tab of any analyis pane. So - CpCenterInnerTop &
              *   CpCenterInnerBottom do NOT have to be arrays
              */
-            createSplitCenterPanes: function(cpCenterInner) {
+            createSplitCenterPanes: function(cpCenterInner, contentView) {
                 dashboard.dom.InnerBcSplit = this.getBorderContainer();
                 var cpList = [];
-                cpList.push(dashboard.dom.CpCenterInnerTop = this.getContentPane("center",true,"height: 100%"));
+                cpList.push(dashboard.dom.CpCenterInnerTop = contentView);
                 cpList.push(dashboard.dom.CpCenterInnerBottom = this.getContentPane("bottom",true,"display: none;"));
                 this.addCPstartBC(dashboard.dom.InnerBcSplit, cpList, cpCenterInner);
-
                 this.createAnalysisTabContainer();
             },
 

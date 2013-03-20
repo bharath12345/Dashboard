@@ -14,7 +14,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
             createDom: function() {
                 this.createCenterContainers();
                 this.createMenu();
-                this.createInnerMenuAndPanes(dashboard.dom.CpCenter.domNode, false, dashboard.pageTypes.dashboard);
+                this.createInnerMenuAndPanes(dashboard.dom.CpCenter.domNode, dashboard.pageTypes.dashboard);
             },
 
             createCenterContainers: function() {
