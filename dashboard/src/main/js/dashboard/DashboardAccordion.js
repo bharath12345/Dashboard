@@ -29,23 +29,23 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                 for(var key in dashboard.enumMap) {
                     switch(key) {
                         case "TOPOLOGY":
-                            this.ACCORDIONMAP[key] = "dashboard.topology.TopologyAccordion";
+                            this.ACCORDIONMAP[key] = "dashboard/views/topology/TopologyAccordion";
                             break;
 
                         case "CONFIG":
-                            this.ACCORDIONMAP[key] = "dashboard.config.ConfigAccordion";
+                            this.ACCORDIONMAP[key] = "dashboard/views/config/ConfigAccordion";
                             break;
 
                         case "NOC":
-                            this.ACCORDIONMAP[key] = "dashboard.noc.NocAccordion";
+                            this.ACCORDIONMAP[key] = "dashboard/views/noc/NocAccordion";
                             break;
 
                         case "CUSTOM":
-                            this.ACCORDIONMAP[key] = "dashboard.custom.CustomAccordion";
+                            this.ACCORDIONMAP[key] = "dashboard/views/custom/CustomAccordion";
                             break;
 
                         case "ALERTS":
-                            this.ACCORDIONMAP[key] = "dashboard.alerts.AlertsAccordion";
+                            this.ACCORDIONMAP[key] = "dashboard/views/alerts/AlertsAccordion";
                             break;
 
                         default:
@@ -101,7 +101,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
             },
 
             createAccordionPanes:function (data) {
-                var accClassPath = Helper.getClassPath(this.ACCORDIONMAP[data.param.name[0]]);
+                var accClassPath = this.ACCORDIONMAP[data.param.name[0]];
                 console.log("fetching callback class = " + accClassPath);
                 require([accClassPath], function (AccordionLoader) {
                     // AccordionLoader is a prototype of ConfigAccordion in the case of Config and so on...

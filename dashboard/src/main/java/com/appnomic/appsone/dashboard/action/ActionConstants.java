@@ -25,11 +25,11 @@ public interface ActionConstants {
 		
 		// Now the group members
 		
-		//group 1
+		//NOC Screens Group
 		APPLICATION_ALERTS,
 		TRANSACTION_GRID,
 		
-		//group 2
+		//Topology Group
 		APPLICATION_LAYERS,
 		APPLICATION_GROUPS,
 		APPLICATION_TOPOLOGY,

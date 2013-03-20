@@ -7,7 +7,7 @@ define(["dojo/_base/declare", "dojo/_base/lang", 'crossroads', 'dashboard/logger
         var DashboardRoutes = declare(dashboard.classnames.DashboardRoutes, null, {
 
             loadMainPage:function () {
-                require(['dashboard/DashboardView', 'dashboard/DashboardAccordion', "dashboard/noc/NocAccordion"],
+                require(['dashboard/DashboardView', 'dashboard/DashboardAccordion', "dashboard/views/noc/NocAccordion"],
 
                     function (DashboardView, DashboardAccordion, NocAccordion) {
 
@@ -46,7 +46,7 @@ define(["dojo/_base/declare", "dojo/_base/lang", 'crossroads', 'dashboard/logger
             nocMatch:function (uuid, name, type) {
                 console.log("NOC - Name = " + name + " type = " + type + " uuid = " + uuid);
 
-                require(["dashboard/noc/NocUtility", "dashboard/noc/NocAccordion"],
+                require(["dashboard/views/noc/NocUtility", "dashboard/views/noc/NocAccordion"],
                     function (NocUtility, NocAccordion) {
                         Logger.initialize();
                         NocUtility.InitKeyControls();
@@ -71,7 +71,7 @@ define(["dojo/_base/declare", "dojo/_base/lang", 'crossroads', 'dashboard/logger
             topologyMatch: function(uuid, name, type) {
                 console.log("TOPOLOGY - Name = " + name + " type = " + type + " uuid = " + uuid);
 
-                require(["dashboard/topology/TopologyAccordion"],
+                require(["dashboard/views/topology/TopologyAccordion"],
 
                     function (TopologyAccordion) {
                         var topoAccordion = new TopologyAccordion();
@@ -82,7 +82,7 @@ define(["dojo/_base/declare", "dojo/_base/lang", 'crossroads', 'dashboard/logger
             customMatch: function(uuid, name, type) {
                 console.log("CUSTOM - Name = " + name + " type = " + type + " uuid = " + uuid);
 
-                require(["dashboard/custom/CustomAccordion"],
+                require(["dashboard/views/custom/CustomAccordion"],
                     function (Logger, CustomUtility, CustomAccordion, Helper) {
                         var customAccordion = new CustomAccordion();
                         DashboardRoutes.createDomAndShowPage(customAccordion, uuid, name, type);

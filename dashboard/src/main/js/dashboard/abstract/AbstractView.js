@@ -92,7 +92,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
              * This creates
              *   a) Menu area which holds heading and toolbar buttons
              *   b) Central area which holds the real content
-             *   c) if 'analysisPaneRequired' flag is set to true then the vertically split panes for AnalysisPane is
+             *   c) if 'analysisPaneRequired' flag is set to true then the vertically split panes for AbstractAnalysisPane is
              *       created - otherwise, not.
              */
             createInnerMenuAndPanes: function(paneDom, analysisPaneRequired, viewName) {
