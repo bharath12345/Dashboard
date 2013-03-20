@@ -28,6 +28,9 @@ define(["dojo/_base/declare", "dojo/_base/lang", 'crossroads', 'dashboard/logger
 
             loadCrossRoadRoutes:function () {
 
+                dashboard.enumMap = {};
+                dashboard.enumMap.NOC = {};
+
                 var hashString = document.URL.substring(document.URL.indexOf("#") + 1, document.URL.length);
                 console.log("hash string = " + hashString);
 
@@ -51,8 +54,6 @@ define(["dojo/_base/declare", "dojo/_base/lang", 'crossroads', 'dashboard/logger
                         Logger.initialize();
                         NocUtility.InitKeyControls();
 
-                        dashboard.enumMap = {};
-                        dashboard.enumMap.NOC = {};
                         dashboard.enumMap.NOC[name] = parseInt(enumid);
 
                         var nocAccordion = new NocAccordion();
@@ -66,6 +67,8 @@ define(["dojo/_base/declare", "dojo/_base/lang", 'crossroads', 'dashboard/logger
 
                 require(['dashboard/config/ConfigAccordion'],
                     function (ConfigAccordion) {
+                        dashboard.enumMap.CONFIG[name] = parseInt(enumid);
+
                         var configAccordion = new ConfigAccordion();
                         DashboardRoutes.createDomAndShowPage(configAccordion, enumid, uuid, name, type);
                     }
@@ -78,6 +81,8 @@ define(["dojo/_base/declare", "dojo/_base/lang", 'crossroads', 'dashboard/logger
                 require(["dashboard/views/topology/TopologyAccordion"],
 
                     function (TopologyAccordion) {
+                        dashboard.enumMap.TOPOLOGY[name] = parseInt(enumid);
+
                         var topoAccordion = new TopologyAccordion();
                         DashboardRoutes.createDomAndShowPage(topoAccordion, enumid, uuid, name, type);
                     });
@@ -88,6 +93,8 @@ define(["dojo/_base/declare", "dojo/_base/lang", 'crossroads', 'dashboard/logger
 
                 require(["dashboard/views/custom/CustomAccordion"],
                     function (Logger, CustomUtility, CustomAccordion, Helper) {
+                        dashboard.enumMap.CUSTOM[name] = parseInt(enumid);
+
                         var customAccordion = new CustomAccordion();
                         DashboardRoutes.createDomAndShowPage(customAccordion, enumid, uuid, name, type);
                     }

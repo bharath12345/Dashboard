@@ -33,7 +33,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/noc/nls/no
                 // launch the child window
                 var wm = new WindowManager();
                 var queryParams = [];
-                queryParams.push("noc");
+                queryParams.push(dashboard.pageTypes.NOC);
                 queryParams.push(this.UUID);
                 queryParams.push(this.ENUMID);
                 queryParams.push(this.NAME);

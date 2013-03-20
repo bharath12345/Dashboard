@@ -1,8 +1,8 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", "dojo/on", "dojo/_base/lang",
     "dojo/store/Memory", "dashboard/widgets/AccordionTreeObjectStoreModel", "dashboard/widgets/AccordionTree",
-    "dashboard/logger/Logger", "dashboard/helper/Scheduler", "dojo/Deferred"],
+    "dashboard/logger/Logger", "dashboard/helper/Scheduler"],
 
-    function (declare, i18n, i18nString, on, lang, Memory, ObjectStoreModel, Tree, Logger, Scheduler, Deferred) {
+    function (declare, i18n, i18nString, on, lang, Memory, ObjectStoreModel, Tree, Logger, Scheduler) {
 
         dashboard.classnames.AbstractAccordion = "dashboard.abstract.AbstractAccordion";
 
@@ -11,8 +11,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
             "-chains-":{
                 renderAccordion:"before" //method is called before calling its superclass method
             },
-
-            deferred: new Deferred(),
 
             getTreeData:function (data, rootId) {
                 var rootNode = {};

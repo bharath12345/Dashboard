@@ -1,7 +1,8 @@
-define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/topology/nls/topology", "dojo/i18n!dashboard/nls/dashboard", "dashboard/logger/Logger",
+define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/topology/nls/topology", "dojo/i18n!dashboard/nls/dashboard",
+    "dashboard/logger/Logger", "dojo/_base/lang",
     "dashboard/abstract/AbstractAccordion", "dashboard/views/topology/TopologyView", "dashboard/helper/Scheduler", "dashboard/helper/Helper"],
 
-    function (declare, i18n, i18nString, dashboardI18nString, Logger, AbstractAccordion, TopologyView, Scheduler, Helper) {
+    function (declare, i18n, i18nString, dashboardI18nString, Logger, lang, AbstractAccordion, TopologyView, Scheduler, Helper) {
 
         dashboard.classnames.TopologyAccordion = "dashboard.topology.TopologyAccordion";
 
@@ -10,17 +11,16 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/topology/n
             showView: function(enumId, uuid, name, type, newWindow) {
                 console.log("view id = " + enumId + " name = " + name + " uuid = " + uuid + " type = " + type);
 
-                topologyView = this.getView(name, newWindow);
-                topologyView.loadMenu(uuid, name, type);
-                topologyView.createSplitCenterPanes(dashboard.dom.CpCenterInner[dashboard.pageTypes.dashboard]);
+                this.topologyView = this.getView(name, newWindow);
+                this.topologyView.loadMenu(enumId, uuid, name, type);
 
-                dashboard.dom.TopMenuPane[dashboard.pageTypes.dashboard].domNode.innerHTML = Helper.getHeading(dashboardI18nString[name]);
+                dashboard.dom.TopMenuPane[this.topologyView.pageType].domNode.innerHTML = Helper.getHeading(dashboardI18nString[name]);
 
                 switch(parseInt(enumId)) {
                     case dashboard.enumMap.TOPOLOGY.SAMPLE_TOPOLOGY:
-                        require(["dashboard/views/topology/forms/SampleTopologyForm"], function (SampleTopologyForm) {
-                            new SampleTopologyForm().loadPage(this.SAMPLE);
-                        });
+                        require(["dashboard/views/topology/forms/SampleTopologyForm"], lang.hitch(this, function (SampleTopologyForm) {
+                            this.topologyView.createSplitCenterPanes(dashboard.dom.CpCenterInner[this.topologyView.pageType], new SampleTopologyForm());
+                        }));
                         break;
 
                     default:
@@ -29,20 +29,20 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/topology/n
                 }
             },
 
+            /*
+             Per the current design, one Accordion holds only one ACTIVE VIEW
+             but later for faster loading, we can keep a list of views per accordion and load them instantly
+             */
             getView: function(name, newWindow) {
-                var topologyView = TopologyAccordion.VIEWMAP[name];
-                if(topologyView == null) {
-                    topologyView = new TopologyView(newWindow);
-                    topologyView.setAccordion(this);
-                    TopologyAccordion.VIEWMAP[name] = topologyView; // there should be only one view per name (filtered views are for later)
+                if(this.topologyView == null || this.topologyView == undefined) {
+                    this.topologyView = new TopologyView(newWindow);
+                    this.topologyView.setAccordion(this);
                 }
-                return topologyView;
+                return this.topologyView;
             }
         });
 
         TopologyAccordion.LOG = Logger.addTimer(new Logger(dashboard.classnames.TopologyAccordion));
-
-        TopologyAccordion.VIEWMAP = {};
 
         return TopologyAccordion;
     });

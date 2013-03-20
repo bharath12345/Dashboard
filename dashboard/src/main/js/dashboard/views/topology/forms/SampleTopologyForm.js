@@ -1,8 +1,8 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/topology/nls/topology", "dashboard/logger/Logger",
     "dojox/layout/GridContainer", "dijit/TitlePane", "dijit/layout/ContentPane", "dojo/request/xhr", "dojo/_base/lang",
-    "dashboard/helper/Helper", "dashboard/helper/Scheduler"],
+    "dashboard/helper/Helper", "dashboard/helper/Scheduler", "dashboard/abstract/AbstractForm"],
 
-    function (declare, i18n, i18nString, Logger, GridContainer, TitlePane, ContentPane, xhr, lang, Helper, Scheduler) {
+    function (declare, i18n, i18nString, Logger, GridContainer, TitlePane, ContentPane, xhr, lang, Helper, Scheduler, AbstractForm) {
 
         dashboard.classnames.ConnectionStatus = "dashboard.topology.forms.SampleTopologyForm.ConnectionStatus";
 
@@ -90,7 +90,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/topology/n
                         RenderConnectivity.sourceEndpoint,
                         {
                             uuid:srcUuid,
-                            container:SampleTopologyForm.TopPane.domNode,
+                            container:dashboard.dom.CpCenterInnerTop.domNode,
                             anchor:"RightMiddle"
                         });
 
@@ -99,12 +99,12 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/topology/n
                         RenderConnectivity.targetEndpoint,
                         {
                             uuid:dstUuid,
-                            container:SampleTopologyForm.TopPane.domNode,
+                            container:dashboard.dom.CpCenterInnerTop.domNode,
                             anchor:"LeftMiddle"
                         });
 
                     // create connection link
-                    jsPlumb.connect({ source:sourceEP, target:dstEP, container:SampleTopologyForm.TopPane.domNode });
+                    jsPlumb.connect({ source:sourceEP, target:dstEP, container:dashboard.dom.CpCenterInnerTop.domNode });
 
                     // get and set the status of the connection link
                     var xpos = 0, ypos = 0;
@@ -269,7 +269,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/topology/n
 
                     var gridContainer = new GridContainer({nbZones:names.length, isAutoOrganized:true,
                         style:"width: 100%; height: 100%;"});
-                    SampleTopologyForm.TopPane.addChild(gridContainer);
+                    dashboard.dom.CpCenterInnerTop.addChild(gridContainer);
                     gridContainer.disableDnd();
 
                     var j = 0, k = 0;
@@ -425,12 +425,12 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/topology/n
                     }
                 }
 
-                var innerPane = dojo.query(".dijitTitlePaneContentOuter", SampleTopologyForm.TopPane.domNode);
+                var innerPane = dojo.query(".dijitTitlePaneContentOuter", dashboard.dom.CpCenterInnerTop.domNode);
                 for (var i = 0; i < innerPane.length; i++) {
                     innerPane[i].style.border = 0;
                 }
 
-                var gridText = dojo.query(".dijitTitlePaneTextNode", SampleTopologyForm.TopPane.domNode);
+                var gridText = dojo.query(".dijitTitlePaneTextNode", dashboard.dom.CpCenterInnerTop.domNode);
                 for (var i = 0; i < gridText.length; i++) {
                     gridText[i].style.display = "block";
                     gridText[i].style.textAlign = "center";
@@ -469,33 +469,16 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/topology/n
 
         dashboard.classnames.SampleTopologyForm = "dashboard.topology.forms.SampleTopologyForm";
 
-        var SampleTopologyForm = declare(dashboard.classnames.SampleTopologyForm, null, {
+        var SampleTopologyForm = declare(dashboard.classnames.SampleTopologyForm, AbstractForm, {
 
-            loadPage:function (pageName) {
-
-                var paneWidth = dashboard.dom.CpCenterInnerTop.w;
-                var paneHeight = dashboard.dom.CpCenterInnerTop.h;
-                var styleString = "width: " + paneWidth + "; height: " + paneHeight + ";"
-
-                SampleTopologyForm.TopPane = new ContentPane({
-                    splitter:false,
-                    style:styleString
-                });
-
-                var gridContainer = new GridContainer({nbZones:1, isAutoOrganized:true,
-                    style:"width: 100%; height: 100%;"});
-                dashboard.dom.CpCenterInnerTop.addChild(gridContainer);
-                gridContainer.disableDnd();
-
-                gridContainer.addChild(SampleTopologyForm.TopPane, 0);
-                gridContainer.startup();
-                gridContainer.resize();
+            startup:function (pageName) {
+                this.inherited(arguments);
 
                 var xpos = 0, ypos = 0;
                 var viewMeta = {
                     id:pageName,
                     name:pageName,
-                    dimensions:[paneWidth, paneHeight],
+                    dimensions:[this.w, this.h],
                     position:[xpos, ypos],
                     custom:[]
                 };
@@ -519,8 +502,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/topology/n
 
         // static variables of this class
         SampleTopologyForm.LOG = Logger.addTimer(new Logger(dashboard.classnames.SampleTopologyForm));
-
-        SampleTopologyForm.TopPane = null;
 
         return SampleTopologyForm;
     });
