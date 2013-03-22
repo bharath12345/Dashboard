@@ -33,7 +33,7 @@ define({
 
             /* The panes */
             APPLICATION_LAYERS: "Application Layers",
-            APPLICATION_GROUPS: "Application Groups and Topology",
+            APPLICATION_GROUPS: "Application Groups",
             APPLICATION_TOPOLOGY: "Application Topology",
             COMPONENT_TOPOLOGY: "Component Topology",
         //////////////////////////////////////////////////////////////////

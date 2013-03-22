@@ -34,6 +34,7 @@
         <script type="text/javascript" src="./js/jQuery/jquery-1.9.1.min.js"></script>
         <script type="text/javascript" src="./js/jQuery/jquery-ui-1.10.0.custom.min.js"></script>
         <script type="text/javascript" src="./js/jQuery/plugins/jsPlumb/jquery.jsPlumb-1.3.16-all-min.js"></script>
+        <script type="text/javascript" src="./js/jQuery/plugins/tag/tag.js"></script>
 
         </head>
         <body class="claro">

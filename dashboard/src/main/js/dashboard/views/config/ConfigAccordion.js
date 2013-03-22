@@ -9,23 +9,24 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/config/nls
         var ConfigAccordion = declare(dashboard.classnames.ConfigAccordion, AbstractAccordion, {
 
             showView: function(enumId, uuid, name, type, newWindow) {
-                var configView = this.getView(name);
-
                 console.log("view id = " + enumId + " name = " + name + " uuid = " + uuid + " type = " + type);
-                var viewMeta = {
-                    id:uuid,
-                    name: name,
-                    type: 0,
-                    newWindow: newWindow,
-                    custom:[]
-                };
 
-                dashboard.dom.TopMenuPane[dashboard.pageTypes.dashboard].domNode.innerHTML = Helper.getHeading(dashboardI18nString[name]);
+                this.configView = this.getView(name);
+                this.configView.loadMenu(enumId, uuid, name, type);
+
+
+                dashboard.dom.TopMenuPane[this.configView.pageType].domNode.innerHTML = Helper.getHeading(dashboardI18nString[name]);
 
                 // ToDo: Change this switch away from Name to some ID
                 switch(parseInt(enumId)) {
                     case dashboard.enumMap.CONFIG.APPLICATION_ALERTS:
-                        xhr("config/alertGridDetailsRetrieve.action", {
+                        var viewMeta = {
+                            id:uuid,
+                            name: name,
+                            type: 0,
+                            newWindow: newWindow,
+                            custom:[]
+                        };xhr("config/alertGridDetailsRetrieve.action", {
                             handleAs:"json",
                             method:"POST",
                             query:viewMeta,
@@ -34,7 +35,13 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/config/nls
                         break;
 
                     case dashboard.enumMap.CONFIG.TRANSACTION_GRID:
-                        xhr("config/transactionGridDetailsRetrieve.action", {
+                        var viewMeta = {
+                            id:uuid,
+                            name: name,
+                            type: 0,
+                            newWindow: newWindow,
+                            custom:[]
+                        };xhr("config/transactionGridDetailsRetrieve.action", {
                             handleAs:"json",
                             method:"POST",
                             query:viewMeta,
@@ -43,10 +50,15 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/config/nls
                         break;
 
                     case dashboard.enumMap.CONFIG.APPLICATION_LAYERS:
-
+                        require(["dashboard/views/config/forms/ConfigAppLayersForm"], lang.hitch(this, function (ConfigAppLayersForm) {
+                            this.configView.createSplitCenterPanes(dashboard.dom.CpCenterInner[this.configView.pageType], new ConfigAppLayersForm());
+                        }));
                         break;
 
                     case dashboard.enumMap.CONFIG.APPLICATION_GROUPS:
+                        require(["dashboard/views/config/forms/ConfigAppGroupsForm"], lang.hitch(this, function (ConfigAppGroupsForm) {
+                            this.configView.createSplitCenterPanes(dashboard.dom.CpCenterInner[this.configView.pageType], new ConfigAppGroupsForm());
+                        }));
                         break;
 
                     case dashboard.enumMap.CONFIG.APPLICATION_TOPOLOGY:
@@ -77,20 +89,16 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/config/nls
                 });
             },
 
-            getView: function(name) {
-                var configView = ConfigAccordion.VIEWMAP[name];
-                if(configView == null) {
-                    configView = new ConfigView();
-                    configView.setAccordion(this);
-                    ConfigAccordion.VIEWMAP[name] = configView; // there should be only one view per name (filtered views are for later)
+            getView: function(name, newWindow) {
+                if(this.configView == null || this.configView == undefined) {
+                    this.configView = new ConfigView();
+                    this.configView.setAccordion(this);
                 }
-                return configView;
+                return this.configView;
             }
         });
 
         ConfigAccordion.LOG = Logger.addTimer(new Logger(dashboard.classnames.ConfigAccordion));
-
-        ConfigAccordion.VIEWMAP = {};
 
         return ConfigAccordion;
     });

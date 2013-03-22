@@ -159,4 +159,49 @@ div.heading{
     float:right;
 }
 
+/* ----------------- For the Instructions area in Form -----------------*/
+div.Instructions {
+    border-color:#FFFFFF #CCCCCC #CCCCCC #FFFFFF;
+    border-style:solid;
+    border-width:1px;
+    color:#777777;
+    width:auto;
+    padding:2px 2px 4px 4px;
+}
+
+/* ----------------- For the Apps and Layers Tagging -----------------*/
+SPAN.tagMatches {
+    margin-left: 10px;
+}
+
+SPAN.tagMatches SPAN {
+    padding: 2px;
+    margin-right: 4px;
+    background-color: #0000AB;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* ----------------- Configuration Form Internals -----------------*/
+form.dijitContentPane {
+    background-color:#F0F0F0;
+    border-color:#CCCCCC #666666 #666666 #CCCCCC;
+    border-style:solid;
+    border-width:1px;
+}
+
+.dijitInputInner {
+    font-size: 11px !important;
+}
+
+label  {
+    font-size: 11px !important;
+    cursor: default  !important;
+}
+
+.tableContainer-table {
+    padding-left: 10px;
+}
+
+
 
