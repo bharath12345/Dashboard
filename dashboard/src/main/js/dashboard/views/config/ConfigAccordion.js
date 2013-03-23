@@ -51,13 +51,13 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/config/nls
 
                     case dashboard.enumMap.CONFIG.APPLICATION_LAYERS:
                         require(["dashboard/views/config/forms/ConfigAppLayersForm"], lang.hitch(this, function (ConfigAppLayersForm) {
-                            this.configView.createSplitCenterPanes(dashboard.dom.CpCenterInner[this.configView.pageType], new ConfigAppLayersForm(dashboard.pageTypes.dashboard));
+                            this.configView.createSplitCenterPanes(dashboard.dom.CpCenterInner[this.configView.pageType], new ConfigAppLayersForm(this.configView.pageType));
                         }));
                         break;
 
                     case dashboard.enumMap.CONFIG.APPLICATION_TAGS:
                         require(["dashboard/views/config/forms/ConfigAppTagsForm"], lang.hitch(this, function (ConfigAppTagsForm) {
-                            this.configView.createSplitCenterPanes(dashboard.dom.CpCenterInner[this.configView.pageType], new ConfigAppTagsForm(dashboard.pageTypes.dashboard));
+                            this.configView.createSplitCenterPanes(dashboard.dom.CpCenterInner[this.configView.pageType], new ConfigAppTagsForm(this.configView.pageType));
                         }));
                         break;
 
