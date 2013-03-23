@@ -175,6 +175,13 @@ public class DefaultTableCreator {
 		pageList.add(topoListVO);
 
 		pageListVO = cple.new PageEntity();
+		pageListVO.setName(ActionConstants.CONFIG.APPLICATION_TAGS.name());
+		pageListVO.setUuid(UUID.randomUUID().toString());
+		pageListVO.setEnumId(ActionConstants.CONFIG.APPLICATION_TAGS.ordinal());
+		pageListVO.setType(ActionConstants.ACCTYPE.CONFIGURATION.name());
+		topoList.add(pageListVO);
+		
+		pageListVO = cple.new PageEntity();
 		pageListVO.setName(ActionConstants.CONFIG.APPLICATION_LAYERS.name());
 		pageListVO.setUuid(UUID.randomUUID().toString());
 		pageListVO.setEnumId(ActionConstants.CONFIG.APPLICATION_LAYERS.ordinal());
@@ -185,13 +192,6 @@ public class DefaultTableCreator {
 		pageListVO.setName(ActionConstants.CONFIG.APPLICATION_TOPOLOGY.name());
 		pageListVO.setUuid(UUID.randomUUID().toString());
 		pageListVO.setEnumId(ActionConstants.CONFIG.APPLICATION_TOPOLOGY.ordinal());
-		pageListVO.setType(ActionConstants.ACCTYPE.CONFIGURATION.name());
-		topoList.add(pageListVO);
-
-		pageListVO = cple.new PageEntity();
-		pageListVO.setName(ActionConstants.CONFIG.APPLICATION_TAGS.name());
-		pageListVO.setUuid(UUID.randomUUID().toString());
-		pageListVO.setEnumId(ActionConstants.CONFIG.APPLICATION_TAGS.ordinal());
 		pageListVO.setType(ActionConstants.ACCTYPE.CONFIGURATION.name());
 		topoList.add(pageListVO);
 

@@ -18,9 +18,10 @@ define(["dojo/_base/declare", "dojo/i18n","dojo/i18n!dashboard/views/config/nls/
                 console.log("making icons = " + this.title);
                 this.createConfigMenu();
 
-                this.attr('content', dojo.create('div', {'id':ConfigAppTagsForm.FORMNAME, style:'width: 100%; height: 100%;'}));
+                var tableDiv = dojo.create('div', {'id':ConfigAppTagsForm.FORMNAME, style:'width: 100%; height: 100%;'});
+                this.attr('content', tableDiv);
 
-                var configTable = new TableContainer({cols:1, "labelWidth":"150"}, dojo.byId(ConfigAppTagsForm.FORMNAME));
+                var configTable = new TableContainer({cols:1, "labelWidth":"150"}, tableDiv);
 
                 this.appBox = TextBox({label:"Application Name", name:ConfigAppTagsForm.APPID, id:ConfigAppTagsForm.APPID});
                 configTable.addChild(this.appBox);

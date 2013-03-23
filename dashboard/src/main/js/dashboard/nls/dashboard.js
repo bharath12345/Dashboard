@@ -34,7 +34,7 @@ define({
             /* The panes */
             APPLICATION_TAGS: "Application Tags",
             APPLICATION_LAYERS: "Application Layers",
-            APPLICATION_TOPOLOGY: "Application Topology",
+            APPLICATION_TOPOLOGY: "Topology",
             COMPONENT_TOPOLOGY: "Component Topology",
         //////////////////////////////////////////////////////////////////
 

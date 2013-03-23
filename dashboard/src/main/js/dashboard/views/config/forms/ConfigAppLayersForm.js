@@ -17,7 +17,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                 console.log("making icons = " + this.title);
                 this.createConfigMenu();
 
-                this.attr('content', dojo.create('div', {'id':ConfigAppLayersForm.FORMNAME, style:'width: 100%; height: 100%;'}));
+                var tableDiv = dojo.create('div', {'id':ConfigAppLayersForm.FORMNAME, style:'width: 100%; height: 100%;'});
+                this.attr('content', tableDiv);
 
                 var configTable = new TableContainer({cols: 1,"labelWidth": "150"}, dojo.byId(ConfigAppLayersForm.FORMNAME));
 
@@ -54,6 +55,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                     tagNameArray[i] = string.trim(tagNameArray[i]);
                 }
 
+                ConfigAppLayersForm.LAYERARRAY.push(layerName);
+                ConfigAppLayersForm.LAYERARRAY = ConfigHelper.arrayUnique(ConfigAppLayersForm.LAYERARRAY);
+
                 for (var i = 0; i < appNameArray.length; i++) {
                     var layerMap = ConfigAppLayersForm.LAYERMAP[layerName] = {};
                     layerMap['TAGS'] = tagNameArray;
@@ -74,6 +78,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
         ConfigAppLayersForm.FORMNAME= "ConfigAppLayersForm";
 
         ConfigAppLayersForm.LAYERMAP = {};
+        ConfigAppLayersForm.LAYERARRAY = [];
 
         ConfigAppLayersForm.APPID = "apps";
         ConfigAppLayersForm.APPTAGID = "app-tags";
