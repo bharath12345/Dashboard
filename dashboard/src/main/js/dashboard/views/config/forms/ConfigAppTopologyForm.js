@@ -1,8 +1,9 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", "dashboard/logger/Logger",
     "dashboard/views/config/ConfigForm", "dojox/layout/TableContainer", "dijit/form/TextBox", "dashboard/helper/ConfigHelper",
-    "dojo/string", "dojo/_base/lang", "dojo/dom-construct"],
+    "dojo/string", "dojo/_base/lang", "dojo/dom-construct", "dashboard/helper/ButtonHelper", "dojo/on"],
 
-    function (declare, i18n, dashboardI18nString, Logger, ConfigForm, TableContainer, TextBox, ConfigHelper, string, lang, domConstruct) {
+    function (declare, i18n, dashboardI18nString, Logger, ConfigForm, TableContainer, TextBox, ConfigHelper, string,
+              lang, domConstruct, ButtonHelper, on) {
 
         dashboard.classnames.ConfigAppTopologyForm = "dashboard.config.forms.ConfigAppTopologyForm";
 
@@ -23,36 +24,62 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
 
                 var layerDef = dojo.create('div', {style:'width: 100%; height: 40px;'});
                 tableDiv.appendChild(layerDef);
-                var configTable = new TableContainer({cols: 3,"labelWidth": "150"}, layerDef);
+                this.configTable = new TableContainer({cols: 3,"labelWidth": "150"}, layerDef);
 
-                this.layerBox = TextBox({label:"Layer Name", name:ConfigAppTopologyForm.LAYER, id:ConfigAppTopologyForm.LAYER});
-                configTable.addChild(this.layerBox);
+                this.layerBox = TextBox({label:"Layer Name", name:ConfigAppTopologyForm.LAYER,
+                    id:ConfigAppTopologyForm.LAYER, intermediateChanges:true});
+                this.configTable.addChild(this.layerBox);
 
-                configTable.startup();
+                this.configTable.startup();
 
                 ConfigHelper.addSuggest(ConfigAppTopologyForm.LAYER, dashboard.config.forms.ConfigAppLayersForm.LAYERARRAY);
 
                 ////
 
-                var topoDef = dojo.create('div', {style:'width: 100%; height: 100%;'});
+                var topoDef = dojo.create('div', {style:'width: 100%;'});
                 tableDiv.appendChild(topoDef);
 
-                configTable = new TableContainer({cols: 3,"labelWidth": "10"}, topoDef);
+                this.configTable = new TableContainer({cols: 3,"labelWidth": "10"}, topoDef);
 
                 this.nodeOneBox = TextBox({name:ConfigAppTopologyForm.NODEONE, id:ConfigAppTopologyForm.NODEONE});
-                configTable.addChild(this.nodeOneBox);
+                this.configTable.addChild(this.nodeOneBox);
 
                 this.nodeTwoBox = TextBox({name:ConfigAppTopologyForm.NODETWO, id:ConfigAppTopologyForm.NODETWO});
-                configTable.addChild(this.nodeTwoBox);
+                this.configTable.addChild(this.nodeTwoBox);
 
                 this.txBox = TextBox({name:ConfigAppTopologyForm.TX, id:ConfigAppTopologyForm.TX});
-                configTable.addChild(this.txBox);
+                this.configTable.addChild(this.txBox);
 
-                configTable.startup();
+                this.configTable.startup();
 
                 /// Add heading row
 
-                var table = configTable.domNode.childNodes[0];
+                this.addHeadingRow();
+
+                /// Add content assist
+
+                on(this.layerBox, "change", lang.hitch(this, this.contentAssist));
+                ConfigHelper.addSuggest(ConfigAppTopologyForm.TX, ConfigAppTopologyForm.TXARRAY);
+
+                dashboard.dom.STANDBY.hide();
+            },
+
+            contentAssist: function() {
+                var layerName = string.trim(this.layerBox.get('value'));
+                var configAppLayersForm = dashboard.config.forms.ConfigAppLayersForm;
+                var layerMap = configAppLayersForm.LAYERMAP[layerName];
+
+                var allAppAndTags = [];
+                if(layerMap != null && layerMap != undefined) {
+                    allAppAndTags = ConfigHelper.arrayUnique(layerMap['TAGS'].concat(layerMap['APPS']));
+                }
+
+                ConfigHelper.addSuggest(ConfigAppTopologyForm.NODEONE, allAppAndTags);
+                ConfigHelper.addSuggest(ConfigAppTopologyForm.NODETWO, allAppAndTags);
+            },
+
+            addHeadingRow: function(table) {
+                var table = this.configTable.domNode.childNodes[0];
 
                 var thead = dojo.create('thead');
                 //table.appendChild(thead);
@@ -78,23 +105,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                 col = lang.clone(col);
                 col.innerHTML = "Edge Transaction";
                 row.appendChild(col);
-
-                /// Add content assist
-
-                var layerName = this.layerBox.get('value');
-                var configAppLayersForm = dashboard.config.forms.ConfigAppLayersForm;
-                var layerMap = configAppLayersForm.LAYERMAP[layerName];
-
-                var allAppAndTags = [];
-                if(layerMap != null && layerMap != undefined) {
-                    allAppAndTags = ConfigHelper.arrayUnique(layerMap['TAGS'].concat(layerMap['APPS']));
-                }
-
-                ConfigHelper.addSuggest(ConfigAppTopologyForm.NODEONE, allAppAndTags);
-                ConfigHelper.addSuggest(ConfigAppTopologyForm.NODETWO, allAppAndTags);
-                ConfigHelper.addSuggest(ConfigAppTopologyForm.TX, ConfigAppTopologyForm.TXARRAY);
-
-                dashboard.dom.STANDBY.hide();
             },
 
             saveConfig:function () {
@@ -117,6 +127,23 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                  called from the base ConfigForm class
                  one can add further form specific buttons and actions here
                  */
+
+                var buttonHelper = new ButtonHelper();
+                var button = buttonHelper.getNew();
+                on(button, "click", lang.hitch(this, this.addRow));
+                dashboard.dom.Toolbar[this.pageType].addChild(button);
+            },
+
+            addRow: function() {
+                var x = TextBox({});
+                this.configTable.addChild(x);
+
+                this.configTable._initialized = false;
+                this.configTable._started = false;
+                this.configTable.startup();
+
+                this.addHeadingRow();
+
             }
         });
 
