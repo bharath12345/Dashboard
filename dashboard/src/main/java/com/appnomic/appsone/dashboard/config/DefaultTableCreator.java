@@ -189,9 +189,9 @@ public class DefaultTableCreator {
 		topoList.add(pageListVO);
 
 		pageListVO = cple.new PageEntity();
-		pageListVO.setName(ActionConstants.CONFIG.APPLICATION_GROUPS.name());
+		pageListVO.setName(ActionConstants.CONFIG.APPLICATION_TAGS.name());
 		pageListVO.setUuid(UUID.randomUUID().toString());
-		pageListVO.setEnumId(ActionConstants.CONFIG.APPLICATION_GROUPS.ordinal());
+		pageListVO.setEnumId(ActionConstants.CONFIG.APPLICATION_TAGS.ordinal());
 		pageListVO.setType(ActionConstants.ACCTYPE.CONFIGURATION.name());
 		topoList.add(pageListVO);
 

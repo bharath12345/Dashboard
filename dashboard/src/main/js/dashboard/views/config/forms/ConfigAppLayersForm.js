@@ -13,14 +13,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
 
                 this.attr('content', dojo.create('div', {'id':ConfigAppLayersForm.FORMNAME, style:'width: 100%; height: 100%;'}));
 
-                var configTable = new TableContainer({cols: 2,"labelWidth": "150"}, dojo.byId(ConfigAppLayersForm.FORMNAME));
-                var numLayers = NumberTextBox({label: "Number of Layers"});
-                var configureLayers = new Button({label: "Configure Layers"});
-                configTable.addChild(numLayers);
-                configTable.addChild(configure);
+                var configTable = new TableContainer({cols: 1,"labelWidth": "150"}, dojo.byId(ConfigAppLayersForm.FORMNAME));
+
                 configTable.startup();
-
-
 
                 dashboard.dom.STANDBY.hide();
             }

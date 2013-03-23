@@ -32,8 +32,8 @@ define({
             CONFIG_TOPOLOGY: "Topology",
 
             /* The panes */
+            APPLICATION_TAGS: "Application Tags",
             APPLICATION_LAYERS: "Application Layers",
-            APPLICATION_GROUPS: "Application Groups",
             APPLICATION_TOPOLOGY: "Application Topology",
             COMPONENT_TOPOLOGY: "Component Topology",
         //////////////////////////////////////////////////////////////////
