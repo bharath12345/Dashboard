@@ -1,7 +1,8 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", "dashboard/logger/Logger",
-    "dashboard/views/config/ConfigForm", "dojox/layout/TableContainer", "dijit/form/TextBox", "dashboard/helper/ConfigHelper", "dojo/string"],
+    "dashboard/views/config/ConfigForm", "dojox/layout/TableContainer", "dijit/form/TextBox", "dashboard/helper/ConfigHelper",
+    "dojo/string", "dojo/_base/lang", "dojo/dom-construct"],
 
-    function (declare, i18n, i18nString, Logger, ConfigForm, TableContainer, TextBox, ConfigHelper, string) {
+    function (declare, i18n, dashboardI18nString, Logger, ConfigForm, TableContainer, TextBox, ConfigHelper, string, lang, domConstruct) {
 
         dashboard.classnames.ConfigAppTopologyForm = "dashboard.config.forms.ConfigAppTopologyForm";
 
@@ -20,9 +21,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
 
                 ////
 
-                var layerDef = dojo.create('div', {style:'width: 100%; height: 100px;'});
+                var layerDef = dojo.create('div', {style:'width: 100%; height: 40px;'});
                 tableDiv.appendChild(layerDef);
-                var configTable = new TableContainer({cols: 3,"labelWidth": "10"}, layerDef);
+                var configTable = new TableContainer({cols: 3,"labelWidth": "150"}, layerDef);
 
                 this.layerBox = TextBox({label:"Layer Name", name:ConfigAppTopologyForm.LAYER, id:ConfigAppTopologyForm.LAYER});
                 configTable.addChild(this.layerBox);
@@ -49,9 +50,45 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
 
                 configTable.startup();
 
+                /// Add heading row
+
+                var table = configTable.domNode.childNodes[0];
+
+                var thead = dojo.create('thead');
+                //table.appendChild(thead);
+                domConstruct.place(thead, table, "first");
+
+                var row = dojo.create('tr');
+                thead.appendChild(row);
+
+                var blankCol = dojo.create('th');
+                row.appendChild(blankCol);
+                var col = dojo.create('th');
+                col.className = 'configTableHead';
+                col.innerHTML = "Application/Tag Endpoint";
+                row.appendChild(col);
+
+                blankCol = lang.clone(blankCol);
+                row.appendChild(blankCol);
+                col = lang.clone(col);
+                row.appendChild(col);
+
+                blankCol = lang.clone(blankCol);
+                row.appendChild(blankCol);
+                col = lang.clone(col);
+                col.innerHTML = "Edge Transaction";
+                row.appendChild(col);
+
+                /// Add content assist
+
                 var layerName = this.layerBox.get('value');
-                var allAppAndTags = ConfigHelper.arrayUnique(
-                    ConfigAppLayersForm.LAYERMAP[layerName]['TAGS'].concat(ConfigAppLayersForm.LAYERMAP[layerName]['APPS']));
+                var configAppLayersForm = dashboard.config.forms.ConfigAppLayersForm;
+                var layerMap = configAppLayersForm.LAYERMAP[layerName];
+
+                var allAppAndTags = [];
+                if(layerMap != null && layerMap != undefined) {
+                    allAppAndTags = ConfigHelper.arrayUnique(layerMap['TAGS'].concat(layerMap['APPS']));
+                }
 
                 ConfigHelper.addSuggest(ConfigAppTopologyForm.NODEONE, allAppAndTags);
                 ConfigHelper.addSuggest(ConfigAppTopologyForm.NODETWO, allAppAndTags);

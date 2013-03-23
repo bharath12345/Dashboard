@@ -62,6 +62,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/config/nls
                         break;
 
                     case dashboard.enumMap.CONFIG.APPLICATION_TOPOLOGY:
+                        require(["dashboard/views/config/forms/ConfigAppTopologyForm"], lang.hitch(this, function (ConfigAppTopologyForm) {
+                            this.configView.createSplitCenterPanes(dashboard.dom.CpCenterInner[this.configView.pageType], new ConfigAppTopologyForm(this.configView.pageType));
+                        }));
                         break;
 
                     case dashboard.enumMap.CONFIG.COMPONENT_TOPOLOGY:

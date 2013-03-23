@@ -204,5 +204,10 @@ label  {
     padding-left: 10px;
 }
 
+.configTableHead {
+    font-size: 11px;
+    padding-left: 55px;
+    text-align: left;
+}
 
 
