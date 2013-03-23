@@ -196,6 +196,13 @@ public class DefaultTableCreator {
 		topoList.add(pageListVO);
 
 		pageListVO = cple.new PageEntity();
+		pageListVO.setName(ActionConstants.CONFIG.LAYER_TRANSITIONS.name());
+		pageListVO.setUuid(UUID.randomUUID().toString());
+		pageListVO.setEnumId(ActionConstants.CONFIG.LAYER_TRANSITIONS.ordinal());
+		pageListVO.setType(ActionConstants.ACCTYPE.CONFIGURATION.name());
+		topoList.add(pageListVO);
+
+		pageListVO = cple.new PageEntity();
 		pageListVO.setName(ActionConstants.CONFIG.COMPONENT_TOPOLOGY.name());
 		pageListVO.setUuid(UUID.randomUUID().toString());
 		pageListVO.setEnumId(ActionConstants.CONFIG.COMPONENT_TOPOLOGY.ordinal());

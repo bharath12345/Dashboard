@@ -14,7 +14,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/config/nls
                 this.configView = this.getView(name);
                 this.configView.loadMenu(enumId, uuid, name, type);
 
-
                 dashboard.dom.TopMenuPane[this.configView.pageType].domNode.innerHTML = Helper.getHeading(dashboardI18nString[name]);
 
                 // ToDo: Change this switch away from Name to some ID
@@ -66,6 +65,13 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/config/nls
                             this.configView.createSplitCenterPanes(dashboard.dom.CpCenterInner[this.configView.pageType], new ConfigAppTopologyForm(this.configView.pageType));
                         }));
                         break;
+
+                    case dashboard.enumMap.CONFIG.LAYER_TRANSITIONS:
+                        require(["dashboard/views/config/forms/ConfigAppLayerTransitions"], lang.hitch(this, function (ConfigAppLayerTransitions) {
+                            this.configView.createSplitCenterPanes(dashboard.dom.CpCenterInner[this.configView.pageType], new ConfigAppLayerTransitions(this.configView.pageType));
+                        }));
+                        break;
+
 
                     case dashboard.enumMap.CONFIG.COMPONENT_TOPOLOGY:
                         break;

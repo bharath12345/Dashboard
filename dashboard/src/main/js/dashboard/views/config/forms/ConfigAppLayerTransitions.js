@@ -5,11 +5,11 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
     function (declare, i18n, dashboardI18nString, Logger, ConfigForm, TableContainer, TextBox, ConfigHelper, string,
               lang, domConstruct, ButtonHelper, on) {
 
-        dashboard.classnames.ConfigAppTopologyForm = "dashboard.config.forms.ConfigAppTopologyForm";
+        dashboard.classnames.ConfigAppLayerTransitions = "dashboard.config.forms.ConfigAppLayerTransitions";
 
-        var ConfigAppTopologyForm = declare(dashboard.classnames.ConfigAppTopologyForm, ConfigForm, {
+        var ConfigAppLayerTransitions = declare(dashboard.classnames.ConfigAppLayerTransitions, ConfigForm, {
 
-            title: dashboardI18nString.APPLICATION_TOPOLOGY,
+            title: dashboardI18nString.LAYER_TRANSITION,
 
             startup: function() {
                 this.inherited(arguments);
@@ -17,7 +17,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                 console.log("making icons = " + this.title);
                 this.createConfigMenu();
 
-                var tableDiv = dojo.create('div', {'id':ConfigAppTopologyForm.FORMNAME, style:'width: 100%; height: 100%;'});
+                var tableDiv = dojo.create('div', {'id':ConfigAppLayerTransitions.FORMNAME, style:'width: 100%; height: 100%;'});
                 this.attr('content', tableDiv);
 
                 ////
@@ -26,29 +26,26 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                 tableDiv.appendChild(layerDef);
                 this.configTable = new TableContainer({cols: 3,"labelWidth": "150"}, layerDef);
 
-                this.layerBox = TextBox({label:"Layer Name", name:ConfigAppTopologyForm.LAYER,
-                    id:ConfigAppTopologyForm.LAYER, intermediateChanges:true});
+                this.layerBox = TextBox({label:"Layer Name", name:ConfigAppLayerTransitions.LAYER,
+                    id:ConfigAppLayerTransitions.LAYER, intermediateChanges:true});
                 this.configTable.addChild(this.layerBox);
 
                 this.configTable.startup();
 
-                ConfigHelper.addSuggest(ConfigAppTopologyForm.LAYER, dashboard.config.forms.ConfigAppLayersForm.LAYERARRAY);
+                ConfigHelper.addSuggest(ConfigAppLayerTransitions.LAYER, dashboard.config.forms.ConfigAppLayersForm.LAYERARRAY);
 
                 ////
 
                 var topoDef = dojo.create('div', {style:'width: 100%;'});
                 tableDiv.appendChild(topoDef);
 
-                this.configTable = new TableContainer({cols: 3,"labelWidth": "10"}, topoDef);
+                this.configTable = new TableContainer({cols: 2,"labelWidth": "10"}, topoDef);
 
-                this.nodeOneBox = TextBox({name:ConfigAppTopologyForm.NODEONE, id:ConfigAppTopologyForm.NODEONE});
-                this.configTable.addChild(this.nodeOneBox);
+                this.fromBox = TextBox({name:ConfigAppLayerTransitions.FROM, id:ConfigAppLayerTransitions.FROM});
+                this.configTable.addChild(this.fromBox);
 
-                this.nodeTwoBox = TextBox({name:ConfigAppTopologyForm.NODETWO, id:ConfigAppTopologyForm.NODETWO});
-                this.configTable.addChild(this.nodeTwoBox);
-
-                this.txBox = TextBox({name:ConfigAppTopologyForm.TX, id:ConfigAppTopologyForm.TX});
-                this.configTable.addChild(this.txBox);
+                this.toBox = TextBox({name:ConfigAppLayerTransitions.TO, id:ConfigAppLayerTransitions.TO});
+                this.configTable.addChild(this.toBox);
 
                 this.configTable.startup();
 
@@ -59,8 +56,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                 /// Add content assist
 
                 on(this.layerBox, "change", lang.hitch(this, this.contentAssist));
-                ConfigHelper.addSuggest(ConfigAppTopologyForm.TX, ConfigAppTopologyForm.TXARRAY);
-
+                
                 dashboard.dom.STANDBY.hide();
             },
 
@@ -74,8 +70,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                     allAppAndTags = ConfigHelper.arrayUnique(layerMap['TAGS'].concat(layerMap['APPS']));
                 }
 
-                ConfigHelper.addSuggest(ConfigAppTopologyForm.NODEONE, allAppAndTags);
-                ConfigHelper.addSuggest(ConfigAppTopologyForm.NODETWO, allAppAndTags);
+                ConfigHelper.addSuggest(ConfigAppTopologyForm.FROM, allAppAndTags);
+                ConfigHelper.addSuggest(ConfigAppTopologyForm.TO, allAppAndTags);
             },
 
             addHeadingRow: function() {
@@ -92,34 +88,22 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                 row.appendChild(blankCol);
                 var col = dojo.create('th');
                 col.className = 'configTableHead';
-                col.innerHTML = "Application/Tag Endpoint";
+                col.innerHTML = "From Layer";
                 row.appendChild(col);
 
                 blankCol = lang.clone(blankCol);
                 row.appendChild(blankCol);
                 col = lang.clone(col);
-                row.appendChild(col);
-
-                blankCol = lang.clone(blankCol);
-                row.appendChild(blankCol);
-                col = lang.clone(col);
-                col.innerHTML = "Edge Transaction";
+                col.innerHTML = "To Layer";
                 row.appendChild(col);
             },
 
             saveConfig:function () {
-                var nodeOneName = this.nodeOneBox.get('value');
-                var nodeTwoName = this.nodeTwoBox.get('value');
+                var fromLayer = this.fromBox.get('value');
+                var toLayer = this.toBox.get('value');
                 var layerName = this.layerBox.get('value');
-                var txNames = this.txBox.get('value');
 
-                var txNameArray = txNames.split(',');
-                for(var i=0;i<txNameArray.length;i++) {
-                    txNameArray[i] = string.trim(txNameArray[i]);
-                }
 
-                var topoKey = nodeOneName + "__" + nodeTwoName + "__" + layerName;
-                ConfigAppTopologyForm.TOPOLOGY[topoKey] = txNameArray;
             },
 
             createFormSpecificMenu:function () {
@@ -147,17 +131,13 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
             }
         });
 
-        ConfigAppTopologyForm.LOG = Logger.addTimer(new Logger(dashboard.classnames.ConfigAppTopologyForm));
+        ConfigAppLayerTransitions.LOG = Logger.addTimer(new Logger(dashboard.classnames.ConfigAppLayerTransitions));
 
-        ConfigAppTopologyForm.FORMNAME = "ConfigAppTopologyForm";
+        ConfigAppLayerTransitions.FORMNAME = "ConfigAppLayerTransitions";
 
-        ConfigAppTopologyForm.NODEONE = "nodeOne";
-        ConfigAppTopologyForm.NODETWO = "nodeTwo";
-        ConfigAppTopologyForm.TX = "transactions";
-        ConfigAppTopologyForm.LAYER = "layerName";
+        ConfigAppLayerTransitions.FROM = "from";
+        ConfigAppLayerTransitions.TO = "two";
+        ConfigAppLayerTransitions.LAYER = "layerName";
 
-        ConfigAppTopologyForm.TXARRAY = ['TxA', 'TxB', 'TxC', 'TxD', 'TxE'];
-        ConfigAppTopologyForm.TOPOLOGY = {};
-
-        return ConfigAppTopologyForm;
+        return ConfigAppLayerTransitions;
     });
