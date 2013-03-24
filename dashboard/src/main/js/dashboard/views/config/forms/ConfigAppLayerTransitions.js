@@ -56,7 +56,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                 /// Add content assist
 
                 on(this.layerBox, "change", lang.hitch(this, this.contentAssist));
-                
+
                 dashboard.dom.STANDBY.hide();
             },
 

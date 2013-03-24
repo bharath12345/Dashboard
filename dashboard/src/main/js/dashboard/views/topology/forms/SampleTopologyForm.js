@@ -1,8 +1,8 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/topology/nls/topology", "dashboard/logger/Logger",
     "dojox/layout/GridContainer", "dijit/TitlePane", "dijit/layout/ContentPane", "dojo/request/xhr", "dojo/_base/lang",
-    "dashboard/helper/Helper", "dashboard/helper/Scheduler", "dashboard/abstract/AbstractForm"],
+    "dashboard/helper/Helper", "dashboard/helper/Scheduler", "dashboard/topology/TopologyForm"],
 
-    function (declare, i18n, i18nString, Logger, GridContainer, TitlePane, ContentPane, xhr, lang, Helper, Scheduler, AbstractForm) {
+    function (declare, i18n, i18nString, Logger, GridContainer, TitlePane, ContentPane, xhr, lang, Helper, Scheduler, TopologyForm) {
 
         dashboard.classnames.ConnectionStatus = "dashboard.topology.forms.SampleTopologyForm.ConnectionStatus";
 
@@ -469,7 +469,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/topology/n
 
         dashboard.classnames.SampleTopologyForm = "dashboard.topology.forms.SampleTopologyForm";
 
-        var SampleTopologyForm = declare(dashboard.classnames.SampleTopologyForm, AbstractForm, {
+        var SampleTopologyForm = declare(dashboard.classnames.SampleTopologyForm, TopologyForm, {
 
             startup:function (pageName) {
                 this.inherited(arguments);
@@ -497,6 +497,10 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/topology/n
             createNodeLayout:function (input) {
                 var data = Helper.parseInput(input);
                 new RenderNodes().create(data, input);
+            },
+
+            createFormSpecificMenu: function() {
+
             }
         });
 

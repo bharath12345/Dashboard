@@ -19,7 +19,13 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/topology/n
                 switch(parseInt(enumId)) {
                     case dashboard.enumMap.TOPOLOGY.SAMPLE_TOPOLOGY:
                         require(["dashboard/views/topology/forms/SampleTopologyForm"], lang.hitch(this, function (SampleTopologyForm) {
-                            this.topologyView.createSplitCenterPanes(dashboard.dom.CpCenterInner[this.topologyView.pageType], new SampleTopologyForm());
+                            this.topologyView.createSplitCenterPanes(dashboard.dom.CpCenterInner[this.topologyView.pageType], new SampleTopologyForm(this.topologyView.pageType));
+                        }));
+                        break;
+
+                    case dashboard.enumMap.TOPOLOGY.LAYERONE:
+                        require(["dashboard/views/topology/forms/LayerOne"], lang.hitch(this, function (LayerOne) {
+                            this.topologyView.createSplitCenterPanes(dashboard.dom.CpCenterInner[this.topologyView.pageType], new LayerOne(this.topologyView.pageType));
                         }));
                         break;
 

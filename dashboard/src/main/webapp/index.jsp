@@ -27,6 +27,8 @@
         <link rel="stylesheet" type="test/css" href="./js/dgrid/css/dgrid.css"/>
         <link rel="stylesheet" type="test/css" href="./js/dgrid/css/skins/claro.css"/>
         <!--link rel="stylesheet" type="text/css" href="./js/jQuery/smoothness/jquery-ui-1.10.0.custom.min.css"/-->
+        <link rel="stylesheet" type="test/css" href="./js/closure/goog/css/autocomplete.css"/>
+
 
         <!-- List of JS. First one should always be Dojo -->
         <script type="text/javascript" data-dojo-config="async: 1, tlmSiblingOfDojo: 0, isDebug: 1" src="./js/dojo/dojo.js"></script>
@@ -35,6 +37,7 @@
         <script type="text/javascript" src="./js/jQuery/jquery-ui-1.10.0.custom.min.js"></script>
         <script type="text/javascript" src="./js/jQuery/plugins/jsPlumb/jquery.jsPlumb-1.3.16-all-min.js"></script>
         <script type="text/javascript" src="./js/jQuery/plugins/tag/tag.js"></script>
+        <script type="text/javascript" src="./js/closure/goog/base.js"></script>
 
         </head>
         <body class="claro">

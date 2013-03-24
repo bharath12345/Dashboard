@@ -17,6 +17,7 @@ define({
 
         /* ----- Topology Accordion ----- */
         SAMPLE_TOPOLOGY:"Sample Topology",
+        LAYERONE: "Layer One",
         //////////////////////////////////////////////////////////////////
 
 
@@ -35,7 +36,7 @@ define({
             APPLICATION_TAGS: "Define Tags",
             APPLICATION_LAYERS: "Define Layers",
             APPLICATION_TOPOLOGY: "Configure Layer Topology",
-            LAYER_TRANSITION: "Configure Layer Transition",
+            LAYER_TRANSITIONS: "Configure Layer Transition",
             COMPONENT_TOPOLOGY: "Component Topology",
         //////////////////////////////////////////////////////////////////
 

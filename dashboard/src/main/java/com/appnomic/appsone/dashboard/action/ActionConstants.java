@@ -47,7 +47,8 @@ public interface ActionConstants {
 	}
 	
 	public enum TOPOLOGY {
-		SAMPLE_TOPOLOGY
+		SAMPLE_TOPOLOGY,
+		LAYERONE
 	}
 	
 	public enum NOC {

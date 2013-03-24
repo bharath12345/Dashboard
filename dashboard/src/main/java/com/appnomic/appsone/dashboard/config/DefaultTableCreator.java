@@ -230,6 +230,13 @@ public class DefaultTableCreator {
 		pageEntity.setEnumId(ActionConstants.TOPOLOGY.SAMPLE_TOPOLOGY.ordinal());
 		pageEntity.setType(ActionConstants.ACCTYPE.TOPOLOGY.name());
 		pageList.add(pageEntity);
+		
+		pageEntity = tple.new PageEntity();
+		pageEntity.setName(ActionConstants.TOPOLOGY.LAYERONE.name());
+		pageEntity.setUuid(UUID.randomUUID().toString());
+		pageEntity.setEnumId(ActionConstants.TOPOLOGY.LAYERONE.ordinal());
+		pageEntity.setType(ActionConstants.ACCTYPE.TOPOLOGY.name());
+		pageList.add(pageEntity);
 
 		tple.setPageEntity(pageList.toArray(new AlertsPageListEntity.PageEntity[pageList.size()]));
 		AccordionPageConfigManager apcm = AccordionPageConfigManager.getInstance();

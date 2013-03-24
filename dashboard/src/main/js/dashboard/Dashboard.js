@@ -18,6 +18,10 @@
 
 define([ 'dojo/has', 'require' ], function (has, require) {
 
+    /*
+        Initialize Global Data Structures
+     */
+
     dashboard = {};
     dashboard.classnames = {};
     dashboard.dom = {};
@@ -34,6 +38,15 @@ define([ 'dojo/has', 'require' ], function (has, require) {
     dashboard.pageTypes.TOPOLOGY = "topology";
     dashboard.pageTypes.CUSTOM = "custom";
 
+    /*
+        Include Google closure's required modules
+     */
+
+    goog.require('goog.ui.ac');
+
+    /*
+        Begin Dashboards
+     */
     if (has('host-browser')) {
 
         require(['./DashboardRoutes', 'dashboard/logger/Logger', 'dojo/domReady!'],

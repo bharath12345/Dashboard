@@ -92,12 +92,13 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                 row.appendChild(blankCol);
                 var col = dojo.create('th');
                 col.className = 'configTableHead';
-                col.innerHTML = "Application/Tag Endpoint";
+                col.innerHTML = "Application/Tag Source Endpoint";
                 row.appendChild(col);
 
                 blankCol = lang.clone(blankCol);
                 row.appendChild(blankCol);
                 col = lang.clone(col);
+                col.innerHTML = "Application/Tag Destination Endpoint";
                 row.appendChild(col);
 
                 blankCol = lang.clone(blankCol);
@@ -118,8 +119,10 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                     txNameArray[i] = string.trim(txNameArray[i]);
                 }
 
-                var topoKey = nodeOneName + "__" + nodeTwoName + "__" + layerName;
-                ConfigAppTopologyForm.TOPOLOGY[topoKey] = txNameArray;
+                var topoObject = ConfigAppTopologyForm.TOPOLOGY[layerName] = {};
+                topoObject[ConfigAppTopologyForm.SOURCE] = nodeOneName;
+                topoObject[ConfigAppTopologyForm.DESTINATION] = nodeTwoName;
+                topoObject[ConfigAppTopologyForm.TX] = txNameArray;
             },
 
             createFormSpecificMenu:function () {
@@ -155,6 +158,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
         ConfigAppTopologyForm.NODETWO = "nodeTwo";
         ConfigAppTopologyForm.TX = "transactions";
         ConfigAppTopologyForm.LAYER = "layerName";
+
+        ConfigAppTopologyForm.SOURCE = "source";
+        ConfigAppTopologyForm.DESTINATION = "destination";
 
         ConfigAppTopologyForm.TXARRAY = ['TxA', 'TxB', 'TxC', 'TxD', 'TxE'];
         ConfigAppTopologyForm.TOPOLOGY = {};
