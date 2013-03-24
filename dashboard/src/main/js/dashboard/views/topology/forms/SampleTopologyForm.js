@@ -474,11 +474,15 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/topology/n
             startup:function (pageName) {
                 this.inherited(arguments);
 
+                var width = this.domNode.parentNode.offsetWidth - 20;
+                var height = this.domNode.offsetHeight;
+                console.log("view port width = " + width + " height = " + height);
+
                 var xpos = 0, ypos = 0;
                 var viewMeta = {
                     id:pageName,
                     name:pageName,
-                    dimensions:[this.w, this.h],
+                    dimensions:[width, height],
                     position:[xpos, ypos],
                     custom:[]
                 };
