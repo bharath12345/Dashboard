@@ -1,6 +1,6 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/topology/nls/topology", "dashboard/logger/Logger",
     "dojox/layout/GridContainer", "dijit/TitlePane", "dijit/layout/ContentPane", "dojo/request/xhr", "dojo/_base/lang",
-    "dashboard/helper/Helper", "dashboard/helper/Scheduler", "dashboard/topology/TopologyForm"],
+    "dashboard/helper/Helper", "dashboard/helper/Scheduler", "dashboard/views/topology/TopologyForm"],
 
     function (declare, i18n, i18nString, Logger, GridContainer, TitlePane, ContentPane, xhr, lang, Helper, Scheduler, TopologyForm) {
 
