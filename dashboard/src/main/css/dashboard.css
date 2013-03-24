@@ -211,19 +211,11 @@ label  {
 }
 
 /* ----------------- Topology -----------------*/
-.node {
-    stroke: #fff;
-    stroke-width: 1.5px;
-}
-
 .link {
-    stroke: #999;
+    stroke: #000;
     stroke-opacity: .6;
 }
 
-.nodetext {
-    pointer-events: none; font: 10px sans-serif;
-}
 
 
 

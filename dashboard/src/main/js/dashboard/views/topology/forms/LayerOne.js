@@ -22,7 +22,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                 var graphDiv = dojo.create('div', {'id':LayerOne.FORMNAME, style:'width: 100%; height: 100%;'});
                 this.attr('content', graphDiv);
 
-                var color = d3.scale.category20();
+                var color = d3.scale.category10();
 
                 var width = this.domNode.parentNode.offsetWidth - 20;
                 var height = this.domNode.offsetHeight;
@@ -36,8 +36,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                     .nodes(this.nodes)
                     .links(this.links)
                     .gravity(.05)
-                    .distance(100)
-                    .charge(-100)
+                    .distance(300)
+                    .charge(-500)
                     .size([width, height])
                     .start();
 
@@ -73,7 +73,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                     force.stop();
                 }
 
-
                 var node = vis.selectAll("g.node")
                     .data(this.nodes)
                     .enter().append("svg:g")
@@ -81,12 +80,19 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                     .call(node_drag);
 
                 node.append("svg:image")
-                    .attr("class", "circle")
-                    .attr("xlink:href", "https://github.com/favicon.ico")
+                    .attr("class", "node")
+                    .attr("xlink:href", function (d) {
+                        console.log('group for image in d = ' + d.group);
+                        if(d.group == 1) {
+                            return LayerOne.APPGROUPICON;
+                        } else {
+                            return LayerOne.APPICON;
+                        }
+                    })
                     .attr("x", "-8px")
                     .attr("y", "-8px")
-                    .attr("width", "16px")
-                    .attr("height", "16px");
+                    .attr("width", "32px")
+                    .attr("height", "32px");
 
                 node.append("svg:text")
                     .attr("class", "nodetext")
@@ -108,7 +114,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                     node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
                 };
 
-                for (var i = 0; i < 500; ++i) force.tick();
+                for (var i = 0; i < 100; ++i) force.tick();
                 force.stop();
 
                 dashboard.dom.STANDBY.hide();
@@ -154,6 +160,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
             {"source":5,"target":1,"value":5},
             {"source":6,"target":3,"value":5},
             {"source":7,"target":4,"value":5}];
+
+        LayerOne.APPGROUPICON = "./images/topologyicons/AppSet.128.png";
+        LayerOne.APPICON = "./images/topologyicons/AppGlobe.64.png";
 
         return LayerOne;
     });
