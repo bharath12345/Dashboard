@@ -221,4 +221,9 @@ label  {
     stroke-opacity: .6;
 }
 
+.nodetext {
+    pointer-events: none; font: 10px sans-serif;
+}
+
+
 

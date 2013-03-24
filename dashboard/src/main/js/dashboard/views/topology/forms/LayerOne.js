@@ -22,69 +22,94 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                 var graphDiv = dojo.create('div', {'id':LayerOne.FORMNAME, style:'width: 100%; height: 100%;'});
                 this.attr('content', graphDiv);
 
+                var color = d3.scale.category20();
+
                 var width = this.domNode.parentNode.offsetWidth - 20;
                 var height = this.domNode.offsetHeight;
                 console.log("view port width = " + width + " height = " + height);
 
-                var color = d3.scale.category20();
-
-                var force = d3.layout.force()
-                    .charge(-120)
-                    .linkDistance(30)
-                    .size([width, height]);
-
-                var svg = d3.select("#"+LayerOne.FORMNAME).append("svg")
+                var vis = d3.select("#"+LayerOne.FORMNAME).append("svg")
                     .attr("width", width)
                     .attr("height", height);
 
-                force.nodes(this.nodes)
+                var force = self.force = d3.layout.force()
+                    .nodes(this.nodes)
                     .links(this.links)
+                    .gravity(.05)
+                    .distance(100)
+                    .charge(-100)
+                    .size([width, height])
                     .start();
 
-                var link = svg.selectAll(".link")
+                var link = vis.selectAll("line.link")
                     .data(this.links)
-                    .enter().append("line")
+                    .enter().append("svg:line")
                     .attr("class", "link")
-                    .style("stroke-width", function (d) {
-                        return Math.sqrt(d.value);
-                    });
+                    .attr("x1", function(d) { return d.source.x; })
+                    .attr("y1", function(d) { return d.source.y; })
+                    .attr("x2", function(d) { return d.target.x; })
+                    .attr("y2", function(d) { return d.target.y; });
 
-                var node = svg.selectAll(".node")
+                var node_drag = d3.behavior.drag()
+                    .on("dragstart", dragstart)
+                    .on("drag", dragmove)
+                    .on("dragend", dragend);
+
+                function dragstart(d, i) {
+                    force.stop() // stops the force auto positioning before you start dragging
+                }
+
+                function dragmove(d, i) {
+                    d.px += d3.event.dx;
+                    d.py += d3.event.dy;
+                    d.x += d3.event.dx;
+                    d.y += d3.event.dy;
+                    tick(); // this is the key to make it work together with updating both px,py,x,y on d !
+                }
+
+                function dragend(d, i) {
+                    d.fixed = true; // of course set the node to fixed so the force doesn't include the node in its auto positioning stuff
+                    tick();
+                    force.stop();
+                }
+
+
+                var node = vis.selectAll("g.node")
                     .data(this.nodes)
-                    .enter().append("circle")
+                    .enter().append("svg:g")
                     .attr("class", "node")
-                    .attr("r", 5)
+                    .call(node_drag);
+
+                node.append("svg:image")
+                    .attr("class", "circle")
+                    .attr("xlink:href", "https://github.com/favicon.ico")
+                    .attr("x", "-8px")
+                    .attr("y", "-8px")
+                    .attr("width", "16px")
+                    .attr("height", "16px");
+
+                node.append("svg:text")
+                    .attr("class", "nodetext")
+                    .attr("dx", 12)
+                    .attr("dy", ".35em")
+                    .text(function(d) { return d.name })
                     .style("fill", function (d) {
                         return color(d.group);
-                    })
-                    .call(force.drag);
-
-                node.append("title")
-                    .text(function (d) {
-                        return d.name;
                     });
 
-                force.on("tick", function () {
-                    link.attr("x1", function (d) {
-                        return d.source.x;
-                    })
-                        .attr("y1", function (d) {
-                            return d.source.y;
-                        })
-                        .attr("x2", function (d) {
-                            return d.target.x;
-                        })
-                        .attr("y2", function (d) {
-                            return d.target.y;
-                        });
+                force.on("tick", tick);
 
-                    node.attr("cx", function (d) {
-                        return d.x;
-                    })
-                        .attr("cy", function (d) {
-                            return d.y;
-                        });
-                });
+                function tick() {
+                    link.attr("x1", function(d) { return d.source.x; })
+                        .attr("y1", function(d) { return d.source.y; })
+                        .attr("x2", function(d) { return d.target.x; })
+                        .attr("y2", function(d) { return d.target.y; });
+
+                    node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+                };
+
+                for (var i = 0; i < 500; ++i) force.tick();
+                force.stop();
 
                 dashboard.dom.STANDBY.hide();
             },
