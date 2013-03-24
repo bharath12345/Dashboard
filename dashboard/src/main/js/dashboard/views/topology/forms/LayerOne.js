@@ -100,5 +100,21 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
 
         LayerOne.LOG = Logger.addTimer(new Logger(dashboard.classnames.LayerOne));
 
+        LayerOne.nodes = [
+            {"name":"CustomerFacingApp","group":1},
+            {"name":"CriticalInterfaceApp","group":1},
+            {"name":"CoreBankingSol","group":1},
+            {"name":"InternalOperationsApp","group":1},
+            {"name":"InternalBusinessApp","group":1},
+            {"name":"Geborand","group":1},
+            {"name":"Champtercier","group":1},
+            {"name":"Cravatte","group":1},
+            {"name":"Count","group":1},
+            {"name":"OldMan","group":1},
+            {"name":"Labarre","group":2},
+            {"name":"Valjean","group":2}];
+
+
+
         return LayerOne;
     });

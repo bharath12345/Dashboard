@@ -119,10 +119,12 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                     txNameArray[i] = string.trim(txNameArray[i]);
                 }
 
-                var topoObject = ConfigAppTopologyForm.TOPOLOGY[layerName] = {};
-                topoObject[ConfigAppTopologyForm.SOURCE] = nodeOneName;
-                topoObject[ConfigAppTopologyForm.DESTINATION] = nodeTwoName;
-                topoObject[ConfigAppTopologyForm.TX] = txNameArray;
+                var topoObject = ConfigAppTopologyForm.TOPOLOGY[layerName] = [];
+                var edgeDef = {};
+                edgeDef[ConfigAppTopologyForm.SOURCE] = nodeOneName;
+                edgeDef[ConfigAppTopologyForm.DESTINATION] = nodeTwoName;
+                edgeDef[ConfigAppTopologyForm.TX] = txNameArray;
+                topoObject.push(edgeDef);
             },
 
             createFormSpecificMenu:function () {
@@ -163,7 +165,55 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
         ConfigAppTopologyForm.DESTINATION = "destination";
 
         ConfigAppTopologyForm.TXARRAY = ['TxA', 'TxB', 'TxC', 'TxD', 'TxE'];
-        ConfigAppTopologyForm.TOPOLOGY = {};
+        ConfigAppTopologyForm.TOPOLOGY = {
+            'LayerOne': [
+                {
+                    'source': 'CustomerFacingApp',
+                    'destination': 'CriticalInterfaceApp',
+                    'transactions': ConfigAppTopologyForm.TXARRAY
+                },{
+                    'source': 'CriticalInterfaceApp',
+                    'destination': 'CoreBankingSol',
+                    'transactions': ConfigAppTopologyForm.TXARRAY
+                },{
+                    'source': 'CriticalInterfaceApp',
+                    'destination': 'InternalOperationsApp',
+                    'transactions': ConfigAppTopologyForm.TXARRAY
+                },{
+                    'source': 'CriticalInterfaceApp',
+                    'destination': 'InternalBusinessApp',
+                    'transactions': ConfigAppTopologyForm.TXARRAY
+                },{
+                    'source': 'InternalOperationsApp',
+                    'destination': 'CoreBankingSol',
+                    'transactions': ConfigAppTopologyForm.TXARRAY
+                },{
+                    'source': 'InternalBusinessApp',
+                    'destination': 'CoreBankingSol',
+                    'transactions': ConfigAppTopologyForm.TXARRAY
+                },{
+                    'source': 'InternalBusinessApp',
+                    'destination': 'InternalOperationsApp',
+                    'transactions': ConfigAppTopologyForm.TXARRAY
+                },{
+                    'source': 'InternalOperationsApp',
+                    'destination': 'InternalBusinessApp',
+                    'transactions': ConfigAppTopologyForm.TXARRAY
+                },{
+                    'source': 'CMSCollection',
+                    'destination': 'CriticalInterfaceApp',
+                    'transactions': ConfigAppTopologyForm.TXARRAY
+                },{
+                    'source': 'CMSDisbursement',
+                    'destination': 'InternalOperationsApp',
+                    'transactions': ConfigAppTopologyForm.TXARRAY
+                },{
+                    'source': 'PRMEnterprise',
+                    'destination': 'InternalBusinessApp',
+                    'transactions': ConfigAppTopologyForm.TXARRAY
+                }
+            ]
+        };
 
         return ConfigAppTopologyForm;
     });

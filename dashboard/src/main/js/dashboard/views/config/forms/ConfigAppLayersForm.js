@@ -77,8 +77,13 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
 
         ConfigAppLayersForm.FORMNAME= "ConfigAppLayersForm";
 
-        ConfigAppLayersForm.LAYERMAP = {};
-        ConfigAppLayersForm.LAYERARRAY = [];
+        ConfigAppLayersForm.LAYERARRAY = ['LayerOne'];
+        ConfigAppLayersForm.LAYERMAP = {
+            'LayerOne': {
+                'TAGS' : ['CustomerFacingApp', 'CriticalInterfaceApp', 'CoreBankingSol', 'InternalOperationsApp', 'InternalBusinessApp'],
+                'APPS' : ['CMSCollection','CMSDisbursement','PRMEnterprise']
+            }
+        };
 
         ConfigAppLayersForm.APPID = "apps";
         ConfigAppLayersForm.APPTAGID = "app-tags";

@@ -73,11 +73,41 @@ define(["dojo/_base/declare", "dojo/i18n","dojo/i18n!dashboard/views/config/nls/
         
         ConfigAppTagsForm.APPARRAY = ['NetBanking','RTGSPI','UBS','CRMNext','FinnoneLOS','Dealerpad','FinnoneLMS',
             'MobileBanking','FlexRTGS','ICUSTODY','Debos','CMSCollection','CMSDisbursement','ENET','PRMEnterprise',
-            'eTreasury','FCCorporate','INSULATION_LAYER','NCB_Test','FCC_Production','HSL_IPO_UAT'	];
+            'eTreasury','FCCorporate','INSULATION_LAYER','NCB_Test','FCC_Production','HSL_IPO_UAT','SFMS'	];
 
-        ConfigAppTagsForm.TAGARRAY = [];
+        ConfigAppTagsForm.TAGARRAY = ['CustomerFacingApp', 'CriticalInterfaceApp', 'CoreBankingSol', 'InternalOperationsApp', 'InternalBusinessApp'];
 
-        ConfigAppTagsForm.APPTOTAGMAP = {};
+        ConfigAppTagsForm.APPTOTAGMAP = {
+            'NetBanking':['CustomerFacingApp'],
+            'FCCorporate':['CustomerFacingApp'],
+            'ENET': ['CustomerFacingApp'],
+            'MobileBanking': ['CustomerFacingApp'],
+
+            'RTGSPI': ['CriticalInterfaceApp'],
+            'SFMS': ['CriticalInterfaceApp'],
+            'INSULATION_LAYER': ['CriticalInterfaceApp'],
+            'FlexRTGS': ['CriticalInterfaceApp'],
+
+            'UBS': ['CoreBankingSol'],
+            'NCB': ['CoreBankingSol'],
+
+            'ICUSTODY': ['InternalOperationsApp'],
+            'Dealerpad': ['InternalOperationsApp'],
+            'eTreasury': ['InternalOperationsApp'],
+            'Debos': ['InternalOperationsApp'],
+
+            'FinnoneLMS': ['InternalBusinessApp'],
+            'FinnoneLOS': ['InternalBusinessApp'],
+            'CRMNext': ['InternalBusinessApp']
+
+            /*
+                Applications left out -
+                    CMSCollection
+                    CMSDisbursement
+                    PRMEnterprise
+             */
+
+        };
 
         ConfigAppTagsForm.APPID = "apps";
         ConfigAppTagsForm.APPTAGID = "app-tags";
