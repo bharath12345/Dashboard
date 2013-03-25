@@ -1,9 +1,10 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", "dashboard/logger/Logger",
     "dashboard/views/config/ConfigForm", "dojox/layout/TableContainer", "dijit/form/NumberTextBox",
-    "dijit/form/Button", "dijit/form/TextBox", "dashboard/helper/ConfigHelper", "dojo/string"],
+    "dijit/form/Button", "dijit/form/TextBox", "dashboard/helper/ConfigHelper", "dojo/string",
+    "dojo/data/ItemFileReadStore", "dojo/store/Memory", "dojox/form/MultiComboBox", "dashboard/views/config/ConfigUtility"],
 
     function (declare, i18n, dashboardI18nString, Logger, ConfigForm, TableContainer, NumberTextBox, Button, TextBox,
-              ConfigHelper, string) {
+              ConfigHelper, string, ItemFileReadStore, Memory, MultiComboBox, ConfigUtility) {
 
         dashboard.classnames.ConfigAppLayersForm = "dashboard.config.forms.ConfigAppLayersForm";
 
@@ -22,19 +23,24 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
 
                 var configTable = new TableContainer({cols: 1,"labelWidth": "150"}, dojo.byId(ConfigAppLayersForm.FORMNAME));
 
-                this.layerBox = TextBox({label:"Layer Name"});
+                this.layerBox = new TextBox({label:"Layer Name"});
                 configTable.addChild(this.layerBox);
 
-                this.appBox = TextBox({label:"Applications", name:ConfigAppLayersForm.APPID, id:ConfigAppLayersForm.APPID});
+                this.appBox = new MultiComboBox({label:"Applications",
+                    store: ConfigUtility.getMemoryStore(dashboard.config.forms.ConfigAppTagsForm.APPARRAY, './images/topologyicons/AppWindow.128.png'),
+                    searchAttr: "name",
+                    labelAttr:"label",
+                    labelType:"html"});
                 configTable.addChild(this.appBox);
 
-                this.tagBox = TextBox({label:"Application Tags", name:ConfigAppLayersForm.APPTAGID, id:ConfigAppLayersForm.APPTAGID});
+                this.tagBox = new MultiComboBox({label:"Tags",
+                    store: ConfigUtility.getMemoryStore(dashboard.config.forms.ConfigAppTagsForm.TAGARRAY, './images/topologyicons/AppSet.128.png'),
+                    searchAttr: "name",
+                    labelAttr:"label",
+                    labelType:"html"});
                 configTable.addChild(this.tagBox);
 
                 configTable.startup();
-
-                ConfigHelper.addSuggest(ConfigAppLayersForm.APPID, dashboard.config.forms.ConfigAppTagsForm.APPARRAY);
-                ConfigHelper.addSuggest(ConfigAppLayersForm.APPTAGID, dashboard.config.forms.ConfigAppTagsForm.TAGARRAY);
 
                 dashboard.dom.STANDBY.hide();
             },
@@ -42,7 +48,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
             saveConfig:function () {
                 var appNames = this.appBox.get('value');
                 var tagNames = this.tagBox.get('value');
-                var layerName = this.layerBox.get('value');
+                var layerName = string.trim(this.layerBox.get('value'));
 
                 var appNameArray = appNames.split(',');
                 var tagNameArray = tagNames.split(',');

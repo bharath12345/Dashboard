@@ -1,7 +1,7 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/config/nls/config", "dojo/request/xhr", "dijit/Dialog",
-    "dashboard/logger/Logger", "dashboard/helper/Helper"],
+    "dashboard/logger/Logger", "dashboard/helper/Helper", "dojo/store/Memory"],
 
-    function (declare, i18n, i18nString, xhr, Dialog, Logger, Helper) {
+    function (declare, i18n, i18nString, xhr, Dialog, Logger, Helper, Memory) {
 
         dashboard.classnames.ConfigUtility = "dashboard.config.ConfigUtility";
 
@@ -54,6 +54,19 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/config/nls
             var node = dojo.create("div");
             divToAdd.appendChild(node);
             return node;
+        };
+
+        ConfigUtility.getMemoryStore = function(array, iconPath) {
+            var dataArray = [];
+            var tagImage = "<img width='16px' height='16px' src=" + iconPath + "/>";
+            for(var i =0; i < array.length; i++) {
+                var dataObj = {};
+                dataObj['name'] = array[i];
+                dataObj['label'] = tagImage + array[i];
+                dataArray.push(dataObj);
+            }
+            var stateStore = new Memory({data: dataArray});
+            return stateStore;
         };
 
         ConfigUtility.SAVE_DIALOG = null;

@@ -1,9 +1,10 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", "dashboard/logger/Logger",
     "dashboard/views/config/ConfigForm", "dojox/layout/TableContainer", "dijit/form/TextBox", "dashboard/helper/ConfigHelper",
-    "dojo/string", "dojo/_base/lang", "dojo/dom-construct", "dashboard/helper/ButtonHelper", "dojo/on"],
+    "dojo/string", "dojo/_base/lang", "dojo/dom-construct", "dashboard/helper/ButtonHelper", "dojo/on",
+    "dojo/data/ItemFileReadStore", "dojo/store/Memory", "dojox/form/MultiComboBox", "dashboard/views/config/ConfigUtility"],
 
     function (declare, i18n, dashboardI18nString, Logger, ConfigForm, TableContainer, TextBox, ConfigHelper, string,
-              lang, domConstruct, ButtonHelper, on) {
+              lang, domConstruct, ButtonHelper, on, ItemFileReadStore, Memory, MultiComboBox, ConfigUtility) {
 
         dashboard.classnames.ConfigAppTopologyForm = "dashboard.config.forms.ConfigAppTopologyForm";
 
@@ -26,13 +27,16 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                 tableDiv.appendChild(layerDef);
                 this.configTable = new TableContainer({cols: 3,"labelWidth": "150"}, layerDef);
 
-                this.layerBox = TextBox({label:"Layer Name", name:ConfigAppTopologyForm.LAYER,
-                    id:ConfigAppTopologyForm.LAYER, intermediateChanges:true});
+                this.layerBox = new MultiComboBox({label:"Layer Name", intermediateChanges:true,
+                    store: ConfigUtility.getMemoryStore(dashboard.config.forms.ConfigAppLayersForm.LAYERARRAY, './images/topologyicons/AppGroup.128.png'),
+                    searchAttr: "name",
+                    labelAttr:"label",
+                    labelType:"html"});
                 this.configTable.addChild(this.layerBox);
 
                 this.configTable.startup();
 
-                ConfigHelper.addSuggest(ConfigAppTopologyForm.LAYER, dashboard.config.forms.ConfigAppLayersForm.LAYERARRAY);
+                //ConfigHelper.addSuggest(ConfigAppTopologyForm.LAYER, dashboard.config.forms.ConfigAppLayersForm.LAYERARRAY);
 
                 ////
 
@@ -41,13 +45,22 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
 
                 this.configTable = new TableContainer({cols: 3,"labelWidth": "10"}, topoDef);
 
-                this.nodeOneBox = TextBox({name:ConfigAppTopologyForm.NODEONE, id:ConfigAppTopologyForm.NODEONE});
+                this.nodeOneBox = new MultiComboBox({searchAttr: "name",
+                    store: ConfigUtility.getMemoryStore([], './images/topologyicons/Transaction.128.png'),
+                    labelAttr:"label",
+                    labelType:"html"});
                 this.configTable.addChild(this.nodeOneBox);
 
-                this.nodeTwoBox = TextBox({name:ConfigAppTopologyForm.NODETWO, id:ConfigAppTopologyForm.NODETWO});
+                this.nodeTwoBox = new MultiComboBox({searchAttr: "name",
+                    store: ConfigUtility.getMemoryStore([], './images/topologyicons/Transaction.128.png'),
+                    labelAttr:"label",
+                    labelType:"html"});
                 this.configTable.addChild(this.nodeTwoBox);
 
-                this.txBox = TextBox({name:ConfigAppTopologyForm.TX, id:ConfigAppTopologyForm.TX});
+                this.txBox = new MultiComboBox({searchAttr: "name",
+                    store: ConfigUtility.getMemoryStore(ConfigAppTopologyForm.TXARRAY, './images/topologyicons/Transaction.128.png'),
+                    labelAttr:"label",
+                    labelType:"html"});
                 this.configTable.addChild(this.txBox);
 
                 this.configTable.startup();
@@ -59,7 +72,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                 /// Add content assist
 
                 on(this.layerBox, "change", lang.hitch(this, this.contentAssist));
-                ConfigHelper.addSuggest(ConfigAppTopologyForm.TX, ConfigAppTopologyForm.TXARRAY);
+                //ConfigHelper.addSuggest(ConfigAppTopologyForm.TX, ConfigAppTopologyForm.TXARRAY);
 
                 dashboard.dom.STANDBY.hide();
             },
@@ -74,8 +87,11 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                     allAppAndTags = ConfigHelper.arrayUnique(layerMap['TAGS'].concat(layerMap['APPS']));
                 }
 
-                ConfigHelper.addSuggest(ConfigAppTopologyForm.NODEONE, allAppAndTags);
-                ConfigHelper.addSuggest(ConfigAppTopologyForm.NODETWO, allAppAndTags);
+                this.nodeOneBox.set('store', ConfigUtility.getMemoryStore(allAppAndTags, './images/topologyicons/Transaction.128.png'));
+                this.nodeTwoBox.set('store', ConfigUtility.getMemoryStore(allAppAndTags, './images/topologyicons/Transaction.128.png'));
+
+                //ConfigHelper.addSuggest(ConfigAppTopologyForm.NODEONE, allAppAndTags);
+                //ConfigHelper.addSuggest(ConfigAppTopologyForm.NODETWO, allAppAndTags);
             },
 
             addHeadingRow: function() {
