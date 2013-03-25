@@ -547,6 +547,21 @@
                                     </resources>
                                 </configuration>
                             </execution>
+                            <execution>
+                                <id>copy-closure-lib</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${gui.target.gui.location}/js/closure</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>${js-dir}/closure</directory>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
                         </executions>
                     </plugin>
                 </plugins>
@@ -845,6 +860,21 @@
                                     <resources>
                                         <resource>
                                             <directory>${basedir}/src/main/images</directory>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>copy-closure-lib</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${gui.target.gui.location}/js/closure</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>${js-dir}/closure</directory>
                                         </resource>
                                     </resources>
                                 </configuration>

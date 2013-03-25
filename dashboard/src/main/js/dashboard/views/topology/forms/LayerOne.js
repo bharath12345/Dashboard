@@ -36,7 +36,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                     .nodes(this.nodes)
                     .links(this.links)
                     .gravity(.05)
-                    .distance(300)
+                    .distance(200)
                     .charge(-500)
                     .size([width, height])
                     .start();
