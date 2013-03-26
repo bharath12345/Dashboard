@@ -1,6 +1,0 @@
-[
-    {"name": "topoViews", "label": "Topology Views", "id":0, "action": "topology/.action"},
-    {"name": "commandScreens", "label": "Command Center Screens", "id":1, "action": "noc/.action"},
-    {"name": "alerts", "label": "Alerts", "id":2, "action": "noc/.action"},
-    {"name": "configuration", "label": "Configuration", "id":3, "action": "config/pages.action"}
-]
