@@ -10,12 +10,11 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>uiJS</artifactId>
-	<groupId>${project.parent.groupId}</groupId> 
-	<version>${project.parent.version}</version>
-    <name>AppsOne JavaScript Project</name>
+	<version>01.00.000.000</version>
+    <name>AppsOne UI JavaScript Project</name>
     <description>Build of AppsOne UI JavaScript</description>
-
     <packaging>jar</packaging>
+    
     <properties>
         <dojoSrc>${basedir}/src/main/js/dojo-release-${dojo.version}-src</dojoSrc>
         <doh-dir>${basedir}/src/main/js/util/doh</doh-dir>

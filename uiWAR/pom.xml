@@ -1,35 +1,124 @@
 <?xml version="1.0"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <parent>
-        <groupId>com.appnomic.appsone.dashboard</groupId>
-        <artifactId>appsone-dashboard</artifactId>
-        <version>01.00.000.000</version>
-    </parent>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<parent>
+		<groupId>com.appnomic.appsone.dashboard</groupId>
+		<artifactId>appsone-dashboard</artifactId>
+		<version>01.00.000.000</version>
+	</parent>
 
-    <modelVersion>4.0.0</modelVersion>
-    <artifactId>uiWAR</artifactId>
-    <name>AppsOne Dashboard UI WAR</name>
-    <packaging>war</packaging>
-    <groupId>com.appnomic.appsone.dashboard</groupId>
-    <version>01.00.000.000</version>
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>uiWAR</artifactId>
+	<name>AppsOne UI WAR</name>
+	<packaging>war</packaging>
+	<version>01.00.000.000</version>
 
-    <dependencies>
+	<properties>
+		<main.basedir>${project.parent.basedir}</main.basedir>
+		<js.location>${main.basedir}/uiJS/target/dashboard</js.location>
+		<web.location>${main.basedir}/uiWeb/target</web.location>
+		<war.target.location>${basedir}${file.separator}target</war.target.location>
+		<finalname>dashboard</finalname>
+	</properties>
+	<profiles>
 
-    </dependencies>
+		<!-- ************************************************** -->
+		<!-- The DEFAULT BUILD Profile - VERY SLOW BUILD -->
+		<!-- To Turn it OFF: mvn -Dbuild-all=false -->
+		<!-- ************************************************** -->
+		<profile>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<build>
+				<finalName>${finalname}</finalName>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>Copy Minified, Obfuscated JavaScript</id>
+								<configuration>
+									<tasks>
+										<parallel>
+											<move todir="${war.target.location}/${finalname}"
+												failonerror="false">
+												<fileset dir="${js.location}">
+													<include name="css/" />
+												</fileset>
+											</move>
+											<move todir="${war.target.location}/${finalname}"
+												failonerror="false">
+												<fileset dir="${js.location}">
+													<include name="data/" />
+												</fileset>
+											</move>
+											<move todir="${war.target.location}/${finalname}"
+												failonerror="false">
+												<fileset dir="${js.location}">
+													<include name="images/" />
+												</fileset>
+											</move>
+											<move todir="${war.target.location}/${finalname}"
+												failonerror="false">
+												<fileset dir="${js.location}">
+													<include name="js/" />
+												</fileset>
+											</move>
+											<move todir="${war.target.location}/${finalname}"
+												failonerror="false">
+												<fileset dir="${js.location}/jsp">
+													<include name="*.jsp" />
+												</fileset>
+											</move>
+											<move todir="${war.target.location}/${finalname}/WEB-INF"
+												failonerror="false">
+												<fileset dir="${web.location}">
+													<include name="classes/" />
+												</fileset>
+											</move>
+										</parallel>
+									</tasks>
+								</configuration>
+								<phase>process-sources</phase>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>2.4</version>
-                <configuration>
-                    <includes>
-                        <include>**/*</include>
-                    </includes>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.appnomic.appsone.dashboard</groupId>
+			<artifactId>uiCommonLib</artifactId>
+			<version>${uiCommonLib.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.appnomic.appsone.dashboard</groupId>
+			<artifactId>uiConfig</artifactId>
+			<version>${uiConfig.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.appnomic.appsone.dashboard</groupId>
+			<artifactId>uiJS</artifactId>
+			<version>${uiJS.version}</version>
+		</dependency>
+		
+		<!-- Putting the action classes in the WAR's WEB-INF/lib is not leading to action classes
+		getting deployed. So commented this and doing actual file copy of classes - find a work around
+		to this problem so that a proper JAR gets packaged -->
+		<dependency>
+			<groupId>com.appnomic.appsone.dashboard</groupId>
+			<artifactId>uiWeb</artifactId>
+			<version>${uiWeb.version}</version>
+		</dependency>
+	</dependencies>
+
 </project>
