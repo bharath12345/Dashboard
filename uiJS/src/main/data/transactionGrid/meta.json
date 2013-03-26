@@ -1,0 +1,70 @@
+{
+    "applications": [
+        {
+            "applicationName": "CRMNext",
+            "id": 123,
+            "transactionGroups": [
+                {
+                    "groupName": "groupOne",
+                    "id": 111,
+                    "transactions": [
+                        {
+                            "name": "tx1",
+                            "id": 22
+                        },
+                        {
+                            "name": "tx2",
+                            "id": 12
+                        }
+                    ]
+                },
+                {
+                    "groupName": "groupTwo",
+                    "transactions": [
+                        {
+                            "name": "tx3",
+                            "id": 66
+                        },
+                        {
+                            "name": "tx4",
+                            "id": 34
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "applicationName": "NetBankingt",
+            "id": 123,
+            "transactionGroups": [
+                {
+                    "groupName": "groupOne",
+                    "id": 111,
+                    "transactions": [
+                        {
+                            "name": "tx1",
+                            "id": 22
+                        },
+                        {
+                            "name": "tx2",
+                            "id": 12
+                        }
+                    ]
+                },
+                {
+                    "groupName": "groupTwo",
+                    "transactions": [
+                        {
+                            "name": "tx3",
+                            "id": 66
+                        },
+                        {
+                            "name": "tx4",
+                            "id": 34
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

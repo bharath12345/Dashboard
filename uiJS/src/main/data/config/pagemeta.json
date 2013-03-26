@@ -1,0 +1,6 @@
+[
+    {"name": "Alerts Grid", "id":0},
+    {"name": "Clusters Grid", "id":1},
+    {"name": "Transactions Grid", "id":2},
+    {"name": "Topology View", "id":3}
+]

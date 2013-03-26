@@ -1,0 +1,50 @@
+{
+ "name": "Transaction Volume TreeMap",
+ "children": [
+  {
+  	"name": "TxA",
+   "children": [
+   		{"name": "TxA1", "volume": 1, "alert": "5"},
+      	{"name": "TxA2", "size": 2 },
+      	{"name": "TxA3", "size": 3},
+      	{"name": "TxA4", "size": 4}
+   ]
+  },
+  {
+  	"name": "TxB",
+   "children": [
+   		{"name": "TxB1", "size": 11},
+      	{"name": "TxB2", "size": 12},
+      	{"name": "TxB3", "size": 13},
+      	{"name": "TxB4", "size": 14}
+   ]
+  },
+  {
+  	"name": "TxC",
+   "children": [
+   		{"name": "TxC1", "size": 21},
+      	{"name": "TxC2", "size": 22},
+      	{"name": "TxC3", "size": 23},
+      	{"name": "TxC4", "size": 24}
+   ]
+  },
+  {
+  	"name": "TxD",
+   "children": [
+   		{"name": "TxD1", "size": 31},
+      	{"name": "TxD2", "size": 32},
+      	{"name": "TxD3", "size": 33},
+      	{"name": "TxD4", "size": 34}
+   ]
+  },
+  {
+  	"name": "TxE",
+   "children": [
+   		{"name": "TxE1", "size": 41},
+      	{"name": "TxE2", "size": 42},
+      	{"name": "TxE3", "size": 43},
+      	{"name": "TxE4", "size": 44}
+   ]
+  }
+ ]
+}

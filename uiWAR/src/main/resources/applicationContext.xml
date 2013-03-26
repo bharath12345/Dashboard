@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:context="http://www.springframework.org/schema/context"
+xmlns:tx="http://www.springframework.org/schema/tx"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+    http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context-3.1.xsd
+    xmlns:cache="http://www.springframework.org/schema/cache"
+   ">
+    -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+
+
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+       http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.1.xsd
+       http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+        http://www.springframework.org/schema/cache
+        http://www.springframework.org/schema/cache/spring-cache-3.1.xsd
+        ">
+
+
+
+    
+
+    <import resource="classpath:META-INF/spring/dbconnection.xml" />
+
+
+    <!--
+
+<bean id="mysqlDS" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/OTRS"/>
+        <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+        <property name="user" value="root"/>
+        <property name="password" value="root"/>
+
+
+
+    </bean>
+
+
+    <bean id="apmcommonDS" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/apmcommon"/>
+        <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+        <property name="user" value="root"/>
+        <property name="password" value="root"/>
+
+    </bean>
+        -->
+
+
+    <bean
+            id="propertyConfigurer"
+            class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:db.properties</value>
+            </list>
+        </property>
+        <property name="ignoreUnresolvablePlaceholders" value="true" />
+    </bean>
+
+
+
+    <bean id="mysqlDS" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="jdbcUrl" value="jdbc:mysql://${enterprise.db.hostIp}:${enterprise.db.port}/${enterprise.db.name}"/>
+        <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+        <property name="user" value="${enterprise.db.username}"/>
+        <property name="password" value="${enterprise.db.password}"/>
+
+
+
+    </bean>
+
+    <bean id="apmcommonDS" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="jdbcUrl" value="jdbc:mysql://${apmcommon.db.hostIp}:${apmcommon.db.port}/${apmcommon.db.name}"/>
+        <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+        <property name="user" value="${apmcommon.db.username}"/>
+        <property name="password" value="${apmcommon.db.password}"/>
+
+    </bean>
+
+    <cache:annotation-driven/>
+
+
+
+
+    <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+        <property name="cacheManager" ref="ehcache" />
+
+    </bean>
+
+
+
+    <bean id="ehcache"
+          class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+        <property name="configLocation" value="classpath:ehcacheconfig.xml"/>
+    </bean>
+
+
+    <!--
+    <bean id="cacheManager"
+          class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+        <property name="configLocation" value="classpath:ehcacheconfig.xml" />
+    </bean>
+        -->
+    <!--
+
+    <cache:annotation-driven/>
+
+    <bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+        <property name="configLocation" value="classpath:ehcacheconfig.xml"/>
+    </bean>
+
+
+    <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+        <property name="cacheManager" ref="ehcache" />
+
+    </bean>
+    -->
+    <tx:annotation-driven transaction-manager="txManager"/>
+
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="mysqlDS"/>
+    </bean>
+
+    <bean id="txManager2" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="apmcommonDS"/>
+    </bean>
+
+    <context:annotation-config/>
+
+    <context:component-scan base-package="com.appnomic"/>
+
+
+</beans>

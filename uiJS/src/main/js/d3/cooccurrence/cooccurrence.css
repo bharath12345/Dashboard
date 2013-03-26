@@ -1,0 +1,155 @@
+html.cooccurrence {
+    min-width: 1040px;
+}
+
+h1.cooccurrence {
+    font-size: 64px;
+    font-weight: 300;
+    letter-spacing: -2px;
+    margin: .3em 0 .1em 0;
+}
+
+h2.cooccurrence {
+    margin-top: 2em;
+}
+
+h1.cooccurrence, h2.cooccurrence {
+    text-rendering: optimizeLegibility;
+}
+
+h2.cooccurrence a {
+    color: #ccc;
+    left: -20px;
+    position: absolute;
+    width: 740px;
+}
+
+footer.cooccurrence {
+    font-size: small;
+    margin-top: 8em;
+}
+
+header.cooccurrence aside {
+    margin-top: 88px;
+}
+
+header.cooccurrence aside,
+footer aside {
+    color: #636363;
+    text-align: right;
+}
+
+aside.cooccurrence {
+    font-size: small;
+    right: 0;
+    position: absolute;
+    width: 180px;
+}
+
+.attribution {
+    font-size: small;
+    margin-bottom: 2em;
+}
+
+body > p.cooccurrence, li > p.cooccurrence {
+    line-height: 1.5em;
+}
+
+body > p.cooccurrence {
+    width: 720px;
+}
+
+body > blockquote.cooccurrence {
+    width: 640px;
+}
+
+li.cooccurrence {
+    width: 680px;
+}
+
+a.cooccurrence {
+    color: steelblue;
+}
+
+a.cooccurrence:not(:hover) {
+    text-decoration: none;
+}
+
+pre.cooccurrence, code.cooccurrence, textarea.cooccurrence {
+    font-family: "Menlo", monospace;
+}
+
+code.cooccurrence {
+    line-height: 1em;
+}
+
+textarea.cooccurrence {
+    font-size: 100%;
+}
+
+body > pre.cooccurrence {
+    border-left: solid 2px #ccc;
+    padding-left: 18px;
+    margin: 2em 0 2em -20px;
+}
+
+.html .value,
+.javascript .string,
+.javascript .regexp .cooccurrence {
+    color: #756bb1;
+}
+
+.html .tag,
+.css .tag,
+.javascript .keyword .cooccurrence {
+    color: #3182bd;
+}
+
+.comment .cooccurrence {
+    color: #636363;
+}
+
+.html .doctype,
+.javascript .number .cooccurrence {
+    color: #31a354;
+}
+
+.html .attribute,
+.css .attribute,
+.javascript .class,
+.javascript .special .cooccurrence {
+    color: #e6550d;
+}
+
+svg.cooccurrence {
+    font: 10px sans-serif;
+}
+
+.axis path, .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+sup.cooccurrence, sub.cooccurrence {
+    line-height: 0;
+}
+
+q:before,
+blockquote:before {
+    content: "“";
+}
+
+q:after,
+blockquote:after {
+    content: "”";
+}
+
+blockquote:before {
+    position: absolute;
+    left: 2em;
+}
+
+blockquote:after {
+    position: absolute;
+}
