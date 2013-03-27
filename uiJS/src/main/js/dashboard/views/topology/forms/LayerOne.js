@@ -30,7 +30,23 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
 
                 var vis = d3.select("#"+LayerOne.FORMNAME).append("svg")
                     .attr("width", width)
-                    .attr("height", height);
+                    .attr("height", height)
+                    .attr("preserveAspectRatio", "xMidYMid meet")
+                    .attr("pointer-events", "all")
+                    .append('svg:g')
+                    .call(d3.behavior.zoom().on("zoom", redraw))
+                    .append('svg:g');
+
+                vis.append('svg:rect')
+                    .attr('width', width)
+                    .attr('height', height)
+                    .attr('fill', 'white');
+
+                function redraw() {
+                    vis.attr("transform",
+                        "translate(" + d3.event.translate + ")"
+                            + " scale(" + d3.event.scale + ")");
+                };
 
                 var force = self.force = d3.layout.force()
                     .nodes(this.nodes)
