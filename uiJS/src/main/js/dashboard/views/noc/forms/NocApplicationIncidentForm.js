@@ -169,23 +169,28 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/noc/nls/no
                     gridata.push(row);
                 }
 
-                var gridDataStore = new Memory({data:gridata});
-                IncidentGrid.Grid = new Grid({
-                    store: gridDataStore,
-                    columns:columnMeta,
-                    rowsPerPage: 25,
-                    pagingLinks: 1,
-                    pagingTextBox: true,
-                    firstLastArrows: true,
-                    pageSizeOptions: [15, 20, 25, 30]
-                }, data.name);
-                IncidentGrid.Grid.on(".dgrid-row:click", lang.hitch(this, this.handleRowClick));
+                try {
+                    var gridDataStore = new Memory({data:gridata});
+                    IncidentGrid.Grid = new Grid({
+                        store: gridDataStore,
+                        columns:columnMeta,
+                        rowsPerPage: 25,
+                        pagingLinks: 1,
+                        pagingTextBox: true,
+                        firstLastArrows: true,
+                        pageSizeOptions: [15, 20, 25, 30]
+                    }, data.name);
+                    IncidentGrid.Grid.on(".dgrid-row:click", lang.hitch(this, this.handleRowClick));
+                } catch(e) {
+                    console.log("exception = " + e);
+                }
 
                 var textNode = dojo.query(".dgrid-cell", IncidentGrid.Grid.domNode);
                 console.log("count of dgrid cells = " + textNode.length);
                 for (var i = 0; i < textNode.length; i++) {
                     textNode[i].style.fontSize = "12px";
                 }
+
 
                 // assign ids to nodes
                 for (var i = 0; i < input.applicationVO.applications.length; i++) {

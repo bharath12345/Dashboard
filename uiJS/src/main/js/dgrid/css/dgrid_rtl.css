@@ -7,30 +7,29 @@
 		the grid's isRTL is true AND the client isn't WebKit
 */
 .dgrid-rtl-nonwebkit .dgrid-header {
-    right: 0;
-    left: 17px;
+	right: 0;
+	left: 17px;
 }
 
 .dgrid-rtl-nonwebkit .dgrid-header-scroll {
-    left: 0px;
-    right: auto;
+	left: 0px;
+	right: auto;
 }
 
 .dgrid-rtl .dgrid-cell {
-    text-align: right;
+	text-align: right;
 }
 
 /* Reverse position of sort arrow */
 .dgrid-rtl .dgrid-sort-arrow {
-    float: left;
-    margin: 0 5px 0 4px;
+	float: left;
+	margin: 0 5px 0 4px;
 }
 
 /* Reverse arrows for tree expando states */
 .dgrid-rtl .ui-icon-triangle-1-e {
-    background-position: -96px -16px;
+	background-position: -96px -16px;
 }
-
 .dgrid-rtl .ui-icon-triangle-1-se {
-    background-position: -80px -16px;
+	background-position: -80px -16px;
 }
