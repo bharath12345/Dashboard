@@ -3,56 +3,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/noc/nls/no
     "dashboard/logger/Logger", "dashboard/helper/Scheduler", "dashboard/helper/Helper", "dashboard/analysis/ApplicationAnalysisPane",
     "dashboard/abstract/AbstractForm"],
 
-    function (declare, i18n, i18nString, ContentPane, GridContainer, Grid, xhr, lang, Memory,
-              Logger, Scheduler, Helper, ApplicationAnalysisPane, AbstractForm) {
-
-        dashboard.classnames.IncidentGridConfig = "dashboard.noc.forms.NocApplicationIncidentForm.IncidentGridConfig";
-
-        var IncidentGridConfig = declare(dashboard.classnames.IncidentGridConfig, null, {
-
-            applyConfig:function () {
-                if (IncidentGridConfig.CONFIG == null) {
-                    console.log("no config received yet to apply");
-                    return;
-                } else {
-                    console.log("applying config");
-                }
-
-                var applicationRefreshTime = "applicationRefreshTime";
-                var value = IncidentGridConfig.CONFIG.agcVO[applicationRefreshTime].value;
-
-                var fontName = "fontName";
-                var fontValue = IncidentGridConfig.CONFIG.agcVO[fontName].value;
-
-                var fontSize = "fontSize";
-                value = parseInt(IncidentGridConfig.CONFIG.agcVO[fontSize].value);
-                if (value < 6) {
-                    value = 18;
-                }
-                console.log("font size retrived = " + value);
-                var cell = dojo.query(".dgrid-cell, .label", dashboard.dom.CpCenterInnerTop.domNode);
-                for (var i = 0; i < cell.length; i++) {
-                    cell[i].style.fontSize = value;
-                    cell[i].style.verticalAlign = "middle";
-                    cell[i].style.fontFamily = fontValue;
-                }
-
-                var showAllGreenApplications = "showAllGreenApplications";
-                value = IncidentGridConfig.CONFIG.agcVO[showAllGreenApplications].value;
-
-                IncidentGrid.Grid.resize();
-            },
-
-            setConfig:function (data) {
-                console.log("config set");
-                IncidentGridConfig.CONFIG = data;
-            }
-
-        });
-
-        IncidentGridConfig.LOG = Logger.addTimer(new Logger(dashboard.classnames.IncidentGridConfig));
-        IncidentGridConfig.CONFIG = null;
-
+    function (declare, i18n, i18nString, ContentPane, GridContainer, Grid, xhr, lang, Memory, Logger, Scheduler, Helper,
+              ApplicationAnalysisPane, AbstractForm) {
 
         /*
          *
@@ -65,14 +17,14 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/noc/nls/no
 
             create:function (data, input) {
 
+                var row = {};
+                row.appName = data.name;
+                row.id = data.id;
+
                 var customMetrics = dojo.fromJson(data.custom[0]);
                 console.log("custom len = " + customMetrics.length);
                 for (var i = 0; i < customMetrics.length; i++) {
                     var metric = customMetrics[i];
-                    var nodeId = data.name + "_" + data.id + "_" + metric;
-                    console.log("node id = " + nodeId);
-                    var node = dojo.byId(nodeId);
-                    Helper.removeChildren(document.getElementById(nodeId));
 
                     for (var j = 0; j < input.applicationDataVO.metrics.length; j++) {
                         var payload = input.applicationDataVO.metrics[j];
@@ -80,39 +32,17 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/noc/nls/no
                             continue;
                         }
 
-                        var highAlert = payload.count[0];
-                        var mediumAlert = payload.count[1];
-                        var lowAlert = payload.count[2];
-
-                        if (parseInt(highAlert) > 0) {
-                            var highSpan = dojo.create("span");
-                            highSpan.className = "label label-important";
-                            highSpan.innerHTML = highAlert;
-                            highSpan.style.width = "40";
-                            node.appendChild(highSpan);
-                        }
-
-                        if (parseInt(mediumAlert) > 0) {
-                            var mediumSpan = dojo.create("span");
-                            mediumSpan.className = "label label-warning";
-                            mediumSpan.innerHTML = mediumAlert;
-                            mediumSpan.style.width = "40";
-                            node.appendChild(mediumSpan);
-                        }
-
-                        var lowSpan = dojo.create("span");
-                        lowSpan.className = "label label-success";
-                        lowSpan.innerHTML = lowAlert;
-                        lowSpan.style.width = "40";
-                        node.appendChild(lowSpan);
+                        row[metric + "_" + IncidentGrid.CRITICAL] = payload.count[0];
+                        row[metric + "_" + IncidentGrid.MAJOR] = payload.count[1];
+                        row[metric + "_" + IncidentGrid.MINOR] = Math.floor(Math.random() * 100);
 
                         break;
                     }
                 }
 
-                var nwigc = new IncidentGridConfig();
-                nwigc.applyConfig();
-                dashboard.dom.STANDBY.hide();
+                NocApplicationIncidentForm.gridDataStore.put(row, {overwrite:true});
+                IncidentGrid.Grid.refresh();
+
             }
 
         });
@@ -134,13 +64,13 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/noc/nls/no
                     {
                         field:"appName",
                         label:"Application Name",
-                        resizable: true
+                        resizable:true
                     },
                     {
-                        field: "id",
-                        label: "id",
-                        unhidable: true,
-                        hidden: true
+                        field:"id",
+                        label:"id",
+                        unhidable:true,
+                        hidden:true
                     }
                 ];
 
@@ -149,10 +79,33 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/noc/nls/no
                 var metrics = input.applicationVO.metrics;
                 for (var i = 0; i < metrics.length; i++) {
                     var col = {};
-                    col.field = metrics[i];
                     col.label = i18nString[metrics[i]];
+                    //col.field = metrics[i]; // because of child columns, there is NO field
                     col.reorderable = true;
                     col.resizable = true;
+                    col.children = [];
+
+                    var subcol = {};
+                    subcol.field = metrics[i] + "_" + IncidentGrid.CRITICAL;
+                    subcol.label = i18nString[IncidentGrid.CRITICAL];
+                    subcol.reorderable = true;
+                    subcol.resizable = true;
+                    col.children.push(subcol);
+
+                    subcol = {};
+                    subcol.field = metrics[i] + "_" + IncidentGrid.MAJOR;
+                    subcol.label = i18nString[IncidentGrid.MAJOR];
+                    subcol.reorderable = true;
+                    subcol.resizable = true;
+                    col.children.push(subcol);
+
+                    subcol = {};
+                    subcol.field = metrics[i] + "_" + IncidentGrid.MINOR;
+                    subcol.label = i18nString[IncidentGrid.MINOR];
+                    subcol.reorderable = true;
+                    subcol.resizable = true;
+                    col.children.push(subcol);
+
                     columnMeta.push(col);
                 }
 
@@ -164,24 +117,26 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/noc/nls/no
                     row.appName = apps[i].name;
                     row.id = apps[i].id;
                     for (var j = 0; j < metrics.length; j++) {
-                        row[metrics[j]] = "";
+                        row[metrics[j] + "_" + IncidentGrid.CRITICAL] = "";
+                        row[metrics[j] + "_" + IncidentGrid.MAJOR] = "";
+                        row[metrics[j] + "_" + IncidentGrid.MINOR] = "";
                     }
                     gridata.push(row);
                 }
 
                 try {
-                    var gridDataStore = new Memory({data:gridata});
+                    NocApplicationIncidentForm.gridDataStore = new Memory({data:gridata, idProperty:'id'});
                     IncidentGrid.Grid = new Grid({
-                        store: gridDataStore,
+                        store:NocApplicationIncidentForm.gridDataStore,
                         columns:columnMeta,
-                        rowsPerPage: 25,
-                        pagingLinks: 1,
-                        pagingTextBox: true,
-                        firstLastArrows: true,
-                        pageSizeOptions: [15, 20, 25, 30]
+                        rowsPerPage:25,
+                        pagingLinks:1,
+                        pagingTextBox:true,
+                        firstLastArrows:true,
+                        pageSizeOptions:[15, 20, 25, 30]
                     }, data.name);
                     IncidentGrid.Grid.on(".dgrid-row:click", lang.hitch(this, this.handleRowClick));
-                } catch(e) {
+                } catch (e) {
                     console.log("exception = " + e);
                 }
 
@@ -191,15 +146,22 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/noc/nls/no
                     textNode[i].style.fontSize = "12px";
                 }
 
-
                 // assign ids to nodes
-                for (var i = 0; i < input.applicationVO.applications.length; i++) {
-                    var apps = input.applicationVO.applications;
-                    for (var j = 0; j < metrics.length; j++) {
-                        dojo.query("#"+NocApplicationIncidentForm.PAGENAME+"-row-" + i + " td.field-" + metrics[j]).forEach(function (node) {
-                            node.id = apps[i].name + "_" + apps[i].id + "_" + metrics[j];
-                        });
-                    }
+                for (var j = 0; j < metrics.length; j++) {
+                    dojo.query("td.field-" + metrics[j] + "_" + IncidentGrid.CRITICAL).forEach(function (node) {
+                        //node.id = apps[i].name + "_" + apps[i].id + "_" + metrics[j] + "_" + IncidentGrid.CRITICAL;
+                        node.style.color = "red";
+                    });
+
+                    dojo.query("td.field-" + metrics[j] + "_" + IncidentGrid.MAJOR).forEach(function (node) {
+                        //node.id = apps[i].name + "_" + apps[i].id + "_" + metrics[j] + "_" + IncidentGrid.MAJOR;
+                        node.style.color = "orange";
+                    });
+
+                    dojo.query("td.field-" + metrics[j] + "_" + IncidentGrid.MINOR).forEach(function (node) {
+                        //node.id = apps[i].name + "_" + apps[i].id + "_" + metrics[j] + "_" + IncidentGrid.MINOR;
+                        node.style.color = "blue";
+                    });
                 }
 
                 IncidentGrid.POSTSET.metricsJson = dojo.toJson(metrics);
@@ -222,7 +184,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/noc/nls/no
                 this.startStaggeredDatabasePolling();
             },
 
-            handleRowClick: function(evt) {
+            handleRowClick:function (evt) {
                 var row = IncidentGrid.Grid.row(evt);
                 // row.element == the element with the dgrid-row class
                 // row.id == the identity of the item represented by the row
@@ -281,7 +243,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/noc/nls/no
                 }
             },
 
-            createIncidentGridData: function(input) {
+            createIncidentGridData:function (input) {
                 var data = Helper.parseInput(input);
                 new IncidentData().create(data, input);
             }
@@ -295,6 +257,11 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/noc/nls/no
         IncidentGrid.CONFIG_PERIOD = 5;
         IncidentGrid.Grid = null;
         IncidentGrid.DATACLASS = null;
+
+        IncidentGrid.CRITICAL = "critical";
+        IncidentGrid.MAJOR = "major";
+        IncidentGrid.MINOR = "minor";
+
 
         /*
 
@@ -325,8 +292,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/noc/nls/no
             },
 
             createIncidentGridMeta:function (input) {
-                if(input.applicationVO == null || input.applicationVO == undefined || input.applicationVO.applications.length == 0) {
-                    this.attr('content',"No Applications configured to display on the dashboard");
+                if (input.applicationVO == null || input.applicationVO == undefined || input.applicationVO.applications.length == 0) {
+                    this.attr('content', "No Applications configured to display on the dashboard");
                     dashboard.dom.STANDBY.hide();
                     return;
                 }
