@@ -216,6 +216,44 @@ label  {
     stroke-opacity: .6;
 }
 
+/* ---------- Application Alerts Grid ---------*/
+.field-COMPONENT_AVAILABILITY_critical,
+.field-COMPONENT_STATIC_critical,
+.field-TRANSACTION_ONLINE_ANALYTIC_critical,
+.field-TRANSACTION_BATCH_ANALYTIC_critical,
+.field-COMPONENT_ANALYTIC_critical {
+    color: red;
+    font-weight:bold;
+}
+
+.field-COMPONENT_AVAILABILITY_major,
+.field-COMPONENT_STATIC_major,
+.field-TRANSACTION_ONLINE_ANALYTIC_major,
+.field-TRANSACTION_BATCH_ANALYTIC_major,
+.field-COMPONENT_ANALYTIC_major {
+    color: orange;
+    font-weight:bold;
+}
+
+.field-COMPONENT_AVAILABILITY_minor,
+.field-COMPONENT_STATIC_minor,
+.field-TRANSACTION_ONLINE_ANALYTIC_minor,
+.field-TRANSACTION_BATCH_ANALYTIC_minor,
+.field-COMPONENT_ANALYTIC_minor {
+    color: green;
+}
+
+.dgrid-cell {
+    font-size: 11px;
+}
+
+.field-appName {
+    width: 120px;
+}
+
+
+
+
 
 
 

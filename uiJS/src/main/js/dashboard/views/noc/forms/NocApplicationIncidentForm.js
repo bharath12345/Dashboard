@@ -42,7 +42,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/noc/nls/no
 
                 NocApplicationIncidentForm.gridDataStore.put(row, {overwrite:true});
                 IncidentGrid.Grid.refresh();
-
+                dashboard.dom.STANDBY.hide();
             }
 
         });
@@ -149,17 +149,14 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/noc/nls/no
                 // assign ids to nodes
                 for (var j = 0; j < metrics.length; j++) {
                     dojo.query("td.field-" + metrics[j] + "_" + IncidentGrid.CRITICAL).forEach(function (node) {
-                        //node.id = apps[i].name + "_" + apps[i].id + "_" + metrics[j] + "_" + IncidentGrid.CRITICAL;
                         node.style.color = "red";
                     });
 
                     dojo.query("td.field-" + metrics[j] + "_" + IncidentGrid.MAJOR).forEach(function (node) {
-                        //node.id = apps[i].name + "_" + apps[i].id + "_" + metrics[j] + "_" + IncidentGrid.MAJOR;
                         node.style.color = "orange";
                     });
 
                     dojo.query("td.field-" + metrics[j] + "_" + IncidentGrid.MINOR).forEach(function (node) {
-                        //node.id = apps[i].name + "_" + apps[i].id + "_" + metrics[j] + "_" + IncidentGrid.MINOR;
                         node.style.color = "blue";
                     });
                 }
