@@ -10,48 +10,34 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
         var ConfigAppLayerTransitions = declare(dashboard.classnames.ConfigAppLayerTransitions, ConfigForm, {
 
             title: dashboardI18nString.LAYER_TRANSITION,
+            tableCount: 2,
+            columnCount: [1, 2],
+            headings: ["From Layer", "To Layer"],
 
             startup: function() {
                 this.inherited(arguments);
 
-                console.log("making icons = " + this.title);
-                this.createConfigMenu();
-
-                var tableDiv = dojo.create('div', {'id':ConfigAppLayerTransitions.FORMNAME, style:'width: 100%; height: 100%;'});
-                this.attr('content', tableDiv);
-
-                ////
-
-                var layerDef = dojo.create('div', {style:'width: 100%; height: 40px;'});
-                tableDiv.appendChild(layerDef);
-                this.configTable = new TableContainer({cols: 3,"labelWidth": "150"}, layerDef);
-
                 this.layerBox = TextBox({label:"Layer Name", name:ConfigAppLayerTransitions.LAYER,
                     id:ConfigAppLayerTransitions.LAYER, intermediateChanges:true});
-                this.configTable.addChild(this.layerBox);
+                this.configTable[0].addChild(this.layerBox);
 
-                this.configTable.startup();
+                this.configTable[0].startup();
 
-                ConfigHelper.addSuggest(ConfigAppLayerTransitions.LAYER, dashboard.config.forms.ConfigAppLayersForm.LAYERARRAY);
+                //ConfigHelper.addSuggest(ConfigAppLayerTransitions.LAYER, dashboard.config.forms.ConfigAppLayersForm.LAYERARRAY);
 
                 ////
 
-                var topoDef = dojo.create('div', {style:'width: 100%;'});
-                tableDiv.appendChild(topoDef);
-
-                this.configTable = new TableContainer({cols: 2,"labelWidth": "10"}, topoDef);
-
                 this.fromBox = TextBox({name:ConfigAppLayerTransitions.FROM, id:ConfigAppLayerTransitions.FROM});
-                this.configTable.addChild(this.fromBox);
+                this.configTable[1].addChild(this.fromBox);
 
                 this.toBox = TextBox({name:ConfigAppLayerTransitions.TO, id:ConfigAppLayerTransitions.TO});
-                this.configTable.addChild(this.toBox);
+                this.configTable[1].addChild(this.toBox);
 
-                this.configTable.startup();
+                this.configTable[1].startup();
 
                 /// Add heading row
 
-                this.addHeadingRow();
+                this.addHeadingRow(this.configTable[1]);
 
                 /// Add content assist
 
@@ -74,36 +60,10 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                 ConfigHelper.addSuggest(ConfigAppTopologyForm.TO, allAppAndTags);
             },
 
-            addHeadingRow: function() {
-                var table = this.configTable.domNode.childNodes[0];
-
-                var thead = dojo.create('thead');
-                //table.appendChild(thead);
-                domConstruct.place(thead, table, "first");
-
-                var row = dojo.create('tr');
-                thead.appendChild(row);
-
-                var blankCol = dojo.create('th');
-                row.appendChild(blankCol);
-                var col = dojo.create('th');
-                col.className = 'configTableHead';
-                col.innerHTML = "From Layer";
-                row.appendChild(col);
-
-                blankCol = lang.clone(blankCol);
-                row.appendChild(blankCol);
-                col = lang.clone(col);
-                col.innerHTML = "To Layer";
-                row.appendChild(col);
-            },
-
             saveConfig:function () {
                 var fromLayer = this.fromBox.get('value');
                 var toLayer = this.toBox.get('value');
                 var layerName = this.layerBox.get('value');
-
-
             },
 
             createFormSpecificMenu:function () {
@@ -120,13 +80,13 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
 
             addRow: function() {
                 var x = TextBox({});
-                this.configTable.addChild(x);
+                this.configTable[1].addChild(x);
 
-                this.configTable._initialized = false;
-                this.configTable._started = false;
-                this.configTable.startup();
+                this.configTable[1]._initialized = false;
+                this.configTable[1]._started = false;
+                this.configTable[1].startup();
 
-                this.addHeadingRow();
+                this.addHeadingRow(this.configTable[1]);
 
             }
         });

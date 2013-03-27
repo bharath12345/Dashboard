@@ -12,25 +12,18 @@ define(["dojo/_base/declare", "dojo/i18n","dojo/i18n!dashboard/views/config/nls/
         var ConfigAppTagsForm = declare(dashboard.classnames.ConfigAppTagsForm, ConfigForm, {
 
             title: dashboardI18nString.APPLICATION_TAGS,
+            tableCount: 1,
+            columnCount: 1,
 
             startup:function () {
                 this.inherited(arguments);
-
-                console.log("making icons = " + this.title);
-                this.createConfigMenu();
-
-                var tableDiv = dojo.create('div', {'id':ConfigAppTagsForm.FORMNAME, style:'width: 100%; height: 100%;'});
-                this.attr('content', tableDiv);
-
-                var configTable = new TableContainer({cols:1, "labelWidth":"150"}, tableDiv);
-
                 this.appBox = new MultiComboBox({
                     label:"Application Name",
                     store: ConfigUtility.getMemoryStore(ConfigAppTagsForm.APPARRAY, './images/topologyicons/AppWindow.128.png'),
                     searchAttr: "name",
                     labelAttr:"label",
                     labelType:"html"});
-                configTable.addChild(this.appBox);
+                this.configTable.addChild(this.appBox);
 
                 this.tagBox = new MultiComboBox({
                     label:"Tags",
@@ -38,9 +31,9 @@ define(["dojo/_base/declare", "dojo/i18n","dojo/i18n!dashboard/views/config/nls/
                     searchAttr: "name",
                     labelAttr:"label",
                     labelType:"html"});
-                configTable.addChild(this.tagBox);
+                this.configTable.addChild(this.tagBox);
 
-                configTable.startup();
+                this.configTable.startup();
 
                 dashboard.dom.STANDBY.hide();
             },
@@ -77,8 +70,6 @@ define(["dojo/_base/declare", "dojo/i18n","dojo/i18n!dashboard/views/config/nls/
 
         ConfigAppTagsForm.LOG = Logger.addTimer(new Logger(dashboard.classnames.ConfigAppTagsForm));
 
-        ConfigAppTagsForm.FORMNAME = "ConfigAppTagsForm";
-        
         ConfigAppTagsForm.APPARRAY = ['NetBanking','RTGSPI','UBS','CRMNext','FinnoneLOS','Dealerpad','FinnoneLMS',
             'MobileBanking','FlexRTGS','ICUSTODY','Debos','CMSCollection','CMSDisbursement','ENET','PRMEnterprise',
             'eTreasury','FCCorporate','INSULATION_LAYER','NCB_Test','FCC_Production','HSL_IPO_UAT','SFMS'	];

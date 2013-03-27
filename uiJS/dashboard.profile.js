@@ -138,9 +138,9 @@ var profile = (function () {
             }
         ],
 
-        depsDumpFilename:"treeDump.json",
-        depsDumpDotFilename:"treeGraph.dot",
-        dotModules:"noc"
+        depsDumpFilename:"dashboard.json",
+        depsDumpDotFilename:"dashboard.dot",
+        dotModules:"dashboard"
 
     };
 })();

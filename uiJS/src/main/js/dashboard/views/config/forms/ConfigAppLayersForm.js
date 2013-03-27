@@ -11,36 +11,30 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
         var ConfigAppLayersForm = declare(dashboard.classnames.ConfigAppLayersForm, ConfigForm, {
 
             title: dashboardI18nString.APPLICATION_LAYERS,
+            tableCount: 1,
+            columnCount: 1,
 
             startup: function() {
                 this.inherited(arguments);
 
-                console.log("making icons = " + this.title);
-                this.createConfigMenu();
-
-                var tableDiv = dojo.create('div', {'id':ConfigAppLayersForm.FORMNAME, style:'width: 100%; height: 100%;'});
-                this.attr('content', tableDiv);
-
-                var configTable = new TableContainer({cols: 1,"labelWidth": "150"}, dojo.byId(ConfigAppLayersForm.FORMNAME));
-
                 this.layerBox = new TextBox({label:"Layer Name"});
-                configTable.addChild(this.layerBox);
+                this.configTable.addChild(this.layerBox);
 
                 this.appBox = new MultiComboBox({label:"Applications",
                     store: ConfigUtility.getMemoryStore(dashboard.config.forms.ConfigAppTagsForm.APPARRAY, './images/topologyicons/AppWindow.128.png'),
                     searchAttr: "name",
                     labelAttr:"label",
                     labelType:"html"});
-                configTable.addChild(this.appBox);
+                this.configTable.addChild(this.appBox);
 
                 this.tagBox = new MultiComboBox({label:"Tags",
                     store: ConfigUtility.getMemoryStore(dashboard.config.forms.ConfigAppTagsForm.TAGARRAY, './images/topologyicons/AppSet.128.png'),
                     searchAttr: "name",
                     labelAttr:"label",
                     labelType:"html"});
-                configTable.addChild(this.tagBox);
+                this.configTable.addChild(this.tagBox);
 
-                configTable.startup();
+                this.configTable.startup();
 
                 dashboard.dom.STANDBY.hide();
             },
@@ -80,8 +74,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
         });
 
         ConfigAppLayersForm.LOG = Logger.addTimer(new Logger(dashboard.classnames.ConfigAppLayersForm));
-
-        ConfigAppLayersForm.FORMNAME= "ConfigAppLayersForm";
 
         ConfigAppLayersForm.LAYERARRAY = ['LayerOne'];
         ConfigAppLayersForm.LAYERMAP = {
