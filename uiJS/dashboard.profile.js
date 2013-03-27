@@ -121,16 +121,8 @@ var profile = (function () {
                 location:"dbind"
             },
             {
-                name:"noc",
-                location:"noc"
-            },
-            {
                 name:"login",
                 location:"login"
-            },
-            {
-                name:"config",
-                location:"config"
             },
             {
                 name:"dashboard",
@@ -140,7 +132,8 @@ var profile = (function () {
 
         depsDumpFilename:"dashboard.json",
         depsDumpDotFilename:"dashboard.dot",
-        dotModules:"dashboard"
+        dotModules:"dashboard/DashboardRoutes, dashboard/DashboardAccordion, dashboard/DashboardView," +
+            "dashboard/views/noc/NocAcordion, dashboard/views/noc/NocView"
 
     };
 })();
