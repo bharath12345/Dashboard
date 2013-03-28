@@ -24,7 +24,8 @@ public class UserConfigPersistence extends Persistence {
             instance = LevelDBManager.getInstance();
 
             // ToDo: currently doing for only one user
-            String userUuid = UUID.randomUUID().toString();
+            String defaultUser = "default-panes";
+            String userUuid = new UserPersistence().getUserUuid(defaultUser);
 
             UserConfigEntity uce = new UserConfigEntity();
             uce.setUuid(userUuid);
@@ -34,9 +35,11 @@ public class UserConfigPersistence extends Persistence {
             TabListEntity tle = TabListEntity.getDefaultConfig();
             uuidList.add(tle.getUuid());
             uuidMap.put(ActionConstants.ACCORDION.PANES.name(), uuidList);
-            uce.setUuidMap(uuidMap);
 
-            uuidMap = new HashMap<String, ArrayList<String>>();
+            //ToDo: How will someone distinguish between these different object types ???
+            //ToDo: How will the Alert's PageListEntity get picked up correctly ??
+            //ToDo: Fix this along with Debasis
+
             uuidList = new ArrayList<String>();
             PageListEntity alertPLE = PageListEntity.getDefaultAlertsPageEntity();
             uuidList.add(alertPLE.getUuid());

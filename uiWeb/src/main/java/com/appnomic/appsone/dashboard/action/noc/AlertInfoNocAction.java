@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import com.appnomic.appsone.common.ActionConstants;
+import com.appnomic.appsone.config.entity.UserConfigEntity;
+import com.appnomic.appsone.config.persistence.Persistence;
 import com.appnomic.appsone.dashboard.action.*;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -122,7 +125,16 @@ public class AlertInfoNocAction extends AbstractAction {
 		
 		AlertGridConfigManager agcm = AlertGridConfigManager.getInstance();
 		AlertGridEntity age = (AlertGridEntity)agcm.getConfig();
-		String [] appsInterestedIn = age.getApplicationNames().getUserSetting();
+
+        Persistence persistence = new Persistence();
+        String json = persistence.get(userUuid);
+        UserConfigEntity uce = gson.fromJson(json, UserConfigEntity.class);
+
+        String tabListObjectUuid = uce.getUuidMap().get(ActionConstants.NOC.APPLICATION_ALERTS.name());
+
+        json = persistence.get(tabListObjectUuid);
+
+        String [] appsInterestedIn = age.getApplicationNames().getUserSetting();
 		if(appsInterestedIn == null || appsInterestedIn.length == 0 ) {
 			applicationMetaVO = null;
 			return SUCCESS;

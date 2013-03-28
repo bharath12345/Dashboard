@@ -91,6 +91,7 @@ public class TabListEntity extends AbstractConfigEntity{
         tabList.add(tabListObj);
 
         tle.setTabList(tabList.toArray(new TabListEntity.TabEntity[tabList.size()]));
+        tle.setUuid(UUID.randomUUID().toString());
         return tle;
     }
 

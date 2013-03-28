@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.appnomic.appsone.common.ActionConstants;
+import com.appnomic.appsone.config.entity.ApplicationAlertsGrid;
+import com.appnomic.appsone.config.entity.UserConfigEntity;
+import com.appnomic.appsone.config.persistence.Persistence;
 import com.appnomic.appsone.dashboard.action.AbstractAction;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
@@ -29,7 +33,7 @@ import com.appnomic.service.ApplicationDataService;
 public class AlertGridConfigAction extends AbstractAction {
 
 	private Map<String, String[]> param;
-	private AlertGridEntity age;
+	private ApplicationAlertsGrid age;
 	private AlertGridConfigVO agcVO;
 	private ApplicationDataService applicationDataService;
 	
@@ -50,11 +54,11 @@ public class AlertGridConfigAction extends AbstractAction {
 		this.agcVO = agcVO;
 	}
 
-	public AlertGridEntity getAge() {
+	public ApplicationAlertsGrid getAge() {
 		return age;
 	}
 
-	public void setAge(AlertGridEntity age) {
+	public void setAge(ApplicationAlertsGrid age) {
 		this.age = age;
 	}
 
@@ -79,10 +83,23 @@ public class AlertGridConfigAction extends AbstractAction {
 	            })})
 	public String alertGridDetailsRetrieveAction() {
 		param = getParameters();
-		AlertGridConfigManager agcm = AlertGridConfigManager.getInstance();
-		age = (AlertGridEntity)agcm.getConfig();
-		
-		List<ApplicationData> applications = applicationDataService.getAll();
+
+
+		//AlertGridConfigManager agcm = AlertGridConfigManager.getInstance();
+		//age = (AlertGridEntity)agcm.getConfig();
+
+        Persistence persistence = new Persistence();
+        String json = persistence.get(userUuid);
+
+        UserConfigEntity uce = gson.fromJson(json, UserConfigEntity.class);
+
+        String tabListObjectUuid = uce.getUuidMap().get("");
+        //.get(ActionConstants.NOC.APPLICATION_ALERTS.name());
+
+        json = persistence.get(tabListObjectUuid);
+
+
+        List<ApplicationData> applications = applicationDataService.getAll();
 		List<String> allApplications = new ArrayList<String>();
 		for(ApplicationData application: applications) {
 			allApplications.add(application.getName());

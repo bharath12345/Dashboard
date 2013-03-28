@@ -77,6 +77,7 @@ public class PageListEntity extends AbstractConfigEntity {
         pageList.add(pageEntity);
 
         aple.setPageEntity(pageList.toArray(new PageListEntity.PageEntity[pageList.size()]));
+        aple.setUuid(UUID.randomUUID().toString());
         return aple;
     }
 
@@ -161,6 +162,7 @@ public class PageListEntity extends AbstractConfigEntity {
         ////////
 
         cple.setPageEntity(pageList.toArray(new PageListEntity.PageEntity[pageList.size()]));
+        cple.setUuid(UUID.randomUUID().toString());
         return cple;
     }
 
@@ -183,6 +185,7 @@ public class PageListEntity extends AbstractConfigEntity {
         pageList.add(pageEntity);
 
         tple.setPageEntity(pageList.toArray(new PageListEntity.PageEntity[pageList.size()]));
+        tple.setUuid(UUID.randomUUID().toString());
         return tple;
     }
 
@@ -205,6 +208,7 @@ public class PageListEntity extends AbstractConfigEntity {
         pageList.add(pageEntity);
 
         tple.setPageEntity(pageList.toArray(new PageListEntity.PageEntity[pageList.size()]));
+        tple.setUuid(UUID.randomUUID().toString());
         return tple;
     }
 
@@ -227,6 +231,7 @@ public class PageListEntity extends AbstractConfigEntity {
         pageList.add(pageEntity);
 
         tple.setPageEntity(pageList.toArray(new PageListEntity.PageEntity[pageList.size()]));
+        tple.setUuid(UUID.randomUUID().toString());
         return tple;
     }
 

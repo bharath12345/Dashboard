@@ -21,7 +21,7 @@ public class ApplicationAlertsGrid extends AbstractConfigEntity {
 		this.applications = applications;
 	}
 
-    public ApplicationAlertsGrid getDefaultConfig() {
+    public static ApplicationAlertsGrid getDefaultConfig() {
         ApplicationAlertsGrid aag = new ApplicationAlertsGrid();
         String [] applications = {"NetBanking","RTGSPI","UBS","CRMNext","FinnoneLOS","Dealerpad","FinnoneLMS",
                 "MobileBanking","FlexRTGS","ICUSTODY","Debos","CMSCollection","CMSDisbursement","ENET","PRMEnterprise",
