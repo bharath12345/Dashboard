@@ -1,7 +1,5 @@
 package com.appnomic.appsone.dashboard.viewobject.config.base;
 
-import com.appnomic.appsone.config.ConfigType;
-
 public class StringAttributeVO extends AttributeVO {
 
 	String value;

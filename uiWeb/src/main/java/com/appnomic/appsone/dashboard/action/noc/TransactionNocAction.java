@@ -2,7 +2,6 @@ package com.appnomic.appsone.dashboard.action.noc;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -12,13 +11,7 @@ import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 
-import com.appnomic.appsone.config.entity.TransactionGridEntity;
 import com.appnomic.appsone.dashboard.action.TimeUtility;
-import com.appnomic.appsone.config.TransactionGridConfigManager;
-import com.appnomic.appsone.dashboard.viewobject.availability.ClusterVO;
-import com.appnomic.appsone.dashboard.viewobject.availability.ComponentDataVO;
-import com.appnomic.appsone.dashboard.viewobject.availability.ComponentVO;
-import com.appnomic.appsone.dashboard.viewobject.availability.InstanceVO;
 import com.appnomic.appsone.dashboard.viewobject.transaction.ApplicationVO;
 import com.appnomic.appsone.dashboard.viewobject.transaction.TransactionAppDataVO;
 import com.appnomic.appsone.dashboard.viewobject.transaction.TransactionDataVO;
@@ -26,16 +19,9 @@ import com.appnomic.appsone.dashboard.viewobject.transaction.TransactionGroupDat
 import com.appnomic.appsone.dashboard.viewobject.transaction.TransactionGroupVO;
 import com.appnomic.appsone.dashboard.viewobject.transaction.TransactionVO;
 import com.appnomic.domainobject.ApplicationData;
-import com.appnomic.domainobject.Cluster;
-import com.appnomic.domainobject.Cluster.ComponentData;
-import com.appnomic.domainobject.Component;
-import com.appnomic.domainobject.Host;
 import com.appnomic.domainobject.Transaction;
-import com.appnomic.domainobject.TransactionGroup;
 import com.appnomic.domainobject.TransactionSummary;
 import com.appnomic.service.ApplicationDataService;
-import com.appnomic.service.ClusterDataService;
-import com.appnomic.service.ComponentDataService;
 import com.appnomic.service.TransactionDataService;
 
 /*

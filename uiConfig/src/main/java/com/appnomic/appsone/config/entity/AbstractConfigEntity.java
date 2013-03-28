@@ -1,24 +1,24 @@
 package com.appnomic.appsone.config.entity;
 
 public abstract class AbstractConfigEntity {
-	
-	String uuid; // key
-	int userId; 
 
-	public String getUuid() {
-		return uuid;
-	}
+    String uuid; // key
+    int userId;
 
-	public void setUuid(String uuid) {
-		this.uuid = uuid;
-	}
+    public String getUuid() {
+        return uuid;
+    }
 
-	public int getUserId() {
-		return userId;
-	}
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
 
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
 }

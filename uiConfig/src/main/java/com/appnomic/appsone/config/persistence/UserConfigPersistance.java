@@ -17,8 +17,33 @@ public class UserConfigPersistance {
       * 2) The get() and set() methods are called from UI interactions
       */
 
-    public boolean set(int userId) {
+    private static final Gson gson = new Gson();
+
+    public boolean set(String userUuid, String json) {
+        LevelDBManager instance = null;
+        try {
+            instance = LevelDBManager.getInstance();
+            System.out.println("saving: key = " + userUuid + " value = " + json);
+            instance.write(userUuid, json);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
         return true;
+    }
+
+    public UserConfigEntity get(String userUuid) {
+        LevelDBManager instance = null;
+        UserConfigEntity uce = null;
+        try {
+            instance = LevelDBManager.getInstance();
+            System.out.println("retrieving: key = " + userUuid);
+            String json = instance.read(userUuid);
+            uce = gson.fromJson(json, UserConfigEntity.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return uce;
     }
 
     public boolean persist() {
@@ -28,7 +53,6 @@ public class UserConfigPersistance {
         LevelDBManager instance = null;
         try {
             instance = LevelDBManager.getInstance();
-            Gson gson = new Gson();
 
             // ToDo: currently doing for only one user
             String userUuid = UUID.randomUUID().toString();

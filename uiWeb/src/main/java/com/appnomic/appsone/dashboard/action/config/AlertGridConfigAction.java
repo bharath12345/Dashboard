@@ -13,13 +13,7 @@ import com.appnomic.appsone.config.attribute.BooleanAttribute;
 import com.appnomic.appsone.config.attribute.IntegerAttribute;
 import com.appnomic.appsone.config.attribute.StringArrayAttribute;
 import com.appnomic.appsone.config.attribute.StringAttribute;
-import com.appnomic.appsone.config.entity.AlertGridEntity;
-import com.appnomic.appsone.config.entity.PageListEntity;
 import com.appnomic.appsone.dashboard.action.noc.AbstractNocAction;
-import com.appnomic.appsone.config.AlertGridConfigManager;
-import com.appnomic.appsone.config.ConfigType;
-import com.appnomic.appsone.config.LevelDBManager;
-import com.appnomic.appsone.config.attribute.*;
 
 import com.appnomic.appsone.dashboard.viewobject.config.AlertGridConfigVO;
 import com.appnomic.appsone.dashboard.viewobject.config.base.BooleanAttributeVO;

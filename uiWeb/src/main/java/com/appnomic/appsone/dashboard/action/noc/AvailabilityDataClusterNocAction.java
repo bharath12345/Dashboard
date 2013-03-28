@@ -4,34 +4,24 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.Set;
 
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
-import org.apache.struts2.interceptor.ParameterAware;
 import org.apache.struts2.convention.annotation.Action;
-import org.springframework.jdbc.BadSqlGrammarException;
 
-import com.appnomic.appsone.config.entity.ClusterGridEntity;
-import com.appnomic.appsone.config.ClusterGridConfigManager;
-import com.appnomic.appsone.dashboard.request.RequestHelper;
-import com.appnomic.appsone.dashboard.request.objects.RequestNameId;
 import com.appnomic.appsone.dashboard.viewobject.availability.ClusterDataVO;
 import com.appnomic.appsone.dashboard.viewobject.availability.ClusterVO;
 import com.appnomic.appsone.dashboard.viewobject.availability.CompInstanceDataPointVO;
 import com.appnomic.appsone.dashboard.viewobject.availability.CompInstanceTimesVO;
-import com.appnomic.appsone.dashboard.viewobject.availability.KpiDataPointVO;
-import com.appnomic.appsone.dashboard.viewobject.availability.KpiTimesVO;
 import com.appnomic.domainobject.Cluster;
 import com.appnomic.domainobject.Cluster.ComponentData;
-import com.appnomic.domainobject.Host;
 import com.appnomic.entity.NormalizedAvailabilityKpi;
 import com.appnomic.service.ClusterDataService;
 import com.appnomic.service.ComponentDataService;
 //import com.opensymphony.xwork2.Action;
-import com.google.gson.Gson;
+
 
 @ParentPackage("json-default")
 @Namespace("/availability")

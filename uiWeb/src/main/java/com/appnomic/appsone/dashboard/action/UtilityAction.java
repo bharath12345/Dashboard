@@ -1,31 +1,17 @@
 package com.appnomic.appsone.dashboard.action;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 
-import com.appnomic.appsone.config.entity.AlertGridEntity;
-import com.appnomic.appsone.config.entity.PageListEntity;
 import com.appnomic.appsone.config.entity.TabListEntity;
 import com.appnomic.appsone.common.ActionConstants;
 import com.appnomic.appsone.common.ActionConstants.ACCORDION;
 import com.appnomic.appsone.dashboard.action.noc.AbstractNocAction;
-import com.appnomic.appsone.config.AccordionTabConfigManager;
-import com.appnomic.appsone.config.AlertGridConfigManager;
-import com.appnomic.appsone.config.ConfigType;
-import com.appnomic.appsone.config.LevelDBManager;
-import com.appnomic.appsone.config.attribute.*;
-import com.appnomic.appsone.dashboard.viewobject.config.AlertGridConfigVO;
-import com.appnomic.appsone.dashboard.viewobject.config.base.BooleanAttributeVO;
-import com.appnomic.appsone.dashboard.viewobject.config.base.IntegerAttributeVO;
-import com.appnomic.appsone.dashboard.viewobject.config.base.StringAttributeVO;
 
 @ParentPackage("json-default")
 @Namespace("/utility")

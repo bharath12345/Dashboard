@@ -11,15 +11,10 @@ import org.apache.struts2.convention.annotation.Result;
 
 import com.appnomic.appsone.config.attribute.IntegerAttribute;
 import com.appnomic.appsone.config.attribute.StringArrayAttribute;
-import com.appnomic.appsone.config.entity.ClusterGridEntity;
 import com.appnomic.appsone.dashboard.action.noc.AbstractNocAction;
-import com.appnomic.appsone.config.ClusterGridConfigManager;
-import com.appnomic.appsone.config.attribute.*;
 import com.appnomic.appsone.dashboard.viewobject.config.ClusterGridConfigVO;
-import com.appnomic.appsone.dashboard.viewobject.config.base.BooleanAttributeVO;
 import com.appnomic.appsone.dashboard.viewobject.config.base.IntegerAttributeVO;
 import com.appnomic.appsone.dashboard.viewobject.config.base.StringArrayAttributeVO;
-import com.appnomic.appsone.dashboard.viewobject.config.base.StringAttributeVO;
 import com.appnomic.domainobject.Cluster;
 import com.appnomic.service.ClusterDataService;
 

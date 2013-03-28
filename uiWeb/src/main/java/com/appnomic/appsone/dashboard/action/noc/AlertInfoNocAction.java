@@ -1,9 +1,6 @@
 package com.appnomic.appsone.dashboard.action.noc;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -13,9 +10,7 @@ import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Action;
 
-import com.appnomic.appsone.config.entity.AlertGridEntity;
 import com.appnomic.appsone.dashboard.action.TimeUtility;
-import com.appnomic.appsone.config.AlertGridConfigManager;
 import com.appnomic.appsone.dashboard.viewobject.alert.ApplicationDataVO;
 import com.appnomic.appsone.dashboard.viewobject.alert.ApplicationMetaVO;
 import com.appnomic.appsone.dashboard.viewobject.alert.ApplicationVO;
@@ -24,8 +19,6 @@ import com.appnomic.domainobject.AlertCountSummary;
 import com.appnomic.domainobject.AlertCountSummary.SUMMARY_CATEGORY;
 import com.appnomic.domainobject.AlertSeverity;
 import com.appnomic.domainobject.ApplicationData;
-import com.appnomic.domainobject.Component;
-import com.appnomic.domainobject.ComponentAlertSummary;
 import com.appnomic.exception.InvalidTimeIntervalException;
 import com.appnomic.service.ApplicationDataService;
 import com.appnomic.service.ComponentDataService;

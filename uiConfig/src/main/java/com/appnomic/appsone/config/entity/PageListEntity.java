@@ -5,65 +5,65 @@ import java.util.*;
 
 public class PageListEntity extends AbstractConfigEntity {
 
-	PageEntity[] pageEntity;
+    PageEntity[] pageEntity;
 
-	public PageEntity[] getPageEntity() {
-		return pageEntity;
-	}
+    public PageEntity[] getPageEntity() {
+        return pageEntity;
+    }
 
-	public void setPageEntity(PageEntity[] pageEntity) {
-		this.pageEntity = pageEntity;
-	}
+    public void setPageEntity(PageEntity[] pageEntity) {
+        this.pageEntity = pageEntity;
+    }
 
-	public class PageEntity {
+    public class PageEntity {
 
-		String name;
-		String type;
-		int enumId;
-		String uuid;
-		
-		PageEntity[] pageList;
+        String name;
+        String type;
+        int enumId;
+        String uuid;
 
-		public PageEntity[] getPageList() {
-			return pageList;
-		}
+        PageEntity[] pageList;
 
-		public void setPageList(PageEntity[] pageList) {
-			this.pageList = pageList;
-		}
+        public PageEntity[] getPageList() {
+            return pageList;
+        }
 
-		public int getEnumId() {
-			return enumId;
-		}
+        public void setPageList(PageEntity[] pageList) {
+            this.pageList = pageList;
+        }
 
-		public void setEnumId(int enumId) {
-			this.enumId = enumId;
-		}
+        public int getEnumId() {
+            return enumId;
+        }
 
-		public String getUuid() {
-			return uuid;
-		}
+        public void setEnumId(int enumId) {
+            this.enumId = enumId;
+        }
 
-		public void setUuid(String uuid) {
-			this.uuid = uuid;
-		}
+        public String getUuid() {
+            return uuid;
+        }
 
-		public String getType() {
-			return type;
-		}
+        public void setUuid(String uuid) {
+            this.uuid = uuid;
+        }
 
-		public void setType(String type) {
-			this.type = type;
-		}
+        public String getType() {
+            return type;
+        }
 
-		public String getName() {
-			return name;
-		}
+        public void setType(String type) {
+            this.type = type;
+        }
 
-		public void setName(String name) {
-			this.name = name;
-		}
-	}
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+    }
 
     public static PageListEntity getDefaultAlertsPageEntity() {
         PageListEntity aple = new PageListEntity();
