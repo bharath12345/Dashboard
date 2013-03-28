@@ -3,6 +3,7 @@ package com.appnomic.appsone.dashboard.action;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.appnomic.appsone.config.entity.PageListEntity;
 import com.appnomic.appsone.config.entity.UserConfigEntity;
 import com.appnomic.appsone.config.persistence.Persistence;
 import org.apache.struts2.convention.annotation.Action;
@@ -67,7 +68,7 @@ public class UtilityAction extends AbstractAction {
 
         String tabListObjectUuid = uce.getUuidMap().get(ActionConstants.ACCORDION.PANES.name());
 
-		json = persistence.get(tabListObjectUuid);//tle.getTabList();
+		json = persistence.get(tabListObjectUuid);
         TabListEntity tle = gson.fromJson(json, TabListEntity.class);
         tabListVO = tle.getTabList();
 
@@ -128,5 +129,17 @@ public class UtilityAction extends AbstractAction {
 		
 		return SUCCESS;
 	}
+
+    public static PageListEntity getPageListEntity(String userUuid) {
+        Persistence persistence = new Persistence();
+        String json = persistence.get(userUuid);
+        UserConfigEntity uce = gson.fromJson(json, UserConfigEntity.class);
+
+        String tabListObjectUuid = uce.getUuidMap().get(ActionConstants.ACCORDION.LINKS.name());
+
+        json = persistence.get(tabListObjectUuid);
+        PageListEntity ple = gson.fromJson(json, PageListEntity.class);
+        return ple;
+    }
 	
 }

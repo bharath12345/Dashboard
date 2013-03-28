@@ -3,6 +3,7 @@ package com.appnomic.appsone.dashboard.action.noc;
 import java.util.Map;
 
 import com.appnomic.appsone.dashboard.action.AbstractAction;
+import com.appnomic.appsone.dashboard.action.UtilityAction;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -44,10 +45,11 @@ public class NocUtilityAction extends AbstractAction {
 	            })})
 	public String pagesAction() {
 		param = getParameters();
-		AccordionPageConfigManager accordionPageConfigManager = AccordionPageConfigManager.getInstance();
-		NocPageListEntity nple = accordionPageConfigManager.getNocPageListEntity();
-		pageListVO = nple.getPageEntity();
-		return SUCCESS;
+
+        PageListEntity nocPLE = UtilityAction.getPageListEntity(userUuid);
+        pageListVO = nocPLE.getPageEntity();
+
+        return SUCCESS;
 	}
 	
 }

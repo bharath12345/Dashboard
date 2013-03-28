@@ -3,6 +3,7 @@ package com.appnomic.appsone.dashboard.action.custom;
 import java.util.Map;
 
 import com.appnomic.appsone.dashboard.action.AbstractAction;
+import com.appnomic.appsone.dashboard.action.UtilityAction;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -44,10 +45,11 @@ public class CustomUtilityAction extends AbstractAction {
 	            })})
 	public String pagesAction() {
 		param = getParameters();
-		AccordionPageConfigManager accordionPageConfigManager = AccordionPageConfigManager.getInstance();
-		CustomPageListEntity cple = accordionPageConfigManager.getCustomPageListEntity();
-		pageListVO = cple.getPageEntity();
-		return SUCCESS;
+
+        PageListEntity customPLE = UtilityAction.getPageListEntity(userUuid);
+        pageListVO = customPLE.getPageEntity();
+
+        return SUCCESS;
 	}
 	
 }

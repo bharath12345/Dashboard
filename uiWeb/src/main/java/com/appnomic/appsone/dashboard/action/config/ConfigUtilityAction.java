@@ -2,7 +2,11 @@ package com.appnomic.appsone.dashboard.action.config;
 
 import java.util.Map;
 
+import com.appnomic.appsone.common.ActionConstants;
+import com.appnomic.appsone.config.entity.UserConfigEntity;
+import com.appnomic.appsone.config.persistence.Persistence;
 import com.appnomic.appsone.dashboard.action.AbstractAction;
+import com.appnomic.appsone.dashboard.action.UtilityAction;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -16,15 +20,6 @@ public class ConfigUtilityAction extends AbstractAction {
 
 	private PageListEntity.PageEntity [] pageListVO;
 	private Map<String, String[]> param;
-	private Map<String, String> levelDbMap;
-	
-	public Map<String, String> getLevelDbMap() {
-		return levelDbMap;
-	}
-
-	public void setLevelDbMap(Map<String, String> levelDbMap) {
-		this.levelDbMap = levelDbMap;
-	}
 
 	public PageListEntity.PageEntity[] getPageListVO() {
 		return pageListVO;
@@ -53,10 +48,11 @@ public class ConfigUtilityAction extends AbstractAction {
 	            })})
 	public String pagesAction() {
 		param = getParameters();
-		AccordionPageConfigManager accordionPageConfigManager = AccordionPageConfigManager.getInstance();
-		ConfigPageListEntity cple = accordionPageConfigManager.getConfigPageListEntity();
-		pageListVO = cple.getPageEntity();
-		return SUCCESS;
+
+        PageListEntity configPLE = UtilityAction.getPageListEntity(userUuid);
+        pageListVO = configPLE.getPageEntity();
+
+        return SUCCESS;
 	}
 	
 	
@@ -81,36 +77,4 @@ public class ConfigUtilityAction extends AbstractAction {
 		}
 		return mybool;
 	}
-	
-	
-	////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	@Action(value="/config/allConfigDump", results = {
-	        @Result(name="success", type="json", params = {
-	        		"excludeProperties",
-	                "parameters,session,SUCCESS,ERROR,age,agcVO,pageListVO",
-	        		"enableGZIP", "true",
-	        		"encoding", "UTF-8",
-	                "noCache","true",
-	                "excludeNullProperties","true"
-	            })})
-	public String allConfigDumpAction() {
-		LevelDBManager instance = null;
-		try {
-			instance = LevelDBManager.getInstance();
-			//instance.init();
-			levelDbMap = instance.getAllKeyValues();
-		} catch(Exception e) {
-			e.printStackTrace();
-		} finally {
-			if(instance!=null) {
-				//instance.shutdown();
-			}
-		}
-		return SUCCESS;
-	}
-	
-	////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	
 }

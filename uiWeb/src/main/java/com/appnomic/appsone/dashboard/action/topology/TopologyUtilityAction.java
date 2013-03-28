@@ -3,6 +3,7 @@ package com.appnomic.appsone.dashboard.action.topology;
 import java.util.Map;
 
 import com.appnomic.appsone.dashboard.action.AbstractAction;
+import com.appnomic.appsone.dashboard.action.UtilityAction;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -44,10 +45,11 @@ public class TopologyUtilityAction extends AbstractAction {
 	            })})
 	public String pagesAction() {
 		param = getParameters();
-		AccordionPageConfigManager accordionPageConfigManager = AccordionPageConfigManager.getInstance();
-		TopologyPageListEntity tple = accordionPageConfigManager.getTopologyPageListEntity();
-		pageListVO = tple.getPageEntity();
-		return SUCCESS;
+
+        PageListEntity topoPLE = UtilityAction.getPageListEntity(userUuid);
+        pageListVO = topoPLE.getPageEntity();
+
+        return SUCCESS;
 	}
 	
 }

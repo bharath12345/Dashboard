@@ -3,6 +3,7 @@ package com.appnomic.appsone.dashboard.action.alerts;
 import java.util.Map;
 
 import com.appnomic.appsone.dashboard.action.AbstractAction;
+import com.appnomic.appsone.dashboard.action.UtilityAction;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -44,11 +45,11 @@ public class AlertsUtilityAction extends AbstractAction {
 	            })})
 	public String pagesAction() {
 		param = getParameters();
-		
-		AccordionPageConfigManager accordionPageConfigManager = AccordionPageConfigManager.getInstance();
-		AlertsPageListEntity aple = accordionPageConfigManager.getAlertsPageListEntity();
-		pageListVO = aple.getPageEntity();
-		return SUCCESS;
+
+        PageListEntity alertPLE = UtilityAction.getPageListEntity(userUuid);
+        pageListVO = alertPLE.getPageEntity();
+
+        return SUCCESS;
 	}
 	
 }
