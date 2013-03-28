@@ -2,6 +2,7 @@ package com.appnomic.appsone.dashboard.action.noc;
 
 import java.util.Map;
 
+import com.appnomic.appsone.dashboard.action.AbstractAction;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -11,7 +12,7 @@ import com.appnomic.appsone.config.entity.PageListEntity;
 
 @ParentPackage("json-default")
 @Namespace("/noc")
-public class NocUtilityAction extends AbstractNocAction {
+public class NocUtilityAction extends AbstractAction {
 
 	private PageListEntity.PageEntity [] pageListVO;
 	private Map<String, String[]> param;

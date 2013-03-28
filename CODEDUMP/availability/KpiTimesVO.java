@@ -1,8 +1,8 @@
-package com.appnomic.appsone.dashboard.viewobject.availability;
+package availability;
 
 public class KpiTimesVO {
 	private String time;
-	private KpiDataPointVO [] kpi;
+	private KpiDataPointVO[] kpi;
 	
 	public KpiDataPointVO[] getKpi() {
 		return kpi;

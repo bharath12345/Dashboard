@@ -8,7 +8,7 @@ import com.appnomic.appsone.common.ActionConstants;
 
 public class TabListEntity extends AbstractConfigEntity{
 
-    TabEntity [] tabList;
+    private TabEntity [] tabList;
 
     public TabEntity[] getTabList() {
         return tabList;

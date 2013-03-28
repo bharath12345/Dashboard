@@ -6,12 +6,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.appnomic.appsone.dashboard.action.*;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 
-import com.appnomic.appsone.dashboard.action.TimeUtility;
 import com.appnomic.appsone.dashboard.viewobject.transaction.ApplicationVO;
 import com.appnomic.appsone.dashboard.viewobject.transaction.TransactionAppDataVO;
 import com.appnomic.appsone.dashboard.viewobject.transaction.TransactionDataVO;
@@ -33,7 +33,7 @@ import com.appnomic.service.TransactionDataService;
 @SuppressWarnings("serial")
 @ParentPackage("json-default")
 @Namespace("/transaction")
-public class TransactionNocAction extends AbstractNocAction  {
+public class TransactionNocAction extends AbstractAction {
 
 	private ApplicationDataService applicationDataService;
 	private TransactionDataService transactionDataService;

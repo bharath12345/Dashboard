@@ -1,9 +1,9 @@
-package com.appnomic.appsone.dashboard.viewobject.availability;
+package availability;
 
-public class ComponentDataVO {
+public class ClusterDataVO {
 	
 	private String instanceName;
-	private ClusterTimesVO [] times;
+	private CompInstanceTimesVO [] times;
 	
 	public String getInstanceName() {
 		return instanceName;
@@ -11,11 +11,11 @@ public class ComponentDataVO {
 	public void setInstanceName(String instanceName) {
 		this.instanceName = instanceName;
 	}
-	public ClusterTimesVO[] getTimes() {
+	public CompInstanceTimesVO[] getTimes() {
 		return times;
 	}
-	public void setTimes(ClusterTimesVO[] times) {
+	public void setTimes(CompInstanceTimesVO[] times) {
 		this.times = times;
 	}
-
+	
 }

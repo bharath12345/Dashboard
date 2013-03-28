@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.appnomic.appsone.dashboard.action.AbstractAction;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -11,7 +12,6 @@ import org.apache.struts2.convention.annotation.Result;
 
 import com.appnomic.appsone.config.attribute.IntegerAttribute;
 import com.appnomic.appsone.config.attribute.StringArrayAttribute;
-import com.appnomic.appsone.dashboard.action.noc.AbstractNocAction;
 import com.appnomic.appsone.dashboard.viewobject.config.TransactionGridConfigVO;
 import com.appnomic.appsone.dashboard.viewobject.config.base.IntegerAttributeVO;
 import com.appnomic.appsone.dashboard.viewobject.config.base.StringArrayAttributeVO;
@@ -22,7 +22,7 @@ import com.appnomic.service.TransactionDataService;
 
 @ParentPackage("json-default")
 @Namespace("/config")
-public class TransactionGridConfigAction extends AbstractNocAction {
+public class TransactionGridConfigAction extends AbstractAction {
 
 	private ApplicationDataService applicationDataService;
 	private TransactionDataService transactionDataService;

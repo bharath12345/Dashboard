@@ -1,10 +1,10 @@
-package com.appnomic.appsone.dashboard.viewobject.availability;
+package availability;
 
 public class ComponentVO {
 
 	private String componentName;
 	private int id;
-	private ClusterVO [] clusters;
+	private ClusterVO[] clusters;
 	
 	public int getId() {
 		return id;

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.appnomic.appsone.dashboard.action.AbstractAction;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -13,7 +14,6 @@ import com.appnomic.appsone.config.attribute.BooleanAttribute;
 import com.appnomic.appsone.config.attribute.IntegerAttribute;
 import com.appnomic.appsone.config.attribute.StringArrayAttribute;
 import com.appnomic.appsone.config.attribute.StringAttribute;
-import com.appnomic.appsone.dashboard.action.noc.AbstractNocAction;
 
 import com.appnomic.appsone.dashboard.viewobject.config.AlertGridConfigVO;
 import com.appnomic.appsone.dashboard.viewobject.config.base.BooleanAttributeVO;
@@ -26,7 +26,7 @@ import com.appnomic.service.ApplicationDataService;
 
 @ParentPackage("json-default")
 @Namespace("/config")
-public class AlertGridConfigAction extends AbstractNocAction {
+public class AlertGridConfigAction extends AbstractAction {
 
 	private Map<String, String[]> param;
 	private AlertGridEntity age;

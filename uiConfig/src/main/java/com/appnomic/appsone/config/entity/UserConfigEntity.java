@@ -2,11 +2,7 @@ package com.appnomic.appsone.config.entity;
 
 import java.util.*;
 
-public class UserConfigEntity {
-
-
-    // the persistence key in Level DB JSON store
-	String userUuid;
+public class UserConfigEntity extends AbstractConfigEntity {
 
     // 1) json of this is what gets persisted as value
     // 2) The key in this map is the 'kind' of config objects associated to this user
@@ -21,14 +17,6 @@ public class UserConfigEntity {
 
     public void setUuidMap(Map<String, ArrayList<String>> uuidMap) {
         this.uuidMap = uuidMap;
-    }
-
-    public String getUserUuid() {
-        return userUuid;
-    }
-
-    public void setUserUuid(String userUuid) {
-        this.userUuid = userUuid;
     }
 
 }

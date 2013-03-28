@@ -1,5 +1,3 @@
-package com.appnomic.appsone.dashboard.action;
-
 import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Namespace;

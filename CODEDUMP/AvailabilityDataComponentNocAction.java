@@ -1,5 +1,3 @@
-package com.appnomic.appsone.dashboard.action.noc;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -8,6 +6,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
+import com.appnomic.appsone.dashboard.action.noc.AbstractNocAction;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
@@ -31,7 +30,7 @@ import com.google.gson.Gson;
 
 @ParentPackage("json-default")
 @Namespace("/availability")
-public class AvailabilityDataComponentNocAction extends AbstractNocAction  {
+public class AvailabilityDataComponentNocAction extends AbstractNocAction {
 	
 	private ComponentDataService componentDataService;
 	private ClusterDataService clusterDataService;

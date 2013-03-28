@@ -1,4 +1,4 @@
-package com.appnomic.appsone.dashboard.viewobject.availability;
+package availability;
 
 public class ClusterDataPointVO {
 	

@@ -2,17 +2,17 @@ package com.appnomic.appsone.dashboard.action.custom;
 
 import java.util.Map;
 
+import com.appnomic.appsone.dashboard.action.AbstractAction;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 
 import com.appnomic.appsone.config.entity.PageListEntity;
-import com.appnomic.appsone.dashboard.action.noc.AbstractNocAction;
 
 @ParentPackage("json-default")
 @Namespace("/custom")
-public class CustomUtilityAction extends AbstractNocAction {
+public class CustomUtilityAction extends AbstractAction {
 
 	private PageListEntity.PageEntity [] pageListVO;
 	private Map<String, String[]> param;

@@ -8,43 +8,12 @@ import com.appnomic.appsone.config.entity.PageListEntity;
 import com.appnomic.appsone.config.entity.TabListEntity;
 import com.appnomic.appsone.config.entity.UserConfigEntity;
 
-import com.google.gson.Gson;
-
-public class UserConfigPersistance {
+public class UserConfigPersistence extends Persistence {
 
     /*
       * 1) The persist() method of this class is invoked on deployment
-      * 2) The get() and set() methods are called from UI interactions
+      * 2) The get() and set() methods are called from UI for interactions
       */
-
-    private static final Gson gson = new Gson();
-
-    public boolean set(String userUuid, String json) {
-        LevelDBManager instance = null;
-        try {
-            instance = LevelDBManager.getInstance();
-            System.out.println("saving: key = " + userUuid + " value = " + json);
-            instance.write(userUuid, json);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
-    }
-
-    public UserConfigEntity get(String userUuid) {
-        LevelDBManager instance = null;
-        UserConfigEntity uce = null;
-        try {
-            instance = LevelDBManager.getInstance();
-            System.out.println("retrieving: key = " + userUuid);
-            String json = instance.read(userUuid);
-            uce = gson.fromJson(json, UserConfigEntity.class);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return uce;
-    }
 
     public boolean persist() {
         // 1) Iterate over the list of users
@@ -58,27 +27,52 @@ public class UserConfigPersistance {
             String userUuid = UUID.randomUUID().toString();
 
             UserConfigEntity uce = new UserConfigEntity();
-            uce.setUserUuid(userUuid);
+            uce.setUuid(userUuid);
 
             Map<String, ArrayList<String>> uuidMap = new HashMap<String, ArrayList<String>>();
             ArrayList<String> uuidList = new ArrayList<String>();
-            uuidList.add(TabListEntity.getDefaultConfig().getUuid());
+            TabListEntity tle = TabListEntity.getDefaultConfig();
+            uuidList.add(tle.getUuid());
             uuidMap.put(ActionConstants.ACCORDION.PANES.name(), uuidList);
             uce.setUuidMap(uuidMap);
 
             uuidMap = new HashMap<String, ArrayList<String>>();
             uuidList = new ArrayList<String>();
-            uuidList.add(PageListEntity.getDefaultAlertsPageEntity().getUuid());
-            uuidList.add(PageListEntity.getDefaultConfigPageEntity().getUuid());
-            uuidList.add(PageListEntity.getDefaultCustomPageEntity().getUuid());
-            uuidList.add(PageListEntity.getDefaultNocPageEntity().getUuid());
-            uuidList.add(PageListEntity.getDefaultTopologyPageEntity().getUuid());
+            PageListEntity alertPLE = PageListEntity.getDefaultAlertsPageEntity();
+            uuidList.add(alertPLE.getUuid());
+            PageListEntity configPLE = PageListEntity.getDefaultConfigPageEntity();
+            uuidList.add(configPLE.getUuid());
+            PageListEntity customPLE = PageListEntity.getDefaultCustomPageEntity();
+            uuidList.add(customPLE.getUuid());
+            PageListEntity nocPLE = PageListEntity.getDefaultNocPageEntity();
+            uuidList.add(nocPLE.getUuid());
+            PageListEntity topoPLE = PageListEntity.getDefaultTopologyPageEntity();
+            uuidList.add(topoPLE.getUuid());
             uuidMap.put(ActionConstants.ACCORDION.LINKS.name(), uuidList);
             uce.setUuidMap(uuidMap);
 
             String json = gson.toJson(uce);
             System.out.println("saving: key = " + userUuid + " value = " + json);
             instance.write(userUuid, json);
+
+            // Now persist the actual config objects for this user - those
+            // whose UUID has been returned above
+
+            json = gson.toJson(tle);
+            instance.write(tle.getUuid(), json);
+
+            json = gson.toJson(alertPLE);
+            instance.write(alertPLE.getUuid(), json);
+            json = gson.toJson(configPLE);
+            instance.write(configPLE.getUuid(), json);
+            json = gson.toJson(customPLE);
+            instance.write(customPLE.getUuid(), json);
+            json = gson.toJson(nocPLE);
+            instance.write(nocPLE.getUuid(), json);
+            json = gson.toJson(topoPLE);
+            instance.write(topoPLE.getUuid(), json);
+
+
         } catch (Exception e) {
             e.printStackTrace();
             return false;

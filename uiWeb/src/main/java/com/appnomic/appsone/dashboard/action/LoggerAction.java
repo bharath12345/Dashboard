@@ -1,6 +1,5 @@
 package com.appnomic.appsone.dashboard.action;
 
-import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -10,12 +9,10 @@ import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Action;
 
-import com.appnomic.appsone.dashboard.action.noc.AbstractNocAction;
-
 
 @ParentPackage("json-default")
 @Namespace("/logger")
-public class LoggerAction extends AbstractNocAction  {
+public class LoggerAction extends AbstractAction {
 	
 	private final static Logger LOGGER = Logger.getLogger(LoggerAction.class.getName()); 
 	

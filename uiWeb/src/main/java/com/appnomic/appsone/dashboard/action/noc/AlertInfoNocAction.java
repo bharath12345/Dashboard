@@ -5,12 +5,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import com.appnomic.appsone.dashboard.action.*;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Action;
 
-import com.appnomic.appsone.dashboard.action.TimeUtility;
 import com.appnomic.appsone.dashboard.viewobject.alert.ApplicationDataVO;
 import com.appnomic.appsone.dashboard.viewobject.alert.ApplicationMetaVO;
 import com.appnomic.appsone.dashboard.viewobject.alert.ApplicationVO;
@@ -26,7 +26,7 @@ import com.appnomic.service.AlertDataService;
 
 @ParentPackage("json-default")
 @Namespace("/alert")
-public class AlertInfoNocAction extends AbstractNocAction  {
+public class AlertInfoNocAction extends AbstractAction {
 	
 	private Map<String, String[]> param;
 	

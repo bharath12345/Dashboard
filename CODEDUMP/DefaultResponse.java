@@ -1,5 +1,3 @@
-package com.appnomic.appsone.dashboard.action;
-
 public class DefaultResponse {
 
 	private int id;

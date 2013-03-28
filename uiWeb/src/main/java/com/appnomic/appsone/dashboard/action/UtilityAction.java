@@ -3,6 +3,8 @@ package com.appnomic.appsone.dashboard.action;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.appnomic.appsone.config.entity.UserConfigEntity;
+import com.appnomic.appsone.config.persistence.Persistence;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -11,11 +13,10 @@ import org.apache.struts2.convention.annotation.Result;
 import com.appnomic.appsone.config.entity.TabListEntity;
 import com.appnomic.appsone.common.ActionConstants;
 import com.appnomic.appsone.common.ActionConstants.ACCORDION;
-import com.appnomic.appsone.dashboard.action.noc.AbstractNocAction;
 
 @ParentPackage("json-default")
 @Namespace("/utility")
-public class UtilityAction extends AbstractNocAction {
+public class UtilityAction extends AbstractAction {
 
 	private TabListEntity.TabEntity [] tabListVO;
 	private Map<String, String[]> param;
@@ -59,14 +60,17 @@ public class UtilityAction extends AbstractNocAction {
 	            })})
 	public String allconfig() {
 		param = getParameters();
-		
-		AccordionTabConfigManager atcm = AccordionTabConfigManager.getInstance();
-		
-		TabListEntity tle = atcm.getConfig();
-		
-		tabListVO = tle.getTabList();
-		//tabListVO = tabList.toArray(new TabListEntity[tabList.size()]);
-		
+
+        Persistence persistence = new Persistence();
+        String json = persistence.get(userUuid);
+        UserConfigEntity uce = gson.fromJson(json, UserConfigEntity.class);
+
+        String tabListObjectUuid = uce.getUuidMap().get(ActionConstants.ACCORDION.PANES.name());
+
+		json = persistence.get(tabListObjectUuid);//tle.getTabList();
+        TabListEntity tle = gson.fromJson(json, TabListEntity.class);
+        tabListVO = tle.getTabList();
+
 		return SUCCESS;
 	}
 	

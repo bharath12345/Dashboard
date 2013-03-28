@@ -1,9 +1,9 @@
-package com.appnomic.appsone.dashboard.action.config;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.appnomic.appsone.dashboard.action.AbstractAction;
+import com.appnomic.appsone.dashboard.action.config.ConfigUtilityAction;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -11,7 +11,6 @@ import org.apache.struts2.convention.annotation.Result;
 
 import com.appnomic.appsone.config.attribute.IntegerAttribute;
 import com.appnomic.appsone.config.attribute.StringArrayAttribute;
-import com.appnomic.appsone.dashboard.action.noc.AbstractNocAction;
 import com.appnomic.appsone.dashboard.viewobject.config.ClusterGridConfigVO;
 import com.appnomic.appsone.dashboard.viewobject.config.base.IntegerAttributeVO;
 import com.appnomic.appsone.dashboard.viewobject.config.base.StringArrayAttributeVO;
@@ -20,7 +19,7 @@ import com.appnomic.service.ClusterDataService;
 
 @ParentPackage("json-default")
 @Namespace("/config")
-public class ClusterGridConfigAction extends AbstractNocAction {
+public class ClusterGridConfigAction extends AbstractAction {
 
 	private ClusterDataService clusterDataService;
 	private Map<String, String[]> param;
@@ -82,7 +81,7 @@ public class ClusterGridConfigAction extends AbstractNocAction {
 		}
 		
 		cge.setAllUserClusters(userClusters.toArray(new String[userClusters.size()]));
-		return SUCCESS;
+		return AbstractAction.SUCCESS;
 	}
 	
 	@Action(value="/config/clusterGridDetailsSave", results = {
@@ -109,7 +108,7 @@ public class ClusterGridConfigAction extends AbstractNocAction {
 		newC.setAllUserClusters(null); // this is just for the initial get and never for persistence
 		cgcm.saveConfig(newC);
 		
-		return SUCCESS;
+		return AbstractAction.SUCCESS;
 	}
 	
 	@Action(value="/config/applicableClusterGridDetailsRetrieve", results = {
@@ -142,7 +141,7 @@ public class ClusterGridConfigAction extends AbstractNocAction {
 			cgcVO.setClusterRefreshTime(iaVO);
 		}
 		
-		return SUCCESS;
+		return AbstractAction.SUCCESS;
 	}
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////

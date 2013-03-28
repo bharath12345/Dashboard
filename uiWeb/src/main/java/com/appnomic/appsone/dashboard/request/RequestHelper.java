@@ -6,7 +6,7 @@ import com.appnomic.appsone.dashboard.request.objects.RequestComponentKpiName;
 import com.appnomic.appsone.dashboard.request.objects.RequestNameId;
 import com.appnomic.appsone.dashboard.request.objects.RequestWidthHeight;
 import com.appnomic.appsone.dashboard.request.objects.RequestZoneName;
-import com.appnomic.appsone.dashboard.viewobject.component.ComponentMatrixZonesVO;
+import component.ComponentMatrixZonesVO;
 import com.google.gson.Gson;
 
 public class RequestHelper {

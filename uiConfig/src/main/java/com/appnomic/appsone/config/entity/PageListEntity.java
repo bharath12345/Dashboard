@@ -5,7 +5,7 @@ import java.util.*;
 
 public class PageListEntity extends AbstractConfigEntity {
 
-    PageEntity[] pageEntity;
+    private PageEntity[] pageEntity;
 
     public PageEntity[] getPageEntity() {
         return pageEntity;

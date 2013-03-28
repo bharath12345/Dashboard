@@ -1,11 +1,10 @@
-package com.appnomic.appsone.dashboard.action.noc;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.appnomic.appsone.dashboard.action.noc.AbstractNocAction;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;

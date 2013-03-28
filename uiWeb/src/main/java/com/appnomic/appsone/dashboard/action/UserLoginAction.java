@@ -1,7 +1,6 @@
 package com.appnomic.appsone.dashboard.action;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.apache.struts2.convention.annotation.Namespace;
@@ -10,16 +9,14 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 
 
-import com.appnomic.appsone.dashboard.action.noc.AbstractNocAction;
 import com.appnomic.appsone.dashboard.request.objects.LoginInput;
 import com.appnomic.appsone.dashboard.request.objects.LoginOutput;
 import com.appnomic.domainobject.User;
 import com.appnomic.service.impl.UserDataServiceImpl;
-import com.google.gson.Gson;
 
 @ParentPackage("json-default")
 @Namespace("/user")
-public class UserLoginAction extends AbstractNocAction {
+public class UserLoginAction extends AbstractAction {
 
     private UserDataServiceImpl userDataServiceImpl;
     private LoginOutput login = new LoginOutput();

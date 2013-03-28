@@ -2,8 +2,8 @@ package com.appnomic.appsone.config.entity;
 
 public abstract class AbstractConfigEntity {
 
-    String uuid; // key
-    int userId;
+    protected String uuid; // key
+    protected int userId;
 
     public String getUuid() {
         return uuid;

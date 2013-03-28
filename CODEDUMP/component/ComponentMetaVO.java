@@ -1,4 +1,4 @@
-package com.appnomic.appsone.dashboard.viewobject.component;
+package component;
 
 public class ComponentMetaVO {
 	

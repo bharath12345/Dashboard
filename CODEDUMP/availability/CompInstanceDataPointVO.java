@@ -1,6 +1,6 @@
-package com.appnomic.appsone.dashboard.viewobject.availability;
+package availability;
 
-public class KpiDataPointVO {
+public class CompInstanceDataPointVO {
 	private String name;
 	private int value;
 	

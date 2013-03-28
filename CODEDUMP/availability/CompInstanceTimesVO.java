@@ -1,9 +1,9 @@
-package com.appnomic.appsone.dashboard.viewobject.availability;
+package availability;
 
 public class CompInstanceTimesVO {
 	
 	private String time;
-	private CompInstanceDataPointVO [] instances;
+	private CompInstanceDataPointVO[] instances;
 	
 	public String getTime() {
 		return time;

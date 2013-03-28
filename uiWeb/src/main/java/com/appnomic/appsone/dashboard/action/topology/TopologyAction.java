@@ -1,18 +1,15 @@
 package com.appnomic.appsone.dashboard.action.topology;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
+import com.appnomic.appsone.dashboard.action.AbstractAction;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 
-import com.appnomic.appsone.dashboard.action.noc.AbstractNocAction;
 import com.appnomic.appsone.dashboard.viewobject.topology.LayerVO;
 import com.appnomic.appsone.dashboard.viewobject.topology.LayerValueVO;
 import com.appnomic.appsone.dashboard.viewobject.topology.NetBankingConnectivityStatusVO;
@@ -23,7 +20,7 @@ import com.appnomic.appsone.dashboard.viewobject.topology.NetBankingNodeStatusVO
 @SuppressWarnings("serial")
 @ParentPackage("json-default")
 @Namespace("/topology")
-public class TopologyAction extends AbstractNocAction  {
+public class TopologyAction extends AbstractAction {
 
 	private Map<String, String[]> param;
 	
