@@ -109,6 +109,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/noc/nls/no
                     columnMeta.push(col);
                 }
 
+
                 // create blank grid
                 var gridata = [];
                 for (var i = 0; i < input.applicationVO.applications.length; i++) {
@@ -122,6 +123,20 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/noc/nls/no
                         row[metrics[j] + "_" + IncidentGrid.MINOR] = "";
                     }
                     gridata.push(row);
+                }
+
+                if(input.applicationVO.applications.length < 25) {
+                    for(var z = input.applicationVO.applications.length; z < 25; z++) {
+                        var row = {};
+                        row.appName = "blank row";
+                        row.id = " ";
+                        for (var j = 0; j < metrics.length; j++) {
+                            row[metrics[j] + "_" + IncidentGrid.CRITICAL] = " ";
+                            row[metrics[j] + "_" + IncidentGrid.MAJOR] = " ";
+                            row[metrics[j] + "_" + IncidentGrid.MINOR] = " ";
+                        }
+                        gridata.push(row);
+                    }
                 }
 
                 try {

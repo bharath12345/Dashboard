@@ -11,6 +11,11 @@ public interface ActionConstants {
 	}
 	
 	public enum ACCORDION {
+		PANES,
+		LINKS
+	}
+	
+	public enum ACCGROUPS {
 		TOPOLOGY,
 		NOC,
 		ALERTS,

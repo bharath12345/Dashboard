@@ -20,13 +20,14 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/noc/nls/no
                 switch(parseInt(enumId)) {
                     case dashboard.enumMap.NOC.APPLICATION_ALERTS:
                         require(["dashboard/views/noc/forms/NocApplicationIncidentForm"], lang.hitch(this, function (NocApplicationIncidentForm) {
-                            this.nocView.createSplitCenterPanes(dashboard.dom.CpCenterInner[this.nocView.pageType], new NocApplicationIncidentForm());
+
+                            Helper.createView(this.nocView, this.nocView.pageType, new NocApplicationIncidentForm());
                         }));
                         break;
 
                     case dashboard.enumMap.NOC.TRANSACTION_GRID:
                         require(["dashboard/views/noc/forms/NocTransactionGridForm"], lang.hitch(this, function (NocTransactionGridForm) {
-                            this.nocView.createSplitCenterPanes(dashboard.dom.CpCenterInner[this.nocView.pageType], new NocTransactionGridForm());
+                            Helper.createView(this.nocView, this.nocView.pageType, new NocTransactionGridForm());
                         }));
                         break;
 

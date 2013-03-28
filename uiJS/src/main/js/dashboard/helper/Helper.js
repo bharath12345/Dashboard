@@ -71,5 +71,9 @@ define(["dojo/_base/declare", 'dojox/widget/Standby', "dojo/io-query", "dojo/_ba
             return "<div class='text-center alert alert-info heading'>" + stringObject + "</div>";
         }
 
+        Helper.createView = function(viewObject, pageType, formObject) {
+            viewObject.createSplitCenterPanes(dashboard.dom.CpCenterInner[pageType], formObject);
+        };
+
         return Helper;
     });
