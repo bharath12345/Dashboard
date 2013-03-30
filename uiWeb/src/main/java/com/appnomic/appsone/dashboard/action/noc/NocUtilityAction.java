@@ -2,6 +2,7 @@ package com.appnomic.appsone.dashboard.action.noc;
 
 import java.util.Map;
 
+import com.appnomic.appsone.config.entity.LinksListEntity;
 import com.appnomic.appsone.dashboard.action.AbstractAction;
 import com.appnomic.appsone.dashboard.action.UtilityAction;
 import org.apache.struts2.convention.annotation.Action;
@@ -9,21 +10,19 @@ import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 
-import com.appnomic.appsone.config.entity.PageListEntity;
-
 @ParentPackage("json-default")
 @Namespace("/noc")
 public class NocUtilityAction extends AbstractAction {
 
-	private PageListEntity.PageEntity [] pageListVO;
+	private LinksListEntity.LinkEntity[] linkListVO;
 	private Map<String, String[]> param;
 	
-	public PageListEntity.PageEntity[] getPageListVO() {
-		return pageListVO;
+	public LinksListEntity.LinkEntity[] getLinkListVO() {
+		return linkListVO;
 	}
 
-	public void setPageListVO(PageListEntity.PageEntity[] pageListVO) {
-		this.pageListVO = pageListVO;
+	public void setLinkListVO(LinksListEntity.LinkEntity[] linkListVO) {
+		this.linkListVO = linkListVO;
 	}
 
 	public Map<String, String[]> getParam() {
@@ -34,7 +33,7 @@ public class NocUtilityAction extends AbstractAction {
 		this.param = param;
 	}
 
-	@Action(value="/noc/pages", results = {
+	@Action(value="/noc/links", results = {
 	        @Result(name="success", type="json", params = {
 	        		"excludeProperties",
 	                "parameters,session,SUCCESS,ERROR,agcVO,levelDbMap",
@@ -46,8 +45,8 @@ public class NocUtilityAction extends AbstractAction {
 	public String pagesAction() {
 		param = getParameters();
 
-        PageListEntity nocPLE = UtilityAction.getPageListEntity(userUuid);
-        pageListVO = nocPLE.getPageEntity();
+        LinksListEntity nocPLE = UtilityAction.getPageListEntity(userUuid);
+        linkListVO = nocPLE.getLinkEntity();
 
         return SUCCESS;
 	}

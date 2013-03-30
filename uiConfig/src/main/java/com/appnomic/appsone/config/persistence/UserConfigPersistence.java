@@ -3,9 +3,9 @@ package com.appnomic.appsone.config.persistence;
 import java.util.*;
 
 import com.appnomic.appsone.common.ActionConstants;
+import com.appnomic.appsone.config.entity.LinksListEntity;
+import com.appnomic.appsone.config.entity.PaneListEntity;
 import com.appnomic.appsone.config.leveldb.LevelDBManager;
-import com.appnomic.appsone.config.entity.PageListEntity;
-import com.appnomic.appsone.config.entity.TabListEntity;
 import com.appnomic.appsone.config.entity.UserConfigEntity;
 
 public class UserConfigPersistence extends Persistence {
@@ -32,24 +32,24 @@ public class UserConfigPersistence extends Persistence {
 
             Map<String, ArrayList<String>> uuidMap = new HashMap<String, ArrayList<String>>();
             ArrayList<String> uuidList = new ArrayList<String>();
-            TabListEntity tle = TabListEntity.getDefaultConfig();
+            PaneListEntity tle = PaneListEntity.getDefaultConfig();
             uuidList.add(tle.getUuid());
             uuidMap.put(ActionConstants.ACCORDION.PANES.name(), uuidList);
 
             //ToDo: How will someone distinguish between these different object types ???
-            //ToDo: How will the Alert's PageListEntity get picked up correctly ??
+            //ToDo: How will the Alert's LinksListEntity get picked up correctly ??
             //ToDo: Fix this along with Debasis
 
             uuidList = new ArrayList<String>();
-            PageListEntity alertPLE = PageListEntity.getDefaultAlertsPageEntity();
+            LinksListEntity alertPLE = LinksListEntity.getDefaultAlertsPageEntity();
             uuidList.add(alertPLE.getUuid());
-            PageListEntity configPLE = PageListEntity.getDefaultConfigPageEntity();
+            LinksListEntity configPLE = LinksListEntity.getDefaultConfigPageEntity();
             uuidList.add(configPLE.getUuid());
-            PageListEntity customPLE = PageListEntity.getDefaultCustomPageEntity();
+            LinksListEntity customPLE = LinksListEntity.getDefaultCustomPageEntity();
             uuidList.add(customPLE.getUuid());
-            PageListEntity nocPLE = PageListEntity.getDefaultNocPageEntity();
+            LinksListEntity nocPLE = LinksListEntity.getDefaultNocPageEntity();
             uuidList.add(nocPLE.getUuid());
-            PageListEntity topoPLE = PageListEntity.getDefaultTopologyPageEntity();
+            LinksListEntity topoPLE = LinksListEntity.getDefaultTopologyPageEntity();
             uuidList.add(topoPLE.getUuid());
             uuidMap.put(ActionConstants.ACCORDION.LINKS.name(), uuidList);
             uce.setUuidMap(uuidMap);

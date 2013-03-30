@@ -3,7 +3,8 @@ package com.appnomic.appsone.dashboard.action;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.appnomic.appsone.config.entity.PageListEntity;
+import com.appnomic.appsone.config.entity.LinksListEntity;
+import com.appnomic.appsone.config.entity.PaneListEntity;
 import com.appnomic.appsone.config.entity.UserConfigEntity;
 import com.appnomic.appsone.config.persistence.Persistence;
 import org.apache.struts2.convention.annotation.Action;
@@ -11,15 +12,13 @@ import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 
-import com.appnomic.appsone.config.entity.TabListEntity;
 import com.appnomic.appsone.common.ActionConstants;
-import com.appnomic.appsone.common.ActionConstants.ACCORDION;
 
 @ParentPackage("json-default")
 @Namespace("/utility")
 public class UtilityAction extends AbstractAction {
 
-	private TabListEntity.TabEntity [] tabListVO;
+	private PaneListEntity.PaneEntity[] paneListVO;
 	private Map<String, String[]> param;
 	Map<String, HashMap<String, Integer>> enumMap = new HashMap<String, HashMap<String, Integer>>();
 	
@@ -32,12 +31,12 @@ public class UtilityAction extends AbstractAction {
 		this.param = param;
 	}
 
-	public TabListEntity.TabEntity[] getTabListVO() {
-		return tabListVO;
+	public PaneListEntity.PaneEntity[] getPaneListVO() {
+		return paneListVO;
 	}
 
-	public void setTabListVO(TabListEntity.TabEntity[] tabListVO) {
-		this.tabListVO = tabListVO;
+	public void setPaneListVO(PaneListEntity.PaneEntity[] paneListVO) {
+		this.paneListVO = paneListVO;
 	}
 
 	public Map<String, HashMap<String, Integer>> getEnumMap() {
@@ -69,8 +68,8 @@ public class UtilityAction extends AbstractAction {
         String tabListObjectUuid = uce.getUuidMap().get(ActionConstants.ACCORDION.PANES.name());
 
 		json = persistence.get(tabListObjectUuid);
-        TabListEntity tle = gson.fromJson(json, TabListEntity.class);
-        tabListVO = tle.getTabList();  */
+        PaneListEntity tle = gson.fromJson(json, PaneListEntity.class);
+        paneListVO = tle.getPaneList();  */
 
 		return SUCCESS;
 	}
@@ -78,7 +77,7 @@ public class UtilityAction extends AbstractAction {
 	@Action(value="/dashboard/enums", results = {
 	        @Result(name="success", type="json", params = {
 	        		"excludeProperties",
-	                "parameters,session,SUCCESS,ERROR,agcVO,levelDbMap,tabListVO",
+	                "parameters,session,SUCCESS,ERROR,agcVO,levelDbMap,paneListVO",
 	        		"enableGZIP", "true",
 	        		"encoding", "UTF-8",
 	                "noCache","true",
@@ -130,7 +129,7 @@ public class UtilityAction extends AbstractAction {
 		return SUCCESS;
 	}
 
-    public static PageListEntity getPageListEntity(String userUuid) {
+    public static LinksListEntity getPageListEntity(String userUuid) {
         Persistence persistence = new Persistence();
         String json = persistence.get(userUuid);
         UserConfigEntity uce = gson.fromJson(json, UserConfigEntity.class);
@@ -138,7 +137,7 @@ public class UtilityAction extends AbstractAction {
         /*String tabListObjectUuid = uce.getUuidMap().get(ActionConstants.ACCORDION.LINKS.name());
 
         json = persistence.get(tabListObjectUuid);
-        PageListEntity ple = gson.fromJson(json, PageListEntity.class);
+        LinksListEntity ple = gson.fromJson(json, LinksListEntity.class);
         return ple;*/
 
         return null;
