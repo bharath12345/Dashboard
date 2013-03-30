@@ -1,4 +1,4 @@
-package com.appnomic.appsone.dashboard.request.objects;
+package request.objects;
 
 public class LoginInput {
 

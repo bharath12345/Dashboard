@@ -1,4 +1,4 @@
-package com.appnomic.appsone.dashboard.viewobject.config.base;
+package config.base;
 
 public class FloatAttributeVO extends AttributeVO {
 

@@ -62,7 +62,7 @@ public class UtilityAction extends AbstractAction {
 	public String allconfig() {
 		param = getParameters();
 
-        Persistence persistence = new Persistence();
+        /*Persistence persistence = new Persistence();
         String json = persistence.get(userUuid);
         UserConfigEntity uce = gson.fromJson(json, UserConfigEntity.class);
 
@@ -70,7 +70,7 @@ public class UtilityAction extends AbstractAction {
 
 		json = persistence.get(tabListObjectUuid);
         TabListEntity tle = gson.fromJson(json, TabListEntity.class);
-        tabListVO = tle.getTabList();
+        tabListVO = tle.getTabList();  */
 
 		return SUCCESS;
 	}
@@ -92,7 +92,7 @@ public class UtilityAction extends AbstractAction {
 		for(ActionConstants.CONFIG config: ActionConstants.CONFIG.values()) {
 			configMap.put(config.name(), config.ordinal());
 		}
-		enumMap.put(ACCORDION.CONFIG.name(), configMap);
+		enumMap.put(ActionConstants.ACCGROUPS.CONFIG.name(), configMap);
 		
 		////
 	
@@ -100,7 +100,7 @@ public class UtilityAction extends AbstractAction {
 		for(ActionConstants.ALERTS config: ActionConstants.ALERTS.values()) {
 			alertsMap.put(config.name(), config.ordinal());
 		}
-		enumMap.put(ACCORDION.ALERTS.name(), alertsMap);
+		enumMap.put(ActionConstants.ACCGROUPS.ALERTS.name(), alertsMap);
 		
 		////
 		
@@ -108,7 +108,7 @@ public class UtilityAction extends AbstractAction {
 		for(ActionConstants.CUSTOM config: ActionConstants.CUSTOM.values()) {
 			customMap.put(config.name(), config.ordinal());
 		}
-		enumMap.put(ACCORDION.CUSTOM.name(), customMap);
+		enumMap.put(ActionConstants.ACCGROUPS.CUSTOM.name(), customMap);
 		
 		////
 		
@@ -116,7 +116,7 @@ public class UtilityAction extends AbstractAction {
 		for(ActionConstants.TOPOLOGY config: ActionConstants.TOPOLOGY.values()) {
 			topologyMap.put(config.name(), config.ordinal());
 		}
-		enumMap.put(ACCORDION.TOPOLOGY.name(), topologyMap);
+		enumMap.put(ActionConstants.ACCGROUPS.TOPOLOGY.name(), topologyMap);
 		
 		////
 		
@@ -124,7 +124,7 @@ public class UtilityAction extends AbstractAction {
 		for(ActionConstants.NOC config: ActionConstants.NOC.values()) {
 			nocMap.put(config.name(), config.ordinal());
 		}
-		enumMap.put(ACCORDION.NOC.name(), nocMap);
+		enumMap.put(ActionConstants.ACCGROUPS.NOC.name(), nocMap);
 		
 		
 		return SUCCESS;
@@ -135,11 +135,13 @@ public class UtilityAction extends AbstractAction {
         String json = persistence.get(userUuid);
         UserConfigEntity uce = gson.fromJson(json, UserConfigEntity.class);
 
-        String tabListObjectUuid = uce.getUuidMap().get(ActionConstants.ACCORDION.LINKS.name());
+        /*String tabListObjectUuid = uce.getUuidMap().get(ActionConstants.ACCORDION.LINKS.name());
 
         json = persistence.get(tabListObjectUuid);
         PageListEntity ple = gson.fromJson(json, PageListEntity.class);
-        return ple;
+        return ple;*/
+
+        return null;
     }
 	
 }

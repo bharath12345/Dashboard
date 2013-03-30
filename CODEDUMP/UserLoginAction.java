@@ -1,5 +1,3 @@
-package com.appnomic.appsone.dashboard.action;
-
 import java.util.List;
 import java.util.Set;
 
@@ -9,8 +7,8 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 
 
-import com.appnomic.appsone.dashboard.request.objects.LoginInput;
-import com.appnomic.appsone.dashboard.request.objects.LoginOutput;
+import request.objects.LoginInput;
+import request.objects.LoginOutput;
 import com.appnomic.domainobject.User;
 import com.appnomic.service.impl.UserDataServiceImpl;
 
@@ -63,12 +61,12 @@ public class UserLoginAction extends AbstractAction {
 		if(userDataServiceImpl.authUser(userlocal.getUsername(), userlocal.getPassword())) {
 			System.out.println("user "+ userlocal.getUsername() +" authenticated!");
 			login.setAuthentication(true);
-			return SUCCESS;
+			return AbstractAction.SUCCESS;
 		} 
 		
 		login.setAuthentication(false);		
 		System.out.println("user " + userlocal.getPassword() +" auth failed.");
-		return ERROR;
+		return AbstractAction.ERROR;
 	}
 
 	public LoginOutput getLogin() {

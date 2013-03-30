@@ -11,9 +11,9 @@ import org.apache.struts2.convention.annotation.Result;
 
 import com.appnomic.appsone.config.attribute.IntegerAttribute;
 import com.appnomic.appsone.config.attribute.StringArrayAttribute;
-import com.appnomic.appsone.dashboard.viewobject.config.ClusterGridConfigVO;
-import com.appnomic.appsone.dashboard.viewobject.config.base.IntegerAttributeVO;
-import com.appnomic.appsone.dashboard.viewobject.config.base.StringArrayAttributeVO;
+import config.ClusterGridConfigVO;
+import config.base.IntegerAttributeVO;
+import config.base.StringArrayAttributeVO;
 import com.appnomic.domainobject.Cluster;
 import com.appnomic.service.ClusterDataService;
 

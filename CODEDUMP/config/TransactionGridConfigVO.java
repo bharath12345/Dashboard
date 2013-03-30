@@ -1,7 +1,7 @@
-package com.appnomic.appsone.dashboard.viewobject.config;
+package config;
 
-import com.appnomic.appsone.dashboard.viewobject.config.base.IntegerAttributeVO;
-import com.appnomic.appsone.dashboard.viewobject.config.base.StringArrayAttributeVO;
+import config.base.IntegerAttributeVO;
+import config.base.StringArrayAttributeVO;
 
 public class TransactionGridConfigVO {
 	StringArrayAttributeVO transactions;

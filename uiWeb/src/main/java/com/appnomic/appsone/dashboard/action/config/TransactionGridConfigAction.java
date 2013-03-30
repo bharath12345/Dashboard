@@ -15,9 +15,6 @@ import com.appnomic.appsone.config.entity.TransactionGrid;
 import com.appnomic.appsone.config.entity.UserConfigEntity;
 import com.appnomic.appsone.config.persistence.Persistence;
 
-import com.appnomic.appsone.dashboard.viewobject.config.TransactionGridConfigVO;
-import com.appnomic.appsone.dashboard.viewobject.config.base.IntegerAttributeVO;
-import com.appnomic.appsone.dashboard.viewobject.config.base.StringArrayAttributeVO;
 import com.appnomic.domainobject.ApplicationData;
 import com.appnomic.domainobject.Transaction;
 import com.appnomic.service.ApplicationDataService;
@@ -31,8 +28,7 @@ public class TransactionGridConfigAction extends AbstractAction {
 	private TransactionDataService transactionDataService;
 	private Map<String, String[]> param;
 	private TransactionGrid tge;
-	private TransactionGridConfigVO tgcVO;
-	
+
 	public ApplicationDataService getApplicationDataService() {
 		return applicationDataService;
 	}
@@ -57,14 +53,6 @@ public class TransactionGridConfigAction extends AbstractAction {
 
 	public void setTge(TransactionGrid tge) {
 		this.tge = tge;
-	}
-
-	public TransactionGridConfigVO getTgcVO() {
-		return tgcVO;
-	}
-
-	public void setTgcVO(TransactionGridConfigVO tgcVO) {
-		this.tgcVO = tgcVO;
 	}
 
 	public Map<String, String[]> getParam() {

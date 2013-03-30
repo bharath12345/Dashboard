@@ -123,18 +123,14 @@ public class AlertInfoNocAction extends AbstractAction {
 		metrics[4] = SUMMARY_CATEGORY.COMPONENT_ANALYTIC.name();
 		applicationMetaVO.setMetrics(metrics);
 		
-		AlertGridConfigManager agcm = AlertGridConfigManager.getInstance();
-		AlertGridEntity age = (AlertGridEntity)agcm.getConfig();
-
-        Persistence persistence = new Persistence();
+		/*Persistence persistence = new Persistence();
         String json = persistence.get(userUuid);
         UserConfigEntity uce = gson.fromJson(json, UserConfigEntity.class);
-
         String tabListObjectUuid = uce.getUuidMap().get(ActionConstants.NOC.APPLICATION_ALERTS.name());
-
         json = persistence.get(tabListObjectUuid);
+        */
 
-        String [] appsInterestedIn = age.getApplicationNames().getUserSetting();
+        String [] appsInterestedIn = null;
 		if(appsInterestedIn == null || appsInterestedIn.length == 0 ) {
 			applicationMetaVO = null;
 			return SUCCESS;
@@ -261,58 +257,4 @@ public class AlertInfoNocAction extends AbstractAction {
 		metricDataset.setName(category.name());
 		return metricDataset;
 	}
-
-	@Action(value="/alert/Cluster", results = {
-	        @Result(name="success", type="json", params = {
-	        		"excludeProperties",
-	                "session,SUCCESS,ERROR,alertDataService,componentDataService,applicationDataService",
-	                "enableGZIP", "true",
-	        		"encoding", "UTF-8",
-	                "noCache","true",
-	                "excludeNullProperties","true"
-	            })})
-	public String clusterAlertAction() {
-		param = getParameters();
-		
-		String keyVal = "Cluster Alert: ";
-		for(String key : parameters.keySet()) {
-			keyVal += "[ " + key + " = ";
-			for(String value : parameters.get(key)) {
-				keyVal += value + ", ";
-			}
-			keyVal += "] ";
-		}
-		System.out.println("key value map = " + keyVal);		
-		String clusterName = (parameters.get("name")[0]);
-		System.out.println("cluster name being assembled = " + clusterName);
-		return SUCCESS;
-	}
-	
-	@Action(value="/alert/Instance", results = {
-	        @Result(name="success", type="json", params = {
-	        		"excludeProperties",
-	                "session,SUCCESS,ERROR,alertDataService,componentDataService,applicationDataService",
-	                "enableGZIP", "true",
-	        		"encoding", "UTF-8",
-	                "noCache","true",
-	                "excludeNullProperties","true"
-	            })})
-	public String instanceAlertAction() {
-		param = getParameters();
-		
-		String keyVal = "Instance Alert: ";
-		for(String key : parameters.keySet()) {
-			keyVal += "[ " + key + " = ";
-			for(String value : parameters.get(key)) {
-				keyVal += value + ", ";
-			}
-			keyVal += "] ";
-		}
-		System.out.println("key value map = " + keyVal);
-		
-		String instanceName = (parameters.get("name")[0]);
-		System.out.println("instance name being assembled = " + instanceName);
-		return SUCCESS;
-	}
-
 }

@@ -1,9 +1,9 @@
-package com.appnomic.appsone.dashboard.viewobject.config;
+package config;
 
-import com.appnomic.appsone.dashboard.viewobject.config.base.BooleanAttributeVO;
-import com.appnomic.appsone.dashboard.viewobject.config.base.IntegerAttributeVO;
-import com.appnomic.appsone.dashboard.viewobject.config.base.StringArrayAttributeVO;
-import com.appnomic.appsone.dashboard.viewobject.config.base.StringAttributeVO;
+import config.base.BooleanAttributeVO;
+import config.base.IntegerAttributeVO;
+import config.base.StringArrayAttributeVO;
+import config.base.StringAttributeVO;
 
 public class AlertGridConfigVO {
 

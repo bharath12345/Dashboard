@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.appnomic.appsone.config.entity.TransactionGrid;
 import com.appnomic.appsone.dashboard.action.*;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
@@ -214,9 +215,7 @@ public class TransactionNocAction extends AbstractAction {
 		appDataVO.setAppName(appName);
 		appDataVO.setId(id);
 		
-		TransactionGridConfigManager cgcm = TransactionGridConfigManager.getInstance();
-		TransactionGridEntity tge = (TransactionGridEntity)cgcm.getConfig();
-		String [] txInterestedIn = tge.getTransactionNames().getUserSetting();
+		String [] txInterestedIn = null; //tge.getTransactionNames().getUserSetting();
 		
 		if(txInterestedIn == null || txInterestedIn.length == 0) {
 			System.out.println("No transaction configured as interested for data");
@@ -392,11 +391,10 @@ public class TransactionNocAction extends AbstractAction {
 	public String transactionMeta() {
 		param = getParameters();
 		
-		TransactionGridConfigManager cgcm = TransactionGridConfigManager.getInstance();
-		TransactionGridEntity tge = (TransactionGridEntity)cgcm.getConfig();
+		TransactionGrid tge = null;
 		
-		String [] appsInterestedIn = tge.getApplicationNames().getUserSetting();
-		String [] txInterestedIn = tge.getTransactionNames().getUserSetting();
+		String [] appsInterestedIn = tge.getApplications();
+		String [] txInterestedIn = tge.getTransactions();
 		if(appsInterestedIn == null || txInterestedIn == null ||
 				appsInterestedIn.length == 0 || txInterestedIn.length == 0) {
 			applicationVO = null;

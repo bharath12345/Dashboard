@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.appnomic.appsone.common.ActionConstants;
 import com.appnomic.appsone.config.entity.ApplicationAlertsGrid;
 import com.appnomic.appsone.config.entity.UserConfigEntity;
 import com.appnomic.appsone.config.persistence.Persistence;
@@ -13,12 +12,6 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
-
-import com.appnomic.appsone.dashboard.viewobject.config.AlertGridConfigVO;
-import com.appnomic.appsone.dashboard.viewobject.config.base.BooleanAttributeVO;
-import com.appnomic.appsone.dashboard.viewobject.config.base.IntegerAttributeVO;
-import com.appnomic.appsone.dashboard.viewobject.config.base.StringArrayAttributeVO;
-import com.appnomic.appsone.dashboard.viewobject.config.base.StringAttributeVO;
 
 import com.appnomic.domainobject.ApplicationData;
 import com.appnomic.service.ApplicationDataService;
@@ -29,7 +22,6 @@ public class AlertGridConfigAction extends AbstractAction {
 
 	private Map<String, String[]> param;
 	private ApplicationAlertsGrid age;
-	private AlertGridConfigVO agcVO;
 	private ApplicationDataService applicationDataService;
 	
 	public ApplicationDataService getApplicationDataService() {
@@ -39,14 +31,6 @@ public class AlertGridConfigAction extends AbstractAction {
 	public void setApplicationDataService(
 			ApplicationDataService applicationDataService) {
 		this.applicationDataService = applicationDataService;
-	}
-
-	public AlertGridConfigVO getAgcVO() {
-		return agcVO;
-	}
-
-	public void setAgcVO(AlertGridConfigVO agcVO) {
-		this.agcVO = agcVO;
 	}
 
 	public ApplicationAlertsGrid getAge() {
