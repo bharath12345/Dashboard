@@ -1,6 +1,7 @@
 package com.appnomic.appsone.dashboard.action.config;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,8 +11,10 @@ import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 
-import com.appnomic.appsone.config.attribute.IntegerAttribute;
-import com.appnomic.appsone.config.attribute.StringArrayAttribute;
+import com.appnomic.appsone.config.entity.TransactionGrid;
+import com.appnomic.appsone.config.entity.UserConfigEntity;
+import com.appnomic.appsone.config.persistence.Persistence;
+
 import com.appnomic.appsone.dashboard.viewobject.config.TransactionGridConfigVO;
 import com.appnomic.appsone.dashboard.viewobject.config.base.IntegerAttributeVO;
 import com.appnomic.appsone.dashboard.viewobject.config.base.StringArrayAttributeVO;
@@ -27,7 +30,7 @@ public class TransactionGridConfigAction extends AbstractAction {
 	private ApplicationDataService applicationDataService;
 	private TransactionDataService transactionDataService;
 	private Map<String, String[]> param;
-	private TransactionGridEntity tge;
+	private TransactionGrid tge;
 	private TransactionGridConfigVO tgcVO;
 	
 	public ApplicationDataService getApplicationDataService() {
@@ -48,11 +51,11 @@ public class TransactionGridConfigAction extends AbstractAction {
 		this.transactionDataService = transactionDataService;
 	}
 
-	public TransactionGridEntity getTge() {
+	public TransactionGrid getTge() {
 		return tge;
 	}
 
-	public void setTge(TransactionGridEntity tge) {
+	public void setTge(TransactionGrid tge) {
 		this.tge = tge;
 	}
 
@@ -86,40 +89,40 @@ public class TransactionGridConfigAction extends AbstractAction {
 	            })})
 	public String transactionGridDetailsRetrieveAction() {
 		param = getParameters();
-		
-		TransactionGridConfigManager cgcm = TransactionGridConfigManager.getInstance();
-		tge = (TransactionGridEntity)cgcm.getConfig();
-		
-		List<ApplicationData> applications = applicationDataService.getAll();
-		String [] appsInterestedIn = tge.getApplicationNames().getUserSetting();
-		
-		List<String> allApplications = new ArrayList<String>();
-		List<String> userTransactions = new ArrayList<String>();
-		
-		for(ApplicationData application: applications) {
+
+        /*
+           1. first get the object with default values set
+        */
+        tge = TransactionGrid.getDefaultConfig();
+
+        /*
+           2. check if the given user has an already persisted config object
+           if so, then use those fields to create the 'age' object
+        */
+        Persistence persistence = new Persistence();
+        String json = persistence.get(userUuid);
+        UserConfigEntity uce = gson.fromJson(json, UserConfigEntity.class);
+
+
+        /*
+            3. Set the runtime fields of the 'tge' object
+        */
+        List<String> allApplications = new ArrayList<String>();
+        Map<String, String[]> allTransactions = new HashMap<String, String[]>();
+        List<ApplicationData> applications = applicationDataService.getAll();
+        for(ApplicationData application: applications) {
 			allApplications.add(application.getName());
-			if(appsInterestedIn == null || appsInterestedIn.length == 0) {
-				continue;
-			}
-			boolean found = false;
-			for(String intApp: appsInterestedIn) {
-				if(application.getName().equalsIgnoreCase(intApp)) {
-					found = true;
-					break;
-				}
-			}
-			if(found == false) {
-				//user is has not YET saved this application as one he is interested in - so DONT show its Tx
-				continue;
-			}
+
+            List<String> appTransactions = new ArrayList<String>();
 			List<Transaction> transactions = transactionDataService.getTransactionPerApplication(application.getId());
 			for(Transaction transaction : transactions) {
-				userTransactions.add(transaction.getName());
+				appTransactions.add(transaction.getName());
 			}
+            allTransactions.put(application.getName(), appTransactions.toArray(new String[appTransactions.size()]));
 		}
 		
-		tge.setAllUserApplications(allApplications.toArray(new String[allApplications.size()]));
-		tge.setAllUserTransactions(userTransactions.toArray(new String[userTransactions.size()]));
+		tge.setApplications(allApplications.toArray(new String[allApplications.size()]));
+		tge.setAllTransactions(allTransactions);
 		return SUCCESS;
 	}
 	
@@ -135,7 +138,7 @@ public class TransactionGridConfigAction extends AbstractAction {
 	public String transactionGridDetailsSaveAction() {
 		param = getParameters();
 		
-		Integer refreshTime = ConfigUtilityAction.getInteger("refreshTime", param);
+		/*Integer refreshTime = ConfigUtilityAction.getInteger("refreshTime", param);
 		String [] applicationArray = parameters.get("applications");
 		String [] transactionArray = parameters.get("transactions");
 		
@@ -148,48 +151,11 @@ public class TransactionGridConfigAction extends AbstractAction {
 		newTGE.setApplicationNames(new StringArrayAttribute(null, null, applicationArray));
 		newTGE.setAllUserTransactions(null); // this is just for the initial get and never for persistence
 		newTGE.setAllUserApplications(null);
-		tgcm.saveConfig(newTGE);
+		tgcm.saveConfig(newTGE);  */
 		
 		return SUCCESS;
 	}
-	
-	@Action(value="/config/applicableTransactionGridDetailsRetrieve", results = {
-	        @Result(name="success", type="json", params = {
-	        		"excludeProperties",
-	                "parameters,session,SUCCESS,ERROR,applicationDataService,transactionDataService,tge",
-	        		"enableGZIP", "true",
-	        		"encoding", "UTF-8",
-	                "noCache","true",
-	                "excludeNullProperties","true"
-	            })})
-	public String applicableTransactionGridDetailsRetriveAction() {
-		param = getParameters();
-		
-		// inspect the param in query to find what level the user is at and form the response accordingly
-		// do NOT return the same entity which is persisted but a ViewObject which has values just
-		// right for the requesting user and is minimum in size - this object is what will be used by 
-		// the dashboard to actually render the UI
-		
-		TransactionGridConfigManager tgcm = TransactionGridConfigManager.getInstance();
-		tge = (TransactionGridEntity)tgcm.getConfig();
-		tgcVO = new TransactionGridConfigVO();
-		if(tge != null) {
-			StringArrayAttributeVO saaVO = new StringArrayAttributeVO();
-			saaVO.setValue(tge.getTransactionNames().getUserSetting());
-			tgcVO.setTransactions(saaVO);
-			
-			saaVO = new StringArrayAttributeVO();
-			saaVO.setValue(tge.getApplicationNames().getUserSetting());
-			tgcVO.setApplications(saaVO);
-			
-			IntegerAttributeVO iaVO = new IntegerAttributeVO();
-			iaVO.setValue(tge.getTransactionRefreshTime().getUserSetting());
-			tgcVO.setTransactionRefreshTime(iaVO);
-		}
-		
-		return SUCCESS;
-	}
-	
+
 	////////////////////////////////////////////////////////////////////////////////////////////////
 	
 }

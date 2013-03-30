@@ -14,11 +14,6 @@ import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 
-import com.appnomic.appsone.config.attribute.BooleanAttribute;
-import com.appnomic.appsone.config.attribute.IntegerAttribute;
-import com.appnomic.appsone.config.attribute.StringArrayAttribute;
-import com.appnomic.appsone.config.attribute.StringAttribute;
-
 import com.appnomic.appsone.dashboard.viewobject.config.AlertGridConfigVO;
 import com.appnomic.appsone.dashboard.viewobject.config.base.BooleanAttributeVO;
 import com.appnomic.appsone.dashboard.viewobject.config.base.IntegerAttributeVO;
@@ -84,27 +79,33 @@ public class AlertGridConfigAction extends AbstractAction {
 	public String alertGridDetailsRetrieveAction() {
 		param = getParameters();
 
+        /*
+            1. first get the object with default values set
+         */
+		age = ApplicationAlertsGrid.getDefaultConfig();
 
-		//AlertGridConfigManager agcm = AlertGridConfigManager.getInstance();
-		//age = (AlertGridEntity)agcm.getConfig();
-
+        /*
+            2. check if the given user has an already persisted config object
+            if so, then use those fields to create the 'age' object
+         */
         Persistence persistence = new Persistence();
         String json = persistence.get(userUuid);
-
         UserConfigEntity uce = gson.fromJson(json, UserConfigEntity.class);
-
-        String tabListObjectUuid = uce.getUuidMap().get("");
+        //String tabListObjectUuid = uce.getUuidMap().get("");
         //.get(ActionConstants.NOC.APPLICATION_ALERTS.name());
+        //json = persistence.get(tabListObjectUuid);
 
-        json = persistence.get(tabListObjectUuid);
-
-
+        /*
+            3. Set the runtime fields of the 'age' object
+         */
         List<ApplicationData> applications = applicationDataService.getAll();
 		List<String> allApplications = new ArrayList<String>();
 		for(ApplicationData application: applications) {
 			allApplications.add(application.getName());
 		}
-		age.setAllUserApplications(allApplications.toArray(new String[allApplications.size()]));
+		age.setAllApplications(allApplications.toArray(new String[allApplications.size()]));
+
+
 		return SUCCESS;
 	}
 	
@@ -120,7 +121,7 @@ public class AlertGridConfigAction extends AbstractAction {
 	public String alertGridDetailsSaveAction() {
 		param = getParameters();
 		
-		Integer refreshTime = ConfigUtilityAction.getInteger("refreshTime", param);
+		/*Integer refreshTime = ConfigUtilityAction.getInteger("refreshTime", param);
 		Integer fontSize = ConfigUtilityAction.getInteger("fontSize", param);
 		Boolean showGreenApp = ConfigUtilityAction.getBoolean("showGreenApp", param);
 		String fontName = (parameters.get("fontName")[0]);
@@ -156,56 +157,11 @@ public class AlertGridConfigAction extends AbstractAction {
 		
 		newAge.setApplicationNames(new StringArrayAttribute(null, null, applicationArray));
 		
-		agcm.saveConfig(newAge);
+		agcm.saveConfig(newAge);  */
+
 		return SUCCESS;
 	}
-		
-	
-	@Action(value="/config/applicableAlertGridDetailsRetrieve", results = {
-	        @Result(name="success", type="json", params = {
-	        		"excludeProperties",
-	                "parameters,session,SUCCESS,ERROR,age,applicationDataService",
-	        		"enableGZIP", "true",
-	        		"encoding", "UTF-8",
-	                "noCache","true",
-	                "excludeNullProperties","true"
-	            })})
-	public String applicableAlertGridDetailsRetriveAction() {
-		param = getParameters();
-		
-		// inspect the param in query to find what level the user is at and form the response accordingly
-		// do NOT return the same entity which is persisted but a ViewObject which has values just
-		// right for the requesting user and is minimum in size - this object is what will be used by 
-		// the dashboard to actually render the UI
-		
-		AlertGridConfigManager agcm = AlertGridConfigManager.getInstance();
-		age = (AlertGridEntity)agcm.getConfig();
-		agcVO = new AlertGridConfigVO();
-		if(age != null) {
-			IntegerAttributeVO appRefreshTime = new IntegerAttributeVO();
-			appRefreshTime.setValue(age.getApplicationRefreshTime().getUserSetting());
-			agcVO.setApplicationRefreshTime(appRefreshTime);
-			
-			StringAttributeVO fontName = new StringAttributeVO();
-			fontName.setValue(age.getFontName().getUserSetting());
-			agcVO.setFontName(fontName);
-			
-			IntegerAttributeVO fontSize = new IntegerAttributeVO();
-			fontSize.setValue(age.getFontSize().getUserSetting());
-			agcVO.setFontSize(fontSize);
-			
-			BooleanAttributeVO showAllGreenApp = new BooleanAttributeVO();
-			showAllGreenApp.setValue(age.getShowAllGreenApplications().isUserSetting());
-			agcVO.setShowAllGreenApplications(showAllGreenApp);
-			
-			StringArrayAttributeVO saaVO = new StringArrayAttributeVO();
-			saaVO.setValue(age.getApplicationNames().getUserSetting());
-			agcVO.setApplications(saaVO);
-		}
-		
-		return SUCCESS;
-	}
-	
+
 	////////////////////////////////////////////////////////////////////////////////////////////////
 	
 }
