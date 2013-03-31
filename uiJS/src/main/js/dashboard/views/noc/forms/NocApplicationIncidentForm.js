@@ -112,6 +112,13 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/noc/nls/no
                     gridata.push(row);
                 }
 
+                /*
+                ToDo: ToDo: ToDo: ToDo: todo todo todo todo todo
+                Inserting blank rows in this way simply does not work -
+                    one) it is bound to the model - it should not be - this kind of logic should be in AonDgrid class and not here
+                    two) sorting does not work with this logic - blank rows gets mixed up in the sort
+                So, find a better way to add blank rows and till then keep this crap code as a reminder
+
                 if(input.applicationVO.applications.length < 25) {
                     for(var z = input.applicationVO.applications.length; z < 25; z++) {
                         var row = {};
@@ -124,7 +131,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/noc/nls/no
                         }
                         gridata.push(row);
                     }
-                }
+                }*/
 
                 try {
 
