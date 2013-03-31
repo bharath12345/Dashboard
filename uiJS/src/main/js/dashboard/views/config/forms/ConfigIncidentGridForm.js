@@ -3,32 +3,31 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/config/nls
     "dashboard/views/config/ConfigUtility", "dashboard/views/config/ConfigForm", "dijit/form/NumberSpinner", "dijit/form/TextBox",
     "dashboard/views/config/widgets/ConfigWidgetCheckedMultiSelect"],
 
-    function (declare, i18n, i18nString, dashboardI18nString, Logger, xhr, lang, Helper,
-              ConfigUtility, ConfigForm, NumberSpinner, TextBox, ConfigWidgetCheckedMultiSelect) {
+    function (declare, i18n, i18nString, dashboardI18nString, Logger, xhr, lang, Helper, ConfigUtility, ConfigForm, NumberSpinner, TextBox, ConfigWidgetCheckedMultiSelect) {
 
         dashboard.classnames.ConfigIncidentGridForm = "dashboard.config.forms.ConfigIncidentGridForm";
 
         var ConfigIncidentGridForm = declare(dashboard.classnames.ConfigIncidentGridForm, ConfigForm, {
 
-            title: dashboardI18nString.APPLICATION_ALERTS,
-            tableCount: 1,
-            columnCount: 1,
+            title:dashboardI18nString.APPLICATION_ALERTS,
+            tableCount:1,
+            columnCount:1,
 
             startup:function () {
                 this.inherited(arguments);
 
                 this.numberSpinner = new NumberSpinner({
-                    label: "Refresh Time",
-                    smallDelta: 1,
-                    value: 30,
-                    constraints: { min:1, max:120, places:0 }
+                    label:"Refresh Time",
+                    smallDelta:1,
+                    value:30,
+                    constraints:{ min:1, max:120, places:0 }
                 });
                 this.configTable.addChild(this.numberSpinner);
 
                 // Note - this should be the last - because this one is replaced by a CheckedMultiSelect with options
                 this.dummyTextbox = new TextBox({
-                    label: "Select Application",
-                    id: "dummyForMultiSelect"
+                    label:"Select Application",
+                    id:"dummyForMultiSelect"
                 });
                 this.configTable.addChild(this.dummyTextbox);
 
@@ -39,8 +38,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/config/nls
                 var tableCol = dummyForMultiSelect.domNode.parentNode;
                 dummyForMultiSelect.destroyRendering();
 
-                var configWidgetCheckedMultiSelect = new ConfigWidgetCheckedMultiSelect();
-                configWidgetCheckedMultiSelect.render(tableCol, "selectApplications", [], []);
+                this.configWidgetCheckedMultiSelect = new ConfigWidgetCheckedMultiSelect();
+                this.configWidgetCheckedMultiSelect.render(tableCol, "selectApplications", [], []);
 
                 dashboard.dom.STANDBY.hide();
             },
@@ -52,35 +51,19 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/config/nls
                  */
             },
 
-            saveConfig: function() {
-                var refreshTime, fontName, fontSize, showGreenApp, applications = [];
-                if(ConfigIncidentGridForm.APPLICATIONREFRESHTIME != null) {
-                    refreshTime = ConfigIncidentGridForm.APPLICATIONREFRESHTIME[ConfigUtility.USER].get('value');
-                }
-                if(ConfigIncidentGridForm.FONTNAME != null) {
-                    fontName = ConfigIncidentGridForm.FONTNAME[ConfigUtility.USER].domNode.childNodes[2].childNodes[0].value;
-                }
-                if(ConfigIncidentGridForm.FONTSIZE != null) {
-                    fontSize = ConfigIncidentGridForm.FONTSIZE[ConfigUtility.USER].get('value');
-                }
-                if(ConfigIncidentGridForm.SHOWALLGREEN != null) {
-                    showGreenApp = ConfigIncidentGridForm.SHOWALLGREEN[ConfigUtility.USER].domNode.childNodes[2].childNodes[0].value;;
-                }
-                var applicationNames = "applicationNames";
-                if(ConfigIncidentGridForm.APPLICATIONS != null) {
-                    var rhsCMS = ConfigWidgetCheckedMultiSelect.checkedMSList[applicationNames + ConfigUtility.USER][1];
-                    var msRhsOptions = rhsCMS.getOptions();
-                    for (var j = 0; j < msRhsOptions.length; j++) {
-                        applications[j] = msRhsOptions[j].value;
-                    }
+            saveConfig:function () {
+                var refreshTime = this.numberSpinner.get('value');
+
+                var applications = [];
+                var rhsCMS = this.configWidgetCheckedMultiSelect.rhsCMS;
+                var msRhsOptions = rhsCMS.getOptions();
+                for (var j = 0; j < msRhsOptions.length; j++) {
+                    applications[j] = msRhsOptions[j].value;
                 }
 
                 var saveData = {
-                    saveType: 1,
+                    saveType:1,
                     refreshTime:refreshTime,
-                    fontName:fontName,
-                    fontSize:fontSize,
-                    showGreenApp:showGreenApp,
                     applications:applications
                 };
 
@@ -89,19 +72,17 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/config/nls
                     method:"POST",
                     query:saveData,
                     headers:Helper.JSON_HEADER
-                }).then(lang.hitch(this, this.alertGridSave));
+                }).then(lang.hitch(this, this.postSave));
 
-                console.log("refreshTime = " + refreshTime + " fontName = " + fontName + " fontSize = " + fontSize + " showGreen = " + showGreenApp);
+                console.log("refreshTime = " + refreshTime);
+            },
+
+            postSave: function() {
+                console.log("Save successful. Remove the dialog now!");
             }
         });
 
         ConfigIncidentGridForm.LOG = Logger.addTimer(new Logger(dashboard.classnames.ConfigIncidentGridForm));
-
-        ConfigIncidentGridForm.APPLICATIONREFRESHTIME = null;
-        ConfigIncidentGridForm.FONTNAME = null;
-        ConfigIncidentGridForm.FONTSIZE = null;
-        ConfigIncidentGridForm.SHOWALLGREEN = null;
-        ConfigIncidentGridForm.APPLICATIONS = null;
 
         return ConfigIncidentGridForm;
     });
