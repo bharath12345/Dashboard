@@ -1,73 +1,58 @@
-define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/config/nls/config", "dashboard/logger/Logger",
-    "dojo/request/xhr", "dojo/_base/lang", "dashboard/helper/Helper",
-    "dashboard/views/config/ConfigUtility", "dashboard/views/config/widgets/ConfigWidgetNumberSpinner",
-    "dashboard/views/config/widgets/ConfigWidgetComboBox", "dashboard/views/config/widgets/ConfigWidgetRadioButton", "dashboard/views/config/widgets/ConfigWidgetCheckedMultiSelect" ],
+define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/config/nls/config", "dojo/i18n!dashboard/nls/dashboard",
+    "dashboard/logger/Logger", "dojo/request/xhr", "dojo/_base/lang", "dashboard/helper/Helper",
+    "dashboard/views/config/ConfigUtility", "dashboard/views/config/ConfigForm", "dijit/form/NumberSpinner", "dijit/form/TextBox",
+    "dashboard/views/config/widgets/ConfigWidgetCheckedMultiSelect"],
 
-    function (declare, i18n, i18nString, Logger, xhr, lang, Helper,
-              ConfigUtility, ConfigWidgetNumberSpinner, ConfigWidgetComboBox, ConfigWidgetRadioButton, ConfigWidgetCheckedMultiSelect) {
+    function (declare, i18n, i18nString, dashboardI18nString, Logger, xhr, lang, Helper,
+              ConfigUtility, ConfigForm, NumberSpinner, TextBox, ConfigWidgetCheckedMultiSelect) {
 
         dashboard.classnames.ConfigIncidentGridForm = "dashboard.config.forms.ConfigIncidentGridForm";
 
-        var ConfigIncidentGridForm = declare(dashboard.classnames.ConfigIncidentGridForm, null, {
+        var ConfigIncidentGridForm = declare(dashboard.classnames.ConfigIncidentGridForm, ConfigForm, {
 
-            getAttrib: function(data) {
-                return data.age;
+            title: dashboardI18nString.APPLICATION_ALERTS,
+            tableCount: 1,
+            columnCount: 1,
+
+            startup:function () {
+                this.inherited(arguments);
+
+                this.numberSpinner = new NumberSpinner({
+                    label: "Refresh Time",
+                    smallDelta: 1,
+                    value: 30,
+                    constraints: { min:1, max:120, places:0 }
+                });
+                this.configTable.addChild(this.numberSpinner);
+
+                // Note - this should be the last - because this one is replaced by a CheckedMultiSelect with options
+                this.dummyTextbox = new TextBox({
+                    label: "Select Application",
+                    id: "dummyForMultiSelect"
+                });
+                this.configTable.addChild(this.dummyTextbox);
+
+                this.configTable.startup();
+
+                // we shall add the Multi-Select-box row after the TableContainer has been rendered
+                var dummyForMultiSelect = dijit.byId('dummyForMultiSelect');
+                var tableCol = dummyForMultiSelect.domNode.parentNode;
+                dummyForMultiSelect.destroyRendering();
+
+                var configWidgetCheckedMultiSelect = new ConfigWidgetCheckedMultiSelect();
+                configWidgetCheckedMultiSelect.render(tableCol, "selectApplications", [], []);
+
+                dashboard.dom.STANDBY.hide();
             },
 
-            getAttribIgnoreList: function() {
-                var ignore = [];
-                ignore["allUserApplications"] = "allUserApplications";
-                return ignore;
+            createFormSpecificMenu:function () {
+                /*
+                 called from the base ConfigForm class
+                 one can add further form specific buttons and actions here
+                 */
             },
 
-            renderAttributes: function(data) {
-                var gridConfig = data.age;
-                for(var attribute in gridConfig) {
-                    var adminSetting = gridConfig[attribute].adminSetting;
-                    var factoryModified = gridConfig[attribute].factoryModified;
-                    var factoryReadOnly = gridConfig[attribute].factoryReadOnly;
-                    var userSetting = gridConfig[attribute].userSetting;
-                    console.log("adminSetting = " + adminSetting + " factoryModified = " + factoryModified + " factoryReadOnly = " + factoryReadOnly + " userSetting = " + userSetting);
-                }
-
-                var applicationRefreshTime = "applicationRefreshTime";
-                if(gridConfig[applicationRefreshTime] != null) {
-                    var ns = new ConfigWidgetNumberSpinner();
-                    ConfigIncidentGridForm.APPLICATIONREFRESHTIME = ns.renderNumberSpinner(gridConfig[applicationRefreshTime].userSetting, applicationRefreshTime, 10, 60, 1);
-                }
-
-                var fontName = "fontName";
-                if(gridConfig[fontName] != null) {
-                    var values = ["Arial", "Verdana", "Times New Roman", "Helvetica"];
-                    var cb = new ConfigWidgetComboBox();
-                    ConfigIncidentGridForm.FONTNAME = cb.renderComboBox(gridConfig[fontName].userSetting, fontName, values);
-                }
-
-                var fontSize = "fontSize";
-                if(gridConfig[fontSize] != null) {
-                    var nss = new ConfigWidgetNumberSpinner();
-                    ConfigIncidentGridForm.FONTSIZE = nss.renderNumberSpinner(gridConfig[fontSize].userSetting, fontSize, 6, 50, 1);
-                }
-
-                var showAllGreenApplications = "showAllGreenApplications";
-                if(gridConfig[showAllGreenApplications] != null) {
-                    values = ["true", "false"];
-                    //var rb = new ConfigWidgetRadioButton();
-                    //ConfigIncidentGridForm.SHOWALLGREEN = rb.renderRadioButton(gridConfig[showAllGreenApplications],showAllGreenApplications, values);
-                    var cb = new ConfigWidgetComboBox();
-                    ConfigIncidentGridForm.SHOWALLGREEN = cb.renderComboBox(gridConfig[showAllGreenApplications].userSetting, showAllGreenApplications, values);
-                }
-
-                var applicationNames = "applicationNames";
-                if(gridConfig[applicationNames] != null) {
-                    var values = gridConfig.allUserApplications;
-                    var cb = new ConfigWidgetCheckedMultiSelect();
-                    ConfigIncidentGridForm.APPLICATIONS = cb.renderCheckedMultiSelect(gridConfig[applicationNames].userSetting, applicationNames, values);
-                }
-
-            },
-
-            saveValues: function() {
+            saveConfig: function() {
                 var refreshTime, fontName, fontSize, showGreenApp, applications = [];
                 if(ConfigIncidentGridForm.APPLICATIONREFRESHTIME != null) {
                     refreshTime = ConfigIncidentGridForm.APPLICATIONREFRESHTIME[ConfigUtility.USER].get('value');
@@ -107,10 +92,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/config/nls
                 }).then(lang.hitch(this, this.alertGridSave));
 
                 console.log("refreshTime = " + refreshTime + " fontName = " + fontName + " fontSize = " + fontSize + " showGreen = " + showGreenApp);
-            },
-
-            alertGridSave: function(data) {
-                ConfigUtility.handleSave(data);
             }
         });
 

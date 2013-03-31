@@ -7,42 +7,20 @@ define(["dojo/_base/declare", "dojo/i18n", "dojox/form/CheckedMultiSelect", "dij
 
         var ConfigWidgetCheckedMultiSelect = declare(dashboard.classnames.ConfigWidgetCheckedMultiSelect, null, {
 
-            renderCheckedMultiSelect: function(selectedValues, attribute, restValues) {
+            render:function (node, type, selectedValue, restValues) {
+                this.createSkeleton(node, type);
 
-                var type = ConfigUtility.USER;
-                ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + ConfigUtility.USER] = this.getCMSL(attribute, type, selectedValues, restValues);
+                this.lhsCMS = this.makeCMS(restValues, "lhsSelect" + type);
+                this.rhsCMS = this.makeCMS(selectedValue, "rhsSelect" + type);
 
-                /*type = ConfigUtility.ADMIN;
-                 ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + ConfigUtility.ADMIN] = this.getCMSL(attribute, type, "");
-
-                 type = ConfigUtility.FACTORY;
-                 ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + ConfigUtility.FACTORY] = this.getCMSL(attribute, type, "");
-                 */
-
-                return ConfigWidgetCheckedMultiSelect.checkedMSList;
             },
 
-            getCMSL: function(attribute, type, selectedValue, restValues) {
-                var node = ConfigUtility.getConfigDiv(attribute, type);
-                this.createSkeleton(node, type, attribute);
-
-                var cmsl = [];
-                cmsl[0] = this.makeCMS(restValues, "lhsSelect"+type+attribute);
-                cmsl[1] = this.makeCMS(selectedValue, "rhsSelect"+type+attribute);
-
-                if(type != ConfigUtility.USER) {
-                    cmsl[0].set('disabled','disabled');
-                    cmsl[1].set('disabled','disabled');
-                }
-                return cmsl;
-            },
-
-            makeCMS: function(values, id) {
+            makeCMS:function (values, id) {
                 var options = [];
-                if(values == null || values == undefined) {
+                if (values == null || values == undefined) {
                     values = [];
                 }
-                for(var i=0;i<values.length;i++) {
+                for (var i = 0; i < values.length; i++) {
                     console.log("cms id = " + id + " value = " + values[i]);
                     options[i] = {label:values[i], value:values[i], selected:false};
                 }
@@ -54,7 +32,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojox/form/CheckedMultiSelect", "dij
                 return CMS;
             },
 
-            createSkeleton: function(node, type, attribute) {
+            createSkeleton:function (node, type) {
                 var table = dojo.create("table");
                 node.appendChild(table);
 
@@ -64,21 +42,21 @@ define(["dojo/_base/declare", "dojo/i18n", "dojox/form/CheckedMultiSelect", "dij
                 row.appendChild(col);
 
                 var select = dojo.create("select");
-                select.id = "lhsSelect"+type+attribute;
+                select.id = "lhsSelect" + type;
                 col.appendChild(select);
 
                 col = dojo.create("td");
-                this.makeButtons(col, attribute, type);
-                row.appendChild(col, attribute);
+                this.makeButtons(col, type);
+                row.appendChild(col);
 
                 col = dojo.create("td");
                 select = dojo.create("select");
-                select.id = "rhsSelect"+type+attribute;
+                select.id = "rhsSelect" + type;
                 col.appendChild(select);
                 row.appendChild(col);
             },
 
-            getNewRowCol: function(table) {
+            getNewRowCol:function (table) {
                 var row = dojo.create("tr");
                 table.appendChild(row);
                 var col = dojo.create("td");
@@ -86,13 +64,13 @@ define(["dojo/_base/declare", "dojo/i18n", "dojox/form/CheckedMultiSelect", "dij
                 return col;
             },
 
-            setButtonWidth: function(btn) {
+            setButtonWidth:function (btn) {
                 domStyle.set(btn.domNode, "width", "150px");
                 domStyle.set(btn.domNode, "fontSize", "12");
                 domStyle.set(btn.domNode.firstChild, "display", "block");
             },
 
-            makeButtons: function(bigCol, attribute, type) {
+            makeButtons:function (bigCol, type) {
                 var table = dojo.create("table");
                 bigCol.appendChild(table);
 
@@ -115,14 +93,14 @@ define(["dojo/_base/declare", "dojo/i18n", "dojox/form/CheckedMultiSelect", "dij
                 col.appendChild(tempUnselectAllRight);
 
                 var buttonStyle = "width: 100px; fontSize: 10;";
-                var addButtonObj = new Button({label:"Add", id: attribute + "_Add" + ConfigWidgetCheckedMultiSelect.BUTTONPOSTFIX}, tempAdd);
-                var removeButtonObj = new Button({label:"Remove", id: attribute + "_Remove" + ConfigWidgetCheckedMultiSelect.BUTTONPOSTFIX}, tempRemove);
+                var addButtonObj = new Button({label:"Add", id:type + "_Add" + ConfigWidgetCheckedMultiSelect.BUTTONPOSTFIX}, tempAdd);
+                var removeButtonObj = new Button({label:"Remove", id:type + "_Remove" + ConfigWidgetCheckedMultiSelect.BUTTONPOSTFIX}, tempRemove);
 
-                var selectAllLeftButtonObj = new Button({label:"Select All on Left", id: attribute + "_SelectAllLeft" + ConfigWidgetCheckedMultiSelect.BUTTONPOSTFIX}, tempSelectAllLeft);
-                var unselectAllLeftButtonObj = new Button({label:"Unselect All on Left", id: attribute + "_UnselectAllLeft" + ConfigWidgetCheckedMultiSelect.BUTTONPOSTFIX}, tempUnselectAllLeft);
+                var selectAllLeftButtonObj = new Button({label:"Select All on Left", id:type + "_SelectAllLeft" + ConfigWidgetCheckedMultiSelect.BUTTONPOSTFIX}, tempSelectAllLeft);
+                var unselectAllLeftButtonObj = new Button({label:"Unselect All on Left", id:type + "_UnselectAllLeft" + ConfigWidgetCheckedMultiSelect.BUTTONPOSTFIX}, tempUnselectAllLeft);
 
-                var selectAllRightButtonObj = new Button({label:"Select All on Right", id: attribute + "_SelectAllRight" + ConfigWidgetCheckedMultiSelect.BUTTONPOSTFIX}, tempSelectAllRight);
-                var unselectAllRightButtonObj = new Button({label:"Unselect All on Right", id: attribute + "_UnselectAllRight" + ConfigWidgetCheckedMultiSelect.BUTTONPOSTFIX}, tempUnselectAllRight);
+                var selectAllRightButtonObj = new Button({label:"Select All on Right", id:type + "_SelectAllRight" + ConfigWidgetCheckedMultiSelect.BUTTONPOSTFIX}, tempSelectAllRight);
+                var unselectAllRightButtonObj = new Button({label:"Unselect All on Right", id:type + "_UnselectAllRight" + ConfigWidgetCheckedMultiSelect.BUTTONPOSTFIX}, tempUnselectAllRight);
 
                 this.setButtonWidth(addButtonObj);
                 this.setButtonWidth(removeButtonObj);
@@ -131,78 +109,38 @@ define(["dojo/_base/declare", "dojo/i18n", "dojox/form/CheckedMultiSelect", "dij
                 this.setButtonWidth(selectAllRightButtonObj);
                 this.setButtonWidth(unselectAllRightButtonObj);
 
-                if(type == ConfigUtility.USER) {
-                    dojo.connect(addButtonObj, "onClick", lang.hitch(this, "moveUserLhsToRhs"));
-                    dojo.connect(removeButtonObj, "onClick", lang.hitch(this, "moveUserRhsToLhs"));
+                dojo.connect(addButtonObj, "onClick", lang.hitch(this, this.moveLhsToRhs));
+                dojo.connect(removeButtonObj, "onClick", lang.hitch(this, this.moveRhsToLhs));
 
-                    dojo.connect(selectAllLeftButtonObj, "onClick", lang.hitch(this, "selectAllLeftUser"));
-                    dojo.connect(unselectAllLeftButtonObj, "onClick", lang.hitch(this, "unselectAllLeftUser"));
+                dojo.connect(selectAllLeftButtonObj, "onClick", lang.hitch(this, this.selectAllLeft));
+                dojo.connect(unselectAllLeftButtonObj, "onClick", lang.hitch(this, this.unselectAllLeft));
 
-                    dojo.connect(selectAllRightButtonObj, "onClick", lang.hitch(this, "selectAllRightUser"));
-                    dojo.connect(unselectAllRightButtonObj, "onClick", lang.hitch(this, "unselectAllRightUser"));
-
-                } else if(type == ConfigUtility.ADMIN) {
-                    dojo.connect(addButtonObj, "onClick", lang.hitch(this, "moveAdminLhsToRhs"));
-                    dojo.connect(removeButtonObj, "onClick", lang.hitch(this, "moveAdminRhsToLhs"));
-                } else if(type == ConfigUtility.FACTORY) {
-                    dojo.connect(addButtonObj, "onClick", lang.hitch(this, "moveFactoryLhsToRhs"));
-                    dojo.connect(removeButtonObj, "onClick", lang.hitch(this, "moveFactoryRhsToLhs"));
-                } else {
-                    console.log("unknown type = " + type);
-                }
+                dojo.connect(selectAllRightButtonObj, "onClick", lang.hitch(this, this.selectAllRight));
+                dojo.connect(unselectAllRightButtonObj, "onClick", lang.hitch(this, this.unselectAllRight));
             },
 
-            getAttribute: function(id) {
+            getAttribute:function (id) {
                 var attribute = id.split("_")[0];
                 return attribute;
             },
 
-            moveUserLhsToRhs: function(event) {
-                var attribute = this.getAttribute(event.target.id);
-                this.moveLhsToRhs(ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + ConfigUtility.USER][0], ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + ConfigUtility.USER][1]);
+            selectAllLeft:function (event) {
+                this.selectAllCMS(this.lhsCMS);
             },
-            moveUserRhsToLhs: function(event) {
-                var attribute = this.getAttribute(event.target.id);
-                this.moveRhsToLhs(ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + ConfigUtility.USER][1]);
+            unselectAllLeft:function (event) {
+                this.unselectAllCMS(this.lhsCMS);
             },
-            moveAdminLhsToRhs: function(event) {
-                var attribute = this.getAttribute(event.target.id);
-                this.moveLhsToRhs(ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + ConfigUtility.ADMIN][0], ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + ConfigUtility.ADMIN][1]);
+            selectAllRight:function (event) {
+                this.selectAllCMS(this.rhsCMS);
             },
-            moveAdminRhsToLhs: function(event) {
-                var attribute = this.getAttribute(event.target.id);
-                this.moveRhsToLhs(ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + ConfigUtility.ADMIN][1]);
-            },
-            moveFactoryLhsToRhs: function(event) {
-                var attribute = this.getAttribute(event.target.id);
-                this.moveLhsToRhs(ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + ConfigUtility.FACTORY][0], ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + ConfigUtility.FACTORY][1]);
-            },
-            moveFactoryRhsToLhs: function(event) {
-                var attribute = this.getAttribute(event.target.id);
-                this.moveRhsToLhs(ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + ConfigUtility.FACTORY][1]);
+            unselectAllRight:function (event) {
+                this.unselectAllCMS(this.rhsCMS);
             },
 
-            selectAllLeftUser: function(event) {
-                var attribute = this.getAttribute(event.target.id);
-                this.selectAllCMS(ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + ConfigUtility.USER][0]);
-            },
-            unselectAllLeftUser: function(event) {
-                var attribute = this.getAttribute(event.target.id);
-                this.unselectAllCMS(ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + ConfigUtility.USER][0]);
-            },
-            selectAllRightUser: function(event) {
-                var attribute = this.getAttribute(event.target.id);
-                this.selectAllCMS(ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + ConfigUtility.USER][1]);
-            },
-            unselectAllRightUser: function(event) {
-                var attribute = this.getAttribute(event.target.id);
-                this.unselectAllCMS(ConfigWidgetCheckedMultiSelect.checkedMSList[attribute + ConfigUtility.USER][1]);
-            },
-
-            moveLhsToRhs: function(lhsCMS, rhsCMS) {
+            moveLhsToRhs:function () {
                 dashboard.dom.STANDBY.show();
-                var msLhsOptions = lhsCMS.getOptions();
-                var msRhsOptions = rhsCMS.getOptions();
+                var msLhsOptions = this.lhsCMS.getOptions();
+                var msRhsOptions = this.rhsCMS.getOptions();
                 for (var i = 0; i < msLhsOptions.length; i++) {
                     if (msLhsOptions[i].selected == true) {
                         console.log("selected option = " + msLhsOptions[i].value + " label = " + msLhsOptions[i].label);
@@ -223,27 +161,27 @@ define(["dojo/_base/declare", "dojo/i18n", "dojox/form/CheckedMultiSelect", "dij
                 dashboard.dom.STANDBY.hide();
             },
 
-            moveRhsToLhs: function(rhsCMS) {
+            moveRhsToLhs:function () {
                 dashboard.dom.STANDBY.show();
-                var msRhsOptions = rhsCMS.getOptions();
+                var msRhsOptions = this.rhsCMS.getOptions();
                 for (var i = 0; i < msRhsOptions.length; i++) {
                     if (msRhsOptions[i].selected == true) {
                         console.log("selected option = " + msRhsOptions[i].value + " label = " + msRhsOptions[i].label);
-                        rhsCMS.removeOption(msRhsOptions[i]);
+                        this.rhsCMS.removeOption(msRhsOptions[i]);
                     }
                 }
                 dashboard.dom.STANDBY.hide();
             },
 
-            selectAllCMS: function(cms) {
+            selectAllCMS:function (cms) {
                 this.cmsUpdate(true, cms);
             },
 
-            unselectAllCMS: function(cms) {
+            unselectAllCMS:function (cms) {
                 this.cmsUpdate(false, cms);
             },
 
-            cmsUpdate: function(bool, cms) {
+            cmsUpdate:function (bool, cms) {
                 dashboard.dom.STANDBY.show();
                 var cmsOptions = cms.getOptions();
                 for (var i = 0; i < cmsOptions.length; i++) {
@@ -258,7 +196,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojox/form/CheckedMultiSelect", "dij
         ConfigWidgetCheckedMultiSelect.LOG = Logger.addTimer(new Logger(dashboard.classnames.ConfigWidgetCheckedMultiSelect));
         ConfigWidgetCheckedMultiSelect.POSTFIX = "_CheckedMultiSelect";
         ConfigWidgetCheckedMultiSelect.BUTTONPOSTFIX = ConfigWidgetCheckedMultiSelect.POSTFIX + "Button";
-        ConfigWidgetCheckedMultiSelect.checkedMSList = [];
 
         return ConfigWidgetCheckedMultiSelect;
     });

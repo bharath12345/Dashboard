@@ -1,8 +1,8 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/config/nls/config", "dojo/i18n!dashboard/nls/dashboard", "dashboard/logger/Logger",
     "dojo/request/xhr", "dojo/_base/lang", "dashboard/helper/Helper",
-    "dashboard/abstract/AbstractAccordion", "dashboard/views/config/ConfigView", "dashboard/views/config/RenderAttributes"],
+    "dashboard/abstract/AbstractAccordion", "dashboard/views/config/ConfigView"],
 
-    function (declare, i18n, i18nString, dashboardI18nString, Logger, xhr, lang, Helper, AbstractAccordion, ConfigView, RenderAttributes) {
+    function (declare, i18n, i18nString, dashboardI18nString, Logger, xhr, lang, Helper, AbstractAccordion, ConfigView) {
 
         dashboard.classnames.ConfigAccordion = "dashboard.config.ConfigAccordion";
 
@@ -19,56 +19,38 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/config/nls
                 // ToDo: Change this switch away from Name to some ID
                 switch(parseInt(enumId)) {
                     case dashboard.enumMap.CONFIG.APPLICATION_ALERTS:
-                        var viewMeta = {
-                            id:uuid,
-                            name: name,
-                            type: 0,
-                            newWindow: newWindow,
-                            custom:[]
-                        };xhr("config/alertGridDetailsRetrieve.action", {
-                            handleAs:"json",
-                            method:"POST",
-                            query:viewMeta,
-                            headers:Helper.JSON_HEADER
-                        }).then(lang.hitch(this, this.alertGridHandle));
+                        require(["dashboard/views/config/forms/ConfigIncidentGridForm"], lang.hitch(this, function (ConfigIncidentGridForm) {
+                            Helper.createView(this.configView, this.configView.pageType, new ConfigIncidentGridForm(this.configView.pageType));
+                        }));
                         break;
 
                     case dashboard.enumMap.CONFIG.TRANSACTION_GRID:
-                        var viewMeta = {
-                            id:uuid,
-                            name: name,
-                            type: 0,
-                            newWindow: newWindow,
-                            custom:[]
-                        };xhr("config/transactionGridDetailsRetrieve.action", {
-                            handleAs:"json",
-                            method:"POST",
-                            query:viewMeta,
-                            headers:Helper.JSON_HEADER
-                        }).then(lang.hitch(this, this.transactionsGridHandle));
+                        require(["dashboard/views/config/forms/ConfigTransactionGridForm"], lang.hitch(this, function (ConfigTransactionGridForm) {
+                            Helper.createView(this.configView, this.configView.pageType, new ConfigTransactionGridForm(this.configView.pageType));
+                        }));
                         break;
 
                     case dashboard.enumMap.CONFIG.APPLICATION_LAYERS:
                         require(["dashboard/views/config/forms/ConfigAppLayersForm"], lang.hitch(this, function (ConfigAppLayersForm) {
-                            this.configView.createSplitCenterPanes(dashboard.dom.CpCenterInner[this.configView.pageType], new ConfigAppLayersForm(this.configView.pageType));
+                            Helper.createView(this.configView, this.configView.pageType, new ConfigAppLayersForm(this.configView.pageType));
                         }));
                         break;
 
                     case dashboard.enumMap.CONFIG.APPLICATION_TAGS:
                         require(["dashboard/views/config/forms/ConfigAppTagsForm"], lang.hitch(this, function (ConfigAppTagsForm) {
-                            this.configView.createSplitCenterPanes(dashboard.dom.CpCenterInner[this.configView.pageType], new ConfigAppTagsForm(this.configView.pageType));
+                            Helper.createView(this.configView, this.configView.pageType, new ConfigAppTagsForm(this.configView.pageType));
                         }));
                         break;
 
                     case dashboard.enumMap.CONFIG.APPLICATION_TOPOLOGY:
                         require(["dashboard/views/config/forms/ConfigAppTopologyForm"], lang.hitch(this, function (ConfigAppTopologyForm) {
-                            this.configView.createSplitCenterPanes(dashboard.dom.CpCenterInner[this.configView.pageType], new ConfigAppTopologyForm(this.configView.pageType));
+                            Helper.createView(this.configView, this.configView.pageType, new ConfigAppTopologyForm(this.configView.pageType));
                         }));
                         break;
 
                     case dashboard.enumMap.CONFIG.LAYER_TRANSITIONS:
                         require(["dashboard/views/config/forms/ConfigAppLayerTransitions"], lang.hitch(this, function (ConfigAppLayerTransitions) {
-                            this.configView.createSplitCenterPanes(dashboard.dom.CpCenterInner[this.configView.pageType], new ConfigAppLayerTransitions(this.configView.pageType));
+                            Helper.createView(this.configView, this.configView.pageType, new ConfigAppLayerTransitions(this.configView.pageType));
                         }));
                         break;
 
@@ -80,22 +62,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/config/nls
                         console.log("Unknown page id = " + enumId);
                         return;
                 }
-            },
-
-            alertGridHandle:function (data) {
-                require(["dashboard/views/config/forms/ConfigIncidentGridForm"], function(ConfigIncidentGridForm) {
-                    var ra = new RenderAttributes();
-                    var configViewIncidentGrid = new ConfigIncidentGridForm();
-                    ra.renderConfigParameters(data, configViewIncidentGrid);
-                });
-            },
-
-            transactionsGridHandle: function(data) {
-                require(["dashboard/views/config/forms/ConfigTransactionGridForm"], function(ConfigTransactionGridForm) {
-                    var ra = new RenderAttributes();
-                    var transactionGrid = new ConfigTransactionGridForm();
-                    ra.renderConfigParameters(data, transactionGrid);
-                });
             },
 
             getView: function(name, newWindow) {

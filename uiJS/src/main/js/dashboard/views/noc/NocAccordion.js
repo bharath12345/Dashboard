@@ -20,7 +20,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/noc/nls/no
                 switch(parseInt(enumId)) {
                     case dashboard.enumMap.NOC.APPLICATION_ALERTS:
                         require(["dashboard/views/noc/forms/NocApplicationIncidentForm"], lang.hitch(this, function (NocApplicationIncidentForm) {
-
                             Helper.createView(this.nocView, this.nocView.pageType, new NocApplicationIncidentForm());
                         }));
                         break;
