@@ -40,8 +40,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/noc/nls/no
                     }
                 }
 
-                NocApplicationIncidentForm.gridDataStore.put(row, {overwrite:true});
-                IncidentGrid.Grid.refresh();
+                NocApplicationIncidentForm.Grid.addRow(row);
                 dashboard.dom.STANDBY.hide();
             }
 
@@ -140,25 +139,15 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/noc/nls/no
                 }
 
                 try {
-                    NocApplicationIncidentForm.gridDataStore = new Memory({data:gridata, idProperty:'id'});
-                    IncidentGrid.Grid = new Grid({
-                        store:NocApplicationIncidentForm.gridDataStore,
-                        columns:columnMeta,
-                        rowsPerPage:25,
-                        pagingLinks:1,
-                        pagingTextBox:true,
-                        firstLastArrows:true,
-                        pageSizeOptions:[15, 20, 25, 30]
-                    }, data.name);
-                    IncidentGrid.Grid.on(".dgrid-row:click", lang.hitch(this, this.handleRowClick));
+
+                    NocApplicationIncidentForm.Grid = new Grid();
+                    NocApplicationIncidentForm.Grid.setColumnMeta(columnMeta);
+                    NocApplicationIncidentForm.Grid.setData(gridata);
+                    NocApplicationIncidentForm.Grid.render(data.name);
+                    NocApplicationIncidentForm.Grid.handleRowClick(this); // the handleRowClick() callback is invoked in this case
+
                 } catch (e) {
                     console.log("exception = " + e);
-                }
-
-                var textNode = dojo.query(".dgrid-cell", IncidentGrid.Grid.domNode);
-                console.log("count of dgrid cells = " + textNode.length);
-                for (var i = 0; i < textNode.length; i++) {
-                    textNode[i].style.fontSize = "12px";
                 }
 
                 // assign ids to nodes
@@ -197,7 +186,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/noc/nls/no
             },
 
             handleRowClick:function (evt) {
-                var row = IncidentGrid.Grid.row(evt);
+                var row = NocApplicationIncidentForm.Grid.getRow(evt);
+
                 // row.element == the element with the dgrid-row class
                 // row.id == the identity of the item represented by the row
                 // row.data == the item represented by the row
@@ -267,7 +257,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/noc/nls/no
         IncidentGrid.APP_COUNTER = 0;
         IncidentGrid.APP_STAGGER_PERIOD = 3;
         IncidentGrid.CONFIG_PERIOD = 5;
-        IncidentGrid.Grid = null;
         IncidentGrid.DATACLASS = null;
 
         IncidentGrid.CRITICAL = "critical";
