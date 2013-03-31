@@ -64,9 +64,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dojox/form/CheckedMultiSelect", "dij
                 return col;
             },
 
-            setButtonWidth:function (btn) {
+            setButtonStyle:function (btn) {
                 domStyle.set(btn.domNode, "width", "150px");
-                domStyle.set(btn.domNode, "fontSize", "12");
+                domStyle.set(btn.domNode, "fontSize", "11");
                 domStyle.set(btn.domNode.firstChild, "display", "block");
             },
 
@@ -92,7 +92,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojox/form/CheckedMultiSelect", "dij
                 var tempUnselectAllRight = dojo.create("div");
                 col.appendChild(tempUnselectAllRight);
 
-                var buttonStyle = "width: 100px; fontSize: 10;";
                 var addButtonObj = new Button({label:"Add", id:type + "_Add" + ConfigWidgetCheckedMultiSelect.BUTTONPOSTFIX}, tempAdd);
                 var removeButtonObj = new Button({label:"Remove", id:type + "_Remove" + ConfigWidgetCheckedMultiSelect.BUTTONPOSTFIX}, tempRemove);
 
@@ -102,12 +101,12 @@ define(["dojo/_base/declare", "dojo/i18n", "dojox/form/CheckedMultiSelect", "dij
                 var selectAllRightButtonObj = new Button({label:"Select All on Right", id:type + "_SelectAllRight" + ConfigWidgetCheckedMultiSelect.BUTTONPOSTFIX}, tempSelectAllRight);
                 var unselectAllRightButtonObj = new Button({label:"Unselect All on Right", id:type + "_UnselectAllRight" + ConfigWidgetCheckedMultiSelect.BUTTONPOSTFIX}, tempUnselectAllRight);
 
-                this.setButtonWidth(addButtonObj);
-                this.setButtonWidth(removeButtonObj);
-                this.setButtonWidth(selectAllLeftButtonObj);
-                this.setButtonWidth(unselectAllLeftButtonObj);
-                this.setButtonWidth(selectAllRightButtonObj);
-                this.setButtonWidth(unselectAllRightButtonObj);
+                this.setButtonStyle(addButtonObj);
+                this.setButtonStyle(removeButtonObj);
+                this.setButtonStyle(selectAllLeftButtonObj);
+                this.setButtonStyle(unselectAllLeftButtonObj);
+                this.setButtonStyle(selectAllRightButtonObj);
+                this.setButtonStyle(unselectAllRightButtonObj);
 
                 dojo.connect(addButtonObj, "onClick", lang.hitch(this, this.moveLhsToRhs));
                 dojo.connect(removeButtonObj, "onClick", lang.hitch(this, this.moveRhsToLhs));
@@ -155,7 +154,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojox/form/CheckedMultiSelect", "dij
                             continue;
                         }
                         var newRhsOption = {label:msLhsOptions[i].value, value:msLhsOptions[i].value, selected:false};
-                        rhsCMS.addOption(newRhsOption);
+                        this.rhsCMS.addOption(newRhsOption);
                     }
                 }
                 dashboard.dom.STANDBY.hide();
