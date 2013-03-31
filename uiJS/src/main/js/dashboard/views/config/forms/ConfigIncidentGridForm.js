@@ -38,8 +38,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/config/nls
                 var tableCol = dummyForMultiSelect.domNode.parentNode;
                 dummyForMultiSelect.destroyRendering();
 
-                this.configWidgetCheckedMultiSelect = new ConfigWidgetCheckedMultiSelect();
-                this.configWidgetCheckedMultiSelect.render(tableCol, "selectApplications", [], []);
+                this.appCheckedMultiSelect = new ConfigWidgetCheckedMultiSelect();
+                this.appCheckedMultiSelect.render(tableCol, "selectApplications", [], []);
 
                 dashboard.dom.STANDBY.hide();
             },
@@ -55,7 +55,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/config/nls
                 var refreshTime = this.numberSpinner.get('value');
 
                 var applications = [];
-                var rhsCMS = this.configWidgetCheckedMultiSelect.rhsCMS;
+                var rhsCMS = this.appCheckedMultiSelect.rhsCMS;
                 var msRhsOptions = rhsCMS.getOptions();
                 for (var j = 0; j < msRhsOptions.length; j++) {
                     applications[j] = msRhsOptions[j].value;
@@ -79,6 +79,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/config/nls
 
             postSave: function() {
                 console.log("Save successful. Remove the dialog now!");
+                ConfigUtility.handleSave(data);
             }
         });
 
