@@ -10,17 +10,33 @@ public class TimeUtility {
 		return alltime(Calendar.MINUTE, -5);
 	}
 
-	public static String[] get30MinStartEnd() {
+    public static long[] get5MinStartEndLong() {
+        return alltimeLong(Calendar.MINUTE, -5);
+    }
+
+    public static String[] get30MinStartEnd() {
 		return alltime(Calendar.MINUTE, -30);
 	}
 
-	public static String[] get1HourStartEnd() {
+    public static long[] get30MinStartEndLong() {
+        return alltimeLong(Calendar.MINUTE, -30);
+    }
+
+    public static String[] get1HourStartEnd() {
 		return alltime(Calendar.HOUR_OF_DAY, -1);
 	}
+
+    public static long[] get1HourStartEndLong() {
+        return alltimeLong(Calendar.HOUR_OF_DAY, -1);
+    }
 
 	public static String[] get3HourStartEnd() {
 		return alltime(Calendar.HOUR_OF_DAY, -3);
 	}
+
+    public static long[] get3HourStartEndLong() {
+        return alltimeLong(Calendar.HOUR_OF_DAY, -3);
+    }
 	
 	public static Date convertGmtToIndiaTimeDate(Calendar gmtTime) {
 		gmtTime.add(Calendar.HOUR_OF_DAY, -5);
@@ -34,7 +50,19 @@ public class TimeUtility {
 		return gmtTime;
 	}
 
-	private static String[] alltime(int field, int delta) {
+    private static long[] alltimeLong(int field, int delta) {
+        Calendar currentTime = convertGmtToIndiaTimeCalendar(Calendar.getInstance());
+        Calendar previousCalendar = convertGmtToIndiaTimeCalendar(Calendar.getInstance());
+
+        previousCalendar.add(field, delta);
+
+        long[] startEndTimes = new long[2];
+        startEndTimes[0] = previousCalendar.getTimeInMillis();
+        startEndTimes[1] = currentTime.getTimeInMillis();
+        return startEndTimes;
+    }
+
+    private static String[] alltime(int field, int delta) {
 		Date currentTime = convertGmtToIndiaTimeDate(Calendar.getInstance());
 		Calendar previousCalendar = convertGmtToIndiaTimeCalendar(Calendar.getInstance());
 		

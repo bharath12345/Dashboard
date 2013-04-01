@@ -43,7 +43,7 @@ public interface ActionConstants {
 	}
 	
 	public enum ALERTS {
-		SAMPLE_ALERTS
+		SQL_DB_OUTLIERS
 	}
 	
 	public enum CUSTOM {

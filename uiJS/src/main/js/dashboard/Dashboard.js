@@ -37,6 +37,7 @@ define([ 'dojo/has', 'require' ], function (has, require) {
     dashboard.pageTypes.CONFIG = "config";
     dashboard.pageTypes.TOPOLOGY = "topology";
     dashboard.pageTypes.CUSTOM = "custom";
+    dashboard.pageTypes.ALERTS = "alerts";
 
     /*
         Begin Dashboards
