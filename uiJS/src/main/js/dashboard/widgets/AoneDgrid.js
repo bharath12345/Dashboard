@@ -27,7 +27,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                 this.gridDataStore = new Memory({data:gridata, idProperty:'id'});
             },
 
-            render: function(divId) {
+            render: function(div) {
                 this.grid = new CompoundColumnsGrid({
                     store:this.gridDataStore,
                     columns:this.columnMeta,
@@ -36,7 +36,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                     pagingTextBox:true,
                     firstLastArrows:true,
                     pageSizeOptions:[15, 20, 25, 30]
-                }, divId);
+                }, div);
             },
 
             addRow: function(row) {

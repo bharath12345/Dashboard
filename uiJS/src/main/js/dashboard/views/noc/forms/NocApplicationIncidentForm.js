@@ -18,15 +18,10 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/noc/nls/no
             startup:function () {
                 this.inherited(arguments);
 
-                this.attr('content', dojo.create('div', {'id':NocApplicationIncidentForm.PAGENAME, style:'width: 100%; height: 100%;'}));
+                this.innerDIV = dojo.create('div', {style:'width: 100%; height: 100%;'});
+                this.attr('content', this.innerDIV);
 
-                var xpos = 0, ypos = 0;
-                var viewMeta = {
-                    id:NocApplicationIncidentForm.PAGENAME,
-                    name:NocApplicationIncidentForm.PAGENAME,
-                    position:[xpos, ypos],
-                    custom:[]
-                };
+                var viewMeta = {};
                 xhr("alert/ApplicationMeta.action", {
                     handleAs:"json",
                     method:"POST",
@@ -138,7 +133,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/noc/nls/no
                     NocApplicationIncidentForm.Grid = new Grid();
                     NocApplicationIncidentForm.Grid.setColumnMeta(columnMeta);
                     NocApplicationIncidentForm.Grid.setData(gridata);
-                    NocApplicationIncidentForm.Grid.render(data.name);
+                    NocApplicationIncidentForm.Grid.render(this.innerDIV);
                     NocApplicationIncidentForm.Grid.handleRowClick(this); // the handleRowClick() callback is invoked in this case
 
                 } catch (e) {
@@ -222,8 +217,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/noc/nls/no
                 var viewMeta = {
                     id:appDataSet.id,
                     name:appDataSet.name,
-                    dimensions:[0, 0],
-                    position:[0, 0],
                     custom:[NocApplicationIncidentForm.POSTSET.metricsJson]
                 };
 
@@ -276,7 +269,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/noc/nls/no
 
         });
 
-        NocApplicationIncidentForm.PAGENAME = "NocApplicationIncidentForm";
         // static variables of this class
         NocApplicationIncidentForm.LOG = Logger.addTimer(new Logger(dashboard.classnames.NocApplicationIncidentForm));
 
