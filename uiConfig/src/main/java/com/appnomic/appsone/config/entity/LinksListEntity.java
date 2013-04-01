@@ -70,9 +70,9 @@ public class LinksListEntity extends AbstractConfigEntity {
         List<LinkEntity> linkList = new ArrayList<LinkEntity>();
 
         LinkEntity linkEntity = aple.new LinkEntity();
-        linkEntity.setName(ActionConstants.ALERTS.SAMPLE_ALERTS.name());
+        linkEntity.setName(ActionConstants.ALERTS.SQL_DB_OUTLIERS.name());
         linkEntity.setUuid(UUID.randomUUID().toString());
-        linkEntity.setEnumId( ActionConstants.ALERTS.SAMPLE_ALERTS.ordinal());
+        linkEntity.setEnumId( ActionConstants.ALERTS.SQL_DB_OUTLIERS.ordinal());
         linkEntity.setType(ActionConstants.ACCTYPE.GRID.name());
         linkList.add(linkEntity);
 

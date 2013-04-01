@@ -6,7 +6,15 @@
       <sourceFolder url="file://$MODULE_DIR$/CODEDUMP" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/.idea" />
       <excludeFolder url="file://$MODULE_DIR$/.metadata" />
+      <excludeFolder url="file://$MODULE_DIR$/uiCommonLib/.settings" />
+      <excludeFolder url="file://$MODULE_DIR$/uiCommonLib/target" />
+      <excludeFolder url="file://$MODULE_DIR$/uiConfig/.settings" />
+      <excludeFolder url="file://$MODULE_DIR$/uiConfig/target" />
       <excludeFolder url="file://$MODULE_DIR$/uiJS" />
+      <excludeFolder url="file://$MODULE_DIR$/uiWAR/.settings" />
+      <excludeFolder url="file://$MODULE_DIR$/uiWAR/target" />
+      <excludeFolder url="file://$MODULE_DIR$/uiWeb/.settings" />
+      <excludeFolder url="file://$MODULE_DIR$/uiWeb/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

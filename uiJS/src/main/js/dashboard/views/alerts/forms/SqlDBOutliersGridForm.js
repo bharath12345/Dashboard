@@ -1,14 +1,20 @@
-define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", "dashboard/logger/Logger"],
+define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", "dashboard/logger/Logger", "dashboard/abstract/AbstractForm"],
 
-    function (declare, i18n, i18nString, Logger) {
+    function (declare, i18n, i18nString, Logger, AbstractForm) {
 
-        dashboard.classnames.XXX = "dashboard.XXX";
+        dashboard.classnames.SqlDBOutliersGridForm = "dashboard.alerts.form.SqlDBOutliersGridForm";
 
-        var XXX = declare(dashboard.classnames.XXX, null, {
+        var SqlDBOutliersGridForm = declare(dashboard.classnames.SqlDBOutliersGridForm, AbstractForm, {
+
+            startup:function () {
+                this.inherited(arguments);
+
+
+            }
 
         });
 
-        XXX.LOG = Logger.addTimer(new Logger(dashboard.classnames.XXX));
+        SqlDBOutliersGridForm.LOG = Logger.addTimer(new Logger(dashboard.classnames.SqlDBOutliersGridForm));
 
-        return XXX;
+        return SqlDBOutliersGridForm;
     });

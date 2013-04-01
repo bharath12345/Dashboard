@@ -18,7 +18,7 @@ import com.appnomic.appsone.common.ActionConstants;
 @Namespace("/utility")
 public class UtilityAction extends AbstractAction {
 
-	private PaneListEntity.PaneEntity[] paneListVO;
+	private PaneListEntity.PaneEntity[] paneList;
 	private Map<String, String[]> param;
 	Map<String, HashMap<String, Integer>> enumMap = new HashMap<String, HashMap<String, Integer>>();
 	
@@ -31,12 +31,12 @@ public class UtilityAction extends AbstractAction {
 		this.param = param;
 	}
 
-	public PaneListEntity.PaneEntity[] getPaneListVO() {
-		return paneListVO;
+	public PaneListEntity.PaneEntity[] getPaneList() {
+		return paneList;
 	}
 
-	public void setPaneListVO(PaneListEntity.PaneEntity[] paneListVO) {
-		this.paneListVO = paneListVO;
+	public void setPaneList(PaneListEntity.PaneEntity[] paneList) {
+		this.paneList = paneList;
 	}
 
 	public Map<String, HashMap<String, Integer>> getEnumMap() {
@@ -69,7 +69,10 @@ public class UtilityAction extends AbstractAction {
 
 		json = persistence.get(tabListObjectUuid);
         PaneListEntity tle = gson.fromJson(json, PaneListEntity.class);
-        paneListVO = tle.getPaneList();  */
+        paneList = tle.getPaneList();  */
+
+        // ToDo: The below code is temporary - remove it once the persistence stuff starts working
+        paneList = PaneListEntity.getDefaultConfig().getPaneList();
 
 		return SUCCESS;
 	}
@@ -77,7 +80,7 @@ public class UtilityAction extends AbstractAction {
 	@Action(value="/dashboard/enums", results = {
 	        @Result(name="success", type="json", params = {
 	        		"excludeProperties",
-	                "parameters,session,SUCCESS,ERROR,agcVO,levelDbMap,paneListVO",
+	                "parameters,session,SUCCESS,ERROR,agcVO,levelDbMap,paneList",
 	        		"enableGZIP", "true",
 	        		"encoding", "UTF-8",
 	                "noCache","true",

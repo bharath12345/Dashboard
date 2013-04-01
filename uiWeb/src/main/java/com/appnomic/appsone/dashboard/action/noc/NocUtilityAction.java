@@ -4,7 +4,6 @@ import java.util.Map;
 
 import com.appnomic.appsone.config.entity.LinksListEntity;
 import com.appnomic.appsone.dashboard.action.AbstractAction;
-import com.appnomic.appsone.dashboard.action.UtilityAction;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -14,15 +13,15 @@ import org.apache.struts2.convention.annotation.Result;
 @Namespace("/noc")
 public class NocUtilityAction extends AbstractAction {
 
-	private LinksListEntity.LinkEntity[] linkListVO;
+	private LinksListEntity.LinkEntity[] linkEntityList;
 	private Map<String, String[]> param;
 	
-	public LinksListEntity.LinkEntity[] getLinkListVO() {
-		return linkListVO;
+	public LinksListEntity.LinkEntity[] getLinkEntityList() {
+		return linkEntityList;
 	}
 
-	public void setLinkListVO(LinksListEntity.LinkEntity[] linkListVO) {
-		this.linkListVO = linkListVO;
+	public void setLinkEntityList(LinksListEntity.LinkEntity[] linkEntityList) {
+		this.linkEntityList = linkEntityList;
 	}
 
 	public Map<String, String[]> getParam() {
@@ -45,8 +44,12 @@ public class NocUtilityAction extends AbstractAction {
 	public String pagesAction() {
 		param = getParameters();
 
-        LinksListEntity nocPLE = UtilityAction.getPageListEntity(userUuid);
-        linkListVO = nocPLE.getLinkEntity();
+        /*LinksListEntity nocPLE = UtilityAction.getPageListEntity(userUuid);
+        linkEntityList = nocPLE.getLinkEntity();*/
+
+        // ToDo: The below code is temporary - remove it once the persistence stuff starts working
+        linkEntityList = LinksListEntity.getDefaultNocPageEntity().getLinkEntity();
+
 
         return SUCCESS;
 	}

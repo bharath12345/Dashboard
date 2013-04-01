@@ -2,7 +2,8 @@ package com.appnomic.appsone.dashboard.action.alerts;
 
 import com.appnomic.appsone.dashboard.action.AbstractAction;
 import com.appnomic.appsone.dashboard.action.TimeUtility;
-import com.appnomic.appsone.dashboard.viewobject.alert.SqlQueryOutlierVO;
+import com.appnomic.appsone.dashboard.viewobject.alert.SqlQueryOutlierDataVO;
+import com.appnomic.appsone.dashboard.viewobject.alert.SqlQueryOutlierMetaVO;
 import com.appnomic.common.type.QueryOutlier;
 import com.appnomic.exception.InvalidTimeIntervalException;
 import com.appnomic.service.OutlierDataManagerService;
@@ -11,6 +12,7 @@ import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +31,8 @@ public class SqlAnalytics extends AbstractAction {
 
     private Map<String, String[]> param;
 
-    private List<SqlQueryOutlierVO> sqlQueryOutlierVOList;
+    private List<SqlQueryOutlierDataVO> sqlQueryOutlierDataVOList;
+    private SqlQueryOutlierMetaVO sqlQueryOutlierMetaVO;
 
     public Map<String, String[]> getParam() {
         return param;
@@ -47,15 +50,23 @@ public class SqlAnalytics extends AbstractAction {
         this.outlierDataManagerService = outlierDataManagerService;
     }
 
-    public List<SqlQueryOutlierVO> getSqlQueryOutlierVOList() {
-        return sqlQueryOutlierVOList;
+    public List<SqlQueryOutlierDataVO> getSqlQueryOutlierDataVOList() {
+        return sqlQueryOutlierDataVOList;
     }
 
-    public void setSqlQueryOutlierVOList(List<SqlQueryOutlierVO> sqlQueryOutlierVOList) {
-        this.sqlQueryOutlierVOList = sqlQueryOutlierVOList;
+    public void setSqlQueryOutlierDataVOList(List<SqlQueryOutlierDataVO> sqlQueryOutlierDataVOList) {
+        this.sqlQueryOutlierDataVOList = sqlQueryOutlierDataVOList;
     }
 
-    @Action(value="/alerts/sqlAnalytics", results = {
+    public SqlQueryOutlierMetaVO getSqlQueryOutlierMetaVO() {
+        return sqlQueryOutlierMetaVO;
+    }
+
+    public void setSqlQueryOutlierMetaVO(SqlQueryOutlierMetaVO sqlQueryOutlierMetaVO) {
+        this.sqlQueryOutlierMetaVO = sqlQueryOutlierMetaVO;
+    }
+
+    @Action(value="/alerts/sqlAnalyticsData", results = {
             @Result(name="success", type="json", params = {
                     "excludeProperties",
                     "parameters,session,SUCCESS,ERROR",
@@ -64,7 +75,7 @@ public class SqlAnalytics extends AbstractAction {
                     "noCache","true",
                     "excludeNullProperties","true"
             })})
-    public String pagesAction() {
+    public String sqlAnalyticsDataAction() {
         param = getParameters();
 
         String[] startEndTimes = TimeUtility.get30MinStartEnd();
@@ -72,14 +83,14 @@ public class SqlAnalytics extends AbstractAction {
 
         try {
             List<QueryOutlier> queryOutliers = outlierDataManagerService.fetchSqlQueryOutlier(null, null, startEndTimes[0], startEndTimes[1]);
-            sqlQueryOutlierVOList = new ArrayList<SqlQueryOutlierVO>();
+            sqlQueryOutlierDataVOList = new ArrayList<SqlQueryOutlierDataVO>();
             for(QueryOutlier qo : queryOutliers) {
-                SqlQueryOutlierVO sqlQueryOutlierVO = new SqlQueryOutlierVO();
-                sqlQueryOutlierVO.setComponentName(qo.getComponentName());
-                sqlQueryOutlierVO.setSqlId(qo.getSqlId());
-                sqlQueryOutlierVO.setSqlText(qo.getSqlText());
-                sqlQueryOutlierVO.setId(qo.getId());
-                sqlQueryOutlierVOList.add(sqlQueryOutlierVO);
+                SqlQueryOutlierDataVO sqlQueryOutlierDataVO = new SqlQueryOutlierDataVO();
+                sqlQueryOutlierDataVO.setComponentName(qo.getComponentName());
+                sqlQueryOutlierDataVO.setSqlId(qo.getSqlId());
+                sqlQueryOutlierDataVO.setSqlText(qo.getSqlText());
+                sqlQueryOutlierDataVO.setId(qo.getId());
+                sqlQueryOutlierDataVOList.add(sqlQueryOutlierDataVO);
             }
 
             if(queryOutliers == null || queryOutliers.size() == 0) {
@@ -94,15 +105,40 @@ public class SqlAnalytics extends AbstractAction {
     }
 
     private void setDummySqlValues() {
-        sqlQueryOutlierVOList = new ArrayList<SqlQueryOutlierVO>();
+        sqlQueryOutlierDataVOList = new ArrayList<SqlQueryOutlierDataVO>();
         for(int i=0;i<5;i++) {
-            SqlQueryOutlierVO sqlQueryOutlierVO = new SqlQueryOutlierVO();
-            sqlQueryOutlierVO.setComponentName(Integer.toString(i));
-            sqlQueryOutlierVO.setSqlId(i);
-            sqlQueryOutlierVO.setSqlText(Integer.toString(i));
-            sqlQueryOutlierVO.setId(i);
-            sqlQueryOutlierVOList.add(sqlQueryOutlierVO);
+            SqlQueryOutlierDataVO sqlQueryOutlierDataVO = new SqlQueryOutlierDataVO();
+            sqlQueryOutlierDataVO.setComponentName(Integer.toString(i));
+            sqlQueryOutlierDataVO.setSqlId(i);
+            sqlQueryOutlierDataVO.setSqlText(Integer.toString(i));
+            sqlQueryOutlierDataVO.setId(i);
+            sqlQueryOutlierDataVOList.add(sqlQueryOutlierDataVO);
         }
+    }
+
+    @Action(value="/alerts/sqlAnalyticsMeta", results = {
+            @Result(name="success", type="json", params = {
+                    "excludeProperties",
+                    "parameters,session,SUCCESS,ERROR",
+                    "enableGZIP", "true",
+                    "encoding", "UTF-8",
+                    "noCache","true",
+                    "excludeNullProperties","true"
+            })})
+    public String sqlAnalyticsMeta() {
+        param = getParameters();
+
+        SqlQueryOutlierMetaVO sqlQueryOutlierMetaVO = new SqlQueryOutlierMetaVO();
+        sqlQueryOutlierMetaVO.setDataActionClass("alerts/sqlAnalyticsData.action");
+
+        List<String> columns = new ArrayList<String>();
+        Field[] fields = SqlQueryOutlierDataVO.class.getDeclaredFields();
+        for(Field field: fields) {
+            columns.add(field.getName());
+        }
+        sqlQueryOutlierMetaVO.setColumns(columns.toArray(new String[columns.size()]));
+
+        return SUCCESS;
     }
 
 }

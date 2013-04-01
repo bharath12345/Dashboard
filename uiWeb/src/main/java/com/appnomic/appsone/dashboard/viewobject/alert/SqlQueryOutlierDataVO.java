@@ -5,7 +5,7 @@ package com.appnomic.appsone.dashboard.viewobject.alert;
  * Date: 01/04/13
  * Time: 5:12 PM
  */
-public class SqlQueryOutlierVO {
+public class SqlQueryOutlierDataVO {
 
     String componentName;
     long sqlId;
