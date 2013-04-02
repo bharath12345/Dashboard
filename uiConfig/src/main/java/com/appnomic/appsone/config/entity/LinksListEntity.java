@@ -65,14 +65,14 @@ public class LinksListEntity extends AbstractConfigEntity {
         }
     }
 
-    public static LinksListEntity getDefaultAlertsPageEntity() {
+    public static LinksListEntity getDefaultAnalyticsPageEntity() {
         LinksListEntity aple = new LinksListEntity();
         List<LinkEntity> linkList = new ArrayList<LinkEntity>();
 
         LinkEntity linkEntity = aple.new LinkEntity();
-        linkEntity.setName(ActionConstants.ALERTS.SQL_DB_OUTLIERS.name());
+        linkEntity.setName(ActionConstants.ANALYTICS.SQL_DB_OUTLIERS.name());
         linkEntity.setUuid(UUID.randomUUID().toString());
-        linkEntity.setEnumId( ActionConstants.ALERTS.SQL_DB_OUTLIERS.ordinal());
+        linkEntity.setEnumId( ActionConstants.ANALYTICS.SQL_DB_OUTLIERS.ordinal());
         linkEntity.setType(ActionConstants.ACCTYPE.GRID.name());
         linkList.add(linkEntity);
 

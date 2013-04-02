@@ -16,7 +16,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/config/nls
 
                 dashboard.dom.TopMenuPane[this.configView.pageType].domNode.innerHTML = Helper.getHeading(dashboardI18nString[name]);
 
-                // ToDo: Change this switch away from Name to some ID
                 switch(parseInt(enumId)) {
                     case dashboard.enumMap.CONFIG.APPLICATION_ALERTS:
                         require(["dashboard/views/config/forms/ConfigIncidentGridForm"], lang.hitch(this, function (ConfigIncidentGridForm) {

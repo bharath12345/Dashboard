@@ -70,10 +70,10 @@ public class PaneListEntity extends AbstractConfigEntity{
         paneList.add(paneListObj);
 
         paneListObj = tle.new PaneEntity();
-        paneListObj.setName(ActionConstants.ACCGROUPS.ALERTS.name());
+        paneListObj.setName(ActionConstants.ACCGROUPS.ANALYTICS.name());
         paneListObj.setUuid(UUID.randomUUID().toString());
-        paneListObj.setEnumId(ActionConstants.ACCGROUPS.ALERTS.ordinal());
-        paneListObj.setAction("alerts/links.action");
+        paneListObj.setEnumId(ActionConstants.ACCGROUPS.ANALYTICS.ordinal());
+        paneListObj.setAction("analytics/links.action");
         paneList.add(paneListObj);
 
         paneListObj = tle.new PaneEntity();

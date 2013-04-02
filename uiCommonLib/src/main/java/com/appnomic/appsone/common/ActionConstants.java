@@ -18,7 +18,7 @@ public interface ActionConstants {
 	public enum ACCGROUPS {
 		TOPOLOGY,
 		NOC,
-		ALERTS,
+		ANALYTICS,
 		CUSTOM,
 		CONFIG
 	}
@@ -42,7 +42,7 @@ public interface ActionConstants {
 		COMPONENT_TOPOLOGY
 	}
 	
-	public enum ALERTS {
+	public enum ANALYTICS {
 		SQL_DB_OUTLIERS
 	}
 	

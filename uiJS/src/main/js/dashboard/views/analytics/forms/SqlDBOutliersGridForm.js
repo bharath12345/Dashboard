@@ -4,7 +4,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
 
     function (declare, i18n, i18nString, Logger, AbstractForm, Helper, xhr, lang, Grid, SqlDBOutliersAnalysisPane) {
 
-        dashboard.classnames.SqlDBOutliersGridForm = "dashboard.alerts.form.SqlDBOutliersGridForm";
+        dashboard.classnames.SqlDBOutliersGridForm = "dashboard.analytics.form.SqlDBOutliersGridForm";
 
         var SqlDBOutliersGridForm = declare(dashboard.classnames.SqlDBOutliersGridForm, AbstractForm, {
 
@@ -15,7 +15,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                 this.attr('content', this.innerDIV);
 
                 var viewMeta = {};
-                xhr("alert/sqlAnalyticsMeta.action", {
+                xhr("analytics/sqlAnalyticsMeta.action", {
                     handleAs:"json",
                     method:"POST",
                     query:viewMeta,

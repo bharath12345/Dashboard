@@ -1,4 +1,4 @@
-package com.appnomic.appsone.dashboard.action.alerts;
+package com.appnomic.appsone.dashboard.action.analytics;
 
 import com.appnomic.appsone.dashboard.action.AbstractAction;
 import com.appnomic.appsone.dashboard.action.TimeUtility;
@@ -25,7 +25,7 @@ import java.util.Map;
  */
 
 @ParentPackage("json-default")
-@Namespace("/alerts")
+@Namespace("/analytics")
 public class SqlAnalytics extends AbstractAction {
 
     OutlierDataManagerService outlierDataManagerService;
@@ -76,7 +76,7 @@ public class SqlAnalytics extends AbstractAction {
         this.sqlQueryOutlierDataVO = sqlQueryOutlierDataVO;
     }
 
-    @Action(value = "/alerts/sqlAnalyticsForm", results = {
+    @Action(value = "/analytics/sqlAnalyticsForm", results = {
             @Result(name = "success", type = "json", params = {
                     "excludeProperties",
                     "parameters,session,SUCCESS,ERROR",
@@ -135,7 +135,7 @@ public class SqlAnalytics extends AbstractAction {
         return SUCCESS;
     }
 
-    @Action(value = "/alerts/sqlAnalyticsData", results = {
+    @Action(value = "/analytics/sqlAnalyticsData", results = {
             @Result(name = "success", type = "json", params = {
                     "excludeProperties",
                     "parameters,session,SUCCESS,ERROR",
@@ -206,7 +206,7 @@ public class SqlAnalytics extends AbstractAction {
         }
     }
 
-    @Action(value = "/alerts/sqlAnalyticsMeta", results = {
+    @Action(value = "/analytics/sqlAnalyticsMeta", results = {
             @Result(name = "success", type = "json", params = {
                     "excludeProperties",
                     "parameters,session,SUCCESS,ERROR",
@@ -219,7 +219,7 @@ public class SqlAnalytics extends AbstractAction {
         param = getParameters();
 
         SqlQueryOutlierMetaVO sqlQueryOutlierMetaVO = new SqlQueryOutlierMetaVO();
-        sqlQueryOutlierMetaVO.setDataActionClass("alerts/sqlAnalyticsData.action");
+        sqlQueryOutlierMetaVO.setDataActionClass("analytics/sqlAnalyticsData.action");
 
         List<String> columns = new ArrayList<String>();
         Field[] fields = SqlQueryOutlierDataVO.class.getDeclaredFields();

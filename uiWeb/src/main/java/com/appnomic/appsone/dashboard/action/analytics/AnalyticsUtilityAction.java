@@ -1,4 +1,4 @@
-package com.appnomic.appsone.dashboard.action.alerts;
+package com.appnomic.appsone.dashboard.action.analytics;
 
 import java.util.Map;
 
@@ -10,8 +10,8 @@ import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 
 @ParentPackage("json-default")
-@Namespace("/alerts")
-public class AlertsUtilityAction extends AbstractAction {
+@Namespace("/analytics")
+public class AnalyticsUtilityAction extends AbstractAction {
 
 	private LinksListEntity.LinkEntity[] linkEntityList;
 	private Map<String, String[]> param;
@@ -32,7 +32,7 @@ public class AlertsUtilityAction extends AbstractAction {
 		this.param = param;
 	}
 
-	@Action(value="/alerts/links", results = {
+	@Action(value="/analytics/links", results = {
 	        @Result(name="success", type="json", params = {
 	        		"excludeProperties",
 	                "parameters,session,SUCCESS,ERROR,agcVO,levelDbMap",
@@ -48,7 +48,7 @@ public class AlertsUtilityAction extends AbstractAction {
         linkEntityList = alertPLE.getLinkEntity();*/
 
         // ToDo: The below code is temporary - remove it once the persistence stuff starts working
-        linkEntityList = LinksListEntity.getDefaultAlertsPageEntity().getLinkEntity();
+        linkEntityList = LinksListEntity.getDefaultAnalyticsPageEntity().getLinkEntity();
 
         return SUCCESS;
 	}

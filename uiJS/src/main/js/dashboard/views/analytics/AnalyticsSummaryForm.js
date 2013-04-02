@@ -4,22 +4,22 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
 
     function (declare, i18n, i18nString, Logger, AbstractForm, Form, ButtonHelper, lang, on, TableContainer, domConstruct) {
 
-        dashboard.classnames.AlertsSummaryForm = "dashboard.alerts.AlertsSummaryForm";
+        dashboard.classnames.AnalyticsSummaryForm = "dashboard.analytics.AnalyticsSummaryForm";
 
-        var AlertsSummaryForm = declare(dashboard.classnames.AlertsSummaryForm, [AbstractForm, Form], {
+        var AnalyticsSummaryForm = declare(dashboard.classnames.AnalyticsSummaryForm, [AbstractForm, Form], {
 
             "-chains-":{
                 renderAccordion:"before" //method is called before calling its superclass method
             },
 
-            pageType: dashboard.pageTypes.ALERTS, // this is the default; in case of 'main' dashboard calls, this is overwritten in the constructor
+            pageType: dashboard.pageTypes.ANALYTICS, // this is the default; in case of 'main' dashboard calls, this is overwritten in the constructor
 
             constructor: function(pageType) {
-                // if its a new window then the pageType will be Alerts, else Dashboard
+                // if its a new window then the pageType will be Analytics, else Dashboard
                 this.pageType = pageType;
             },
 
-            createAlertsMenu:function () {
+            createAnalyticsMenu:function () {
                 dashboard.dom.Toolbar[this.pageType].destroyDescendants(false);
 
                 var buttonHelper = new ButtonHelper();
@@ -34,30 +34,30 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
             startup: function() {
                 this.inherited(arguments);
 
-                this.createAlertsMenu();
+                this.createAnalyticsMenu();
 
                 var tableDiv = dojo.create('div', {style:'width: 100%; height: 100%;'});
                 this.attr('content', tableDiv);
 
                 if(this.tableCount == 1) {
                     // ToDo: This TableContainer has to be within a TitlePane and not hanging outside
-                    this.alertsTable = new TableContainer({cols:this.columnCount, "labelWidth":"150"}, tableDiv);
+                    this.analyticsTable = new TableContainer({cols:this.columnCount, "labelWidth":"150"}, tableDiv);
                     return;
                 }
 
-                this.alertsTable = [];
+                this.analyticsTable = [];
                 for(var i=0;i<this.tableCount;i++) {
                     var layerDef = dojo.create('div', {style:'width: 100%; height: 40px;'});
                     tableDiv.appendChild(layerDef);
                     // ToDo: This TableContainer has to be within a TitlePane and not hanging outside
-                    this.alertsTable.push(new TableContainer({cols: this.columnCount[i],"labelWidth": "150"}, layerDef));
+                    this.analyticsTable.push(new TableContainer({cols: this.columnCount[i],"labelWidth": "150"}, layerDef));
                 }
 
             }
 
         });
 
-        AlertsSummaryForm.LOG = Logger.addTimer(new Logger(dashboard.classnames.AlertsSummaryForm));
+        AnalyticsSummaryForm.LOG = Logger.addTimer(new Logger(dashboard.classnames.AnalyticsSummaryForm));
 
-        return AlertsSummaryForm;
+        return AnalyticsSummaryForm;
     });

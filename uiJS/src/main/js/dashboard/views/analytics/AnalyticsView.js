@@ -1,18 +1,18 @@
-define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/config/nls/config",
+define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/analytics/nls/analytics",
     "dashboard/abstract/AbstractView", "dashboard/helper/WindowManager"],
 
     function (declare, i18n, i18nString, AbstractView, WindowManager) {
 
-        dashboard.classnames.AlertsView = "dashboard.config.AlertsView";
+        dashboard.classnames.AnalyticsView = "dashboard.analytics.AnalyticsView";
 
-        var AlertsView = declare(dashboard.classnames.AlertsView, AbstractView, {
+        var AnalyticsView = declare(dashboard.classnames.AnalyticsView, AbstractView, {
 
             newWindow: false,
 
             constructor: function(newWindow) {
                 this.newWindow = newWindow;
                 if(this.newWindow) {
-                    this.pageType = dashboard.pageTypes.ALERTS;
+                    this.pageType = dashboard.pageTypes.ANALYTICS;
                 } else {
                     this.pageType = dashboard.pageTypes.dashboard;
                 }
@@ -20,11 +20,11 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/config/nls
 
             // the method is called only in a NEW Window. Never in the 'central' dashboard
             createDom: function() {
-                this.createInnerMenuAndPanes(dashboard.dom.CpTopCenter.domNode, dashboard.pageTypes.ALERTS);
+                this.createInnerMenuAndPanes(dashboard.dom.CpTopCenter.domNode, dashboard.pageTypes.ANALYTICS);
             },
 
-            setAccordion: function(alertsAccordion) {
-                this.ACCORDION = alertsAccordion;
+            setAccordion: function(analyticsAccordion) {
+                this.ACCORDION = analyticsAccordion;
             },
 
             loadMenu: function(enumId, id, name, type) {
@@ -38,7 +38,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/config/nls
                 // launch the child window
                 var wm = new WindowManager();
                 var queryParams = [];
-                queryParams.push(dashboard.pageTypes.ALERTS);
+                queryParams.push(dashboard.pageTypes.ANALYTICS);
                 queryParams.push(this.UUID);
                 queryParams.push(this.ENUMID);
                 queryParams.push(this.NAME);
@@ -47,5 +47,5 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/config/nls
             }
         });
 
-        return AlertsView;
+        return AnalyticsView;
     });

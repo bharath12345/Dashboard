@@ -98,11 +98,11 @@ public class UtilityAction extends AbstractAction {
 		
 		////
 	
-		HashMap<String, Integer> alertsMap = new HashMap<String, Integer>();
-		for(ActionConstants.ALERTS config: ActionConstants.ALERTS.values()) {
-			alertsMap.put(config.name(), config.ordinal());
+		HashMap<String, Integer> analyticsMap = new HashMap<String, Integer>();
+		for(ActionConstants.ANALYTICS config: ActionConstants.ANALYTICS.values()) {
+			analyticsMap.put(config.name(), config.ordinal());
 		}
-		enumMap.put(ActionConstants.ACCGROUPS.ALERTS.name(), alertsMap);
+		enumMap.put(ActionConstants.ACCGROUPS.ANALYTICS.name(), analyticsMap);
 		
 		////
 		

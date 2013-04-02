@@ -16,7 +16,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/noc/nls/no
 
                 dashboard.dom.TopMenuPane[this.nocView.pageType].domNode.innerHTML = Helper.getHeading(dashboardI18nString[name]);
 
-                var contentView = null;
                 switch(parseInt(enumId)) {
                     case dashboard.enumMap.NOC.APPLICATION_ALERTS:
                         require(["dashboard/views/noc/forms/NocApplicationIncidentForm"], lang.hitch(this, function (NocApplicationIncidentForm) {

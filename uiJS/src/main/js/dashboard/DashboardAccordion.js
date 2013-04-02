@@ -44,8 +44,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                             this.ACCORDIONMAP[key] = "dashboard/views/custom/CustomAccordion";
                             break;
 
-                        case "ALERTS":
-                            this.ACCORDIONMAP[key] = "dashboard/views/alerts/AlertsAccordion";
+                        case "ANALYTICS":
+                            this.ACCORDIONMAP[key] = "dashboard/views/analytics/AnalyticsAccordion";
                             break;
 
                         default:

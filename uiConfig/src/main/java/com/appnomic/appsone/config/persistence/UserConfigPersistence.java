@@ -41,7 +41,7 @@ public class UserConfigPersistence extends Persistence {
             //ToDo: Fix this along with Debasis
 
             uuidList = new ArrayList<String>();
-            LinksListEntity alertPLE = LinksListEntity.getDefaultAlertsPageEntity();
+            LinksListEntity alertPLE = LinksListEntity.getDefaultAnalyticsPageEntity();
             uuidList.add(alertPLE.getUuid());
             LinksListEntity configPLE = LinksListEntity.getDefaultConfigPageEntity();
             uuidList.add(configPLE.getUuid());

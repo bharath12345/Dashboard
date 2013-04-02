@@ -1,9 +1,9 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", "dashboard/logger/Logger",
-    "dashboard/views/alerts/AlertsSummaryForm", "dojo/request/xhr", "dojo/_base/lang"],
+    "dashboard/views/analytics/AlertsSummaryForm", "dojo/request/xhr", "dojo/_base/lang"],
 
     function (declare, i18n, i18nString, Logger, AlertsSummaryForm, xhr, lang) {
 
-        dashboard.classnames.SqlDBOutlierSummaryForm = "dashboard.alerts.forms.SqlDBOutlierSummaryForm";
+        dashboard.classnames.SqlDBOutlierSummaryForm = "dashboard.analytics.forms.SqlDBOutlierSummaryForm";
 
         var SqlDBOutlierSummaryForm = declare(dashboard.classnames.SqlDBOutlierSummaryForm, AlertsSummaryForm, {
 
@@ -18,7 +18,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                 this.inherited(arguments);
 
                 var viewMeta = {};
-                xhr("alert/sqlAnalyticsForm.action", {
+                xhr("analytics/sqlAnalyticsForm.action", {
                     handleAs:"json",
                     method:"POST",
                     query:viewMeta,
