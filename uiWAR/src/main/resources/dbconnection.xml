@@ -27,12 +27,22 @@
         <property name="defaultTransactionIsolation" value="2"/>
     </bean>
 
-    <bean id="apmcommonDataSource" class="com.app.dao.ds.ApmDataSource" parent="abstractDataSource">
+    <!--
+    <bean id="apmcommonDataSource" class="com.appnomic.dao.ds.ApmDataSource" parent="abstractDataSource">
        <property name="ipaddress" value="127.0.0.1"/>
        <property name="port" value="3306"/>
        <property name="username" value="root"/>
-       <property name="password" value=""/>
-       <property name="db" value="apmcommon_HDFC"/>
+       <property name="password" value="root"/>
+       <property name="db" value="apmcommon_hdfc"/>
+    </bean>
+    -->
+
+    <bean id="apmcommonDataSource" class="com.appnomic.dao.ds.ApmDataSource" parent="abstractDataSource">
+        <property name="ipaddress" value="127.0.0.1"/>
+        <property name="port" value="3306"/>
+        <property name="username" value="root"/>
+        <property name="password" value=""/>
+        <property name="db" value="apmcommon_HDFC"/>
     </bean>
 
     <bean id="apmcommonJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">

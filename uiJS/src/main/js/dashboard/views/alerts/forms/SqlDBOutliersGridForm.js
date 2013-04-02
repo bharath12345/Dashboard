@@ -1,7 +1,8 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", "dashboard/logger/Logger", "dashboard/abstract/AbstractForm",
-    "dashboard/helper/Helper", "dojo/request/xhr", "dojo/_base/lang", 'dashboard/widgets/AoneDgrid'],
+    "dashboard/helper/Helper", "dojo/request/xhr", "dojo/_base/lang", 'dashboard/widgets/AoneDgrid',
+    "dashboard/analysis/SqlDBOutliersAnalysisPane"],
 
-    function (declare, i18n, i18nString, Logger, AbstractForm, Helper, xhr, lang, Grid) {
+    function (declare, i18n, i18nString, Logger, AbstractForm, Helper, xhr, lang, Grid, SqlDBOutliersAnalysisPane) {
 
         dashboard.classnames.SqlDBOutliersGridForm = "dashboard.alerts.form.SqlDBOutliersGridForm";
 
@@ -14,7 +15,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                 this.attr('content', this.innerDIV);
 
                 var viewMeta = {};
-                xhr("alert/ApplicationMeta.action", {
+                xhr("alert/sqlAnalyticsMeta.action", {
                     handleAs:"json",
                     method:"POST",
                     query:viewMeta,
@@ -80,6 +81,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                 console.log("row element = " + dojo.toJson(row.element));
                 console.log("row id = " + dojo.toJson(row.id));
                 console.log("row data = " + dojo.toJson(row.data));
+
+                var sqlDBOutliersAnalysisPane = new SqlDBOutliersAnalysisPane();
+                sqlDBOutliersAnalysisPane.launch(row.data.id);
 
             },
 
