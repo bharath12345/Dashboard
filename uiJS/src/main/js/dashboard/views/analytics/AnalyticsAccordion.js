@@ -1,4 +1,4 @@
-define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/topology/nls/topology", "dojo/i18n!dashboard/nls/dashboard",
+define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/analytics/nls/analytics", "dojo/i18n!dashboard/nls/dashboard",
     "dashboard/logger/Logger", "dojo/_base/lang",
     "dashboard/abstract/AbstractAccordion", "dashboard/helper/Scheduler", "dashboard/helper/Helper",
     "dashboard/views/analytics/AnalyticsView"],

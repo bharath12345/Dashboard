@@ -1,6 +1,8 @@
 define({
     root:({
-
+        componentName: "Component Name",
+        sqlId: "SQL ID",
+        sqlText: "SQL Text"
 
     }),
 

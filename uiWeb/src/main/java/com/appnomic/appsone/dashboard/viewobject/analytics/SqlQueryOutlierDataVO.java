@@ -1,4 +1,4 @@
-package com.appnomic.appsone.dashboard.viewobject.alert;
+package com.appnomic.appsone.dashboard.viewobject.analytics;
 
 /**
  * User: bharadwaj

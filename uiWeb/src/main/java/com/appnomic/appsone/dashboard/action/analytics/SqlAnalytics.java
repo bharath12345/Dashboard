@@ -2,8 +2,8 @@ package com.appnomic.appsone.dashboard.action.analytics;
 
 import com.appnomic.appsone.dashboard.action.AbstractAction;
 import com.appnomic.appsone.dashboard.action.TimeUtility;
-import com.appnomic.appsone.dashboard.viewobject.alert.SqlQueryOutlierDataVO;
-import com.appnomic.appsone.dashboard.viewobject.alert.SqlQueryOutlierMetaVO;
+import com.appnomic.appsone.dashboard.viewobject.analytics.SqlQueryOutlierDataVO;
+import com.appnomic.appsone.dashboard.viewobject.analytics.SqlQueryOutlierMetaVO;
 import com.appnomic.common.type.QueryOutlier;
 import com.appnomic.common.type.TimeInterval;
 import com.appnomic.exception.InvalidTimeIntervalException;
@@ -79,7 +79,7 @@ public class SqlAnalytics extends AbstractAction {
     @Action(value = "/analytics/sqlAnalyticsForm", results = {
             @Result(name = "success", type = "json", params = {
                     "excludeProperties",
-                    "parameters,session,SUCCESS,ERROR",
+                    "parameters,session,SUCCESS,ERROR,sqlQueryOutlierDataVOList,outlierDataManagerService,sqlQueryOutlierMetaVO",
                     "enableGZIP", "true",
                     "encoding", "UTF-8",
                     "noCache", "true",
@@ -104,7 +104,7 @@ public class SqlAnalytics extends AbstractAction {
         String[] startEndTimes = TimeUtility.get30MinStartEnd();
         System.out.println("Times = [" + startEndTimes[0] + "] [" + startEndTimes[1] + "]");
 
-        SqlQueryOutlierDataVO sqlQueryOutlierDataVO = new SqlQueryOutlierDataVO();
+        sqlQueryOutlierDataVO = new SqlQueryOutlierDataVO();
         QueryOutlier qo = outlierDataManagerService.fetchSqlQueryOutlier(id);
         sqlQueryOutlierDataVO.setComponentName(qo.getComponentName());
         sqlQueryOutlierDataVO.setSqlId(qo.getSqlId());
@@ -129,16 +129,13 @@ public class SqlAnalytics extends AbstractAction {
         outlierDataManagerService.getSqlOutlierFrequency(qo.getComponentId(), qo.getSqlId(), ti);
         // the number of occurances for this sql in last 1 hour
 
-
-        sqlQueryOutlierDataVOList.add(sqlQueryOutlierDataVO);
-
         return SUCCESS;
     }
 
     @Action(value = "/analytics/sqlAnalyticsData", results = {
             @Result(name = "success", type = "json", params = {
                     "excludeProperties",
-                    "parameters,session,SUCCESS,ERROR",
+                    "parameters,session,SUCCESS,ERROR,outlierDataManagerService,sqlQueryOutlierMetaVO,sqlQueryOutlierDataVO",
                     "enableGZIP", "true",
                     "encoding", "UTF-8",
                     "noCache", "true",
@@ -209,7 +206,7 @@ public class SqlAnalytics extends AbstractAction {
     @Action(value = "/analytics/sqlAnalyticsMeta", results = {
             @Result(name = "success", type = "json", params = {
                     "excludeProperties",
-                    "parameters,session,SUCCESS,ERROR",
+                    "parameters,session,SUCCESS,ERROR,sqlQueryOutlierDataVOList,outlierDataManagerService,sqlQueryOutlierDataVO",
                     "enableGZIP", "true",
                     "encoding", "UTF-8",
                     "noCache", "true",
@@ -218,7 +215,7 @@ public class SqlAnalytics extends AbstractAction {
     public String sqlAnalyticsMeta() {
         param = getParameters();
 
-        SqlQueryOutlierMetaVO sqlQueryOutlierMetaVO = new SqlQueryOutlierMetaVO();
+        sqlQueryOutlierMetaVO = new SqlQueryOutlierMetaVO();
         sqlQueryOutlierMetaVO.setDataActionClass("analytics/sqlAnalyticsData.action");
 
         List<String> columns = new ArrayList<String>();

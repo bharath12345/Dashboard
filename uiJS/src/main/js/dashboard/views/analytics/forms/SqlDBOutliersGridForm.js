@@ -1,4 +1,5 @@
-define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", "dashboard/logger/Logger", "dashboard/abstract/AbstractForm",
+define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/analytics/nls/analytics", "dashboard/logger/Logger",
+    "dashboard/abstract/AbstractForm",
     "dashboard/helper/Helper", "dojo/request/xhr", "dojo/_base/lang", 'dashboard/widgets/AoneDgrid'],
 
     function (declare, i18n, i18nString, Logger, AbstractForm, Helper, xhr, lang, Grid) {
@@ -22,7 +23,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                 }).then(lang.hitch(this, this.createGridMeta));
             },
 
-            createGridMeta:function (data, input) {
+            createGridMeta:function (input) {
 
                 this.columns = input.sqlQueryOutlierMetaVO.columns;
                 var columnMeta = [];
@@ -88,7 +89,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
 
             },
 
-            createGridData:function (data, input) {
+            createGridData:function (input) {
                 var dataArray = input.sqlQueryOutlierDataVOList;
                 for (var i = 0; i < dataArray.length; i++) {
                     var row = {};

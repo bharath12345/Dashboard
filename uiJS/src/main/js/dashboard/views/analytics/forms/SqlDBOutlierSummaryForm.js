@@ -1,11 +1,11 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", "dashboard/logger/Logger",
-    "dashboard/views/analytics/AlertsSummaryForm", "dojo/request/xhr", "dojo/_base/lang"],
+    "dashboard/views/analytics/AnalyticsSummaryForm", "dojo/request/xhr", "dojo/_base/lang"],
 
-    function (declare, i18n, i18nString, Logger, AlertsSummaryForm, xhr, lang) {
+    function (declare, i18n, i18nString, Logger, AnalyticsSummaryForm, xhr, lang) {
 
         dashboard.classnames.SqlDBOutlierSummaryForm = "dashboard.analytics.forms.SqlDBOutlierSummaryForm";
 
-        var SqlDBOutlierSummaryForm = declare(dashboard.classnames.SqlDBOutlierSummaryForm, AlertsSummaryForm, {
+        var SqlDBOutlierSummaryForm = declare(dashboard.classnames.SqlDBOutlierSummaryForm, AnalyticsSummaryForm, {
 
             title:"SQL DB Outlier Summary",
             tableCount: 1,
