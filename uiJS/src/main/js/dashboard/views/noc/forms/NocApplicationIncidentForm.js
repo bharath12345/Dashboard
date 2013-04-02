@@ -1,10 +1,9 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/noc/nls/noc",
     "dijit/layout/ContentPane", "dojox/layout/GridContainer", 'dashboard/widgets/AoneDgrid', "dojo/request/xhr", "dojo/_base/lang", "dojo/store/Memory",
-    "dashboard/logger/Logger", "dashboard/helper/Scheduler", "dashboard/helper/Helper", "dashboard/analysis/ApplicationAnalysisPane",
-    "dashboard/abstract/AbstractForm"],
+    "dashboard/logger/Logger", "dashboard/helper/Scheduler", "dashboard/helper/Helper", "dashboard/abstract/AbstractForm"],
 
     function (declare, i18n, i18nString, ContentPane, GridContainer, Grid, xhr, lang, Memory, Logger, Scheduler, Helper,
-              ApplicationAnalysisPane, AbstractForm) {
+              AbstractForm) {
 
 
         /*
@@ -189,8 +188,10 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/noc/nls/no
                 var appName = row.data.appName;
                 var appId = row.data.id;
 
-                var analysisPane = new ApplicationAnalysisPane();
-                analysisPane.launch(appName, appId);
+                require(["dashboard/analysis/ApplicationAnalysisPane"], lang.hitch(this, function (ApplicationAnalysisPane) {
+                    var analysisPane = new ApplicationAnalysisPane();
+                    analysisPane.launch(appName, appId);
+                }));
             },
 
             startStaggeredDatabasePolling:function () {

@@ -1,8 +1,9 @@
-define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/topology/nls/topology", "dashboard/logger/Logger",
+define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/topology/nls/topology", "dojo/i18n!dashboard/nls/dashboard",
+    "dashboard/logger/Logger", "dojo/_base/lang",
     "dashboard/abstract/AbstractAccordion", "dashboard/helper/Scheduler", "dashboard/helper/Helper",
     "dashboard/views/analytics/AnalyticsView"],
 
-    function (declare, i18n, i18nString, Logger, AbstractAccordion, Scheduler, Helper, AnalyticsView) {
+    function (declare, i18n, i18nString, dashboardI18nString, Logger, lang, AbstractAccordion, Scheduler, Helper, AnalyticsView) {
 
         dashboard.classnames.AnalyticsAccordion = "dashboard.analytics.AnalyticsAccordion";
 
@@ -17,7 +18,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/topology/n
                 dashboard.dom.TopMenuPane[this.analyticsView.pageType].domNode.innerHTML = Helper.getHeading(dashboardI18nString[name]);
 
                 switch(parseInt(enumId)) {
-                    case dashboard.enumMap.ALERTS.SQL_DB_OUTLIERS:
+                    case dashboard.enumMap.ANALYTICS.SQL_DB_OUTLIERS:
                         require(["dashboard/views/analytics/forms/SqlDBOutliersGridForm"], lang.hitch(this, function (SqlDBOutliersGridForm) {
                             Helper.createView(this.analyticsView, this.analyticsView.pageType, new SqlDBOutliersGridForm(this.analyticsView.pageType));
                         }));

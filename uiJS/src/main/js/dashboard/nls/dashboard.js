@@ -9,7 +9,7 @@ define({
         /* ----- Top Accordion ----- */
         TOPOLOGY:"Topology",
         NOC:"Command Center Screens",
-        ALERTS: "Alerts",
+        ANALYTICS: "Analytics",
         CUSTOM: "Custom Views and Layouts",
         CONFIG: "Configuration",
         //////////////////////////////////////////////////////////////////

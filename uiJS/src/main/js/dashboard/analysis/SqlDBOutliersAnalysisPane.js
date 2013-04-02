@@ -1,5 +1,5 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", "dashboard/logger/Logger",
-    "dashboard/abstract/AbstractAnalysisPane", "dashboard/analytics/forms/SqlDBOutlierSummaryForm"],
+    "dashboard/abstract/AbstractAnalysisPane", "dashboard/views/analytics/forms/SqlDBOutlierSummaryForm"],
 
     function (declare, i18n, i18nString, Logger, AbstractAnalysisPane, SqlDBOutlierSummaryForm) {
 
