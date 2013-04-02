@@ -71,7 +71,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
             },
 
             handleRowClick:function (evt) {
-                var row = NocApplicationIncidentForm.Grid.getRow(evt);
+                var row = SqlDBOutliersGridForm.Grid.getRow(evt);
 
                 // row.element == the element with the dgrid-row class
                 // row.id == the identity of the item represented by the row

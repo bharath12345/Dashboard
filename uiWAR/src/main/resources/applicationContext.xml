@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!--
+        <!--
 <beans xmlns="http://www.springframework.org/schema/beans"
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xmlns:context="http://www.springframework.org/schema/context"
-xmlns:tx="http://www.springframework.org/schema/tx"
-xsi:schemaLocation="http://www.springframework.org/schema/beans
-   http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
-    http://www.springframework.org/schema/context
-   http://www.springframework.org/schema/context/spring-context-3.1.xsd
-    xmlns:cache="http://www.springframework.org/schema/cache"
-   ">
-    -->
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+            http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.1.xsd
+            xmlns:cache="http://www.springframework.org/schema/cache"
+           ">
+            -->
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
@@ -32,11 +32,8 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
 
 
 
-    
 
-    <import resource="classpath:META-INF/spring/dbconnection.xml" />
-
-
+    <import resource="classpath:dbconnection.xml" />
     <!--
 
 <bean id="mysqlDS" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
@@ -60,6 +57,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
         -->
 
 
+    <!--
     <bean
             id="propertyConfigurer"
             class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -71,13 +69,16 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
         <property name="ignoreUnresolvablePlaceholders" value="true" />
     </bean>
 
+-->
 
 
+    <!--
     <bean id="mysqlDS" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
         <property name="jdbcUrl" value="jdbc:mysql://${enterprise.db.hostIp}:${enterprise.db.port}/${enterprise.db.name}"/>
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
         <property name="user" value="${enterprise.db.username}"/>
         <property name="password" value="${enterprise.db.password}"/>
+        <property name="debugUnreturnedConnectionStackTraces" value="true"/>
 
 
 
@@ -88,9 +89,22 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
         <property name="user" value="${apmcommon.db.username}"/>
         <property name="password" value="${apmcommon.db.password}"/>
+        <property name="debugUnreturnedConnectionStackTraces" value="true"/>
 
     </bean>
 
+-->
+
+
+    <!--
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="mysqlDS"/>
+    </bean>
+
+    <bean id="txManager2" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="apmcommonDS"/>
+    </bean>
+        -->
     <cache:annotation-driven/>
 
 
@@ -104,9 +118,9 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
 
 
     <bean id="ehcache"
-          class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+            class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
         <property name="configLocation" value="classpath:ehcacheconfig.xml"/>
-    </bean>
+        </bean>
 
 
     <!--
@@ -128,16 +142,14 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
         <property name="cacheManager" ref="ehcache" />
 
     </bean>
+
+
     -->
+
+    <!--
     <tx:annotation-driven transaction-manager="txManager"/>
 
-    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="mysqlDS"/>
-    </bean>
-
-    <bean id="txManager2" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="apmcommonDS"/>
-    </bean>
+    -->
 
     <context:annotation-config/>
 

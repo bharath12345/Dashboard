@@ -5,6 +5,7 @@ import com.appnomic.appsone.dashboard.action.TimeUtility;
 import com.appnomic.appsone.dashboard.viewobject.alert.SqlQueryOutlierDataVO;
 import com.appnomic.appsone.dashboard.viewobject.alert.SqlQueryOutlierMetaVO;
 import com.appnomic.common.type.QueryOutlier;
+import com.appnomic.common.type.TimeInterval;
 import com.appnomic.exception.InvalidTimeIntervalException;
 import com.appnomic.service.OutlierDataManagerService;
 import org.apache.struts2.convention.annotation.Action;
@@ -86,10 +87,31 @@ public class SqlAnalytics extends AbstractAction {
             sqlQueryOutlierDataVOList = new ArrayList<SqlQueryOutlierDataVO>();
             for(QueryOutlier qo : queryOutliers) {
                 SqlQueryOutlierDataVO sqlQueryOutlierDataVO = new SqlQueryOutlierDataVO();
+
                 sqlQueryOutlierDataVO.setComponentName(qo.getComponentName());
                 sqlQueryOutlierDataVO.setSqlId(qo.getSqlId());
                 sqlQueryOutlierDataVO.setSqlText(qo.getSqlText());
                 sqlQueryOutlierDataVO.setId(qo.getId());
+                qo.getTimeStamp();
+
+                qo.getSqlQueryKpi().getAvgCpu();// in the form
+                // and similar attributes from getSqlQueryKpi
+
+                qo.getViolaitedDbKpis(); // right hand side grid
+                // what was the load/status of db during the violation/deviation
+
+                qo.getInferenceMessage(); // in the form
+
+                // frequency of such violations in last X time period
+                TimeInterval ti = new TimeInterval();
+                ti.resetTimeBackTo(qo.getTimeStamp(), TimeInterval.TimePeriod.HOURS, 1); // for last 1 hour
+                int count = outlierDataManagerService.getSqlOutlierOnComponentFrequency(qo.getComponentId(), ti);
+                // this count is number of slow queries in last 1 hour
+
+                outlierDataManagerService.getSqlOutlierFrequency(qo.getComponentId(), qo.getSqlId(), ti);
+                // the number of occurances for this sql in last 1 hour
+
+
                 sqlQueryOutlierDataVOList.add(sqlQueryOutlierDataVO);
             }
 

@@ -251,6 +251,11 @@ label  {
     width: 120px;
 }
 
+.dgrid-cell-padding {
+    padding: 1px !important;
+}
+
+
 
 
 
