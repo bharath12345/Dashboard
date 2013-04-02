@@ -22,22 +22,22 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                 treeObject = treeObject.concat(this.getTreeLeafForParent(data, rootId));
 
                 for(var i=0;i<data.length; i++) {
-                    if(data[i].pageList != null) {
-                        treeObject = treeObject.concat(this.getTreeLeafForParent(data[i].pageList, data[i].uuid));
+                    if(data[i].linkList != null) {
+                        treeObject = treeObject.concat(this.getTreeLeafForParent(data[i].linkList, data[i].uuid));
                     }
                 }
                 return treeObject;
             },
 
-            getTreeLeafForParent: function(pageList, parentId) {
+            getTreeLeafForParent: function(linksList, parentId) {
                 var leafList = [];
-                for(var i=0;i<pageList.length; i++) {
+                for(var i=0;i<linksList.length; i++) {
                     var leaf = {};
-                    leaf.id = pageList[i].uuid; // its not a good idea to set any of the dom id's as EnumId
-                    leaf.enumId = pageList[i].enumId;
-                    leaf.enumName = pageList[i].name;
-                    leaf.name = i18nString[pageList[i].name];
-                    leaf.type = pageList[i].type;
+                    leaf.id = linksList[i].uuid; // its not a good idea to set any of the dom id's as EnumId
+                    leaf.enumId = linksList[i].enumId;
+                    leaf.enumName = linksList[i].name;
+                    leaf.name = i18nString[linksList[i].name];
+                    leaf.type = linksList[i].type;
                     leaf.parent = parentId;
                     leafList.push(leaf);
                 }
@@ -46,7 +46,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
 
             renderAccordion:function (data) {
                 var param = data.param;
-                var data = data.pageListVO;
+                var data = data.linkEntityList;
 
                 if (data == null || data == undefined || param == null || param == undefined) {
                     console.log("blank accordion");

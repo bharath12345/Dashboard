@@ -48,7 +48,7 @@ define({
 
 
         /* ----- Alerts Accordion ----- */
-        SAMPLE_ALERTS: "Sample Alerts"
+        SQL_DB_OUTLIERS: "SQL DB Outliers"
         //////////////////////////////////////////////////////////////////
 
 

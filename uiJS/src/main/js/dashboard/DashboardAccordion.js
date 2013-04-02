@@ -73,7 +73,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                 DashboardAccordion.AccContainer = new AccordionContainer({gutters:false});
                 DashboardAccordion.AccPane = [];
 
-                var paneList = data.tabListVO;
+                var paneList = data.paneList;
                 for (var i = 0; i < paneList.length; i++) {
                     DashboardAccordion.AccPane[paneList[i].name] = new ContentPane({
                         region:"center",
