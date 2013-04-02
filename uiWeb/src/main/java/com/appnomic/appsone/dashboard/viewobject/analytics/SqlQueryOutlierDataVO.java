@@ -11,6 +11,15 @@ public class SqlQueryOutlierDataVO {
     long sqlId;
     String sqlText;
     int id;
+    String timestamp;
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
 
     public String getComponentName() {
         return componentName;

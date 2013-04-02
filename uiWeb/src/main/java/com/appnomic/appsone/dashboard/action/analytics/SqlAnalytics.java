@@ -144,7 +144,7 @@ public class SqlAnalytics extends AbstractAction {
     public String sqlAnalyticsData() {
         param = getParameters();
 
-        String[] startEndTimes = TimeUtility.get30MinStartEnd();
+        String[] startEndTimes = TimeUtility.get1YearStartEnd();
         System.out.println("Times = [" + startEndTimes[0] + "] [" + startEndTimes[1] + "]");
 
         try {
@@ -157,25 +157,7 @@ public class SqlAnalytics extends AbstractAction {
                 sqlQueryOutlierDataVO.setSqlId(qo.getSqlId());
                 sqlQueryOutlierDataVO.setSqlText(qo.getSqlText());
                 sqlQueryOutlierDataVO.setId(qo.getId());
-                qo.getTimeStamp();
-
-                qo.getSqlQueryKpi().getAvgCpu();// in the form
-                // and similar attributes from getSqlQueryKpi
-
-                qo.getViolaitedDbKpis(); // right hand side grid
-                // what was the load/status of db during the violation/deviation
-
-                qo.getInferenceMessage(); // in the form
-
-                // frequency of such violations in last X time period
-                TimeInterval ti = new TimeInterval();
-                ti.resetTimeBackTo(qo.getTimeStamp(), TimeInterval.TimePeriod.HOURS, 1); // for last 1 hour
-                int count = outlierDataManagerService.getSqlOutlierOnComponentFrequency(qo.getComponentId(), ti);
-                // this count is number of slow queries in last 1 hour
-
-                outlierDataManagerService.getSqlOutlierFrequency(qo.getComponentId(), qo.getSqlId(), ti);
-                // the number of occurances for this sql in last 1 hour
-
+                sqlQueryOutlierDataVO.setTimestamp(qo.getTimeStamp());
 
                 sqlQueryOutlierDataVOList.add(sqlQueryOutlierDataVO);
             }

@@ -1,7 +1,8 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/analytics/nls/analytics",
-    "dashboard/abstract/AbstractView", "dashboard/helper/WindowManager"],
+    "dashboard/abstract/AbstractView", "dashboard/helper/WindowManager", "dashboard/helper/ButtonHelper",
+    "dojo/on", "dojo/_base/lang"],
 
-    function (declare, i18n, i18nString, AbstractView, WindowManager) {
+    function (declare, i18n, i18nString, AbstractView, WindowManager, ButtonHelper, on, lang) {
 
         dashboard.classnames.AnalyticsView = "dashboard.analytics.AnalyticsView";
 
@@ -32,6 +33,31 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/analytics/
                 this.UUID = id;
                 this.NAME = name;
                 this.TYPE = type;
+
+                dashboard.dom.Toolbar[this.pageType].destroyDescendants(false);
+
+                var buttonHelper = new ButtonHelper();
+                var button = buttonHelper.getRefresh();
+                on(button, "click", lang.hitch(this, this.refreshView));
+                dashboard.dom.Toolbar[this.pageType].addChild(button);
+
+                button = buttonHelper.getViewNewWindow();
+                on(button, "click", lang.hitch(this, this.launchNewWindow));
+                dashboard.dom.Toolbar[this.pageType].addChild(button);
+
+                button = buttonHelper.getStatusRefresh();
+                on(button, "click", function() {
+                    Scheduler.startStopRefresh(true);
+                });
+                dashboard.dom.Toolbar[this.pageType].addChild(button);
+
+                button = buttonHelper.getRefreshStop();
+                on(button, "click", function() {
+                    Scheduler.startStopRefresh(false);
+                });
+                dashboard.dom.Toolbar[this.pageType].addChild(button);
+
+                dashboard.dom.TopBc.resize();
             },
 
             launchNewWindow: function() {

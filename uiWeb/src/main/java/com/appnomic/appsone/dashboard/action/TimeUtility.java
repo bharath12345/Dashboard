@@ -37,8 +37,20 @@ public class TimeUtility {
     public static long[] get3HourStartEndLong() {
         return alltimeLong(Calendar.HOUR_OF_DAY, -3);
     }
-	
-	public static Date convertGmtToIndiaTimeDate(Calendar gmtTime) {
+
+    public static String[] get1DayStartEnd() {
+        return alltime(Calendar.DATE, -1);
+    }
+
+    public static String[] get1MonthStartEnd() {
+        return alltime(Calendar.MONTH, -1);
+    }
+
+    public static String[] get1YearStartEnd() {
+        return alltime(Calendar.YEAR, -1);
+    }
+
+    public static Date convertGmtToIndiaTimeDate(Calendar gmtTime) {
 		gmtTime.add(Calendar.HOUR_OF_DAY, -5);
 		gmtTime.add(Calendar.MINUTE, -30);
 		return gmtTime.getTime();
