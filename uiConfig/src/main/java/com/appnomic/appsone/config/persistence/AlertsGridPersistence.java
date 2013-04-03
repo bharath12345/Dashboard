@@ -1,14 +1,13 @@
 package com.appnomic.appsone.config.persistence;
 
 import com.appnomic.appsone.common.ActionConstants;
-import com.appnomic.appsone.config.entity.ApplicationAlertsGrid;
+import com.appnomic.appsone.config.entity.ApplicationAlertsGridEntity;
 import com.appnomic.appsone.config.entity.UserConfigEntity;
 import com.appnomic.appsone.config.leveldb.LevelDBManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 /**
  * Created with IntelliJ IDEA.
@@ -40,7 +39,7 @@ public class AlertsGridPersistence extends Persistence {
 
             Map<String, ArrayList<String>> uuidMap = new HashMap<String, ArrayList<String>>();
             ArrayList<String> uuidList = new ArrayList<String>();
-            ApplicationAlertsGrid aag = ApplicationAlertsGrid.getDefaultConfig();
+            ApplicationAlertsGridEntity aag = ApplicationAlertsGridEntity.getDefaultConfig();
             uuidList.add(aag.getUuid());
             uuidMap.put(ActionConstants.NOC.APPLICATION_ALERTS.name(), uuidList);
             uce.setUuidMap(uuidMap);

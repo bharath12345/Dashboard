@@ -1,10 +1,10 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", "dashboard/logger/Logger",
     'dgrid/OnDemandGrid', "dgrid/extensions/ColumnHider", "dgrid/extensions/ColumnReorder", "dgrid/extensions/ColumnResizer",
     "dgrid/extensions/DijitRegistry", "dgrid/extensions/Pagination", "dgrid/Selection", "dgrid/extensions/CompoundColumns",
-    "dgrid/Keyboard", "dojo/store/Memory", "dojo/_base/lang"],
+    "dgrid/Keyboard", "dojo/store/Memory", "dojo/_base/lang", "dojo/store/Observable"],
 
     function (declare, i18n, i18nString, Logger, Grid, ColumnHider, ColumnReorder, ColumnResizer, DijitRegistry, Pagination,
-              Selection, CompoundColumns, Keyboard, Memory, lang) {
+              Selection, CompoundColumns, Keyboard, Memory, lang, Observable) {
 
         dashboard.classnames.AoneDgrid = "dashboard.widgets.AoneDgrid";
 
@@ -24,18 +24,27 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
             },
 
             setData: function(gridata) {
-                this.gridDataStore = new Memory({data:gridata, idProperty:'id'});
+                this.gridDataStore = Observable(new Memory({data:gridata,
+                    idProperty:'id',
+                    query : function(query, options) {
+                        options = options || {};
+                        //options.sort = [ {
+                        //    attribute : [{attribute:"appName"}]
+                        //} ];
+                        return Memory.prototype.query.call(this, query, options);
+                    }
+                }));
             },
 
             render: function(div) {
                 this.grid = new CompoundColumnsGrid({
                     store:this.gridDataStore,
                     columns:this.columnMeta,
-                    rowsPerPage:25,
+                    rowsPerPage:35, // this should not be hard-coded like this - depending on the real estate, do a compute
                     pagingLinks:1,
                     pagingTextBox:true,
                     firstLastArrows:true,
-                    pageSizeOptions:[15, 20, 25, 30]
+                    pageSizeOptions:[5, 10, 15, 20, 25, 30]
                 }, div);
             },
 

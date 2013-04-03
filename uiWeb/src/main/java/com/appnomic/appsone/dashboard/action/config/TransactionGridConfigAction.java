@@ -5,13 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.appnomic.appsone.config.entity.TransactionGridEntity;
 import com.appnomic.appsone.dashboard.action.AbstractAction;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 
-import com.appnomic.appsone.config.entity.TransactionGrid;
 import com.appnomic.appsone.config.entity.UserConfigEntity;
 import com.appnomic.appsone.config.persistence.Persistence;
 
@@ -27,7 +27,7 @@ public class TransactionGridConfigAction extends AbstractAction {
 	private ApplicationDataService applicationDataService;
 	private TransactionDataService transactionDataService;
 	private Map<String, String[]> param;
-	private TransactionGrid tge;
+	private TransactionGridEntity tge;
 
 	public ApplicationDataService getApplicationDataService() {
 		return applicationDataService;
@@ -47,11 +47,11 @@ public class TransactionGridConfigAction extends AbstractAction {
 		this.transactionDataService = transactionDataService;
 	}
 
-	public TransactionGrid getTge() {
+	public TransactionGridEntity getTge() {
 		return tge;
 	}
 
-	public void setTge(TransactionGrid tge) {
+	public void setTge(TransactionGridEntity tge) {
 		this.tge = tge;
 	}
 
@@ -81,7 +81,7 @@ public class TransactionGridConfigAction extends AbstractAction {
         /*
            1. first get the object with default values set
         */
-        tge = TransactionGrid.getDefaultConfig();
+        tge = TransactionGridEntity.getDefaultConfig();
 
         /*
            2. check if the given user has an already persisted config object

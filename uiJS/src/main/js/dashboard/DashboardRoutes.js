@@ -34,7 +34,7 @@ define(["dojo/_base/declare", "dojo/_base/lang", 'crossroads', 'dashboard/logger
             loadCrossRoadRoutes:function () {
 
                 dashboard.enumMap = {};
-                dashboard.enumMap.NOC = {};
+
 
                 var hashString = document.URL.substring(document.URL.indexOf("#") + 1, document.URL.length);
                 console.log("hash string = " + hashString);
@@ -46,19 +46,21 @@ define(["dojo/_base/declare", "dojo/_base/lang", 'crossroads', 'dashboard/logger
                 dashboard.routes.push(crossroads.addRoute('/config/:uuid:/:enumid:/:name:/:type:', lang.hitch(this, this.configMatch)));
                 dashboard.routes.push(crossroads.addRoute('/topology/:uuid:/:enumid:/:name:/:type:', lang.hitch(this, this.topologyMatch)));
                 dashboard.routes.push(crossroads.addRoute('/custom/:uuid:/:enumid:/:name:/:type:', lang.hitch(this, this.customMatch)));
+                dashboard.routes.push(crossroads.addRoute('/analytics/:uuid:/:enumid:/:name:/:type:', lang.hitch(this, this.analyticsMatch)));
 
                 crossroads.parse(hashString);
 
             },
 
             nocMatch:function (uuid, enumid, name, type) {
-                console.log("NOC - Name = " + name + " type = " + type + " uuid = " + uuid);
+                console.log("NOC - Name = " + name + " type = " + type + " uuid = " + uuid + " enumid = " + enumid);
 
                 require(["dashboard/views/noc/NocUtility", "dashboard/views/noc/NocAccordion"],
                     function (NocUtility, NocAccordion) {
                         Logger.initialize();
                         NocUtility.InitKeyControls();
 
+                        dashboard.enumMap.NOC = {};
                         dashboard.enumMap.NOC[name] = parseInt(enumid);
 
                         var nocAccordion = new NocAccordion();
@@ -68,10 +70,11 @@ define(["dojo/_base/declare", "dojo/_base/lang", 'crossroads', 'dashboard/logger
             },
 
             configMatch: function(uuid, enumid, name, type) {
-                console.log("CONFIG - Name = " + name + " type = " + type + " uuid = " + uuid);
+                console.log("CONFIG - Name = " + name + " type = " + type + " uuid = " + uuid + " enumid = " + enumid);
 
                 require(['dashboard/config/ConfigAccordion'],
                     function (ConfigAccordion) {
+                        dashboard.enumMap.CONFIG = {};
                         dashboard.enumMap.CONFIG[name] = parseInt(enumid);
 
                         var configAccordion = new ConfigAccordion();
@@ -81,11 +84,12 @@ define(["dojo/_base/declare", "dojo/_base/lang", 'crossroads', 'dashboard/logger
             },
 
             topologyMatch: function(uuid, enumid, name, type) {
-                console.log("TOPOLOGY - Name = " + name + " type = " + type + " uuid = " + uuid);
+                console.log("TOPOLOGY - Name = " + name + " type = " + type + " uuid = " + uuid + " enumid = " + enumid);
 
                 require(["dashboard/views/topology/TopologyAccordion"],
 
                     function (TopologyAccordion) {
+                        dashboard.enumMap.TOPOLOGY = {};
                         dashboard.enumMap.TOPOLOGY[name] = parseInt(enumid);
 
                         var topoAccordion = new TopologyAccordion();
@@ -94,14 +98,29 @@ define(["dojo/_base/declare", "dojo/_base/lang", 'crossroads', 'dashboard/logger
             },
 
             customMatch: function(uuid, enumid, name, type) {
-                console.log("CUSTOM - Name = " + name + " type = " + type + " uuid = " + uuid);
+                console.log("CUSTOM - Name = " + name + " type = " + type + " uuid = " + uuid + " enumid = " + enumid);
 
                 require(["dashboard/views/custom/CustomAccordion"],
-                    function (Logger, CustomUtility, CustomAccordion, Helper) {
+                    function (CustomAccordion) {
+                        dashboard.enumMap.CUSTOM = {};
                         dashboard.enumMap.CUSTOM[name] = parseInt(enumid);
 
                         var customAccordion = new CustomAccordion();
                         DashboardRoutes.createDomAndShowPage(customAccordion, enumid, uuid, name, type);
+                    }
+                );
+            },
+
+            analyticsMatch: function(uuid, enumid, name, type) {
+                console.log("Analytics - Name = " + name + " type = " + type + " uuid = " + uuid + " enumid = " + enumid);
+
+                require(["dashboard/views/analytics/AnalyticsAccordion"],
+                    function (AnalyticsAccordion) {
+                        dashboard.enumMap.ANALYTICS = {};
+                        dashboard.enumMap.ANALYTICS[name] = parseInt(enumid);
+
+                        var analyticsAccordion = new AnalyticsAccordion();
+                        DashboardRoutes.createDomAndShowPage(analyticsAccordion, enumid, uuid, name, type);
                     }
                 );
             }

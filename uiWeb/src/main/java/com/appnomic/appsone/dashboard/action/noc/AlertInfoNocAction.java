@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Random;
 
 import com.appnomic.appsone.common.ActionConstants;
+import com.appnomic.appsone.config.entity.ApplicationAlertsGridEntity;
 import com.appnomic.appsone.config.entity.UserConfigEntity;
 import com.appnomic.appsone.config.persistence.Persistence;
 import com.appnomic.appsone.dashboard.action.*;
@@ -130,7 +131,8 @@ public class AlertInfoNocAction extends AbstractAction {
         json = persistence.get(tabListObjectUuid);
         */
 
-        String [] appsInterestedIn = null;
+        // ToDo: this is temporary - remove it once the config persistence is up
+        String [] appsInterestedIn = ApplicationAlertsGridEntity.getDefaultConfig().getApplications();
 		if(appsInterestedIn == null || appsInterestedIn.length == 0 ) {
 			applicationMetaVO = null;
 			return SUCCESS;

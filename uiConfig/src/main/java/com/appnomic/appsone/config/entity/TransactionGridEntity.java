@@ -7,7 +7,7 @@ import java.util.Map;
  * Date: 30/03/13
  * Time: 9:09 AM
  */
-public class TransactionGrid extends AbstractConfigEntity {
+public class TransactionGridEntity extends AbstractConfigEntity {
 
     private int refreshTime = 60;
     private String [] applications;
@@ -68,8 +68,8 @@ public class TransactionGrid extends AbstractConfigEntity {
            A1 db at run-time. So the default config will not have its value set
 
     */
-    public static TransactionGrid getDefaultConfig() {
-        TransactionGrid transactionGrid = new TransactionGrid();
-        return transactionGrid;
+    public static TransactionGridEntity getDefaultConfig() {
+        TransactionGridEntity transactionGridEntity = new TransactionGridEntity();
+        return transactionGridEntity;
     }
 }

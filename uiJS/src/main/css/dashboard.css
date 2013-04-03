@@ -10,6 +10,10 @@
     padding: 0 !important;
 }
 
+.dijitAccordionTitle {
+    padding: 2px 7px 1px !important;
+}
+
 /* ----------------- Masthead -----------------*/
 .masthead
 {

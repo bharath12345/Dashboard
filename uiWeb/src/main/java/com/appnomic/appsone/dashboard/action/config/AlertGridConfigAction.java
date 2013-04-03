@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.appnomic.appsone.config.entity.ApplicationAlertsGrid;
-import com.appnomic.appsone.config.entity.UserConfigEntity;
-import com.appnomic.appsone.config.persistence.Persistence;
+import com.appnomic.appsone.config.entity.ApplicationAlertsGridEntity;
 import com.appnomic.appsone.dashboard.action.AbstractAction;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
@@ -21,7 +19,7 @@ import com.appnomic.service.ApplicationDataService;
 public class AlertGridConfigAction extends AbstractAction {
 
 	private Map<String, String[]> param;
-	private ApplicationAlertsGrid age;
+	private ApplicationAlertsGridEntity age;
 	private ApplicationDataService applicationDataService;
 	
 	public ApplicationDataService getApplicationDataService() {
@@ -33,11 +31,11 @@ public class AlertGridConfigAction extends AbstractAction {
 		this.applicationDataService = applicationDataService;
 	}
 
-	public ApplicationAlertsGrid getAge() {
+	public ApplicationAlertsGridEntity getAge() {
 		return age;
 	}
 
-	public void setAge(ApplicationAlertsGrid age) {
+	public void setAge(ApplicationAlertsGridEntity age) {
 		this.age = age;
 	}
 
@@ -66,15 +64,16 @@ public class AlertGridConfigAction extends AbstractAction {
         /*
             1. first get the object with default values set
          */
-		age = ApplicationAlertsGrid.getDefaultConfig();
+		age = ApplicationAlertsGridEntity.getDefaultConfig();
 
         /*
             2. check if the given user has an already persisted config object
             if so, then use those fields to create the 'age' object
          */
-        Persistence persistence = new Persistence();
-        String json = persistence.get(userUuid);
-        UserConfigEntity uce = gson.fromJson(json, UserConfigEntity.class);
+
+        //Persistence persistence = new Persistence();
+        //String json = persistence.get(userUuid);
+        //UserConfigEntity uce = gson.fromJson(json, UserConfigEntity.class);
         //String tabListObjectUuid = uce.getUuidMap().get("");
         //.get(ActionConstants.NOC.APPLICATION_ALERTS.name());
         //json = persistence.get(tabListObjectUuid);

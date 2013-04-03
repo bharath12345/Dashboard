@@ -65,7 +65,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/config/nls
 
             getView: function(name, newWindow) {
                 if(this.configView == null || this.configView == undefined) {
-                    this.configView = new ConfigView();
+                    this.configView = new ConfigView(newWindow);
                     this.configView.setAccordion(this);
                 }
                 return this.configView;

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.appnomic.appsone.config.entity.TransactionGrid;
+import com.appnomic.appsone.config.entity.TransactionGridEntity;
 import com.appnomic.appsone.dashboard.action.*;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
@@ -391,8 +391,10 @@ public class TransactionNocAction extends AbstractAction {
 	public String transactionMeta() {
 		param = getParameters();
 		
-		TransactionGrid tge = null;
-		
+		//ToDo: this has to be set per the config and NOT null.
+        TransactionGridEntity tge = null;
+
+
 		String [] appsInterestedIn = tge.getApplications();
 		String [] txInterestedIn = tge.getTransactions();
 		if(appsInterestedIn == null || txInterestedIn == null ||

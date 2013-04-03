@@ -32,7 +32,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/analytics/
 
             getView: function(name, newWindow) {
                 if(this.analyticsView == null || this.analyticsView == undefined) {
-                    this.analyticsView = new AnalyticsView();
+                    this.analyticsView = new AnalyticsView(newWindow);
                     this.analyticsView.setAccordion(this);
                 }
                 return this.analyticsView;
