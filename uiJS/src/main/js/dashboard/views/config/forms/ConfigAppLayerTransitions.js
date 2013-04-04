@@ -1,8 +1,8 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", "dashboard/logger/Logger",
-    "dashboard/views/config/ConfigForm", "dojox/layout/TableContainer", "dijit/form/TextBox", "dashboard/helper/ConfigHelper",
+    "dashboard/views/config/ConfigForm", "dojox/layout/TableContainer", "dijit/form/TextBox", "dashboard/helper/Helper",
     "dojo/string", "dojo/_base/lang", "dojo/dom-construct", "dashboard/helper/ButtonHelper", "dojo/on"],
 
-    function (declare, i18n, dashboardI18nString, Logger, ConfigForm, TableContainer, TextBox, ConfigHelper, string,
+    function (declare, i18n, dashboardI18nString, Logger, ConfigForm, TableContainer, TextBox, Helper, string,
               lang, domConstruct, ButtonHelper, on) {
 
         dashboard.classnames.ConfigAppLayerTransitions = "dashboard.config.forms.ConfigAppLayerTransitions";
@@ -34,8 +34,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
 
                 this.configTable[0].startup();
 
-                //ConfigHelper.addSuggest(ConfigAppLayerTransitions.LAYER, dashboard.config.forms.ConfigAppLayersForm.LAYERARRAY);
-
                 ////
 
                 this.fromBox = TextBox({name:ConfigAppLayerTransitions.FROM, id:ConfigAppLayerTransitions.FROM});
@@ -64,11 +62,11 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
 
                 var allAppAndTags = [];
                 if(layerMap != null && layerMap != undefined) {
-                    allAppAndTags = ConfigHelper.arrayUnique(layerMap['TAGS'].concat(layerMap['APPS']));
+                    allAppAndTags = Helper.arrayUnique(layerMap['TAGS'].concat(layerMap['APPS']));
                 }
 
-                ConfigHelper.addSuggest(ConfigAppTopologyForm.FROM, allAppAndTags);
-                ConfigHelper.addSuggest(ConfigAppTopologyForm.TO, allAppAndTags);
+                //ConfigHelper.addSuggest(ConfigAppTopologyForm.FROM, allAppAndTags);
+                //ConfigHelper.addSuggest(ConfigAppTopologyForm.TO, allAppAndTags);
             },
 
             saveConfig:function () {

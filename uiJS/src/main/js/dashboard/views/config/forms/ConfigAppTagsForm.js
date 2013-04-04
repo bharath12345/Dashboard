@@ -1,11 +1,11 @@
 define(["dojo/_base/declare", "dojo/i18n","dojo/i18n!dashboard/views/config/nls/config", "dojo/i18n!dashboard/nls/dashboard", "dashboard/logger/Logger",
     "dashboard/views/config/ConfigForm", "dojox/layout/TableContainer", "dijit/form/TextBox",
     "dijit/form/Button", "dijit/form/ComboBox", "dijit/form/Select", "dashboard/helper/ButtonHelper", "dojo/_base/lang",
-    "dojo/on", "dojo/string", "dashboard/helper/ConfigHelper", "dojo/data/ItemFileReadStore", "dojo/store/Memory",
+    "dojo/on", "dojo/string", "dashboard/helper/Helper", "dojo/data/ItemFileReadStore", "dojo/store/Memory",
     "dojox/form/MultiComboBox", "dashboard/views/config/ConfigUtility"],
 
     function (declare, i18n, i18nString, dashboardI18nString, Logger, ConfigForm, TableContainer, TextBox, Button,
-              ComboBox, Select, ButtonHelper, lang, on, string, ConfigHelper, ItemFileReadStore, Memory, MultiComboBox, ConfigUtility) {
+              ComboBox, Select, ButtonHelper, lang, on, string, Helper, ItemFileReadStore, Memory, MultiComboBox, ConfigUtility) {
 
         dashboard.classnames.ConfigAppTagsForm = "dashboard.config.forms.ConfigAppTagsForm";
 
@@ -66,7 +66,7 @@ define(["dojo/_base/declare", "dojo/i18n","dojo/i18n!dashboard/views/config/nls/
                     ConfigAppTagsForm.APPTOTAGMAP[appNameArray[i]] = tagNameArray;
                 }
 
-                ConfigAppTagsForm.TAGARRAY = ConfigHelper.arrayUnique(ConfigAppTagsForm.TAGARRAY.concat(tagNameArray));
+                ConfigAppTagsForm.TAGARRAY = Helper.arrayUnique(ConfigAppTagsForm.TAGARRAY.concat(tagNameArray));
             }
         });
 

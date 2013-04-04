@@ -1,9 +1,9 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", "dashboard/logger/Logger",
-    "dashboard/views/config/ConfigForm", "dojox/layout/TableContainer", "dijit/form/TextBox", "dashboard/helper/ConfigHelper",
+    "dashboard/views/config/ConfigForm", "dojox/layout/TableContainer", "dijit/form/TextBox", "dashboard/helper/Helper",
     "dojo/string", "dojo/_base/lang", "dojo/dom-construct", "dashboard/helper/ButtonHelper", "dojo/on",
     "dojo/data/ItemFileReadStore", "dojo/store/Memory", "dojox/form/MultiComboBox", "dashboard/views/config/ConfigUtility"],
 
-    function (declare, i18n, dashboardI18nString, Logger, ConfigForm, TableContainer, TextBox, ConfigHelper, string,
+    function (declare, i18n, dashboardI18nString, Logger, ConfigForm, TableContainer, TextBox, Helper, string,
               lang, domConstruct, ButtonHelper, on, ItemFileReadStore, Memory, MultiComboBox, ConfigUtility) {
 
         dashboard.classnames.ConfigAppTopologyForm = "dashboard.config.forms.ConfigAppTopologyForm";
@@ -39,8 +39,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                 this.configTable[0].addChild(this.layerBox);
 
                 this.configTable[0].startup();
-
-                //ConfigHelper.addSuggest(ConfigAppTopologyForm.LAYER, dashboard.config.forms.ConfigAppLayersForm.LAYERARRAY);
 
                 ////
 
@@ -83,7 +81,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
 
                 var allAppAndTags = [];
                 if(layerMap != null && layerMap != undefined) {
-                    allAppAndTags = ConfigHelper.arrayUnique(layerMap['TAGS'].concat(layerMap['APPS']));
+                    allAppAndTags = Helper.arrayUnique(layerMap['TAGS'].concat(layerMap['APPS']));
                 }
 
                 this.nodeOneBox.set('store', ConfigUtility.getMemoryStore(allAppAndTags, './images/topologyicons/Transaction.128.png'));

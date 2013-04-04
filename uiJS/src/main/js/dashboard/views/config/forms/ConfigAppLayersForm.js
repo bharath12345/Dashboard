@@ -1,10 +1,10 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", "dashboard/logger/Logger",
     "dashboard/views/config/ConfigForm", "dojox/layout/TableContainer", "dijit/form/NumberTextBox",
-    "dijit/form/Button", "dijit/form/TextBox", "dashboard/helper/ConfigHelper", "dojo/string",
+    "dijit/form/Button", "dijit/form/TextBox", "dashboard/helper/Helper", "dojo/string",
     "dojo/data/ItemFileReadStore", "dojo/store/Memory", "dojox/form/MultiComboBox", "dashboard/views/config/ConfigUtility"],
 
     function (declare, i18n, dashboardI18nString, Logger, ConfigForm, TableContainer, NumberTextBox, Button, TextBox,
-              ConfigHelper, string, ItemFileReadStore, Memory, MultiComboBox, ConfigUtility) {
+              Helper, string, ItemFileReadStore, Memory, MultiComboBox, ConfigUtility) {
 
         dashboard.classnames.ConfigAppLayersForm = "dashboard.config.forms.ConfigAppLayersForm";
 
@@ -64,7 +64,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                 }
 
                 ConfigAppLayersForm.LAYERARRAY.push(layerName);
-                ConfigAppLayersForm.LAYERARRAY = ConfigHelper.arrayUnique(ConfigAppLayersForm.LAYERARRAY);
+                ConfigAppLayersForm.LAYERARRAY = Helper.arrayUnique(ConfigAppLayersForm.LAYERARRAY);
 
                 for (var i = 0; i < appNameArray.length; i++) {
                     var layerMap = ConfigAppLayersForm.LAYERMAP[layerName] = {};
