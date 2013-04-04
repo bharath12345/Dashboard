@@ -18,7 +18,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                 this.pageType = pageType;
             },
 
-            launch: function() {
+            launch: function(id) {
 
                 dojo.style(dashboard.dom.CpCenterInnerBottom.domNode, "display", "block");
                 dojo.style(dashboard.dom.CpCenterInnerBottom.domNode, "height",
@@ -40,6 +40,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                      */
 
                     this.createInnerMenuAndPanes(this.tabList[i].domNode, this.tabList[i].title);
+                    this.tabList[i].selectedId(id);
                     Helper.initializeForm(this.tabList[i]);
 
                 }

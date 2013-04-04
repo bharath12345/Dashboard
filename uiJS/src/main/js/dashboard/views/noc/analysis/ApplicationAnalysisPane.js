@@ -10,12 +10,14 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
 
         var ApplicationAnalysisPane = declare(dashboard.classnames.ApplicationAnalysisPane, AbstractAnalysisPane, {
 
-            launch: function(name, id) {
+            pageType: dashboard.pageTypes.NOC, // this is the default; in case of 'main' dashboard calls, this is overwritten in the constructor
+
+            launch: function(id) {
                 this.tabList = [];
-                this.tabList.push(new AppSummaryForm());
-                this.tabList.push(new AppTopologyForm());
-                this.tabList.push(new AppTransactionSummaryForm());
-                this.tabList.push(new AppComponentSummaryForm());
+                this.tabList.push(new AppSummaryForm(this.pageType));
+                this.tabList.push(new AppTopologyForm(this.pageType));
+                this.tabList.push(new AppTransactionSummaryForm(this.pageType));
+                this.tabList.push(new AppComponentSummaryForm(this.pageType));
             }
 
         });

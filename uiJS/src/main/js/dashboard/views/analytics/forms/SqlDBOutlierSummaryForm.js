@@ -1,5 +1,5 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", "dashboard/logger/Logger",
-    "dashboard/views/analytics/AnalyticsSummaryForm", "dojo/request/xhr", "dojo/_base/lang", "dashboard/helper/Helper"],
+    "dashboard/views/analytics/abstract/AnalyticsSummaryForm", "dojo/request/xhr", "dojo/_base/lang", "dashboard/helper/Helper"],
 
     function (declare, i18n, i18nString, Logger, AnalyticsSummaryForm, xhr, lang, Helper) {
 
@@ -24,7 +24,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
             launch: function() {
                 this.createTableContainers();
 
-                var viewMeta = {};
+                var viewMeta = {
+                    id: this.selectedId
+                };
                 xhr("analytics/sqlAnalyticsForm.action", {
                     handleAs:"json",
                     method:"POST",

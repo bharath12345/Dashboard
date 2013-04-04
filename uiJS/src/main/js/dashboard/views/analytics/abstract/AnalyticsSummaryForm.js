@@ -1,28 +1,12 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", "dashboard/logger/Logger",
-    "dashboard/abstract/AbstractForm", "dijit/form/Form", "dashboard/helper/ButtonHelper", "dojo/_base/lang",
+    "dashboard/views/analytics/abstract/AnalyticsForm", "dijit/form/Form", "dashboard/helper/ButtonHelper", "dojo/_base/lang",
     "dojo/on", "dojox/layout/TableContainer", "dojo/dom-construct"],
 
-    function (declare, i18n, i18nString, Logger, AbstractForm, Form, ButtonHelper, lang, on, TableContainer, domConstruct) {
+    function (declare, i18n, i18nString, Logger, AnalyticsForm, Form, ButtonHelper, lang, on, TableContainer, domConstruct) {
 
-        dashboard.classnames.AnalyticsSummaryForm = "dashboard.analytics.AnalyticsSummaryForm";
+        dashboard.classnames.AnalyticsSummaryForm = "dashboard.analytics.abstract.AnalyticsSummaryForm";
 
-        var AnalyticsSummaryForm = declare(dashboard.classnames.AnalyticsSummaryForm, [AbstractForm, Form], {
-
-            pageType: dashboard.pageTypes.ANALYTICS, // this is the default; in case of 'main' dashboard calls, this is overwritten in the constructor
-            inAnalysisPane: true,
-
-            constructor: function(pageType) {
-                // if its a new window then the pageType will be Analytics, else Dashboard
-                this.pageType = pageType;
-            },
-
-            createToolbarButtons:function () {
-
-            },
-
-            startup: function() {
-                this.inherited(arguments);
-            },
+        var AnalyticsSummaryForm = declare(dashboard.classnames.AnalyticsSummaryForm, [AnalyticsForm], {
 
             createTableContainers:function (data, input) {
                 // the result set has all the fields to be put up in the form

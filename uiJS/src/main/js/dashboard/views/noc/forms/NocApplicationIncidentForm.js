@@ -194,12 +194,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/noc/nls/no
                 console.log("row id = " + dojo.toJson(row.id));
                 console.log("row data = " + dojo.toJson(row.data));
 
-                var appName = row.data.appName;
-                var appId = row.data.id;
-
                 require(["dashboard/views/noc/analysis/ApplicationAnalysisPane"], lang.hitch(this, function (ApplicationAnalysisPane) {
                     var analysisPane = new ApplicationAnalysisPane();
-                    analysisPane.launch(appName, appId);
+                    analysisPane.launch(row.data.id);
                 }));
             },
 

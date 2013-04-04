@@ -1,11 +1,11 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", "dashboard/logger/Logger",
-    "dashboard/abstract/AbstractForm"],
+    "dashboard/views/noc/abstract/AppForm"],
 
-    function (declare, i18n, i18nString, Logger, AbstractForm) {
+    function (declare, i18n, i18nString, Logger, AppForm) {
 
         dashboard.classnames.AppComponentSummaryForm = "dashboard.noc.forms.application.AppComponentSummaryForm";
 
-        var AppComponentSummaryForm = declare(dashboard.classnames.AppComponentSummaryForm, AbstractForm, {
+        var AppComponentSummaryForm = declare(dashboard.classnames.AppComponentSummaryForm, AppForm, {
 
             title: "Application Component Summary",
             inAnalysisPane: true,
