@@ -244,7 +244,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/topology/n
                 }
             },
 
-            createColumnPanes:function (pageName, names, width, height) {
+            createColumnPanes:function (names, width, height) {
                 console.log("in createColumnPanes = " + (names.length) + " w = " + width + " h = " + height);
                 try {
                     var styleString = "width: " + (width / (names.length)) + "; height: " + height + ";";
@@ -261,8 +261,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/topology/n
                         });
                         titlePanes[i] = titlePane;
                     }
-
-                    console.log("pageName = " + pageName);
 
                     var gridContainer = new GridContainer({nbZones:names.length, isAutoOrganized:true,
                         style:"width: 100%; height: 100%;"});
@@ -340,7 +338,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/topology/n
             },
 
             create:function (data, input) {
-                var pageName = data.name;
 
                 var nbLayers = input.netBankingLayersVO.layers;
 
@@ -348,7 +345,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/topology/n
                 for (var i = 0; i < nbLayers.length; i++) {
                     layerTypes.push(nbLayers[i].layertype);
                 }
-                this.createColumnPanes(pageName, layerTypes, data.dimensions.width, data.dimensions.height);
+                this.createColumnPanes(layerTypes, data.dimensions.width, data.dimensions.height);
 
                 var colWidth = data.dimensions.width / layerTypes.length;
                 var divW = 60, divH = 60;
@@ -399,7 +396,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/topology/n
                     for (var j = 0; j < layer.length; j++) {
                         for (var k = 0; k < layer[j].value.length; k++) {
                             // get the STATUS of the nodes
-                            var pageName = data.name;
                             var viewMeta = {
                                 id:layer[j].value[k], // this will be something like FLXRET_IHS1
                                 name:layer[j].value[k] // this will be something like FLXRET_IHS1
@@ -469,7 +465,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/topology/n
 
             },
 
-            startup:function (pageName) {
+            startup:function () {
                 this.inherited(arguments);
             },
 
@@ -479,8 +475,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/topology/n
                 console.log("view port width = " + width + " height = " + height);
 
                 var viewMeta = {
-                    id:pageName,
-                    name:pageName,
                     dimensions:[width, height]
                 };
 
