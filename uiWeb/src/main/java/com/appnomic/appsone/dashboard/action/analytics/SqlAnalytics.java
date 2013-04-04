@@ -3,7 +3,9 @@ package com.appnomic.appsone.dashboard.action.analytics;
 import com.appnomic.appsone.dashboard.action.AbstractAction;
 import com.appnomic.appsone.dashboard.action.TimeUtility;
 import com.appnomic.appsone.dashboard.viewobject.analytics.SqlQueryOutlierDataVO;
+import com.appnomic.appsone.dashboard.viewobject.analytics.SqlQueryOutlierFormVO;
 import com.appnomic.appsone.dashboard.viewobject.analytics.SqlQueryOutlierMetaVO;
+import com.appnomic.appsone.dashboard.viewobject.analytics.SqlQueryOutlierViolatedKpiVO;
 import com.appnomic.common.type.QueryOutlier;
 import com.appnomic.common.type.TimeInterval;
 import com.appnomic.exception.InvalidTimeIntervalException;
@@ -34,7 +36,8 @@ public class SqlAnalytics extends AbstractAction {
 
     private List<SqlQueryOutlierDataVO> sqlQueryOutlierDataVOList;
     private SqlQueryOutlierMetaVO sqlQueryOutlierMetaVO;
-    private SqlQueryOutlierDataVO sqlQueryOutlierDataVO;
+    private SqlQueryOutlierFormVO sqlQueryOutlierFormVO;
+    private SqlQueryOutlierViolatedKpiVO sqlQueryOutlierViolatedKpiVO;
 
     public Map<String, String[]> getParam() {
         return param;
@@ -68,18 +71,89 @@ public class SqlAnalytics extends AbstractAction {
         this.sqlQueryOutlierMetaVO = sqlQueryOutlierMetaVO;
     }
 
-    public SqlQueryOutlierDataVO getSqlQueryOutlierDataVO() {
-        return sqlQueryOutlierDataVO;
+    public SqlQueryOutlierFormVO getSqlQueryOutlierFormVO() {
+        return sqlQueryOutlierFormVO;
     }
 
-    public void setSqlQueryOutlierDataVO(SqlQueryOutlierDataVO sqlQueryOutlierDataVO) {
-        this.sqlQueryOutlierDataVO = sqlQueryOutlierDataVO;
+    public void setSqlQueryOutlierFormVO(SqlQueryOutlierFormVO sqlQueryOutlierFormVO) {
+        this.sqlQueryOutlierFormVO = sqlQueryOutlierFormVO;
+    }
+
+    public SqlQueryOutlierViolatedKpiVO getSqlQueryOutlierViolatedKpiVO() {
+        return sqlQueryOutlierViolatedKpiVO;
+    }
+
+    public void setSqlQueryOutlierViolatedKpiVO(SqlQueryOutlierViolatedKpiVO sqlQueryOutlierViolatedKpiVO) {
+        this.sqlQueryOutlierViolatedKpiVO = sqlQueryOutlierViolatedKpiVO;
+    }
+
+    @Action(value = "/analytics/sqlAnalyticsViolatedKpiTimeseries", results = {
+            @Result(name = "success", type = "json", params = {
+                    "excludeProperties",
+                    "parameters,session,SUCCESS,ERROR,sqlQueryOutlierDataVOList,outlierDataManagerService," +
+                            "sqlQueryOutlierMetaVO, sqlQueryOutlierFormVO",
+                    "enableGZIP", "true",
+                    "encoding", "UTF-8",
+                    "noCache", "true",
+                    "excludeNullProperties", "true"
+            })})
+    public String sqlAnalyticsViolatedKpiTimeseries() {
+        param = getParameters();
+
+        String keyVal = "sqlAnalyticsForm: ";
+        for (String key : parameters.keySet()) {
+            keyVal += "[ " + key + " = ";
+            for (String value : parameters.get(key)) {
+                keyVal += value + ", ";
+            }
+            keyVal += "] ";
+        }
+        System.out.println("key value map = " + keyVal);
+
+        int id = Integer.parseInt(parameters.get("id")[0]);
+
+        return SUCCESS;
+    }
+
+    @Action(value = "/analytics/sqlAnalyticsViolatedKPI", results = {
+            @Result(name = "success", type = "json", params = {
+                    "excludeProperties",
+                    "parameters,session,SUCCESS,ERROR,sqlQueryOutlierDataVOList,outlierDataManagerService," +
+                            "sqlQueryOutlierMetaVO, sqlQueryOutlierFormVO",
+                    "enableGZIP", "true",
+                    "encoding", "UTF-8",
+                    "noCache", "true",
+                    "excludeNullProperties", "true"
+            })})
+    public String sqlAnalyticsViolatedKPI() {
+        param = getParameters();
+
+        String keyVal = "sqlAnalyticsForm: ";
+        for (String key : parameters.keySet()) {
+            keyVal += "[ " + key + " = ";
+            for (String value : parameters.get(key)) {
+                keyVal += value + ", ";
+            }
+            keyVal += "] ";
+        }
+        System.out.println("key value map = " + keyVal);
+
+        int id = Integer.parseInt(parameters.get("id")[0]);
+
+        sqlQueryOutlierViolatedKpiVO = new SqlQueryOutlierViolatedKpiVO();
+        QueryOutlier qo = outlierDataManagerService.fetchSqlQueryOutlier(id);
+
+        // what was the load/status of db during the violation/deviation
+        sqlQueryOutlierViolatedKpiVO.setViolatedDbKpis(qo.getViolaitedDbKpis()); // list of values
+
+        return SUCCESS;
     }
 
     @Action(value = "/analytics/sqlAnalyticsForm", results = {
             @Result(name = "success", type = "json", params = {
                     "excludeProperties",
-                    "parameters,session,SUCCESS,ERROR,sqlQueryOutlierDataVOList,outlierDataManagerService,sqlQueryOutlierMetaVO",
+                    "parameters,session,SUCCESS,ERROR,sqlQueryOutlierDataVOList,outlierDataManagerService," +
+                            "sqlQueryOutlierMetaVO,sqlQueryOutlierViolatedKpiVO",
                     "enableGZIP", "true",
                     "encoding", "UTF-8",
                     "noCache", "true",
@@ -100,34 +174,40 @@ public class SqlAnalytics extends AbstractAction {
 
         int id = Integer.parseInt(parameters.get("id")[0]);
 
-
-        String[] startEndTimes = TimeUtility.get30MinStartEnd();
-        System.out.println("Times = [" + startEndTimes[0] + "] [" + startEndTimes[1] + "]");
-
-        sqlQueryOutlierDataVO = new SqlQueryOutlierDataVO();
+        sqlQueryOutlierFormVO = new SqlQueryOutlierFormVO();
         QueryOutlier qo = outlierDataManagerService.fetchSqlQueryOutlier(id);
-        sqlQueryOutlierDataVO.setComponentName(qo.getComponentName());
-        sqlQueryOutlierDataVO.setSqlId(qo.getSqlId());
-        sqlQueryOutlierDataVO.setSqlText(qo.getSqlText());
-        sqlQueryOutlierDataVO.setId(qo.getId());
-        qo.getTimeStamp();
+        sqlQueryOutlierFormVO.setComponentName(qo.getComponentName());
+        sqlQueryOutlierFormVO.setSqlId(qo.getSqlId());
+        sqlQueryOutlierFormVO.setSqlText(qo.getSqlText());
+        sqlQueryOutlierFormVO.setId(qo.getId());
+        sqlQueryOutlierFormVO.setTimestamp(qo.getTimeStamp());
+        sqlQueryOutlierFormVO.setInferenceMessage(qo.getInferenceMessage());
 
-        qo.getSqlQueryKpi().getAvgCpu();// in the form
-        // and similar attributes from getSqlQueryKpi
+        sqlQueryOutlierFormVO.setAvgCpu(qo.getSqlQueryKpi().getAvgCpu());
+        sqlQueryOutlierFormVO.setAppWaitTime(qo.getSqlQueryKpi().getAppWaitTime());
+        sqlQueryOutlierFormVO.setAvgElapsedTime(qo.getSqlQueryKpi().getAvgElapsedTime());
+        sqlQueryOutlierFormVO.setDiskReads(qo.getSqlQueryKpi().getDiskReads());
+        sqlQueryOutlierFormVO.setDiskWrites(qo.getSqlQueryKpi().getDiskWrites());
+        sqlQueryOutlierFormVO.setExecutionsCount(qo.getSqlQueryKpi().getExecutionsCount());
+        sqlQueryOutlierFormVO.setFetchCount(qo.getSqlQueryKpi().getFetchCount());
+        sqlQueryOutlierFormVO.setRowsProcessed(qo.getSqlQueryKpi().getRowsProcessed());
+        sqlQueryOutlierFormVO.setSortCount(qo.getSqlQueryKpi().getSortCount());
 
-        qo.getViolaitedDbKpis(); // right hand side grid
-        // what was the load/status of db during the violation/deviation
-
-        qo.getInferenceMessage(); // in the form
 
         // frequency of such violations in last X time period
         TimeInterval ti = new TimeInterval();
         ti.resetTimeBackTo(qo.getTimeStamp(), TimeInterval.TimePeriod.HOURS, 1); // for last 1 hour
         int count = outlierDataManagerService.getSqlOutlierOnComponentFrequency(qo.getComponentId(), ti);
-        // this count is number of slow queries in last 1 hour
+        sqlQueryOutlierFormVO.setLastHourOutliers(count);// this count is number of slow queries in last 1 hour
+        int occurrences = outlierDataManagerService.getSqlOutlierFrequency(qo.getComponentId(), qo.getSqlId(), ti); // ## occurrences for this sql in last 1 hour
+        sqlQueryOutlierFormVO.setLastHourOccurrences(occurrences);
 
-        outlierDataManagerService.getSqlOutlierFrequency(qo.getComponentId(), qo.getSqlId(), ti);
-        // the number of occurances for this sql in last 1 hour
+        ti.resetTimeBackTo(qo.getTimeStamp(), TimeInterval.TimePeriod.HOURS, 24); // for last 1 hour
+        count = outlierDataManagerService.getSqlOutlierOnComponentFrequency(qo.getComponentId(), ti);
+        sqlQueryOutlierFormVO.setLastDayOutliers(count);// this count is number of slow queries in last 1 day
+        occurrences = outlierDataManagerService.getSqlOutlierFrequency(qo.getComponentId(), qo.getSqlId(), ti); // ## occurrences for this sql in last 1 day
+        sqlQueryOutlierFormVO.setLastDayOccurrences(occurrences);
+
 
         return SUCCESS;
     }
@@ -135,7 +215,8 @@ public class SqlAnalytics extends AbstractAction {
     @Action(value = "/analytics/sqlAnalyticsData", results = {
             @Result(name = "success", type = "json", params = {
                     "excludeProperties",
-                    "parameters,session,SUCCESS,ERROR,outlierDataManagerService,sqlQueryOutlierMetaVO,sqlQueryOutlierDataVO",
+                    "parameters,session,SUCCESS,ERROR,outlierDataManagerService,sqlQueryOutlierMetaVO," +
+                            "sqlQueryOutlierFormVO,sqlQueryOutlierViolatedKpiVO",
                     "enableGZIP", "true",
                     "encoding", "UTF-8",
                     "noCache", "true",
@@ -188,7 +269,8 @@ public class SqlAnalytics extends AbstractAction {
     @Action(value = "/analytics/sqlAnalyticsMeta", results = {
             @Result(name = "success", type = "json", params = {
                     "excludeProperties",
-                    "parameters,session,SUCCESS,ERROR,sqlQueryOutlierDataVOList,outlierDataManagerService,sqlQueryOutlierDataVO",
+                    "parameters,session,SUCCESS,ERROR,sqlQueryOutlierDataVOList,outlierDataManagerService," +
+                            "sqlQueryOutlierFormVO,sqlQueryOutlierViolatedKpiVO",
                     "enableGZIP", "true",
                     "encoding", "UTF-8",
                     "noCache", "true",

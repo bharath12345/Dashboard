@@ -46,6 +46,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                     firstLastArrows:true,
                     pageSizeOptions:[5, 10, 15, 20, 25, 30]
                 }, div);
+                this.grid.refresh();
             },
 
             addRow: function(row) {

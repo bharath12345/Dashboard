@@ -4,7 +4,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
 
     function (declare, i18n, dashboardI18nString, i18nString, Logger, AbstractForm, Helper, xhr, lang, Grid) {
 
-        dashboard.classnames.SqlDBOutliersGridForm = "dashboard.analytics.form.SqlDBOutliersGridForm";
+        dashboard.classnames.SqlDBOutliersGridForm = "dashboard.analytics.forms.SqlDBOutliersGridForm";
 
         var SqlDBOutliersGridForm = declare(dashboard.classnames.SqlDBOutliersGridForm, AbstractForm, {
 
@@ -114,7 +114,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
         });
 
         SqlDBOutliersGridForm.LOG = Logger.addTimer(new Logger(dashboard.classnames.SqlDBOutliersGridForm));
-        SqlDBOutliersGridForm.PAGENAME = "";
 
         return SqlDBOutliersGridForm;
     });
