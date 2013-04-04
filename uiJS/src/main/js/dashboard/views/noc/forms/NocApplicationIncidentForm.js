@@ -1,8 +1,8 @@
-define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/noc/nls/noc",
+define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/noc/nls/noc", "dojo/i18n!dashboard/nls/dashboard",
     "dijit/layout/ContentPane", "dojox/layout/GridContainer", 'dashboard/widgets/AoneDgrid', "dojo/request/xhr", "dojo/_base/lang", "dojo/store/Memory",
     "dashboard/logger/Logger", "dashboard/helper/Scheduler", "dashboard/helper/Helper", "dashboard/abstract/AbstractForm"],
 
-    function (declare, i18n, i18nString, ContentPane, GridContainer, Grid, xhr, lang, Memory, Logger, Scheduler, Helper,
+    function (declare, i18n, i18nString, dashboardI18nString, ContentPane, GridContainer, Grid, xhr, lang, Memory, Logger, Scheduler, Helper,
               AbstractForm) {
 
 
@@ -14,9 +14,18 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/noc/nls/no
 
         var NocApplicationIncidentForm = declare(dashboard.classnames.NocApplicationIncidentForm, AbstractForm, {
 
+            title: dashboardI18nString.APPLICATION_ALERTS,
+            inAnalysisPane: false,
+            pageType: dashboard.pageTypes.NOC, // this is the default; in case of 'main' dashboard calls, this is overwritten in the constructor
+
+            createToolbarButtons: function() {
+            },
+
             startup:function () {
                 this.inherited(arguments);
+            },
 
+            launch: function() {
                 this.innerDIV = dojo.create('div', {style:'width: 100%; height: 100%;'});
                 this.attr('content', this.innerDIV);
 
@@ -188,7 +197,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/noc/nls/no
                 var appName = row.data.appName;
                 var appId = row.data.id;
 
-                require(["dashboard/analysis/ApplicationAnalysisPane"], lang.hitch(this, function (ApplicationAnalysisPane) {
+                require(["dashboard/views/noc/analysis/ApplicationAnalysisPane"], lang.hitch(this, function (ApplicationAnalysisPane) {
                     var analysisPane = new ApplicationAnalysisPane();
                     analysisPane.launch(appName, appId);
                 }));

@@ -12,9 +12,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/config/nls
                 console.log("view id = " + enumId + " name = " + name + " uuid = " + uuid + " type = " + type);
 
                 this.configView = this.getView(name);
-                this.configView.loadMenu(enumId, uuid, name, type);
-
-                dashboard.dom.TopMenuPane[this.configView.pageType].domNode.innerHTML = Helper.getHeading(dashboardI18nString[name]);
+                this.configView.createToolbarButtons(enumId, uuid, name, type);
 
                 switch(parseInt(enumId)) {
                     case dashboard.enumMap.CONFIG.APPLICATION_ALERTS:

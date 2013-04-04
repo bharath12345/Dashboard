@@ -1,7 +1,7 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", "dashboard/logger/Logger",
-    "dashboard/abstract/AbstractAnalysisPane", "dashboard/forms/application/AppComponentSummaryForm",
-    "dashboard/forms/application/AppSummaryForm", "dashboard/forms/application/AppTopologyForm",
-    "dashboard/forms/application/AppTransactionSummaryForm"],
+    "dashboard/abstract/AbstractAnalysisPane", "dashboard/views/noc/forms/AppComponentSummaryForm",
+    "dashboard/views/noc/forms/AppSummaryForm", "dashboard/views/noc/forms/AppTopologyForm",
+    "dashboard/views/noc/forms/AppTransactionSummaryForm"],
 
     function (declare, i18n, i18nString, Logger, AbstractAnalysisPane, AppComponentSummaryForm, AppSummaryForm,
               AppTopologyForm, AppTransactionSummaryForm) {

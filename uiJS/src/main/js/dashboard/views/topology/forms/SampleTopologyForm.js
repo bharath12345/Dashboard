@@ -107,13 +107,10 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/topology/n
                     jsPlumb.connect({ source:sourceEP, target:dstEP, container:dashboard.dom.CpCenterInnerTop.domNode });
 
                     // get and set the status of the connection link
-                    var xpos = 0, ypos = 0;
                     var viewMeta = {
                         id:"", // uuid of the link?
-                        name:"", // uuid of the link?
-                        dimensions:[0, 0],
-                        position:[xpos, ypos],
-                        custom:[]
+                        name:"" // uuid of the link?
+
                     };
 
                     xhr("topology/ConnectionStatus.action", {
@@ -382,13 +379,10 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/topology/n
                         // problem 2 - placement of endpoints on the node
 
                         for (var k = 0; k < layer[j].value.length; k++) {
-                            var xpos = 0, ypos = 0;
                             var viewMeta = {
                                 id:layer[j].name, // this will be something like WebServers
-                                name:layer[j].value[k], // this will be something like FLXRET_IHS1
-                                dimensions:[0, 0],
-                                position:[xpos, ypos],
-                                custom:[]
+                                name:layer[j].value[k] // this will be something like FLXRET_IHS1
+
                             };
 
                             xhr("topology/Connections.action", {
@@ -406,13 +400,10 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/topology/n
                         for (var k = 0; k < layer[j].value.length; k++) {
                             // get the STATUS of the nodes
                             var pageName = data.name;
-                            var xpos = 0, ypos = 0;
                             var viewMeta = {
                                 id:layer[j].value[k], // this will be something like FLXRET_IHS1
-                                name:layer[j].value[k], // this will be something like FLXRET_IHS1
-                                dimensions:[0, 0],
-                                position:[xpos, ypos],
-                                custom:[]
+                                name:layer[j].value[k] // this will be something like FLXRET_IHS1
+
                             };
                             xhr("topology/NodeStatus.action", {
                                 handleAs:"json",
@@ -471,20 +462,26 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/topology/n
 
         var SampleTopologyForm = declare(dashboard.classnames.SampleTopologyForm, TopologyForm, {
 
+            title: i18nString.SAMPLE_TOPOLOGY,
+            inAnalysisPane: false,
+
+            createToolbarButtons: function() {
+
+            },
+
             startup:function (pageName) {
                 this.inherited(arguments);
+            },
 
+            launch: function() {
                 var width = this.domNode.parentNode.offsetWidth - 20;
                 var height = this.domNode.offsetHeight;
                 console.log("view port width = " + width + " height = " + height);
 
-                var xpos = 0, ypos = 0;
                 var viewMeta = {
                     id:pageName,
                     name:pageName,
-                    dimensions:[width, height],
-                    position:[xpos, ypos],
-                    custom:[]
+                    dimensions:[width, height]
                 };
 
                 xhr("topology/Nodes.action", {
@@ -501,11 +498,9 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/topology/n
             createNodeLayout:function (input) {
                 var data = Helper.parseInput(input);
                 new RenderNodes().create(data, input);
-            },
-
-            createFormSpecificMenu: function() {
-
             }
+
+
         });
 
         // static variables of this class

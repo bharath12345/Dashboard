@@ -12,9 +12,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/topology/n
                 console.log("view id = " + enumId + " name = " + name + " uuid = " + uuid + " type = " + type);
 
                 this.topologyView = this.getView(name, newWindow);
-                this.topologyView.loadMenu(enumId, uuid, name, type);
-
-                dashboard.dom.TopMenuPane[this.topologyView.pageType].domNode.innerHTML = Helper.getHeading(dashboardI18nString[name]);
+                this.topologyView.createToolbarButtons(enumId, uuid, name, type);
 
                 switch(parseInt(enumId)) {
                     case dashboard.enumMap.TOPOLOGY.SAMPLE_TOPOLOGY:

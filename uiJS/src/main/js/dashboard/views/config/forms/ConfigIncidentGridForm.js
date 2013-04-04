@@ -12,9 +12,17 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/config/nls
             title:dashboardI18nString.APPLICATION_ALERTS,
             tableCount:1,
             columnCount:1,
+            inAnalysisPane: false,
 
             startup:function () {
                 this.inherited(arguments);
+            },
+
+            createToolbarButtons:function () {
+
+            },
+
+            launch:function () {
 
                 this.numberSpinner = new NumberSpinner({
                     label:"Refresh Time",
@@ -44,12 +52,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/config/nls
                 dashboard.dom.STANDBY.hide();
             },
 
-            createFormSpecificMenu:function () {
-                /*
-                 called from the base ConfigForm class
-                 one can add further form specific buttons and actions here
-                 */
-            },
 
             saveConfig:function () {
                 var refreshTime = this.numberSpinner.get('value');

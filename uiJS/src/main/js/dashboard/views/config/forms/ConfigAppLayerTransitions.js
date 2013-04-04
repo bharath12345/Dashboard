@@ -13,9 +13,20 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
             tableCount: 2,
             columnCount: [1, 2],
             headings: ["From Layer", "To Layer"],
+            inAnalysisPane: false,
 
             startup: function() {
                 this.inherited(arguments);
+            },
+
+            createToolbarButtons:function () {
+                var buttonHelper = new ButtonHelper();
+                var button = buttonHelper.getNew();
+                on(button, "click", lang.hitch(this, this.addRow));
+                dashboard.dom.Toolbar[this.pageType].addChild(button);
+            },
+
+            launch: function() {
 
                 this.layerBox = TextBox({label:"Layer Name", name:ConfigAppLayerTransitions.LAYER,
                     id:ConfigAppLayerTransitions.LAYER, intermediateChanges:true});
@@ -66,17 +77,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                 var layerName = this.layerBox.get('value');
             },
 
-            createFormSpecificMenu:function () {
-                /*
-                 called from the base ConfigForm class
-                 one can add further form specific buttons and actions here
-                 */
-
-                var buttonHelper = new ButtonHelper();
-                var button = buttonHelper.getNew();
-                on(button, "click", lang.hitch(this, this.addRow));
-                dashboard.dom.Toolbar[this.pageType].addChild(button);
-            },
 
             addRow: function() {
                 var x = TextBox({});

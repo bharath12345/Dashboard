@@ -1,15 +1,25 @@
-define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/analytics/nls/analytics", "dashboard/logger/Logger",
-    "dashboard/abstract/AbstractForm",
+define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", "dojo/i18n!dashboard/views/analytics/nls/analytics",
+    "dashboard/logger/Logger", "dashboard/abstract/AbstractForm",
     "dashboard/helper/Helper", "dojo/request/xhr", "dojo/_base/lang", 'dashboard/widgets/AoneDgrid'],
 
-    function (declare, i18n, i18nString, Logger, AbstractForm, Helper, xhr, lang, Grid) {
+    function (declare, i18n, dashboardI18nString, i18nString, Logger, AbstractForm, Helper, xhr, lang, Grid) {
 
         dashboard.classnames.SqlDBOutliersGridForm = "dashboard.analytics.form.SqlDBOutliersGridForm";
 
         var SqlDBOutliersGridForm = declare(dashboard.classnames.SqlDBOutliersGridForm, AbstractForm, {
 
+            title: dashboardI18nString.SQL_DB_OUTLIERS,
+            pageType: dashboard.pageTypes.ANALYTICS, // this is the default; in case of 'main' dashboard calls, this is overwritten in the constructor
+            inAnalysisPane: false,
+
             startup:function () {
                 this.inherited(arguments);
+            },
+
+            createToolbarButtons: function() {
+            },
+
+            launch: function() {
 
                 this.innerDIV = dojo.create('div', {style:'width: 100%; height: 100%;'});
                 this.attr('content', this.innerDIV);
@@ -82,8 +92,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/analytics/
                 console.log("row id = " + dojo.toJson(row.id));
                 console.log("row data = " + dojo.toJson(row.data));
 
-                require(["dashboard/analysis/SqlDBOutliersAnalysisPane"], lang.hitch(this, function (SqlDBOutliersAnalysisPane) {
-                    var sqlDBOutliersAnalysisPane = new SqlDBOutliersAnalysisPane();
+                require(["dashboard/views/analytics/analysis/SqlDBOutliersAnalysisPane"], lang.hitch(this, function (SqlDBOutliersAnalysisPane) {
+                    var sqlDBOutliersAnalysisPane = new SqlDBOutliersAnalysisPane(this.pageType);
                     sqlDBOutliersAnalysisPane.launch(row.data.id);
                 }));
 

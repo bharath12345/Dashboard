@@ -14,9 +14,22 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
             tableCount: 3,
             columnCount: [1, 3],
             headings: ["Source Endpoint", "Destination Endpoint", "Edge Transaction"],
+            inAnalysisPane: false,
 
             startup: function() {
                 this.inherited(arguments);
+            },
+
+            createToolbarButtons:function () {
+
+                var buttonHelper = new ButtonHelper();
+                var button = buttonHelper.getNew();
+                on(button, "click", lang.hitch(this, this.addRow));
+                dashboard.dom.Toolbar[this.pageType].addChild(button);
+            },
+
+
+            launch: function() {
 
                 this.layerBox = new MultiComboBox({label:"Layer Name", intermediateChanges:true,
                     store: ConfigUtility.getMemoryStore(dashboard.config.forms.ConfigAppLayersForm.LAYERARRAY, './images/topologyicons/AppGroup.128.png'),
@@ -99,17 +112,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                 topoObject.push(edgeDef);
             },
 
-            createFormSpecificMenu:function () {
-                /*
-                 called from the base ConfigForm class
-                 one can add further form specific buttons and actions here
-                 */
 
-                var buttonHelper = new ButtonHelper();
-                var button = buttonHelper.getNew();
-                on(button, "click", lang.hitch(this, this.addRow));
-                dashboard.dom.Toolbar[this.pageType].addChild(button);
-            },
 
             addRow: function() {
                 var x = TextBox({});

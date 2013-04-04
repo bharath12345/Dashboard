@@ -11,10 +11,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/topology/n
                 console.log("view id = " + enumId + " name = " + name + " uuid = " + uuid + " type = " + type);
 
                 var customView = this.getView(name);
-                customView.loadMenu(uuid, name, type);
-                customView.createSplitCenterPanes(dashboard.dom.CpCenterInner[dashboard.pageTypes.dashboard]);
-
-                dashboard.dom.TopMenuPane[dashboard.pageTypes.dashboard].domNode.innerHTML = Helper.getHeading(dashboardI18nString[name]);
+                customView.createToolbarButtons(enumId, uuid, name, type);
 
                 switch(parseInt(enumId)) {
                     case dashboard.enumMap.CUSTOM.CUSTOM_LAYOUTS:

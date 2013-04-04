@@ -124,7 +124,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dijit/layout/ContentPane", "dijit/la
 
             /*
              *   The split screens - top and bottom - for content and analysis'panes - this holds only for the 'main'
-             *   dashboard. This is never permitted within the tab of any analyis pane. So - CpCenterInnerTop &
+             *   dashboard. This is never permitted within the tab of any analysis pane. So - CpCenterInnerTop &
              *   CpCenterInnerBottom do NOT have to be arrays
              */
             createSplitCenterPanes: function(cpCenterInner, contentView) {

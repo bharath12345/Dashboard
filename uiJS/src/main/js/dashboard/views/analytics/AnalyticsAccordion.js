@@ -13,9 +13,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/analytics/
                 console.log("view id = " + enumId + " name = " + name + " uuid = " + uuid + " type = " + type);
 
                 this.analyticsView = this.getView(name);
-                this.analyticsView.loadMenu(enumId, uuid, name, type);
-
-                dashboard.dom.TopMenuPane[this.analyticsView.pageType].domNode.innerHTML = Helper.getHeading(dashboardI18nString[name]);
+                this.analyticsView.createToolbarButtons(enumId, uuid, name, type);
 
                 switch(parseInt(enumId)) {
                     case dashboard.enumMap.ANALYTICS.SQL_DB_OUTLIERS:

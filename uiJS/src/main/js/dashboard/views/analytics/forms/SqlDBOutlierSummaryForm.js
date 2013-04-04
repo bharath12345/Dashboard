@@ -1,7 +1,7 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", "dashboard/logger/Logger",
-    "dashboard/views/analytics/AnalyticsSummaryForm", "dojo/request/xhr", "dojo/_base/lang"],
+    "dashboard/views/analytics/AnalyticsSummaryForm", "dojo/request/xhr", "dojo/_base/lang", "dashboard/helper/Helper"],
 
-    function (declare, i18n, i18nString, Logger, AnalyticsSummaryForm, xhr, lang) {
+    function (declare, i18n, i18nString, Logger, AnalyticsSummaryForm, xhr, lang, Helper) {
 
         dashboard.classnames.SqlDBOutlierSummaryForm = "dashboard.analytics.forms.SqlDBOutlierSummaryForm";
 
@@ -11,11 +11,18 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
             tableCount: 1,
             columnCount: 1,
 
-            createFormSpecificMenu:function () {
+            pageType: dashboard.pageTypes.ANALYTICS, // this is the default; in case of 'main' dashboard calls, this is overwritten in the constructor
+            inAnalysisPane: true,
+
+            createToolbarButtons:function () {
             },
 
             startup:function () {
                 this.inherited(arguments);
+            },
+
+            launch: function() {
+                this.createTableContainers();
 
                 var viewMeta = {};
                 xhr("analytics/sqlAnalyticsForm.action", {
@@ -26,9 +33,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                 }).then(lang.hitch(this, this.createForm));
             },
 
-            createForm:function (data, input) {
-                // the result set has all the fields to be put up in the form
-
+            createForm: function() {
 
             },
 

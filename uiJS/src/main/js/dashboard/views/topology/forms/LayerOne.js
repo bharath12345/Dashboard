@@ -10,11 +10,17 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
             // ConfigAppTopologyForm.TOPOLOGY has the topology connectivity
             // ConfigAppLayersForm.LAYERMAP has the layer definition by keys APPS and TAGS
 
-            createFormSpecificMenu:function () {
+            title: i18nString.LAYERONE,
+            inAnalysisPane: false,
+
+            createToolbarButtons:function () {
             },
 
             startup:function (pageName) {
                 this.inherited(arguments);
+            },
+
+            launch: function() {
 
                 this.nodes = this.getNodes();
                 this.links = this.getLinks();

@@ -72,7 +72,20 @@ define(["dojo/_base/declare", 'dojox/widget/Standby', "dojo/io-query", "dojo/_ba
         }
 
         Helper.createView = function(viewObject, pageType, formObject) {
+            /*
+                Similar stuff happens in AbstractAnalysisPane's launch() method to bring up a form
+                If it is a center-top form, then, ==> createSplitCenterPanes (in AbstractView)
+                If it is a center-bottom form, then ==> createInnerMenuAndPanes (in AbstractView)
+             */
+
             viewObject.createSplitCenterPanes(dashboard.dom.CpCenterInner[pageType], formObject);
+            Helper.initializeForm(formObject);
+        };
+
+        Helper.initializeForm = function(formObject) {
+            formObject.createHeading();
+            formObject.createToolbarButtons();
+            formObject.launch();
         };
 
         return Helper;

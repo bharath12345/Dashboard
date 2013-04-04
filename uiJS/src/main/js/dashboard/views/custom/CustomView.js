@@ -25,12 +25,20 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/custom/nls
                 customAccordion.createView(CustomView.ID, CustomView.NAME, CustomView.TYPE, this.newWindow);
             },
 
-            loadMenu: function(id, name, type) {
+            /*
+             Button can be created at multiple levels -
+             a) At the view level (which happens below)
+             b) At the Form or it its inheritance hierarchy
+             */
+            createToolbarButtons: function(id, name, type) {
                 CustomView.ID = id;
                 CustomView.NAME = name;
                 CustomView.TYPE = type;
 
-                dashboard.dom.Toolbar[dashboard.pageTypes.dashboard].destroyDescendants(false);
+                /*
+                 The destory of the previous toolbar happens ONLY in the view - never in the form or form's inheritance hierarchy
+                 */
+                dashboard.dom.Toolbar[this.pageType].destroyDescendants(false);
             },
 
             setAccordion: function(customAccordion) {

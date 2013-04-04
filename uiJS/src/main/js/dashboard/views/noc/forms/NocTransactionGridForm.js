@@ -1,9 +1,9 @@
-define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/noc/nls/noc", "dashboard/logger/Logger",
+define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/noc/nls/noc", "dojo/i18n!dashboard/nls/dashboard", "dashboard/logger/Logger",
     "dijit/TitlePane", "dojox/layout/GridContainer", "dojo/request/xhr", "dojo/_base/lang",
     "dashboard/helper/Scheduler", "dashboard/helper/Helper", "dashboard/abstract/AbstractForm",
     "dashboard/widgets/AoneGridContainer"],
 
-    function (declare, i18n, i18nString, Logger, TitlePane, GridContainer, xhr, lang, Scheduler, Helper, AbstractForm, AoneGridContainer) {
+    function (declare, i18n, i18nString, dashboardI18nString, Logger, TitlePane, GridContainer, xhr, lang, Scheduler, Helper, AbstractForm, AoneGridContainer) {
 
         dashboard.classnames.TxGridData = "dashboard.noc.forms.NocTransactionGridForm.TxGridData";
 
@@ -322,9 +322,18 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/noc/nls/no
 
         var NocTransactionGridForm = declare(dashboard.classnames.NocTransactionGridForm, AbstractForm, {
 
+            title: dashboardI18nString.TRANSACTION_GRID,
+            inAnalysisPane: false,
+            pageType: dashboard.pageTypes.NOC, // this is the default; in case of 'main' dashboard calls, this is overwritten in the constructor
+
+            createToolbarButtons: function() {
+            },
+
             startup:function () {
                 this.inherited(arguments);
+            },
 
+            launch: function() {
                 var viewMeta = {
                     id:0,
                     name:""

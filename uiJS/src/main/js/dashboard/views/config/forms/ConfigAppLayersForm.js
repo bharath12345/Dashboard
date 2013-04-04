@@ -13,9 +13,17 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
             title: dashboardI18nString.APPLICATION_LAYERS,
             tableCount: 1,
             columnCount: 1,
+            inAnalysisPane: false,
 
             startup: function() {
                 this.inherited(arguments);
+            },
+
+            createToolbarButtons:function () {
+
+            },
+
+            launch: function() {
 
                 this.layerBox = new TextBox({label:"Layer Name"});
                 this.configTable.addChild(this.layerBox);
@@ -63,14 +71,8 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                     layerMap['TAGS'] = tagNameArray;
                     layerMap['APPS'] = appNameArray;
                 }
-            },
-
-            createFormSpecificMenu:function () {
-                /*
-                 called from the base ConfigForm class
-                 one can add further form specific buttons and actions here
-                 */
             }
+
         });
 
         ConfigAppLayersForm.LOG = Logger.addTimer(new Logger(dashboard.classnames.ConfigAppLayersForm));

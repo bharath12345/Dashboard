@@ -3,13 +3,19 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
 
     function (declare, i18n, i18nString, Logger, AbstractForm) {
 
-        dashboard.classnames.AppComponentSummaryForm = "dashboard.forms.application.AppComponentSummaryForm";
+        dashboard.classnames.AppComponentSummaryForm = "dashboard.noc.forms.application.AppComponentSummaryForm";
 
         var AppComponentSummaryForm = declare(dashboard.classnames.AppComponentSummaryForm, AbstractForm, {
 
             title: "Application Component Summary",
+            inAnalysisPane: true,
+            pageType: dashboard.pageTypes.NOC, // this is the default; in case of 'main' dashboard calls, this is overwritten in the constructor
 
-            createMenuButtons: function() {
+            createToolbarButtons: function() {
+            },
+
+            launch: function() {
+
             }
 
         });

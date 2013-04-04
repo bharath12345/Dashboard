@@ -42,15 +42,19 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/views/noc/nls/no
             },
 
             /*
-                Create VIEW level button and other artifcats here
-                Note that buttons can be created at the FORM level too - DON'T Duplicate!!
+                Button can be created at multiple levels -
+                    a) At the view level (which happens below)
+                    b) At the Form or it its inheritance hierarchy
              */
-            loadMenu: function(enumId, id, name, type) {
+            createToolbarButtons: function(enumId, id, name, type) {
                 this.ENUMID = enumId;
                 this.UUID = id;
                 this.NAME = name;
                 this.TYPE = type;
 
+                /*
+                 The destory of the previous toolbar happens ONLY in the view - never in the form or form's inheritance hierarchy
+                 */
                 dashboard.dom.Toolbar[this.pageType].destroyDescendants(false);
 
                 var buttonHelper = new ButtonHelper();

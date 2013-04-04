@@ -15,16 +15,13 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                 this.pageType = pageType;
             },
 
-            createTopologyMenu:function () {
-                dashboard.dom.Toolbar[this.pageType].destroyDescendants(false);
+            createToolbarButtons:function () {
 
                 var buttonHelper = new ButtonHelper();
                 var button = buttonHelper.getRefresh();
                 on(button, "click", lang.hitch(this, this.refresh)); // this is a superclass call
                 dashboard.dom.Toolbar[this.pageType].addChild(button);
 
-                // this superclass call should be the last - form specific buttons appended at the end of the toolbar
-                this.createFormSpecificMenu();
             }
 
         });

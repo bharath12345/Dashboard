@@ -1,7 +1,7 @@
 define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", "dashboard/logger/Logger",
-    "dashboard/abstract/AbstractView"],
+    "dashboard/abstract/AbstractView", "dashboard/helper/Helper"],
 
-    function (declare, i18n, i18nString, Logger, AbstractView) {
+    function (declare, i18n, i18nString, Logger, AbstractView, Helper) {
 
         dashboard.classnames.AbstractAnalysisPane = "dashboard.abstract.AbstractAnalysisPane";
 
@@ -12,6 +12,11 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
             },
 
             tabList: [],
+
+            constructor: function(pageType) {
+                // if its a new window then the pageType will be Analytics, else Dashboard
+                this.pageType = pageType;
+            },
 
             launch: function() {
 
@@ -28,9 +33,15 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                 dashboard.dom.AnalysisPaneTC.startup();
 
                 for(var i=0; i<this.tabList.length; i++) {
+                    /*
+                     Similar stuff happens in Helper createView() method to bring up a form
+                     If it is a center-top form, then, ==> createSplitCenterPanes (in AbstractView)
+                     If it is a center-bottom form, then ==> createInnerMenuAndPanes (in AbstractView)
+                     */
+
                     this.createInnerMenuAndPanes(this.tabList[i].domNode, this.tabList[i].title);
-                    this.tabList[i].createHeading();
-                    this.tabList[i].createMenuButtons();
+                    Helper.initializeForm(this.tabList[i]);
+
                 }
 
             }

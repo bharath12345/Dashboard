@@ -3,13 +3,18 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
 
     function (declare, i18n, i18nString, Logger, AbstractForm) {
 
-        dashboard.classnames.AppSummaryForm = "dashboard.forms.application.AppSummaryForm";
+        dashboard.classnames.AppSummaryForm = "dashboard.noc.forms.application.AppSummaryForm";
 
         var AppSummaryForm = declare(dashboard.classnames.AppSummaryForm, AbstractForm, {
 
             title: "Application Summary",
+            inAnalysisPane: true,
 
-            createMenuButtons: function() {
+            createToolbarButtons: function() {
+            },
+
+            launch: function() {
+
             }
 
         });

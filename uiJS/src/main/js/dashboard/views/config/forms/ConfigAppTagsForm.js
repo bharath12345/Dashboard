@@ -14,9 +14,17 @@ define(["dojo/_base/declare", "dojo/i18n","dojo/i18n!dashboard/views/config/nls/
             title: dashboardI18nString.APPLICATION_TAGS,
             tableCount: 1,
             columnCount: 1,
+            inAnalysisPane: false,
 
             startup:function () {
                 this.inherited(arguments);
+            },
+
+            createToolbarButtons:function () {
+
+            },
+
+            launch:function () {
                 this.appBox = new MultiComboBox({
                     label:"Application Name",
                     store: ConfigUtility.getMemoryStore(ConfigAppTagsForm.APPARRAY, './images/topologyicons/AppWindow.128.png'),
@@ -38,12 +46,6 @@ define(["dojo/_base/declare", "dojo/i18n","dojo/i18n!dashboard/views/config/nls/
                 dashboard.dom.STANDBY.hide();
             },
 
-            createFormSpecificMenu:function () {
-                /*
-                    called from the base ConfigForm class
-                    one can add further form specific buttons and actions here
-                 */
-            },
 
             saveConfig:function () {
                 var appNames = this.appBox.get('value');
