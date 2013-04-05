@@ -31,6 +31,7 @@
         <!-- List of JS. First one should always be Dojo -->
         <script type="text/javascript" data-dojo-config="async: 1, tlmSiblingOfDojo: 0, isDebug: 1" src="./js/dojo/dojo.js"></script>
         <script type="text/javascript" src="./js/d3/d3.v3.0.4.min.js"></script>
+        <script type="text/javascript" src="./js/d3/cubism.v1.3.0.min.js"></script>
         <script type="text/javascript" src="./js/jQuery/jquery-1.9.1.min.js"></script>
         <script type="text/javascript" src="./js/jQuery/jquery-ui-1.10.0.custom.min.js"></script>
         <script type="text/javascript" src="./js/jQuery/plugins/jsPlumb/jquery.jsPlumb-1.3.16-all-min.js"></script>

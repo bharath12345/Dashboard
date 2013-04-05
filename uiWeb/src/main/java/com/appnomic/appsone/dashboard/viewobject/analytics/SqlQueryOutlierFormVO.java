@@ -31,6 +31,7 @@ public class SqlQueryOutlierFormVO {
     private long lastDayOccurrences;
 
     private String inferenceMessage;
+    private long componentId;
 
     public String getTimestamp() {
         return timestamp;
@@ -184,4 +185,11 @@ public class SqlQueryOutlierFormVO {
         this.lastDayOccurrences = lastDayOccurrences;
     }
 
+    public long getComponentId() {
+        return componentId;
+    }
+
+    public void setComponentId(long componentId) {
+        this.componentId = componentId;
+    }
 }

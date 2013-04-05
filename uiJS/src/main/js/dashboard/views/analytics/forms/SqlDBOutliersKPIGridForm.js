@@ -19,8 +19,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
             createToolbarButtons: function() {
             },
 
-
-
             launch: function() {
 
                 this.innerDIV = dojo.create('div', {style:'width: 100%; height: 100%;'});
@@ -55,7 +53,7 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                 for (var i = 0; i < data.length; i++) {
                     var row = {};
                     row.kpiName = data[i];
-                    row.id = i;
+                    row.id = input.sqlQueryOutlierViolatedKpiVO.id;
                     gridata.push(row);
                 }
 
@@ -70,24 +68,6 @@ define(["dojo/_base/declare", "dojo/i18n", "dojo/i18n!dashboard/nls/dashboard", 
                 } catch (e) {
                     console.log("exception = " + e);
                 }
-
-            },
-
-            handleRowClick:function (evt) {
-                var row = SqlDBOutliersKPIGridForm.Grid.getRow(evt);
-
-                // row.element == the element with the dgrid-row class
-                // row.id == the identity of the item represented by the row
-                // row.data == the item represented by the row
-
-                console.log("row element = " + dojo.toJson(row.element));
-                console.log("row id = " + dojo.toJson(row.id));
-                console.log("row data = " + dojo.toJson(row.data));
-
-                require(["dashboard/views/analytics/form/SqlDBOutliersKpiTimeseries"], lang.hitch(this, function (SqlDBOutliersKpiTimeseries) {
-                    var sqlDBOutliersKpiTimeseries = new SqlDBOutliersKpiTimeseries(this.pageType);
-                    sqlDBOutliersKpiTimeseries.launch(row.data.kpiName);
-                }));
 
             }
 

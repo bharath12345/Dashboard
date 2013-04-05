@@ -10,6 +10,7 @@ import java.util.List;
 public class SqlQueryOutlierViolatedKpiVO {
 
     List<String> violatedDbKpis;
+    int id;
 
     public List<String> getViolatedDbKpis() {
         return violatedDbKpis;
@@ -17,5 +18,13 @@ public class SqlQueryOutlierViolatedKpiVO {
 
     public void setViolatedDbKpis(List<String> violatedDbKpis) {
         this.violatedDbKpis = violatedDbKpis;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

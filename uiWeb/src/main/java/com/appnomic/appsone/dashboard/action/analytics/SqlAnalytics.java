@@ -2,14 +2,13 @@ package com.appnomic.appsone.dashboard.action.analytics;
 
 import com.appnomic.appsone.dashboard.action.AbstractAction;
 import com.appnomic.appsone.dashboard.action.TimeUtility;
-import com.appnomic.appsone.dashboard.viewobject.analytics.SqlQueryOutlierDataVO;
-import com.appnomic.appsone.dashboard.viewobject.analytics.SqlQueryOutlierFormVO;
-import com.appnomic.appsone.dashboard.viewobject.analytics.SqlQueryOutlierMetaVO;
-import com.appnomic.appsone.dashboard.viewobject.analytics.SqlQueryOutlierViolatedKpiVO;
+import com.appnomic.appsone.dashboard.viewobject.analytics.*;
 import com.appnomic.common.type.QueryOutlier;
 import com.appnomic.common.type.TimeInterval;
+import com.appnomic.domainobject.DataPoint;
 import com.appnomic.exception.InvalidTimeIntervalException;
 import com.appnomic.service.OutlierDataManagerService;
+import com.appnomic.service.DataPointExtractorService;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -30,7 +29,8 @@ import java.util.Map;
 @Namespace("/analytics")
 public class SqlAnalytics extends AbstractAction {
 
-    OutlierDataManagerService outlierDataManagerService;
+    private OutlierDataManagerService outlierDataManagerService;
+    private DataPointExtractorService dataPointExtractorService;
 
     private Map<String, String[]> param;
 
@@ -38,6 +38,7 @@ public class SqlAnalytics extends AbstractAction {
     private SqlQueryOutlierMetaVO sqlQueryOutlierMetaVO;
     private SqlQueryOutlierFormVO sqlQueryOutlierFormVO;
     private SqlQueryOutlierViolatedKpiVO sqlQueryOutlierViolatedKpiVO;
+    private List<SqlQueryOutlierViolatedKpiTimeseriesVO> sqlQueryOutlierViolatedKpiTimeseriesVOList;
 
     public Map<String, String[]> getParam() {
         return param;
@@ -87,11 +88,27 @@ public class SqlAnalytics extends AbstractAction {
         this.sqlQueryOutlierViolatedKpiVO = sqlQueryOutlierViolatedKpiVO;
     }
 
+    public DataPointExtractorService getDataPointExtractorService() {
+        return dataPointExtractorService;
+    }
+
+    public void setDataPointExtractorService(DataPointExtractorService dataPointExtractorService) {
+        this.dataPointExtractorService = dataPointExtractorService;
+    }
+
+    public List<SqlQueryOutlierViolatedKpiTimeseriesVO> getSqlQueryOutlierViolatedKpiTimeseriesVOList() {
+        return sqlQueryOutlierViolatedKpiTimeseriesVOList;
+    }
+
+    public void setSqlQueryOutlierViolatedKpiTimeseriesVOList(List<SqlQueryOutlierViolatedKpiTimeseriesVO> sqlQueryOutlierViolatedKpiTimeseriesVOList) {
+        this.sqlQueryOutlierViolatedKpiTimeseriesVOList = sqlQueryOutlierViolatedKpiTimeseriesVOList;
+    }
+
     @Action(value = "/analytics/sqlAnalyticsViolatedKpiTimeseries", results = {
             @Result(name = "success", type = "json", params = {
                     "excludeProperties",
                     "parameters,session,SUCCESS,ERROR,sqlQueryOutlierDataVOList,outlierDataManagerService," +
-                            "sqlQueryOutlierMetaVO, sqlQueryOutlierFormVO",
+                            "sqlQueryOutlierMetaVO, sqlQueryOutlierFormVO,dataPointExtractorService",
                     "enableGZIP", "true",
                     "encoding", "UTF-8",
                     "noCache", "true",
@@ -110,7 +127,24 @@ public class SqlAnalytics extends AbstractAction {
         }
         System.out.println("key value map = " + keyVal);
 
-        int id = Integer.parseInt(parameters.get("id")[0]);
+        int componentId = Integer.parseInt(parameters.get("id")[0]);
+        String kpiName = parameters.get("name")[0];
+
+        String[] startEndTimes = TimeUtility.get1YearStartEnd();
+        System.out.println("Times = [" + startEndTimes[0] + "] [" + startEndTimes[1] + "]");
+        List<DataPoint> dataPointList = dataPointExtractorService.fetchDataPointForKpi(componentId, kpiName, startEndTimes[0], startEndTimes[1]);
+
+        sqlQueryOutlierViolatedKpiTimeseriesVOList = new ArrayList<SqlQueryOutlierViolatedKpiTimeseriesVO>();
+        for(DataPoint dp: dataPointList) {
+            long time = dp.getEpochTime();
+            Number number = dp.getSample();
+            float value = number.floatValue();
+
+            SqlQueryOutlierViolatedKpiTimeseriesVO sqlQueryOutlierViolatedKpiTimeseriesVO = new SqlQueryOutlierViolatedKpiTimeseriesVO();
+            sqlQueryOutlierViolatedKpiTimeseriesVO.setTime(time);
+            sqlQueryOutlierViolatedKpiTimeseriesVO.setValue(value);
+            sqlQueryOutlierViolatedKpiTimeseriesVOList.add(sqlQueryOutlierViolatedKpiTimeseriesVO);
+        }
 
         return SUCCESS;
     }
@@ -119,7 +153,7 @@ public class SqlAnalytics extends AbstractAction {
             @Result(name = "success", type = "json", params = {
                     "excludeProperties",
                     "parameters,session,SUCCESS,ERROR,sqlQueryOutlierDataVOList,outlierDataManagerService," +
-                            "sqlQueryOutlierMetaVO, sqlQueryOutlierFormVO",
+                            "sqlQueryOutlierMetaVO, sqlQueryOutlierFormVO,dataPointExtractorService",
                     "enableGZIP", "true",
                     "encoding", "UTF-8",
                     "noCache", "true",
@@ -145,6 +179,7 @@ public class SqlAnalytics extends AbstractAction {
 
         // what was the load/status of db during the violation/deviation
         sqlQueryOutlierViolatedKpiVO.setViolatedDbKpis(qo.getViolaitedDbKpis()); // list of values
+        sqlQueryOutlierViolatedKpiVO.setId(qo.getComponentId());
 
         return SUCCESS;
     }
@@ -153,7 +188,7 @@ public class SqlAnalytics extends AbstractAction {
             @Result(name = "success", type = "json", params = {
                     "excludeProperties",
                     "parameters,session,SUCCESS,ERROR,sqlQueryOutlierDataVOList,outlierDataManagerService," +
-                            "sqlQueryOutlierMetaVO,sqlQueryOutlierViolatedKpiVO",
+                            "sqlQueryOutlierMetaVO,sqlQueryOutlierViolatedKpiVO,dataPointExtractorService",
                     "enableGZIP", "true",
                     "encoding", "UTF-8",
                     "noCache", "true",
@@ -182,6 +217,7 @@ public class SqlAnalytics extends AbstractAction {
         sqlQueryOutlierFormVO.setId(qo.getId());
         sqlQueryOutlierFormVO.setTimestamp(qo.getTimeStamp());
         sqlQueryOutlierFormVO.setInferenceMessage(qo.getInferenceMessage());
+        sqlQueryOutlierFormVO.setComponentId(qo.getComponentId());
 
         sqlQueryOutlierFormVO.setAvgCpu(qo.getSqlQueryKpi().getAvgCpu());
         sqlQueryOutlierFormVO.setAppWaitTime(qo.getSqlQueryKpi().getAppWaitTime());
@@ -216,7 +252,7 @@ public class SqlAnalytics extends AbstractAction {
             @Result(name = "success", type = "json", params = {
                     "excludeProperties",
                     "parameters,session,SUCCESS,ERROR,outlierDataManagerService,sqlQueryOutlierMetaVO," +
-                            "sqlQueryOutlierFormVO,sqlQueryOutlierViolatedKpiVO",
+                            "sqlQueryOutlierFormVO,sqlQueryOutlierViolatedKpiVO,dataPointExtractorService",
                     "enableGZIP", "true",
                     "encoding", "UTF-8",
                     "noCache", "true",
@@ -270,7 +306,7 @@ public class SqlAnalytics extends AbstractAction {
             @Result(name = "success", type = "json", params = {
                     "excludeProperties",
                     "parameters,session,SUCCESS,ERROR,sqlQueryOutlierDataVOList,outlierDataManagerService," +
-                            "sqlQueryOutlierFormVO,sqlQueryOutlierViolatedKpiVO",
+                            "sqlQueryOutlierFormVO,sqlQueryOutlierViolatedKpiVO,dataPointExtractorService",
                     "enableGZIP", "true",
                     "encoding", "UTF-8",
                     "noCache", "true",
