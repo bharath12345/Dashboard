@@ -1,4 +1,4 @@
-package com.appnomic.appsone.dashboard.action;
+package com.appnomic.appsone.common;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

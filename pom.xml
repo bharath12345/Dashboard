@@ -22,8 +22,9 @@
 		<uiConfig.version>01.00.000.000</uiConfig.version>
 		<uiJS.version>01.00.000.000</uiJS.version>
 		<uiWeb.version>01.00.000.000</uiWeb.version>
-		
-		<main.basedir>${project.basedir}</main.basedir>
+        <uiExtension.version>01.00.000.000</uiExtension.version>
+
+        <main.basedir>${project.basedir}</main.basedir>
     </properties>
 
     <repositories>
@@ -175,6 +176,8 @@
         <module>uiCommonLib</module>
         <module>uiConfig</module>
         <module>uiWeb</module>
+        <module>uiExtension</module>
+        <module>uiCoreExtensions</module>
         <module>uiJS</module>
         <module>uiWAR</module>
     </modules>

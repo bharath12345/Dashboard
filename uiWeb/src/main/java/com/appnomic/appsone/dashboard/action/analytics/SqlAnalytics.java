@@ -1,7 +1,7 @@
 package com.appnomic.appsone.dashboard.action.analytics;
 
 import com.appnomic.appsone.dashboard.action.AbstractAction;
-import com.appnomic.appsone.dashboard.action.TimeUtility;
+import com.appnomic.appsone.common.TimeUtility;
 import com.appnomic.appsone.dashboard.viewobject.analytics.*;
 import com.appnomic.common.type.QueryOutlier;
 import com.appnomic.common.type.TimeInterval;

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<appsoneExtensions>
+
+    <!--
+        All uiExtension.xml are provided in "uiExtension.action" servlets. For example,
+
+        /dashboard/applications/uiExtension.action ==> has all definition for Applications Accordion etc
+        /dashboard/transactions/uiExtension.action ==> has all definition for Transactions Accordion etc
+        /dashboard/analytics/uiExtension.action =====> has all definition for Analytics Accordion etc
+
+        The v1 will support only co-deployed extensions. Future versions with security layers will allow
+         remote extensions
+
+        There are two types of extensions. Packaged extensions developed by AppsOne product team and
+            external extensions developed by AppsOne plugin's team. So, there are two XML's -
+            one) For AppsOne 'core' extensions - packaged within the WAR
+            two) For AppsOne 'external' extensions - packaged outside the WAR in some system path
+    -->
+
+    <extension id="Applications" url="/applications"/>
+    <extension id="Transactions" url="/transactions"/>
+    <extension id="Analytics" url="/analytics"/>
+
+</appsoneExtensions>

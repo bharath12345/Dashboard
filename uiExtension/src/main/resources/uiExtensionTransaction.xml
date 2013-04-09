@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui-extension label="TransactionExtension">
+
+    <!-- *************** PANE NAME IN THE ACCORDION **************************************************************** -->
+    <pane label="TransactionsPaneLabel">
+        <view-container label="TransactionDashboardsLabel">
+            <!--
+                view-links is a set. view-link is singular link
+                view-links is configurable via a reference field
+            -->
+            <view-links ref="TransactionDashboardForm" attribute-ref="ApplicationName"/>
+        </view-container>
+
+    </pane>
+
+
+    <!-- *************** BUTTON DEFINITION FOR ALL FORMS *********************************************************** -->
+    <form-toolbar>
+        <form-tool id="Refresh" type="refresh"/>
+        <form-tool id="StartRefresh" type="startRefresh"/>
+        <form-tool id="StopRefresh" type="stopRefresh"/>
+        <form-tool id="OpenWindow" type="openWindow"/>
+    </form-toolbar>
+
+
+    <!-- *************** MENU IN THE MAIN DASHBOARD **************************************************************** -->
+
+
+
+    <!-- *************** GLOBAL ATTRIBUTES EXPOSED BY THIS PANE **************************************************** -->
+    <attributes>
+        <attribute>TransactionName</attribute>
+    </attributes>
+
+
+
+    <!-- *************** FORMS ************************************************************************************* -->
+    <forms>
+        <!--
+            label is NOT needed for this form as this is rendered as part of view-links with application
+            name as the link name
+        -->
+        <titlegrid-form id="TransactionDashboardForm"
+                   object-url="xxxx/yyyyy/TransactionDashboardForm.action" refresh-rate="180"
+                   help-url="${serverProtocol}://${host}:${requestBasedPort}/help.html">
+            <form-toolbar>
+                <form-tool ref="Refresh" label="TransactionDashboardRefreshLabel"/>
+                <form-tool ref="StartRefresh" label="TransactionDashboardStartRefreshLabel"/>
+                <form-tool ref="StopRefresh" label="TransactionDashboardStopRefreshLabel"/>
+                <form-tool ref="OpenWindow" label="TransactionDashboardOpenWindowLabel"/>
+            </form-toolbar>
+
+            <titlegrid-unit>
+                <grid-col attribute="TransactionName" type="string"/>
+                <grid-col attribute="TransactionAlertCount" type="long"/>
+                <grid-col attribute="TransactionVolume" type="long"/>
+                <grid-col attribute="TransactionResponseTime" type="long"/>
+                <grid-col attribute="TransactionSlowCount" type="long"/>
+                <grid-col attribute="TransactionFailureCount" type="long"/>
+                <grid-col attribute="TransactionSuccessCount" type="long"/>
+            </titlegrid-unit>
+
+            <filters>
+                <col-filter ref="ApplicationName"/>
+            </filters>
+        </titlegrid-form>
+
+    </forms>
+
+
+    <!-- *************** ANALYSIS PANES **************************************************************************** -->
+    <analysis-panes>
+
+    </analysis-panes>
+
+
+    <!-- *************** LABELS ************************************************************************************ -->
+    <labels>
+        <label id="TransactionsPaneLabel">
+            <label-value lang="en">Transactions</label-value>
+            <label-value lang="ja"></label-value>
+            <label-value lang="zh-CN"></label-value>
+            <label-value lang="ko"></label-value>
+        </label>
+    </labels>
+</ui-extension>

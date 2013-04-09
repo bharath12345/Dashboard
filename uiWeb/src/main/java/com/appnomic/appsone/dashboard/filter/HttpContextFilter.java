@@ -15,7 +15,7 @@
  * shall not be liable for any damages suffered by licensee as a result
  * of using, modifying or distributing this software or its derivatives.
  */
-package com.appnomic.appsone.filter;
+package com.appnomic.appsone.dashboard.filter;
 
 import java.io.IOException;
 import java.util.Locale;

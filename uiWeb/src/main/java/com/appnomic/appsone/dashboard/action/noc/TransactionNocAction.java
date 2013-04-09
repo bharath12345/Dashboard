@@ -227,7 +227,7 @@ public class TransactionNocAction extends AbstractAction {
 		}
 		
 		//String[] startEndTimes = TimeUtility.get5MinStartEnd();
-		String[] startEndTimes = TimeUtility.get30MinStartEnd();
+		String[] startEndTimes = com.appnomic.appsone.common.TimeUtility.get30MinStartEnd();
 		Map<Integer, TransactionSummary> txSummary = transactionDataService.getTransactionSummaryForApp(id, startEndTimes[0], startEndTimes[1]);
 		if(txSummary == null && makeDummy == false) {
 			System.out.println("complete txSummary is null");

@@ -1,32 +1,23 @@
-package com.appnomic.appsone.dashboard.action.noc;
+package com.appnomic.appsone.ui.extension.application.action;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-
-import com.appnomic.appsone.config.entity.ApplicationAlertsGridEntity;
-import com.appnomic.appsone.dashboard.action.*;
-import org.apache.struts2.convention.annotation.Namespace;
-import org.apache.struts2.convention.annotation.ParentPackage;
-import org.apache.struts2.convention.annotation.Result;
-import org.apache.struts2.convention.annotation.Action;
-
-import com.appnomic.appsone.dashboard.viewobject.alert.ApplicationDataVO;
-import com.appnomic.appsone.dashboard.viewobject.alert.ApplicationMetaVO;
-import com.appnomic.appsone.dashboard.viewobject.alert.ApplicationVO;
-import com.appnomic.appsone.dashboard.viewobject.alert.MetricData;
+import com.appnomic.appsone.ui.extension.application.viewobject.ApplicationDataVO;
+import com.appnomic.appsone.ui.extension.application.viewobject.MetricData;
 import com.appnomic.domainobject.AlertCountSummary;
 import com.appnomic.domainobject.AlertCountSummary.SUMMARY_CATEGORY;
 import com.appnomic.domainobject.AlertSeverity;
-import com.appnomic.domainobject.ApplicationData;
 import com.appnomic.exception.InvalidTimeIntervalException;
+import com.appnomic.service.AlertDataService;
 import com.appnomic.service.ApplicationDataService;
 import com.appnomic.service.ComponentDataService;
-import com.appnomic.service.AlertDataService;
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
+import com.appnomic.appsone.common.TimeUtility;
+
+import java.util.Map;
+import java.util.Random;
 
 @ParentPackage("json-default")
-@Namespace("/alert")
 public class AlertInfoNocAction extends AbstractAction {
 	
 	private Map<String, String[]> param;
@@ -35,7 +26,6 @@ public class AlertInfoNocAction extends AbstractAction {
 	private ComponentDataService componentDataService;
 	private ApplicationDataService applicationDataService;
 	
-	private ApplicationMetaVO applicationMetaVO;
 	private ApplicationDataVO applicationDataVO;
 	
 	private Random rand;
@@ -66,14 +56,6 @@ public class AlertInfoNocAction extends AbstractAction {
 		this.param = param;
 	}
 
-	public ApplicationMetaVO getApplicationVO() {
-		return applicationMetaVO;
-	}
-
-	public void setApplicationVO(ApplicationMetaVO applicationVO) {
-		this.applicationMetaVO = applicationVO;
-	}
-	
 	public ApplicationDataVO getApplicationDataVO() {
 		return applicationDataVO;
 	}
@@ -97,67 +79,6 @@ public class AlertInfoNocAction extends AbstractAction {
 		this.alertDataService = alertDataService;
 	}
 
-	@Action(value="/alert/ApplicationMeta", results = {
-	        @Result(name="success", type="json", params = {
-	        		"excludeProperties",
-	                "session,SUCCESS,ERROR,alertDataService,componentDataService,applicationDataService,applicationDataVO",
-	                "enableGZIP", "true",
-	        		"encoding", "UTF-8",
-	                "noCache","true",
-	                "excludeNullProperties","true"
-	            })})
-	public String applicationAlertMetaAction() {
-		param = getParameters();
-		
-		applicationMetaVO = new ApplicationMetaVO();
-		
-		applicationMetaVO.setDataActionClass("alert/ApplicationData.action");
-		
-		String [] metrics = new String[5];
-		metrics[0] = SUMMARY_CATEGORY.COMPONENT_AVAILABILITY.name();
-		metrics[1] = SUMMARY_CATEGORY.COMPONENT_STATIC.name();
-		metrics[2] = SUMMARY_CATEGORY.TRANSACTION_ONLINE_ANALYTIC.name();
-		metrics[3] = SUMMARY_CATEGORY.TRANSACTION_BATCH_ANALYTIC.name();
-		metrics[4] = SUMMARY_CATEGORY.COMPONENT_ANALYTIC.name();
-		applicationMetaVO.setMetrics(metrics);
-		
-		/*Persistence persistence = new Persistence();
-        String json = persistence.get(userUuid);
-        UserConfigEntity uce = gson.fromJson(json, UserConfigEntity.class);
-        String tabListObjectUuid = uce.getUuidMap().get(ActionConstants.NOC.APPLICATION_ALERTS.name());
-        json = persistence.get(tabListObjectUuid);
-        */
-
-        // ToDo: this is temporary - remove it once the config persistence is up
-        String [] appsInterestedIn = ApplicationAlertsGridEntity.getDefaultConfig().getApplications();
-		if(appsInterestedIn == null || appsInterestedIn.length == 0 ) {
-			applicationMetaVO = null;
-			return SUCCESS;
-		}
-		
-		List<ApplicationData> allApplications = applicationDataService.getAll();
-		List<ApplicationVO> applicationList = new ArrayList<ApplicationVO>();
-		for(ApplicationData application : allApplications) {
-			boolean appfound = false;
-			for(String intApp: appsInterestedIn) {
-				if(application.getName().equalsIgnoreCase(intApp)) {
-					appfound = true;
-					break;
-				}
-			}
-			if(appfound == false) {
-				// user has not saved this application as one he is interested in
-				continue;
-			}
-			ApplicationVO applicationVO = new ApplicationVO();
-			applicationVO.setId(application.getId());
-			applicationVO.setName(application.getName());
-			applicationList.add(applicationVO);
-		}
-		applicationMetaVO.setApplications(applicationList.toArray(new ApplicationVO[applicationList.size()]));
-		return SUCCESS;
-	}
-	
 	private void setDummyApplicationData(String applicationName, ApplicationDataVO applicationDataVO) {
 		MetricData [] metricDataset = new MetricData[5];
 		applicationDataVO.setMetrics(metricDataset);
@@ -182,7 +103,7 @@ public class AlertInfoNocAction extends AbstractAction {
 		return metricDataset;
 	}
 	
-	@Action(value="/alert/ApplicationData", results = {
+	@Action(value="/ApplicationAlertsForm.action", results = {
 	        @Result(name="success", type="json", params = {
 	        		"excludeProperties",
 	                "session,SUCCESS,ERROR,alertDataService,componentDataService,applicationDataService,applicationMetaVO",
@@ -211,7 +132,7 @@ public class AlertInfoNocAction extends AbstractAction {
 		applicationDataVO = new ApplicationDataVO();
 		
 		//String[] startEndTimes = TimeUtility.get5MinStartEnd();
-		String[] startEndTimes = com.appnomic.appsone.common.TimeUtility.get30MinStartEnd();
+		String[] startEndTimes = TimeUtility.get30MinStartEnd();
 		System.out.println("Times = ["+startEndTimes[0] + "] [" + startEndTimes[1] + "]");
 		
 		MetricData [] metricDataset = new MetricData[5];

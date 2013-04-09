@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui-extension label="AnalyticsExtension">
+
+    <!-- *************** PANE NAME IN THE ACCORDION **************************************************************** -->
+    <pane label="AnalyticsPaneLabel">
+        <view-link ref="SqlOutliersForm" />
+    </pane>
+
+
+    <!-- *************** BUTTON DEFINITION FOR ALL FORMS *********************************************************** -->
+    <form-toolbar>
+        <form-tool id="Refresh" type="refresh"/>
+        <form-tool id="StartRefresh" type="startRefresh"/>
+        <form-tool id="StopRefresh" type="stopRefresh"/>
+        <form-tool id="OpenWindow" type="openWindow"/>
+    </form-toolbar>
+
+
+    <!-- *************** MENU IN THE MAIN DASHBOARD **************************************************************** -->
+
+
+
+    <!-- *************** GLOBAL ATTRIBUTES EXPOSED BY THIS PANE **************************************************** -->
+    <attributes>
+    </attributes>
+
+
+
+    <!-- *************** FORMS ************************************************************************************* -->
+    <forms>
+        <!-- ******************************************************************************************************* -->
+        <grid-form id="SqlOutliersForm" label="SqlOutliersFormLabel"
+                   object-url="xxxx/yyyyy/SqlOutliers.action" refresh-rate="180"
+                   help-url="${serverProtocol}://${host}:${requestBasedPort}/help.html">
+
+            <form-toolbar>
+                <form-tool ref="Refresh" label="SqlOutliersRefreshLabel"/>
+                <form-tool ref="StartRefresh" label="SqlOutliersStartRefreshLabel"/>
+                <form-tool ref="StopRefresh" label="SqlOutliersStopRefreshLabel"/>
+                <form-tool ref="OpenWindow" label="SqlOutliersOpenWindowLabel"/>
+            </form-toolbar>
+
+            <columns>
+                <column attribute="ID" display="false" type="long"/>
+
+                <column attribute="ComponentName" label="ComponentNameLabel"
+                        width="70" display="true" sortable="false" filterable="true" type="string"/>
+                <column attribute="SqlID" label="SqlIDLabel"
+                        width="70" display="true" sortable="false" filterable="true" type="long"/>
+                <column attribute="SqlText" label="SqlTextLabel"
+                        width="70" display="true" sortable="false" filterable="true" type="string"/>
+                <column attribute="Timestamp" label="TimestampLabel"
+                        width="70" display="true" sortable="false" filterable="true" type="string"/>
+            </columns>
+
+            <filters>
+                <col-filter ref="ID"/>
+                <col-filter ref="ComponentName" />
+            </filters>
+        </grid-form>
+
+        <!-- ******************************************************************************************************* -->
+        <!--
+            There is NO refresh rate for summary forms
+            Summary forms are always invoked with ID as the key
+        -->
+        <summary-form id="SqlOutlierSummaryForm" label="SqlOutlierSummaryFormLabel"
+                      object-url="xxxx/yyyyy/SqlOutlierSummaryForm.action"
+                      help-url="${serverProtocol}://${host}:${requestBasedPort}/help.html">
+
+            <form-toolbars>
+                <form-toolbar ref="Refresh" label="SqlOutlierRefreshLabel"/>
+                <form-toolbar ref="OpenWindow" label="SqlOutlierOpenWindowLabel"/>
+            </form-toolbars>
+
+            <field-group label="SummaryLabel">
+                <field attribute="ID" label="ApplicationIdLabel"/>
+                <field attribute="ComponentName" label="ComponentNameLabel"/>
+                <field attribute="SqlID" label="SqlIDLabel"/>
+                <field attribute="SqlText" label="SqlTextLabel"/>
+                <field attribute="Timestamp" label="TimestampLabel"/>
+                <field attribute="InferenceMessage" label="InferenceMessageLabel"/>
+            </field-group>
+
+            <field-group label="DbKpiLabel">
+                <field attribute="AverageCPU" label="AverageCPULabel"/>
+                <field attribute="RowsProcessed" label="RowsProcessedLabel"/>
+                <field attribute="ApplicationWaitTime" label="ApplicationWaitTimeLabel"/>
+                <field attribute="ApplicationElapsedTime" label="ApplicationElapsedTimeLabel"/>
+                <field attribute="ExecutionCount" label="ExecutionCountLabel"/>
+                <field attribute="SortCount" label="SortCountLabel"/>
+                <field attribute="FetchCount" label="FetchCountLabel"/>
+                <field attribute="DiskReads" label="DiskReadsLabel"/>
+                <field attribute="DiskWrites" label="DiskWritesLabel"/>
+            </field-group>
+
+            <field-group label="HistoryLabel">
+                <field attribute="LastHourOutlier" label="LastHourOutlierLabel"/>
+                <field attribute="LastDayOutlier" label="LastDayOutlierLabel"/>
+                <field attribute="LastHourOccurrences" label="LastHourOccurrencesLabel"/>
+                <field attribute="LastDayOccurrences" label="LastDayOccurrencesLabel"/>
+            </field-group>
+
+            <filters>
+                <col-filter ref="ID"/>
+            </filters>
+        </summary-form>
+
+        <!-- ******************************************************************************************************* -->
+        <grid-form id="ViolatedDbKpiForm" label="ViolatedDbKpiFormLabel"
+                   object-url="xxxx/yyyyy/ViolatedDbKpi.action" refresh-rate="180"
+                   help-url="${serverProtocol}://${host}:${requestBasedPort}/help.html">
+
+            <form-toolbar>
+                <form-tool ref="Refresh" label="SqlOutliersRefreshLabel"/>
+            </form-toolbar>
+
+            <columns>
+                <column attribute="ID" display="false" type="long"/>
+
+                <column attribute="KpiName" label="KpiNameLabel"
+                        width="70" display="true" sortable="false" filterable="true" type="string"/>
+
+            </columns>
+
+            <filters>
+                <col-filter ref="ID"/>
+            </filters>
+        </grid-form>
+
+    </forms>
+
+
+
+    <!-- *************** ANALYSIS PANES **************************************************************************** -->
+    <analysis-panes>
+        <analysis-pane ref="SqlOutliersForm">
+            <forms>
+                <grid-form ref="SqlOutlierSummaryForm" query-by="ID"/>
+                <grid-form ref="ViolatedDbKpiForm" query-by="ID"/>
+            </forms>
+        </analysis-pane>
+    </analysis-panes>
+
+
+
+    <!-- *************** LABELS ************************************************************************************ -->
+    <labels>
+        <label id="AnalyticsPaneLabel">
+            <label-value lang="en">Analytics</label-value>
+            <label-value lang="ja"></label-value>
+            <label-value lang="zh-CN"></label-value>
+            <label-value lang="ko"></label-value>
+        </label>
+    </labels>
+</ui-extension>
