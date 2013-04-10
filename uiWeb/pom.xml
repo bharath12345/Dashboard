@@ -30,14 +30,63 @@
 
 
     <dependencies>
+
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
             <version>2.5</version>
             <scope>provided</scope>
+            <!--
+                This is just a compile time dependency and need not be present in 'lib' as
+                    tomcat natively has it in its lib
+            -->
         </dependency>
 
-        <!-- STRUTS -->
+        <!-- JDOM XML Parser *************************************************************************************** -->
+        <dependency>
+            <groupId>jdom</groupId>
+            <artifactId>jdom</artifactId>
+            <version>1.1</version>
+        </dependency>
+
+        <!-- Apache HTTPClient ************************************************************************************* -->
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+            <version>4.2.4</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-httpclient</groupId>
+            <artifactId>commons-httpclient</artifactId>
+            <version>3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpmime</artifactId>
+            <version>4.2.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient-cache</artifactId>
+            <version>4.2.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>fluent-hc</artifactId>
+            <version>4.2.3</version>
+        </dependency>
+
+        <!-- STRUTS ************************************************************************************************ -->
         <dependency>
             <groupId>org.apache.struts</groupId>
             <artifactId>struts2-core</artifactId>
@@ -70,7 +119,7 @@
             <version>${struts.version}</version>
         </dependency-->
 
-        <!-- SPRING -->
+        <!-- SPRING ************************************************************************************************ -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
@@ -147,7 +196,7 @@
             <version>2.1</version>
         </dependency>
 
-        <!-- UI's OWN ================================================== -->
+        <!-- UI's OWN ********************************************************************************************** -->
         <dependency>
             <groupId>com.appnomic.appsone.dashboard</groupId>
             <artifactId>uiCommonLib</artifactId>
@@ -160,7 +209,7 @@
             <version>${uiConfig.version}</version>
         </dependency>
 
-		<!-- Other AppsOne Services ================================================== -->
+		<!-- Other AppsOne Services ******************************************************************************** -->
         <dependency>
             <groupId>com.appnomic</groupId>
             <artifactId>appnomic-common</artifactId>
