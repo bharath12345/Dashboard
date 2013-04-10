@@ -8,17 +8,24 @@
     </pane>
 
 
-    <!-- *************** BUTTON DEFINITION FOR ALL FORMS *********************************************************** -->
-    <form-toolbar>
-        <form-tool id="Refresh" type="refresh"/>
-        <form-tool id="StartRefresh" type="startRefresh"/>
-        <form-tool id="StopRefresh" type="stopRefresh"/>
-        <form-tool id="OpenWindow" type="openWindow"/>
-    </form-toolbar>
-
-
     <!-- *************** MENU IN THE MAIN DASHBOARD **************************************************************** -->
+    <menu>
+        <menu-item></menu-item>
+        <menu-container>
+            <menu-container>
+                <menu-item></menu-item>
+            </menu-container>
+        </menu-container>
+    </menu>
 
+
+    <!-- *************** BUTTON DEFINITION FOR ALL FORMS *********************************************************** -->
+    <toolbar>
+        <tool id="Refresh" type="refresh"/>
+        <tool id="StartRefresh" type="startRefresh"/>
+        <tool id="StopRefresh" type="stopRefresh"/>
+        <tool id="OpenWindow" type="openWindow"/>
+    </toolbar>
 
 
     <!-- *************** GLOBAL ATTRIBUTES EXPOSED BY THIS PANE **************************************************** -->

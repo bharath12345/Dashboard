@@ -45,7 +45,9 @@ public class ExtensionLoader implements InitializingBean {
             Note: No hot-deployment in first release planned. If a extension.xml changes on the fly,
                 then the user has to restart the AppsOne Dashboard UI to see the changes
 
-        5) When the user clicks on an particular link, connect to the data-source and
+        5) For Accordion Panes and links - the UI has to be populated
+
+        When the user clicks on an particular link, connect to the data-source and
             send the data after validation. The steps -
             5.1) HTTP client receives json data
             5.2) parse the data to make sure that the format is per the definition
@@ -56,14 +58,16 @@ public class ExtensionLoader implements InitializingBean {
     @Override
     public void afterPropertiesSet() throws Exception {
         try {
+            XMLSerializer xmlSerializer = new XMLSerializer();
             Map<String, String> extensionMap = getExtensionSchemaUrls();
             Set<String> extensionNames = extensionMap.keySet();
             for (String extensionName : extensionNames) {
-                String uiExtensionXML = getExtensionXML(extensionName);
+                String extensionURL = extensionMap.get(extensionName);
+                String uiExtensionXML = getExtensionXML(extensionURL);
                 // ToDo: cache this XML locally
 
-                XMLSerializer xmlSerializer = new XMLSerializer();
                 JSON json = xmlSerializer.read(uiExtensionXML);
+                addJsonToCache(json);
 
             }
         } catch (Exception e) {
@@ -104,11 +108,15 @@ public class ExtensionLoader implements InitializingBean {
     }*/
 
 
-    private String getExtensionXML(String extensionName) throws Exception {
-        return Request.Get("http://somehost/")
+    private String getExtensionXML(String extensionURL) throws Exception {
+        return Request.Get(extensionURL)
                 .connectTimeout(1000)
                 .socketTimeout(1000)
                 .execute().returnContent().asString();
+    }
+
+    private void addJsonToCache(JSON json) {
+
     }
 
 }

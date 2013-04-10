@@ -103,7 +103,7 @@ public class AlertInfoNocAction extends AbstractAction {
 		return metricDataset;
 	}
 	
-	@Action(value="/ApplicationAlertsForm.action", results = {
+	@Action(value="/ApplicationAlertsForm", results = {
 	        @Result(name="success", type="json", params = {
 	        		"excludeProperties",
 	                "session,SUCCESS,ERROR,alertDataService,componentDataService,applicationDataService,applicationMetaVO",
