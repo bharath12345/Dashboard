@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.jdom.Document;
 import org.jdom.Element;
@@ -16,12 +17,19 @@ import org.jdom.input.SAXBuilder;
 //import javax.management.*;
 //import org.apache.catalina.Server;
 
+import org.springframework.beans.factory.InitializingBean;
+
+import org.apache.http.client.fluent.Request;
+
+import net.sf.json.xml.XMLSerializer;
+import net.sf.json.JSON;
+
 /**
  * User: bharadwaj
  * Date: 09/04/13
  * Time: 2:27 PM
  */
-public class ExtensionLoader {
+public class ExtensionLoader implements InitializingBean {
 
     /*
         1) Look at the appsoneExtensions.xml from both locations (look into that XML for more info)
@@ -45,29 +53,46 @@ public class ExtensionLoader {
             5.4) Depending on the refresh-time, send the data to UI regularly
      */
 
-    public Map<String, String> getExtensionSchemaUrls() {
-        Map<String, String> extensionMap = new HashMap<String, String>();
+    @Override
+    public void afterPropertiesSet() throws Exception {
         try {
-            URL resourceUrl = URL.class.getResource("/WEB-INF/classes/appsoneExtensions.xml");
-            File appsoneExtensions = new File(resourceUrl.toURI());
+            Map<String, String> extensionMap = getExtensionSchemaUrls();
+            Set<String> extensionNames = extensionMap.keySet();
+            for (String extensionName : extensionNames) {
+                String uiExtensionXML = getExtensionXML(extensionName);
+                // ToDo: cache this XML locally
 
-            SAXBuilder builder = new SAXBuilder();
-            Document document = (Document) builder.build(appsoneExtensions);
-            Element rootNode = document.getRootElement();
-            List list = rootNode.getChildren();
+                XMLSerializer xmlSerializer = new XMLSerializer();
+                JSON json = xmlSerializer.read(uiExtensionXML);
 
-            for (int i = 0; i < list.size(); i++) {
-
-                Element node = (Element) list.get(i);
-
-                String id = node.getAttributeValue("id");
-                String url = node.getAttributeValue("url");
-                extensionMap.put(id, url);
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+
+    private Map<String, String> getExtensionSchemaUrls() throws Exception {
+        Map<String, String> extensionMap = new HashMap<String, String>();
+
+        URL resourceUrl = URL.class.getResource("/WEB-INF/classes/appsoneExtensions.xml");
+        File appsoneExtensions = new File(resourceUrl.toURI());
+
+        SAXBuilder builder = new SAXBuilder();
+        Document document = (Document) builder.build(appsoneExtensions);
+        Element rootNode = document.getRootElement();
+        List list = rootNode.getChildren();
+
+        for (int i = 0; i < list.size(); i++) {
+
+            Element node = (Element) list.get(i);
+
+            String id = node.getAttributeValue("id");
+            String url = node.getAttributeValue("url");
+            extensionMap.put(id, url);
+        }
+
+
         return extensionMap;
     }
 
@@ -79,8 +104,11 @@ public class ExtensionLoader {
     }*/
 
 
-
-
-
+    private String getExtensionXML(String extensionName) throws Exception {
+        return Request.Get("http://somehost/")
+                .connectTimeout(1000)
+                .socketTimeout(1000)
+                .execute().returnContent().asString();
+    }
 
 }
