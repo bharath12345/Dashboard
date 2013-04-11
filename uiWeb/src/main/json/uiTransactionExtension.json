@@ -1,0 +1,116 @@
+{
+    "@label": "TransactionExtension",
+    "pane": {
+        "@label": "TransactionsPaneLabel",
+        "view-container": {
+            "@label": "TransactionDashboardsLabel",
+            "view-links": {
+                "@ref": "TransactionDashboardForm",
+                "@attribute-ref": "ApplicationName"
+            }
+        }
+    },
+    "menu": {
+        "menu-item": [],
+        "menu-container": [
+            [
+                []
+            ]
+        ]
+    },
+    "toolbar": [
+        {
+            "@id": "Refresh"
+        },
+        {
+            "@id": "StartRefresh"
+        },
+        {
+            "@id": "StopRefresh"
+        },
+        {
+            "@id": "OpenWindow"
+        }
+    ],
+    "attributes": [
+        "TransactionName"
+    ],
+    "forms": [
+        {
+            "@id": "TransactionDashboardForm",
+            "@object-url": "xxxx/yyyyy/TransactionDashboardForm.action",
+            "@refresh-rate": "180",
+            "@help-url": "${serverProtocol}://${host}:${requestBasedPort}/help.html",
+            "form-toolbar": [
+                {
+                    "@ref": "Refresh",
+                    "@label": "TransactionDashboardRefreshLabel"
+                },
+                {
+                    "@ref": "StartRefresh",
+                    "@label": "TransactionDashboardStartRefreshLabel"
+                },
+                {
+                    "@ref": "StopRefresh",
+                    "@label": "TransactionDashboardStopRefreshLabel"
+                },
+                {
+                    "@ref": "OpenWindow",
+                    "@label": "TransactionDashboardOpenWindowLabel"
+                }
+            ],
+            "titlegrid-unit": [
+                {
+                    "@attribute": "TransactionName"
+                },
+                {
+                    "@attribute": "TransactionAlertCount"
+                },
+                {
+                    "@attribute": "TransactionVolume"
+                },
+                {
+                    "@attribute": "TransactionResponseTime"
+                },
+                {
+                    "@attribute": "TransactionSlowCount"
+                },
+                {
+                    "@attribute": "TransactionFailureCount"
+                },
+                {
+                    "@attribute": "TransactionSuccessCount"
+                }
+            ],
+            "filters": [
+                {
+                    "@ref": "ApplicationName"
+                }
+            ]
+        }
+    ],
+    "analysis-panes": "    ",
+    "labels": [
+        {
+            "@id": "TransactionsPaneLabel",
+            "label-value": [
+                {
+                    "@lang": "en",
+                    "#text": "Transactions"
+                },
+                {
+                    "@lang": "ja",
+                    "#text": "コンピュータ"
+                },
+                {
+                    "@lang": "zh-CN",
+                    "#text": "汉字/漢字"
+                },
+                {
+                    "@lang": "ko",
+                    "#text": "향찰/鄕札"
+                }
+            ]
+        }
+    ]
+}

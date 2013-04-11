@@ -1,0 +1,296 @@
+{
+    "@label": "ApplicationExtension",
+    "pane": {
+        "@label": "ApplicationPaneLabel",
+        "view-link": {
+            "@ref": "ApplicationAlertsForm"
+        }
+    },
+    "menu": {
+        "menu-item": [],
+        "menu-container": [
+            [
+                []
+            ]
+        ]
+    },
+    "attributes": [
+        "ApplicationName"
+    ],
+    "toolbar": [
+        {
+            "@id": "Refresh"
+        },
+        {
+            "@id": "StartRefresh"
+        },
+        {
+            "@id": "StopRefresh"
+        },
+        {
+            "@id": "OpenWindow"
+        }
+    ],
+    "forms": {
+        "grid-form": {
+            "@id": "ApplicationAlertsForm",
+            "@label": "ApplicationAlertsFormLabel",
+            "@object-url": "ApplicationAlertsForm.action",
+            "@refresh-rate": "180",
+            "@help-url": "${serverProtocol}://${host}:${requestBasedPort}/help.html",
+            "form-toolbar": [
+                {
+                    "@ref": "Refresh",
+                    "@label": "ApplicationAlertsRefreshLabel"
+                },
+                {
+                    "@ref": "StartRefresh",
+                    "@label": "ApplicationAlertsStartRefreshLabel"
+                },
+                {
+                    "@ref": "StopRefresh",
+                    "@label": "ApplicationAlertsStopRefreshLabel"
+                },
+                {
+                    "@ref": "OpenWindow",
+                    "@label": "ApplicationAlertsOpenWindowLabel"
+                }
+            ],
+            "columns": [
+                {
+                    "@attribute": "ID",
+                    "@display": "false"
+                },
+                {
+                    "@attribute": "ApplicationName",
+                    "@label": "ApplicationNameLabel",
+                    "@width": "70",
+                    "@display": "true",
+                    "@sortable": "false",
+                    "@filterable": "true"
+                },
+                {
+                    "@label": "ComponentAvailabilityAlertsLabel",
+                    "subcolumn": [
+                        {
+                            "@attribute": "ComponentAvailabilityCriticalAlerts",
+                            "@label": "ComponentAvailabilityCriticalAlertsLabel",
+                            "@width": "70",
+                            "@display": "true",
+                            "@sortable": "false",
+                            "@filterable": "true"
+                        },
+                        {
+                            "@attribute": "ComponentAvailabilityMajorAlerts",
+                            "@label": "ComponentAvailabilityMajorAlertsLabel",
+                            "@width": "70",
+                            "@display": "true",
+                            "@sortable": "false",
+                            "@filterable": "true"
+                        },
+                        {
+                            "@attribute": "ComponentAvailabilityMinorAlerts",
+                            "@label": "ComponentAvailabilityMinorAlertsLabel",
+                            "@width": "70",
+                            "@display": "true",
+                            "@sortable": "false",
+                            "@filterable": "true"
+                        }
+                    ]
+                },
+                {
+                    "@label": "ComponentStaticAlertsLabel",
+                    "subcolumn": [
+                        {
+                            "@attribute": "ComponentStaticCriticalAlerts",
+                            "@label": "ComponentStaticCriticalAlertsLabel",
+                            "@width": "70",
+                            "@display": "true",
+                            "@sortable": "false",
+                            "@filterable": "true"
+                        },
+                        {
+                            "@attribute": "ComponentStaticMajorAlerts",
+                            "@label": "ComponentStaticMajorAlertsLabel",
+                            "@width": "70",
+                            "@display": "true",
+                            "@sortable": "false",
+                            "@filterable": "true"
+                        },
+                        {
+                            "@attribute": "ComponentStaticMinorAlerts",
+                            "@label": "ComponentStaticMinorAlertsLabel",
+                            "@width": "70",
+                            "@display": "true",
+                            "@sortable": "false",
+                            "@filterable": "true"
+                        }
+                    ]
+                },
+                {
+                    "@label": "OnlineTransactionAlertsLabel",
+                    "subcolumn": [
+                        {
+                            "@attribute": "OnlineTransactionCriticalAlerts",
+                            "@label": "OnlineTransactionCriticalAlertsLabel",
+                            "@width": "70",
+                            "@display": "true",
+                            "@sortable": "false",
+                            "@filterable": "true"
+                        },
+                        {
+                            "@attribute": "OnlineTransactionMajorAlerts",
+                            "@label": "OnlineTransactionMajorAlertsLabel",
+                            "@width": "70",
+                            "@display": "true",
+                            "@sortable": "false",
+                            "@filterable": "true"
+                        },
+                        {
+                            "@attribute": "OnlineTransactionMinorAlerts",
+                            "@label": "OnlineTransactionMinorAlertsLabel",
+                            "@width": "70",
+                            "@display": "true",
+                            "@sortable": "false",
+                            "@filterable": "true"
+                        }
+                    ]
+                },
+                {
+                    "@label": "BatchTransactionAlertsLabel",
+                    "subcolumn": [
+                        {
+                            "@attribute": "BatchTransactionCriticalAlerts",
+                            "@label": "BatchTransactionCriticalAlertsLabel",
+                            "@width": "70",
+                            "@display": "true",
+                            "@sortable": "false",
+                            "@filterable": "true"
+                        },
+                        {
+                            "@attribute": "BatchTransactionMajorAlerts",
+                            "@label": "BatchTransactionMajorAlertsLabel",
+                            "@width": "70",
+                            "@display": "true",
+                            "@sortable": "false",
+                            "@filterable": "true"
+                        },
+                        {
+                            "@attribute": "BatchTransactionMinorAlerts",
+                            "@label": "BatchTransactionMinorAlertsLabel",
+                            "@width": "70",
+                            "@display": "true",
+                            "@sortable": "false",
+                            "@filterable": "true"
+                        }
+                    ]
+                },
+                {
+                    "@label": "ComponentAnalyticAlertsLabel",
+                    "subcolumn": [
+                        {
+                            "@attribute": "ComponentAnalyticCriticalAlerts",
+                            "@label": "ComponentAnalyticCriticalAlertsLabel",
+                            "@width": "70",
+                            "@display": "true",
+                            "@sortable": "false",
+                            "@filterable": "true"
+                        },
+                        {
+                            "@attribute": "ComponentAnalyticMajorAlerts",
+                            "@label": "ComponentAnalyticMajorAlertsLabel",
+                            "@width": "70",
+                            "@display": "true",
+                            "@sortable": "false",
+                            "@filterable": "true"
+                        },
+                        {
+                            "@attribute": "ComponentAnalyticMinorAlerts",
+                            "@label": "ComponentAnalyticMinorAlertsLabel",
+                            "@width": "70",
+                            "@display": "true",
+                            "@sortable": "false",
+                            "@filterable": "true"
+                        }
+                    ]
+                }
+            ],
+            "filters": [
+                {
+                    "@ref": "ID"
+                },
+                {
+                    "@ref": "ApplicationName"
+                },
+                {
+                    "@custom-name": "TransactionID"
+                }
+            ]
+        },
+        "summary-form": {
+            "@id": "ApplicationSummaryForm",
+            "@label": "ApplicationSummaryFormLabel",
+            "@object-url": "xxxx/yyyyy/ApplicationSummaryForm.action",
+            "@help-url": "${serverProtocol}://${host}:${requestBasedPort}/help.html",
+            "form-toolbars": [
+                {
+                    "@ref": "Refresh",
+                    "@label": "ApplicationAlertsRefreshLabel"
+                },
+                {
+                    "@ref": "OpenWindow",
+                    "@label": "ApplicationAlertsOpenWindowLabel"
+                }
+            ],
+            "field-group": {
+                "@label": "SummaryLabel",
+                "field": [
+                    {
+                        "@attribute": "ID",
+                        "@label": "ApplicationIdLabel"
+                    },
+                    {
+                        "@attribute": "ApplicationName",
+                        "@label": "ApplicationNameLabel"
+                    }
+                ]
+            },
+            "filters": [
+                {
+                    "@ref": "ID"
+                }
+            ]
+        }
+    },
+    "analysis-panes": [
+        {
+            "@ref": "ApplicationAlertsForm",
+            "forms": [
+                {
+                    "@ref": "ApplicationSummaryForm",
+                    "@query-by": "ID"
+                }
+            ]
+        }
+    ],
+    "labels": [
+        {
+            "@id": "ApplicationPaneLabel",
+            "label-value": [
+                {
+                    "@lang": "en",
+                    "#text": "Applications"
+                },
+                {
+                    "@lang": "ja"
+                },
+                {
+                    "@lang": "zh-CN"
+                },
+                {
+                    "@lang": "ko"
+                }
+            ]
+        }
+    ]
+}

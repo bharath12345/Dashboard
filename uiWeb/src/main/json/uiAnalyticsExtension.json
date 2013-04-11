@@ -1,0 +1,288 @@
+{
+    "@label": "AnalyticsExtension",
+    "pane": {
+        "@label": "AnalyticsPaneLabel",
+        "view-link": {
+            "@ref": "SqlOutliersForm"
+        }
+    },
+    "menu": {
+        "menu-item": [],
+        "menu-container": [
+            [
+                []
+            ]
+        ]
+    },
+    "toolbar": [
+        {
+            "@id": "Refresh"
+        },
+        {
+            "@id": "StartRefresh"
+        },
+        {
+            "@id": "StopRefresh"
+        },
+        {
+            "@id": "OpenWindow"
+        }
+    ],
+    "attributes": "    ",
+    "forms": {
+        "grid-form": [
+            {
+                "@id": "SqlOutliersForm",
+                "@label": "SqlOutliersFormLabel",
+                "@object-url": "xxxx/yyyyy/SqlOutliers.action",
+                "@refresh-rate": "180",
+                "@help-url": "${serverProtocol}://${host}:${requestBasedPort}/help.html",
+                "form-toolbar": [
+                    {
+                        "@ref": "Refresh",
+                        "@label": "SqlOutliersRefreshLabel"
+                    },
+                    {
+                        "@ref": "StartRefresh",
+                        "@label": "SqlOutliersStartRefreshLabel"
+                    },
+                    {
+                        "@ref": "StopRefresh",
+                        "@label": "SqlOutliersStopRefreshLabel"
+                    },
+                    {
+                        "@ref": "OpenWindow",
+                        "@label": "SqlOutliersOpenWindowLabel"
+                    }
+                ],
+                "columns": [
+                    {
+                        "@attribute": "ID",
+                        "@display": "false"
+                    },
+                    {
+                        "@attribute": "ComponentName",
+                        "@label": "ComponentNameLabel",
+                        "@width": "70",
+                        "@display": "true",
+                        "@sortable": "false",
+                        "@filterable": "true"
+                    },
+                    {
+                        "@attribute": "SqlID",
+                        "@label": "SqlIDLabel",
+                        "@width": "70",
+                        "@display": "true",
+                        "@sortable": "false",
+                        "@filterable": "true"
+                    },
+                    {
+                        "@attribute": "SqlText",
+                        "@label": "SqlTextLabel",
+                        "@width": "70",
+                        "@display": "true",
+                        "@sortable": "false",
+                        "@filterable": "true"
+                    },
+                    {
+                        "@attribute": "Timestamp",
+                        "@label": "TimestampLabel",
+                        "@width": "70",
+                        "@display": "true",
+                        "@sortable": "false",
+                        "@filterable": "true"
+                    }
+                ],
+                "filters": [
+                    {
+                        "@ref": "ID"
+                    },
+                    {
+                        "@ref": "ComponentName"
+                    }
+                ]
+            },
+            {
+                "@id": "ViolatedDbKpiForm",
+                "@label": "ViolatedDbKpiFormLabel",
+                "@object-url": "xxxx/yyyyy/ViolatedDbKpi.action",
+                "@refresh-rate": "180",
+                "@help-url": "${serverProtocol}://${host}:${requestBasedPort}/help.html",
+                "form-toolbar": [
+                    {
+                        "@ref": "Refresh",
+                        "@label": "SqlOutliersRefreshLabel"
+                    }
+                ],
+                "columns": [
+                    {
+                        "@attribute": "ID",
+                        "@display": "false"
+                    },
+                    {
+                        "@attribute": "KpiName",
+                        "@label": "KpiNameLabel",
+                        "@width": "70",
+                        "@display": "true",
+                        "@sortable": "false",
+                        "@filterable": "true"
+                    }
+                ],
+                "filters": [
+                    {
+                        "@ref": "ID"
+                    }
+                ]
+            }
+        ],
+        "summary-form": {
+            "@id": "SqlOutlierSummaryForm",
+            "@label": "SqlOutlierSummaryFormLabel",
+            "@object-url": "xxxx/yyyyy/SqlOutlierSummaryForm.action",
+            "@help-url": "${serverProtocol}://${host}:${requestBasedPort}/help.html",
+            "form-toolbars": [
+                {
+                    "@ref": "Refresh",
+                    "@label": "SqlOutlierRefreshLabel"
+                },
+                {
+                    "@ref": "OpenWindow",
+                    "@label": "SqlOutlierOpenWindowLabel"
+                }
+            ],
+            "field-group": [
+                {
+                    "@label": "SummaryLabel",
+                    "field": [
+                        {
+                            "@attribute": "ID",
+                            "@label": "ApplicationIdLabel"
+                        },
+                        {
+                            "@attribute": "ComponentName",
+                            "@label": "ComponentNameLabel"
+                        },
+                        {
+                            "@attribute": "SqlID",
+                            "@label": "SqlIDLabel"
+                        },
+                        {
+                            "@attribute": "SqlText",
+                            "@label": "SqlTextLabel"
+                        },
+                        {
+                            "@attribute": "Timestamp",
+                            "@label": "TimestampLabel"
+                        },
+                        {
+                            "@attribute": "InferenceMessage",
+                            "@label": "InferenceMessageLabel"
+                        }
+                    ]
+                },
+                {
+                    "@label": "DbKpiLabel",
+                    "field": [
+                        {
+                            "@attribute": "AverageCPU",
+                            "@label": "AverageCPULabel"
+                        },
+                        {
+                            "@attribute": "RowsProcessed",
+                            "@label": "RowsProcessedLabel"
+                        },
+                        {
+                            "@attribute": "ApplicationWaitTime",
+                            "@label": "ApplicationWaitTimeLabel"
+                        },
+                        {
+                            "@attribute": "ApplicationElapsedTime",
+                            "@label": "ApplicationElapsedTimeLabel"
+                        },
+                        {
+                            "@attribute": "ExecutionCount",
+                            "@label": "ExecutionCountLabel"
+                        },
+                        {
+                            "@attribute": "SortCount",
+                            "@label": "SortCountLabel"
+                        },
+                        {
+                            "@attribute": "FetchCount",
+                            "@label": "FetchCountLabel"
+                        },
+                        {
+                            "@attribute": "DiskReads",
+                            "@label": "DiskReadsLabel"
+                        },
+                        {
+                            "@attribute": "DiskWrites",
+                            "@label": "DiskWritesLabel"
+                        }
+                    ]
+                },
+                {
+                    "@label": "HistoryLabel",
+                    "field": [
+                        {
+                            "@attribute": "LastHourOutlier",
+                            "@label": "LastHourOutlierLabel"
+                        },
+                        {
+                            "@attribute": "LastDayOutlier",
+                            "@label": "LastDayOutlierLabel"
+                        },
+                        {
+                            "@attribute": "LastHourOccurrences",
+                            "@label": "LastHourOccurrencesLabel"
+                        },
+                        {
+                            "@attribute": "LastDayOccurrences",
+                            "@label": "LastDayOccurrencesLabel"
+                        }
+                    ]
+                }
+            ],
+            "filters": [
+                {
+                    "@ref": "ID"
+                }
+            ]
+        }
+    },
+    "analysis-panes": [
+        {
+            "@ref": "SqlOutliersForm",
+            "forms": [
+                {
+                    "@ref": "SqlOutlierSummaryForm",
+                    "@query-by": "ID"
+                },
+                {
+                    "@ref": "ViolatedDbKpiForm",
+                    "@query-by": "ID"
+                }
+            ]
+        }
+    ],
+    "labels": [
+        {
+            "@id": "AnalyticsPaneLabel",
+            "label-value": [
+                {
+                    "@lang": "en",
+                    "#text": "Analytics"
+                },
+                {
+                    "@lang": "ja"
+                },
+                {
+                    "@lang": "zh-CN"
+                },
+                {
+                    "@lang": "ko"
+                }
+            ]
+        }
+    ]
+}
