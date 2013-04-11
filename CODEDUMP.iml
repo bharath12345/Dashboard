@@ -15,9 +15,11 @@
       <excludeFolder url="file://$MODULE_DIR$/uiConfig/.settings" />
       <excludeFolder url="file://$MODULE_DIR$/uiConfig/target" />
       <excludeFolder url="file://$MODULE_DIR$/uiCoreExtensions/.settings" />
+      <excludeFolder url="file://$MODULE_DIR$/uiCoreExtensions/uiAnalyticsExtension/.settings" />
       <excludeFolder url="file://$MODULE_DIR$/uiCoreExtensions/uiAnalyticsExtension/target" />
       <excludeFolder url="file://$MODULE_DIR$/uiCoreExtensions/uiApplicationExtension/.settings" />
       <excludeFolder url="file://$MODULE_DIR$/uiCoreExtensions/uiApplicationExtension/target" />
+      <excludeFolder url="file://$MODULE_DIR$/uiCoreExtensions/uiTransactionExtension/.settings" />
       <excludeFolder url="file://$MODULE_DIR$/uiCoreExtensions/uiTransactionExtension/target" />
       <excludeFolder url="file://$MODULE_DIR$/uiJS" />
       <excludeFolder url="file://$MODULE_DIR$/uiWAR/.settings" />

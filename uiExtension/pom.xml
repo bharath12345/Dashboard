@@ -10,7 +10,7 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>uiExtension</artifactId>
+    <artifactId>uiExtensionLib</artifactId>
     <version>01.00.000.000</version>
     <name>AppsOne UI Extension</name>
     <packaging>jar</packaging>
@@ -30,6 +30,16 @@
         </plugins>
     </build>
 
+     <dependencies>
+         <!--
+            This is a lib - ideally it should be deployed in Tomcat lib or jboss lib. It
+                could also be packaged in the WAR's lib
+            It thus should NOT use frameworks like Spring and Struts
+            Its job is to provide the basic building block data structures to assemble
+                the UI extensions project
+            This lib should be necessarily by all extensions and appsone UI main
+         -->
 
+     </dependencies>
 
 </project>
