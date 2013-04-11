@@ -5,6 +5,9 @@ import org.apache.commons.io.IOUtils;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.core.io.Resource;
 
 import java.io.File;
 import java.io.InputStream;
@@ -48,12 +51,11 @@ public class ExtensionAction extends AbstractAction {
         */
         try {
 
-            /*URL resourceUrl = Thread.currentThread().getContextClassLoader().getResource("/WEB-INF/classes/uiApplicationExtension.xml");
-            File appsoneExtensions = new File(resourceUrl.toURI());
-            uiExtension = FileUtils.readFileToString(appsoneExtensions);*/
-
-            InputStream xmlStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("/WEB-INF/classes/uiApplicationExtension.xml");
+            ApplicationContext ctx = new ClassPathXmlApplicationContext();
+            Resource uiExtnResource = ctx.getResource("classpath:uiApplicationExtension.xml");
+            InputStream xmlStream = uiExtnResource.getInputStream();
             uiExtension = IOUtils.toString(xmlStream, "UTF-8");
+            xmlStream.close();
 
         } catch (Exception e) {
             e.printStackTrace();
