@@ -7,19 +7,12 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="lib6" level="project" />
+    <orderEntry type="library" name="lib2" level="project" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../../../uiConfig/target/uiConfig-01.00.000.000.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../.metadata/.plugins/org.jboss.tools.common.projecttemplates/lib/servlet/2.3/servlet.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -34,8 +27,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="2.4" level="project" />
-    <orderEntry type="library" name="lib" level="project" />
+    <orderEntry type="library" name="lib8" level="project" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
@@ -45,9 +37,18 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module" module-name="uiConfig" />
-    <orderEntry type="module" module-name="CODEDUMP" />
+    <orderEntry type="library" name="2.4" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../.metadata/.plugins/org.jboss.tools.common.projecttemplates/lib/servlet/2.3/servlet.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
     <orderEntry type="module" module-name="uiCommonLib" />
+    <orderEntry type="module" module-name="uiConfig" />
   </component>
 </module>
 
