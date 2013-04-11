@@ -21,8 +21,8 @@ import org.springframework.beans.factory.InitializingBean;
 
 import org.apache.http.client.fluent.Request;
 
-import net.sf.json.xml.XMLSerializer;
-import net.sf.json.JSON;
+import net.sf.json.xml.*;
+import net.sf.json.*;
 
 /**
  * User: bharadwaj
@@ -38,7 +38,9 @@ public class ExtensionLoader implements InitializingBean {
 
         3) Use a HTTP client to query the uiExtension.xml and cache it locally
 
-        4) Parse the XML to build various cache's for -
+        ToDo: remove the 'type' attributes from the XML
+
+        4) Convert the XML to JSON and build various cache's for -
             4.1) Accordion Panes - These are visible at all times
             4.2) Links
             4.3) Forms, Attributes, Menu, Toolbar, Label, Analysis-Pane
@@ -116,6 +118,22 @@ public class ExtensionLoader implements InitializingBean {
     }
 
     private void addJsonToCache(JSON json) {
+        JSONObject jsonObject = (JSONObject) json;
+        String extensionName = (String)jsonObject.get("@label");
+
+        JsonCache.paneCache.add((JSONObject)jsonObject.get("pane"));
+
+        JsonCache jsonCache = new JsonCache();
+        JsonCache.ExtensionCache extensionCache = jsonCache.new ExtensionCache();
+        JsonCache.extensionCacheMap.put(extensionName, extensionCache);
+
+        extensionCache.menuCache = (JSONObject)jsonObject.get("menu");
+        extensionCache.formsCache = (JSONObject)jsonObject.get("forms");
+
+        extensionCache.attributesCache = (JSONArray)jsonObject.get("attributes");
+        extensionCache.toolbarCache = (JSONArray)jsonObject.get("toolbar");
+        extensionCache.analysisPaneCache = (JSONArray)jsonObject.get("analysis-panes");
+        extensionCache.labelCache = (JSONArray)jsonObject.get("labels");
 
     }
 

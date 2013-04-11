@@ -176,7 +176,7 @@
         <module>uiCommonLib</module>
         <module>uiConfig</module>
         <module>uiWeb</module>
-        <module>uiExtension</module>
+        <module>uiExtensionLib</module>
         <module>uiCoreExtensions</module>
         <module>uiJS</module>
         <module>uiWAR</module>
