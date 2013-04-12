@@ -109,7 +109,7 @@ public class ExtensionLoader implements InitializingBean, ApplicationContextAwar
             Map<String, String> extensionMap = getExtensionSchemaUrls();
             Set<String> extensionNames = extensionMap.keySet();
             for (String extensionName : extensionNames) {
-                String extensionURL = "http://localhost:" + getServerPort() + "/";
+                String extensionURL = "http://localhost:" + getServerPort();
                 extensionURL += extensionMap.get(extensionName);
                 extensionURL += "/uiExtension.action";
                 System.out.println("Fetching UI Extension from URL: " + extensionURL);
@@ -179,8 +179,8 @@ public class ExtensionLoader implements InitializingBean, ApplicationContextAwar
 
     private String getExtensionXML(String extensionURL) throws Exception {
         return Request.Get(extensionURL)
-                .connectTimeout(1000)
-                .socketTimeout(1000)
+                .connectTimeout(10000)
+                .socketTimeout(10000)
                 .execute().returnContent().asString();
     }
 

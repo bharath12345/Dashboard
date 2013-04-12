@@ -55,20 +55,10 @@ public class ExtensionAction extends AbstractAction {
         try {
 
             ApplicationContext ctx = new ClassPathXmlApplicationContext();
-            Resource uiExtnResource = ctx.getResource("classpath:uiApplicationExtension.xml");
+            Resource uiExtnResource = ctx.getResource("classpath:uiExtensionAnalytics.xml");
             InputStream xmlStream = uiExtnResource.getInputStream();
             uiExtension = IOUtils.toString(xmlStream, "UTF-8");
             xmlStream.close();
-
-            uiExtension = uiExtension.replaceAll("\t", "");
-            uiExtension = uiExtension.replaceAll("\n", "");
-
-            XMLSerializer xmlSerializer = new XMLSerializer();
-            JSON json = xmlSerializer.read(uiExtension);
-
-
-
-            uiExtension = json.toString(1);
 
         } catch (Exception e) {
             e.printStackTrace();

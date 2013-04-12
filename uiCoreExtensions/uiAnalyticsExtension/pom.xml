@@ -66,9 +66,9 @@
             <version>4.2.4</version>
         </dependency>
         <dependency>
-            <groupId>commons-httpclient</groupId>
-            <artifactId>commons-httpclient</artifactId>
-            <version>3.1</version>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.2.3</version>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
@@ -77,15 +77,14 @@
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient-cache</artifactId>
+            <artifactId>fluent-hc</artifactId>
             <version>4.2.3</version>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>fluent-hc</artifactId>
+            <artifactId>httpclient-cache</artifactId>
             <version>4.2.3</version>
         </dependency>
-
 
         <!-- JSON LIB ************************************************************************************* -->
         <dependency>
@@ -191,11 +190,6 @@
             <groupId>commons-httpclient</groupId>
             <artifactId>commons-httpclient</artifactId>
             <version>3.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>4.0.1</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
