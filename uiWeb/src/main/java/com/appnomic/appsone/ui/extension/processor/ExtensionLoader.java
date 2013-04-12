@@ -47,14 +47,19 @@ public class ExtensionLoader implements InitializingBean {
             Note: No hot-deployment in first release planned. If a extension.xml changes on the fly,
                 then the user has to restart the AppsOne Dashboard UI to see the changes
 
-        5) For Accordion Panes and links - the UI has to be populated
+        5) For Accordion Panes and links - the UI has to be populated at all times. This data is sent over from
+            the cache when the UI starts getting rendered
 
-        When the user clicks on an particular link, connect to the data-source and
-            send the data after validation. The steps -
-            5.1) HTTP client receives json data
-            5.2) parse the data to make sure that the format is per the definition
-            5.3) Send the data to the UI
-            5.4) Depending on the refresh-time, send the data to UI regularly
+        6) When the user clicks on an particular link, an action will be invoked (say in uiApplicationExtension).
+         That action will first be sent the meta (say of the grid) which includes attribtues like the refresh
+         interval. But more importantly it also includes the action URL to invoke as data-url.
+         - The UI thus invokes this data-url at regular intervals to render data.
+         - On the server side, to publish data on the data-url, the server connects to the internal object-url,
+            fetches data and sends it over after validation. The steps -
+            6.1) HTTP client receives json data
+            6.2) parse the data to make sure that the format is per the definition
+            6.3) Send the data to the UI
+            6.4) Depending on the refresh-time, send the data to UI regularly
      */
 
     @Override
