@@ -18,8 +18,8 @@
             two) For AppsOne 'external' extensions - packaged outside the WAR in some system path
     -->
 
-    <extension id="Applications" url="/applications"/>
-    <extension id="Transactions" url="/transactions"/>
-    <extension id="Analytics" url="/analytics"/>
+    <extension id="Application" url="/uiApplicationExtension"/>
+    <extension id="Transaction" url="/uiTransactionExtension"/>
+    <extension id="Analytics" url="/uiAnalyticsExtension"/>
 
 </appsoneExtensions>

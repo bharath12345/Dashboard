@@ -30,17 +30,29 @@
 
 
     <dependencies>
-
+        <!--
+            The first 2 - javax.servlet and catalina - are a compile time dependency and should not be included in
+            the 'lib' of the WAR. Anyway tomcat natively has it in its lib
+        -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
             <version>2.5</version>
             <scope>provided</scope>
-            <!--
-                This is just a compile time dependency and need not be present in 'lib' as
-                    tomcat natively has it in its lib
-            -->
         </dependency>
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-catalina</artifactId>
+            <version>7.0.34</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-coyote</artifactId>
+            <version>7.0.34</version>
+            <scope>provided</scope>
+        </dependency>
+
 
         <!-- JDOM XML Parser *************************************************************************************** -->
         <dependency>
@@ -114,6 +126,11 @@
             <artifactId>json-lib</artifactId>
             <version>2.4</version>
             <classifier>jdk15</classifier>
+        </dependency>
+        <dependency>
+            <groupId>xom</groupId>
+            <artifactId>xom</artifactId>
+            <version>1.2.5</version>
         </dependency>
 
 
