@@ -36,30 +36,31 @@ public class ExtensionLoader implements InitializingBean {
 
         2) The URL of the various extensions are available in appsoneExtensions.xml
 
-        3) Use a HTTP client to query the uiExtension.xml and cache it locally
-
-        ToDo: remove the 'type' attributes from the XML
+        3) Use a HTTP client to query the uiExtension.xml and cache it locally in tmp of tomcat
 
         4) Convert the XML to JSON and build various cache's for -
-            4.1) Accordion Panes - These are visible at all times
-            4.2) Links
-            4.3) Forms, Attributes, Menu, Toolbar, Label, Analysis-Pane
+            4.1) Accordion Panes Links - These are visible at all times
+            4.2) Forms, Attributes, Menu, Toolbar, Label, Analysis-Pane
             Note: No hot-deployment in first release planned. If a extension.xml changes on the fly,
                 then the user has to restart the AppsOne Dashboard UI to see the changes
 
         5) For Accordion Panes and links - the UI has to be populated at all times. This data is sent over from
             the cache when the UI starts getting rendered
 
-        6) When the user clicks on an particular link, an action will be invoked (say in uiApplicationExtension).
-         That action will first be sent the meta (say of the grid) which includes attribtues like the refresh
-         interval. But more importantly it also includes the action URL to invoke as data-url.
-         - The UI thus invokes this data-url at regular intervals to render data.
-         - On the server side, to publish data on the data-url, the server connects to the internal object-url,
-            fetches data and sends it over after validation. The steps -
-            6.1) HTTP client receives json data
-            6.2) parse the data to make sure that the format is per the definition
-            6.3) Send the data to the UI
-            6.4) Depending on the refresh-time, send the data to UI regularly
+        6) When user clicks on an accordion link,
+             - the struts action to fetch the 'meta' is invoked. The URL (struts action) to fetch
+                the meta is singular - same for all links. It uses the incoming parameters to filter.
+                Thus the URL for the meta is NOT part of any extension.xml but part of the framework.
+                The meta (say of the grid) includes attributes like the refresh interval, column width etc.
+             - Nextly, the data. Again the data-url between the browser and A1 UI framework is a constant. It fetches the
+                right data by filtering based on parameters. The browser invokes this data-url at regular intervals per
+                the refresh time to render data. Again, the URL for the data between the browser and A1 UI framework
+                is NOT part of the extension.xml
+            - On the server side, to publish data on the data-url, the server connects to the internal object-url,
+                fetches data and sends it over after validation. The steps -
+                    * HTTP client receives json data
+                    * parse the data to make sure that the format is per the definition
+                    * Send data to UI
      */
 
     @Override
@@ -126,12 +127,11 @@ public class ExtensionLoader implements InitializingBean {
         JSONObject jsonObject = (JSONObject) json;
         String extensionName = (String)jsonObject.get("@label");
 
-        JsonCache.paneCache.add((JSONObject)jsonObject.get("pane"));
-
         JsonCache jsonCache = new JsonCache();
         JsonCache.ExtensionCache extensionCache = jsonCache.new ExtensionCache();
         JsonCache.extensionCacheMap.put(extensionName, extensionCache);
 
+        extensionCache.paneCache = (JSONObject)jsonObject.get("pane");
         extensionCache.menuCache = (JSONObject)jsonObject.get("menu");
         extensionCache.formsCache = (JSONObject)jsonObject.get("forms");
 
@@ -139,6 +139,7 @@ public class ExtensionLoader implements InitializingBean {
         extensionCache.toolbarCache = (JSONArray)jsonObject.get("toolbar");
         extensionCache.analysisPaneCache = (JSONArray)jsonObject.get("analysis-panes");
         extensionCache.labelCache = (JSONArray)jsonObject.get("labels");
+
 
     }
 

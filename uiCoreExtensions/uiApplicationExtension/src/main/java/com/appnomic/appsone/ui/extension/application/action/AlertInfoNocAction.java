@@ -1,7 +1,5 @@
 package com.appnomic.appsone.ui.extension.application.action;
 
-import com.appnomic.appsone.ui.extension.application.viewobject.ApplicationDataVO;
-import com.appnomic.appsone.ui.extension.application.viewobject.MetricData;
 import com.appnomic.domainobject.AlertCountSummary;
 import com.appnomic.domainobject.AlertCountSummary.SUMMARY_CATEGORY;
 import com.appnomic.domainobject.AlertSeverity;
@@ -26,8 +24,7 @@ public class AlertInfoNocAction extends AbstractAction {
 	private ComponentDataService componentDataService;
 	private ApplicationDataService applicationDataService;
 	
-	private ApplicationDataVO applicationDataVO;
-	
+
 	private Random rand;
 	private static final int min = 0, max = 100;
 	
@@ -56,14 +53,6 @@ public class AlertInfoNocAction extends AbstractAction {
 		this.param = param;
 	}
 
-	public ApplicationDataVO getApplicationDataVO() {
-		return applicationDataVO;
-	}
-
-	public void setApplicationDataVO(ApplicationDataVO applicationDataVO) {
-		this.applicationDataVO = applicationDataVO;
-	}
-
 	public AlertInfoNocAction() {
 	}
 	
@@ -79,7 +68,7 @@ public class AlertInfoNocAction extends AbstractAction {
 		this.alertDataService = alertDataService;
 	}
 
-	private void setDummyApplicationData(String applicationName, ApplicationDataVO applicationDataVO) {
+	/*private void setDummyApplicationData(String applicationName, ApplicationDataVO applicationDataVO) {
 		MetricData [] metricDataset = new MetricData[5];
 		applicationDataVO.setMetrics(metricDataset);
 		applicationDataVO.setApplicationName(applicationName);
@@ -101,7 +90,7 @@ public class AlertInfoNocAction extends AbstractAction {
 		metricDataset.setCount(counts);
 		metricDataset.setName(category.name());
 		return metricDataset;
-	}
+	}*/
 	
 	@Action(value="/ApplicationAlertsForm", results = {
 	        @Result(name="success", type="json", params = {
@@ -129,7 +118,7 @@ public class AlertInfoNocAction extends AbstractAction {
 		int id = Integer.parseInt(parameters.get("id")[0]);
 		System.out.println("application being assembled = " + applicationName + "id = " + id);
 		
-		applicationDataVO = new ApplicationDataVO();
+		/*applicationDataVO = new ApplicationDataVO();
 		
 		//String[] startEndTimes = TimeUtility.get5MinStartEnd();
 		String[] startEndTimes = TimeUtility.get30MinStartEnd();
@@ -156,12 +145,12 @@ public class AlertInfoNocAction extends AbstractAction {
 			System.out.println("Actual alerts were NOT found. Displaying dummy data");
 			//setDummyApplicationData(applicationName, applicationDataVO);
 			return SUCCESS;
-		}
+		}*/
 		
 		return SUCCESS;
 	}
 	
-	private MetricData getMetricData(AlertCountSummary acs, SUMMARY_CATEGORY category) {
+	/*private MetricData getMetricData(AlertCountSummary acs, SUMMARY_CATEGORY category) {
 		MetricData metricDataset = new MetricData();
 		int [] counts = new int[3];
 		if(acs != null) {
@@ -176,5 +165,5 @@ public class AlertInfoNocAction extends AbstractAction {
 		metricDataset.setCount(counts);
 		metricDataset.setName(category.name());
 		return metricDataset;
-	}
+	}*/
 }

@@ -6,7 +6,7 @@
     <artifactId>appsone-dashboard</artifactId>
     <name>AppsOne Dashboard UI</name>
     <groupId>com.appnomic.appsone.dashboard</groupId>
-    <version>01.00.000.000</version>
+    <version>04.20.100.000</version>
 
     <packaging>pom</packaging>
 
@@ -18,11 +18,11 @@
         <spring.version>3.1.3.RELEASE</spring.version>
         <struts.version>2.1.8</struts.version>
         
-		<uiCommonLib.version>01.00.000.000</uiCommonLib.version>
-		<uiConfig.version>01.00.000.000</uiConfig.version>
-		<uiJS.version>01.00.000.000</uiJS.version>
-		<uiWeb.version>01.00.000.000</uiWeb.version>
-        <uiExtension.version>01.00.000.000</uiExtension.version>
+		<uiCommonLib.version>04.20.100.000</uiCommonLib.version>
+		<uiConfig.version>04.20.100.000</uiConfig.version>
+		<uiJS.version>04.20.100.000</uiJS.version>
+		<uiWeb.version>04.20.100.000</uiWeb.version>
+        <uiExtension.version>04.20.100.000</uiExtension.version>
 
         <main.basedir>${project.basedir}</main.basedir>
     </properties>

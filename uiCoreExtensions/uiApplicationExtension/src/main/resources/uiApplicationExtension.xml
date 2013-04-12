@@ -26,17 +26,32 @@
 
     <!-- *************** GLOBAL ATTRIBUTES EXPOSED BY THIS PANE **************************************************** -->
     <attributes>
-        <attribute>ApplicationName</attribute>
+        <attribute id="ApplicationName" label="ApplicationNameLabel"/>
+        <attribute id="ComponentAvailabilityCriticalAlerts" label=""/>
+        <attribute id="ComponentAvailabilityMajorAlerts" label=""/>
+        <attribute id="ComponentAvailabilityMinorAlerts" label=""/>
+        <attribute id="ComponentStaticCriticalAlerts" label=""/>
+        <attribute id="ComponentStaticMajorAlerts" label=""/>
+        <attribute id="ComponentStaticMinorAlerts" label=""/>
+        <attribute id="OnlineTransactionCriticalAlerts" label=""/>
+        <attribute id="OnlineTransactionMajorAlerts" label=""/>
+        <attribute id="OnlineTransactionMinorAlerts" label=""/>
+        <attribute id="BatchTransactionCriticalAlerts" label=""/>
+        <attribute id="BatchTransactionMajorAlerts" label=""/>
+        <attribute id="BatchTransactionMinorAlerts" label=""/>
+        <attribute id="ComponentAnalyticCriticalAlerts" label=""/>
+        <attribute id="ComponentAnalyticMajorAlerts" label=""/>
+        <attribute id="ComponentAnalyticMinorAlerts" label=""/>
     </attributes>
 
 
 
     <!-- *************** BUTTON DEFINITION FOR ALL FORMS *********************************************************** -->
 	<toolbar>
-		<tool id="Refresh" type="refresh"/>
-		<tool id="StartRefresh" type="startRefresh"/>
-		<tool id="StopRefresh" type="stopRefresh"/>
-		<tool id="OpenWindow" type="openWindow"/>
+		<tool id="Refresh"/>
+		<tool id="StartRefresh"/>
+		<tool id="StopRefresh"/>
+		<tool id="OpenWindow"/>
 	</toolbar>
 
 
@@ -61,54 +76,54 @@
 			</form-toolbar>
 		
 			<columns>
-				<column attribute="ID" display="false" type="long"/>
+				<column attribute="ID" display="false" data-type="long"/>
 				
 				<column attribute="ApplicationName" label="ApplicationNameLabel"
-					width="70" display="true" sortable="false" filterable="true" type="string"/>
+					width="70" display="true" sortable="false" filterable="true" data-type="string"/>
 					
 				<column label="ComponentAvailabilityAlertsLabel">
 					<subcolumn attribute="ComponentAvailabilityCriticalAlerts" label="ComponentAvailabilityCriticalAlertsLabel"
-					width="70" display="true" sortable="false" filterable="true" type="long"/>
+					width="70" display="true" sortable="false" filterable="true" data-type="long"/>
 					<subcolumn attribute="ComponentAvailabilityMajorAlerts" label="ComponentAvailabilityMajorAlertsLabel"
-					width="70" display="true" sortable="false" filterable="true" type="long"/>
+					width="70" display="true" sortable="false" filterable="true" data-type="long"/>
 					<subcolumn attribute="ComponentAvailabilityMinorAlerts" label="ComponentAvailabilityMinorAlertsLabel"
-					width="70" display="true" sortable="false" filterable="true" type="long"/>
+					width="70" display="true" sortable="false" filterable="true" data-type="long"/>
 				</column>
 				
 				<column label="ComponentStaticAlertsLabel">
 					<subcolumn attribute="ComponentStaticCriticalAlerts" label="ComponentStaticCriticalAlertsLabel"
-					width="70" display="true" sortable="false" filterable="true" type="long"/>
+					width="70" display="true" sortable="false" filterable="true" data-type="long"/>
 					<subcolumn attribute="ComponentStaticMajorAlerts" label="ComponentStaticMajorAlertsLabel"
-					width="70" display="true" sortable="false" filterable="true" type="long"/>
+					width="70" display="true" sortable="false" filterable="true" data-type="long"/>
 					<subcolumn attribute="ComponentStaticMinorAlerts" label="ComponentStaticMinorAlertsLabel"
-					width="70" display="true" sortable="false" filterable="true" type="long"/>
+					width="70" display="true" sortable="false" filterable="true" data-type="long"/>
 				</column>
 				
 				<column label="OnlineTransactionAlertsLabel">
 					<subcolumn attribute="OnlineTransactionCriticalAlerts" label="OnlineTransactionCriticalAlertsLabel"
-					width="70" display="true" sortable="false" filterable="true" type="long"/>
+					width="70" display="true" sortable="false" filterable="true" data-type="long"/>
 					<subcolumn attribute="OnlineTransactionMajorAlerts" label="OnlineTransactionMajorAlertsLabel"
-					width="70" display="true" sortable="false" filterable="true" type="long"/>
+					width="70" display="true" sortable="false" filterable="true" data-type="long"/>
 					<subcolumn attribute="OnlineTransactionMinorAlerts" label="OnlineTransactionMinorAlertsLabel"
-					width="70" display="true" sortable="false" filterable="true" type="long"/>
+					width="70" display="true" sortable="false" filterable="true" data-type="long"/>
 				</column>
 
 				<column label="BatchTransactionAlertsLabel">
 					<subcolumn attribute="BatchTransactionCriticalAlerts" label="BatchTransactionCriticalAlertsLabel"
-					width="70" display="true" sortable="false" filterable="true" type="long"/>
+					width="70" display="true" sortable="false" filterable="true" data-type="long"/>
 					<subcolumn attribute="BatchTransactionMajorAlerts" label="BatchTransactionMajorAlertsLabel"
-					width="70" display="true" sortable="false" filterable="true" type="long"/>
+					width="70" display="true" sortable="false" filterable="true" data-type="long"/>
 					<subcolumn attribute="BatchTransactionMinorAlerts" label="BatchTransactionMinorAlertsLabel"
-					width="70" display="true" sortable="false" filterable="true" type="long"/>
+					width="70" display="true" sortable="false" filterable="true" data-type="long"/>
 				</column>
 				
 				<column label="ComponentAnalyticAlertsLabel">
 					<subcolumn attribute="ComponentAnalyticCriticalAlerts" label="ComponentAnalyticCriticalAlertsLabel"
-					width="70" display="true" sortable="false" filterable="true" type="long"/>
+					width="70" display="true" sortable="false" filterable="true" data-type="long"/>
 					<subcolumn attribute="ComponentAnalyticMajorAlerts" label="ComponentAnalyticMajorAlertsLabel"
-					width="70" display="true" sortable="false" filterable="true" type="long"/>
+					width="70" display="true" sortable="false" filterable="true" data-type="long"/>
 					<subcolumn attribute="ComponentAnalyticMinorAlerts" label="ComponentAnalyticMinorAlertsLabel"
-					width="70" display="true" sortable="false" filterable="true" type="long"/>
+					width="70" display="true" sortable="false" filterable="true" data-type="long"/>
 				</column>
 				
 			</columns>
@@ -186,9 +201,9 @@
     <labels>
 		<label id="ApplicationPaneLabel">
 			<label-value lang="en">Applications</label-value>
-			<label-value lang="ja"></label-value>
-			<label-value lang="zh-CN"></label-value>
-			<label-value lang="ko"></label-value>
+			<label-value lang="ja">アプリケーション</label-value>
+			<label-value lang="zh-CN">应用程序</label-value>
+			<label-value lang="ko">응용 프로그램</label-value>
 		</label>
 	</labels>
 </ui-extension>

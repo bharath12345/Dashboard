@@ -6,12 +6,12 @@
     <parent>
         <groupId>com.appnomic.appsone.dashboard</groupId>
         <artifactId>appsone-dashboard</artifactId>
-        <version>01.00.000.000</version>
+        <version>04.20.100.000</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>uiExtensionLib</artifactId>
-    <version>01.00.000.000</version>
+    <version>${uiExtension.version}</version>
     <name>AppsOne UI Extension</name>
     <packaging>jar</packaging>
 

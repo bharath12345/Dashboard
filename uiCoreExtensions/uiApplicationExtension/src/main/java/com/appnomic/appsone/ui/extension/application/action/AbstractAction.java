@@ -9,7 +9,7 @@ import org.apache.struts2.interceptor.SessionAware;
 import java.util.Map;
 
 public abstract class AbstractAction
-							extends ActionSupport 
+							extends ActionSupport
 							implements ParameterAware, SessionAware, Action {
 	
 	protected Map<String, String[]> parameters;

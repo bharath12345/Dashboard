@@ -5,15 +5,15 @@
 
     <parent>
         <groupId>com.appnomic.appsone.dashboard</groupId>
-        <artifactId>appsone-dashboard</artifactId>
-        <version>01.00.000.000</version>
+        <artifactId>uiCoreExtensions</artifactId>
+        <version>04.20.100.000</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>uiApplicationExtension</artifactId>
     <name>AppsOne Application Extension</name>
     <packaging>war</packaging>
-    <version>01.00.000.000</version>
+    <version>04.20.100.000</version>
 
     <build>
         <plugins>

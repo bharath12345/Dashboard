@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+	<!-- For the purposes of development, we will leave devMode set to true. 
+		This allows several things to occur including provision of debugging level 
+		information on error pages as well as reloading of various resources with 
+		each request. -->
+	<constant name="struts.devMode" value="true" />
+    <!--constant name="struts.objectFactory" value="org.apache.struts2.spring.StrutsSpringObjectFactory" /-->
+
+    <!-- Below ones are for improved URL mapping -->
+    <constant name="struts.mapper.alwaysSelectFullNamespace" value="false"/>
+    <constant name="struts.enable.SlashesInActionNames" value="true"/>
+    <constant name="struts.patternMatcher" value="namedVariable"/>
+
+</struts>

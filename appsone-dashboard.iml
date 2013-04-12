@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="false">
+    <output url="file://$MODULE_DIR$/target/classes" />
+    <output-test url="file://$MODULE_DIR$/target/test-classes" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/.metadata" />
+      <excludeFolder url="file://$MODULE_DIR$/CODEDUMP" />
+      <excludeFolder url="file://$MODULE_DIR$/out" />
+      <excludeFolder url="file://$MODULE_DIR$/target" />
+      <excludeFolder url="file://$MODULE_DIR$/uiCommonLib/.settings" />
+      <excludeFolder url="file://$MODULE_DIR$/uiCommonLib/target" />
+      <excludeFolder url="file://$MODULE_DIR$/uiConfig/.settings" />
+      <excludeFolder url="file://$MODULE_DIR$/uiConfig/target" />
+      <excludeFolder url="file://$MODULE_DIR$/uiCoreExtensions/.settings" />
+      <excludeFolder url="file://$MODULE_DIR$/uiCoreExtensions/uiAnalyticsExtension/.settings" />
+      <excludeFolder url="file://$MODULE_DIR$/uiCoreExtensions/uiAnalyticsExtension/target" />
+      <excludeFolder url="file://$MODULE_DIR$/uiCoreExtensions/uiApplicationExtension/.settings" />
+      <excludeFolder url="file://$MODULE_DIR$/uiCoreExtensions/uiApplicationExtension/target" />
+      <excludeFolder url="file://$MODULE_DIR$/uiCoreExtensions/uiTransactionExtension/.settings" />
+      <excludeFolder url="file://$MODULE_DIR$/uiCoreExtensions/uiTransactionExtension/target" />
+      <excludeFolder url="file://$MODULE_DIR$/uiExtensionLib/.settings" />
+      <excludeFolder url="file://$MODULE_DIR$/uiExtensionLib/target" />
+      <excludeFolder url="file://$MODULE_DIR$/uiJS" />
+      <excludeFolder url="file://$MODULE_DIR$/uiWAR/.settings" />
+      <excludeFolder url="file://$MODULE_DIR$/uiWAR/target" />
+      <excludeFolder url="file://$MODULE_DIR$/uiWeb/.settings" />
+      <excludeFolder url="file://$MODULE_DIR$/uiWeb/target" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
+

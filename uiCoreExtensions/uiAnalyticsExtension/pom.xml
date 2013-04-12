@@ -5,13 +5,13 @@
 
     <parent>
         <groupId>com.appnomic.appsone.dashboard</groupId>
-        <artifactId>appsone-dashboard</artifactId>
-        <version>01.00.000.000</version>
+        <artifactId>uiCoreExtensions</artifactId>
+        <version>04.20.100.000</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>uiAnalyticsExtension</artifactId>
-    <version>01.00.000.000</version>
+    <version>04.20.100.000</version>
     <name>AppsOne Analytics Extension</name>
     <packaging>war</packaging>
 
@@ -19,12 +19,9 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>2.4</version>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.3</version>
                 <configuration>
-                    <includes>
-                        <include>**/*</include>
-                    </includes>
                 </configuration>
             </plugin>
         </plugins>
@@ -32,21 +29,100 @@
 
 
     <dependencies>
+
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
             <version>2.5</version>
             <scope>provided</scope>
+            <!--
+                This is just a compile time dependency and need not be present in 'lib' as
+                    tomcat natively has it in its lib
+            -->
         </dependency>
 
-        <!-- GOOGLE's Libraries -->
+        <!-- JDOM XML Parser *************************************************************************************** -->
         <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.2.2</version>
+            <groupId>jdom</groupId>
+            <artifactId>jdom</artifactId>
+            <version>1.1</version>
         </dependency>
 
-        <!-- STRUTS -->
+
+        <!-- Apache HTTPClient ************************************************************************************* -->
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+            <version>4.2.4</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-httpclient</groupId>
+            <artifactId>commons-httpclient</artifactId>
+            <version>3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpmime</artifactId>
+            <version>4.2.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient-cache</artifactId>
+            <version>4.2.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>fluent-hc</artifactId>
+            <version>4.2.3</version>
+        </dependency>
+
+
+        <!-- JSON LIB ************************************************************************************* -->
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>1.8.3</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>3.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.ezmorph</groupId>
+            <artifactId>ezmorph</artifactId>
+            <version>1.0.6</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.json-lib</groupId>
+            <artifactId>json-lib</artifactId>
+            <version>2.4</version>
+            <classifier>jdk15</classifier>
+        </dependency>
+        <dependency>
+            <groupId>xom</groupId>
+            <artifactId>xom</artifactId>
+            <version>1.2.5</version>
+        </dependency>
+
+
+
+        <!-- STRUTS ************************************************************************************************ -->
         <dependency>
             <groupId>org.apache.struts</groupId>
             <artifactId>struts2-core</artifactId>
@@ -79,7 +155,8 @@
             <version>${struts.version}</version>
         </dependency-->
 
-        <!-- SPRING -->
+
+        <!-- SPRING ************************************************************************************************ -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
@@ -156,7 +233,8 @@
             <version>2.1</version>
         </dependency>
 
-        <!-- UI's OWN ================================================== -->
+
+        <!-- UI's OWN ********************************************************************************************** -->
         <dependency>
             <groupId>com.appnomic.appsone.dashboard</groupId>
             <artifactId>uiCommonLib</artifactId>
@@ -175,7 +253,8 @@
             <version>${uiExtension.version}</version>
         </dependency>
 
-        <!-- Other AppsOne Services ================================================== -->
+
+        <!-- Other AppsOne Services ******************************************************************************** -->
         <dependency>
             <groupId>com.appnomic</groupId>
             <artifactId>appnomic-common</artifactId>

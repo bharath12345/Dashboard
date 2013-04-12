@@ -11,10 +11,11 @@ import java.util.*;
  */
 public class JsonCache {
 
-    public static List<JSONObject> paneCache = new ArrayList<JSONObject>();
     public static Map<String, ExtensionCache> extensionCacheMap = new HashMap<String, ExtensionCache>();
 
     public class ExtensionCache {
+        public JSONObject paneCache;
+
         public JSONObject menuCache;
         public JSONObject formsCache;
 

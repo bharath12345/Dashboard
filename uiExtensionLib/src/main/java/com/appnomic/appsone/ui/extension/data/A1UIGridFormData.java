@@ -15,5 +15,6 @@ public class A1UIGridFormData {
         or an array of those types
         - The HashMap holds one row. The array of HashMap holds the whole table
      */
-    List<Map<String, Object>> gridRows;
+
+    List<A1UIGridColumnData> gridRows;
 }
