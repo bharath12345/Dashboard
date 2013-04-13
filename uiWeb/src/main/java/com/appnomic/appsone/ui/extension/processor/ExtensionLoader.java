@@ -5,10 +5,7 @@ import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import com.appnomic.service.BeanLocator;
 import org.apache.catalina.connector.Connector;
@@ -92,12 +89,12 @@ public class ExtensionLoader implements InitializingBean, ApplicationContextAwar
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         System.out.println("bharath: setting the application context");
-        this.applicationContext=applicationContext;
+        this.applicationContext = applicationContext;
         BeanLocator.getInstance().setApplicationContext(applicationContext);
     }
 
     @PostConstruct
-    public void init(){
+    public void init() {
         System.out.println("bharath: postconstruct");
     }
 
@@ -105,21 +102,17 @@ public class ExtensionLoader implements InitializingBean, ApplicationContextAwar
     public void afterPropertiesSet() throws Exception {
         System.out.println("Starting UI Extension Loader...");
         try {
-            XMLSerializer xmlSerializer = new XMLSerializer();
             Map<String, String> extensionMap = getExtensionSchemaUrls();
             Set<String> extensionNames = extensionMap.keySet();
             for (String extensionName : extensionNames) {
                 String extensionURL = "http://localhost:" + getServerPort();
                 extensionURL += extensionMap.get(extensionName);
-                extensionURL += "/uiExtension.action";
+                extensionURL += "/uiExtension";
                 System.out.println("Fetching UI Extension from URL: " + extensionURL);
 
-                String uiExtensionXML = getExtensionXML(extensionURL);
-                String tempFilePath = System.getProperty("catalina.base") + "/temp/" + extensionName + "_Extension.xml";
-                FileUtils.writeStringToFile(new File(tempFilePath), uiExtensionXML);
-
-                JSON json = xmlSerializer.read(uiExtensionXML);
-                addJsonToCache(json);
+                Timer timer = new Timer();
+                FetchXmlTask fetchXmlTask = new FetchXmlTask(extensionName, extensionURL, timer);
+                timer.schedule(fetchXmlTask, 10 * 1000);
 
             }
         } catch (Exception e) {
@@ -187,6 +180,7 @@ public class ExtensionLoader implements InitializingBean, ApplicationContextAwar
     private void addJsonToCache(JSON json) {
         JSONObject jsonObject = (JSONObject) json;
         String extensionName = (String) jsonObject.get("@label");
+        System.out.println("extension name being added to json cache = " + extensionName);
 
         JsonCache jsonCache = new JsonCache();
         JsonCache.ExtensionCache extensionCache = jsonCache.new ExtensionCache();
@@ -200,8 +194,37 @@ public class ExtensionLoader implements InitializingBean, ApplicationContextAwar
         extensionCache.toolbarCache = (JSONArray) jsonObject.get("toolbar");
         extensionCache.analysisPaneCache = (JSONArray) jsonObject.get("analysis-panes");
         extensionCache.labelCache = (JSONArray) jsonObject.get("labels");
+    }
 
+    class FetchXmlTask extends TimerTask {
+        String extensionURL;
+        String extensionName;
+        Timer timer;
 
+        public FetchXmlTask(String extensionName, String extensionURL, Timer timer) {
+            this.extensionName =  extensionName;
+            this.extensionURL = extensionURL;
+            this.timer = timer;
+        }
+
+        public void run() {
+            try {
+
+                System.out.println("FetchXmlTask timer fired for name = " + extensionName + " url = " + extensionURL);
+                XMLSerializer xmlSerializer = new XMLSerializer();
+                String uiExtensionXML = getExtensionXML(extensionURL);
+                String tempFilePath = System.getProperty("catalina.base") + "/temp/" + extensionName + "_Extension.xml";
+                FileUtils.writeStringToFile(new File(tempFilePath), uiExtensionXML);
+
+                JSON json = xmlSerializer.read(uiExtensionXML);
+                addJsonToCache(json);
+
+                timer.cancel(); //Terminate the timer thread
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }
