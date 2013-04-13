@@ -11,6 +11,15 @@ import java.util.*;
  */
 public class JsonCache {
 
+    private static JsonCache jsonCache = new JsonCache();
+
+    private JsonCache() {
+    }
+
+    public static JsonCache getInstance() {
+        return jsonCache;
+    }
+
     public static Map<String, ExtensionCache> extensionCacheMap = new HashMap<String, ExtensionCache>();
 
     public class ExtensionCache {

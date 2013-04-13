@@ -21,10 +21,10 @@
 
     <!-- *************** BUTTON DEFINITION FOR ALL FORMS *********************************************************** -->
     <toolbar>
-        <tool id="Refresh" type="refresh"/>
-        <tool id="StartRefresh" type="startRefresh"/>
-        <tool id="StopRefresh" type="stopRefresh"/>
-        <tool id="OpenWindow" type="openWindow"/>
+        <tool id="Refresh"/>
+        <tool id="StartRefresh"/>
+        <tool id="StopRefresh"/>
+        <tool id="OpenWindow"/>
     </toolbar>
 
 
@@ -49,16 +49,16 @@
             </form-toolbar>
 
             <columns>
-                <column attribute="ID" display="false" type="long"/>
+                <column attribute="ID" display="false" data-type="long"/>
 
                 <column attribute="ComponentName" label="ComponentNameLabel"
-                        width="70" display="true" sortable="false" filterable="true" type="string"/>
+                        width="70" display="true" sortable="false" filterable="true" data-type="string"/>
                 <column attribute="SqlID" label="SqlIDLabel"
-                        width="70" display="true" sortable="false" filterable="true" type="long"/>
+                        width="70" display="true" sortable="false" filterable="true" data-type="long"/>
                 <column attribute="SqlText" label="SqlTextLabel"
-                        width="70" display="true" sortable="false" filterable="true" type="string"/>
+                        width="70" display="true" sortable="false" filterable="true" data-type="string"/>
                 <column attribute="Timestamp" label="TimestampLabel"
-                        width="70" display="true" sortable="false" filterable="true" type="string"/>
+                        width="70" display="true" sortable="false" filterable="true" data-type="string"/>
             </columns>
 
             <filters>
@@ -124,10 +124,10 @@
             </form-toolbar>
 
             <columns>
-                <column attribute="ID" display="false" type="long"/>
+                <column attribute="ID" display="false" data-type="long"/>
 
                 <column attribute="KpiName" label="KpiNameLabel"
-                        width="70" display="true" sortable="false" filterable="true" type="string"/>
+                        width="70" display="true" sortable="false" filterable="true" data-type="string"/>
 
             </columns>
 

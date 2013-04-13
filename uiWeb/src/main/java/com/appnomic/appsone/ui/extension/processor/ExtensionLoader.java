@@ -182,7 +182,7 @@ public class ExtensionLoader implements InitializingBean, ApplicationContextAwar
         String extensionName = (String) jsonObject.get("@label");
         System.out.println("extension name being added to json cache = " + extensionName);
 
-        JsonCache jsonCache = new JsonCache();
+        JsonCache jsonCache = JsonCache.getInstance();
         JsonCache.ExtensionCache extensionCache = jsonCache.new ExtensionCache();
         JsonCache.extensionCacheMap.put(extensionName, extensionCache);
 

@@ -31,10 +31,10 @@
 
     <!-- *************** BUTTON DEFINITION FOR ALL FORMS *********************************************************** -->
     <toolbar>
-        <tool id="Refresh" type="refresh"/>
-        <tool id="StartRefresh" type="startRefresh"/>
-        <tool id="StopRefresh" type="stopRefresh"/>
-        <tool id="OpenWindow" type="openWindow"/>
+        <tool id="Refresh"/>
+        <tool id="StartRefresh"/>
+        <tool id="StopRefresh"/>
+        <tool id="OpenWindow"/>
     </toolbar>
 
 
@@ -62,13 +62,13 @@
             </form-toolbar>
 
             <titlegrid-unit>
-                <grid-col attribute="TransactionName" type="string"/>
-                <grid-col attribute="TransactionAlertCount" type="long"/>
-                <grid-col attribute="TransactionVolume" type="long"/>
-                <grid-col attribute="TransactionResponseTime" type="long"/>
-                <grid-col attribute="TransactionSlowCount" type="long"/>
-                <grid-col attribute="TransactionFailureCount" type="long"/>
-                <grid-col attribute="TransactionSuccessCount" type="long"/>
+                <grid-col attribute="TransactionName" data-type="string"/>
+                <grid-col attribute="TransactionAlertCount" data-type="long"/>
+                <grid-col attribute="TransactionVolume" data-type="long"/>
+                <grid-col attribute="TransactionResponseTime" data-type="long"/>
+                <grid-col attribute="TransactionSlowCount" data-type="long"/>
+                <grid-col attribute="TransactionFailureCount" data-type="long"/>
+                <grid-col attribute="TransactionSuccessCount" data-type="long"/>
             </titlegrid-unit>
 
             <filters>
