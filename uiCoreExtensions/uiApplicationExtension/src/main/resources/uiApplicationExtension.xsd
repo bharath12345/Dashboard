@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified"
+           elementFormDefault="qualified"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="ui-extension" type="ui-extensionType"/>
+  <xs:complexType name="view-linkType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="ref"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="paneType">
+    <xs:sequence>
+      <xs:element type="view-linkType" name="view-link"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="label"/>
+  </xs:complexType>
+  <xs:complexType name="menu-containerType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="menu-item" minOccurs="0"/>
+      <xs:element type="menu-containerType" name="menu-container" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="menuType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="menu-item"/>
+      <xs:element type="menu-containerType" name="menu-container"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="attributeType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="id"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="attributesType">
+    <xs:sequence>
+      <xs:element type="attributeType" name="attribute"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="toolType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="id" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="toolbarType">
+    <xs:sequence>
+      <xs:element type="toolType" name="tool" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="form-toolType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="ref" use="optional"/>
+        <xs:attribute type="xs:string" name="label" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="form-toolbarType" mixed="true">
+    <xs:sequence>
+      <xs:element type="form-toolType" name="form-tool" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="ref" use="optional"/>
+    <xs:attribute type="xs:string" name="label" use="optional"/>
+  </xs:complexType>
+  <xs:complexType name="columnType" mixed="true">
+    <xs:sequence>
+      <xs:element type="subcolumnType" name="subcolumn" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="attribute" use="optional"/>
+    <xs:attribute type="xs:string" name="display" use="optional"/>
+    <xs:attribute type="xs:string" name="data-type" use="optional"/>
+    <xs:attribute type="xs:string" name="label" use="optional"/>
+    <xs:attribute type="xs:byte" name="width" use="optional"/>
+    <xs:attribute type="xs:string" name="sortable" use="optional"/>
+    <xs:attribute type="xs:string" name="filterable" use="optional"/>
+  </xs:complexType>
+  <xs:complexType name="subcolumnType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="attribute" use="optional"/>
+        <xs:attribute type="xs:string" name="label" use="optional"/>
+        <xs:attribute type="xs:byte" name="width" use="optional"/>
+        <xs:attribute type="xs:string" name="display" use="optional"/>
+        <xs:attribute type="xs:string" name="sortable" use="optional"/>
+        <xs:attribute type="xs:string" name="filterable" use="optional"/>
+        <xs:attribute type="xs:string" name="data-type" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="columnsType">
+    <xs:sequence>
+      <xs:element type="columnType" name="column" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="col-filterType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="ref" use="optional"/>
+        <xs:attribute type="xs:string" name="custom-name" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="filtersType">
+    <xs:sequence>
+      <xs:element type="col-filterType" name="col-filter" maxOccurs="unbounded" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>A form can be invoked with any of the col-filters as part of the query in the URL. The 'query-by'
+                    reference field in analysis-pane or view-link uses one or many of these col-filter
+                    to fetch a filtered grid
+
+                    Two types of filter actions are possible on the grid
+                    1) When the user selects something in the grid in main-view leading to
+                        showing of an analysis-pane. Here, the filtering uses the 'id' of the
+                        selected row to bring up the corresponding set of forms
+                        in the analysis pane
+                    2) When a filtered table/graph needs to be shown from a 'different' context. For
+                        example, user could select a Transaction in a Transaction-Grid. The status/health of the two
+                        endpoint applications of the selected transaction needs to be shown as a grid in a Analysis-pane
+                        form-tab. On the selection of a transaction, the TransactionID is passed as custom-name filter,
+                        the response for which should be a filtered grid of 2 application rows for the endpoints
+                    3) When a filtered table needs to be shown on a particular value condition in a column
+
+                    ToDo: are separate col-filter required for columns?? Cant it be default part of all tables URLs? That is
+                    ToDo:    a filtered table can be queried for any of its columns depending on the type ('long' column
+                    ToDo:    can have filtering like =,!=,>,&lt;. 'string' column can have filtering like =,!=,regEx, 'boolean'
+                    ToDo:    column can have filtering by true/false etc). Further, since a URL routing framework like
+                    ToDo:    crossroads can be used - it can create</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="grid-formType" mixed="true">
+    <xs:sequence>
+      <xs:element type="form-toolbarType" name="form-toolbar" minOccurs="0"/>
+      <xs:element type="columnsType" name="columns" minOccurs="0"/>
+      <xs:element type="filtersType" name="filters" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="id" use="optional"/>
+    <xs:attribute type="xs:string" name="label" use="optional"/>
+    <xs:attribute type="xs:string" name="object-url" use="optional"/>
+    <xs:attribute type="xs:short" name="refresh-rate" use="optional"/>
+    <xs:attribute type="xs:string" name="help-url" use="optional"/>
+    <xs:attribute type="xs:string" name="ref" use="optional"/>
+    <xs:attribute type="xs:string" name="query-by" use="optional"/>
+  </xs:complexType>
+  <xs:complexType name="form-toolbarsType">
+    <xs:sequence>
+      <xs:element type="form-toolbarType" name="form-toolbar" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="fieldType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="attribute" use="optional"/>
+        <xs:attribute type="xs:string" name="label" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="field-groupType">
+    <xs:sequence>
+      <xs:element type="fieldType" name="field" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="label"/>
+  </xs:complexType>
+  <xs:complexType name="summary-formType">
+    <xs:sequence>
+      <xs:element type="form-toolbarsType" name="form-toolbars"/>
+      <xs:element type="field-groupType" name="field-group"/>
+      <xs:element type="filtersType" name="filters"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="id"/>
+    <xs:attribute type="xs:string" name="label"/>
+    <xs:attribute type="xs:string" name="object-url"/>
+    <xs:attribute type="xs:string" name="help-url"/>
+  </xs:complexType>
+  <xs:complexType name="formsType">
+    <xs:sequence>
+      <xs:element type="grid-formType" name="grid-form">
+        <xs:annotation>
+          <xs:documentation>If the underlying JSON from the url has more fields then set the fields that do not need to be displayed
+            in the grid as display=false. So, there can be multiple grids from the same URL with different sets of
+            columns being shown. The ID field should always be display=false
+         *******************************************************************************************************</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="summary-formType" name="summary-form" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>******************************************************************************************************* 
+            There is NO refresh rate for summary forms
+            Summary forms are always invoked with ID as the key</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="analysis-paneType">
+    <xs:sequence>
+      <xs:element type="formsType" name="forms"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="ref"/>
+  </xs:complexType>
+  <xs:complexType name="analysis-panesType">
+    <xs:sequence>
+      <xs:element type="analysis-paneType" name="analysis-pane"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="label-valueType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="lang" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="labelType">
+    <xs:sequence>
+      <xs:element type="label-valueType" name="label-value" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="id"/>
+  </xs:complexType>
+  <xs:complexType name="labelsType">
+    <xs:sequence>
+      <xs:element type="labelType" name="label"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ui-extensionType">
+    <xs:sequence>
+      <xs:element type="paneType" name="pane">
+        <xs:annotation>
+          <xs:documentation>*************** PANE NAME IN THE ACCORDION ****************************************************************</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="menuType" name="menu">
+        <xs:annotation>
+          <xs:documentation>*************** MENU IN THE MAIN DASHBOARD **************************************************************** 
+        The menu is not form specific but available for the whole pane</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="attributesType" name="attributes">
+        <xs:annotation>
+          <xs:documentation>*************** GLOBAL ATTRIBUTES EXPOSED BY THIS PANE ****************************************************</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="toolbarType" name="toolbar">
+        <xs:annotation>
+          <xs:documentation>*************** BUTTON DEFINITION FOR ALL FORMS ***********************************************************</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="formsType" name="forms">
+        <xs:annotation>
+          <xs:documentation>*************** FORMS *************************************************************************************</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="analysis-panesType" name="analysis-panes">
+        <xs:annotation>
+          <xs:documentation>*************** ANALYSIS PANES ****************************************************************************</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="labelsType" name="labels">
+        <xs:annotation>
+          <xs:documentation>*************** LABELS ************************************************************************************</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="label"/>
+  </xs:complexType>
+</xs:schema>

@@ -3,7 +3,6 @@ package com.appnomic.appsone.ui.extension.servlet;
 import com.appnomic.appsone.ui.extension.processor.JsonCache;
 import com.google.gson.Gson;
 import net.sf.json.JSONObject;
-import org.apache.commons.io.IOUtils;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

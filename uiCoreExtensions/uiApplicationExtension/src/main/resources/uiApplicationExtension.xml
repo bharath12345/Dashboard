@@ -2,6 +2,9 @@
 
 <ui-extension label="ApplicationExtension">
 
+    <note xmlns="http://www.appnomic.com"/>
+
+
     <!-- *************** PANE NAME IN THE ACCORDION **************************************************************** -->
     <pane label="ApplicationPaneLabel">
 		<view-link ref="ApplicationAlertsForm" />
@@ -26,22 +29,7 @@
 
     <!-- *************** GLOBAL ATTRIBUTES EXPOSED BY THIS PANE **************************************************** -->
     <attributes>
-        <attribute id="ApplicationName" label="ApplicationNameLabel"/>
-        <attribute id="ComponentAvailabilityCriticalAlerts" label=""/>
-        <attribute id="ComponentAvailabilityMajorAlerts" label=""/>
-        <attribute id="ComponentAvailabilityMinorAlerts" label=""/>
-        <attribute id="ComponentStaticCriticalAlerts" label=""/>
-        <attribute id="ComponentStaticMajorAlerts" label=""/>
-        <attribute id="ComponentStaticMinorAlerts" label=""/>
-        <attribute id="OnlineTransactionCriticalAlerts" label=""/>
-        <attribute id="OnlineTransactionMajorAlerts" label=""/>
-        <attribute id="OnlineTransactionMinorAlerts" label=""/>
-        <attribute id="BatchTransactionCriticalAlerts" label=""/>
-        <attribute id="BatchTransactionMajorAlerts" label=""/>
-        <attribute id="BatchTransactionMinorAlerts" label=""/>
-        <attribute id="ComponentAnalyticCriticalAlerts" label=""/>
-        <attribute id="ComponentAnalyticMajorAlerts" label=""/>
-        <attribute id="ComponentAnalyticMinorAlerts" label=""/>
+        <attribute id="ApplicationName"/>
     </attributes>
 
 

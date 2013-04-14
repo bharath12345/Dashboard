@@ -177,24 +177,6 @@ public class ExtensionLoader implements InitializingBean, ApplicationContextAwar
                 .execute().returnContent().asString();
     }
 
-    private void addJsonToCache(JSON json) {
-        JSONObject jsonObject = (JSONObject) json;
-        String extensionName = (String) jsonObject.get("@label");
-        System.out.println("extension name being added to json cache = " + extensionName);
-
-        JsonCache jsonCache = JsonCache.getInstance();
-        JsonCache.ExtensionCache extensionCache = jsonCache.new ExtensionCache();
-        JsonCache.extensionCacheMap.put(extensionName, extensionCache);
-
-        extensionCache.paneCache = (JSONObject) jsonObject.get("pane");
-        extensionCache.menuCache = (JSONObject) jsonObject.get("menu");
-        extensionCache.formsCache = (JSONObject) jsonObject.get("forms");
-
-        extensionCache.attributesCache = (JSONArray) jsonObject.get("attributes");
-        extensionCache.toolbarCache = (JSONArray) jsonObject.get("toolbar");
-        extensionCache.analysisPaneCache = (JSONArray) jsonObject.get("analysis-panes");
-        extensionCache.labelCache = (JSONArray) jsonObject.get("labels");
-    }
 
     class FetchXmlTask extends TimerTask {
         String extensionURL;
@@ -209,15 +191,19 @@ public class ExtensionLoader implements InitializingBean, ApplicationContextAwar
 
         public void run() {
             try {
+                String tempFilePath = System.getProperty("catalina.base") + "/temp/" + extensionName + "_Extension.xml";
+                File extensionXML = new File(tempFilePath);
 
                 System.out.println("FetchXmlTask timer fired for name = " + extensionName + " url = " + extensionURL);
-                XMLSerializer xmlSerializer = new XMLSerializer();
                 String uiExtensionXML = getExtensionXML(extensionURL);
-                String tempFilePath = System.getProperty("catalina.base") + "/temp/" + extensionName + "_Extension.xml";
-                FileUtils.writeStringToFile(new File(tempFilePath), uiExtensionXML);
+                FileUtils.writeStringToFile(extensionXML, uiExtensionXML);
 
+                SAXBuilder builder = new SAXBuilder();
+                Document document = (Document) builder.build(extensionXML);
+
+                XMLSerializer xmlSerializer = new XMLSerializer();
                 JSON json = xmlSerializer.read(uiExtensionXML);
-                addJsonToCache(json);
+                XmlProcessor xmlProcessor = new XmlProcessor(document, json);
 
                 timer.cancel(); //Terminate the timer thread
 
