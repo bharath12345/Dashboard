@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui-extension label="ApplicationExtension" xmlns="http://www.extension.ui.appsone.appnomic.com"
+              xmlns:aam="http://www.extension.ui.appsone.appnomic.com"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <!-- *************** PANE NAME IN THE ACCORDION **************************************************************** -->
+    <pane label="ApplicationPaneLabel">
+        <view-link ref="ApplicationAlertsForm" />
+    </pane>
+
+
+
+    <!-- *************** MENU IN THE MAIN DASHBOARD **************************************************************** -->
+    <!--
+        The menu is not form specific but available for the whole pane
+    -->
+    <menu>
+        <menu-item></menu-item>
+        <menu-container>
+            <menu-container>
+                <menu-item></menu-item>
+            </menu-container>
+        </menu-container>
+    </menu>
+
+
+
+    <!-- *************** GLOBAL ATTRIBUTES EXPOSED BY THIS PANE **************************************************** -->
+    <attributes>
+        <attribute id="ApplicationName"/>
+    </attributes>
+
+
+
+    <!-- *************** BUTTON DEFINITION FOR ALL FORMS *********************************************************** -->
+    <toolbar>
+        <tool id="Refresh"/>
+        <tool id="StartRefresh"/>
+        <tool id="StopRefresh"/>
+        <tool id="OpenWindow"/>
+    </toolbar>
+
+
+
+    <!-- *************** FORMS ************************************************************************************* -->
+    <forms>
+        <!--
+            If the underlying JSON from the url has more fields then set the fields that do not need to be displayed
+            in the grid as display=false. So, there can be multiple grids from the same URL with different sets of
+            columns being shown. The ID field should always be display=false
+        -->
+        <!-- ******************************************************************************************************* -->
+        <grid-form id="ApplicationAlertsForm" label="ApplicationAlertsFormLabel"
+                   object-url="ApplicationAlertsForm.action" refresh-rate="180"
+                   help-url="${serverProtocol}://${host}:${requestBasedPort}/help.html">
+
+            <form-toolbar>
+                <form-tool ref="Refresh" label="ApplicationAlertsRefreshLabel"/>
+                <form-tool ref="StartRefresh" label="ApplicationAlertsStartRefreshLabel"/>
+                <form-tool ref="StopRefresh" label="ApplicationAlertsStopRefreshLabel"/>
+                <form-tool ref="OpenWindow" label="ApplicationAlertsOpenWindowLabel"/>
+            </form-toolbar>
+
+            <columns>
+                <column attribute="ID" display="false" data-type="long"/>
+
+                <column attribute="ApplicationName" label="ApplicationNameLabel"
+                        width="70" display="true" sortable="false" filterable="true" data-type="string"/>
+
+                <column label="ComponentAvailabilityAlertsLabel">
+                    <subcolumn attribute="ComponentAvailabilityCriticalAlerts" label="ComponentAvailabilityCriticalAlertsLabel"
+                               width="70" display="true" sortable="false" filterable="true" data-type="long"/>
+                    <subcolumn attribute="ComponentAvailabilityMajorAlerts" label="ComponentAvailabilityMajorAlertsLabel"
+                               width="70" display="true" sortable="false" filterable="true" data-type="long"/>
+                    <subcolumn attribute="ComponentAvailabilityMinorAlerts" label="ComponentAvailabilityMinorAlertsLabel"
+                               width="70" display="true" sortable="false" filterable="true" data-type="long"/>
+                </column>
+
+                <column label="ComponentStaticAlertsLabel">
+                    <subcolumn attribute="ComponentStaticCriticalAlerts" label="ComponentStaticCriticalAlertsLabel"
+                               width="70" display="true" sortable="false" filterable="true" data-type="long"/>
+                    <subcolumn attribute="ComponentStaticMajorAlerts" label="ComponentStaticMajorAlertsLabel"
+                               width="70" display="true" sortable="false" filterable="true" data-type="long"/>
+                    <subcolumn attribute="ComponentStaticMinorAlerts" label="ComponentStaticMinorAlertsLabel"
+                               width="70" display="true" sortable="false" filterable="true" data-type="long"/>
+                </column>
+
+                <column label="OnlineTransactionAlertsLabel">
+                    <subcolumn attribute="OnlineTransactionCriticalAlerts" label="OnlineTransactionCriticalAlertsLabel"
+                               width="70" display="true" sortable="false" filterable="true" data-type="long"/>
+                    <subcolumn attribute="OnlineTransactionMajorAlerts" label="OnlineTransactionMajorAlertsLabel"
+                               width="70" display="true" sortable="false" filterable="true" data-type="long"/>
+                    <subcolumn attribute="OnlineTransactionMinorAlerts" label="OnlineTransactionMinorAlertsLabel"
+                               width="70" display="true" sortable="false" filterable="true" data-type="long"/>
+                </column>
+
+                <column label="BatchTransactionAlertsLabel">
+                    <subcolumn attribute="BatchTransactionCriticalAlerts" label="BatchTransactionCriticalAlertsLabel"
+                               width="70" display="true" sortable="false" filterable="true" data-type="long"/>
+                    <subcolumn attribute="BatchTransactionMajorAlerts" label="BatchTransactionMajorAlertsLabel"
+                               width="70" display="true" sortable="false" filterable="true" data-type="long"/>
+                    <subcolumn attribute="BatchTransactionMinorAlerts" label="BatchTransactionMinorAlertsLabel"
+                               width="70" display="true" sortable="false" filterable="true" data-type="long"/>
+                </column>
+
+                <column label="ComponentAnalyticAlertsLabel">
+                    <subcolumn attribute="ComponentAnalyticCriticalAlerts" label="ComponentAnalyticCriticalAlertsLabel"
+                               width="70" display="true" sortable="false" filterable="true" data-type="long"/>
+                    <subcolumn attribute="ComponentAnalyticMajorAlerts" label="ComponentAnalyticMajorAlertsLabel"
+                               width="70" display="true" sortable="false" filterable="true" data-type="long"/>
+                    <subcolumn attribute="ComponentAnalyticMinorAlerts" label="ComponentAnalyticMinorAlertsLabel"
+                               width="70" display="true" sortable="false" filterable="true" data-type="long"/>
+                </column>
+
+            </columns>
+
+            <filters>
+                <!--
+                    A form can be invoked with any of the col-filters as part of the query in the URL. The 'query-by'
+                    reference field in analysis-pane or view-link uses one or many of these col-filter
+                    to fetch a filtered grid
+
+                    Two types of filter actions are possible on the grid
+                    1) When the user selects something in the grid in main-view leading to
+                        showing of an analysis-pane. Here, the filtering uses the 'id' of the
+                        selected row to bring up the corresponding set of forms
+                        in the analysis pane
+                    2) When a filtered table/graph needs to be shown from a 'different' context. For
+                        example, user could select a Transaction in a Transaction-Grid. The status/health of the two
+                        endpoint applications of the selected transaction needs to be shown as a grid in a Analysis-pane
+                        form-tab. On the selection of a transaction, the TransactionID is passed as custom-name filter,
+                        the response for which should be a filtered grid of 2 application rows for the endpoints
+                    3) When a filtered table needs to be shown on a particular value condition in a column
+
+                    ToDo: are separate col-filter required for columns?? Cant it be default part of all tables URLs? That is
+                    ToDo:    a filtered table can be queried for any of its columns depending on the type ('long' column
+                    ToDo:    can have filtering like =,!=,>,<. 'string' column can have filtering like =,!=,regEx, 'boolean'
+                    ToDo:    column can have filtering by true/false etc). Further, since a URL routing framework like
+                    ToDo:    crossroads can be used - it can create
+                -->
+                <col-filter ref="ID"/>
+                <col-filter ref="ApplicationName" />
+                <col-filter custom-name="TransactionID"/>
+            </filters>
+        </grid-form>
+
+        <!-- ******************************************************************************************************* -->
+
+        <!--
+            There is NO refresh rate for summary forms
+            Summary forms are always invoked with ID as the key
+        -->
+        <summary-form id="ApplicationSummaryForm" label="ApplicationSummaryFormLabel"
+                      object-url="xxxx/yyyyy/ApplicationSummaryForm.action"
+                      help-url="${serverProtocol}://${host}:${requestBasedPort}/help.html">
+
+            <form-toolbars>
+                <form-toolbar ref="Refresh" label="ApplicationAlertsRefreshLabel"/>
+                <form-toolbar ref="OpenWindow" label="ApplicationAlertsOpenWindowLabel"/>
+            </form-toolbars>
+
+            <field-group label="SummaryLabel">
+                <field attribute="ID" label="ApplicationIdLabel"/>
+                <field attribute="ApplicationName" label="ApplicationNameLabel"/>
+            </field-group>
+
+            <filters>
+                <col-filter ref="ID"/>
+            </filters>
+        </summary-form>
+    </forms>
+
+
+
+    <!-- *************** ANALYSIS PANES **************************************************************************** -->
+    <analysis-panes>
+        <analysis-pane ref="ApplicationAlertsForm">
+            <forms>
+                <grid-form ref="ApplicationSummaryForm" query-by="ID"/>
+            </forms>
+        </analysis-pane>
+    </analysis-panes>
+
+
+
+    <!-- *************** LABELS ************************************************************************************ -->
+    <labels>
+        <label id="ApplicationPaneLabel">
+            <label-value lang="en">Applications</label-value>
+            <label-value lang="ja">アプリケーション</label-value>
+            <label-value lang="zh-CN">应用程序</label-value>
+            <label-value lang="ko">응용 프로그램</label-value>
+        </label>
+    </labels>
+</ui-extension>

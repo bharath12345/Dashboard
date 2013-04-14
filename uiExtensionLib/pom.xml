@@ -27,7 +27,42 @@
                     </includes>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.1</version>
+                <executions>
+                    <execution>
+                        <id>copy</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>org.apache.openejb</groupId>
+                                    <artifactId>openejb-javaagent</artifactId>
+                                    <version>3.0-beta-2</version>
+                                    <outputDirectory>${project.build.directory}</outputDirectory>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>target/generated-sources/axis2/wsdl2code/resources</directory>
+            </resource>
+            <resource>
+                <directory>target/generated-sources/xmlbeans/resources</directory>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
     </build>
 
      <dependencies>
@@ -39,6 +74,11 @@
                 the UI extensions project
             This lib should be necessarily by all extensions and appsone UI main
          -->
+         <dependency>
+             <groupId>com.appnomic.appsone.dashboard</groupId>
+             <artifactId>uiExtensionXmlBeans</artifactId>
+             <version>04.20.100.000</version>
+         </dependency>
 
      </dependencies>
 

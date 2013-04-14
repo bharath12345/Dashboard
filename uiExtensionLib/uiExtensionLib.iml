@@ -11,6 +11,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: com.appnomic.appsone.dashboard:uiExtensionXmlBeans:04.20.100.000" level="project" />
   </component>
 </module>
 

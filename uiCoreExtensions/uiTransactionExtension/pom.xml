@@ -241,13 +241,11 @@
             <artifactId>uiCommonLib</artifactId>
             <version>${uiCommonLib.version}</version>
         </dependency>
-
         <dependency>
             <groupId>com.appnomic.appsone.dashboard</groupId>
             <artifactId>uiConfig</artifactId>
             <version>${uiConfig.version}</version>
         </dependency>
-
         <dependency>
             <groupId>com.appnomic.appsone.dashboard</groupId>
             <artifactId>uiExtensionLib</artifactId>

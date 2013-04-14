@@ -117,6 +117,11 @@
 			<artifactId>uiJS</artifactId>
 			<version>${uiJS.version}</version>
 		</dependency>
+        <dependency>
+            <groupId>com.appnomic.appsone.dashboard</groupId>
+            <artifactId>uiExtensionLib</artifactId>
+            <version>${uiExtension.version}</version>
+        </dependency>
 		
 		<!-- Putting the action classes in the WAR's WEB-INF/lib is not leading to action classes
 		getting deployed. So commented this and doing actual file copy of classes - find a work around

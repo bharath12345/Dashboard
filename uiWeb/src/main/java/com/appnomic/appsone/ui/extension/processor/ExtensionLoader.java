@@ -2,9 +2,7 @@ package com.appnomic.appsone.ui.extension.processor;
 
 import java.io.File;
 import java.io.InputStream;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.io.IOException;
+
 import java.util.*;
 
 import com.appnomic.service.BeanLocator;
@@ -192,18 +190,13 @@ public class ExtensionLoader implements InitializingBean, ApplicationContextAwar
         public void run() {
             try {
                 String tempFilePath = System.getProperty("catalina.base") + "/temp/" + extensionName + "_Extension.xml";
-                File extensionXML = new File(tempFilePath);
+                File extensionXmlFile = new File(tempFilePath);
 
                 System.out.println("FetchXmlTask timer fired for name = " + extensionName + " url = " + extensionURL);
-                String uiExtensionXML = getExtensionXML(extensionURL);
-                FileUtils.writeStringToFile(extensionXML, uiExtensionXML);
+                String uiExtensionXmlContent = getExtensionXML(extensionURL);
+                FileUtils.writeStringToFile(extensionXmlFile, uiExtensionXmlContent);
 
-                SAXBuilder builder = new SAXBuilder();
-                Document document = (Document) builder.build(extensionXML);
-
-                XMLSerializer xmlSerializer = new XMLSerializer();
-                JSON json = xmlSerializer.read(uiExtensionXML);
-                XmlProcessor xmlProcessor = new XmlProcessor(document, json);
+                XmlProcessor xmlProcessor = new XmlProcessor(extensionXmlFile, uiExtensionXmlContent);
 
                 timer.cancel(); //Terminate the timer thread
 

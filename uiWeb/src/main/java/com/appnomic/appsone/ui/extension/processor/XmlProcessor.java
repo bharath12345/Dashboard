@@ -1,9 +1,13 @@
 package com.appnomic.appsone.ui.extension.processor;
 
+import com.appnomic.appsone.ui.extension.*;
 import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import net.sf.json.xml.XMLSerializer;
 import org.jdom.Document;
+
+import java.io.File;
 
 /**
  * User: bharadwaj
@@ -12,7 +16,11 @@ import org.jdom.Document;
  */
 public class XmlProcessor {
 
-    public XmlProcessor(Document document, JSON json) {
+    public XmlProcessor(File extensionXmlFile, String uiExtensionXmlContent) {
+        fromXmlBeans(extensionXmlFile);
+
+        XMLSerializer xmlSerializer = new XMLSerializer();
+        JSON json = xmlSerializer.read(uiExtensionXmlContent);
         addJsonToCache(json);
     }
 
@@ -33,6 +41,23 @@ public class XmlProcessor {
         extensionCache.toolbarCache = (JSONArray) jsonObject.get("toolbar");
         extensionCache.analysisPaneCache = (JSONArray) jsonObject.get("analysis-panes");
         extensionCache.labelCache = (JSONArray) jsonObject.get("labels");
+    }
+
+    public void fromXmlBeans(File xmlDocument) {
+        try {
+            UiExtensionDocument uiExtensionDocument = UiExtensionDocument.Factory.parse(xmlDocument);
+            UiExtensionType uiExtensionType = uiExtensionDocument.getUiExtension();
+            PaneType paneType = uiExtensionType.getPane();
+            System.out.println("pane label = " + paneType.getLabel());
+
+            FormsType uiFormsType = uiExtensionType.getForms();
+            GridFormType gridFormType = uiFormsType.getGridForm();
+            System.out.println("Grid form details: ID = " + gridFormType.getId() +
+                    " object-url = " + gridFormType.getObjectUrl());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
