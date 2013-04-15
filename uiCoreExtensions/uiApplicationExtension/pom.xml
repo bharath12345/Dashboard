@@ -13,7 +13,6 @@
     <artifactId>uiApplicationExtension</artifactId>
     <name>AppsOne Application Extension</name>
     <packaging>war</packaging>
-    <version>04.20.100.000</version>
 
     <build>
         <plugins>

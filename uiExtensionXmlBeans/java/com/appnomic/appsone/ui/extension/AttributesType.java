@@ -16,12 +16,17 @@ package com.appnomic.appsone.ui.extension;
 public interface AttributesType extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(AttributesType.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s701D4925774A9F0AC0512BF3769C3FEF").resolveHandle("attributestype901atype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(AttributesType.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s8A2893182E2AC857591676D6F1461A5E").resolveHandle("attributestype901atype");
     
     /**
      * Gets the "attribute" element
      */
     com.appnomic.appsone.ui.extension.AttributeType getAttribute();
+    
+    /**
+     * True if has "attribute" element
+     */
+    boolean isSetAttribute();
     
     /**
      * Sets the "attribute" element
@@ -32,6 +37,11 @@ public interface AttributesType extends org.apache.xmlbeans.XmlObject
      * Appends and returns a new empty "attribute" element
      */
     com.appnomic.appsone.ui.extension.AttributeType addNewAttribute();
+    
+    /**
+     * Unsets the "attribute" element
+     */
+    void unsetAttribute();
     
     /**
      * A factory class with static methods for creating instances

@@ -11,7 +11,6 @@
 	<artifactId>uiWeb</artifactId>
 	<name>AppsOne UI Servlets, Filters, Actions, Struts</name>
 	<packaging>jar</packaging>
-    <version>${uiWeb.version}</version>
 
 	<build>
 		<plugins>
@@ -258,7 +257,7 @@
         <dependency>
             <groupId>com.appnomic.appsone.dashboard</groupId>
             <artifactId>uiExtensionXmlBeans</artifactId>
-            <version>04.20.100.000</version>
+            <version>${uiExtensionXmlBeans.version}</version>
         </dependency>
 
 

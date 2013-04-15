@@ -17,7 +17,7 @@ package com.appnomic.appsone.ui.extension;
 public interface UiExtensionDocument extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(UiExtensionDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s701D4925774A9F0AC0512BF3769C3FEF").resolveHandle("uiextension18d5doctype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(UiExtensionDocument.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s8A2893182E2AC857591676D6F1461A5E").resolveHandle("uiextension18d5doctype");
     
     /**
      * Gets the "ui-extension" element

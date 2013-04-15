@@ -1,0 +1,39 @@
+<project>
+    <parent>
+        <groupId>com.appnomic.appsone.dashboard</groupId>
+        <artifactId>appsone-dashboard</artifactId>
+        <version>04.20.100.000</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>uiExtensionXmlBeans</artifactId>
+    <name>AppsOne Extension XML Beans</name>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>2.3.1</version>
+                <executions>
+                    <execution>
+                        <id>install-library</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                        <configuration>
+                            <file>uiExtensionXmlBeans.jar</file>
+                            <!--classifier>${classifier_if_this_isnt_the_main_artifact_of_this_project}</classifier-->
+                            <groupId>com.appnomic.appsone.dashboard</groupId>
+                            <artifactId>uiExtensionXmlBeans</artifactId>
+                            <version>${uiExtensionXmlBeans.version}</version>
+                            <packaging>jar</packaging>
+                            <generatePom>true</generatePom>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

@@ -16,12 +16,17 @@ package com.appnomic.appsone.ui.extension;
 public interface AnalysisPanesType extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(AnalysisPanesType.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s701D4925774A9F0AC0512BF3769C3FEF").resolveHandle("analysispanestypeec77type");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(AnalysisPanesType.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s8A2893182E2AC857591676D6F1461A5E").resolveHandle("analysispanestypeec77type");
     
     /**
      * Gets the "analysis-pane" element
      */
     com.appnomic.appsone.ui.extension.AnalysisPaneType getAnalysisPane();
+    
+    /**
+     * True if has "analysis-pane" element
+     */
+    boolean isSetAnalysisPane();
     
     /**
      * Sets the "analysis-pane" element
@@ -32,6 +37,11 @@ public interface AnalysisPanesType extends org.apache.xmlbeans.XmlObject
      * Appends and returns a new empty "analysis-pane" element
      */
     com.appnomic.appsone.ui.extension.AnalysisPaneType addNewAnalysisPane();
+    
+    /**
+     * Unsets the "analysis-pane" element
+     */
+    void unsetAnalysisPane();
     
     /**
      * A factory class with static methods for creating instances

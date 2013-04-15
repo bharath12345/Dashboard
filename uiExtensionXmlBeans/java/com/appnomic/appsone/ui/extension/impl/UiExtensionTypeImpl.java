@@ -39,33 +39,84 @@ public class UiExtensionTypeImpl extends org.apache.xmlbeans.impl.values.XmlComp
     
     
     /**
-     * Gets the "pane" element
+     * Gets array of all "pane" elements
      */
-    public com.appnomic.appsone.ui.extension.PaneType getPane()
+    public com.appnomic.appsone.ui.extension.PaneType[] getPaneArray()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            java.util.List targetList = new java.util.ArrayList();
+            get_store().find_all_element_users(PANE$0, targetList);
+            com.appnomic.appsone.ui.extension.PaneType[] result = new com.appnomic.appsone.ui.extension.PaneType[targetList.size()];
+            targetList.toArray(result);
+            return result;
+        }
+    }
+    
+    /**
+     * Gets ith "pane" element
+     */
+    public com.appnomic.appsone.ui.extension.PaneType getPaneArray(int i)
     {
         synchronized (monitor())
         {
             check_orphaned();
             com.appnomic.appsone.ui.extension.PaneType target = null;
-            target = (com.appnomic.appsone.ui.extension.PaneType)get_store().find_element_user(PANE$0, 0);
+            target = (com.appnomic.appsone.ui.extension.PaneType)get_store().find_element_user(PANE$0, i);
             if (target == null)
             {
-                return null;
+                throw new IndexOutOfBoundsException();
             }
             return target;
         }
     }
     
     /**
-     * Sets the "pane" element
+     * Returns number of "pane" element
      */
-    public void setPane(com.appnomic.appsone.ui.extension.PaneType pane)
+    public int sizeOfPaneArray()
     {
-        generatedSetterHelperImpl(pane, PANE$0, 0, org.apache.xmlbeans.impl.values.XmlObjectBase.KIND_SETTERHELPER_SINGLETON);
+        synchronized (monitor())
+        {
+            check_orphaned();
+            return get_store().count_elements(PANE$0);
+        }
     }
     
     /**
-     * Appends and returns a new empty "pane" element
+     * Sets array of all "pane" element  WARNING: This method is not atomicaly synchronized.
+     */
+    public void setPaneArray(com.appnomic.appsone.ui.extension.PaneType[] paneArray)
+    {
+        check_orphaned();
+        arraySetterHelper(paneArray, PANE$0);
+    }
+    
+    /**
+     * Sets ith "pane" element
+     */
+    public void setPaneArray(int i, com.appnomic.appsone.ui.extension.PaneType pane)
+    {
+        generatedSetterHelperImpl(pane, PANE$0, i, org.apache.xmlbeans.impl.values.XmlObjectBase.KIND_SETTERHELPER_ARRAYITEM);
+    }
+    
+    /**
+     * Inserts and returns a new empty value (as xml) as the ith "pane" element
+     */
+    public com.appnomic.appsone.ui.extension.PaneType insertNewPane(int i)
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            com.appnomic.appsone.ui.extension.PaneType target = null;
+            target = (com.appnomic.appsone.ui.extension.PaneType)get_store().insert_element_user(PANE$0, i);
+            return target;
+        }
+    }
+    
+    /**
+     * Appends and returns a new empty value (as xml) as the last "pane" element
      */
     public com.appnomic.appsone.ui.extension.PaneType addNewPane()
     {
@@ -79,33 +130,96 @@ public class UiExtensionTypeImpl extends org.apache.xmlbeans.impl.values.XmlComp
     }
     
     /**
-     * Gets the "menu" element
+     * Removes the ith "pane" element
      */
-    public com.appnomic.appsone.ui.extension.MenuType getMenu()
+    public void removePane(int i)
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            get_store().remove_element(PANE$0, i);
+        }
+    }
+    
+    /**
+     * Gets array of all "menu" elements
+     */
+    public com.appnomic.appsone.ui.extension.MenuType[] getMenuArray()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            java.util.List targetList = new java.util.ArrayList();
+            get_store().find_all_element_users(MENU$2, targetList);
+            com.appnomic.appsone.ui.extension.MenuType[] result = new com.appnomic.appsone.ui.extension.MenuType[targetList.size()];
+            targetList.toArray(result);
+            return result;
+        }
+    }
+    
+    /**
+     * Gets ith "menu" element
+     */
+    public com.appnomic.appsone.ui.extension.MenuType getMenuArray(int i)
     {
         synchronized (monitor())
         {
             check_orphaned();
             com.appnomic.appsone.ui.extension.MenuType target = null;
-            target = (com.appnomic.appsone.ui.extension.MenuType)get_store().find_element_user(MENU$2, 0);
+            target = (com.appnomic.appsone.ui.extension.MenuType)get_store().find_element_user(MENU$2, i);
             if (target == null)
             {
-                return null;
+                throw new IndexOutOfBoundsException();
             }
             return target;
         }
     }
     
     /**
-     * Sets the "menu" element
+     * Returns number of "menu" element
      */
-    public void setMenu(com.appnomic.appsone.ui.extension.MenuType menu)
+    public int sizeOfMenuArray()
     {
-        generatedSetterHelperImpl(menu, MENU$2, 0, org.apache.xmlbeans.impl.values.XmlObjectBase.KIND_SETTERHELPER_SINGLETON);
+        synchronized (monitor())
+        {
+            check_orphaned();
+            return get_store().count_elements(MENU$2);
+        }
     }
     
     /**
-     * Appends and returns a new empty "menu" element
+     * Sets array of all "menu" element  WARNING: This method is not atomicaly synchronized.
+     */
+    public void setMenuArray(com.appnomic.appsone.ui.extension.MenuType[] menuArray)
+    {
+        check_orphaned();
+        arraySetterHelper(menuArray, MENU$2);
+    }
+    
+    /**
+     * Sets ith "menu" element
+     */
+    public void setMenuArray(int i, com.appnomic.appsone.ui.extension.MenuType menu)
+    {
+        generatedSetterHelperImpl(menu, MENU$2, i, org.apache.xmlbeans.impl.values.XmlObjectBase.KIND_SETTERHELPER_ARRAYITEM);
+    }
+    
+    /**
+     * Inserts and returns a new empty value (as xml) as the ith "menu" element
+     */
+    public com.appnomic.appsone.ui.extension.MenuType insertNewMenu(int i)
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            com.appnomic.appsone.ui.extension.MenuType target = null;
+            target = (com.appnomic.appsone.ui.extension.MenuType)get_store().insert_element_user(MENU$2, i);
+            return target;
+        }
+    }
+    
+    /**
+     * Appends and returns a new empty value (as xml) as the last "menu" element
      */
     public com.appnomic.appsone.ui.extension.MenuType addNewMenu()
     {
@@ -119,33 +233,96 @@ public class UiExtensionTypeImpl extends org.apache.xmlbeans.impl.values.XmlComp
     }
     
     /**
-     * Gets the "attributes" element
+     * Removes the ith "menu" element
      */
-    public com.appnomic.appsone.ui.extension.AttributesType getAttributes()
+    public void removeMenu(int i)
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            get_store().remove_element(MENU$2, i);
+        }
+    }
+    
+    /**
+     * Gets array of all "attributes" elements
+     */
+    public com.appnomic.appsone.ui.extension.AttributesType[] getAttributesArray()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            java.util.List targetList = new java.util.ArrayList();
+            get_store().find_all_element_users(ATTRIBUTES$4, targetList);
+            com.appnomic.appsone.ui.extension.AttributesType[] result = new com.appnomic.appsone.ui.extension.AttributesType[targetList.size()];
+            targetList.toArray(result);
+            return result;
+        }
+    }
+    
+    /**
+     * Gets ith "attributes" element
+     */
+    public com.appnomic.appsone.ui.extension.AttributesType getAttributesArray(int i)
     {
         synchronized (monitor())
         {
             check_orphaned();
             com.appnomic.appsone.ui.extension.AttributesType target = null;
-            target = (com.appnomic.appsone.ui.extension.AttributesType)get_store().find_element_user(ATTRIBUTES$4, 0);
+            target = (com.appnomic.appsone.ui.extension.AttributesType)get_store().find_element_user(ATTRIBUTES$4, i);
             if (target == null)
             {
-                return null;
+                throw new IndexOutOfBoundsException();
             }
             return target;
         }
     }
     
     /**
-     * Sets the "attributes" element
+     * Returns number of "attributes" element
      */
-    public void setAttributes(com.appnomic.appsone.ui.extension.AttributesType attributes)
+    public int sizeOfAttributesArray()
     {
-        generatedSetterHelperImpl(attributes, ATTRIBUTES$4, 0, org.apache.xmlbeans.impl.values.XmlObjectBase.KIND_SETTERHELPER_SINGLETON);
+        synchronized (monitor())
+        {
+            check_orphaned();
+            return get_store().count_elements(ATTRIBUTES$4);
+        }
     }
     
     /**
-     * Appends and returns a new empty "attributes" element
+     * Sets array of all "attributes" element  WARNING: This method is not atomicaly synchronized.
+     */
+    public void setAttributesArray(com.appnomic.appsone.ui.extension.AttributesType[] attributesArray)
+    {
+        check_orphaned();
+        arraySetterHelper(attributesArray, ATTRIBUTES$4);
+    }
+    
+    /**
+     * Sets ith "attributes" element
+     */
+    public void setAttributesArray(int i, com.appnomic.appsone.ui.extension.AttributesType attributes)
+    {
+        generatedSetterHelperImpl(attributes, ATTRIBUTES$4, i, org.apache.xmlbeans.impl.values.XmlObjectBase.KIND_SETTERHELPER_ARRAYITEM);
+    }
+    
+    /**
+     * Inserts and returns a new empty value (as xml) as the ith "attributes" element
+     */
+    public com.appnomic.appsone.ui.extension.AttributesType insertNewAttributes(int i)
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            com.appnomic.appsone.ui.extension.AttributesType target = null;
+            target = (com.appnomic.appsone.ui.extension.AttributesType)get_store().insert_element_user(ATTRIBUTES$4, i);
+            return target;
+        }
+    }
+    
+    /**
+     * Appends and returns a new empty value (as xml) as the last "attributes" element
      */
     public com.appnomic.appsone.ui.extension.AttributesType addNewAttributes()
     {
@@ -159,33 +336,96 @@ public class UiExtensionTypeImpl extends org.apache.xmlbeans.impl.values.XmlComp
     }
     
     /**
-     * Gets the "toolbar" element
+     * Removes the ith "attributes" element
      */
-    public com.appnomic.appsone.ui.extension.ToolbarType getToolbar()
+    public void removeAttributes(int i)
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            get_store().remove_element(ATTRIBUTES$4, i);
+        }
+    }
+    
+    /**
+     * Gets array of all "toolbar" elements
+     */
+    public com.appnomic.appsone.ui.extension.ToolbarType[] getToolbarArray()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            java.util.List targetList = new java.util.ArrayList();
+            get_store().find_all_element_users(TOOLBAR$6, targetList);
+            com.appnomic.appsone.ui.extension.ToolbarType[] result = new com.appnomic.appsone.ui.extension.ToolbarType[targetList.size()];
+            targetList.toArray(result);
+            return result;
+        }
+    }
+    
+    /**
+     * Gets ith "toolbar" element
+     */
+    public com.appnomic.appsone.ui.extension.ToolbarType getToolbarArray(int i)
     {
         synchronized (monitor())
         {
             check_orphaned();
             com.appnomic.appsone.ui.extension.ToolbarType target = null;
-            target = (com.appnomic.appsone.ui.extension.ToolbarType)get_store().find_element_user(TOOLBAR$6, 0);
+            target = (com.appnomic.appsone.ui.extension.ToolbarType)get_store().find_element_user(TOOLBAR$6, i);
             if (target == null)
             {
-                return null;
+                throw new IndexOutOfBoundsException();
             }
             return target;
         }
     }
     
     /**
-     * Sets the "toolbar" element
+     * Returns number of "toolbar" element
      */
-    public void setToolbar(com.appnomic.appsone.ui.extension.ToolbarType toolbar)
+    public int sizeOfToolbarArray()
     {
-        generatedSetterHelperImpl(toolbar, TOOLBAR$6, 0, org.apache.xmlbeans.impl.values.XmlObjectBase.KIND_SETTERHELPER_SINGLETON);
+        synchronized (monitor())
+        {
+            check_orphaned();
+            return get_store().count_elements(TOOLBAR$6);
+        }
     }
     
     /**
-     * Appends and returns a new empty "toolbar" element
+     * Sets array of all "toolbar" element  WARNING: This method is not atomicaly synchronized.
+     */
+    public void setToolbarArray(com.appnomic.appsone.ui.extension.ToolbarType[] toolbarArray)
+    {
+        check_orphaned();
+        arraySetterHelper(toolbarArray, TOOLBAR$6);
+    }
+    
+    /**
+     * Sets ith "toolbar" element
+     */
+    public void setToolbarArray(int i, com.appnomic.appsone.ui.extension.ToolbarType toolbar)
+    {
+        generatedSetterHelperImpl(toolbar, TOOLBAR$6, i, org.apache.xmlbeans.impl.values.XmlObjectBase.KIND_SETTERHELPER_ARRAYITEM);
+    }
+    
+    /**
+     * Inserts and returns a new empty value (as xml) as the ith "toolbar" element
+     */
+    public com.appnomic.appsone.ui.extension.ToolbarType insertNewToolbar(int i)
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            com.appnomic.appsone.ui.extension.ToolbarType target = null;
+            target = (com.appnomic.appsone.ui.extension.ToolbarType)get_store().insert_element_user(TOOLBAR$6, i);
+            return target;
+        }
+    }
+    
+    /**
+     * Appends and returns a new empty value (as xml) as the last "toolbar" element
      */
     public com.appnomic.appsone.ui.extension.ToolbarType addNewToolbar()
     {
@@ -199,33 +439,96 @@ public class UiExtensionTypeImpl extends org.apache.xmlbeans.impl.values.XmlComp
     }
     
     /**
-     * Gets the "forms" element
+     * Removes the ith "toolbar" element
      */
-    public com.appnomic.appsone.ui.extension.FormsType getForms()
+    public void removeToolbar(int i)
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            get_store().remove_element(TOOLBAR$6, i);
+        }
+    }
+    
+    /**
+     * Gets array of all "forms" elements
+     */
+    public com.appnomic.appsone.ui.extension.FormsType[] getFormsArray()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            java.util.List targetList = new java.util.ArrayList();
+            get_store().find_all_element_users(FORMS$8, targetList);
+            com.appnomic.appsone.ui.extension.FormsType[] result = new com.appnomic.appsone.ui.extension.FormsType[targetList.size()];
+            targetList.toArray(result);
+            return result;
+        }
+    }
+    
+    /**
+     * Gets ith "forms" element
+     */
+    public com.appnomic.appsone.ui.extension.FormsType getFormsArray(int i)
     {
         synchronized (monitor())
         {
             check_orphaned();
             com.appnomic.appsone.ui.extension.FormsType target = null;
-            target = (com.appnomic.appsone.ui.extension.FormsType)get_store().find_element_user(FORMS$8, 0);
+            target = (com.appnomic.appsone.ui.extension.FormsType)get_store().find_element_user(FORMS$8, i);
             if (target == null)
             {
-                return null;
+                throw new IndexOutOfBoundsException();
             }
             return target;
         }
     }
     
     /**
-     * Sets the "forms" element
+     * Returns number of "forms" element
      */
-    public void setForms(com.appnomic.appsone.ui.extension.FormsType forms)
+    public int sizeOfFormsArray()
     {
-        generatedSetterHelperImpl(forms, FORMS$8, 0, org.apache.xmlbeans.impl.values.XmlObjectBase.KIND_SETTERHELPER_SINGLETON);
+        synchronized (monitor())
+        {
+            check_orphaned();
+            return get_store().count_elements(FORMS$8);
+        }
     }
     
     /**
-     * Appends and returns a new empty "forms" element
+     * Sets array of all "forms" element  WARNING: This method is not atomicaly synchronized.
+     */
+    public void setFormsArray(com.appnomic.appsone.ui.extension.FormsType[] formsArray)
+    {
+        check_orphaned();
+        arraySetterHelper(formsArray, FORMS$8);
+    }
+    
+    /**
+     * Sets ith "forms" element
+     */
+    public void setFormsArray(int i, com.appnomic.appsone.ui.extension.FormsType forms)
+    {
+        generatedSetterHelperImpl(forms, FORMS$8, i, org.apache.xmlbeans.impl.values.XmlObjectBase.KIND_SETTERHELPER_ARRAYITEM);
+    }
+    
+    /**
+     * Inserts and returns a new empty value (as xml) as the ith "forms" element
+     */
+    public com.appnomic.appsone.ui.extension.FormsType insertNewForms(int i)
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            com.appnomic.appsone.ui.extension.FormsType target = null;
+            target = (com.appnomic.appsone.ui.extension.FormsType)get_store().insert_element_user(FORMS$8, i);
+            return target;
+        }
+    }
+    
+    /**
+     * Appends and returns a new empty value (as xml) as the last "forms" element
      */
     public com.appnomic.appsone.ui.extension.FormsType addNewForms()
     {
@@ -239,33 +542,96 @@ public class UiExtensionTypeImpl extends org.apache.xmlbeans.impl.values.XmlComp
     }
     
     /**
-     * Gets the "analysis-panes" element
+     * Removes the ith "forms" element
      */
-    public com.appnomic.appsone.ui.extension.AnalysisPanesType getAnalysisPanes()
+    public void removeForms(int i)
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            get_store().remove_element(FORMS$8, i);
+        }
+    }
+    
+    /**
+     * Gets array of all "analysis-panes" elements
+     */
+    public com.appnomic.appsone.ui.extension.AnalysisPanesType[] getAnalysisPanesArray()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            java.util.List targetList = new java.util.ArrayList();
+            get_store().find_all_element_users(ANALYSISPANES$10, targetList);
+            com.appnomic.appsone.ui.extension.AnalysisPanesType[] result = new com.appnomic.appsone.ui.extension.AnalysisPanesType[targetList.size()];
+            targetList.toArray(result);
+            return result;
+        }
+    }
+    
+    /**
+     * Gets ith "analysis-panes" element
+     */
+    public com.appnomic.appsone.ui.extension.AnalysisPanesType getAnalysisPanesArray(int i)
     {
         synchronized (monitor())
         {
             check_orphaned();
             com.appnomic.appsone.ui.extension.AnalysisPanesType target = null;
-            target = (com.appnomic.appsone.ui.extension.AnalysisPanesType)get_store().find_element_user(ANALYSISPANES$10, 0);
+            target = (com.appnomic.appsone.ui.extension.AnalysisPanesType)get_store().find_element_user(ANALYSISPANES$10, i);
             if (target == null)
             {
-                return null;
+                throw new IndexOutOfBoundsException();
             }
             return target;
         }
     }
     
     /**
-     * Sets the "analysis-panes" element
+     * Returns number of "analysis-panes" element
      */
-    public void setAnalysisPanes(com.appnomic.appsone.ui.extension.AnalysisPanesType analysisPanes)
+    public int sizeOfAnalysisPanesArray()
     {
-        generatedSetterHelperImpl(analysisPanes, ANALYSISPANES$10, 0, org.apache.xmlbeans.impl.values.XmlObjectBase.KIND_SETTERHELPER_SINGLETON);
+        synchronized (monitor())
+        {
+            check_orphaned();
+            return get_store().count_elements(ANALYSISPANES$10);
+        }
     }
     
     /**
-     * Appends and returns a new empty "analysis-panes" element
+     * Sets array of all "analysis-panes" element  WARNING: This method is not atomicaly synchronized.
+     */
+    public void setAnalysisPanesArray(com.appnomic.appsone.ui.extension.AnalysisPanesType[] analysisPanesArray)
+    {
+        check_orphaned();
+        arraySetterHelper(analysisPanesArray, ANALYSISPANES$10);
+    }
+    
+    /**
+     * Sets ith "analysis-panes" element
+     */
+    public void setAnalysisPanesArray(int i, com.appnomic.appsone.ui.extension.AnalysisPanesType analysisPanes)
+    {
+        generatedSetterHelperImpl(analysisPanes, ANALYSISPANES$10, i, org.apache.xmlbeans.impl.values.XmlObjectBase.KIND_SETTERHELPER_ARRAYITEM);
+    }
+    
+    /**
+     * Inserts and returns a new empty value (as xml) as the ith "analysis-panes" element
+     */
+    public com.appnomic.appsone.ui.extension.AnalysisPanesType insertNewAnalysisPanes(int i)
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            com.appnomic.appsone.ui.extension.AnalysisPanesType target = null;
+            target = (com.appnomic.appsone.ui.extension.AnalysisPanesType)get_store().insert_element_user(ANALYSISPANES$10, i);
+            return target;
+        }
+    }
+    
+    /**
+     * Appends and returns a new empty value (as xml) as the last "analysis-panes" element
      */
     public com.appnomic.appsone.ui.extension.AnalysisPanesType addNewAnalysisPanes()
     {
@@ -279,33 +645,96 @@ public class UiExtensionTypeImpl extends org.apache.xmlbeans.impl.values.XmlComp
     }
     
     /**
-     * Gets the "labels" element
+     * Removes the ith "analysis-panes" element
      */
-    public com.appnomic.appsone.ui.extension.LabelsType getLabels()
+    public void removeAnalysisPanes(int i)
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            get_store().remove_element(ANALYSISPANES$10, i);
+        }
+    }
+    
+    /**
+     * Gets array of all "labels" elements
+     */
+    public com.appnomic.appsone.ui.extension.LabelsType[] getLabelsArray()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            java.util.List targetList = new java.util.ArrayList();
+            get_store().find_all_element_users(LABELS$12, targetList);
+            com.appnomic.appsone.ui.extension.LabelsType[] result = new com.appnomic.appsone.ui.extension.LabelsType[targetList.size()];
+            targetList.toArray(result);
+            return result;
+        }
+    }
+    
+    /**
+     * Gets ith "labels" element
+     */
+    public com.appnomic.appsone.ui.extension.LabelsType getLabelsArray(int i)
     {
         synchronized (monitor())
         {
             check_orphaned();
             com.appnomic.appsone.ui.extension.LabelsType target = null;
-            target = (com.appnomic.appsone.ui.extension.LabelsType)get_store().find_element_user(LABELS$12, 0);
+            target = (com.appnomic.appsone.ui.extension.LabelsType)get_store().find_element_user(LABELS$12, i);
             if (target == null)
             {
-                return null;
+                throw new IndexOutOfBoundsException();
             }
             return target;
         }
     }
     
     /**
-     * Sets the "labels" element
+     * Returns number of "labels" element
      */
-    public void setLabels(com.appnomic.appsone.ui.extension.LabelsType labels)
+    public int sizeOfLabelsArray()
     {
-        generatedSetterHelperImpl(labels, LABELS$12, 0, org.apache.xmlbeans.impl.values.XmlObjectBase.KIND_SETTERHELPER_SINGLETON);
+        synchronized (monitor())
+        {
+            check_orphaned();
+            return get_store().count_elements(LABELS$12);
+        }
     }
     
     /**
-     * Appends and returns a new empty "labels" element
+     * Sets array of all "labels" element  WARNING: This method is not atomicaly synchronized.
+     */
+    public void setLabelsArray(com.appnomic.appsone.ui.extension.LabelsType[] labelsArray)
+    {
+        check_orphaned();
+        arraySetterHelper(labelsArray, LABELS$12);
+    }
+    
+    /**
+     * Sets ith "labels" element
+     */
+    public void setLabelsArray(int i, com.appnomic.appsone.ui.extension.LabelsType labels)
+    {
+        generatedSetterHelperImpl(labels, LABELS$12, i, org.apache.xmlbeans.impl.values.XmlObjectBase.KIND_SETTERHELPER_ARRAYITEM);
+    }
+    
+    /**
+     * Inserts and returns a new empty value (as xml) as the ith "labels" element
+     */
+    public com.appnomic.appsone.ui.extension.LabelsType insertNewLabels(int i)
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            com.appnomic.appsone.ui.extension.LabelsType target = null;
+            target = (com.appnomic.appsone.ui.extension.LabelsType)get_store().insert_element_user(LABELS$12, i);
+            return target;
+        }
+    }
+    
+    /**
+     * Appends and returns a new empty value (as xml) as the last "labels" element
      */
     public com.appnomic.appsone.ui.extension.LabelsType addNewLabels()
     {
@@ -315,6 +744,18 @@ public class UiExtensionTypeImpl extends org.apache.xmlbeans.impl.values.XmlComp
             com.appnomic.appsone.ui.extension.LabelsType target = null;
             target = (com.appnomic.appsone.ui.extension.LabelsType)get_store().add_element_user(LABELS$12);
             return target;
+        }
+    }
+    
+    /**
+     * Removes the ith "labels" element
+     */
+    public void removeLabels(int i)
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            get_store().remove_element(LABELS$12, i);
         }
     }
     

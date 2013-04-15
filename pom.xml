@@ -23,6 +23,7 @@
 		<uiJS.version>04.20.100.000</uiJS.version>
 		<uiWeb.version>04.20.100.000</uiWeb.version>
         <uiExtension.version>04.20.100.000</uiExtension.version>
+        <uiExtensionXmlBeans.version>04.20.100.001</uiExtensionXmlBeans.version>
 
         <main.basedir>${project.basedir}</main.basedir>
     </properties>
@@ -173,6 +174,7 @@
     </build>
 
     <modules>
+        <module>uiExtensionXmlBeans</module>
         <module>uiCommonLib</module>
         <module>uiConfig</module>
         <module>uiWeb</module>

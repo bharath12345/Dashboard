@@ -12,7 +12,6 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>uiTransactionExtension</artifactId>
-    <version>04.20.100.000</version>
     <name>AppsOne Transaction Extension</name>
     <packaging>war</packaging>
 
@@ -120,13 +119,6 @@
             <artifactId>xom</artifactId>
             <version>1.2.5</version>
         </dependency>
-        <dependency>
-            <groupId>xom</groupId>
-            <artifactId>xom</artifactId>
-            <version>1.2.5</version>
-        </dependency>
-
-
 
         <!-- STRUTS ************************************************************************************************ -->
         <dependency>

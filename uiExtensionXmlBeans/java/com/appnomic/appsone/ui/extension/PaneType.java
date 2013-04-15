@@ -16,12 +16,17 @@ package com.appnomic.appsone.ui.extension;
 public interface PaneType extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(PaneType.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s701D4925774A9F0AC0512BF3769C3FEF").resolveHandle("panetype2369type");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(PaneType.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s8A2893182E2AC857591676D6F1461A5E").resolveHandle("panetype2369type");
     
     /**
      * Gets the "view-link" element
      */
     com.appnomic.appsone.ui.extension.ViewLinkType getViewLink();
+    
+    /**
+     * True if has "view-link" element
+     */
+    boolean isSetViewLink();
     
     /**
      * Sets the "view-link" element
@@ -32,6 +37,36 @@ public interface PaneType extends org.apache.xmlbeans.XmlObject
      * Appends and returns a new empty "view-link" element
      */
     com.appnomic.appsone.ui.extension.ViewLinkType addNewViewLink();
+    
+    /**
+     * Unsets the "view-link" element
+     */
+    void unsetViewLink();
+    
+    /**
+     * Gets the "view-container" element
+     */
+    com.appnomic.appsone.ui.extension.ViewContainerType getViewContainer();
+    
+    /**
+     * True if has "view-container" element
+     */
+    boolean isSetViewContainer();
+    
+    /**
+     * Sets the "view-container" element
+     */
+    void setViewContainer(com.appnomic.appsone.ui.extension.ViewContainerType viewContainer);
+    
+    /**
+     * Appends and returns a new empty "view-container" element
+     */
+    com.appnomic.appsone.ui.extension.ViewContainerType addNewViewContainer();
+    
+    /**
+     * Unsets the "view-container" element
+     */
+    void unsetViewContainer();
     
     /**
      * Gets the "label" attribute

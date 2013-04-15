@@ -11,7 +11,6 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>uiAnalyticsExtension</artifactId>
-    <version>04.20.100.000</version>
     <name>AppsOne Analytics Extension</name>
     <packaging>war</packaging>
 
@@ -118,12 +117,6 @@
             <artifactId>xom</artifactId>
             <version>1.2.5</version>
         </dependency>
-        <dependency>
-            <groupId>xom</groupId>
-            <artifactId>xom</artifactId>
-            <version>1.2.5</version>
-        </dependency>
-
 
 
         <!-- STRUTS ************************************************************************************************ -->

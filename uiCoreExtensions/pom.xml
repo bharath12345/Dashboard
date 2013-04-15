@@ -11,7 +11,6 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>uiCoreExtensions</artifactId>
     <name>AppsOne Dashboard UI Core Extensions</name>
-    <version>04.20.100.000</version>
     <packaging>pom</packaging>
 
     <build>

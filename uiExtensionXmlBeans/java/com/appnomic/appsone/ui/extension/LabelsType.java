@@ -16,7 +16,7 @@ package com.appnomic.appsone.ui.extension;
 public interface LabelsType extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(LabelsType.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s701D4925774A9F0AC0512BF3769C3FEF").resolveHandle("labelstype31f2type");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(LabelsType.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s8A2893182E2AC857591676D6F1461A5E").resolveHandle("labelstype31f2type");
     
     /**
      * Gets the "label" element

@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.extension.ui.appsone.appnomic.com" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="ui-extension" type="ext:ui-extensionType" xmlns:ext="http://www.extension.ui.appsone.appnomic.com"/>
+  <xs:complexType name="view-linkType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="ref" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="paneType">
+    <xs:sequence>
+      <xs:element type="ext:view-linkType" name="view-link" minOccurs="0" xmlns:ext="http://www.extension.ui.appsone.appnomic.com"/>
+      <xs:element type="ext:view-containerType" name="view-container" minOccurs="0" xmlns:ext="http://www.extension.ui.appsone.appnomic.com"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="label" use="optional"/>
+  </xs:complexType>
+  <xs:complexType name="menu-containerType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="menu-item" minOccurs="0"/>
+      <xs:element type="ext:menu-containerType" name="menu-container" minOccurs="0" xmlns:ext="http://www.extension.ui.appsone.appnomic.com"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="menuType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="menu-item"/>
+      <xs:element type="ext:menu-containerType" name="menu-container" xmlns:ext="http://www.extension.ui.appsone.appnomic.com"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="attributeType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="id" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="attributesType" mixed="true">
+    <xs:sequence>
+      <xs:element type="ext:attributeType" name="attribute" minOccurs="0" xmlns:ext="http://www.extension.ui.appsone.appnomic.com"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="toolType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="id" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="toolbarType">
+    <xs:sequence>
+      <xs:element type="ext:toolType" name="tool" maxOccurs="unbounded" minOccurs="0" xmlns:ext="http://www.extension.ui.appsone.appnomic.com"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="form-toolType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="ref" use="optional"/>
+        <xs:attribute type="xs:string" name="label" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="form-toolbarType" mixed="true">
+    <xs:sequence>
+      <xs:element type="ext:form-toolType" name="form-tool" maxOccurs="unbounded" minOccurs="0" xmlns:ext="http://www.extension.ui.appsone.appnomic.com"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="ref" use="optional"/>
+    <xs:attribute type="xs:string" name="label" use="optional"/>
+  </xs:complexType>
+  <xs:complexType name="columnType" mixed="true">
+    <xs:sequence>
+      <xs:element type="ext:subcolumnType" name="subcolumn" maxOccurs="unbounded" minOccurs="0" xmlns:ext="http://www.extension.ui.appsone.appnomic.com"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="attribute" use="optional"/>
+    <xs:attribute type="xs:string" name="display" use="optional"/>
+    <xs:attribute type="xs:string" name="data-type" use="optional"/>
+    <xs:attribute type="xs:string" name="label" use="optional"/>
+    <xs:attribute type="xs:byte" name="width" use="optional"/>
+    <xs:attribute type="xs:string" name="sortable" use="optional"/>
+    <xs:attribute type="xs:string" name="filterable" use="optional"/>
+  </xs:complexType>
+  <xs:complexType name="subcolumnType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="attribute" use="optional"/>
+        <xs:attribute type="xs:string" name="label" use="optional"/>
+        <xs:attribute type="xs:byte" name="width" use="optional"/>
+        <xs:attribute type="xs:string" name="display" use="optional"/>
+        <xs:attribute type="xs:string" name="sortable" use="optional"/>
+        <xs:attribute type="xs:string" name="filterable" use="optional"/>
+        <xs:attribute type="xs:string" name="data-type" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="columnsType">
+    <xs:sequence>
+      <xs:element type="ext:columnType" name="column" maxOccurs="unbounded" minOccurs="0" xmlns:ext="http://www.extension.ui.appsone.appnomic.com"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="col-filterType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="ref" use="optional"/>
+        <xs:attribute type="xs:string" name="custom-name" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="filtersType">
+    <xs:sequence>
+      <xs:element type="ext:col-filterType" name="col-filter" maxOccurs="unbounded" minOccurs="0" xmlns:ext="http://www.extension.ui.appsone.appnomic.com">
+        <xs:annotation>
+          <xs:documentation>A form can be invoked with any of the col-filters as part of the query in the URL. The 'query-by'
+                reference field in analysis-pane or view-link uses one or many of these col-filter
+                to fetch a filtered grid
+
+                Two types of filter actions are possible on the grid
+                1) When the user selects something in the grid in main-view leading to
+                    showing of an analysis-pane. Here, the filtering uses the 'id' of the
+                    selected row to bring up the corresponding set of forms
+                    in the analysis pane
+                2) When a filtered table/graph needs to be shown from a 'different' context. For
+                    example, user could select a Transaction in a Transaction-Grid. The status/health of the two
+                    endpoint applications of the selected transaction needs to be shown as a grid in a Analysis-pane
+                    form-tab. On the selection of a transaction, the TransactionID is passed as custom-name filter,
+                    the response for which should be a filtered grid of 2 application rows for the endpoints
+                3) When a filtered table needs to be shown on a particular value condition in a column
+
+                ToDo: are separate col-filter required for columns?? Cant it be default part of all tables URLs? That is
+                ToDo:    a filtered table can be queried for any of its columns depending on the type ('long' column
+                ToDo:    can have filtering like =,!=,>,&lt;. 'string' column can have filtering like =,!=,regEx, 'boolean'
+                ToDo:    column can have filtering by true/false etc). Further, since a URL routing framework like
+                ToDo:    crossroads can be used - it can create</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="grid-formType" mixed="true">
+    <xs:sequence>
+      <xs:element type="ext:form-toolbarType" name="form-toolbar" minOccurs="0" xmlns:ext="http://www.extension.ui.appsone.appnomic.com"/>
+      <xs:element type="ext:columnsType" name="columns" minOccurs="0" xmlns:ext="http://www.extension.ui.appsone.appnomic.com"/>
+      <xs:element type="ext:filtersType" name="filters" minOccurs="0" xmlns:ext="http://www.extension.ui.appsone.appnomic.com"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="id" use="optional"/>
+    <xs:attribute type="xs:string" name="label" use="optional"/>
+    <xs:attribute type="xs:string" name="object-url" use="optional"/>
+    <xs:attribute type="xs:short" name="refresh-rate" use="optional"/>
+    <xs:attribute type="xs:string" name="help-url" use="optional"/>
+    <xs:attribute type="xs:string" name="ref" use="optional"/>
+    <xs:attribute type="xs:string" name="query-by" use="optional"/>
+  </xs:complexType>
+  <xs:complexType name="form-toolbarsType">
+    <xs:sequence>
+      <xs:element type="ext:form-toolbarType" name="form-toolbar" maxOccurs="unbounded" minOccurs="0" xmlns:ext="http://www.extension.ui.appsone.appnomic.com"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="fieldType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="attribute" use="optional"/>
+        <xs:attribute type="xs:string" name="label" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="field-groupType">
+    <xs:sequence>
+      <xs:element type="ext:fieldType" name="field" maxOccurs="unbounded" minOccurs="0" xmlns:ext="http://www.extension.ui.appsone.appnomic.com"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="label" use="optional"/>
+  </xs:complexType>
+  <xs:complexType name="summary-formType" mixed="true">
+    <xs:sequence>
+      <xs:element type="ext:form-toolbarsType" name="form-toolbars" minOccurs="0" xmlns:ext="http://www.extension.ui.appsone.appnomic.com"/>
+      <xs:element type="ext:field-groupType" name="field-group" maxOccurs="unbounded" minOccurs="0" xmlns:ext="http://www.extension.ui.appsone.appnomic.com"/>
+      <xs:element type="ext:form-toolbarType" name="form-toolbar" minOccurs="0" xmlns:ext="http://www.extension.ui.appsone.appnomic.com"/>
+      <xs:element type="ext:columnsType" name="columns" minOccurs="0" xmlns:ext="http://www.extension.ui.appsone.appnomic.com"/>
+      <xs:element type="ext:filtersType" name="filters" minOccurs="0" xmlns:ext="http://www.extension.ui.appsone.appnomic.com"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="id" use="optional"/>
+    <xs:attribute type="xs:string" name="label" use="optional"/>
+    <xs:attribute type="xs:string" name="object-url" use="optional"/>
+    <xs:attribute type="xs:string" name="help-url" use="optional"/>
+    <xs:attribute type="xs:short" name="refresh-rate" use="optional"/>
+    <xs:attribute type="xs:string" name="ref" use="optional"/>
+    <xs:attribute type="xs:string" name="query-by" use="optional"/>
+  </xs:complexType>
+  <xs:complexType name="formsType">
+    <xs:choice maxOccurs="unbounded" minOccurs="0">
+      <xs:element type="ext:grid-formType" name="grid-form" xmlns:ext="http://www.extension.ui.appsone.appnomic.com">
+        <xs:annotation>
+          <xs:documentation>If the underlying JSON from the url has more fields then set the fields that do not need to be displayed
+        in the grid as display=false. So, there can be multiple grids from the same URL with different sets of
+        columns being shown. The ID field should always be display=false
+     *******************************************************************************************************  *******************************************************************************************************</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="ext:summary-formType" name="summary-form" xmlns:ext="http://www.extension.ui.appsone.appnomic.com">
+        <xs:annotation>
+          <xs:documentation>******************************************************************************************************* 
+        There is NO refresh rate for summary forms
+        Summary forms are always invoked with ID as the key
+     ******************************************************************************************************* 
+            There is NO refresh rate for summary forms
+            Summary forms are always invoked with ID as the key
+         *******************************************************************************************************</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="ext:titlegrid-formType" name="titlegrid-form" xmlns:ext="http://www.extension.ui.appsone.appnomic.com">
+        <xs:annotation>
+          <xs:documentation>label is NOT needed for this form as this is rendered as part of view-links with application
+            name as the link name</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="analysis-paneType">
+    <xs:sequence>
+      <xs:element type="ext:formsType" name="forms" xmlns:ext="http://www.extension.ui.appsone.appnomic.com"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="ref" use="optional"/>
+  </xs:complexType>
+  <xs:complexType name="analysis-panesType" mixed="true">
+    <xs:sequence>
+      <xs:element type="ext:analysis-paneType" name="analysis-pane" minOccurs="0" xmlns:ext="http://www.extension.ui.appsone.appnomic.com"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="label-valueType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="lang" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="labelType">
+    <xs:sequence>
+      <xs:element type="ext:label-valueType" name="label-value" maxOccurs="unbounded" minOccurs="0" xmlns:ext="http://www.extension.ui.appsone.appnomic.com"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="id" use="optional"/>
+  </xs:complexType>
+  <xs:complexType name="labelsType">
+    <xs:sequence>
+      <xs:element type="ext:labelType" name="label" xmlns:ext="http://www.extension.ui.appsone.appnomic.com"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ui-extensionType">
+    <xs:choice maxOccurs="unbounded" minOccurs="0">
+      <xs:element type="ext:paneType" name="pane" xmlns:ext="http://www.extension.ui.appsone.appnomic.com">
+        <xs:annotation>
+          <xs:documentation>*************** PANE NAME IN THE ACCORDION ****************************************************************  *************** PANE NAME IN THE ACCORDION ****************************************************************  *************** PANE NAME IN THE ACCORDION ****************************************************************  *************** PANE NAME IN THE ACCORDION ****************************************************************</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="ext:menuType" name="menu" xmlns:ext="http://www.extension.ui.appsone.appnomic.com">
+        <xs:annotation>
+          <xs:documentation>*************** MENU IN THE MAIN DASHBOARD **************************************************************** 
+    The menu is not form specific but available for the whole pane
+ *************** MENU IN THE MAIN DASHBOARD ****************************************************************  *************** MENU IN THE MAIN DASHBOARD ****************************************************************  *************** MENU IN THE MAIN DASHBOARD **************************************************************** 
+        The menu is not form specific but available for the whole pane</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="ext:attributesType" name="attributes" xmlns:ext="http://www.extension.ui.appsone.appnomic.com">
+        <xs:annotation>
+          <xs:documentation>*************** GLOBAL ATTRIBUTES EXPOSED BY THIS PANE ****************************************************  *************** GLOBAL ATTRIBUTES EXPOSED BY THIS PANE ****************************************************  *************** GLOBAL ATTRIBUTES EXPOSED BY THIS PANE ****************************************************</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="ext:toolbarType" name="toolbar" xmlns:ext="http://www.extension.ui.appsone.appnomic.com">
+        <xs:annotation>
+          <xs:documentation>*************** BUTTON DEFINITION FOR ALL FORMS ***********************************************************  *************** BUTTON DEFINITION FOR ALL FORMS ***********************************************************  *************** BUTTON DEFINITION FOR ALL FORMS ***********************************************************</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="ext:formsType" name="forms" xmlns:ext="http://www.extension.ui.appsone.appnomic.com">
+        <xs:annotation>
+          <xs:documentation>*************** FORMS *************************************************************************************  *************** FORMS *************************************************************************************  *************** FORMS *************************************************************************************</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="ext:analysis-panesType" name="analysis-panes" xmlns:ext="http://www.extension.ui.appsone.appnomic.com">
+        <xs:annotation>
+          <xs:documentation>*************** ANALYSIS PANES ****************************************************************************  *************** ANALYSIS PANES ****************************************************************************  *************** ANALYSIS PANES ****************************************************************************</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="ext:labelsType" name="labels" xmlns:ext="http://www.extension.ui.appsone.appnomic.com">
+        <xs:annotation>
+          <xs:documentation>*************** LABELS ************************************************************************************  *************** LABELS ************************************************************************************  *************** LABELS ************************************************************************************</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:choice>
+    <xs:attribute type="xs:string" name="label" use="optional"/>
+  </xs:complexType>
+  <xs:complexType name="view-linksType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="ref"/>
+        <xs:attribute type="xs:string" name="attribute-ref"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="view-containerType">
+    <xs:sequence>
+      <xs:element type="ext:view-linksType" name="view-links" xmlns:ext="http://www.extension.ui.appsone.appnomic.com">
+        <xs:annotation>
+          <xs:documentation>view-links is a set. view-link is singular link
+                view-links is configurable via a reference field</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="label"/>
+  </xs:complexType>
+  <xs:complexType name="grid-colType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="attribute" use="optional"/>
+        <xs:attribute type="xs:string" name="data-type" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="titlegrid-unitType">
+    <xs:sequence>
+      <xs:element type="ext:grid-colType" name="grid-col" maxOccurs="unbounded" minOccurs="0" xmlns:ext="http://www.extension.ui.appsone.appnomic.com"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="titlegrid-formType">
+    <xs:sequence>
+      <xs:element type="ext:form-toolbarType" name="form-toolbar" xmlns:ext="http://www.extension.ui.appsone.appnomic.com"/>
+      <xs:element type="ext:titlegrid-unitType" name="titlegrid-unit" xmlns:ext="http://www.extension.ui.appsone.appnomic.com"/>
+      <xs:element type="ext:filtersType" name="filters" xmlns:ext="http://www.extension.ui.appsone.appnomic.com"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="id"/>
+    <xs:attribute type="xs:string" name="object-url"/>
+    <xs:attribute type="xs:short" name="refresh-rate"/>
+    <xs:attribute type="xs:string" name="help-url"/>
+  </xs:complexType>
+</xs:schema>

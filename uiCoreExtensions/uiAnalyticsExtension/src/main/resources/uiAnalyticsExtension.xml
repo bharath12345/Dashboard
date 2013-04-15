@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<ui-extension label="AnalyticsExtension">
+<ui-extension id="AnalyticsExtension" xmlns="http://www.extension.ui.appsone.appnomic.com"
+              xmlns:aam="http://www.extension.ui.appsone.appnomic.com"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-    <!-- *************** PANE NAME IN THE ACCORDION **************************************************************** -->
+<!-- *************** PANE NAME IN THE ACCORDION **************************************************************** -->
     <pane label="AnalyticsPaneLabel">
         <view-link ref="SqlOutliersForm" />
     </pane>
@@ -38,7 +40,7 @@
     <forms>
         <!-- ******************************************************************************************************* -->
         <grid-form id="SqlOutliersForm" label="SqlOutliersFormLabel"
-                   object-url="xxxx/yyyyy/SqlOutliers.action" refresh-rate="180"
+                   object-url="SqlOutliers.action" refresh-rate="180"
                    help-url="${serverProtocol}://${host}:${requestBasedPort}/help.html">
 
             <form-toolbar>
@@ -73,12 +75,12 @@
             Summary forms are always invoked with ID as the key
         -->
         <summary-form id="SqlOutlierSummaryForm" label="SqlOutlierSummaryFormLabel"
-                      object-url="xxxx/yyyyy/SqlOutlierSummaryForm.action"
+                      object-url="SqlOutlierSummaryForm.action"
                       help-url="${serverProtocol}://${host}:${requestBasedPort}/help.html">
 
             <form-toolbars>
-                <form-toolbar ref="Refresh" label="SqlOutlierRefreshLabel"/>
-                <form-toolbar ref="OpenWindow" label="SqlOutlierOpenWindowLabel"/>
+                <form-toolbar ref="Refresh" label="SqlOutliersRefreshLabel"/>
+                <form-toolbar ref="OpenWindow" label="SqlOutliersOpenWindowLabel"/>
             </form-toolbars>
 
             <field-group label="SummaryLabel">
@@ -116,7 +118,7 @@
 
         <!-- ******************************************************************************************************* -->
         <grid-form id="ViolatedDbKpiForm" label="ViolatedDbKpiFormLabel"
-                   object-url="xxxx/yyyyy/ViolatedDbKpi.action" refresh-rate="180"
+                   object-url="ViolatedDbKpi.action" refresh-rate="180"
                    help-url="${serverProtocol}://${host}:${requestBasedPort}/help.html">
 
             <form-toolbar>
@@ -156,9 +158,183 @@
     <labels>
         <label id="AnalyticsPaneLabel">
             <label-value lang="en">Analytics</label-value>
-            <label-value lang="ja"></label-value>
-            <label-value lang="zh-CN"></label-value>
-            <label-value lang="ko"></label-value>
+            <label-value lang="ja">Analytics</label-value>
+            <label-value lang="zh-CN">Analytics</label-value>
+            <label-value lang="ko">Analytics</label-value>
+        </label>
+        <label id="SqlOutliersFormLabel">
+            <label-value lang="en">SQL Outliers</label-value>
+            <label-value lang="ja">SQL Outliers</label-value>
+            <label-value lang="zh-CN">SQL Outliers</label-value>
+            <label-value lang="ko">SQL Outliers</label-value>
+        </label>
+        <label id="SqlOutliersRefreshLabel">
+            <label-value lang="en">Refresh SQL Outliers</label-value>
+            <label-value lang="ja">Refresh SQL Outliers</label-value>
+            <label-value lang="zh-CN">Refresh SQL Outliers</label-value>
+            <label-value lang="ko">Refresh SQL Outliers</label-value>
+        </label>
+        <label id="SqlOutliersStartRefreshLabel">
+            <label-value lang="en">Start Refresh of SQL Outliers</label-value>
+            <label-value lang="ja">Start Refresh of SQL Outliers</label-value>
+            <label-value lang="zh-CN">Start Refresh of SQL Outliers</label-value>
+            <label-value lang="ko">Start Refresh of SQL Outliers</label-value>
+        </label>
+        <label id="SqlOutliersStopRefreshLabel">
+            <label-value lang="en">Stop Refresh of SQL Outliers</label-value>
+            <label-value lang="ja">Stop Refresh of SQL Outliers</label-value>
+            <label-value lang="zh-CN">Stop Refresh of SQL Outliers</label-value>
+            <label-value lang="ko">Stop Refresh of SQL Outliers</label-value>
+        </label>
+        <label id="SqlOutliersOpenWindowLabel">
+            <label-value lang="en">Open SQL Outliers in New Window</label-value>
+            <label-value lang="ja">Open SQL Outliers in New Window</label-value>
+            <label-value lang="zh-CN">Open SQL Outliers in New Window</label-value>
+            <label-value lang="ko">Open SQL Outliers in New Window</label-value>
+        </label>
+        <label id="ComponentNameLabel">
+            <label-value lang="en">Component Name</label-value>
+            <label-value lang="ja">Component Name</label-value>
+            <label-value lang="zh-CN">Component Name</label-value>
+            <label-value lang="ko">Component Name</label-value>
+        </label>
+        <label id="SqlIDLabel">
+            <label-value lang="en">SQL ID</label-value>
+            <label-value lang="ja">SQL ID</label-value>
+            <label-value lang="zh-CN">SQL ID</label-value>
+            <label-value lang="ko">SQL ID</label-value>
+        </label>
+        <label id="SqlTextLabel">
+            <label-value lang="en">SQL Text</label-value>
+            <label-value lang="ja">SQL Text</label-value>
+            <label-value lang="zh-CN">SQL Text</label-value>
+            <label-value lang="ko">SQL Text</label-value>
+        </label>
+        <label id="TimestampLabel">
+            <label-value lang="en">Timestamp</label-value>
+            <label-value lang="ja">Timestamp</label-value>
+            <label-value lang="zh-CN">Timestamp</label-value>
+            <label-value lang="ko">Timestamp</label-value>
+        </label>
+        <label id="SqlOutlierSummaryFormLabel">
+            <label-value lang="en">SQL Outliers Summary</label-value>
+            <label-value lang="ja">SQL Outliers Summary</label-value>
+            <label-value lang="zh-CN">SQL Outliers Summary</label-value>
+            <label-value lang="ko">SQL Outliers Summary</label-value>
+        </label>
+        <label id="SummaryLabel">
+            <label-value lang="en">Summary</label-value>
+            <label-value lang="ja">Summary</label-value>
+            <label-value lang="zh-CN">Summary</label-value>
+            <label-value lang="ko">Summary</label-value>
+        </label>
+        <label id="ApplicationIdLabel">
+            <label-value lang="en">Application ID</label-value>
+            <label-value lang="ja">Application ID</label-value>
+            <label-value lang="zh-CN">Application ID</label-value>
+            <label-value lang="ko">Application ID</label-value>
+        </label>
+        <label id="InferenceMessageLabel">
+            <label-value lang="en">Inference Message</label-value>
+            <label-value lang="ja">Inference Message</label-value>
+            <label-value lang="zh-CN">Inference Message</label-value>
+            <label-value lang="ko">Inference Message</label-value>
+        </label>
+        <label id="AverageCPULabel">
+            <label-value lang="en">Average CPU</label-value>
+            <label-value lang="ja">Average CPU</label-value>
+            <label-value lang="zh-CN">Average CPU</label-value>
+            <label-value lang="ko">Average CPU</label-value>
+        </label>
+        <label id="RowsProcessedLabel">
+            <label-value lang="en">Rows Processed</label-value>
+            <label-value lang="ja">Rows Processed</label-value>
+            <label-value lang="zh-CN">Rows Processed</label-value>
+            <label-value lang="ko">Rows Processed</label-value>
+        </label>
+        <label id="ApplicationWaitTimeLabel">
+            <label-value lang="en">Application Wait Time</label-value>
+            <label-value lang="ja">Application Wait Time</label-value>
+            <label-value lang="zh-CN">Application Wait Time</label-value>
+            <label-value lang="ko">Application Wait Time</label-value>
+        </label>
+        <label id="ApplicationElapsedTimeLabel">
+            <label-value lang="en">Application Elapsed Time</label-value>
+            <label-value lang="ja">Application Elapsed Time</label-value>
+            <label-value lang="zh-CN">Application Elapsed Time</label-value>
+            <label-value lang="ko">Application Elapsed Time</label-value>
+        </label>
+        <label id="ExecutionCountLabel">
+            <label-value lang="en">Execution Count</label-value>
+            <label-value lang="ja">Execution Count</label-value>
+            <label-value lang="zh-CN">Execution Count</label-value>
+            <label-value lang="ko">Execution Count</label-value>
+        </label>
+        <label id="SortCountLabel">
+            <label-value lang="en">Sort Count</label-value>
+            <label-value lang="ja">Sort Count</label-value>
+            <label-value lang="zh-CN">Sort Count</label-value>
+            <label-value lang="ko">Sort Count</label-value>
+        </label>
+        <label id="FetchCountLabel">
+            <label-value lang="en">Fetch Count</label-value>
+            <label-value lang="ja">Fetch Count</label-value>
+            <label-value lang="zh-CN">Fetch Count</label-value>
+            <label-value lang="ko">Fetch Count</label-value>
+        </label>
+        <label id="DiskReadsLabel">
+            <label-value lang="en">Disk Reads</label-value>
+            <label-value lang="ja">Disk Reads</label-value>
+            <label-value lang="zh-CN">Disk Reads</label-value>
+            <label-value lang="ko">Disk Reads</label-value>
+        </label>
+        <label id="DiskWritesLabel">
+            <label-value lang="en">Disk Writes</label-value>
+            <label-value lang="ja">Disk Writes</label-value>
+            <label-value lang="zh-CN">Disk Writes</label-value>
+            <label-value lang="ko">Disk Writes</label-value>
+        </label>
+        <label id="HistoryLabel">
+            <label-value lang="en">History</label-value>
+            <label-value lang="ja">History</label-value>
+            <label-value lang="zh-CN">History</label-value>
+            <label-value lang="ko">History</label-value>
+        </label>
+        <label id="LastHourOutlierLabel">
+            <label-value lang="en">Last Hour Outlier Count</label-value>
+            <label-value lang="ja">Last Hour Outlier Count</label-value>
+            <label-value lang="zh-CN">Last Hour Outlier Count</label-value>
+            <label-value lang="ko">Last Hour Outlier Count</label-value>
+        </label>
+        <label id="LastDayOutlierLabel">
+            <label-value lang="en">Last Day Outlier Count</label-value>
+            <label-value lang="ja">Last Day Outlier Count</label-value>
+            <label-value lang="zh-CN">Last Day Outlier Count</label-value>
+            <label-value lang="ko">Last Day Outlier Count</label-value>
+        </label>
+        <label id="LastHourOccurrencesLabel">
+            <label-value lang="en">Last Hour Occurrences</label-value>
+            <label-value lang="ja">Last Hour Occurrences</label-value>
+            <label-value lang="zh-CN">Last Hour Occurrences</label-value>
+            <label-value lang="ko">Last Hour Occurrences</label-value>
+        </label>
+        <label id="LastDayOccurrencesLabel">
+            <label-value lang="en">Last Day Occurrences</label-value>
+            <label-value lang="ja">Last Day Occurrences</label-value>
+            <label-value lang="zh-CN">Last Day Occurrences</label-value>
+            <label-value lang="ko">Last Day Occurrences</label-value>
+        </label>
+        <label id="ViolatedDbKpiFormLabel">
+            <label-value lang="en">Violated DB KPI</label-value>
+            <label-value lang="ja">Violated DB KPI</label-value>
+            <label-value lang="zh-CN">Violated DB KPI</label-value>
+            <label-value lang="ko">Violated DB KPI</label-value>
+        </label>
+        <label id="KpiNameLabel">
+            <label-value lang="en">KPI Name</label-value>
+            <label-value lang="ja">KPI Name</label-value>
+            <label-value lang="zh-CN">KPI Name</label-value>
+            <label-value lang="ko">KPI Name</label-value>
         </label>
     </labels>
 </ui-extension>

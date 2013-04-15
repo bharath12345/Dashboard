@@ -43,6 +43,18 @@ public class AnalysisPanesTypeImpl extends org.apache.xmlbeans.impl.values.XmlCo
     }
     
     /**
+     * True if has "analysis-pane" element
+     */
+    public boolean isSetAnalysisPane()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            return get_store().count_elements(ANALYSISPANE$0) != 0;
+        }
+    }
+    
+    /**
      * Sets the "analysis-pane" element
      */
     public void setAnalysisPane(com.appnomic.appsone.ui.extension.AnalysisPaneType analysisPane)
@@ -61,6 +73,18 @@ public class AnalysisPanesTypeImpl extends org.apache.xmlbeans.impl.values.XmlCo
             com.appnomic.appsone.ui.extension.AnalysisPaneType target = null;
             target = (com.appnomic.appsone.ui.extension.AnalysisPaneType)get_store().add_element_user(ANALYSISPANE$0);
             return target;
+        }
+    }
+    
+    /**
+     * Unsets the "analysis-pane" element
+     */
+    public void unsetAnalysisPane()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            get_store().remove_element(ANALYSISPANE$0, 0);
         }
     }
 }

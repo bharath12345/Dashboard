@@ -1,6 +1,5 @@
 package com.appnomic.appsone.ui.extension.transaction.xml;
 
-import com.appnomic.appsone.ui.extension.xml.core.A1UIExtension;
 
 /**
  * User: bharadwaj
@@ -9,5 +8,4 @@ import com.appnomic.appsone.ui.extension.xml.core.A1UIExtension;
  */
 public class TransactionExtension {
 
-    A1UIExtension a1UIExtension = new A1UIExtension();
 }

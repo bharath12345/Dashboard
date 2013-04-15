@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui-extension label="TransactionExtension" xmlns="http://www.extension.ui.appsone.appnomic.com"
+              xmlns:aam="http://www.extension.ui.appsone.appnomic.com"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <!-- *************** PANE NAME IN THE ACCORDION **************************************************************** -->
+    <pane label="TransactionsPaneLabel">
+        <view-container label="TransactionDashboardsLabel">
+            <!--
+                view-links is a set. view-link is singular link
+                view-links is configurable via a reference field
+            -->
+            <view-links ref="TransactionDashboardForm" attribute-ref="ApplicationName"/>
+        </view-container>
+
+    </pane>
+
+
+    <!-- *************** MENU IN THE MAIN DASHBOARD **************************************************************** -->
+    <!--
+        The menu is not form specific but available for the whole pane
+    -->
+    <menu>
+        <menu-item></menu-item>
+        <menu-container>
+            <menu-container>
+                <menu-item></menu-item>
+            </menu-container>
+        </menu-container>
+    </menu>
+
+
+    <!-- *************** BUTTON DEFINITION FOR ALL FORMS *********************************************************** -->
+    <toolbar>
+        <tool id="Refresh"/>
+        <tool id="StartRefresh"/>
+        <tool id="StopRefresh"/>
+        <tool id="OpenWindow"/>
+    </toolbar>
+
+
+    <!-- *************** GLOBAL ATTRIBUTES EXPOSED BY THIS PANE **************************************************** -->
+    <attributes>
+        <attribute>TransactionName</attribute>
+    </attributes>
+
+
+
+    <!-- *************** FORMS ************************************************************************************* -->
+    <forms>
+        <!--
+            label is NOT needed for this form as this is rendered as part of view-links with application
+            name as the link name
+        -->
+        <titlegrid-form id="TransactionDashboardForm"
+                   object-url="xxxx/yyyyy/TransactionDashboardForm.action" refresh-rate="180"
+                   help-url="${serverProtocol}://${host}:${requestBasedPort}/help.html">
+            <form-toolbar>
+                <form-tool ref="Refresh" label="TransactionDashboardRefreshLabel"/>
+                <form-tool ref="StartRefresh" label="TransactionDashboardStartRefreshLabel"/>
+                <form-tool ref="StopRefresh" label="TransactionDashboardStopRefreshLabel"/>
+                <form-tool ref="OpenWindow" label="TransactionDashboardOpenWindowLabel"/>
+            </form-toolbar>
+
+            <titlegrid-unit>
+                <grid-col attribute="TransactionName" data-type="string"/>
+                <grid-col attribute="TransactionAlertCount" data-type="long"/>
+                <grid-col attribute="TransactionVolume" data-type="long"/>
+                <grid-col attribute="TransactionResponseTime" data-type="long"/>
+                <grid-col attribute="TransactionSlowCount" data-type="long"/>
+                <grid-col attribute="TransactionFailureCount" data-type="long"/>
+                <grid-col attribute="TransactionSuccessCount" data-type="long"/>
+            </titlegrid-unit>
+
+            <filters>
+                <col-filter ref="ApplicationName"/>
+            </filters>
+        </titlegrid-form>
+
+    </forms>
+
+
+    <!-- *************** ANALYSIS PANES **************************************************************************** -->
+    <analysis-panes>
+
+    </analysis-panes>
+
+
+    <!-- *************** LABELS ************************************************************************************ -->
+    <labels>
+        <label id="TransactionsPaneLabel">
+            <label-value lang="en">Transactions</label-value>
+            <label-value lang="ja"></label-value>
+            <label-value lang="zh-CN"></label-value>
+            <label-value lang="ko"></label-value>
+        </label>
+    </labels>
+</ui-extension>

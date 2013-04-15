@@ -43,6 +43,18 @@ public class AttributesTypeImpl extends org.apache.xmlbeans.impl.values.XmlCompl
     }
     
     /**
+     * True if has "attribute" element
+     */
+    public boolean isSetAttribute()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            return get_store().count_elements(ATTRIBUTE$0) != 0;
+        }
+    }
+    
+    /**
      * Sets the "attribute" element
      */
     public void setAttribute(com.appnomic.appsone.ui.extension.AttributeType attribute)
@@ -61,6 +73,18 @@ public class AttributesTypeImpl extends org.apache.xmlbeans.impl.values.XmlCompl
             com.appnomic.appsone.ui.extension.AttributeType target = null;
             target = (com.appnomic.appsone.ui.extension.AttributeType)get_store().add_element_user(ATTRIBUTE$0);
             return target;
+        }
+    }
+    
+    /**
+     * Unsets the "attribute" element
+     */
+    public void unsetAttribute()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            get_store().remove_element(ATTRIBUTE$0, 0);
         }
     }
 }

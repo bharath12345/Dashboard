@@ -16,47 +16,127 @@ package com.appnomic.appsone.ui.extension;
 public interface FormsType extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(FormsType.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s701D4925774A9F0AC0512BF3769C3FEF").resolveHandle("formstype79f4type");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(FormsType.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s8A2893182E2AC857591676D6F1461A5E").resolveHandle("formstype79f4type");
     
     /**
-     * Gets the "grid-form" element
+     * Gets array of all "grid-form" elements
      */
-    com.appnomic.appsone.ui.extension.GridFormType getGridForm();
+    com.appnomic.appsone.ui.extension.GridFormType[] getGridFormArray();
     
     /**
-     * Sets the "grid-form" element
+     * Gets ith "grid-form" element
      */
-    void setGridForm(com.appnomic.appsone.ui.extension.GridFormType gridForm);
+    com.appnomic.appsone.ui.extension.GridFormType getGridFormArray(int i);
     
     /**
-     * Appends and returns a new empty "grid-form" element
+     * Returns number of "grid-form" element
+     */
+    int sizeOfGridFormArray();
+    
+    /**
+     * Sets array of all "grid-form" element
+     */
+    void setGridFormArray(com.appnomic.appsone.ui.extension.GridFormType[] gridFormArray);
+    
+    /**
+     * Sets ith "grid-form" element
+     */
+    void setGridFormArray(int i, com.appnomic.appsone.ui.extension.GridFormType gridForm);
+    
+    /**
+     * Inserts and returns a new empty value (as xml) as the ith "grid-form" element
+     */
+    com.appnomic.appsone.ui.extension.GridFormType insertNewGridForm(int i);
+    
+    /**
+     * Appends and returns a new empty value (as xml) as the last "grid-form" element
      */
     com.appnomic.appsone.ui.extension.GridFormType addNewGridForm();
     
     /**
-     * Gets the "summary-form" element
+     * Removes the ith "grid-form" element
      */
-    com.appnomic.appsone.ui.extension.SummaryFormType getSummaryForm();
+    void removeGridForm(int i);
     
     /**
-     * True if has "summary-form" element
+     * Gets array of all "summary-form" elements
      */
-    boolean isSetSummaryForm();
+    com.appnomic.appsone.ui.extension.SummaryFormType[] getSummaryFormArray();
     
     /**
-     * Sets the "summary-form" element
+     * Gets ith "summary-form" element
      */
-    void setSummaryForm(com.appnomic.appsone.ui.extension.SummaryFormType summaryForm);
+    com.appnomic.appsone.ui.extension.SummaryFormType getSummaryFormArray(int i);
     
     /**
-     * Appends and returns a new empty "summary-form" element
+     * Returns number of "summary-form" element
+     */
+    int sizeOfSummaryFormArray();
+    
+    /**
+     * Sets array of all "summary-form" element
+     */
+    void setSummaryFormArray(com.appnomic.appsone.ui.extension.SummaryFormType[] summaryFormArray);
+    
+    /**
+     * Sets ith "summary-form" element
+     */
+    void setSummaryFormArray(int i, com.appnomic.appsone.ui.extension.SummaryFormType summaryForm);
+    
+    /**
+     * Inserts and returns a new empty value (as xml) as the ith "summary-form" element
+     */
+    com.appnomic.appsone.ui.extension.SummaryFormType insertNewSummaryForm(int i);
+    
+    /**
+     * Appends and returns a new empty value (as xml) as the last "summary-form" element
      */
     com.appnomic.appsone.ui.extension.SummaryFormType addNewSummaryForm();
     
     /**
-     * Unsets the "summary-form" element
+     * Removes the ith "summary-form" element
      */
-    void unsetSummaryForm();
+    void removeSummaryForm(int i);
+    
+    /**
+     * Gets array of all "titlegrid-form" elements
+     */
+    com.appnomic.appsone.ui.extension.TitlegridFormType[] getTitlegridFormArray();
+    
+    /**
+     * Gets ith "titlegrid-form" element
+     */
+    com.appnomic.appsone.ui.extension.TitlegridFormType getTitlegridFormArray(int i);
+    
+    /**
+     * Returns number of "titlegrid-form" element
+     */
+    int sizeOfTitlegridFormArray();
+    
+    /**
+     * Sets array of all "titlegrid-form" element
+     */
+    void setTitlegridFormArray(com.appnomic.appsone.ui.extension.TitlegridFormType[] titlegridFormArray);
+    
+    /**
+     * Sets ith "titlegrid-form" element
+     */
+    void setTitlegridFormArray(int i, com.appnomic.appsone.ui.extension.TitlegridFormType titlegridForm);
+    
+    /**
+     * Inserts and returns a new empty value (as xml) as the ith "titlegrid-form" element
+     */
+    com.appnomic.appsone.ui.extension.TitlegridFormType insertNewTitlegridForm(int i);
+    
+    /**
+     * Appends and returns a new empty value (as xml) as the last "titlegrid-form" element
+     */
+    com.appnomic.appsone.ui.extension.TitlegridFormType addNewTitlegridForm();
+    
+    /**
+     * Removes the ith "titlegrid-form" element
+     */
+    void removeTitlegridForm(int i);
     
     /**
      * A factory class with static methods for creating instances

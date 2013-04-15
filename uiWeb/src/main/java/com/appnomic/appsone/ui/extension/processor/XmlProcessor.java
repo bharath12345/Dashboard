@@ -47,13 +47,14 @@ public class XmlProcessor {
         try {
             UiExtensionDocument uiExtensionDocument = UiExtensionDocument.Factory.parse(xmlDocument);
             UiExtensionType uiExtensionType = uiExtensionDocument.getUiExtension();
-            PaneType paneType = uiExtensionType.getPane();
-            System.out.println("pane label = " + paneType.getLabel());
+            PaneType [] paneType = uiExtensionType.getPaneArray();
+            System.out.println("pane list size = " + paneType.length);
 
-            FormsType uiFormsType = uiExtensionType.getForms();
-            GridFormType gridFormType = uiFormsType.getGridForm();
-            System.out.println("Grid form details: ID = " + gridFormType.getId() +
-                    " object-url = " + gridFormType.getObjectUrl());
+            FormsType[] uiFormsType = uiExtensionType.getFormsArray();
+            GridFormType [] gridFormType = uiFormsType[0].getGridFormArray();
+            System.out.println("Num of grids = " + gridFormType.length);
+            //System.out.println("Grid form details: ID = " + gridFormType.getId() +
+            //        " object-url = " + gridFormType.getObjectUrl());
 
         } catch (Exception e) {
             e.printStackTrace();

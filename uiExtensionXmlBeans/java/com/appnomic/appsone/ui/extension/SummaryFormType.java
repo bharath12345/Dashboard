@@ -16,12 +16,17 @@ package com.appnomic.appsone.ui.extension;
 public interface SummaryFormType extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(SummaryFormType.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s701D4925774A9F0AC0512BF3769C3FEF").resolveHandle("summaryformtype17a6type");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(SummaryFormType.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s8A2893182E2AC857591676D6F1461A5E").resolveHandle("summaryformtype17a6type");
     
     /**
      * Gets the "form-toolbars" element
      */
     com.appnomic.appsone.ui.extension.FormToolbarsType getFormToolbars();
+    
+    /**
+     * True if has "form-toolbars" element
+     */
+    boolean isSetFormToolbars();
     
     /**
      * Sets the "form-toolbars" element
@@ -34,24 +39,109 @@ public interface SummaryFormType extends org.apache.xmlbeans.XmlObject
     com.appnomic.appsone.ui.extension.FormToolbarsType addNewFormToolbars();
     
     /**
-     * Gets the "field-group" element
+     * Unsets the "form-toolbars" element
      */
-    com.appnomic.appsone.ui.extension.FieldGroupType getFieldGroup();
+    void unsetFormToolbars();
     
     /**
-     * Sets the "field-group" element
+     * Gets array of all "field-group" elements
      */
-    void setFieldGroup(com.appnomic.appsone.ui.extension.FieldGroupType fieldGroup);
+    com.appnomic.appsone.ui.extension.FieldGroupType[] getFieldGroupArray();
     
     /**
-     * Appends and returns a new empty "field-group" element
+     * Gets ith "field-group" element
+     */
+    com.appnomic.appsone.ui.extension.FieldGroupType getFieldGroupArray(int i);
+    
+    /**
+     * Returns number of "field-group" element
+     */
+    int sizeOfFieldGroupArray();
+    
+    /**
+     * Sets array of all "field-group" element
+     */
+    void setFieldGroupArray(com.appnomic.appsone.ui.extension.FieldGroupType[] fieldGroupArray);
+    
+    /**
+     * Sets ith "field-group" element
+     */
+    void setFieldGroupArray(int i, com.appnomic.appsone.ui.extension.FieldGroupType fieldGroup);
+    
+    /**
+     * Inserts and returns a new empty value (as xml) as the ith "field-group" element
+     */
+    com.appnomic.appsone.ui.extension.FieldGroupType insertNewFieldGroup(int i);
+    
+    /**
+     * Appends and returns a new empty value (as xml) as the last "field-group" element
      */
     com.appnomic.appsone.ui.extension.FieldGroupType addNewFieldGroup();
+    
+    /**
+     * Removes the ith "field-group" element
+     */
+    void removeFieldGroup(int i);
+    
+    /**
+     * Gets the "form-toolbar" element
+     */
+    com.appnomic.appsone.ui.extension.FormToolbarType getFormToolbar();
+    
+    /**
+     * True if has "form-toolbar" element
+     */
+    boolean isSetFormToolbar();
+    
+    /**
+     * Sets the "form-toolbar" element
+     */
+    void setFormToolbar(com.appnomic.appsone.ui.extension.FormToolbarType formToolbar);
+    
+    /**
+     * Appends and returns a new empty "form-toolbar" element
+     */
+    com.appnomic.appsone.ui.extension.FormToolbarType addNewFormToolbar();
+    
+    /**
+     * Unsets the "form-toolbar" element
+     */
+    void unsetFormToolbar();
+    
+    /**
+     * Gets the "columns" element
+     */
+    com.appnomic.appsone.ui.extension.ColumnsType getColumns();
+    
+    /**
+     * True if has "columns" element
+     */
+    boolean isSetColumns();
+    
+    /**
+     * Sets the "columns" element
+     */
+    void setColumns(com.appnomic.appsone.ui.extension.ColumnsType columns);
+    
+    /**
+     * Appends and returns a new empty "columns" element
+     */
+    com.appnomic.appsone.ui.extension.ColumnsType addNewColumns();
+    
+    /**
+     * Unsets the "columns" element
+     */
+    void unsetColumns();
     
     /**
      * Gets the "filters" element
      */
     com.appnomic.appsone.ui.extension.FiltersType getFilters();
+    
+    /**
+     * True if has "filters" element
+     */
+    boolean isSetFilters();
     
     /**
      * Sets the "filters" element
@@ -62,6 +152,11 @@ public interface SummaryFormType extends org.apache.xmlbeans.XmlObject
      * Appends and returns a new empty "filters" element
      */
     com.appnomic.appsone.ui.extension.FiltersType addNewFilters();
+    
+    /**
+     * Unsets the "filters" element
+     */
+    void unsetFilters();
     
     /**
      * Gets the "id" attribute
@@ -182,6 +277,96 @@ public interface SummaryFormType extends org.apache.xmlbeans.XmlObject
      * Unsets the "help-url" attribute
      */
     void unsetHelpUrl();
+    
+    /**
+     * Gets the "refresh-rate" attribute
+     */
+    short getRefreshRate();
+    
+    /**
+     * Gets (as xml) the "refresh-rate" attribute
+     */
+    org.apache.xmlbeans.XmlShort xgetRefreshRate();
+    
+    /**
+     * True if has "refresh-rate" attribute
+     */
+    boolean isSetRefreshRate();
+    
+    /**
+     * Sets the "refresh-rate" attribute
+     */
+    void setRefreshRate(short refreshRate);
+    
+    /**
+     * Sets (as xml) the "refresh-rate" attribute
+     */
+    void xsetRefreshRate(org.apache.xmlbeans.XmlShort refreshRate);
+    
+    /**
+     * Unsets the "refresh-rate" attribute
+     */
+    void unsetRefreshRate();
+    
+    /**
+     * Gets the "ref" attribute
+     */
+    java.lang.String getRef();
+    
+    /**
+     * Gets (as xml) the "ref" attribute
+     */
+    org.apache.xmlbeans.XmlString xgetRef();
+    
+    /**
+     * True if has "ref" attribute
+     */
+    boolean isSetRef();
+    
+    /**
+     * Sets the "ref" attribute
+     */
+    void setRef(java.lang.String ref);
+    
+    /**
+     * Sets (as xml) the "ref" attribute
+     */
+    void xsetRef(org.apache.xmlbeans.XmlString ref);
+    
+    /**
+     * Unsets the "ref" attribute
+     */
+    void unsetRef();
+    
+    /**
+     * Gets the "query-by" attribute
+     */
+    java.lang.String getQueryBy();
+    
+    /**
+     * Gets (as xml) the "query-by" attribute
+     */
+    org.apache.xmlbeans.XmlString xgetQueryBy();
+    
+    /**
+     * True if has "query-by" attribute
+     */
+    boolean isSetQueryBy();
+    
+    /**
+     * Sets the "query-by" attribute
+     */
+    void setQueryBy(java.lang.String queryBy);
+    
+    /**
+     * Sets (as xml) the "query-by" attribute
+     */
+    void xsetQueryBy(org.apache.xmlbeans.XmlString queryBy);
+    
+    /**
+     * Unsets the "query-by" attribute
+     */
+    void unsetQueryBy();
     
     /**
      * A factory class with static methods for creating instances

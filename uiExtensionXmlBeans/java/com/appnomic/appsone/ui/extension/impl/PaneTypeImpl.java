@@ -22,7 +22,9 @@ public class PaneTypeImpl extends org.apache.xmlbeans.impl.values.XmlComplexCont
     
     private static final javax.xml.namespace.QName VIEWLINK$0 = 
         new javax.xml.namespace.QName("http://www.extension.ui.appsone.appnomic.com", "view-link");
-    private static final javax.xml.namespace.QName LABEL$2 = 
+    private static final javax.xml.namespace.QName VIEWCONTAINER$2 = 
+        new javax.xml.namespace.QName("http://www.extension.ui.appsone.appnomic.com", "view-container");
+    private static final javax.xml.namespace.QName LABEL$4 = 
         new javax.xml.namespace.QName("", "label");
     
     
@@ -41,6 +43,18 @@ public class PaneTypeImpl extends org.apache.xmlbeans.impl.values.XmlComplexCont
                 return null;
             }
             return target;
+        }
+    }
+    
+    /**
+     * True if has "view-link" element
+     */
+    public boolean isSetViewLink()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            return get_store().count_elements(VIEWLINK$0) != 0;
         }
     }
     
@@ -67,6 +81,82 @@ public class PaneTypeImpl extends org.apache.xmlbeans.impl.values.XmlComplexCont
     }
     
     /**
+     * Unsets the "view-link" element
+     */
+    public void unsetViewLink()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            get_store().remove_element(VIEWLINK$0, 0);
+        }
+    }
+    
+    /**
+     * Gets the "view-container" element
+     */
+    public com.appnomic.appsone.ui.extension.ViewContainerType getViewContainer()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            com.appnomic.appsone.ui.extension.ViewContainerType target = null;
+            target = (com.appnomic.appsone.ui.extension.ViewContainerType)get_store().find_element_user(VIEWCONTAINER$2, 0);
+            if (target == null)
+            {
+                return null;
+            }
+            return target;
+        }
+    }
+    
+    /**
+     * True if has "view-container" element
+     */
+    public boolean isSetViewContainer()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            return get_store().count_elements(VIEWCONTAINER$2) != 0;
+        }
+    }
+    
+    /**
+     * Sets the "view-container" element
+     */
+    public void setViewContainer(com.appnomic.appsone.ui.extension.ViewContainerType viewContainer)
+    {
+        generatedSetterHelperImpl(viewContainer, VIEWCONTAINER$2, 0, org.apache.xmlbeans.impl.values.XmlObjectBase.KIND_SETTERHELPER_SINGLETON);
+    }
+    
+    /**
+     * Appends and returns a new empty "view-container" element
+     */
+    public com.appnomic.appsone.ui.extension.ViewContainerType addNewViewContainer()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            com.appnomic.appsone.ui.extension.ViewContainerType target = null;
+            target = (com.appnomic.appsone.ui.extension.ViewContainerType)get_store().add_element_user(VIEWCONTAINER$2);
+            return target;
+        }
+    }
+    
+    /**
+     * Unsets the "view-container" element
+     */
+    public void unsetViewContainer()
+    {
+        synchronized (monitor())
+        {
+            check_orphaned();
+            get_store().remove_element(VIEWCONTAINER$2, 0);
+        }
+    }
+    
+    /**
      * Gets the "label" attribute
      */
     public java.lang.String getLabel()
@@ -75,7 +165,7 @@ public class PaneTypeImpl extends org.apache.xmlbeans.impl.values.XmlComplexCont
         {
             check_orphaned();
             org.apache.xmlbeans.SimpleValue target = null;
-            target = (org.apache.xmlbeans.SimpleValue)get_store().find_attribute_user(LABEL$2);
+            target = (org.apache.xmlbeans.SimpleValue)get_store().find_attribute_user(LABEL$4);
             if (target == null)
             {
                 return null;
@@ -93,7 +183,7 @@ public class PaneTypeImpl extends org.apache.xmlbeans.impl.values.XmlComplexCont
         {
             check_orphaned();
             org.apache.xmlbeans.XmlString target = null;
-            target = (org.apache.xmlbeans.XmlString)get_store().find_attribute_user(LABEL$2);
+            target = (org.apache.xmlbeans.XmlString)get_store().find_attribute_user(LABEL$4);
             return target;
         }
     }
@@ -106,7 +196,7 @@ public class PaneTypeImpl extends org.apache.xmlbeans.impl.values.XmlComplexCont
         synchronized (monitor())
         {
             check_orphaned();
-            return get_store().find_attribute_user(LABEL$2) != null;
+            return get_store().find_attribute_user(LABEL$4) != null;
         }
     }
     
@@ -119,10 +209,10 @@ public class PaneTypeImpl extends org.apache.xmlbeans.impl.values.XmlComplexCont
         {
             check_orphaned();
             org.apache.xmlbeans.SimpleValue target = null;
-            target = (org.apache.xmlbeans.SimpleValue)get_store().find_attribute_user(LABEL$2);
+            target = (org.apache.xmlbeans.SimpleValue)get_store().find_attribute_user(LABEL$4);
             if (target == null)
             {
-                target = (org.apache.xmlbeans.SimpleValue)get_store().add_attribute_user(LABEL$2);
+                target = (org.apache.xmlbeans.SimpleValue)get_store().add_attribute_user(LABEL$4);
             }
             target.setStringValue(label);
         }
@@ -137,10 +227,10 @@ public class PaneTypeImpl extends org.apache.xmlbeans.impl.values.XmlComplexCont
         {
             check_orphaned();
             org.apache.xmlbeans.XmlString target = null;
-            target = (org.apache.xmlbeans.XmlString)get_store().find_attribute_user(LABEL$2);
+            target = (org.apache.xmlbeans.XmlString)get_store().find_attribute_user(LABEL$4);
             if (target == null)
             {
-                target = (org.apache.xmlbeans.XmlString)get_store().add_attribute_user(LABEL$2);
+                target = (org.apache.xmlbeans.XmlString)get_store().add_attribute_user(LABEL$4);
             }
             target.set(label);
         }
@@ -154,7 +244,7 @@ public class PaneTypeImpl extends org.apache.xmlbeans.impl.values.XmlComplexCont
         synchronized (monitor())
         {
             check_orphaned();
-            get_store().remove_attribute(LABEL$2);
+            get_store().remove_attribute(LABEL$4);
         }
     }
 }

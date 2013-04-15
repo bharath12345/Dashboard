@@ -16,7 +16,7 @@ package com.appnomic.appsone.ui.extension;
 public interface ColumnType extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ColumnType.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s701D4925774A9F0AC0512BF3769C3FEF").resolveHandle("columntype937btype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(ColumnType.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s8A2893182E2AC857591676D6F1461A5E").resolveHandle("columntype937btype");
     
     /**
      * Gets array of all "subcolumn" elements

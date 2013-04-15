@@ -12,7 +12,6 @@
 	<name>AppsOne Dashboard UI Java Common Components</name>
 	<packaging>jar</packaging>
     <groupId>com.appnomic.appsone.dashboard</groupId>
-    <version>${uiCommonLib.version}</version>
 
     <build>
         <plugins>

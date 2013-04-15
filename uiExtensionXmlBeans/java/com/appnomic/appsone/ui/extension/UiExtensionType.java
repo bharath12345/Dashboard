@@ -16,112 +16,287 @@ package com.appnomic.appsone.ui.extension;
 public interface UiExtensionType extends org.apache.xmlbeans.XmlObject
 {
     public static final org.apache.xmlbeans.SchemaType type = (org.apache.xmlbeans.SchemaType)
-        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(UiExtensionType.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s701D4925774A9F0AC0512BF3769C3FEF").resolveHandle("uiextensiontype8b4btype");
+        org.apache.xmlbeans.XmlBeans.typeSystemForClassLoader(UiExtensionType.class.getClassLoader(), "schemaorg_apache_xmlbeans.system.s8A2893182E2AC857591676D6F1461A5E").resolveHandle("uiextensiontype8b4btype");
     
     /**
-     * Gets the "pane" element
+     * Gets array of all "pane" elements
      */
-    com.appnomic.appsone.ui.extension.PaneType getPane();
+    com.appnomic.appsone.ui.extension.PaneType[] getPaneArray();
     
     /**
-     * Sets the "pane" element
+     * Gets ith "pane" element
      */
-    void setPane(com.appnomic.appsone.ui.extension.PaneType pane);
+    com.appnomic.appsone.ui.extension.PaneType getPaneArray(int i);
     
     /**
-     * Appends and returns a new empty "pane" element
+     * Returns number of "pane" element
+     */
+    int sizeOfPaneArray();
+    
+    /**
+     * Sets array of all "pane" element
+     */
+    void setPaneArray(com.appnomic.appsone.ui.extension.PaneType[] paneArray);
+    
+    /**
+     * Sets ith "pane" element
+     */
+    void setPaneArray(int i, com.appnomic.appsone.ui.extension.PaneType pane);
+    
+    /**
+     * Inserts and returns a new empty value (as xml) as the ith "pane" element
+     */
+    com.appnomic.appsone.ui.extension.PaneType insertNewPane(int i);
+    
+    /**
+     * Appends and returns a new empty value (as xml) as the last "pane" element
      */
     com.appnomic.appsone.ui.extension.PaneType addNewPane();
     
     /**
-     * Gets the "menu" element
+     * Removes the ith "pane" element
      */
-    com.appnomic.appsone.ui.extension.MenuType getMenu();
+    void removePane(int i);
     
     /**
-     * Sets the "menu" element
+     * Gets array of all "menu" elements
      */
-    void setMenu(com.appnomic.appsone.ui.extension.MenuType menu);
+    com.appnomic.appsone.ui.extension.MenuType[] getMenuArray();
     
     /**
-     * Appends and returns a new empty "menu" element
+     * Gets ith "menu" element
+     */
+    com.appnomic.appsone.ui.extension.MenuType getMenuArray(int i);
+    
+    /**
+     * Returns number of "menu" element
+     */
+    int sizeOfMenuArray();
+    
+    /**
+     * Sets array of all "menu" element
+     */
+    void setMenuArray(com.appnomic.appsone.ui.extension.MenuType[] menuArray);
+    
+    /**
+     * Sets ith "menu" element
+     */
+    void setMenuArray(int i, com.appnomic.appsone.ui.extension.MenuType menu);
+    
+    /**
+     * Inserts and returns a new empty value (as xml) as the ith "menu" element
+     */
+    com.appnomic.appsone.ui.extension.MenuType insertNewMenu(int i);
+    
+    /**
+     * Appends and returns a new empty value (as xml) as the last "menu" element
      */
     com.appnomic.appsone.ui.extension.MenuType addNewMenu();
     
     /**
-     * Gets the "attributes" element
+     * Removes the ith "menu" element
      */
-    com.appnomic.appsone.ui.extension.AttributesType getAttributes();
+    void removeMenu(int i);
     
     /**
-     * Sets the "attributes" element
+     * Gets array of all "attributes" elements
      */
-    void setAttributes(com.appnomic.appsone.ui.extension.AttributesType attributes);
+    com.appnomic.appsone.ui.extension.AttributesType[] getAttributesArray();
     
     /**
-     * Appends and returns a new empty "attributes" element
+     * Gets ith "attributes" element
+     */
+    com.appnomic.appsone.ui.extension.AttributesType getAttributesArray(int i);
+    
+    /**
+     * Returns number of "attributes" element
+     */
+    int sizeOfAttributesArray();
+    
+    /**
+     * Sets array of all "attributes" element
+     */
+    void setAttributesArray(com.appnomic.appsone.ui.extension.AttributesType[] attributesArray);
+    
+    /**
+     * Sets ith "attributes" element
+     */
+    void setAttributesArray(int i, com.appnomic.appsone.ui.extension.AttributesType attributes);
+    
+    /**
+     * Inserts and returns a new empty value (as xml) as the ith "attributes" element
+     */
+    com.appnomic.appsone.ui.extension.AttributesType insertNewAttributes(int i);
+    
+    /**
+     * Appends and returns a new empty value (as xml) as the last "attributes" element
      */
     com.appnomic.appsone.ui.extension.AttributesType addNewAttributes();
     
     /**
-     * Gets the "toolbar" element
+     * Removes the ith "attributes" element
      */
-    com.appnomic.appsone.ui.extension.ToolbarType getToolbar();
+    void removeAttributes(int i);
     
     /**
-     * Sets the "toolbar" element
+     * Gets array of all "toolbar" elements
      */
-    void setToolbar(com.appnomic.appsone.ui.extension.ToolbarType toolbar);
+    com.appnomic.appsone.ui.extension.ToolbarType[] getToolbarArray();
     
     /**
-     * Appends and returns a new empty "toolbar" element
+     * Gets ith "toolbar" element
+     */
+    com.appnomic.appsone.ui.extension.ToolbarType getToolbarArray(int i);
+    
+    /**
+     * Returns number of "toolbar" element
+     */
+    int sizeOfToolbarArray();
+    
+    /**
+     * Sets array of all "toolbar" element
+     */
+    void setToolbarArray(com.appnomic.appsone.ui.extension.ToolbarType[] toolbarArray);
+    
+    /**
+     * Sets ith "toolbar" element
+     */
+    void setToolbarArray(int i, com.appnomic.appsone.ui.extension.ToolbarType toolbar);
+    
+    /**
+     * Inserts and returns a new empty value (as xml) as the ith "toolbar" element
+     */
+    com.appnomic.appsone.ui.extension.ToolbarType insertNewToolbar(int i);
+    
+    /**
+     * Appends and returns a new empty value (as xml) as the last "toolbar" element
      */
     com.appnomic.appsone.ui.extension.ToolbarType addNewToolbar();
     
     /**
-     * Gets the "forms" element
+     * Removes the ith "toolbar" element
      */
-    com.appnomic.appsone.ui.extension.FormsType getForms();
+    void removeToolbar(int i);
     
     /**
-     * Sets the "forms" element
+     * Gets array of all "forms" elements
      */
-    void setForms(com.appnomic.appsone.ui.extension.FormsType forms);
+    com.appnomic.appsone.ui.extension.FormsType[] getFormsArray();
     
     /**
-     * Appends and returns a new empty "forms" element
+     * Gets ith "forms" element
+     */
+    com.appnomic.appsone.ui.extension.FormsType getFormsArray(int i);
+    
+    /**
+     * Returns number of "forms" element
+     */
+    int sizeOfFormsArray();
+    
+    /**
+     * Sets array of all "forms" element
+     */
+    void setFormsArray(com.appnomic.appsone.ui.extension.FormsType[] formsArray);
+    
+    /**
+     * Sets ith "forms" element
+     */
+    void setFormsArray(int i, com.appnomic.appsone.ui.extension.FormsType forms);
+    
+    /**
+     * Inserts and returns a new empty value (as xml) as the ith "forms" element
+     */
+    com.appnomic.appsone.ui.extension.FormsType insertNewForms(int i);
+    
+    /**
+     * Appends and returns a new empty value (as xml) as the last "forms" element
      */
     com.appnomic.appsone.ui.extension.FormsType addNewForms();
     
     /**
-     * Gets the "analysis-panes" element
+     * Removes the ith "forms" element
      */
-    com.appnomic.appsone.ui.extension.AnalysisPanesType getAnalysisPanes();
+    void removeForms(int i);
     
     /**
-     * Sets the "analysis-panes" element
+     * Gets array of all "analysis-panes" elements
      */
-    void setAnalysisPanes(com.appnomic.appsone.ui.extension.AnalysisPanesType analysisPanes);
+    com.appnomic.appsone.ui.extension.AnalysisPanesType[] getAnalysisPanesArray();
     
     /**
-     * Appends and returns a new empty "analysis-panes" element
+     * Gets ith "analysis-panes" element
+     */
+    com.appnomic.appsone.ui.extension.AnalysisPanesType getAnalysisPanesArray(int i);
+    
+    /**
+     * Returns number of "analysis-panes" element
+     */
+    int sizeOfAnalysisPanesArray();
+    
+    /**
+     * Sets array of all "analysis-panes" element
+     */
+    void setAnalysisPanesArray(com.appnomic.appsone.ui.extension.AnalysisPanesType[] analysisPanesArray);
+    
+    /**
+     * Sets ith "analysis-panes" element
+     */
+    void setAnalysisPanesArray(int i, com.appnomic.appsone.ui.extension.AnalysisPanesType analysisPanes);
+    
+    /**
+     * Inserts and returns a new empty value (as xml) as the ith "analysis-panes" element
+     */
+    com.appnomic.appsone.ui.extension.AnalysisPanesType insertNewAnalysisPanes(int i);
+    
+    /**
+     * Appends and returns a new empty value (as xml) as the last "analysis-panes" element
      */
     com.appnomic.appsone.ui.extension.AnalysisPanesType addNewAnalysisPanes();
     
     /**
-     * Gets the "labels" element
+     * Removes the ith "analysis-panes" element
      */
-    com.appnomic.appsone.ui.extension.LabelsType getLabels();
+    void removeAnalysisPanes(int i);
     
     /**
-     * Sets the "labels" element
+     * Gets array of all "labels" elements
      */
-    void setLabels(com.appnomic.appsone.ui.extension.LabelsType labels);
+    com.appnomic.appsone.ui.extension.LabelsType[] getLabelsArray();
     
     /**
-     * Appends and returns a new empty "labels" element
+     * Gets ith "labels" element
+     */
+    com.appnomic.appsone.ui.extension.LabelsType getLabelsArray(int i);
+    
+    /**
+     * Returns number of "labels" element
+     */
+    int sizeOfLabelsArray();
+    
+    /**
+     * Sets array of all "labels" element
+     */
+    void setLabelsArray(com.appnomic.appsone.ui.extension.LabelsType[] labelsArray);
+    
+    /**
+     * Sets ith "labels" element
+     */
+    void setLabelsArray(int i, com.appnomic.appsone.ui.extension.LabelsType labels);
+    
+    /**
+     * Inserts and returns a new empty value (as xml) as the ith "labels" element
+     */
+    com.appnomic.appsone.ui.extension.LabelsType insertNewLabels(int i);
+    
+    /**
+     * Appends and returns a new empty value (as xml) as the last "labels" element
      */
     com.appnomic.appsone.ui.extension.LabelsType addNewLabels();
+    
+    /**
+     * Removes the ith "labels" element
+     */
+    void removeLabels(int i);
     
     /**
      * Gets the "label" attribute

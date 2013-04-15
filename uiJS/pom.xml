@@ -10,8 +10,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>uiJS</artifactId>
-	<version>${uiJS.version}</version>
-    <name>AppsOne UI JavaScript Project</name>
+	<name>AppsOne UI JavaScript Project</name>
     <description>Build of AppsOne UI JavaScript</description>
     <packaging>jar</packaging>
     
