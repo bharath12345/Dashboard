@@ -274,6 +274,7 @@
             <version>1.0</version>
         </dependency>
 
+        <!-- Apache XmlBeans  ************************************************************************************** -->
         <dependency>
             <groupId>org.apache.xmlbeans</groupId>
             <artifactId>xmlbeans-xmlpublic</artifactId>
